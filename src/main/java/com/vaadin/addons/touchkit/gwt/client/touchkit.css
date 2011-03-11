@@ -1,0 +1,335 @@
+.v-app, .v-window, .v-popupview-popup, .v-tooltip, .v-app input, .v-app select, .v-app button, .v-app textarea, .v-window input, .v-window select, .v-window button, .v-window textarea, .v-popupview-popup input, .v-popupview-popup select, .v-popupview-popup button, .v-popupview-popup textarea, .v-filterselect-suggestpopup, .v-datefield-popup, .v-contextmenu, .v-Notification, .v-menubar-submenu, .v-drag-element {
+	font-family: Helvetica Neue, Helvetica, Arial, Tahoma, Verdana, sans-serif;
+	font-size: 14px;
+}
+
+.v-navpanel {
+	position: relative;
+	overflow: hidden;
+}
+
+.v-navpanel-wrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	-webkit-transform: translate3d(0, 0, 0);
+	-webkit-transition: -webkit-transform 0.5s linear;
+}
+
+@url backgroundStripes backgroundStripesImage ;
+
+.v-navpanel-container {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: backgroundStripes;
+	/* Not visible until positioned */
+	opacity: 0;
+	-webkit-transition: opacity 0.3s linear;
+}
+
+.v-navpanel-placeholder {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: backgroundStripes;
+}
+
+@sprite .v-navpanel-placeholder>div {
+	display: block;
+	position: absolute;
+	/* For some reason gradien don't work properly in current safari release. For webkit nightlies this is fine.
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#acb9ca), to(#6e84a1));
+	*/
+	gwt-image: "toolbarBackground";
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 40px;
+	font-size: 18px;
+	font-weight: bold;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #222;
+	border-bottom: 1px solid rgb(45, 54, 66);
+	border-top: 1px solid #bbb;
+	text-align: center;
+	line-height:40px;
+	color:white;
+	
+}
+
+/* TODO giallo for placeholder */
+.v-navpanel-notransit {
+	-webkit-transition: none;
+}
+
+.v-navbutton {
+	-webkit-appearance: none;
+	display:block;
+	position:relative;
+	background: white;
+	color: black;
+	font-size: 16px;
+	font-weight: bold;
+	line-height:40px;
+	margin:0;
+	padding:0;
+}
+
+.v-navbutton .v-icon {
+	height:30px;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+
+.v-navbutton-desc {
+	color: #6e84a1;
+	font-weight: normal;
+	position: absolute;
+	right: 40px;
+	top: 0px;
+}
+
+/* Borders backgrounds etc. for the margin element.*/
+.v-optionlayout>div {
+	margin:10px;
+	border: 1px solid grey;
+	border-radius: 10px;
+	background: white;
+	padding: 0 10px;
+}
+
+.v-optionlayout .v-csslayout-container {
+	position:relative;	
+}
+
+.v-optionlayout .v-caption {
+	font-weight:bold;
+	font-size:16px;
+	line-height:32px;
+	height:32px;
+	top:3px;
+}
+
+.v-optionlayout .v-textfield {
+	position: absolute;
+	margin-top: -35px;
+	width:60%;
+	border:0;
+	padding:0;
+	left:40%;
+	background:none;
+	color: #4e64a1;
+	line-height:32px;
+	height: 32px;
+}
+
+/* Grey lines between component */
+.v-optionlayout .v-csslayout-container>*:before {
+	content: "";
+	position:absolute;
+	margin:0;
+	padding:0;
+	left:-10px;
+	right:-10px;
+	border-top: 1px solid grey;
+}
+
+/* ...hide from the last */
+.v-optionlayout .v-csslayout-container>*:first-child:before {
+	display: none;
+}
+
+.v-navbutton:after {
+	content: ">";
+	position:absolute;
+	right: 10px;
+	margin-top: 0px;
+	font-size: 22px;
+	color: grey;	
+}
+
+@url backButtonUrl backButtonImage ;
+
+.v-navbar-backb .v-navbutton {
+	display:inline-block;
+	-webkit-border-image: backButtonUrl 0 4 0 13;
+	border-width: 0 4px 0 13px;
+	width: auto;
+	background: transparent;
+	font-weight: bold;
+	text-align: center;
+	color: white;
+	text-shadow: rgba(0, 0, 0, 0.6) 0px -1px 0px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 12px;
+	height: 31px;
+	line-height: 31px;
+	margin-left: 5px;
+	margin-right:auto;
+	padding-right: 8px;
+	margin-top: 5px;
+	text-align:left;
+}
+.v-navbar-backb .v-navbutton:after {
+	display:none;	
+}
+
+.v-navbar-backb {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 33%;
+	z-index: 1;
+}
+
+@sprite .v-navbar {
+	gwt-image: "toolbarBackground";
+	color: #515b66;
+	display: block;
+	height: 40px;
+	font-size: 18px;
+	font-weight: bold;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #222;
+	border-bottom: 1px solid rgb(45, 54, 66);
+	border-top: 1px solid #bbb;
+}
+
+.v-navbar-caption {
+	position: absolute;
+	text-align: center;
+	left: 0;
+	right: 0;
+	line-height:40px;
+	color:white;
+}
+
+@url navbaractionimage navBarActionImage ;
+
+.v-navbar-actions {
+	-webkit-border-image: navbaractionimage 4;
+	border-width: 4px;
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	height: 22px;
+	max-width: 33%;
+}
+
+/* Reset some default button style */
+.v-navbar-actions .v-button,
+.v-navbar-actions .v-button-wrap {
+	background-image: none !important;
+	position:relative;
+	height:20px;
+	border:0;
+	padding:0;
+}
+.v-navbar-actions .v-button-caption {
+	display: block;
+	position: absolute;
+	left:0;
+	right: 0;
+	bottom:1px;
+	background-image: none;
+	text-align:center;	
+	color:white;
+	text-shadow: none;
+	font-size: 8px;
+}
+
+.v-navbar-actions .v-button .v-icon {
+	height: 20px;
+	margin-right:0;
+}
+
+
+.v-navview-notoolbar .v-navview-tb {
+	display:none;
+}
+
+
+/* NavigationView */
+
+.v-navview {
+	position:relative;	
+}
+
+.v-navview-wrapper {
+	position:absolute;
+	top:42px;
+	bottom:40px;
+	left:0;
+	right:0;	
+	overflow:auto;
+}
+.v-navview-notoolbar .v-navview-wrapper {
+	position:absolute;
+	top:42px;
+	bottom:0px;
+	left:0;
+	right:0;	
+}
+
+
+@sprite .v-navview-tb {
+	gwt-image: "toolbarBackground";
+	position:absolute;
+	height:41px;
+	bottom:0px;
+	width:100%;
+	left:0;
+	right:0;	
+	overflow:hidden;
+	border-top: 1px solid grey;
+}
+
+/* Reset some default button style */
+.v-navview-tb .v-button,
+.v-navview-tb .v-button-wrap {
+	background-image: none !important;
+	position:relative;
+	height:40px;
+	border:0;
+}
+.v-navview-tb .v-button-caption {
+	display: block;
+	position: absolute;
+	left:0;
+	right: 0;
+	bottom:1px;
+	background-image: none;
+	text-align:center;	
+	color:white;
+	text-shadow: none;
+	font-size: 8px;
+}
+
+.v-navview-tb .v-button .v-icon {
+	height: 32px;
+	margin-right:0;
+}
+
+
+.v-navview-notoolbar .v-navview-tb {
+	display:none;
+}
+
+.v-label-grey-title {
+	font-size:18px;
+	font-weight: bold;
+	color: #666;
+	margin: 10px 20px;
+}
+
+@sprite .v-slider-handle {
+	gwt-image: "sliderHandle";
+	/* TODO make me bigger */
+	background-position: center center;
+	width:30px;
+	height:30px;
+	margin-top:-15px;
+}

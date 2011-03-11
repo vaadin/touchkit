@@ -1,0 +1,10 @@
+<module>
+	<!-- WS Compiler: manually edited -->
+	<inherits name="com.vaadin.terminal.gwt.DefaultWidgetSet" />
+	<inherits name="com.google.gwt.resources.Resources" />
+	
+	<!-- Developmen time setting to speed up compilation -->
+	<set-configuration-property name="CssResource.style" value="pretty" /> 
+    <set-property name="user.agent" value="safari"/>
+	
+</module>
