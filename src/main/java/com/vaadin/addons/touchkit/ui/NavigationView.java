@@ -66,6 +66,7 @@ public class NavigationView extends AbstractComponentContainer {
 	/**
 	 * @deprecated use setContent or setToolbar instead
 	 */
+	@Deprecated
 	@Override
 	public void addComponent(Component c) {
 		setContent(c);
@@ -113,6 +114,7 @@ public class NavigationView extends AbstractComponentContainer {
 		getNavigationBar().setCaption(caption);
 	}
 
+	@Override
 	public String getCaption() {
 		return getNavigationBar().getCaption();
 	}
@@ -128,7 +130,6 @@ public class NavigationView extends AbstractComponentContainer {
 		}
 	}
 
-	@Override
 	public void replaceComponent(Component oldComponent, Component newComponent) {
 		if (mainComponent == oldComponent) {
 			setContent(newComponent);
@@ -137,7 +138,6 @@ public class NavigationView extends AbstractComponentContainer {
 		}
 	}
 
-	@Override
 	public Iterator<Component> getComponentIterator() {
 		LinkedList<Component> linkedList = new LinkedList<Component>();
 		linkedList.add(navigationBar);
@@ -153,7 +153,7 @@ public class NavigationView extends AbstractComponentContainer {
 			super.removeComponent(this.toolbar);
 		}
 		this.toolbar = toolbar;
-		if(toolbar != null) {
+		if (toolbar != null) {
 			super.addComponent(toolbar);
 		}
 	}

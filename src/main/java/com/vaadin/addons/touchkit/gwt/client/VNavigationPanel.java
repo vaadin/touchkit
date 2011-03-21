@@ -340,12 +340,11 @@ public class VNavigationPanel extends ComplexPanel implements Container {
 	}
 
 	ScheduledCommand handleChildSizesAndPositions = new ScheduledCommand() {
-		@Override
 		public void execute() {
 			VConsole.log("Set width outside render cycle -> resetting view positions");
 			// update positions. Not set with percentages as ios safari bugs
 			// occasionally with percentages in translate3d.
-			
+
 			/*
 			 * Disable animation for while.
 			 */
@@ -353,7 +352,6 @@ public class VNavigationPanel extends ComplexPanel implements Container {
 			currentWrapperPos = 0;
 			animateHorizontally(0);
 			Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-				@Override
 				public void execute() {
 					wrapper.getStyle().setProperty("webkitTransition", "");
 				}
@@ -424,7 +422,7 @@ public class VNavigationPanel extends ComplexPanel implements Container {
 		}
 
 		public void moveToNextPosition() {
-			setPosition(this.getElement().getStyle(), -currentWrapperPos + 1);
+			setPosition(getElement().getStyle(), -currentWrapperPos + 1);
 		}
 
 	}

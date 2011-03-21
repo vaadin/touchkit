@@ -47,7 +47,6 @@ public class VNavigationView extends ComplexPanel implements Container {
 		final TouchScrollDelegate touchScrollDelegate = new TouchScrollDelegate(
 				wrapper);
 		addHandler(new TouchStartHandler() {
-			@Override
 			public void onTouchStart(TouchStartEvent event) {
 				touchScrollDelegate.onTouchStart(event);
 			}
@@ -123,12 +122,10 @@ public class VNavigationView extends ComplexPanel implements Container {
 		}
 	}
 
-	@Override
 	public void replaceChildComponent(Widget oldComponent, Widget newComponent) {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
 	public boolean hasChildComponent(Widget component) {
 		if (component == navbar || component == content || component == toolbar) {
 			return true;
@@ -136,17 +133,14 @@ public class VNavigationView extends ComplexPanel implements Container {
 		return false;
 	}
 
-	@Override
 	public void updateCaption(Paintable component, UIDL uidl) {
 		// NOP not needed
 	}
 
-	@Override
 	public boolean requestLayout(Set<Paintable> children) {
 		return true;
 	}
 
-	@Override
 	public RenderSpace getAllocatedSpace(Widget child) {
 		if (child == content) {
 			return new RenderSpace(wrapper.getOffsetWidth(),
@@ -166,11 +160,11 @@ public class VNavigationView extends ComplexPanel implements Container {
 	@Override
 	public void setWidth(String width) {
 		super.setWidth(width);
-		if(!rendering) {
+		if (!rendering) {
 			if (content != null) {
 				client.handleComponentRelativeSize((Widget) content);
 			}
-			if(toolbar != null) {
+			if (toolbar != null) {
 				client.handleComponentRelativeSize((Widget) toolbar);
 			}
 		}

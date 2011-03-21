@@ -36,12 +36,10 @@ public class TouchKitWindow extends Window {
 	public void addApplicationIcon(final String url) {
 		applicationIcon.add(new ApplicationIcon() {
 
-			@Override
 			public String getSizes() {
 				return null;
 			}
 
-			@Override
 			public String getHref() {
 				return url;
 			}
@@ -63,12 +61,10 @@ public class TouchKitWindow extends Window {
 			final String url) {
 		applicationIcon.add(new ApplicationIcon() {
 
-			@Override
 			public String getSizes() {
 				return widht + "x" + height;
 			}
 
-			@Override
 			public String getHref() {
 				return url;
 			}
@@ -108,7 +104,7 @@ public class TouchKitWindow extends Window {
 	 * @param viewPortInitialScale
 	 */
 	public void setViewPortInitialScale(Float viewPortinitialScale) {
-		this.viewPortInitialScale = viewPortinitialScale;
+		viewPortInitialScale = viewPortinitialScale;
 	}
 
 	/**
@@ -129,7 +125,7 @@ public class TouchKitWindow extends Window {
 	 * @param viewPortmaximumScale
 	 */
 	public void setViewPortMaximumScale(Float viewPortmaximumScale) {
-		this.viewPortMaximumScale = viewPortmaximumScale;
+		viewPortMaximumScale = viewPortmaximumScale;
 	}
 
 	/**
@@ -246,7 +242,8 @@ public class TouchKitWindow extends Window {
 	}
 
 	public ApplicationIcon[] getApplicationIcons() {
-		return applicationIcon.toArray(new ApplicationIcon[applicationIcon.size()]);
+		return applicationIcon.toArray(new ApplicationIcon[applicationIcon
+				.size()]);
 	}
 
 }

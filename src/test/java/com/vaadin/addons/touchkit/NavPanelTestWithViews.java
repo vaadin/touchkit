@@ -2,10 +2,10 @@ package com.vaadin.addons.touchkit;
 
 import com.vaadin.addons.touchkit.ui.EmailField;
 import com.vaadin.addons.touchkit.ui.NavigationButton;
-import com.vaadin.addons.touchkit.ui.NumberField;
-import com.vaadin.addons.touchkit.ui.OptionLayout;
 import com.vaadin.addons.touchkit.ui.NavigationPanel;
 import com.vaadin.addons.touchkit.ui.NavigationView;
+import com.vaadin.addons.touchkit.ui.NumberField;
+import com.vaadin.addons.touchkit.ui.OptionLayout;
 import com.vaadin.addons.touchkit.ui.Toolbar;
 import com.vaadin.terminal.Resource;
 import com.vaadin.terminal.ThemeResource;
@@ -74,31 +74,31 @@ public class NavPanelTestWithViews extends NavigationPanel implements
 		}
 
 		private Component createActionButton5() {
-			Button button = new Button(null,this);
+			Button button = new Button(null, this);
 			button.setIcon(new ThemeResource("../runo/icons/64/cancel.png"));
 			return button;
 		}
 
 		private Component createActionButton1() {
-			Button button = new Button(null,this);
+			Button button = new Button(null, this);
 			button.setIcon(new ThemeResource("../runo/icons/64/email.png"));
 			return button;
 		}
 
 		private Component createActionButton2() {
-			Button button = new Button(null,this);
+			Button button = new Button(null, this);
 			button.setIcon(new ThemeResource("../runo/icons/64/email-reply.png"));
 			return button;
 		}
 
 		private Component createActionButton3() {
-			Button button = new Button(null,this);
+			Button button = new Button(null, this);
 			button.setIcon(new ThemeResource("../runo/icons/64/email-send.png"));
 			return button;
 		}
 
 		private Component createActionButton4() {
-			Button button = new Button(null,this);
+			Button button = new Button(null, this);
 			button.setIcon(new ThemeResource("../runo/icons/64/folder.png"));
 			button.setCaption("Send");
 			return button;
@@ -137,7 +137,6 @@ public class NavPanelTestWithViews extends NavigationPanel implements
 
 			addSliderWithIcons(optionLayout);
 
-			
 			optionLayout.addComponent(new CheckBox("Setting böö"));
 
 			cssLayout.addComponent(optionLayout);
@@ -154,7 +153,7 @@ public class NavPanelTestWithViews extends NavigationPanel implements
 			optionLayout.addComponent(new NumberField("Age"));
 
 			addSliderWithIcons(optionLayout);
-			
+
 			optionLayout.addComponent(new CheckBox("Setting böö"));
 
 			cssLayout.addComponent(optionLayout);
@@ -170,7 +169,7 @@ public class NavPanelTestWithViews extends NavigationPanel implements
 			emb2.setWidth("32px");
 			final Slider slider = new Slider(0, 100);
 			slider.setWidth(100, UNITS_PERCENTAGE);
-			
+
 			HorizontalLayout hl = new HorizontalLayout();
 			hl.addComponent(emb);
 			hl.addComponent(slider);
@@ -225,7 +224,6 @@ public class NavPanelTestWithViews extends NavigationPanel implements
 			return icons[i++ % icons.length];
 		}
 
-		@Override
 		public void buttonClick(ClickEvent event) {
 			getWindow().showNotification("Just a demo!");
 		}
