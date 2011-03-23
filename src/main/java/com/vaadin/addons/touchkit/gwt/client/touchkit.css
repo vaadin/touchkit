@@ -334,3 +334,14 @@
 	height:30px;
 	margin-top:-15px;
 }
+
+
+
+/* touchkit sub window */
+
+.v-touchkit-window .v-window-closebox,
+.v-touchkit-window .v-window-outerheader,
+.v-touchkit-window .v-window-footer {
+	display: none;
+}
+
