@@ -7,6 +7,7 @@ import com.vaadin.addons.touchkit.ui.NavigationView;
 import com.vaadin.addons.touchkit.ui.NumberField;
 import com.vaadin.addons.touchkit.ui.OptionLayout;
 import com.vaadin.addons.touchkit.ui.Toolbar;
+import com.vaadin.addons.touchkit.ui.TouchKitSubWindow;
 import com.vaadin.terminal.Resource;
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Alignment;
@@ -22,11 +23,13 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Slider;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.VerticalLayout;
 
 public class NavPanelTestWithViews extends NavigationPanel implements
 		ComponentContainer {
 
 	private SimpleNavView[] views;
+	private Button fullScreen;
 
 	public NavPanelTestWithViews() {
 
@@ -37,6 +40,81 @@ public class NavPanelTestWithViews extends NavigationPanel implements
 		}
 
 		navigateTo(views[0]);
+
+		NavigationView currentComponent2 = (NavigationView) getCurrentComponent();
+		ComponentContainer content = (ComponentContainer) currentComponent2
+				.getContent();
+
+		NavigationView testView = new NavigationView(
+				"TestView modal sub windows");
+		testView.setPreviousComponent(currentComponent2);
+
+		Button.ClickListener listener = new Button.ClickListener() {
+			public void buttonClick(ClickEvent event) {
+				TouchKitSubWindow touchKitSubWindow = new TouchKitSubWindow();
+				touchKitSubWindow.setWidth("300px");
+				VerticalLayout content = new VerticalLayout();
+				content.setSpacing(true);
+				content.setMargin(true);
+				content.addComponent(new Button("Foo"));
+				content.addComponent(new Button("Bar"));
+				content.addComponent(new Button("Close",
+						new Button.ClickListener() {
+
+							public void buttonClick(ClickEvent event) {
+								event.getButton()
+										.getWindow()
+										.getParent()
+										.removeWindow(
+												event.getButton().getWindow());
+
+							}
+						}));
+
+				touchKitSubWindow.setContent(content);
+
+				if (event.getButton() == fullScreen) {
+					touchKitSubWindow.setSizeFull();
+				}
+
+				touchKitSubWindow.showRelativeTo(event.getButton());
+
+			}
+		};
+		final Button button = new Button(
+				"Try me (TouchKit's modal window impl)", listener);
+		fullScreen = new Button("Fullscreen modal", listener);
+
+		CssLayout cssLayout = new CssLayout() {
+			@Override
+			protected String getCss(Component c) {
+				if (c == button) {
+					/*
+					 * To test centering.
+					 */
+					return "margin-left: 40%;";
+				}
+				return super.getCss(c);
+			}
+		};
+
+		cssLayout.addComponent(button);
+		cssLayout.addComponent(fullScreen);
+
+		testView.setContent(cssLayout);
+
+		Component metoo = new Button("TopRight", listener);
+		metoo.setWidth("40px");
+		testView.setNavigationBarComponent(metoo);
+
+		NavigationButton navigationButton = new NavigationButton(testView);
+		content.addComponent(navigationButton);
+
+		Toolbar toolbar = new Toolbar();
+
+		toolbar.addComponent(new Button("below", listener));
+
+		testView.setToolbar(toolbar);
 
 	}
 
@@ -145,7 +223,7 @@ public class NavPanelTestWithViews extends NavigationPanel implements
 			label.setStyleName("grey-title");
 			cssLayout.addComponent(label);
 
-			optionLayout = new OptionLayout();
+			optionLayout = new OptionLayout("Foobar");
 			optionLayout.addComponent(new TextField("Name"));
 			// email field
 			optionLayout.addComponent(new EmailField("Email"));
@@ -191,7 +269,8 @@ public class NavPanelTestWithViews extends NavigationPanel implements
 
 		private void generateSubViews() {
 			OptionLayout components = new OptionLayout();
-			for (int i = 0; i < 20; i++) {
+			int amount = getDepth() % 2 == 1 ? 3 : 25;
+			for (int i = 0; i < amount; i++) {
 				SimpleNavView simpleNavView = new SimpleNavView(this, i);
 				NavigationButton navigationButton = new NavigationButton();
 				navigationButton.setIcon(getNextIcon());

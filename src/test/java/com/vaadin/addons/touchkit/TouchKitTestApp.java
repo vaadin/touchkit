@@ -5,28 +5,28 @@ import com.vaadin.addons.touchkit.ui.TouchKitWindow;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.ResizeEvent;
-import com.vaadin.ui.Label;
 
 /**
  * The Application's "main" class
  */
 @SuppressWarnings("serial")
-public class TouchKitTestApp extends Application
-{
+public class TouchKitTestApp extends Application {
 
-    @Override
-    public void init()
-    {
-        final TouchKitWindow mainWindow = new TouchKitWindow();
-        mainWindow.addListener(new Window.ResizeListener() {
+	@Override
+	public void init() {
+		final TouchKitWindow mainWindow = new TouchKitWindow();
+		mainWindow.addListener(new Window.ResizeListener() {
 			public void windowResized(ResizeEvent e) {
-				System.err.println("Window size now:" + e.getWindow().getWidth()  + " x " + e.getWindow().getHeight());
+				System.err.println("Window size now:"
+						+ e.getWindow().getWidth() + " x "
+						+ e.getWindow().getHeight());
 			}
 		});
-        mainWindow.setImmediate(true);
-        mainWindow.setCaption("Hello mobile user");
+		mainWindow.setImmediate(true);
+		mainWindow.setCaption("Hello mobile user");
 		final Label label = new Label("Hello mobile user");
 		mainWindow.addComponent(label);
 
@@ -35,12 +35,12 @@ public class TouchKitTestApp extends Application
 
 			public void buttonClick(ClickEvent event) {
 				mainWindow.setContent(new NavPanelTest());
-				
+
 			}
 		});
-		
-		mainWindow.addComponent(b);
-		
+
+		// mainWindow.addComponent(b);
+
 		b = new Button("NavPanelTest witn navButtons");
 		b.addListener(new ClickListener() {
 			public void buttonClick(ClickEvent event) {
@@ -48,7 +48,7 @@ public class TouchKitTestApp extends Application
 			}
 		});
 
-		mainWindow.addComponent(b);
+		// mainWindow.addComponent(b);
 
 		b = new Button("NavPanelTest witn views");
 		b.addListener(new ClickListener() {
@@ -60,6 +60,6 @@ public class TouchKitTestApp extends Application
 		mainWindow.addComponent(b);
 
 		setMainWindow(mainWindow);
-    }
-    
+	}
+
 }
