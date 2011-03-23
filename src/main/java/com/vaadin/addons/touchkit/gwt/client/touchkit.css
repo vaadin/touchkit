@@ -318,7 +318,8 @@
 	display:none;
 }
 
-.v-label-grey-title {
+.v-label-grey-title,
+.v-caption-v-optionlayout .v-captiontext {
 	font-size:18px;
 	font-weight: bold;
 	color: #666;
