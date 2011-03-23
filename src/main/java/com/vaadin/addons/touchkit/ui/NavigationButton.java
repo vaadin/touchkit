@@ -48,7 +48,11 @@ public class NavigationButton extends Button {
 		super.fireClick();
 	}
 
-	private NavigationPanel getNavigationPanel() {
+	/**
+	 * @return the navigation panel in which the button is contained or null if
+	 *         the button is not inside a {@link NavigationPanel}
+	 */
+	public NavigationPanel getNavigationPanel() {
 		Component p = getParent();
 		while (p != null && !(p instanceof NavigationPanel)) {
 			p = p.getParent();
