@@ -10,4 +10,10 @@ import com.vaadin.ui.TabSheet;
  */
 public class Tabsheet extends TabSheet {
 
+	public Tabsheet() {
+		super();
+		setStyleName("touchkit-tabsbelow");
+		setSizeFull();
+	}
+
 }

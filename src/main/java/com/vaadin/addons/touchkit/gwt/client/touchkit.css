@@ -335,9 +335,33 @@
 	margin-top:-15px;
 }
 
+/* Tabsheet tabs below */
 
+.v-tabsheet-tabcontainer-touchkit-tabsbelow {
+	position: absolute;
+	bottom:0;
+	left:0;
+	right:0;
+}
+
+.v-tabsheet-tabcontainer-touchkit-tabsbelow .v-tabsheet-spacertd,
+.v-tabsheet-tabcontainer-touchkit-tabsbelow .v-tabsheet-spacertd div {
+	background-image:none;
+	background: black;
+	
+}
+
+.v-tabsheet-tabcontainer-touchkit-tabsbelow .v-tabsheet-tabitem-selected .v-caption {
+	background-image:none;
+	background:black;
+	color:white;
+}
 
 /* touchkit sub window */
+
+.v-touchkit-window {
+		
+}
 
 .v-touchkit-window .v-window-closebox,
 .v-touchkit-window .v-window-outerheader,
