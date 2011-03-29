@@ -8,6 +8,7 @@ import com.vaadin.addons.touchkit.ui.Tabsheet;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
 
@@ -15,10 +16,17 @@ public class TabsheetTest extends Tabsheet implements ClickListener {
 
 	public TabsheetTest() {
 
-		CssLayout tab1 = new CssLayout();
+		CssLayout tab1 = new CssLayout() {
+			@Override
+			protected String getCss(Component c) {
+				return "background: yellow;";
+			}
+		};
 		tab1.setSizeFull();
 		tab1.setCaption("Foo1");
-		tab1.addComponent(new Label("Some content for tabsheet"));
+		Label label = new Label("Some content for tabsheet");
+		label.setSizeFull();
+		tab1.addComponent(label);
 
 		CssLayout tab2 = new CssLayout();
 		tab2.setSizeFull();
@@ -35,10 +43,14 @@ public class TabsheetTest extends Tabsheet implements ClickListener {
 		tab4.setCaption("Far1");
 		tab4.addComponent(new Label("Some content for tabsheet"));
 
-		addTab(tab1);
-		addTab(tab2);
-		addTab(tab3);
-		addTab(tab4);
+		Tab tab = addTab(tab1);
+		tab.setIcon(TouchKitTestApp.getRndRunoIconResource());
+		tab = addTab(tab2);
+		tab.setIcon(TouchKitTestApp.getRndRunoIconResource());
+		tab = addTab(tab3);
+		tab.setIcon(TouchKitTestApp.getRndRunoIconResource());
+		tab = addTab(tab4);
+		tab.setIcon(TouchKitTestApp.getRndRunoIconResource());
 
 		NavigationPanel navigationPanel = new NavigationPanel();
 
@@ -62,6 +74,9 @@ public class TabsheetTest extends Tabsheet implements ClickListener {
 
 		Tab addTab = addTab(navigationPanel);
 		addTab.setCaption("Nav");
+		addTab.setIcon(TouchKitTestApp.getRndRunoIconResource());
+
+		setSelectedTab(tab2);
 
 	}
 

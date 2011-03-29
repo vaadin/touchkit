@@ -1,10 +1,15 @@
 package com.vaadin.addons.touchkit;
 
+import java.util.Random;
+
 import com.vaadin.Application;
 import com.vaadin.addons.touchkit.ui.TouchKitWindow;
+import com.vaadin.terminal.Resource;
+import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Embedded;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.ResizeEvent;
@@ -69,6 +74,33 @@ public class TouchKitTestApp extends Application {
 		mainWindow.addComponent(b);
 
 		setMainWindow(mainWindow);
+	}
+
+	private static final String[] runoicons = new String[] { "arrow-down.png",
+			"arrow-left.png", "arrow-right.png", "arrow-up.png",
+			"attention.png", "calendar.png", "cancel.png", "document-add.png",
+			"document-delete.png", "document-doc.png", "document-edit.png",
+			"document-image.png", "document-pdf.png", "document-ppt.png",
+			"document-txt.png", "document-web.png", "document-xsl.png",
+			"document.png", "email-reply.png", "email-send.png", "email.png",
+			"folder-add.png", "folder-delete.png", "folder.png", "globe.png",
+			"help.png", "lock.png", "note.png", "ok.png", "reload.png",
+			"settings.png", "trash-full.png", "trash.png", "user.png",
+			"users.png"
+
+	};
+
+	static Random rnd = new Random();
+
+	public static Resource getRndRunoIconResource() {
+		return new ThemeResource("../runo/icons/64/"
+				+ runoicons[rnd.nextInt(runoicons.length)]);
+	}
+
+	public Embedded getRndIcon32() {
+		Embedded embedded = new Embedded(null, getRndRunoIconResource());
+		embedded.setHeight(32, Embedded.UNITS_PIXELS);
+		return embedded;
 	}
 
 }

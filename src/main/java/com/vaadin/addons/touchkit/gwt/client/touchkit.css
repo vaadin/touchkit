@@ -348,17 +348,66 @@
 	right:0;
 }
 
-.v-tabsheet-tabcontainer-touchkit-tabsbelow .v-tabsheet-spacertd,
-.v-tabsheet-tabcontainer-touchkit-tabsbelow .v-tabsheet-spacertd div {
+.v-tabsheet-tabcontainer-touchkit-tabsbelow .v-tabsheet-tabitem {
+	position:relative;
 	background-image:none;
-	background: black;
-	
+	background:transparent;
+	height: 45px;
 }
 
-.v-tabsheet-tabcontainer-touchkit-tabsbelow .v-tabsheet-tabitem-selected .v-caption {
+.v-tabsheet-tabcontainer-touchkit-tabsbelow .v-caption {
+	display: block;
+	margin:2px 0;
+	margin-left:auto;
+	margin-right:auto;
 	background-image:none;
 	background:black;
 	color:white;
+	font-size:7px;
+	padding: 2px 0;
+	height:41px;
+	position:relative;
+	overflow:visible;
+}
+
+.v-sa .v-tabsheet-tabs-touchkit-tabsbelow .v-captiontext {
+	display:block;
+	text-align:center;
+	overflow:visible;
+}
+
+.v-tabsheet-tabitem-selected .v-caption {
+	background: rgba(255,255,255, 0.12);
+	border-radius: 3px;
+}
+
+.v-tabsheet-tabs-touchkit-tabsbelow .v-tabsheet-spacertd {
+	display: none;	
+}
+
+.v-tabsheet-tabs-touchkit-tabsbelow .v-tabsheet-tabitem-selected {
+}
+
+
+.v-tabsheet-tabitemcell,
+.v-tabsheet-spacertd,
+.v-tabsheet-spacertd div {
+	padding:0;
+	background: black;
+}
+
+.v-tabsheet-touchkit-tabsbelow .v-tabsheet-tabs .v-icon {
+	width: 32px !important;
+	height: 32px !important;
+	padding: 0;
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	margin-bottom: -2px;
+}
+
+.v-tabsheet-deco-touchkit-tabsbelow {
+	display:none;	
 }
 
 /* touchkit sub window */
