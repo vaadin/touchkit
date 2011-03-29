@@ -10,28 +10,36 @@ import com.google.gwt.resources.client.ImageResource.ImageOptions;
 import com.google.gwt.resources.client.ImageResource.RepeatStyle;
 
 public interface TouchKitResources extends ClientBundle {
-	  public static final TouchKitResources INSTANCE =  GWT.create(TouchKitResources.class);
+	public static final TouchKitResources INSTANCE = GWT
+			.create(TouchKitResources.class);
 
-	  @NotStrict
-	  @Source("touchkit.css")
-	  public CssResource css();
-	  
-	  @Source("back_button.png")
-	  public DataResource backButtonImage();
+	@NotStrict
+	@Source("touchkit.css")
+	public CssResource css();
 
-	  @Source("navbar-action.png")
-	  public DataResource navBarActionImage();
+	@Source("back_button.png")
+	public DataResource backButtonImage();
 
-	  @Source("background_stripes.png")
-	  public DataResource backgroundStripesImage();
-	  
-	  @Source("header_middle.png")
-	  @ImageOptions(repeatStyle=RepeatStyle.Horizontal)
-	  public ImageResource toolbarBackground();
-	  
-	  @Source("slider-handle.png")
-	  @ImageOptions(repeatStyle=RepeatStyle.None)
-	  public ImageResource sliderHandle();
+	@Source("navbar-action.png")
+	public DataResource navBarActionImage();
 
+	@Source("background_stripes.png")
+	public DataResource backgroundStripesImage();
+
+	@Source("header_middle.png")
+	@ImageOptions(repeatStyle = RepeatStyle.Horizontal)
+	public ImageResource toolbarBackground();
+
+	@Source("slider-handle.png")
+	@ImageOptions(repeatStyle = RepeatStyle.None)
+	public ImageResource sliderHandle();
+
+	@Source("modalWindowArrow.png")
+	@ImageOptions(repeatStyle = RepeatStyle.None)
+	public ImageResource modalWindowArrow();
+
+	@Source("modalWindowArrowDown.png")
+	@ImageOptions(repeatStyle = RepeatStyle.None)
+	public ImageResource modalWindowArrowDown();
 
 }

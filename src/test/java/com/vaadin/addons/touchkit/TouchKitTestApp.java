@@ -59,6 +59,15 @@ public class TouchKitTestApp extends Application {
 
 		mainWindow.addComponent(b);
 
+		b = new Button("Tabsheet");
+		b.addListener(new ClickListener() {
+			public void buttonClick(ClickEvent event) {
+				mainWindow.setContent(new TabsheetTest());
+			}
+		});
+
+		mainWindow.addComponent(b);
+
 		setMainWindow(mainWindow);
 	}
 

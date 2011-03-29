@@ -11,7 +11,7 @@ import com.vaadin.ui.Window;
  * A modal sub window suitable for mobile devices. Most commonly this kind of
  * window contains no caption, but instead just quickly displays more options or
  * small form related to an action. TouchKitSubWindow does not support dragging
- * or resizing by user.
+ * or resizing by the end user.
  * <p>
  * Typical use case by example: In ios mail when you hit the arrow (the
  * "reply logo") you'll see option of actions: "Reply", "Forward" and "Print".
@@ -61,7 +61,7 @@ public class TouchKitSubWindow extends Window {
 
 	/**
 	 * Sets wheter the sub window is closed if clicked outside it. Note, that no
-	 * close box is rendered as in normal window.
+	 * close box is rendered as in a normal window.
 	 */
 	@Override
 	public void setClosable(boolean closable) {

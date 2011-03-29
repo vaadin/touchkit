@@ -38,7 +38,7 @@ public class NavigationPanel extends AbstractComponentContainer {
 	public void navigateTo(Component c) {
 		if (c == null) {
 			throw new UnsupportedOperationException(
-					"Some view must always be visible");
+					"Some component must always be visible in navigation panel");
 		} else if (c == currentComponent) {
 			/*
 			 * Already nagigated to this component.
@@ -57,6 +57,12 @@ public class NavigationPanel extends AbstractComponentContainer {
 				removeComponent(nextComponent);
 			}
 			addComponent(c);
+			if (c instanceof NavigationView) {
+				NavigationView view = (NavigationView) c;
+				if (view.getPreviousComponent() == null) {
+					view.setPreviousComponent(currentComponent);
+				}
+			}
 		} else {
 			nextComponent = null;
 		}
@@ -71,13 +77,16 @@ public class NavigationPanel extends AbstractComponentContainer {
 	}
 
 	private void notifyViewOfBecomingVisible() {
-		if(currentComponent instanceof NavigationView) {
+		if (currentComponent instanceof NavigationView) {
 			NavigationView v = (NavigationView) currentComponent;
 			v.onBecomingVisible();
+			/*
+			 * TODO consider forcing setting the previous component here.
+			 */
 		}
-		
+
 	}
-	
+
 	public void navigateBack() {
 		if (previousComponent == null) {
 			return;
@@ -96,15 +105,26 @@ public class NavigationPanel extends AbstractComponentContainer {
 	}
 
 	public void setCurrentComponent(Component currentComponent) {
-		this.currentComponent = currentComponent;
+		navigateTo(currentComponent);
 	}
 
 	public Component getCurrentComponent() {
 		return currentComponent;
 	}
 
-	public void setPreviousComponent(Component previousComponent) {
-		this.previousComponent = previousComponent;
+	public void setPreviousComponent(Component newPreviousComponent) {
+		if (previousComponent != newPreviousComponent) {
+			if (previousComponent != null) {
+				removeComponent(newPreviousComponent);
+			}
+			previousComponent = newPreviousComponent;
+			if (currentComponent instanceof NavigationView) {
+				NavigationView view = (NavigationView) currentComponent;
+				view.setPreviousComponent(newPreviousComponent);
+			}
+			addComponent(previousComponent);
+			requestRepaint();
+		}
 	}
 
 	public Component getPreviousComponent() {
@@ -132,12 +152,15 @@ public class NavigationPanel extends AbstractComponentContainer {
 	@Override
 	public void paintContent(PaintTarget target) throws PaintException {
 		super.paintContent(target);
-		if (currentComponent != null)
+		if (currentComponent != null) {
 			target.addAttribute("c", currentComponent);
-		if (nextComponent != null)
+		}
+		if (nextComponent != null) {
 			target.addAttribute("n", nextComponent);
-		if (previousComponent != null)
+		}
+		if (previousComponent != null) {
 			target.addAttribute("p", previousComponent);
+		}
 		Iterator<Component> componentIterator = getComponentIterator();
 		while (componentIterator.hasNext()) {
 			Component next = componentIterator.next();

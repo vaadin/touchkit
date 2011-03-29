@@ -13,7 +13,7 @@
 	width: 100%;
 	height: 100%;
 	-webkit-transform: translate3d(0, 0, 0);
-	-webkit-transition: -webkit-transform 0.5s linear;
+	-webkit-transition: -webkit-transform 0.3s linear;
 }
 
 @url backgroundStripes backgroundStripesImage ;
@@ -25,7 +25,7 @@
 	background: backgroundStripes;
 	/* Not visible until positioned */
 	opacity: 0;
-	-webkit-transition: opacity 0.3s linear;
+	-webkit-transition: opacity 0.15s linear;
 }
 
 .v-navpanel-placeholder {
@@ -337,6 +337,10 @@
 
 /* Tabsheet tabs below */
 
+.v-tabsheet-touchkit-tabsbelow {
+	position: relative;
+}
+
 .v-tabsheet-tabcontainer-touchkit-tabsbelow {
 	position: absolute;
 	bottom:0;
@@ -363,9 +367,39 @@
 		
 }
 
+.v-touchkit-window .v-window-wrap {
+	border: 3px solid black;
+	border-radius: 10px;
+	overflow:hidden;
+	background: white;
+}
+
+.v-touchkit-window-full-screen .v-window-wrap {
+	border: 0;
+	border-radius: 0;
+}
+
+.v-touchkit-window .v-window-contents {
+	background: transparent;	
+}
+
+
 .v-touchkit-window .v-window-closebox,
 .v-touchkit-window .v-window-outerheader,
 .v-touchkit-window .v-window-footer {
 	display: none;
 }
 
+.v-tk-opacity-transition {
+	-webkit-transition: opacity 0.1s linear;
+}
+
+@sprite .v-touchkit-window-pointer {
+	gwt-image: "modalWindowArrowDown";
+	position:absolute;
+}
+
+@sprite .v-touchkit-window-pointer-bottom {
+	gwt-image: "modalWindowArrow";
+	position:absolute;
+}
