@@ -11,6 +11,7 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.TabSheet.Tab;
 
 public class TabsheetTest extends Tabsheet implements ClickListener {
 

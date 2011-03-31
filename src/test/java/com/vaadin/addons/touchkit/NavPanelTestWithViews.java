@@ -6,6 +6,7 @@ import com.vaadin.addons.touchkit.ui.NavigationPanel;
 import com.vaadin.addons.touchkit.ui.NavigationView;
 import com.vaadin.addons.touchkit.ui.NumberField;
 import com.vaadin.addons.touchkit.ui.OptionLayout;
+import com.vaadin.addons.touchkit.ui.Tabsheet;
 import com.vaadin.addons.touchkit.ui.Toolbar;
 import com.vaadin.addons.touchkit.ui.TouchKitSubWindow;
 import com.vaadin.terminal.Resource;
@@ -75,6 +76,17 @@ public class NavPanelTestWithViews extends NavigationPanel implements
 
 				if (event.getButton() == fullScreen) {
 					touchKitSubWindow.setSizeFull();
+					touchKitSubWindow.setModal(false);
+					Tabsheet tabsheet = new Tabsheet();
+					touchKitSubWindow.setContent(tabsheet);
+					
+					content.setCaption("TAB1");
+					tabsheet.addTab(content);
+					CssLayout cssLayout = new CssLayout();
+					cssLayout.setCaption("TAB2");
+					tabsheet.addTab(cssLayout);
+					cssLayout.addComponent(new Label("Nothing here actually, close button on tab1."));
+					
 				}
 
 				touchKitSubWindow.showRelativeTo(event.getButton());
