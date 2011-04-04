@@ -124,6 +124,14 @@
 	height: 32px;
 }
 
+.v-optionlayout .v-switch {
+	float:right;
+	position: absolute;
+	margin-top: -28px;
+	right:0;
+}
+
+
 /* Grey lines between component */
 .v-optionlayout .v-csslayout-container>*:before {
 	content: "";
@@ -403,4 +411,33 @@
 @sprite .v-touchkit-window-pointer-bottom {
 	gwt-image: "modalWindowArrow";
 	position:absolute;
+}
+
+/* Switch style checkbox.
+ * TODO Consider styling with pure css:
+ * http://css3wizardry.com/2010/09/16/making-an-iphone-switch-control-without-images/
+ */
+
+.v-switch {
+	width: 81px;
+	height: 20px;
+	overflow: hidden;
+	border: 1px solid #bfbfbf;	
+	position: relative;
+	cursor: pointer !important;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+@sprite .v-switch-slider {
+	gwt-image: "switchImage";
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.v-switch-focus,
+.v-switch:focus {
+	outline: none;
+	border-color: #4f83b4 #5b97d0 #5ca0df;
 }

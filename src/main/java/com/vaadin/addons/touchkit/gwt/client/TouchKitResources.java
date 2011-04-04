@@ -13,6 +13,10 @@ public interface TouchKitResources extends ClientBundle {
 	public static final TouchKitResources INSTANCE = GWT
 			.create(TouchKitResources.class);
 
+	/**
+	 * TODO consider splitting this per components/related components
+	 * @return
+	 */
 	@NotStrict
 	@Source("touchkit.css")
 	public CssResource css();
@@ -41,5 +45,10 @@ public interface TouchKitResources extends ClientBundle {
 	@Source("modalWindowArrowDown.png")
 	@ImageOptions(repeatStyle = RepeatStyle.None)
 	public ImageResource modalWindowArrowDown();
+	
+	@Source("switch.png")
+	@ImageOptions(repeatStyle = RepeatStyle.None)
+	public ImageResource switchImage();
+
 
 }

@@ -6,6 +6,7 @@ import com.vaadin.addons.touchkit.ui.NavigationPanel;
 import com.vaadin.addons.touchkit.ui.NavigationView;
 import com.vaadin.addons.touchkit.ui.NumberField;
 import com.vaadin.addons.touchkit.ui.OptionLayout;
+import com.vaadin.addons.touchkit.ui.Switch;
 import com.vaadin.addons.touchkit.ui.Tabsheet;
 import com.vaadin.addons.touchkit.ui.Toolbar;
 import com.vaadin.addons.touchkit.ui.TouchKitSubWindow;
@@ -292,6 +293,9 @@ public class NavPanelTestWithViews extends NavigationPanel implements
 				}
 				components.addComponent(navigationButton);
 			}
+			Switch switch1 = new Switch();
+			switch1.setCaption("ios wannabe check");
+			components.addComponent(switch1);
 			setContent(components);
 		}
 
