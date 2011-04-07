@@ -1,8 +1,11 @@
 package com.vaadin.addons.touchkit.ui;
 
 import java.util.LinkedList;
+import java.util.Map;
 
 import com.vaadin.addons.touchkit.server.TouchKitApplicationServlet;
+import com.vaadin.terminal.PaintException;
+import com.vaadin.terminal.PaintTarget;
 import com.vaadin.ui.Window;
 
 /**
@@ -25,6 +28,7 @@ public class TouchKitWindow extends Window {
 	private String startupImage;
 
 	private LinkedList<ApplicationIcon> applicationIcon = new LinkedList<ApplicationIcon>();
+	private LinkedList<PositionCallback> positionCbs;
 
 	/**
 	 * Sets the webpage icon for this web app. This icon may be used by the
@@ -244,6 +248,47 @@ public class TouchKitWindow extends Window {
 	public ApplicationIcon[] getApplicationIcons() {
 		return applicationIcon.toArray(new ApplicationIcon[applicationIcon
 				.size()]);
+	}
+
+	/**
+	 * This method is used to detect the current geographic position of the
+	 * client. The detection happens asynchronously and the position is reported
+	 * to the callback given as argument.
+	 * 
+	 * @param positionCallback
+	 */
+	public void detectCurrentPosition(PositionCallback positionCallback) {
+		if(positionCbs == null) {
+			positionCbs = new LinkedList<PositionCallback>();
+		}
+		positionCbs.add(positionCallback);
+		requestRepaint();
+	}
+	
+	@Override
+	public synchronized void paintContent(PaintTarget target)
+			throws PaintException {
+		super.paintContent(target);
+		if(positionCbs != null && !positionCbs.isEmpty()) {
+			target.addAttribute("geoloc", true);
+		}
+	}
+	
+	@Override
+	public void changeVariables(Object source, Map<String, Object> variables) {
+		super.changeVariables(source, variables);
+		if(variables.containsKey("position")) {
+			for (PositionCallback cb : positionCbs) {
+				cb.onSuccess(new Position((String) variables.get("position")));
+			}
+			positionCbs.clear();
+		} else if (variables.containsKey("positionError")) {
+			for (PositionCallback cb : positionCbs) {
+				Integer errorCode = (Integer) variables.get("positionError");
+				cb.onFailure(errorCode.intValue());
+			}
+			positionCbs.clear();
+		}
 	}
 
 }

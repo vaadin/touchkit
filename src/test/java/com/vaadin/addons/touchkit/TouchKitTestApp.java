@@ -3,12 +3,16 @@ package com.vaadin.addons.touchkit;
 import java.util.Random;
 
 import com.vaadin.Application;
+import com.vaadin.addons.touchkit.ui.Position;
+import com.vaadin.addons.touchkit.ui.PositionCallback;
+import com.vaadin.addons.touchkit.ui.Switch;
 import com.vaadin.addons.touchkit.ui.TouchKitWindow;
 import com.vaadin.terminal.Resource;
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Embedded;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Window;
@@ -23,6 +27,7 @@ public class TouchKitTestApp extends Application {
 	@Override
 	public void init() {
 		final TouchKitWindow mainWindow = new TouchKitWindow();
+		mainWindow.setContent(new CssLayout());
 		mainWindow.addListener(new Window.ResizeListener() {
 			public void windowResized(ResizeEvent e) {
 				System.err.println("Window size now:"
@@ -72,6 +77,55 @@ public class TouchKitTestApp extends Application {
 		});
 
 		mainWindow.addComponent(b);
+
+		mainWindow.addComponent(new Button("Geolocation",
+				new Button.ClickListener() {
+
+					@Override
+					public void buttonClick(ClickEvent event) {
+						mainWindow
+								.detectCurrentPosition(new PositionCallback() {
+
+									@Override
+									public void onSuccess(Position position) {
+
+										double latitude = position
+												.getLatitude();
+										double longitude = position
+												.getLongitude();
+										double accuracy = position
+												.getAccuracy();
+
+										mainWindow.addComponent(new Label(
+												"Position is: " + longitude
+														+ " " + latitude
+														+ "(accuracy:"
+														+ accuracy + ")"));
+
+									}
+
+									@Override
+									public void onFailure(int errorCode) {
+										// TODO Auto-generated method stub
+
+									}
+
+								});
+					}
+				}));
+		;
+
+		mainWindow.addComponent(new Button("dsf", new Button.ClickListener() {
+
+			@Override
+			public void buttonClick(ClickEvent event) {
+				Switch switch1 = new Switch();
+				switch1.setCaption("Jep");
+				mainWindow.addComponent(switch1);
+
+			}
+		}));
+		;
 
 		setMainWindow(mainWindow);
 	}
