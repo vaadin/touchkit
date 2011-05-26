@@ -100,17 +100,14 @@ public class Tabsheet extends CssLayout {
 			}
 		}
 
-		@Override
 		public boolean isClosable() {
 			return false;
 		}
 
-		@Override
 		public void setClosable(boolean closable) {
 			throw new UnsupportedOperationException();
 		}
 
-		@Override
 		public Component getComponent() {
 			return relatedComponent;
 		}

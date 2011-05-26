@@ -221,7 +221,6 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
 	private void updateVisibleState(final boolean skipAnimation) {
 		ScheduledCommand command = new ScheduledCommand() {
 
-			@Override
 			public void execute() {
 				final int targetLeft = (value ? 0 : -getUnvisiblePartWidth());
 
@@ -335,14 +334,12 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
 		removeStyleDependentName("focus");
 	}
 
-	@Override
 	public void onTouchEnd(TouchEndEvent event) {
 		if (isEnabled()) {
 			handleMouseUp();
 		}
 	}
 
-	@Override
 	public void onTouchMove(TouchMoveEvent event) {
 		if (isEnabled()) {
 			Touch touch = event.getTouches().get(0).cast();
@@ -351,7 +348,6 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
 		}
 	}
 
-	@Override
 	public void onTouchStart(TouchStartEvent event) {
 		if (isEnabled()) {
 			Touch touch = event.getTouches().get(0).cast();
@@ -360,7 +356,6 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
 		}
 	}
 
-	@Override
 	public void onTouchCancel(TouchCancelEvent event) {
 		if (isEnabled()) {
 			handleMouseUp();

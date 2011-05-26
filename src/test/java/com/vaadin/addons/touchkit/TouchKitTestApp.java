@@ -81,12 +81,10 @@ public class TouchKitTestApp extends Application {
 		mainWindow.addComponent(new Button("Geolocation",
 				new Button.ClickListener() {
 
-					@Override
 					public void buttonClick(ClickEvent event) {
 						mainWindow
 								.detectCurrentPosition(new PositionCallback() {
 
-									@Override
 									public void onSuccess(Position position) {
 
 										double latitude = position
@@ -104,7 +102,6 @@ public class TouchKitTestApp extends Application {
 
 									}
 
-									@Override
 									public void onFailure(int errorCode) {
 										// TODO Auto-generated method stub
 
@@ -117,7 +114,6 @@ public class TouchKitTestApp extends Application {
 
 		mainWindow.addComponent(new Button("dsf", new Button.ClickListener() {
 
-			@Override
 			public void buttonClick(ClickEvent event) {
 				Switch switch1 = new Switch();
 				switch1.setCaption("Jep");
