@@ -1,5 +1,7 @@
 package com.vaadin.addons.touchkit.ui;
 
+import java.util.Map;
+
 import com.vaadin.addons.touchkit.gwt.client.VNavigationButton;
 import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;
@@ -31,21 +33,32 @@ public class NavigationButton extends Button {
 	public NavigationButton() {
 	}
 
+	// @Override
+	// protected void fireClick() {
+	// /*
+	// * TODO remove debug timeout
+	// */
+	// // try {
+	// // Thread.sleep(300);
+	// // } catch (InterruptedException e) {
+	// // // TODO Auto-generated catch block
+	// // e.printStackTrace();
+	// // }
+	// if (nextView != null) {
+	// getNavigationPanel().navigateTo(nextView);
+	// }
+	// super.fireClick();
+	// }
+
 	@Override
-	protected void fireClick() {
-		/*
-		 * TODO remove debug timeout
-		 */
-		try {
-			Thread.sleep(300);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void changeVariables(Object source, Map<String, Object> variables) {
+		// FIXME since #6605 click implementation in Button sucks. Fix it then
+		// uncomment the previous method or something.
+		// super.changeVariables(source, variables);
 		if (nextView != null) {
 			getNavigationPanel().navigateTo(nextView);
 		}
-		super.fireClick();
+		fireClick();
 	}
 
 	/**
