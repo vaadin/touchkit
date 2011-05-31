@@ -19,155 +19,155 @@ import com.vaadin.terminal.gwt.client.ui.TouchScrollDelegate;
 
 public class VNavigationView extends ComplexPanel implements Container {
 
-	private static final String CLASSNAME = "v-navview";
-	private static final int NAVBARHEIGHT = 42;
-	private Element wrapper = Document.get().createDivElement().cast();
-	private Element toolbarDiv = Document.get().createDivElement().cast();
+    private static final String CLASSNAME = "v-navview";
+    private static final int NAVBARHEIGHT = 42;
+    private Element wrapper = Document.get().createDivElement().cast();
+    private Element toolbarDiv = Document.get().createDivElement().cast();
 
-	private VNavigationBar navbar;
-	private Paintable content;
-	private Paintable toolbar;
-	private boolean hasToolbar;
-	private ApplicationConnection client;
-	private boolean rendering;
+    private VNavigationBar navbar;
+    private Paintable content;
+    private Paintable toolbar;
+    private boolean hasToolbar;
+    private ApplicationConnection client;
+    private boolean rendering;
 
-	public VNavigationView() {
-		TouchKitResources.INSTANCE.css().ensureInjected();
-		setElement(Document.get().createDivElement());
-		setStyleName(CLASSNAME);
-		wrapper.setClassName(CLASSNAME + "-wrapper");
-		getElement().appendChild(wrapper);
-		toolbarDiv.setClassName(CLASSNAME + "-tb");
-		getElement().appendChild(toolbarDiv);
+    public VNavigationView() {
+        TouchKitResources.INSTANCE.css().ensureInjected();
+        setElement(Document.get().createDivElement());
+        setStyleName(CLASSNAME);
+        wrapper.setClassName(CLASSNAME + "-wrapper");
+        getElement().appendChild(wrapper);
+        toolbarDiv.setClassName(CLASSNAME + "-tb");
+        getElement().appendChild(toolbarDiv);
 
-		/*
-		 * Touch scrolling using one finger handled by TouchScrollDelegate.
-		 */
-		sinkEvents(Event.TOUCHEVENTS);
-		final TouchScrollDelegate touchScrollDelegate = new TouchScrollDelegate(
-				wrapper);
-		addHandler(new TouchStartHandler() {
-			public void onTouchStart(TouchStartEvent event) {
-				touchScrollDelegate.onTouchStart(event);
-			}
-		}, TouchStartEvent.getType());
-	}
+        /*
+         * Touch scrolling using one finger handled by TouchScrollDelegate.
+         */
+        sinkEvents(Event.TOUCHEVENTS);
+        final TouchScrollDelegate touchScrollDelegate = new TouchScrollDelegate(
+                wrapper);
+        addHandler(new TouchStartHandler() {
+            public void onTouchStart(TouchStartEvent event) {
+                touchScrollDelegate.onTouchStart(event);
+            }
+        }, TouchStartEvent.getType());
+    }
 
-	@Override
-	public void setStyleName(String style) {
-		if (!hasToolbar) {
-			style += " " + CLASSNAME + "-notoolbar";
-		}
-		super.setStyleName(style);
-	}
+    @Override
+    public void setStyleName(String style) {
+        if (!hasToolbar) {
+            style += " " + CLASSNAME + "-notoolbar";
+        }
+        super.setStyleName(style);
+    }
 
-	public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
-		if (!uidl.hasAttribute("cached")) {
-			int childCount = uidl.getChildCount();
-			hasToolbar = childCount > 2;
-		}
-		if (client.updateComponent(this, uidl, true)) {
-			return;
-		}
-		rendering = true;
-		this.client = client;
+    public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
+        if (!uidl.hasAttribute("cached")) {
+            int childCount = uidl.getChildCount();
+            hasToolbar = childCount > 2;
+        }
+        if (client.updateComponent(this, uidl, false)) {
+            return;
+        }
+        rendering = true;
+        this.client = client;
 
-		// we assume navbar never changes
-		UIDL navbaruidl = uidl.getChildUIDL(0);
-		navbar = (VNavigationBar) client.getPaintable(navbaruidl);
-		if (!navbar.isAttached()) {
-			insert(navbar, getElement(), 0, true);
-		}
-		navbar.updateFromUIDL(navbaruidl, client);
+        // we assume navbar never changes
+        UIDL navbaruidl = uidl.getChildUIDL(0);
+        navbar = (VNavigationBar) client.getPaintable(navbaruidl);
+        if (!navbar.isAttached()) {
+            insert(navbar, getElement(), 0, true);
+        }
+        navbar.updateFromUIDL(navbaruidl, client);
 
-		setStyleDependentName("notoolbar", !hasToolbar);
-		// and we always have content in second slot
-		UIDL childUIDL = uidl.getChildUIDL(1);
-		Paintable paintable = client.getPaintable(childUIDL);
-		if (content != null && content != paintable) {
-			forgetComponent(client, content);
-		}
-		content = paintable;
-		if (!((Widget) content).isAttached()) {
-			add((Widget) content, wrapper);
-		}
-		content.updateFromUIDL(childUIDL, client);
-		if (hasToolbar) {
-			UIDL toolbaruidl = uidl.getChildUIDL(2);
-			Paintable paintable2 = client.getPaintable(toolbaruidl);
-			if (toolbar != null && toolbar != paintable2) {
-				forgetComponent(client, toolbar);
-			}
-			toolbar = paintable2;
-			if (!((Widget) toolbar).isAttached()) {
-				add((Widget) toolbar, toolbarDiv);
-			}
-			toolbar.updateFromUIDL(toolbaruidl, client);
-		} else if (toolbar != null) {
-			forgetComponent(client, toolbar);
-		}
+        setStyleDependentName("notoolbar", !hasToolbar);
+        // and we always have content in second slot
+        UIDL childUIDL = uidl.getChildUIDL(1);
+        Paintable paintable = client.getPaintable(childUIDL);
+        if (content != null && content != paintable) {
+            forgetComponent(client, content);
+        }
+        content = paintable;
+        if (!((Widget) content).isAttached()) {
+            add((Widget) content, wrapper);
+        }
+        content.updateFromUIDL(childUIDL, client);
+        if (hasToolbar) {
+            UIDL toolbaruidl = uidl.getChildUIDL(2);
+            Paintable paintable2 = client.getPaintable(toolbaruidl);
+            if (toolbar != null && toolbar != paintable2) {
+                forgetComponent(client, toolbar);
+            }
+            toolbar = paintable2;
+            if (!((Widget) toolbar).isAttached()) {
+                add((Widget) toolbar, toolbarDiv);
+            }
+            toolbar.updateFromUIDL(toolbaruidl, client);
+        } else if (toolbar != null) {
+            forgetComponent(client, toolbar);
+        }
 
-		Util.runWebkitOverflowAutoFix(wrapper);
-		rendering = false;
-	}
+        Util.runWebkitOverflowAutoFix(wrapper);
+        rendering = false;
+    }
 
-	private void forgetComponent(ApplicationConnection client,
-			Paintable content2) {
-		((Widget) content2).removeFromParent();
-		client.unregisterPaintable(content2);
-		if (content == content2) {
-			content = null;
-		} else {
-			toolbar = null;
-		}
-	}
+    private void forgetComponent(ApplicationConnection client,
+            Paintable content2) {
+        ((Widget) content2).removeFromParent();
+        client.unregisterPaintable(content2);
+        if (content == content2) {
+            content = null;
+        } else {
+            toolbar = null;
+        }
+    }
 
-	public void replaceChildComponent(Widget oldComponent, Widget newComponent) {
-		throw new UnsupportedOperationException();
-	}
+    public void replaceChildComponent(Widget oldComponent, Widget newComponent) {
+        throw new UnsupportedOperationException();
+    }
 
-	public boolean hasChildComponent(Widget component) {
-		if (component == navbar || component == content || component == toolbar) {
-			return true;
-		}
-		return false;
-	}
+    public boolean hasChildComponent(Widget component) {
+        if (component == navbar || component == content || component == toolbar) {
+            return true;
+        }
+        return false;
+    }
 
-	public void updateCaption(Paintable component, UIDL uidl) {
-		// NOP not needed
-	}
+    public void updateCaption(Paintable component, UIDL uidl) {
+        // NOP not needed
+    }
 
-	public boolean requestLayout(Set<Paintable> children) {
-		return true;
-	}
+    public boolean requestLayout(Set<Paintable> children) {
+        return true;
+    }
 
-	public RenderSpace getAllocatedSpace(Widget child) {
-		if (child == content) {
-			return new RenderSpace(wrapper.getOffsetWidth(),
-					wrapper.getOffsetHeight(), true);
-		} else if (child == toolbar) {
-			return new RenderSpace(wrapper.getOffsetWidth(), NAVBARHEIGHT,
-					false);
+    public RenderSpace getAllocatedSpace(Widget child) {
+        if (child == content) {
+            return new RenderSpace(wrapper.getOffsetWidth(),
+                    wrapper.getOffsetHeight(), true);
+        } else if (child == toolbar) {
+            return new RenderSpace(wrapper.getOffsetWidth(), NAVBARHEIGHT,
+                    false);
 
-		} else if (child == navbar) {
-			return new RenderSpace(wrapper.getOffsetWidth(),
-					toolbarDiv.getOffsetHeight(), false);
-		} else {
-			throw new IllegalArgumentException();
-		}
-	}
+        } else if (child == navbar) {
+            return new RenderSpace(wrapper.getOffsetWidth(),
+                    toolbarDiv.getOffsetHeight(), false);
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
 
-	@Override
-	public void setWidth(String width) {
-		super.setWidth(width);
-		if (!rendering) {
-			if (content != null) {
-				client.handleComponentRelativeSize((Widget) content);
-			}
-			if (toolbar != null) {
-				client.handleComponentRelativeSize((Widget) toolbar);
-			}
-		}
-	}
+    @Override
+    public void setWidth(String width) {
+        super.setWidth(width);
+        if (!rendering) {
+            if (content != null) {
+                client.handleComponentRelativeSize((Widget) content);
+            }
+            if (toolbar != null) {
+                client.handleComponentRelativeSize((Widget) toolbar);
+            }
+        }
+    }
 
 }
