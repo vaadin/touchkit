@@ -17,85 +17,118 @@ import com.vaadin.ui.Component;
 @ClientWidget(VNavigationBar.class)
 public class NavigationBar extends AbstractComponentContainer {
 
-	private static final String STYLENAME = "v-navitiotionbar";
-	private static final String BACK_BUTTON = STYLENAME + "-backbutton";
-	private NavigationButton backButton = new NavigationButton();
-	private Component navigationBarComponent;
+    private static final String STYLENAME = "v-navitiotionbar";
+    private static final String BACK_BUTTON = STYLENAME + "-backbutton";
+    private NavigationButton backButton = new NavigationButton();
+    private Component navigationBarComponent;
+    private Component leftNavigationBarComponent;
 
-	public NavigationBar() {
-		setStyleName(STYLENAME);
-		backButton.setVisible(false);
-		backButton.setStyleName(BACK_BUTTON);
-		super.addComponent(backButton);
-	}
+    public NavigationBar() {
+        setStyleName(STYLENAME);
+        backButton.setVisible(false);
+        backButton.setStyleName(BACK_BUTTON);
+        setLeftNavigationBarComponent(backButton);
+    }
 
-	public void setNavigationBarComponent(Component c) {
-		if (navigationBarComponent != null) {
-			super.removeComponent(navigationBarComponent);
-		}
-		if (c != null) {
-			super.addComponent(c);
-		}
-		navigationBarComponent = c;
-	}
+    /**
+     * Sets the component on the left side of the caption.
+     * 
+     * <p>
+     * This place is most commonly reserved for the back button. In case the
+     * {@link #setPreviousView(Component)} method is used, it replaces existing
+     * components from this location.
+     * 
+     * @param c
+     */
+    public void setLeftNavigationBarComponent(Component c) {
+        if (leftNavigationBarComponent != null) {
+            super.removeComponent(leftNavigationBarComponent);
+        }
+        if (c != null) {
+            super.addComponent(c);
+        }
+        leftNavigationBarComponent = c;
+    }
 
-	public void setPreviousView(Component component) {
-		getBackButton().setTargetView(component);
-		getBackButton().setVisible(component != null);
-	}
+    /**
+     * Sets the component on the right side of the caption.
+     * 
+     * @param c
+     */
+    public void setNavigationBarComponent(Component c) {
+        if (navigationBarComponent != null) {
+            super.removeComponent(navigationBarComponent);
+        }
+        if (c != null) {
+            super.addComponent(c);
+        }
+        navigationBarComponent = c;
+    }
 
-	public Component getPreviousView() {
-		return getBackButton().getTargetView();
-	}
+    public void setPreviousView(Component component) {
+        getBackButton().setTargetView(component);
+        if (getBackButton().getParent() == null) {
+            setLeftNavigationBarComponent(getBackButton());
+        }
+        getBackButton().setVisible(component != null);
+    }
 
-	private NavigationButton getBackButton() {
-		return backButton;
-	}
+    public Component getPreviousView() {
+        return getBackButton().getTargetView();
+    }
 
-	/**
-	 * Not supported by NavigationBar.
-	 * 
-	 * @deprecated
-	 */
-	@Override
-	public void addComponent(Component c) {
-		throw new UnsupportedOperationException(
-				"Navigation bar does not support general container mutation methods. Use setRightComponent, setCaption and setPreviousVew methods to control the componen.");
-	}
+    private NavigationButton getBackButton() {
+        return backButton;
+    }
 
-	/**
-	 * Not supported by NavigationBar.
-	 * 
-	 * @deprecated
-	 */
-	public void replaceComponent(Component oldComponent, Component newComponent) {
-		throw new UnsupportedOperationException(
-				"Navigation bar does not support general container mutation methods. Use setRightComponent, setCaption and setPreviousVew methods to control the componen.");
-	}
+    /**
+     * Not supported by NavigationBar.
+     * 
+     * @deprecated
+     */
+    @Deprecated
+    @Override
+    public void addComponent(Component c) {
+        throw new UnsupportedOperationException(
+                "Navigation bar does not support general container mutation methods. Use setRightComponent, setCaption and setPreviousVew methods to control the componen.");
+    }
 
-	@Override
-	public void paintContent(PaintTarget target) throws PaintException {
-		super.paintContent(target);
+    /**
+     * Not supported by NavigationBar.
+     * 
+     * @deprecated
+     */
+    @Deprecated
+    public void replaceComponent(Component oldComponent, Component newComponent) {
+        throw new UnsupportedOperationException(
+                "Navigation bar does not support general container mutation methods. Use setRightComponent, setCaption and setPreviousVew methods to control the componen.");
+    }
 
-		target.startTag("back");
-		backButton.paint(target);
-		target.endTag("back");
+    @Override
+    public void paintContent(PaintTarget target) throws PaintException {
+        super.paintContent(target);
 
-		if (navigationBarComponent != null) {
-			target.startTag("component");
-			navigationBarComponent.paint(target);
-			target.endTag("component");
-		}
-		
-	}
+        if (leftNavigationBarComponent != null) {
+            target.startTag("back");
+            leftNavigationBarComponent.paint(target);
+            target.endTag("back");
+        }
 
-	public Iterator<Component> getComponentIterator() {
-		LinkedList<Component> components = new LinkedList<Component>();
-		components.add(backButton);
-		if (navigationBarComponent != null) {
-			components.add(navigationBarComponent);
-		}
-		return components.iterator();
-	}
+        if (navigationBarComponent != null) {
+            target.startTag("component");
+            navigationBarComponent.paint(target);
+            target.endTag("component");
+        }
+
+    }
+
+    public Iterator<Component> getComponentIterator() {
+        LinkedList<Component> components = new LinkedList<Component>();
+        components.add(backButton);
+        if (navigationBarComponent != null) {
+            components.add(navigationBarComponent);
+        }
+        return components.iterator();
+    }
 
 }
