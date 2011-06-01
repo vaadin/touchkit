@@ -6,6 +6,7 @@ import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -13,7 +14,6 @@ import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.terminal.gwt.client.ApplicationConnection;
 import com.vaadin.terminal.gwt.client.UIDL;
-import com.vaadin.terminal.gwt.client.VConsole;
 import com.vaadin.terminal.gwt.client.ui.VWindow;
 
 public class VTouchKitWindow extends VWindow {
@@ -55,6 +55,7 @@ public class VTouchKitWindow extends VWindow {
              * fade in the modality curtain unless in fullscreen mode.
              */
             getModalityCurtain().removeClassName("v-tk-opacity-transition");
+            DOM.sinkEvents(getModalityCurtain(), Event.TOUCHEVENTS);
             final Style style = getModalityCurtain().getStyle();
             style.setOpacity(0);
             Scheduler.get().scheduleDeferred(new ScheduledCommand() {
