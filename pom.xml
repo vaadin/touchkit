@@ -60,17 +60,13 @@
       <!-- A hosted mode browser for client-side widget debugging can be run with the goal gwt:run after uncommenting the 
         correct line below. A remote debugger can then be connected to port 8998. Note that e.g. a Jetty server should be running 
         with the server side parts - use the goal jetty:run . -->
+        <!--   TODO investigate how this can be disabled on "package/install etc". Compilation only needed for debugging via the test server
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>gwt-maven-plugin</artifactId>
         <version>2.3.0-SNAPSHOT</version>
         <configuration>
-          <!-- if you don't specify any modules, the plugin will find them -->
           <webappDirectory>${project.build.directory}/${project.build.finalName}/VAADIN/widgetsets</webappDirectory>
-          <!-- On Mac running Snow Leopard, add "-d32" -->
-          <!-- This causes error messages (but build works) in phase "package": two processes would use the same debug 
-            port -->
-          <!--extraJvmArgs>-Xmx512M -Xss1024k -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8998</extraJvmArgs -->
           <extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
           <runTarget>xsite</runTarget>
           <hostedWebapp>${project.build.directory}/${project.build.finalName}</hostedWebapp>
@@ -87,6 +83,7 @@
           </execution>
         </executions>
       </plugin>
+       -->
     </plugins>
 
     <!-- This is needed for the sources required by the GWT compiler to be included in the produced JARs -->
