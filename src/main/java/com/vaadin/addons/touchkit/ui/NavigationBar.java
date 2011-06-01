@@ -48,6 +48,7 @@ public class NavigationBar extends AbstractComponentContainer {
             super.addComponent(c);
         }
         leftNavigationBarComponent = c;
+        requestRepaint();
     }
 
     /**
@@ -63,6 +64,7 @@ public class NavigationBar extends AbstractComponentContainer {
             super.addComponent(c);
         }
         navigationBarComponent = c;
+        requestRepaint();
     }
 
     public void setPreviousView(Component component) {
