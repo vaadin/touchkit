@@ -26,6 +26,7 @@ public class VTouchKitWindow extends VWindow {
     protected int zIndex;
 
     public VTouchKitWindow() {
+        setShadowEnabled(false);
     }
 
     @Override
