@@ -376,11 +376,16 @@
 		
 }
 
+@url popupWithToolbarImage popupWithToolbarImage;
 .v-touchkit-window .v-window-wrap {
-	border: 3px solid black;
-	border-radius: 10px;
-	overflow:hidden;
-	background: white;
+	border-width: 22px 8px 55px 8px;
+	-webkit-border-image: popupWithToolbarImage 22 8 55 8 repeat;
+	overflow: visible;
+	background: transparent;
+	position: realtive;
+}
+.v-touchkit-window .v-window-wrap2 {
+	border-radius: 3px;
 }
 
 .v-touchkit-window-full-screen .v-window-wrap {
@@ -389,7 +394,23 @@
 }
 
 .v-touchkit-window .v-window-contents {
-	background: transparent;	
+	background: transparent;
+	top: -20px;
+	left: -3px;
+	margin-right: -6px;
+	margin-bottom: -73px;
+	position: relative;
+}
+
+.v-touchkit-window .v-window-contents > div > .v-verticallayout .v-verticallayout-margin {
+	padding-top:    7px;
+	padding-bottom: 7px;
+}
+
+.v-touchkit-window-full-screen .v-window-contents {
+	top: 0;
+	margin-bottom: 0;
+	position: block;
 }
 
 
@@ -406,11 +427,28 @@
 @sprite .v-touchkit-window-pointer {
 	gwt-image: "modalWindowArrowDown";
 	position:absolute;
+	margin-top: 3px;
 }
 
 @sprite .v-touchkit-window-pointer-bottom {
 	gwt-image: "modalWindowArrow";
 	position:absolute;
+	margin-top: 2px;
+}
+
+.v-touchkit-window .v-navpanel-container {
+	background: transparent;
+}
+.v-touchkit-window .v-navbar {
+	background: transparent;
+	border: 0;
+}
+.v-touchkit-window .v-navview-tb {
+	border: 0;
+}
+
+.v-touchkit-window .v-navview-tb .v-toolbar {
+	background: transparent;
 }
 
 /* Switch style checkbox.
