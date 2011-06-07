@@ -22,6 +22,7 @@ public class VTouchKitWindow extends VWindow {
     private String relComponentId;
     private boolean fullscreen;
     private DivElement arrowElement;
+    protected int zIndex;
 
     public VTouchKitWindow() {
     }
@@ -171,6 +172,7 @@ public class VTouchKitWindow extends VWindow {
         }
         arrowElement.getStyle().setTop(arrowPos, Unit.PX);
         arrowElement.getStyle().setProperty("opacity", "");
+        arrowElement.getStyle().setZIndex(zIndex);
 
     }
 
@@ -180,6 +182,16 @@ public class VTouchKitWindow extends VWindow {
         }
         arrowElement.getStyle().setOpacity(0);
         RootPanel.getBodyElement().appendChild(arrowElement);
+    }
+
+    @Override
+    protected void setZIndex(int zIndex) {
+        super.setZIndex(zIndex);
+        // Store zIndex for later use. set arrow zIndex if available
+        this.zIndex = zIndex;
+        if (arrowElement != null) {
+            arrowElement.getStyle().setZIndex(zIndex);
+        }
     }
 
     /**
