@@ -19,6 +19,7 @@ import com.vaadin.terminal.gwt.client.ui.VWindow;
 public class VTouchKitWindow extends VWindow {
 
     private static final int SMALL_SCREEN_WIDTH_THRESHOLD = 500;
+    private static final int MIN_EDGE_DISTANCE = 10;
     private String relComponentId;
     private boolean fullscreen;
     private DivElement arrowElement;
@@ -139,10 +140,12 @@ public class VTouchKitWindow extends VWindow {
             /*
              * Ensure the window is totally on screen.
              */
-            if (left < 0) {
-                left = 0;
-            } else if (left + getOffsetWidth() > Window.getClientWidth()) {
-                left = Window.getClientWidth() - getOffsetWidth();
+            if (left - MIN_EDGE_DISTANCE < 0) {
+                left = MIN_EDGE_DISTANCE;
+            } else if (left + getOffsetWidth() + MIN_EDGE_DISTANCE > Window
+                    .getClientWidth()) {
+                left = Window.getClientWidth() - getOffsetWidth()
+                        - MIN_EDGE_DISTANCE;
             }
 
         }
@@ -161,8 +164,17 @@ public class VTouchKitWindow extends VWindow {
         UIObject.setStyleName(arrowElement, "v-touchkit-window-pointer-bottom",
                 !onTop);
         UIObject.setStyleName(arrowElement, "v-touchkit-window-pointer", onTop);
-        final int horizontalpoint = centerOfReferencComponent
+
+        int horizontalpoint = centerOfReferencComponent
                 - arrowElement.getOffsetWidth() / 2;
+        if (horizontalpoint - MIN_EDGE_DISTANCE < 0) {
+            horizontalpoint = MIN_EDGE_DISTANCE;
+        } else if (horizontalpoint + arrowElement.getOffsetWidth()
+                + MIN_EDGE_DISTANCE > Window.getClientWidth()) {
+            horizontalpoint = Window.getClientWidth()
+                    - arrowElement.getOffsetWidth() - MIN_EDGE_DISTANCE;
+        }
+
         arrowElement.getStyle().setLeft(horizontalpoint, Unit.PX);
         int arrowPos = ref.getAbsoluteTop();
         if (onTop) {
