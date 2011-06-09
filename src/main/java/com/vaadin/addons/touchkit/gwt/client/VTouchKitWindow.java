@@ -26,7 +26,6 @@ public class VTouchKitWindow extends VWindow {
     protected int zIndex;
 
     public VTouchKitWindow() {
-        setShadowEnabled(false);
     }
 
     @Override
@@ -42,9 +41,11 @@ public class VTouchKitWindow extends VWindow {
     @Override
     public void setStyleName(String style) {
         if (fullscreen) {
+            setShadowEnabled(false);
             style += " v-touchkit-window v-touchkit-window-full-screen";
         } else {
             style += " v-touchkit-window";
+            setShadowEnabled(true);
         }
         super.setStyleName(style);
     }
