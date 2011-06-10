@@ -13,6 +13,33 @@
 	background-color: green;
 }
 
+.v-navpanel .v-button,
+.v-navpanel .v-button-wrap,
+.v-touchkit-window .v-button,
+.v-touchkit-window .v-button-wrap  {
+	background-image: none !important;
+	position: relative;
+	height: 43px;
+	padding: 0;
+	border: 0;
+}
+
+@url buttonImage buttonImage;
+.v-navpanel .v-button-wrap,
+.v-touchkit-window .v-button-wrap  {
+	-webkit-border-image: buttonImage 7;
+	border-width: 7px;
+	border-radius: 8px;
+	height: 29px; /* button height - 2*border */
+	padding: 0 5px;
+}
+
+.v-navpanel .v-button-caption,
+.v-touchkit-window .v-button-caption {
+	font-size: 16px;
+	line-height: 29px;
+}
+
 .v-navpanel {
 	position: relative;
 	overflow: hidden;
@@ -238,8 +265,6 @@
 
 
 
-
-/* Reset some default button style */
 .v-navbar .v-button,
 .v-navbar .v-button-wrap {
 	background-image: none !important;
@@ -248,7 +273,9 @@
 	padding: 0;
 	border: 0;
 }
-
+.v-navbar .v-button-wrap {
+	padding: 0 5px;
+}
 
 /* TODO rename this: */
 @url navbaractionimage navBarActionImage ;
@@ -262,6 +289,7 @@
 
 .buttongroup .v-button {
 	background-image: none !important;
+	-webkit-border-image: none !important;
 	position: relative;
 	height: 23px;
 	padding: 0;
@@ -269,6 +297,8 @@
 }
 .buttongroup .v-button-wrap {
 	border-left: 1px solid;
+	border-radius: 0;
+	-webkit-border-image: none !important;
 }
 .buttongroup > div > div:first-child > div > .v-button .v-button-wrap {
 	border-left: 0;
@@ -285,9 +315,7 @@
 	text-overflow: ellipsis;
 	font-size: 12px;
 	line-height: 22px;
-	margin-left: 5px;
 	margin-right:auto;
-	padding-right: 8px;
 	margin-top: 5px;
 }
 

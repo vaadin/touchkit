@@ -51,7 +51,13 @@ public interface TouchKitResources extends ClientBundle {
     @ImageOptions(repeatStyle = RepeatStyle.None)
     public ImageResource switchImage();
 
+    @Source("popupBackground.png")
+    public DataResource popupImage();
+
     @Source("popupBackgroundWithToolbar.png")
     public DataResource popupWithToolbarImage();
+
+    @Source("button.png")
+    public DataResource buttonImage();
 
 }
