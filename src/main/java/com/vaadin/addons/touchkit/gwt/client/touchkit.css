@@ -148,39 +148,49 @@
 	position:relative;	
 }
 
-.v-optionlayout .v-caption {
+.v-optionlayout .v-csslayout-container>* {
+	clear:both;
+}
+
+.v-optionlayout .v-csslayout-container>.tk-has-caption {
+	clear:right;
+	float:right;
+}
+
+.v-optionlayout .v-csslayout-container>.v-caption {
+	float:left;
 	font-weight:bold;
 	font-size:16px;
-	line-height:32px;
-	height:32px;
-	top:3px;
+	line-height:40px;
+	height:40px;
+	padding-top: 2px;
+}
+.v-optionlayout .v-csslayout-container>.v-caption>.v-captiontext {
+	padding-right:3px;	
 }
 
 .v-optionlayout .v-textfield {
-	position: absolute;
-	margin-top: -35px;
-	width:60%;
 	border:0;
 	padding:0;
-	left:40%;
 	background:none;
 	color: #4e64a1;
 	line-height:32px;
 	height: 32px;
 }
 
+/*
+ * Nav buttons are 40px height, make switch as height in option layouts.
+ */
 .v-optionlayout .v-switch {
-	float:right;
-	position: absolute;
-	margin-top: -28px;
-	right:0;
+	margin-top: 12px;
+	margin-bottom: 8px;
 }
-
 
 /* Grey lines between component */
 .v-optionlayout .v-csslayout-container>*:before {
 	content: "";
-	position:absolute;
+	display: block;
+	position: absolute;
 	margin:0;
 	padding:0;
 	left:-10px;

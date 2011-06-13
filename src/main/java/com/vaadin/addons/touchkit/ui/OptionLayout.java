@@ -1,24 +1,28 @@
 package com.vaadin.addons.touchkit.ui;
 
+import com.vaadin.addons.touchkit.gwt.client.VOptionLayout;
+import com.vaadin.ui.ClientWidget;
 import com.vaadin.ui.CssLayout;
 
 /**
  * A layout to group controls. Uses margins, white background and rounded
- * corners to visualize grouping.
+ * corners to visualize the grouping.
  * <p>
- * TODO may be better to create a customized client side counterpart. Or should
- * this actually be a styled FormLayout? See eg. ios settings and something with
- * text field.
+ * Relative sizes work as in CssLayout, except if the component has a caption.
+ * Components with caption are rendered on the same line with their caption and
+ * setting this kind of component 100% width stretches it to consume all the
+ * space from captions end to the content areas end.
  */
+@ClientWidget(VOptionLayout.class)
 public class OptionLayout extends CssLayout {
 
-	public OptionLayout() {
-		setStyleName("v-optionlayout");
-		setWidth("100%");
-	}
+    public OptionLayout() {
+        setStyleName("v-optionlayout");
+        setWidth("100%");
+    }
 
-	public OptionLayout(String caption) {
-		this();
-		setCaption(caption);
-	}
+    public OptionLayout(String caption) {
+        this();
+        setCaption(caption);
+    }
 }

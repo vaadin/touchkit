@@ -252,11 +252,17 @@ public class NavPanelTestWithViews extends NavigationPanel implements
             cssLayout.addComponent(label);
 
             OptionLayout optionLayout = new OptionLayout();
-            optionLayout.addComponent(new TextField("Name"));
+            Component textField = new TextField("Name");
+            textField.setWidth("100%");
+            optionLayout.addComponent(textField);
             // email field
-            optionLayout.addComponent(new EmailField("Email"));
+            EmailField emailField = new EmailField("Email");
+            emailField.setWidth("100%");
+            optionLayout.addComponent(emailField);
             // number field
-            optionLayout.addComponent(new NumberField("Age"));
+            NumberField numberField = new NumberField("Age");
+            numberField.setWidth("100%");
+            optionLayout.addComponent(numberField);
 
             addSliderWithIcons(optionLayout);
 
@@ -269,11 +275,17 @@ public class NavPanelTestWithViews extends NavigationPanel implements
             cssLayout.addComponent(label);
 
             optionLayout = new OptionLayout();
-            optionLayout.addComponent(new TextField("Name"));
+            textField = new TextField("Name");
+            textField.setWidth("100%");
+            optionLayout.addComponent(textField);
             // email field
-            optionLayout.addComponent(new EmailField("Email"));
+            emailField = new EmailField("Email");
+            emailField.setWidth("100%");
+            optionLayout.addComponent(emailField);
             // number field
-            optionLayout.addComponent(new NumberField("Age"));
+            numberField = new NumberField("Age");
+            numberField.setWidth("100%");
+            optionLayout.addComponent(numberField);
 
             addSliderWithIcons(optionLayout);
 
@@ -285,12 +297,18 @@ public class NavPanelTestWithViews extends NavigationPanel implements
             label.setStyleName("grey-title");
             cssLayout.addComponent(label);
 
-            optionLayout = new OptionLayout("Foobar");
-            optionLayout.addComponent(new TextField("Name"));
+            optionLayout = new OptionLayout();
+            textField = new TextField("Name");
+            textField.setWidth("100%");
+            optionLayout.addComponent(textField);
             // email field
-            optionLayout.addComponent(new EmailField("Email"));
+            emailField = new EmailField("Email");
+            emailField.setWidth("100%");
+            optionLayout.addComponent(emailField);
             // number field
-            optionLayout.addComponent(new NumberField("Age"));
+            numberField = new NumberField("Age");
+            numberField.setWidth("100%");
+            optionLayout.addComponent(numberField);
 
             addSliderWithIcons(optionLayout);
 
