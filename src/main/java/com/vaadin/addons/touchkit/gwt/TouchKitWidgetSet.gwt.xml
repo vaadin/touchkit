@@ -12,4 +12,8 @@
 		<when-type-is class="com.vaadin.terminal.gwt.client.ui.VView" />
 	</replace-with>
 
+
+	<!-- Load css etc eagerly to avoid calc errors -->
+	<entry-point class="com.vaadin.addons.touchkit.gwt.client.EagerResourceLoader" />
+	
 </module>
