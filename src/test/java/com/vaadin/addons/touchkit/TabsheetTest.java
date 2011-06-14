@@ -46,11 +46,15 @@ public class TabsheetTest extends Tabsheet implements ClickListener {
 
 		Tab tab = addTab(tab1);
 		tab.setIcon(TouchKitTestApp.getRndRunoIconResource());
+		tab.setCaption("Playlists");
 		tab = addTab(tab2);
+		tab.setCaption("Artists");
 		tab.setIcon(TouchKitTestApp.getRndRunoIconResource());
 		tab = addTab(tab3);
+		tab.setCaption("Vaadin");
 		tab.setIcon(TouchKitTestApp.getRndRunoIconResource());
 		tab = addTab(tab4);
+		tab.setCaption("IT mill");
 		tab.setIcon(TouchKitTestApp.getRndRunoIconResource());
 
 		NavigationPanel navigationPanel = new NavigationPanel();
@@ -74,7 +78,7 @@ public class TabsheetTest extends Tabsheet implements ClickListener {
 		navigationPanel.setCurrentComponent(navigationView);
 
 		Tab addTab = addTab(navigationPanel);
-		addTab.setCaption("Nav");
+		addTab.setCaption("Option");
 		addTab.setIcon(TouchKitTestApp.getRndRunoIconResource());
 
 		setSelectedTab(tab2);

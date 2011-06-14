@@ -390,23 +390,24 @@
 	position:relative;
 	height:40px;
 	border:0;
+	padding: 0 6px;
+	display: table-cell;
+	vertical-align:middle;
 }
 .v-toolbar .v-button-caption {
 	display: block;
-	position: absolute;
-	left:0;
-	right: 0;
-	bottom:1px;
 	background-image: none;
 	text-align:center;	
 	color:white;
 	text-shadow: none;
-	font-size: 8px;
+	font-size: 9px;
+	line-height: 12px;
 }
 
 .v-toolbar .v-button .v-icon {
-	height: 32px;
-	margin-right:0;
+	height: 25px;
+	margin:0;
+	padding:0;
 }
 
 .v-navview-notoolbar .v-navview-tb {
@@ -428,31 +429,6 @@
 	width:30px;
 	height:30px;
 	margin-top:-15px;
-}
-
-/* Tabsheet tabs below */
-
-.v-csslayout-touchkit-tabsbelow .v-csslayout-container,
-.v-csslayout-touchkit-tabsbelow .v-csslayout-margin {
-	height:100%;
-	position:relative;	
-}
-
-.v-csslayout-touchkit-tabsbelow .v-toolbar  {
-	position:absolute;
-	bottom:0;
-	height:46px;
-	background-image: none;
-	background: black;
-}
-
-.v-csslayout-touchkit-tabsbelow>div>div>.v-caption {
-	display:none;
-}
-
-.v-csslayout-touchkit-tabsbelow .v-button-selected {
-	background: rgba(255,255,255,0.22);	
-	border-radius: 4px;
 }
 
 /* touchkit sub window */
@@ -586,3 +562,31 @@
 	outline: none;
 	border-color: #4f83b4 #5b97d0 #5ca0df;
 }
+
+
+/* Tabsheet tabs below */
+
+.v-csslayout-touchkit-tabsbelow .v-csslayout-container,
+.v-csslayout-touchkit-tabsbelow .v-csslayout-margin {
+	height:100%;
+	position:relative;	
+}
+
+.v-csslayout-touchkit-tabsbelow .v-toolbar  {
+	position:absolute;
+	bottom:0;
+	height:46px;
+	/* Wrappped in literal function so that GWT does not break the gradien declaration */
+	background: literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#ccc), to(#000), color-stop(0.04, #555), color-stop(0.4999, #222), color-stop(0.50, #000))');
+	border-top: 1px solid black;
+}
+
+.v-csslayout-touchkit-tabsbelow>div>div>.v-caption {
+	display:none;
+}
+
+.v-csslayout-touchkit-tabsbelow .v-button-selected {
+	background: rgba(255,255,255,0.22);	
+	border-radius: 4px;
+}
+
