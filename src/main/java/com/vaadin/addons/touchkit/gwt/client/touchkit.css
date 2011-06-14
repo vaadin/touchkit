@@ -1,3 +1,11 @@
+/*
+ * TODO collect more constants to defs
+ */
+
+@def thinSeparatorLine 1px solid #666;
+@def layoutMarginal 10px;
+@def negativeLayoutMarginal -10px;
+
 .v-app, .v-window, .v-popupview-popup, .v-tooltip, .v-app input, .v-app select, .v-app button, .v-app textarea, .v-window input, .v-window select, .v-window button, .v-window textarea, .v-popupview-popup input, .v-popupview-popup select, .v-popupview-popup button, .v-popupview-popup textarea, .v-filterselect-suggestpopup, .v-datefield-popup, .v-contextmenu, .v-Notification, .v-menubar-submenu, .v-drag-element {
 	font-family: Helvetica Neue, Helvetica, Arial, Tahoma, Verdana, sans-serif;
 	font-size: 14px;
@@ -134,11 +142,11 @@
 
 /* Borders backgrounds etc. for the margin element.*/
 .v-optionlayout>div {
-	margin:10px;
-	border: 1px solid grey;
-	border-radius: 10px;
+	margin:layoutMarginal;
+	border: thinSeparatorLine;
+	border-radius: layoutMarginal;
 	background: white;
-	padding: 0 10px;
+	padding: 0 layoutMarginal;
 }
 
 .v-optionlayout .v-csslayout-container {
@@ -191,9 +199,9 @@
 	position: absolute;
 	margin:0;
 	padding:0;
-	left:-10px;
-	right:-10px;
-	border-top: 1px solid grey;
+	left:negativeLayoutMarginal;
+	right:negativeLayoutMarginal;
+	border-top: thinSeparatorLine;
 }
 
 /* ...hide from the last */
@@ -202,12 +210,12 @@
 }
 
 .v-optionlayout .v-formlayout>table {
-	margin-left: -10px;
-	margin-right: -10px;
+	margin-left: negativeLayoutMarginal;
+	margin-right: negativeLayoutMarginal;
 }
 
 .v-optionlayout .v-formlayout-captioncell {
-	padding-left:10px;
+	padding-left:layoutMarginal;
 }
 
 .v-formlayout-captioncell>.v-caption {
@@ -218,7 +226,7 @@
 }
 
 .v-formlayout-row > td {
-	border-bottom: 1px solid rgb(171,171,171);
+	border-bottom: thinSeparatorLine;
 }
 .v-formlayout-lastrow > td {
 	border-bottom: none;
@@ -229,7 +237,7 @@
 .v-navbutton:after {
 	content: ">";
 	position:absolute;
-	right: 10px;
+	right: layoutMarginal;
 	margin-top: 0px;
 	font-size: 22px;
 	color: grey;	
@@ -403,7 +411,7 @@
 	left:0;
 	right:0;	
 	overflow:hidden;
-	border-top: 1px solid grey;
+	border-top: thinSeparatorLine;
 }
 
 /* Reset some default button style */
@@ -443,7 +451,7 @@
 	font-weight: bold;
 	color: rgb(76,86,108);
 	text-shadow: #fff 0 1px 0px;
-	margin: 10px 20px;
+	margin: layoutMarginal 20px;
 }
 
 @sprite .v-slider-handle {
