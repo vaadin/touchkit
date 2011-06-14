@@ -6,6 +6,9 @@
 @def layoutMarginal 10px;
 @def negativeLayoutMarginal -10px;
 
+@def toolbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%,from(rgb(218,221,225)), to(rgb(109,131,165)),color-stop(0.04, rgb(183,194,208)), color-stop(0.4999, rgb(137,155,181)), color-stop(0.50, rgb(126,147,177)))');
+@def tabbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#ccc), to(#000), color-stop(0.04, #555), color-stop(0.4999, #222), color-stop(0.50, #000))');
+
 .v-app, .v-window, .v-popupview-popup, .v-tooltip, .v-app input, .v-app select, .v-app button, .v-app textarea, .v-window input, .v-window select, .v-window button, .v-window textarea, .v-popupview-popup input, .v-popupview-popup select, .v-popupview-popup button, .v-popupview-popup textarea, .v-filterselect-suggestpopup, .v-datefield-popup, .v-contextmenu, .v-Notification, .v-menubar-submenu, .v-drag-element {
 	font-family: Helvetica Neue, Helvetica, Arial, Tahoma, Verdana, sans-serif;
 	font-size: 14px;
@@ -91,7 +94,7 @@
 .v-touchkit-window.v-touchkit-window-full-screen .v-navpanel-placeholder>div {
 	display: block;
 	position: absolute;
-	background: literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(218,221,225)), to(rgb(109,131,165)),                color-stop(0.04, rgb(183,194,208)), color-stop(0.4999, rgb(137,155,181)), color-stop(0.50, rgb(126,147,177)))');
+	background: toolbarGradient;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -280,7 +283,7 @@
 }
 
 .v-navbar {
-	background: literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(218,221,225)), to(rgb(109,131,165)),                color-stop(0.04, rgb(183,194,208)), color-stop(0.4999, rgb(137,155,181)), color-stop(0.50, rgb(126,147,177)))');
+	background: toolbarGradient;
 	color: #515b66;
 	display: block;
 	height: 40px;
@@ -400,7 +403,7 @@
 
 
 .v-toolbar {
-	background: literal('-webkit-gradient(linear, 0% 0%, 0% 100%,from(rgb(218,221,225)), to(rgb(109,131,165)),color-stop(0.04, rgb(183,194,208)), color-stop(0.4999, rgb(137,155,181)), color-stop(0.50, rgb(126,147,177)))');
+	background: toolbarGradient;
 }
 
 .v-navview-tb {
@@ -609,7 +612,7 @@
 	bottom:0;
 	height:46px;
 	/* Wrappped in literal function so that GWT does not break the gradien declaration */
-	background: literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#ccc), to(#000), color-stop(0.04, #555), color-stop(0.4999, #222), color-stop(0.50, #000))');
+	background: tabbarGradient;
 	border-top: 1px solid black;
 }
 
