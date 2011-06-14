@@ -248,8 +248,8 @@
 	z-index: 1;
 }
 
-@sprite .v-navbar {
-	gwt-image: "toolbarBackground";
+.v-navbar {
+	background: literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(218,221,225)), to(rgb(109,131,165)),                color-stop(0.04, rgb(183,194,208)), color-stop(0.4999, rgb(137,155,181)), color-stop(0.50, rgb(126,147,177)))');
 	color: #515b66;
 	display: block;
 	height: 40px;
@@ -368,8 +368,8 @@
 }
 
 
-@sprite .v-toolbar {
-	gwt-image: "toolbarBackground";
+.v-toolbar {
+	background: literal('-webkit-gradient(linear, 0% 0%, 0% 100%,from(rgb(218,221,225)), to(rgb(109,131,165)),color-stop(0.04, rgb(183,194,208)), color-stop(0.4999, rgb(137,155,181)), color-stop(0.50, rgb(126,147,177)))');
 }
 
 .v-navview-tb {

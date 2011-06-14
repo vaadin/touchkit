@@ -31,10 +31,6 @@ public interface TouchKitResources extends ClientBundle {
     @Source("background_stripes.png")
     public DataResource backgroundStripesImage();
 
-    @Source("header_middle.png")
-    @ImageOptions(repeatStyle = RepeatStyle.Horizontal)
-    public ImageResource toolbarBackground();
-
     @Source("slider-handle.png")
     @ImageOptions(repeatStyle = RepeatStyle.None)
     public ImageResource sliderHandle();
