@@ -21,8 +21,10 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Embedded;
+import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Layout;
 import com.vaadin.ui.Slider;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
@@ -279,7 +281,7 @@ public class NavPanelTestWithViews extends NavigationPanel implements
             textField.setWidth("100%");
             optionLayout.addComponent(textField);
             // email field
-            emailField = new EmailField("Email");
+            emailField = new EmailField("Longer caption");
             emailField.setWidth("100%");
             optionLayout.addComponent(emailField);
             // number field
@@ -293,34 +295,39 @@ public class NavPanelTestWithViews extends NavigationPanel implements
 
             cssLayout.addComponent(optionLayout);
 
-            label = new Label("Foobar");
+            label = new Label("FormLayout in OptionLayout");
             label.setStyleName("grey-title");
             cssLayout.addComponent(label);
 
-            optionLayout = new OptionLayout();
+            
+            OptionLayout optionLayout2 = new OptionLayout();
+            FormLayout formLayout = new FormLayout();
+            formLayout.setSpacing(false);
+            formLayout.setMargin(false);
             textField = new TextField("Name");
             textField.setWidth("100%");
-            optionLayout.addComponent(textField);
+            formLayout.addComponent(textField);
             // email field
             emailField = new EmailField("Email");
             emailField.setWidth("100%");
-            optionLayout.addComponent(emailField);
+            formLayout.addComponent(emailField);
             // number field
             numberField = new NumberField("Age");
             numberField.setWidth("100%");
-            optionLayout.addComponent(numberField);
+            formLayout.addComponent(numberField);
 
-            addSliderWithIcons(optionLayout);
+            addSliderWithIcons(formLayout);
 
-            optionLayout.addComponent(new CheckBox("Setting böö"));
+            formLayout.addComponent(new CheckBox("Setting böö"));
 
-            cssLayout.addComponent(optionLayout);
+            optionLayout2.addComponent(formLayout);
+            cssLayout.addComponent(optionLayout2);
 
             setContent(cssLayout);
 
         }
 
-        private void addSliderWithIcons(OptionLayout optionLayout) {
+        private void addSliderWithIcons(Layout optionLayout) {
             final Component emb = new Embedded(null, getNextIcon());
             emb.setWidth("32px");
             final Embedded emb2 = new Embedded(null, getNextIcon());

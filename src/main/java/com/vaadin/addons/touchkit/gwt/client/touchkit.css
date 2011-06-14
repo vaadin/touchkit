@@ -79,14 +79,11 @@
 	background: backgroundStripes;
 }
 
-@sprite .v-navpanel-placeholder>div,
+.v-navpanel-placeholder>div,
 .v-touchkit-window.v-touchkit-window-full-screen .v-navpanel-placeholder>div {
 	display: block;
 	position: absolute;
-	/* For some reason gradien don't work properly in current safari release. For webkit nightlies this is fine.
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#acb9ca), to(#6e84a1));
-	*/
-	gwt-image: "toolbarBackground";
+	background: literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(218,221,225)), to(rgb(109,131,165)),                color-stop(0.04, rgb(183,194,208)), color-stop(0.4999, rgb(137,155,181)), color-stop(0.50, rgb(126,147,177)))');
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -157,25 +154,26 @@
 	float:right;
 }
 
-.v-optionlayout .v-csslayout-container>.v-caption {
+.v-optionlayout>div>.v-csslayout-container>.v-caption {
 	float:left;
 	font-weight:bold;
 	font-size:16px;
 	line-height:40px;
 	height:40px;
-	padding-top: 2px;
 }
+
 .v-optionlayout .v-csslayout-container>.v-caption>.v-captiontext {
 	padding-right:3px;	
 }
 
-.v-optionlayout .v-textfield {
+.v-optionlayout input.v-textfield {
 	border:0;
-	padding:0;
-	background:none;
+	padding:0 4px;
+	background: transparent;
 	color: #4e64a1;
-	line-height:32px;
-	height: 32px;
+	font-size:16px;
+	line-height:40px;
+	height: 40px;
 }
 
 /*
@@ -202,6 +200,31 @@
 .v-optionlayout .v-csslayout-container>*:first-child:before {
 	display: none;
 }
+
+.v-optionlayout .v-formlayout>table {
+	margin-left: -10px;
+	margin-right: -10px;
+}
+
+.v-optionlayout .v-formlayout-captioncell {
+	padding-left:10px;
+}
+
+.v-formlayout-captioncell>.v-caption {
+	font-weight:bold;
+	font-size:16px;
+	line-height:40px;
+	height:40px;
+}
+
+.v-formlayout-row > td {
+	border-bottom: 1px solid rgb(171,171,171);
+}
+.v-formlayout-lastrow > td {
+	border-bottom: none;
+}
+
+
 
 .v-navbutton:after {
 	content: ">";
@@ -418,7 +441,8 @@
 .v-caption-v-optionlayout .v-captiontext {
 	font-size:18px;
 	font-weight: bold;
-	color: #666;
+	color: rgb(76,86,108);
+	text-shadow: #fff 0 1px 0px;
 	margin: 10px 20px;
 }
 
