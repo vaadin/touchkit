@@ -45,6 +45,7 @@ public class VNavigationBar extends ComplexPanel implements Container {
          * Note, HTML caption. TODO XSS vuln.
          */
         caption.setInnerHTML(uidl.getStringAttribute("caption"));
+
         UIDL backUidl = uidl.getChildByTagName("back");
         if (backUidl == null && backButton != null) {
             ((Widget) backButton).removeFromParent();
@@ -54,13 +55,18 @@ public class VNavigationBar extends ComplexPanel implements Container {
         if (backUidl != null) {
             UIDL backButtonUidl = backUidl.getChildUIDL(0);
             Paintable newBackButton = client.getPaintable(backButtonUidl);
-            if (backButton == null) {
-                backButton = newBackButton;
+            if (backButton != null && backButton != newBackButton) {
+                clearBackComponent();
+            }
+            backButton = newBackButton;
+            if (!((Widget) backButton).isAttached()) {
                 add((Widget) backButton,
                         (com.google.gwt.user.client.Element) backButtonEl
                                 .cast());
             }
             backButton.updateFromUIDL(backButtonUidl, client);
+        } else if (backButton != null) {
+            clearBackComponent();
         }
 
         UIDL componentUidl = uidl.getChildByTagName("component");
@@ -86,6 +92,12 @@ public class VNavigationBar extends ComplexPanel implements Container {
             clearComponent();
         }
 
+    }
+
+    private void clearBackComponent() {
+        ((Widget) backButton).removeFromParent();
+        client.unregisterPaintable(backButton);
+        backButton = null;
     }
 
     private void clearComponent() {
