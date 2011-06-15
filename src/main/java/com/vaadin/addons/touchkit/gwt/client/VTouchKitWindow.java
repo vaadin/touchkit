@@ -50,7 +50,12 @@ public class VTouchKitWindow extends VWindow {
     }
 
     @Override
-    public void setVisible(boolean visible) {
+    protected void updateShadowSizeAndPosition() {
+        doSpecialPositioning();
+        super.updateShadowSizeAndPosition();
+    }
+
+    private void doSpecialPositioning() {
         if (isFullScreen()) {
             setPopupPosition(0, 0);
         } else {
@@ -75,11 +80,8 @@ public class VTouchKitWindow extends VWindow {
             } else if (relComponentId != null) {
                 Widget paintable = (Widget) client.getPaintable(relComponentId);
                 showNextTo(paintable);
-                return;
             }
         }
-
-        super.setVisible(visible);
     }
 
     private void slideIn() {
@@ -108,6 +110,12 @@ public class VTouchKitWindow extends VWindow {
     }
 
     private void showNextTo(Widget paintable) {
+        if (paintable == null || !paintable.isAttached()) {
+            // Vaadin may call this via setWidth/setHeight when reference
+            // paintable don't exist anymore. The window may actually also be
+            // about to be removed too. Thus make a sanity check.
+            return;
+        }
         // attach arrow, we need to measure it during calculations
         attachReferenceArrow();
 
