@@ -17,16 +17,14 @@ import com.vaadin.ui.Component;
 @ClientWidget(VNavigationBar.class)
 public class NavigationBar extends AbstractComponentContainer {
 
-    private static final String STYLENAME = "v-navitiotionbar";
-    private static final String BACK_BUTTON = STYLENAME + "-backbutton";
+    private static final String STYLE_NAME_BACK_BUTTON = "backbutton";
     private NavigationButton backButton = new NavigationButton();
     private Component navigationBarComponent;
     private Component leftNavigationBarComponent;
 
     public NavigationBar() {
-        setStyleName(STYLENAME);
         backButton.setVisible(false);
-        backButton.setStyleName(BACK_BUTTON);
+        backButton.setStyleName(STYLE_NAME_BACK_BUTTON);
         setLeftNavigationBarComponent(backButton);
     }
 
