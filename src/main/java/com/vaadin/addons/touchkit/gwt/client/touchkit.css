@@ -235,8 +235,6 @@
 	border-bottom: none;
 }
 
-
-
 .v-navbutton:after {
 	content: ">";
 	position:absolute;
@@ -625,3 +623,14 @@
 	border-radius: 4px;
 }
 
+.v-navbar .v-button-no-decoration {
+	background: transparent;
+	-webkit-border-image: none;
+	border: none;
+}
+
+.v-navbar .v-button-no-decoration .v-button-wrap {
+	border: none;
+	-webkit-border-image: none;
+	background: transparent;
+}
