@@ -7,6 +7,7 @@
 @def negativeLayoutMarginal -10px;
 
 @def toolbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%,from(rgb(218,221,225)), to(rgb(109,131,165)),color-stop(0.04, rgb(183,194,208)), color-stop(0.4999, rgb(137,155,181)), color-stop(0.50, rgb(126,147,177)))');
+@def toolbarPopoverGradient literal('-webkit-gradient( linear, left bottom, left top, color-stop(0.5, rgba(200, 200, 200, 0)), color-stop(0.5, rgba(200, 200, 200, 0.2)), color-stop(0.85, rgba(200, 200, 200, 0.2)),color-stop(1, rgba(200, 200, 200, 0)))');
 @def tabbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#ccc), to(#000), color-stop(0.04, #555), color-stop(0.4999, #222), color-stop(0.50, #000))');
 
 .v-app, .v-window, .v-popupview-popup, .v-tooltip, .v-app input, .v-app select, .v-app button, .v-app textarea, .v-window input, .v-window select, .v-window button, .v-window textarea, .v-popupview-popup input, .v-popupview-popup select, .v-popupview-popup button, .v-popupview-popup textarea, .v-filterselect-suggestpopup, .v-datefield-popup, .v-contextmenu, .v-Notification, .v-menubar-submenu, .v-drag-element {
@@ -44,6 +45,7 @@
 .v-navpanel .v-button-wrap,
 .v-touchkit-window .v-button-wrap {
 	-webkit-border-image: buttonImage 7;
+	/* uglier: -webkit-gradient( linear, left bottom, left top, color-stop(0, #E6E6E6), color-stop(0.49, #E6E6E6), color-stop(0.50, white)) */
 	border-width: 7px;
 	border-radius: 8px;
 	height: 29px; /* button height - 2*border */
@@ -420,12 +422,15 @@
 .v-toolbar .v-button-wrap {
 	background-image: none !important;
 	position:relative;
-	height:40px;
+	height:auto;
 	border:0;
 	padding: 0 6px;
-	display: table-cell;
 	vertical-align:middle;
 }
+.v-toolbar .v-button {
+	display: table-cell;
+}
+
 .v-toolbar .v-button-caption {
 	display: block;
 	background-image: none;
@@ -560,11 +565,9 @@
 .v-touchkit-window .v-navview-tb {
 	border: 0;
 }
-/* TODO toolbar background here - borderImage/csslayout */
-
 
 .v-touchkit-window .v-navview-tb .v-toolbar {
-	background: transparent;
+	background: toolbarPopoverGradient;
 }
 
 /* Switch style checkbox.
