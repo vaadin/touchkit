@@ -250,7 +250,7 @@
 
 .v-navbar-backb .v-navbutton {
 	display:inline-block;
-	-webkit-border-image: backButtonUrl 0 4 0 13;
+	-webkit-border-image: backButtonUrl 0 9 0 30;
 	border-width: 0 4px 0 13px;
 	width: auto;
 	background: transparent;
@@ -330,7 +330,7 @@
 @url navbaractionimage navBarActionImage ;
 .buttongroup,
 .v-navbar .v-button {
-	-webkit-border-image: navbaractionimage 4;
+	-webkit-border-image: navbaractionimage 8;
 	border-width: 4px;
 	border-radius: 5px;
 	height: 31px;
