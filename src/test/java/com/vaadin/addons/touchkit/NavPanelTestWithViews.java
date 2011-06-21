@@ -1,5 +1,6 @@
 package com.vaadin.addons.touchkit;
 
+import com.vaadin.Application;
 import com.vaadin.addons.touchkit.ui.EmailField;
 import com.vaadin.addons.touchkit.ui.NavigationButton;
 import com.vaadin.addons.touchkit.ui.NavigationPanel;
@@ -10,6 +11,7 @@ import com.vaadin.addons.touchkit.ui.Switch;
 import com.vaadin.addons.touchkit.ui.Tabsheet;
 import com.vaadin.addons.touchkit.ui.Toolbar;
 import com.vaadin.addons.touchkit.ui.TouchKitSubWindow;
+import com.vaadin.terminal.ClassResource;
 import com.vaadin.terminal.Resource;
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Alignment;
@@ -34,6 +36,7 @@ public class NavPanelTestWithViews extends NavigationPanel implements
 
     private SimpleNavView[] views;
     private Button fullScreen;
+	static Application app;
 
     public NavPanelTestWithViews() {
 
@@ -133,13 +136,13 @@ public class NavPanelTestWithViews extends NavigationPanel implements
         buttons.setSpacing(true);
         Button b = new Button("Yes");
         b.setStyleName("green");
-        buttons.addComponent(b);
+//        buttons.addComponent(b);
         b = new Button("No");
         b.setStyleName("red");
-        buttons.addComponent(b);
+//        buttons.addComponent(b);
         b = new Button("Ok");
         b.setStyleName("blue");
-        buttons.addComponent(b);
+//        buttons.addComponent(b);
 
         HorizontalLayout group = new HorizontalLayout();
         buttons.addComponent(group);
@@ -224,6 +227,8 @@ public class NavPanelTestWithViews extends NavigationPanel implements
         private Component createActionButton1() {
             Button button = new Button(null, this);
             button.setIcon(new ThemeResource("../runo/icons/64/email.png"));
+            
+            button.setIcon(new ClassResource("mail.png", app));
             return button;
         }
 

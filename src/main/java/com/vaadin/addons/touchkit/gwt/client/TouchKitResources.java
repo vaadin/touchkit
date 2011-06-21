@@ -53,7 +53,7 @@ public interface TouchKitResources extends ClientBundle {
     @Source("popupBackgroundWithToolbar.png")
     public DataResource popupWithToolbarImage();
 
-    @Source("button.png")
+    @Source("navbar-action.png")
     public DataResource buttonImage();
 
 }

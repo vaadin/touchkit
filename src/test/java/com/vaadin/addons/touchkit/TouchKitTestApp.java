@@ -63,6 +63,7 @@ public class TouchKitTestApp extends Application {
         b = new Button("NavPanelTest witn views");
         b.addListener(new ClickListener() {
             public void buttonClick(ClickEvent event) {
+            	NavPanelTestWithViews.app = TouchKitTestApp.this;
                 mainWindow.setContent(new NavPanelTestWithViews());
             }
         });
