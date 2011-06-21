@@ -27,6 +27,14 @@
 .v-touchkit-window .v-button {
 	height: auto;
 }
+.v-touchkit-view .v-button .v-button-wrap,
+.v-touchkit-window .v-button .v-button-wrap {
+	height: 30px;
+}
+.v-navbar .v-button .v-button-wrap,
+.v-toolbar .v-button .v-button-wrap {
+	height: auto;
+}
 
 .v-touchkit-view .v-button:active .v-button-caption,
 .v-touchkit-window .v-button .v-button-caption {
@@ -52,7 +60,7 @@
 .v-touchkit-view .v-button-caption,
 .v-touchkit-window .v-button-caption {
 	font-size: 16px;
-	line-height: 16px;
+	line-height: 30px;
 }
 
 .v-navpanel {
