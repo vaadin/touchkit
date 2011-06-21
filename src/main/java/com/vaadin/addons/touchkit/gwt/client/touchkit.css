@@ -71,7 +71,7 @@
 @url backgroundStripes backgroundStripesImage ;
 
 .v-navpanel-container, 
-.v-touchkit-window.v-touchkit-window-full-screen .v-navpanel-container {
+.v-touchkit-window.v-touchkit-fullscreen .v-navpanel-container {
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -82,7 +82,7 @@
 }
 
 .v-navpanel-placeholder, 
-.v-touchkit-window.v-touchkit-window-full-screen .v-navpanel-placeholder  {
+.v-touchkit-window.v-touchkit-fullscreen .v-navpanel-placeholder  {
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -90,7 +90,7 @@
 }
 
 .v-navpanel-placeholder>div,
-.v-touchkit-window.v-touchkit-window-full-screen .v-navpanel-placeholder>div {
+.v-touchkit-window.v-touchkit-fullscreen .v-navpanel-placeholder>div {
 	display: block;
 	position: absolute;
 	background: toolbarGradient;
@@ -447,7 +447,7 @@
 
 @url popupImage popupImage;
 @url popupWithToolbarImage popupWithToolbarImage;
-.v-touchkit-window-popover .v-window-wrap {
+.v-touchkit-popover .v-window-wrap {
 	/* border-width: 22px 8px 55px 8px;
 	-webkit-border-image: popupImage 22 8 55 8 repeat; */	
 	border-width: 22px 8px 8px 8px;
@@ -460,39 +460,39 @@
 	border-radius: 7px;
 }
 
-.v-touchkit-window-full-screen .v-window-wrap {
+.v-touchkit-fullscreen .v-window-wrap {
 	border-width: 0 0 0 0;
 	border-image: none;
 	border-radius: 0;
 }
 
-.v-touchkit-window-popover .v-window-contents {
+.v-touchkit-popover .v-window-contents {
 	background: transparent;
 	top: -20px;
 	margin-bottom: -28px;
 	
 	position: relative;
 }
-.v-touchkit-window-full-screen .v-window-contents {
+.v-touchkit-fullscreen .v-window-contents {
 	top: 0;
 	left: 0;
 	margin-right: 0;
 	margin-bottom: 0;
 }
 
-.v-touchkit-window-popover .v-navpanel-placeholder,
-.v-touchkit-window-popover .v-navpanel-placeholder>div {
+.v-touchkit-popover .v-navpanel-placeholder,
+.v-touchkit-popover .v-navpanel-placeholder>div {
 	background: transparent;
 	border-top: 0;
 	border-bottom: 0;
 }
 
-.v-touchkit-window-popover .v-window-contents > div > .v-verticallayout .v-verticallayout-margin {
+.v-touchkit-popover .v-window-contents > div > .v-verticallayout .v-verticallayout-margin {
 	padding-top:    7px;
 	padding-bottom: 7px;
 }
 
-.v-touchkit-window-full-screen .v-window-contents {
+.v-touchkit-fullscreen .v-window-contents {
 	top: 0;
 	margin-bottom: 0;
 	position: block;
@@ -521,18 +521,18 @@
 	margin-top: 2px;
 }
 
-.v-touchkit-window-popover .v-navpanel-container {
+.v-touchkit-popover .v-navpanel-container {
 	background: transparent;
 }
-.v-touchkit-window-popover .v-navbar {
+.v-touchkit-popover .v-navbar {
 	background: transparent;
 	border: 0;
 }
-.v-touchkit-window-popover .v-navview-tb {
+.v-touchkit-popover .v-navview-tb {
 	border: 0;
 }
 
-.v-touchkit-window-popover .v-navview-tb .v-toolbar {
+.v-touchkit-popover .v-navview-tb .v-toolbar {
 	background: toolbarPopoverGradient;
 }
 
