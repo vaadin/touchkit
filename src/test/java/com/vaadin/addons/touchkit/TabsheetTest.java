@@ -1,10 +1,10 @@
 package com.vaadin.addons.touchkit;
 
 import com.vaadin.addons.touchkit.ui.NavigationButton;
-import com.vaadin.addons.touchkit.ui.NavigationPanel;
+import com.vaadin.addons.touchkit.ui.NavigationManager;
 import com.vaadin.addons.touchkit.ui.NavigationView;
-import com.vaadin.addons.touchkit.ui.OptionLayout;
-import com.vaadin.addons.touchkit.ui.Tabsheet;
+import com.vaadin.addons.touchkit.ui.ComponentGroup;
+import com.vaadin.addons.touchkit.ui.TouchKitTabsheet;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -13,7 +13,7 @@ import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TabSheet.Tab;
 
-public class TabsheetTest extends Tabsheet implements ClickListener {
+public class TabsheetTest extends TouchKitTabsheet implements ClickListener {
 
 	public TabsheetTest() {
 
@@ -57,27 +57,27 @@ public class TabsheetTest extends Tabsheet implements ClickListener {
 		tab.setCaption("IT mill");
 		tab.setIcon(TouchKitTestApp.getRndRunoIconResource());
 
-		NavigationPanel navigationPanel = new NavigationPanel();
+		NavigationManager navigationManager = new NavigationManager();
 
 		NavigationView navigationView = new NavigationView("FirstView");
 		Button button = new Button("Böö");
 		button.setWidth("60px");
-		navigationView.setNavigationBarComponent(button);
-		OptionLayout optionLayout = new OptionLayout();
+		navigationView.setRightComponent(button);
+		ComponentGroup componentGroup = new ComponentGroup();
 
 		NavigationButton navigationButton = new NavigationButton("Test me");
 		navigationButton.setDescription("no yep");
 		navigationButton.addListener(this);
-		optionLayout.addComponent(navigationButton);
+		componentGroup.addComponent(navigationButton);
 		navigationButton = new NavigationButton("Me too");
 		navigationButton.addListener(this);
-		optionLayout.addComponent(navigationButton);
+		componentGroup.addComponent(navigationButton);
 
-		navigationView.setContent(optionLayout);
+		navigationView.setContent(componentGroup);
 
-		navigationPanel.setCurrentComponent(navigationView);
+		navigationManager.setCurrentComponent(navigationView);
 
-		Tab addTab = addTab(navigationPanel);
+		Tab addTab = addTab(navigationManager);
 		addTab.setCaption("Option");
 		addTab.setIcon(TouchKitTestApp.getRndRunoIconResource());
 
@@ -94,20 +94,20 @@ public class TabsheetTest extends Tabsheet implements ClickListener {
 		NavigationView navigationView = new NavigationView(caption2);
 		Button button = new Button("Böö");
 		button.setWidth("60px");
-		navigationView.setNavigationBarComponent(button);
-		OptionLayout optionLayout = new OptionLayout();
+		navigationView.setRightComponent(button);
+		ComponentGroup componentGroup = new ComponentGroup();
 
 		NavigationButton navigationButton = new NavigationButton("Test me");
 		navigationButton.setDescription("no yep");
 		navigationButton.addListener(this);
-		optionLayout.addComponent(navigationButton);
+		componentGroup.addComponent(navigationButton);
 		navigationButton = new NavigationButton("Me too");
 		navigationButton.addListener(this);
-		optionLayout.addComponent(navigationButton);
+		componentGroup.addComponent(navigationButton);
 
-		navigationView.setContent(optionLayout);
+		navigationView.setContent(componentGroup);
 
-		((NavigationPanel) view.getParent()).navigateTo(navigationView);
+		((NavigationManager) view.getParent()).navigateTo(navigationView);
 
 	}
 

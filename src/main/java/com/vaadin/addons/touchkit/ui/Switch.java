@@ -6,6 +6,8 @@ import com.vaadin.ui.ClientWidget;
 
 /**
  * A checkbox rendered as a switch button like in ios.
+ * 
+ * @see CheckBox
  */
 @ClientWidget(VSwitch.class)
 public class Switch extends CheckBox {

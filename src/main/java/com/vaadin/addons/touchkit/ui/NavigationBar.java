@@ -25,7 +25,7 @@ public class NavigationBar extends AbstractComponentContainer {
     public NavigationBar() {
         backButton.setVisible(false);
         backButton.setStyleName(STYLE_NAME_BACK_BUTTON);
-        setLeftNavigationBarComponent(backButton);
+        setLeftComponent(backButton);
     }
 
     /**
@@ -38,7 +38,7 @@ public class NavigationBar extends AbstractComponentContainer {
      * 
      * @param c
      */
-    public void setLeftNavigationBarComponent(Component c) {
+    public void setLeftComponent(Component c) {
         if (leftNavigationBarComponent != null) {
             super.removeComponent(leftNavigationBarComponent);
         }
@@ -54,7 +54,7 @@ public class NavigationBar extends AbstractComponentContainer {
      * 
      * @param c
      */
-    public void setNavigationBarComponent(Component c) {
+    public void setRightComponent(Component c) {
         if (navigationBarComponent != null) {
             super.removeComponent(navigationBarComponent);
         }
@@ -68,7 +68,7 @@ public class NavigationBar extends AbstractComponentContainer {
     public void setPreviousView(Component component) {
         getBackButton().setTargetView(component);
         if (getBackButton().getParent() == null) {
-            setLeftNavigationBarComponent(getBackButton());
+            setLeftComponent(getBackButton());
         }
         getBackButton().setVisible(component != null);
     }

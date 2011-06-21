@@ -74,6 +74,7 @@
 					<noServer>true</noServer>
 					<port>8080</port>
 					<soyc>false</soyc>
+					<draftCompile>true</draftCompile>
 				</configuration>
 				<executions>
 					<execution>

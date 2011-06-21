@@ -4,6 +4,9 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import com.vaadin.addons.touchkit.server.TouchKitApplicationServlet;
+import com.vaadin.addons.touchkit.service.ApplicationIcon;
+import com.vaadin.addons.touchkit.service.Position;
+import com.vaadin.addons.touchkit.service.PositionCallback;
 import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;
 import com.vaadin.ui.Window;

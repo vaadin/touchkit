@@ -14,14 +14,14 @@ import com.vaadin.ui.CssLayout;
  * space from captions end to the content areas end.
  */
 @ClientWidget(VOptionLayout.class)
-public class OptionLayout extends CssLayout {
+public class ComponentGroup extends CssLayout {
 
-    public OptionLayout() {
+    public ComponentGroup() {
         setStyleName("v-optionlayout");
         setWidth("100%");
     }
 
-    public OptionLayout(String caption) {
+    public ComponentGroup(String caption) {
         this();
         setCaption(caption);
     }

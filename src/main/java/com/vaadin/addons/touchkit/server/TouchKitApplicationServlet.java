@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.vaadin.Application;
-import com.vaadin.addons.touchkit.ui.ApplicationIcon;
+import com.vaadin.addons.touchkit.service.ApplicationIcon;
 import com.vaadin.addons.touchkit.ui.TouchKitWindow;
 import com.vaadin.ui.Window;
 
@@ -37,6 +37,10 @@ public class TouchKitApplicationServlet extends
 	protected void writeAjaxPage(HttpServletRequest request,
 			HttpServletResponse response, Window window, Application application)
 			throws IOException, MalformedURLException, ServletException {
+		/*
+		 * Temporary save window as we may need it if we write e.g. viewport
+		 * definitions.
+		 */
 		this.window = window;
 		super.writeAjaxPage(request, response, window, application);
 		this.window = null;
@@ -73,7 +77,7 @@ public class TouchKitApplicationServlet extends
 				page.write("minimum-scale=" + w.getViewPortMinimumScale());
 			}
 			if (viewportOpen) {
-				closeViewPort(page);
+				closeSingleElementTag(page);
 			}
 
 			boolean webAppCapable = w.isWebAppCapable();
@@ -97,7 +101,7 @@ public class TouchKitApplicationServlet extends
 				}
 				page.write(" href=\"");
 				page.write(icon.getHref());
-				closeViewPort(page);
+				closeSingleElementTag(page);
 			}
 			if (w.getStartupImage() != null) {
 				page.append("<link rel=\"apple-touch-startup-image\" "
@@ -107,7 +111,7 @@ public class TouchKitApplicationServlet extends
 		}
 	}
 
-	private void closeViewPort(BufferedWriter page) throws IOException {
+	private void closeSingleElementTag(BufferedWriter page) throws IOException {
 		page.write("\" />\n");
 	}
 

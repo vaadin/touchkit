@@ -1,7 +1,7 @@
 package com.vaadin.addons.touchkit;
 
 import com.vaadin.addons.touchkit.ui.NavigationButton;
-import com.vaadin.addons.touchkit.ui.NavigationPanel;
+import com.vaadin.addons.touchkit.ui.NavigationManager;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -10,7 +10,7 @@ import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
 
-public class NavPanelTestWithNavButtons extends NavigationPanel implements
+public class NavPanelTestWithNavButtons extends NavigationManager implements
 		ComponentContainer {
 
 	private SimpleNavView[] views;
@@ -74,7 +74,7 @@ public class NavPanelTestWithNavButtons extends NavigationPanel implements
 					 * caching in some cases. This is handled in
 					 * NavigatioButton. Thats why we need to force repaint of
 					 * prev button in next visible view. This will be
-					 * automatically handled by NavigationPanel for
+					 * automatically handled by NavigationManager for
 					 * NavigationViews.
 					 */
 					SimpleNavView targetView = (SimpleNavView) prev.getTargetView();

@@ -14,7 +14,7 @@ import com.vaadin.ui.CssLayout;
 /**
  * A layout consisting of a NavigationBar and content area. The content area is
  * scrollable (no need to use Panel in it). NavigatioView is most commonly used
- * in {@link NavigationPanel} which provides smooth forwared/back animations.
+ * in {@link NavigationManager} which provides smooth forwared/back animations.
  * <p>
  * In addition to the main content area (set with {@link #setContent(Component)}
  * method), {@link NavigationView} can contain a secondary component that is by
@@ -32,17 +32,22 @@ public class NavigationView extends AbstractComponentContainer {
     public NavigationView(Component content) {
         setSizeFull();
         mainComponent = content;
+        super.addComponent(getContent());
+        super.addComponent(getNavigationBar());
     }
 
     public NavigationView() {
         this(new CssLayout());
-        super.addComponent(getNavigationBar());
-        super.addComponent(getContent());
     }
 
     public NavigationView(String captionHtml) {
         this();
         setCaption(captionHtml);
+    }
+    
+    public NavigationView(String captionHtml, Component content) {
+    	this(content);
+    	setCaption(captionHtml);
     }
 
     public void setContent(Component c) {
@@ -76,7 +81,9 @@ public class NavigationView extends AbstractComponentContainer {
     public void removeComponent(Component c) {
         if (c == toolbar) {
             super.removeComponent(c);
-            mainComponent = null;
+            toolbar = null;
+        } else if(c == mainComponent) {
+        	setContent(null);
         } else {
             throw new IllegalArgumentException(
                     " Only main toolbar can be removed from NavigationView");
@@ -86,6 +93,7 @@ public class NavigationView extends AbstractComponentContainer {
     @Override
     public void removeAllComponents() {
         removeComponent(mainComponent);
+        removeComponent(toolbar);
     }
 
     public NavigationBar getNavigationBar() {
@@ -97,8 +105,8 @@ public class NavigationView extends AbstractComponentContainer {
      * 
      * @param c
      */
-    public void setNavigationBarComponent(Component c) {
-        getNavigationBar().setNavigationBarComponent(c);
+    public void setRightComponent(Component c) {
+        getNavigationBar().setRightComponent(c);
     }
 
     /**
@@ -107,8 +115,8 @@ public class NavigationView extends AbstractComponentContainer {
      * 
      * @param c
      */
-    public void setLeftNavigationBarComponent(Component c) {
-        getNavigationBar().setLeftNavigationBarComponent(c);
+    public void setLeftComponent(Component c) {
+        getNavigationBar().setLeftComponent(c);
     }
 
     public Component getPreviousComponent() {

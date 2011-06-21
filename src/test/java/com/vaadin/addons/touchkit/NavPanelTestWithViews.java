@@ -3,14 +3,14 @@ package com.vaadin.addons.touchkit;
 import com.vaadin.Application;
 import com.vaadin.addons.touchkit.ui.EmailField;
 import com.vaadin.addons.touchkit.ui.NavigationButton;
-import com.vaadin.addons.touchkit.ui.NavigationPanel;
+import com.vaadin.addons.touchkit.ui.NavigationManager;
 import com.vaadin.addons.touchkit.ui.NavigationView;
 import com.vaadin.addons.touchkit.ui.NumberField;
-import com.vaadin.addons.touchkit.ui.OptionLayout;
+import com.vaadin.addons.touchkit.ui.ComponentGroup;
 import com.vaadin.addons.touchkit.ui.Switch;
-import com.vaadin.addons.touchkit.ui.Tabsheet;
+import com.vaadin.addons.touchkit.ui.TouchKitTabsheet;
 import com.vaadin.addons.touchkit.ui.Toolbar;
-import com.vaadin.addons.touchkit.ui.TouchKitSubWindow;
+import com.vaadin.addons.touchkit.ui.Popover;
 import com.vaadin.terminal.ClassResource;
 import com.vaadin.terminal.Resource;
 import com.vaadin.terminal.ThemeResource;
@@ -31,7 +31,7 @@ import com.vaadin.ui.Slider;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
-public class NavPanelTestWithViews extends NavigationPanel implements
+public class NavPanelTestWithViews extends NavigationManager implements
         ComponentContainer {
 
     private SimpleNavView[] views;
@@ -58,14 +58,14 @@ public class NavPanelTestWithViews extends NavigationPanel implements
 
         Button.ClickListener listener = new Button.ClickListener() {
             public void buttonClick(ClickEvent event) {
-                TouchKitSubWindow touchKitSubWindow = new TouchKitSubWindow();
-                touchKitSubWindow.setWidth("360px");
-                touchKitSubWindow.setHeight("80%");
+                Popover popover = new Popover();
+                popover.setWidth("360px");
+                popover.setHeight("80%");
                 // VerticalLayout content = new VerticalLayout();
                 // content.setSpacing(true);
                 // content.setMargin(true);
 
-                NavigationPanel content = new NavPanelTestWithViews();
+                NavigationManager content = new NavPanelTestWithViews();
 
                 /*
                  * HorizontalLayout topStuff = new HorizontalLayout();
@@ -88,25 +88,25 @@ public class NavPanelTestWithViews extends NavigationPanel implements
                  * } }));
                  */
 
-                touchKitSubWindow.setContent(content);
+                popover.setContent(content);
 
                 if (event.getButton() == fullScreen) {
-                    touchKitSubWindow.setSizeFull();
-                    touchKitSubWindow.setModal(false);
-                    Tabsheet tabsheet = new Tabsheet();
-                    touchKitSubWindow.setContent(tabsheet);
+                    popover.setSizeFull();
+                    popover.setModal(false);
+                    TouchKitTabsheet touchKitTabsheet = new TouchKitTabsheet();
+                    popover.setContent(touchKitTabsheet);
 
                     content.setCaption("TAB1");
-                    tabsheet.addTab(content);
+                    touchKitTabsheet.addTab(content);
                     CssLayout cssLayout = new CssLayout();
                     cssLayout.setCaption("TAB2");
-                    tabsheet.addTab(cssLayout);
+                    touchKitTabsheet.addTab(cssLayout);
                     cssLayout.addComponent(new Label(
                             "Nothing here actually, close button on tab1."));
 
                 }
 
-                touchKitSubWindow.showRelativeTo(event.getButton());
+                popover.showRelativeTo(event.getButton());
 
             }
         };
@@ -148,28 +148,28 @@ public class NavPanelTestWithViews extends NavigationPanel implements
         buttons.addComponent(group);
         group.setStyleName("buttongroup");
         group.addStyleName("red");
-        testView.setNavigationBarComponent(buttons);
+        testView.setRightComponent(buttons);
         Component metoo = new Button("TopRight", listener);
         // metoo.setWidth("40px");
         group.addComponent(new Button("No toolbar", new Button.ClickListener() {
 
             public void buttonClick(ClickEvent event) {
-                TouchKitSubWindow touchKitSubWindow = new TouchKitSubWindow();
-                touchKitSubWindow.setWidth("360px");
-                ((VerticalLayout) touchKitSubWindow.getContent())
+                Popover popover = new Popover();
+                popover.setWidth("360px");
+                ((VerticalLayout) popover.getContent())
                         .setMargin(false);
                 // touchKitSubWindow.setHeight("80%");
                 Button b = new Button("Asd");
                 b.setWidth("100%");
-                touchKitSubWindow.addComponent(b);
+                popover.addComponent(b);
                 b = new Button("Foo");
                 b.setWidth("100%");
-                touchKitSubWindow.addComponent(b);
+                popover.addComponent(b);
                 b = new Button("Bar");
                 b.setWidth("100%");
-                touchKitSubWindow.addComponent(b);
+                popover.addComponent(b);
 
-                touchKitSubWindow.showRelativeTo(event.getButton());
+                popover.showRelativeTo(event.getButton());
             }
         }));
         group.addComponent(metoo);
@@ -215,7 +215,7 @@ public class NavPanelTestWithViews extends NavigationPanel implements
             toolbar2.addComponent(createActionButton4());
             toolbar2.addComponent(createActionButton1());
 
-            setNavigationBarComponent(createActionButton5());
+            setRightComponent(createActionButton5());
         }
 
         private Component createActionButton5() {
@@ -258,54 +258,54 @@ public class NavPanelTestWithViews extends NavigationPanel implements
             label.setStyleName("grey-title");
             cssLayout.addComponent(label);
 
-            OptionLayout optionLayout = new OptionLayout();
+            ComponentGroup componentGroup = new ComponentGroup();
             Component textField = new TextField("Name");
             textField.setWidth("100%");
-            optionLayout.addComponent(textField);
+            componentGroup.addComponent(textField);
             // email field
             EmailField emailField = new EmailField("Email");
             emailField.setWidth("100%");
-            optionLayout.addComponent(emailField);
+            componentGroup.addComponent(emailField);
             // number field
             NumberField numberField = new NumberField("Age");
             numberField.setWidth("100%");
-            optionLayout.addComponent(numberField);
+            componentGroup.addComponent(numberField);
 
-            addSliderWithIcons(optionLayout);
+            addSliderWithIcons(componentGroup);
 
-            optionLayout.addComponent(new CheckBox("Setting böö"));
+            componentGroup.addComponent(new CheckBox("Setting böö"));
 
-            cssLayout.addComponent(optionLayout);
+            cssLayout.addComponent(componentGroup);
 
             label = new Label("Foobar");
             label.setStyleName("grey-title");
             cssLayout.addComponent(label);
 
-            optionLayout = new OptionLayout();
+            componentGroup = new ComponentGroup();
             textField = new TextField("Name");
             textField.setWidth("100%");
-            optionLayout.addComponent(textField);
+            componentGroup.addComponent(textField);
             // email field
             emailField = new EmailField("Longer caption");
             emailField.setWidth("100%");
-            optionLayout.addComponent(emailField);
+            componentGroup.addComponent(emailField);
             // number field
             numberField = new NumberField("Age");
             numberField.setWidth("100%");
-            optionLayout.addComponent(numberField);
+            componentGroup.addComponent(numberField);
 
-            addSliderWithIcons(optionLayout);
+            addSliderWithIcons(componentGroup);
 
-            optionLayout.addComponent(new CheckBox("Setting böö"));
+            componentGroup.addComponent(new CheckBox("Setting böö"));
 
-            cssLayout.addComponent(optionLayout);
+            cssLayout.addComponent(componentGroup);
 
-            label = new Label("FormLayout in OptionLayout");
+            label = new Label("FormLayout in ComponentGroup");
             label.setStyleName("grey-title");
             cssLayout.addComponent(label);
 
             
-            OptionLayout optionLayout2 = new OptionLayout();
+            ComponentGroup optionLayout2 = new ComponentGroup();
             FormLayout formLayout = new FormLayout();
             formLayout.setSpacing(false);
             formLayout.setMargin(false);
@@ -360,7 +360,7 @@ public class NavPanelTestWithViews extends NavigationPanel implements
         }
 
         private void generateSubViews() {
-            OptionLayout components = new OptionLayout();
+            ComponentGroup components = new ComponentGroup();
             int amount = getDepth() % 2 == 1 ? 3 : 25;
             for (int i = 0; i < amount; i++) {
                 SimpleNavView simpleNavView = new SimpleNavView(this, i);

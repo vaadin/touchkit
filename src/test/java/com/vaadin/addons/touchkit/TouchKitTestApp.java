@@ -3,8 +3,8 @@ package com.vaadin.addons.touchkit;
 import java.util.Random;
 
 import com.vaadin.Application;
-import com.vaadin.addons.touchkit.ui.Position;
-import com.vaadin.addons.touchkit.ui.PositionCallback;
+import com.vaadin.addons.touchkit.service.Position;
+import com.vaadin.addons.touchkit.service.PositionCallback;
 import com.vaadin.addons.touchkit.ui.Switch;
 import com.vaadin.addons.touchkit.ui.TouchKitWindow;
 import com.vaadin.terminal.Resource;
@@ -70,7 +70,7 @@ public class TouchKitTestApp extends Application {
 
         mainWindow.addComponent(b);
 
-        b = new Button("Tabsheet");
+        b = new Button("TouchKitTabsheet");
         b.addListener(new ClickListener() {
             public void buttonClick(ClickEvent event) {
                 mainWindow.setContent(new TabsheetTest());

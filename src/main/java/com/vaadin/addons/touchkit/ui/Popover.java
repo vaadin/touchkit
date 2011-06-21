@@ -10,7 +10,7 @@ import com.vaadin.ui.Window;
 /**
  * A modal sub window suitable for mobile devices. Most commonly this kind of
  * window contains no caption, but instead just quickly displays more options or
- * small form related to an action. TouchKitSubWindow does not support dragging
+ * small form related to an action. Popover does not support dragging
  * or resizing by the end user.
  * <p>
  * Typical use case by example: In ios mail when you hit the arrow (the
@@ -20,7 +20,7 @@ import com.vaadin.ui.Window;
  * {@link #showRelativeTo(Component)} method. In smaller screens this kind of UI
  * element fills the whole width of the screan.
  * <p>
- * TouchKitSubWindow can also be made full screen with setSizeFull(). All
+ * Popover can also be made full screen with setSizeFull(). All
  * borders will in this case be hidden and the window will block all other
  * content of the main window. Using full screen subwindow, instead of changing
  * the whole content of the main window may cause a slightly faster return to
@@ -30,9 +30,9 @@ import com.vaadin.ui.Window;
  * 
  */
 @ClientWidget(VTouchKitWindow.class)
-public class TouchKitSubWindow extends Window {
+public class Popover extends Window {
 
-	public TouchKitSubWindow() {
+	public Popover() {
 		setModal(true);
 	}
 
@@ -42,7 +42,11 @@ public class TouchKitSubWindow extends Window {
 		this.relatedComponent = relatedComponent;
 		requestRepaint();
 		if (relatedComponent != null && getParent() == null) {
-			relatedComponent.getWindow().addWindow(this);
+			Window window = relatedComponent.getWindow();
+			if(window.getParent() != null) {
+				window = window.getParent();
+			}
+			window.addWindow(this);
 		}
 	}
 

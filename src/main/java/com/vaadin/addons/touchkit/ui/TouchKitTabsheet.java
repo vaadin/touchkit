@@ -11,16 +11,16 @@ import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.TabSheet.Tab;
 
 /**
- * A Tabsheet implementation that mimics native tabsheet in ios. E.g. the tabbar
+ * A TouchKitTabsheet implementation that mimics native tabsheet in ios. E.g. the tabbar
  * is below the main content.
  */
 @ClientWidget(VTabsheet.class)
-public class Tabsheet extends CssLayout {
+public class TouchKitTabsheet extends CssLayout {
 
     Toolbar tabbar = new Toolbar();
     private Component currentComponent;
 
-    public Tabsheet() {
+    public TouchKitTabsheet() {
         super();
         setStyleName("touchkit-tabsbelow");
         setSizeFull();

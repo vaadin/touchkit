@@ -23,7 +23,7 @@ import com.vaadin.ui.Component;
  * 
  */
 @ClientWidget(VNavigationPanel.class)
-public class NavigationPanel extends AbstractComponentContainer {
+public class NavigationManager extends AbstractComponentContainer {
 
 	private Stack<Component> breadCrump = new Stack<Component>();
 
@@ -31,7 +31,7 @@ public class NavigationPanel extends AbstractComponentContainer {
 	private Component previousComponent;
 	private Component nextComponent;
 
-	public NavigationPanel() {
+	public NavigationManager() {
 		setSizeFull();
 	}
 

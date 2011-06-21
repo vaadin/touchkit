@@ -1,6 +1,6 @@
 package com.vaadin.addons.touchkit;
 
-import com.vaadin.addons.touchkit.ui.NavigationPanel;
+import com.vaadin.addons.touchkit.ui.NavigationManager;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -8,7 +8,7 @@ import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
 
-public class NavPanelTest extends NavigationPanel implements
+public class NavPanelTest extends NavigationManager implements
 		ComponentContainer, ClickListener {
 
 	private CssLayout[] views;

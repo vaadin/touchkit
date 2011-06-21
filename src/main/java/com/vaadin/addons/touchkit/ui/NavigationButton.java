@@ -10,24 +10,24 @@ import com.vaadin.ui.ClientWidget;
 import com.vaadin.ui.Component;
 
 /**
- * A Button implementation optimized to be used inside a {@link NavigationPanel}
+ * A Button implementation optimized to be used inside a {@link NavigationManager}
  * .
  * <p>
  * Clicking button will automatically navigate to next view if one is defined in
  * this button (via constructor or {@link #setTargetView(Component)}). On the
- * client side, NavigationPanel will start animation immediately when clicked.
+ * client side, NavigationManager will start animation immediately when clicked.
  */
 @ClientWidget(VNavigationButton.class)
 public class NavigationButton extends Button {
-	private Component nextView;
+	private Component targetView;
 
 	public NavigationButton(String caption) {
 		super(caption);
 	}
 
-	public NavigationButton(Component nextView) {
-		super(nextView.getCaption());
-		this.nextView = nextView;
+	public NavigationButton(Component targetView) {
+		super(targetView.getCaption());
+		this.targetView = targetView;
 	}
 
 	public NavigationButton() {
@@ -44,8 +44,8 @@ public class NavigationButton extends Button {
 	// // // TODO Auto-generated catch block
 	// // e.printStackTrace();
 	// // }
-	// if (nextView != null) {
-	// getNavigationPanel().navigateTo(nextView);
+	// if (targetView != null) {
+	// getNavigationPanel().navigateTo(targetView);
 	// }
 	// super.fireClick();
 	// }
@@ -55,47 +55,53 @@ public class NavigationButton extends Button {
 		// FIXME since #6605 click implementation in Button sucks. Fix it then
 		// uncomment the previous method or something.
 		// super.changeVariables(source, variables);
-		if (nextView != null) {
-			getNavigationPanel().navigateTo(nextView);
+		if (targetView != null) {
+			getNavigationPanel().navigateTo(targetView);
 		}
 		fireClick();
 	}
 
 	/**
 	 * @return the navigation panel in which the button is contained or null if
-	 *         the button is not inside a {@link NavigationPanel}
+	 *         the button is not inside a {@link NavigationManager}
 	 */
-	public NavigationPanel getNavigationPanel() {
+	public NavigationManager getNavigationPanel() {
 		Component p = getParent();
-		while (p != null && !(p instanceof NavigationPanel)) {
+		while (p != null && !(p instanceof NavigationManager)) {
 			p = p.getParent();
 		}
-		return (NavigationPanel) p;
+		return (NavigationManager) p;
 	}
 
 	@Override
 	public void paintContent(PaintTarget target) throws PaintException {
 		super.paintContent(target);
-		if (nextView != null && nextView.getApplication() != null) {
-			target.addAttribute("nv", nextView);
+		if (targetView != null && targetView.getApplication() != null) {
+			target.addAttribute("nv", targetView);
 		}
 	}
 
-	public void setTargetView(Component nextView) {
-		this.nextView = nextView;
+	public void setTargetView(Component targetView) {
+		this.targetView = targetView;
 		requestRepaint();
 	}
 
 	@Override
 	public String getCaption() {
-		if (nextView != null && nextView.getCaption() != null) {
-			return nextView.getCaption();
+		String caption2 = super.getCaption();
+		if(caption2 == null) {
+			/*
+			 * Use caption from target view unless explicitly set for this button 
+			 */
+			if (targetView != null && targetView.getCaption() != null) {
+				return targetView.getCaption();
+			}
 		}
-		return super.getCaption();
+		return caption2;
 	}
 
 	public Component getTargetView() {
-		return nextView;
+		return targetView;
 	}
 
 }

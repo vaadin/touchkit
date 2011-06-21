@@ -1,4 +1,4 @@
-package com.vaadin.addons.touchkit.ui;
+package com.vaadin.addons.touchkit.service;
 
 public interface ApplicationIcon {
 	String getSizes();
