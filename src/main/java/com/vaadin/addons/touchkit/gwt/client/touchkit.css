@@ -449,7 +449,7 @@
 
 @url popupImage popupImage;
 @url popupWithToolbarImage popupWithToolbarImage;
-.v-touchkit-window .v-window-wrap {
+.v-touchkit-window-popover .v-window-wrap {
 	/* border-width: 22px 8px 55px 8px;
 	-webkit-border-image: popupImage 22 8 55 8 repeat; */	
 	border-width: 22px 8px 8px 8px;
@@ -461,9 +461,6 @@
 	box-shadow: 0 0 80px 0 #222;
 	border-radius: 7px;
 }
-.v-touchkit-window .v-window-wrap2 {
-
-}
 
 .v-touchkit-window-full-screen .v-window-wrap {
 	border-width: 0 0 0 0;
@@ -471,10 +468,9 @@
 	border-radius: 0;
 }
 
-.v-touchkit-window .v-window-contents {
+.v-touchkit-window-popover .v-window-contents {
 	background: transparent;
 	top: -20px;
-	/* margin-bottom: -73px; */
 	margin-bottom: -28px;
 	
 	position: relative;
@@ -486,14 +482,14 @@
 	margin-bottom: 0;
 }
 
-.v-touchkit-window .v-navpanel-placeholder,
-.v-touchkit-window .v-navpanel-placeholder>div {
+.v-touchkit-window-popover .v-navpanel-placeholder,
+.v-touchkit-window-popover .v-navpanel-placeholder>div {
 	background: transparent;
 	border-top: 0;
 	border-bottom: 0;
 }
 
-.v-touchkit-window .v-window-contents > div > .v-verticallayout .v-verticallayout-margin {
+.v-touchkit-window-popover .v-window-contents > div > .v-verticallayout .v-verticallayout-margin {
 	padding-top:    7px;
 	padding-bottom: 7px;
 }
@@ -527,18 +523,18 @@
 	margin-top: 2px;
 }
 
-.v-touchkit-window .v-navpanel-container {
+.v-touchkit-window-popover .v-navpanel-container {
 	background: transparent;
 }
-.v-touchkit-window .v-navbar {
+.v-touchkit-window-popover .v-navbar {
 	background: transparent;
 	border: 0;
 }
-.v-touchkit-window .v-navview-tb {
+.v-touchkit-window-popover .v-navview-tb {
 	border: 0;
 }
 
-.v-touchkit-window .v-navview-tb .v-toolbar {
+.v-touchkit-window-popover .v-navview-tb .v-toolbar {
 	background: toolbarPopoverGradient;
 }
 
