@@ -63,7 +63,7 @@ public class TouchKitTestApp extends Application {
         b = new Button("NavPanelTest witn views");
         b.addListener(new ClickListener() {
             public void buttonClick(ClickEvent event) {
-            	NavPanelTestWithViews.app = TouchKitTestApp.this;
+                NavPanelTestWithViews.app = TouchKitTestApp.this;
                 mainWindow.setContent(new NavPanelTestWithViews());
             }
         });
@@ -111,18 +111,25 @@ public class TouchKitTestApp extends Application {
                                 });
                     }
                 }));
-        ;
 
-        mainWindow.addComponent(new Button("dsf", new Button.ClickListener() {
+        mainWindow.addComponent(new Button("Show switch",
+                new Button.ClickListener() {
 
-            public void buttonClick(ClickEvent event) {
-                Switch switch1 = new Switch();
-                switch1.setCaption("Jep");
-                mainWindow.addComponent(switch1);
+                    public void buttonClick(ClickEvent event) {
+                        Switch switch1 = new Switch();
+                        switch1.setCaption("Jep");
+                        mainWindow.addComponent(switch1);
 
-            }
-        }));
-        ;
+                    }
+                }));
+
+        mainWindow.addComponent(new Button("PlainNavigationView with buttons",
+                new Button.ClickListener() {
+                    public void buttonClick(ClickEvent event) {
+                        NavPanelTestWithViews.app = TouchKitTestApp.this;
+                        mainWindow.setContent(new NavViewWithButtons());
+                    }
+                }));
 
         setMainWindow(mainWindow);
     }
