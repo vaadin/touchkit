@@ -318,9 +318,17 @@
 	border-left: 1px solid;
 	border-radius: 0;
 }
+
+
+/* For horizontallaoyt that should not be used on mobile devices at all!! */
 .buttongroup > div > div:first-child > div > .v-button .v-button-wrap {
 	border-left: 0;
 }
+
+.buttongroup > div > div > div:first-child .v-button-wrap {
+	border-left: 0;
+}
+
 
 /* TODO unite w/ backbutton rule */
 .v-navbar-right .v-button-caption {
