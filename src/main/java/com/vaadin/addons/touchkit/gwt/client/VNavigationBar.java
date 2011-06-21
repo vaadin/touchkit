@@ -18,10 +18,10 @@ public class VNavigationBar extends ComplexPanel implements Container {
     private static final String CLASSNAME = "v-navbar";
     private ApplicationConnection client;
     private DivElement caption = Document.get().createDivElement();
-    private DivElement componentEl = Document.get().createDivElement();
-    private DivElement backButtonEl = Document.get().createDivElement();
-    private Paintable backButton;
-    private Paintable component;
+    private DivElement rightComponentElement = Document.get().createDivElement();
+    private DivElement leftComponentElement = Document.get().createDivElement();
+    private Paintable leftComponent;
+    private Paintable rightComponent;
 
     public VNavigationBar() {
         TouchKitResources.INSTANCE.css().ensureInjected();
@@ -29,10 +29,10 @@ public class VNavigationBar extends ComplexPanel implements Container {
         setStyleName(CLASSNAME);
         getElement().appendChild(caption);
         caption.setClassName(CLASSNAME + "-caption");
-        componentEl.setClassName(CLASSNAME + "-actions");
-        getElement().appendChild(componentEl);
-        backButtonEl.setClassName(CLASSNAME + "-backb");
-        getElement().appendChild(backButtonEl);
+        rightComponentElement.setClassName(CLASSNAME + "-right");
+        getElement().appendChild(rightComponentElement);
+        leftComponentElement.setClassName(CLASSNAME + "-left");
+        getElement().appendChild(leftComponentElement);
     }
 
     public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
@@ -47,63 +47,63 @@ public class VNavigationBar extends ComplexPanel implements Container {
         caption.setInnerHTML(uidl.getStringAttribute("caption"));
 
         UIDL backUidl = uidl.getChildByTagName("back");
-        if (backUidl == null && backButton != null) {
-            ((Widget) backButton).removeFromParent();
-            client.unregisterPaintable(backButton);
-            backButton = null;
+        if (backUidl == null && leftComponent != null) {
+            ((Widget) leftComponent).removeFromParent();
+            client.unregisterPaintable(leftComponent);
+            leftComponent = null;
         }
         if (backUidl != null) {
             UIDL backButtonUidl = backUidl.getChildUIDL(0);
             Paintable newBackButton = client.getPaintable(backButtonUidl);
-            if (backButton != null && backButton != newBackButton) {
+            if (leftComponent != null && leftComponent != newBackButton) {
                 clearBackComponent();
             }
-            backButton = newBackButton;
-            if (!((Widget) backButton).isAttached()) {
-                add((Widget) backButton,
-                        (com.google.gwt.user.client.Element) backButtonEl
+            leftComponent = newBackButton;
+            if (!((Widget) leftComponent).isAttached()) {
+                add((Widget) leftComponent,
+                        (com.google.gwt.user.client.Element) leftComponentElement
                                 .cast());
             }
-            backButton.updateFromUIDL(backButtonUidl, client);
-        } else if (backButton != null) {
+            leftComponent.updateFromUIDL(backButtonUidl, client);
+        } else if (leftComponent != null) {
             clearBackComponent();
         }
 
         UIDL componentUidl = uidl.getChildByTagName("component");
         boolean hasComponent = componentUidl != null;
-        componentEl.getStyle().setDisplay(
+        rightComponentElement.getStyle().setDisplay(
                 hasComponent ? Display.BLOCK : Display.NONE);
         if (hasComponent) {
             componentUidl = componentUidl.getChildUIDL(0);
             Paintable paintable = client.getPaintable(componentUidl);
-            if (component != paintable && component != null) {
+            if (rightComponent != paintable && rightComponent != null) {
                 clearComponent();
             }
 
-            component = paintable;
-            if (!(((Widget) component)).isAttached()) {
-                add((Widget) component,
-                        (com.google.gwt.user.client.Element) componentEl.cast());
+            rightComponent = paintable;
+            if (!(((Widget) rightComponent)).isAttached()) {
+                add((Widget) rightComponent,
+                        (com.google.gwt.user.client.Element) rightComponentElement.cast());
             }
 
-            component.updateFromUIDL(componentUidl, client);
+            rightComponent.updateFromUIDL(componentUidl, client);
 
-        } else if (component != null) {
+        } else if (rightComponent != null) {
             clearComponent();
         }
 
     }
 
     private void clearBackComponent() {
-        ((Widget) backButton).removeFromParent();
-        client.unregisterPaintable(backButton);
-        backButton = null;
+        ((Widget) leftComponent).removeFromParent();
+        client.unregisterPaintable(leftComponent);
+        leftComponent = null;
     }
 
     private void clearComponent() {
-        ((Widget) component).removeFromParent();
-        client.unregisterPaintable(component);
-        component = null;
+        ((Widget) rightComponent).removeFromParent();
+        client.unregisterPaintable(rightComponent);
+        rightComponent = null;
     }
 
     public void replaceChildComponent(Widget oldComponent, Widget newComponent) {
@@ -111,7 +111,7 @@ public class VNavigationBar extends ComplexPanel implements Container {
     }
 
     public boolean hasChildComponent(Widget component) {
-        if (component == backButton || component == this.component) {
+        if (component == leftComponent || component == this.rightComponent) {
             return true;
         }
         return false;

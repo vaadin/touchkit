@@ -245,7 +245,7 @@
 
 @url backButtonUrl backButtonImage ;
 
-.v-navbar-backb .v-navbutton {
+.v-navbar-left .v-navbutton {
 	display:inline-block;
 	-webkit-border-image: backButtonUrl 0 9 0 30;
 	border-width: 0 4px 0 13px;
@@ -261,20 +261,18 @@
 	font-size: 12px;
 	height: 31px;
 	line-height: 31px;
-	margin-left: 5px;
 	margin-right:auto;
 	padding-right: 8px;
-	margin-top: 5px;
 	text-align:left;
 }
-.v-navbar-backb .v-navbutton:after {
+.v-navbar-left .v-navbutton:after {
 	display:none;	
 }
 
-.v-navbar-backb {
+.v-navbar-left {
 	position: absolute;
-	left: 0;
-	top: 0;
+	left: 5px;
+	top: 5px;
 	max-width: 33%;
 	z-index: 1;
 }
@@ -301,7 +299,7 @@
 	color:white;
 }
 
-.v-navbar-actions {
+.v-navbar-right {
 	position: absolute;
 	right: 5px;
 	top: 5px;
@@ -325,7 +323,7 @@
 }
 
 /* TODO unite w/ backbutton rule */
-.v-navbar-actions .v-button-caption {
+.v-navbar-right .v-button-caption {
 	font-weight: bold;
 	text-align: center;
 	color: white;
