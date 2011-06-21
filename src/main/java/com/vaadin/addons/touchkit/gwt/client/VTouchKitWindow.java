@@ -16,6 +16,11 @@ import com.vaadin.terminal.gwt.client.ApplicationConnection;
 import com.vaadin.terminal.gwt.client.UIDL;
 import com.vaadin.terminal.gwt.client.ui.VWindow;
 
+/**
+ * TouchKit "subwindow". Both for iPad style 'popover' windows, and iPhone style
+ * 'fullscreen' (actionsheet) windows.
+ * 
+ */
 public class VTouchKitWindow extends VWindow {
 
     private static final int SMALL_SCREEN_WIDTH_THRESHOLD = 500;
@@ -42,9 +47,9 @@ public class VTouchKitWindow extends VWindow {
     public void setStyleName(String style) {
         setShadowEnabled(false);
         if (fullscreen) {
-            style += " v-touchkit-window v-touchkit-window-full-screen";
+            style += " v-touchkit-window v-touchkit-fullscreen";
         } else {
-            style += " v-touchkit-window v-touchkit-window-popover";
+            style += " v-touchkit-window v-touchkit-popover";
         }
         super.setStyleName(style);
     }
