@@ -458,9 +458,8 @@
 /* touchkit sub window */
 
 .v-tk-popover.plain {
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
+	/* popover that is not relative to component, nor fullscreen - no styling at all */
+	
 }
 
 @url popupImage popupImage;
