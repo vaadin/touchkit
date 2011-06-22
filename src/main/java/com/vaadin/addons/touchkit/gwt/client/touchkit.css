@@ -348,7 +348,7 @@
 
 
 /* TODO unite w/ backbutton rule */
-.v-navbar-right .v-button-caption {
+.v-navbar .v-button-caption {
 	font-weight: bold;
 	text-align: center;
 	color: white;
