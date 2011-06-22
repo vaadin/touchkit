@@ -48,9 +48,14 @@ public class VTouchKitWindow extends VWindow {
     public void setStyleName(String style) {
         setShadowEnabled(false);
         if (fullscreen) {
-            style += " v-touchkit-window v-touchkit-fullscreen";
+            // fullscreen window
+            style += " v-tk-popover fullscreen";
+        } else if (relComponentId != null) {
+            // real popover (black)
+            style += " v-tk-popover relative";
         } else {
-            style += " v-touchkit-window v-touchkit-popover";
+            // regular (white)
+            style += " v-tk-popover plain";
         }
         super.setStyleName(style);
     }
@@ -184,9 +189,9 @@ public class VTouchKitWindow extends VWindow {
 
     private void showReferenceArrow(boolean onTop,
             int centerOfReferencComponent, Widget ref) {
-        UIObject.setStyleName(arrowElement, "v-touchkit-window-pointer-bottom",
+        UIObject.setStyleName(arrowElement, "v-tk-popover-pointer-bottom",
                 !onTop);
-        UIObject.setStyleName(arrowElement, "v-touchkit-window-pointer", onTop);
+        UIObject.setStyleName(arrowElement, "v-tk-popover-pointer", onTop);
 
         int horizontalpoint = centerOfReferencComponent
                 - arrowElement.getOffsetWidth() / 2;
@@ -259,7 +264,11 @@ public class VTouchKitWindow extends VWindow {
 
     @Override
     public void center() {
-        // NOP avoid centering from parent
+        // Ignore centering if the popover is relative to component, or we're on
+        // a small screen device
+        if (relComponentId == null && !isSmallScreenDevice()) {
+            super.center();
+        }
     }
 
     private final static int ACCEPTEDEVENTS = Event.MOUSEEVENTS;
