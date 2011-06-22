@@ -103,8 +103,7 @@ public class VTouchKitWindow extends VWindow {
         /*
          * Make full width.
          */
-        setWidth((Window.getClientWidth() - (getOffsetWidth() - getContainerElement()
-                .getOffsetWidth())) + "px");
+        setWidth((Window.getClientWidth() + "px"));
 
         int top = 0;
         if (relComponentId != null) {
