@@ -15,10 +15,15 @@
 	font-size: 14px;
 }
 
+
 .v-touchkit-view .v-button,
 .v-touchkit-view .v-button-wrap,
 .v-touchkit-window .v-button,
-.v-touchkit-window .v-button-wrap {
+.v-touchkit-window .v-button-wrap,
+.v-touchkit-view .v-disabled.v-button,
+.v-touchkit-view .v-disabled.v-button .v-button-wrap,
+.v-touchkit-window .v-disabled.v-button,
+.v-touchkit-window .v-disabled.v-button .v-button-wrap {
 	background-image: none !important;
 	padding:0 5px;
 }
@@ -315,14 +320,16 @@
 	max-width: 33%;
 }
 
-.buttongroup .v-button {
+.buttongroup .v-button,
+.buttongroup .v-disabled.v-button {
 	position: relative;
 	padding: 0;
 	border: 0;
 	background-color: transparent;
 }
 
-.buttongroup .v-button-wrap {
+.buttongroup .v-button-wrap,
+.buttongroup .v-disabled.v-button .v-button-wrap {
 	border-left: 1px solid;
 	border-radius: 0;
 }
@@ -333,8 +340,10 @@
 	border-left: 0;
 }
 
+/* for css layout */
+
 .buttongroup > div > div > div:first-child .v-button-wrap {
-	border-left: 0;
+	border-left: 0 !important; /* override .v-disabled.v-button selector */
 }
 
 
@@ -389,6 +398,10 @@
 
 .v-toolbar {
 	background: toolbarGradient;
+	
+	/* Text by default white with shadow */
+	color:white;
+	text-shadow: 0px 1px 0px #222;
 }
 
 .v-navview-tb {
