@@ -29,6 +29,7 @@ public class VTouchKitWindow extends VWindow {
     private boolean fullscreen;
     private DivElement arrowElement;
     protected int zIndex;
+    private boolean specialPositioningRunning;
 
     public VTouchKitWindow() {
     }
@@ -61,31 +62,40 @@ public class VTouchKitWindow extends VWindow {
     }
 
     private void doSpecialPositioning() {
-        if (isFullScreen()) {
-            setPopupPosition(0, 0);
-        } else {
-            /*
-             * fade in the modality curtain unless in fullscreen mode.
-             */
-            getModalityCurtain().removeClassName("v-tk-opacity-transition");
-            DOM.sinkEvents(getModalityCurtain(), Event.TOUCHEVENTS);
-            final Style style = getModalityCurtain().getStyle();
-            style.setOpacity(0);
-            Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-                public void execute() {
-                    getModalityCurtain()
-                            .addClassName("v-tk-opacity-transition");
-                    /* Final value from the theme */
-                    style.setProperty("opacity", "");
-                }
-            });
+        /*
+         * FIXME this is currently called twice when the window is opened, from
+         * setWidth/height and finally from the super.updateFromUidl
+         */
+        if (!specialPositioningRunning) {
+            specialPositioningRunning = true;
+            if (isFullScreen()) {
+                setPopupPosition(0, 0);
+            } else {
+                /*
+                 * fade in the modality curtain unless in fullscreen mode.
+                 */
+                getModalityCurtain().removeClassName("v-tk-opacity-transition");
+                DOM.sinkEvents(getModalityCurtain(), Event.TOUCHEVENTS);
+                final Style style = getModalityCurtain().getStyle();
+                style.setOpacity(0);
+                Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+                    public void execute() {
+                        getModalityCurtain().addClassName(
+                                "v-tk-opacity-transition");
+                        /* Final value from the theme */
+                        style.setProperty("opacity", "");
+                    }
+                });
 
-            if (isSmallScreenDevice()) {
-                slideIn();
-            } else if (relComponentId != null) {
-                Widget paintable = (Widget) client.getPaintable(relComponentId);
-                showNextTo(paintable);
+                if (isSmallScreenDevice()) {
+                    slideIn();
+                } else if (relComponentId != null) {
+                    Widget paintable = (Widget) client
+                            .getPaintable(relComponentId);
+                    showNextTo(paintable);
+                }
             }
+            specialPositioningRunning = false;
         }
     }
 
