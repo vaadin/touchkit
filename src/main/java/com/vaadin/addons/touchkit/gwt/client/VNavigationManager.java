@@ -19,7 +19,7 @@ import com.vaadin.terminal.gwt.client.RenderSpace;
 import com.vaadin.terminal.gwt.client.UIDL;
 import com.vaadin.terminal.gwt.client.VConsole;
 
-public class VNavigationPanel extends ComplexPanel implements Container {
+public class VNavigationManager extends ComplexPanel implements Container {
 
     private static final String CONTAINER_CLASSNAME = "v-tk-navpanel-container";
     private static final String WRAPPER_CLASSNAME = "v-tk-navpanel-wrapper";
@@ -32,7 +32,7 @@ public class VNavigationPanel extends ComplexPanel implements Container {
     private UIDL uidl;
     private ScheduledCommand unregisterOrphaned;
 
-    public VNavigationPanel() {
+    public VNavigationManager() {
         TouchKitResources.INSTANCE.css().ensureInjected();
         setElement(Document.get().createDivElement());
         setStyleName(CLASSNAME);
@@ -47,7 +47,7 @@ public class VNavigationPanel extends ComplexPanel implements Container {
         el.addEventListener("webkitTransitionEnd",function(event) {
         	if(event.target == el) {
     	    	$entry(
-    	        	me.@com.vaadin.addons.touchkit.gwt.client.VNavigationPanel::onTransitionEnd()()
+    	        	me.@com.vaadin.addons.touchkit.gwt.client.VNavigationManager::onTransitionEnd()()
     	        );
         	}
         },false);
@@ -368,7 +368,7 @@ public class VNavigationPanel extends ComplexPanel implements Container {
                 setPosition(nextView, -currentWrapperPos + 1);
                 client.handleComponentRelativeSize((Widget) nextView);
             }
-            client.runDescendentsLayout(VNavigationPanel.this);
+            client.runDescendentsLayout(VNavigationManager.this);
             resizeWhenTransitionDone = false;
         }
     };

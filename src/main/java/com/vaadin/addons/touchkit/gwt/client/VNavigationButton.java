@@ -34,18 +34,18 @@ public class VNavigationButton extends HTML implements Paintable {
 	}
 
 	private void navigate() {
-		VNavigationPanel panel = findNavigationPanel();
+		VNavigationManager panel = findNavigationPanel();
 		if (panel != null) {
 			panel.onNaviButtonClick(this);
 		}
 	}
 
-	private VNavigationPanel findNavigationPanel() {
+	private VNavigationManager findNavigationPanel() {
 		Widget parent2 = getParent();
-		while (parent2 != null && !(parent2 instanceof VNavigationPanel)) {
+		while (parent2 != null && !(parent2 instanceof VNavigationManager)) {
 			parent2 = parent2.getParent();
 		}
-		return (VNavigationPanel) parent2;
+		return (VNavigationManager) parent2;
 	}
 
 	public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {

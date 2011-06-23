@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Stack;
 
-import com.vaadin.addons.touchkit.gwt.client.VNavigationPanel;
+import com.vaadin.addons.touchkit.gwt.client.VNavigationManager;
 import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;
 import com.vaadin.ui.AbstractComponentContainer;
@@ -22,7 +22,7 @@ import com.vaadin.ui.Component;
  * keep only one view backwards in memory and reload older ones if necessary.
  * 
  */
-@ClientWidget(VNavigationPanel.class)
+@ClientWidget(VNavigationManager.class)
 public class NavigationManager extends AbstractComponentContainer {
 
 	private Stack<Component> breadCrump = new Stack<Component>();
