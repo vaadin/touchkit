@@ -1,6 +1,6 @@
 package com.vaadin.addons.touchkit.ui;
 
-import com.vaadin.addons.touchkit.gwt.client.VTouchKitWindow;
+import com.vaadin.addons.touchkit.gwt.client.VPopover;
 import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;
 import com.vaadin.ui.ClientWidget;
@@ -29,7 +29,7 @@ import com.vaadin.ui.Window;
  * TODO implement
  * 
  */
-@ClientWidget(VTouchKitWindow.class)
+@ClientWidget(VPopover.class)
 public class Popover extends Window {
 
 	public Popover() {

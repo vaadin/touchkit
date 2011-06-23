@@ -21,7 +21,7 @@ import com.vaadin.terminal.gwt.client.ui.VWindow;
  * 'fullscreen' (actionsheet) windows.
  * 
  */
-public class VTouchKitWindow extends VWindow {
+public class VPopover extends VWindow {
 
     private static final int SMALL_SCREEN_WIDTH_THRESHOLD = 500;
     private static final int MIN_EDGE_DISTANCE = 10;
@@ -31,7 +31,7 @@ public class VTouchKitWindow extends VWindow {
     protected int zIndex;
     private boolean specialPositioningRunning;
 
-    public VTouchKitWindow() {
+    public VPopover() {
     }
 
     @Override
