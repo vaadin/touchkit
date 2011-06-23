@@ -43,7 +43,7 @@
 
 /* TODO rename this: */
 @url navbaractionimage navBarActionImage ;
-.v-tk-buttongroup,
+.v-tk-componentgroup-h,
 .v-tk-view .v-button,
 .v-tk-popover .v-button  {
 	-webkit-border-image: navbaractionimage 10;
@@ -53,7 +53,7 @@
 }
 
 .v-tk-navbar .v-button,
-.v-tk-navbar .v-tk-buttongroup {
+.v-tk-navbar .v-tk-componentgroup-h {
 	background-color: rgb(91, 128, 171);
 }
 
@@ -315,25 +315,19 @@
 	max-width: 33%;
 }
 
-.v-tk-buttongroup .v-button {
+.v-tk-componentgroup-h .v-button {
 	position: relative;
 	padding: 0;
 	border: 0;
 	background-color: transparent;
 }
 
-.v-tk-buttongroup .v-button-wrap {
+.v-tk-componentgroup-h .v-button-wrap {
 	border-left: 1px solid;
 	border-radius: 0;
 }
 
-
-/* For horizontallaoyt that should not be used on mobile devices at all!! */
-.v-tk-buttongroup > div > div:first-child > div > .v-button .v-button-wrap {
-	border-left: 0;
-}
-
-.v-tk-buttongroup > div > div > div:first-child .v-button-wrap {
+.v-tk-componentgroup-h > div > div > div:first-child .v-button-wrap {
 	border-left: 0;
 }
 
@@ -627,4 +621,12 @@
 }
 .v-tk-greenbg {
 	background-color: green !important;
+}
+
+/* White background for darkish colored buttons */
+.v-tk-redbg .v-button-caption,
+.v-tk-bluebg .v-button-caption,
+.v-tk-greenbg .v-button-caption {
+	color: white;
+	text-shadow: rgba(0, 0, 0, 0.6) 0px -1px 0px;
 }
