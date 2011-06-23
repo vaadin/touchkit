@@ -1,16 +1,16 @@
 package com.vaadin.addons.touchkit;
 
 import com.vaadin.Application;
+import com.vaadin.addons.touchkit.ui.ComponentGroup;
 import com.vaadin.addons.touchkit.ui.EmailField;
 import com.vaadin.addons.touchkit.ui.NavigationButton;
 import com.vaadin.addons.touchkit.ui.NavigationManager;
 import com.vaadin.addons.touchkit.ui.NavigationView;
 import com.vaadin.addons.touchkit.ui.NumberField;
-import com.vaadin.addons.touchkit.ui.ComponentGroup;
-import com.vaadin.addons.touchkit.ui.Switch;
-import com.vaadin.addons.touchkit.ui.TouchKitTabsheet;
-import com.vaadin.addons.touchkit.ui.Toolbar;
 import com.vaadin.addons.touchkit.ui.Popover;
+import com.vaadin.addons.touchkit.ui.Switch;
+import com.vaadin.addons.touchkit.ui.Toolbar;
+import com.vaadin.addons.touchkit.ui.TouchKitTabsheet;
 import com.vaadin.terminal.ClassResource;
 import com.vaadin.terminal.Resource;
 import com.vaadin.terminal.ThemeResource;
@@ -30,13 +30,15 @@ import com.vaadin.ui.Layout;
 import com.vaadin.ui.Slider;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window;
 
 public class NavPanelTestWithViews extends NavigationManager implements
         ComponentContainer {
 
     private SimpleNavView[] views;
     private Button fullScreen;
-	static Application app;
+    static Application app;
+    private Button notRelative;
 
     public NavPanelTestWithViews() {
 
@@ -106,13 +108,26 @@ public class NavPanelTestWithViews extends NavigationManager implements
 
                 }
 
-                popover.showRelativeTo(event.getButton());
+                if (event.getButton() == notRelative) {
+                    Window w = getWindow();
+                    if (w.getParent() != null) {
+                        w = w.getParent();
+                    }
+                    popover.setWidth("50%");
+                    popover.setHeight("100%");
+                    popover.center();
+                    popover.requestRepaint();
+                    w.addWindow(popover);
+                } else {
+                    popover.showRelativeTo(event.getButton());
+                }
 
             }
         };
         final Button button = new Button(
                 "Try me (TouchKit's modal window impl)", listener);
         fullScreen = new Button("Fullscreen modal", listener);
+        notRelative = new Button("Non-relative modal", listener);
 
         CssLayout cssLayout = new CssLayout() {
             @Override
@@ -129,25 +144,26 @@ public class NavPanelTestWithViews extends NavigationManager implements
 
         cssLayout.addComponent(button);
         cssLayout.addComponent(fullScreen);
+        cssLayout.addComponent(notRelative);
 
         testView.setContent(cssLayout);
 
         HorizontalLayout buttons = new HorizontalLayout();
         buttons.setSpacing(true);
         Button b = new Button("Yes");
-        b.setStyleName("green");
-//        buttons.addComponent(b);
+        b.setStyleName("v-tk-greenbg");
+        // buttons.addComponent(b);
         b = new Button("No");
-        b.setStyleName("red");
-//        buttons.addComponent(b);
+        b.setStyleName("v-tk-redbg");
+        // buttons.addComponent(b);
         b = new Button("Ok");
-        b.setStyleName("blue");
-//        buttons.addComponent(b);
+        b.setStyleName("v-tk-bluebg");
+        // buttons.addComponent(b);
 
         HorizontalLayout group = new HorizontalLayout();
         buttons.addComponent(group);
-        group.setStyleName("buttongroup");
-        group.addStyleName("red");
+        group.setStyleName("v-tk-buttongroup");
+        group.addStyleName("v-tk-redbg");
         testView.setRightComponent(buttons);
         Component metoo = new Button("TopRight", listener);
         // metoo.setWidth("40px");
@@ -156,8 +172,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
             public void buttonClick(ClickEvent event) {
                 Popover popover = new Popover();
                 popover.setWidth("360px");
-                ((VerticalLayout) popover.getContent())
-                        .setMargin(false);
+                ((VerticalLayout) popover.getContent()).setMargin(false);
                 // touchKitSubWindow.setHeight("80%");
                 Button b = new Button("Asd");
                 b.setWidth("100%");
@@ -227,7 +242,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
         private Component createActionButton1() {
             Button button = new Button(null, this);
             button.setIcon(new ThemeResource("../runo/icons/64/email.png"));
-            
+
             button.setIcon(new ClassResource("mail.png", app));
             return button;
         }
@@ -304,7 +319,6 @@ public class NavPanelTestWithViews extends NavigationManager implements
             label.setStyleName("grey-title");
             cssLayout.addComponent(label);
 
-            
             ComponentGroup optionLayout2 = new ComponentGroup();
             FormLayout formLayout = new FormLayout();
             formLayout.setSpacing(false);

@@ -49,13 +49,13 @@ public class VTouchKitWindow extends VWindow {
         setShadowEnabled(false);
         if (fullscreen) {
             // fullscreen window
-            style += " v-tk-popover fullscreen";
+            style += " v-tk-popover v-tk-fullscreen";
         } else if (relComponentId != null) {
             // real popover (black)
-            style += " v-tk-popover relative";
+            style += " v-tk-popover v-tk-relative";
         } else {
             // regular (white)
-            style += " v-tk-popover plain";
+            style += " v-tk-popover v-tk-plain";
         }
         super.setStyleName(style);
     }

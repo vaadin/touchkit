@@ -47,7 +47,7 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
 		BlurHandler {
 
 	/** Set the CSS class name to allow styling. */
-	public static final String CLASSNAME = "v-switch";
+	public static final String CLASSNAME = "v-tk-switch";
 	private final int DRAG_THRESHOLD_PIXELS = 10;
 	private final int ANIMATION_DURATION_MS = 300;
 

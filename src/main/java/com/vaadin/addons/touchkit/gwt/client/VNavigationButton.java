@@ -12,7 +12,7 @@ import com.vaadin.terminal.gwt.client.UIDL;
 import com.vaadin.terminal.gwt.client.ui.Icon;
 
 public class VNavigationButton extends HTML implements Paintable {
-	private static final String NAVBUTTON_CLASSNAME = "v-navbutton";
+	private static final String NAVBUTTON_CLASSNAME = "v-tk-navbutton";
 	private String nextViewId;
 	private ApplicationConnection client;
 	private String caption;

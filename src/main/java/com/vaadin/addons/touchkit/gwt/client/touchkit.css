@@ -15,36 +15,36 @@
 	font-size: 14px;
 }
 
-.v-touchkit-view .v-button,
-.v-touchkit-view .v-button-wrap,
+.v-tk-view .v-button,
+.v-tk-view .v-button-wrap,
 .v-tk-popover .v-button,
 .v-tk-popover .v-button-wrap {
 	background-image: none !important;
 	padding:0 5px;
 }
 
-.v-touchkit-view .v-button,
+.v-tk-view .v-button,
 .v-tk-popover .v-button {
 	height: auto;
 }
-.v-touchkit-view .v-button .v-button-wrap,
+.v-tk-view .v-button .v-button-wrap,
 .v-tk-popover .v-button .v-button-wrap {
 	height: 30px;
 }
-.v-navbar .v-button .v-button-wrap,
-.v-toolbar .v-button .v-button-wrap {
+.v-tk-navbar .v-button .v-button-wrap,
+.v-tk-toolbar .v-button .v-button-wrap {
 	height: auto;
 }
 
-.v-touchkit-view .v-button:active .v-button-caption,
+.v-tk-view .v-button:active .v-button-caption,
 .v-tk-popover .v-button .v-button-caption {
 	text-shadow: 0 0 15px #fff;
 }
 
 /* TODO rename this: */
 @url navbaractionimage navBarActionImage ;
-.buttongroup,
-.v-touchkit-view .v-button,
+.v-tk-buttongroup,
+.v-tk-view .v-button,
 .v-tk-popover .v-button  {
 	-webkit-border-image: navbaractionimage 10;
 	border-width: 5px;
@@ -52,23 +52,23 @@
 	background-color:white;
 }
 
-.v-navbar .v-button,
-.v-navbar .buttongroup {
+.v-tk-navbar .v-button,
+.v-tk-navbar .v-tk-buttongroup {
 	background-color: rgb(91, 128, 171);
 }
 
-.v-touchkit-view .v-button-caption,
+.v-tk-view .v-button-caption,
 .v-tk-popover .v-button-caption {
 	font-size: 16px;
 	line-height: 30px;
 }
 
-.v-navpanel {
+.v-tk-navpanel {
 	position: relative;
 	overflow: hidden;
 }
 
-.v-navpanel-wrapper {
+.v-tk-navpanel-wrapper {
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -78,8 +78,8 @@
 
 @url backgroundStripes backgroundStripesImage ;
 
-.v-navpanel-container, 
-.v-tk-popover.v-tk-popover-fullscreen .v-navpanel-container {
+.v-tk-navpanel-container, 
+.v-tk-popover.v-tk-fullscreen .v-tk-navpanel-container {
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -89,16 +89,16 @@
 	-webkit-transition: opacity 0.15s linear;
 }
 
-.v-navpanel-placeholder, 
-.v-tk-popover.v-tk-popover-fullscreen .v-navpanel-placeholder  {
+.v-tk-navpanel-placeholder, 
+.v-tk-popover.v-tk-fullscreen .v-tk-navpanel-placeholder  {
 	position: absolute;
 	width: 100%;
 	height: 100%;
 	background: backgroundStripes;
 }
 
-.v-navpanel-placeholder>div,
-.v-tk-popover.v-tk-popover-fullscreen .v-navpanel-placeholder>div {
+.v-tk-navpanel-placeholder>div,
+.v-tk-popover.v-tk-fullscreen .v-tk-navpanel-placeholder>div {
 	display: block;
 	position: absolute;
 	background: toolbarGradient;
@@ -119,11 +119,11 @@
 }
 
 /* TODO giallo for placeholder */
-.v-navpanel-notransit {
+.v-tk-navpanel-notransit {
 	-webkit-transition: none;
 }
 
-.v-navbutton {
+.v-tk-navbutton {
 	-webkit-appearance: none;
 	display:block;
 	position:relative;
@@ -136,13 +136,13 @@
 	padding:0;
 }
 
-.v-navbutton .v-icon {
+.v-tk-navbutton .v-icon {
 	height:30px;
 	margin-right: 5px;
 	vertical-align: middle;
 }
 
-.v-navbutton-desc {
+.v-tk-navbutton-desc {
 	color: #6e84a1;
 	font-weight: normal;
 	position: absolute;
@@ -151,7 +151,7 @@
 }
 
 /* Borders backgrounds etc. for the margin element.*/
-.v-optionlayout>div {
+.v-tk-componentgroup>div {
 	margin:layoutMarginal;
 	border: thinSeparatorLine;
 	border-radius: layoutMarginal;
@@ -159,20 +159,20 @@
 	padding: 0 layoutMarginal;
 }
 
-.v-optionlayout .v-csslayout-container {
+.v-tk-componentgroup .v-csslayout-container {
 	position:relative;	
 }
 
-.v-optionlayout .v-csslayout-container>* {
+.v-tk-componentgroup .v-csslayout-container>* {
 	clear:both;
 }
 
-.v-optionlayout .v-csslayout-container>.tk-has-caption {
+.v-tk-componentgroup .v-csslayout-container>.v-tk-has-caption {
 	clear:right;
 	float:right;
 }
 
-.v-optionlayout>div>.v-csslayout-container>.v-caption {
+.v-tk-componentgroup>div>.v-csslayout-container>.v-caption {
 	float:left;
 	font-weight:bold;
 	font-size:16px;
@@ -180,11 +180,11 @@
 	height:40px;
 }
 
-.v-optionlayout .v-csslayout-container>.v-caption>.v-captiontext {
+.v-tk-componentgroup .v-csslayout-container>.v-caption>.v-captiontext {
 	padding-right:3px;	
 }
 
-.v-optionlayout input.v-textfield {
+.v-tk-componentgroup input.v-textfield {
 	border:0;
 	padding:0 4px;
 	background: transparent;
@@ -197,13 +197,13 @@
 /*
  * Nav buttons are 40px height, make switch as height in option layouts.
  */
-.v-optionlayout .v-switch {
+.v-tk-componentgroup .v-tk-switch {
 	margin-top: 12px;
 	margin-bottom: 8px;
 }
 
 /* Grey lines between component */
-.v-optionlayout .v-csslayout-container>*:before {
+.v-tk-componentgroup .v-csslayout-container>*:before {
 	content: "";
 	display: block;
 	position: absolute;
@@ -215,16 +215,16 @@
 }
 
 /* ...hide from the last */
-.v-optionlayout .v-csslayout-container>*:first-child:before {
+.v-tk-componentgroup .v-csslayout-container>*:first-child:before {
 	display: none;
 }
 
-.v-optionlayout .v-formlayout>table {
+.v-tk-componentgroup .v-formlayout>table {
 	margin-left: negativeLayoutMarginal;
 	margin-right: negativeLayoutMarginal;
 }
 
-.v-optionlayout .v-formlayout-captioncell {
+.v-tk-componentgroup .v-formlayout-captioncell {
 	padding-left:layoutMarginal;
 }
 
@@ -242,7 +242,7 @@
 	border-bottom: none;
 }
 
-.v-navbutton:after {
+.v-tk-navbutton:after {
 	content: ">";
 	position:absolute;
 	right: layoutMarginal;
@@ -253,7 +253,7 @@
 
 @url backButtonUrl backButtonImage ;
 
-.v-navbar-left .v-navbutton {
+.v-tk-navbar-left .v-tk-navbutton {
 	display:inline-block;
 	-webkit-border-image: backButtonUrl 0 9 0 30;
 	border-width: 0 4px 0 13px;
@@ -273,11 +273,11 @@
 	padding-right: 8px;
 	text-align:left;
 }
-.v-navbar-left .v-navbutton:after {
+.v-tk-navbar-left .v-tk-navbutton:after {
 	display:none;	
 }
 
-.v-navbar-left {
+.v-tk-navbar-left {
 	position: absolute;
 	left: 5px;
 	top: 5px;
@@ -285,7 +285,7 @@
 	z-index: 1;
 }
 
-.v-navbar {
+.v-tk-navbar {
 	background: toolbarGradient;
 	color: #515b66;
 	display: block;
@@ -298,7 +298,7 @@
 	border-top: 1px solid #bbb;
 }
 
-.v-navbar-caption {
+.v-tk-navbar-caption {
 	position: absolute;
 	text-align: center;
 	left: 0;
@@ -307,7 +307,7 @@
 	color:white;
 }
 
-.v-navbar-right {
+.v-tk-navbar-right {
 	position: absolute;
 	right: 5px;
 	top: 5px;
@@ -315,31 +315,31 @@
 	max-width: 33%;
 }
 
-.buttongroup .v-button {
+.v-tk-buttongroup .v-button {
 	position: relative;
 	padding: 0;
 	border: 0;
 	background-color: transparent;
 }
 
-.buttongroup .v-button-wrap {
+.v-tk-buttongroup .v-button-wrap {
 	border-left: 1px solid;
 	border-radius: 0;
 }
 
 
 /* For horizontallaoyt that should not be used on mobile devices at all!! */
-.buttongroup > div > div:first-child > div > .v-button .v-button-wrap {
+.v-tk-buttongroup > div > div:first-child > div > .v-button .v-button-wrap {
 	border-left: 0;
 }
 
-.buttongroup > div > div > div:first-child .v-button-wrap {
+.v-tk-buttongroup > div > div > div:first-child .v-button-wrap {
 	border-left: 0;
 }
 
 
 /* TODO unite w/ backbutton rule */
-.v-navbar-right .v-button-caption {
+.v-tk-navbar-right .v-button-caption {
 	font-weight: bold;
 	text-align: center;
 	color: white;
@@ -353,24 +353,24 @@
 	margin-top: 5px;
 }
 
-.v-navbar .v-button .v-icon {
+.v-tk-navbar .v-button .v-icon {
 	height: 20px;
 	margin-right:0;
 }
 
 
-.v-navview-notoolbar .v-navview-tb {
+.v-tk-navview-notoolbar .v-tk-navview-toolbar {
 	display:none;
 }
 
 
 /* NavigationView */
 
-.v-navview {
+.v-tk-navview {
 	position:relative;	
 }
 
-.v-navview-wrapper {
+.v-tk-navview-wrapper {
 	position:absolute;
 	top:42px;
 	bottom:40px;
@@ -378,7 +378,7 @@
 	right:0;	
 	overflow:auto;
 }
-.v-navview-notoolbar .v-navview-wrapper {
+.v-tk-navview-notoolbar .v-tk-navview-wrapper {
 	position:absolute;
 	top:42px;
 	bottom:0px;
@@ -387,11 +387,11 @@
 }
 
 
-.v-toolbar {
+.v-tk-toolbar {
 	background: toolbarGradient;
 }
 
-.v-navview-tb {
+.v-tk-navview-toolbar {
 	position:absolute;
 	height:41px;
 	bottom:0px;
@@ -403,8 +403,8 @@
 }
 
 /* Reset some default button style */
-.v-toolbar .v-button,
-.v-toolbar .v-button-wrap {
+.v-tk-toolbar .v-button,
+.v-tk-toolbar .v-button-wrap {
 	background-image: none !important;
 	background-color: transparent;
 	position:relative;
@@ -413,11 +413,11 @@
 	padding: 0 6px;
 	vertical-align:middle;
 }
-.v-toolbar .v-button {
+.v-tk-toolbar .v-button {
 	display: table-cell;
 }
 
-.v-toolbar .v-button-caption {
+.v-tk-toolbar .v-button-caption {
 	display: block;
 	background-image: none;
 	text-align:center;	
@@ -427,18 +427,18 @@
 	line-height: 12px;
 }
 
-.v-toolbar .v-button .v-icon {
+.v-tk-toolbar .v-button .v-icon {
 	height: 25px;
 	margin:0;
 	padding:0;
 }
 
-.v-navview-notoolbar .v-navview-tb {
+.v-tk-navview-notoolbar .v-tk-navview-toolbar {
 	display:none;
 }
 
 .v-label-grey-title,
-.v-caption-v-optionlayout .v-captiontext {
+.v-caption-v-tk-componentgroup .v-captiontext {
 	font-size:18px;
 	font-weight: bold;
 	color: rgb(76,86,108);
@@ -457,14 +457,14 @@
 
 /* touchkit sub window */
 
-.v-tk-popover.plain {
+.v-tk-popover.v-tk-plain {
 	/* popover that is not relative to component, nor fullscreen - no styling at all */
 	
 }
 
 @url popupImage popupImage;
 @url popupWithToolbarImage popupWithToolbarImage;
-.v-tk-popover.relative .v-window-wrap {
+.v-tk-popover.v-tk-relative .v-window-wrap {
 	/* border-width: 22px 8px 55px 8px;
 	-webkit-border-image: popupImage 22 8 55 8 repeat; */	
 	border-width: 22px 8px 8px 8px;
@@ -483,38 +483,33 @@
 	border-radius: 0;
 }
 
-.v-tk-popover.relative .v-window-contents {
+.v-tk-popover.v-tk-relative .v-window-contents {
 	background: transparent;
 	top: -20px;
 	margin-bottom: -28px;
 	
 	position: relative;
 }
- .v-window-contents {
-	top: 0;
-	left: 0;
-	margin-right: 0;
-	margin-bottom: 0;
-}
 
-.v-tk-popover.relative .v-navpanel-placeholder,
-.v-tk-popover.relative .v-navpanel-placeholder>div {
+.v-tk-popover.v-tk-relative .v-tk-navpanel-placeholder,
+.v-tk-popover.v-tk-relative .v-tk-navpanel-placeholder>div {
 	background: transparent;
 	border-top: 0;
 	border-bottom: 0;
 }
 
-.v-tk-popover.relative .v-window-contents > div > .v-verticallayout .v-verticallayout-margin {
+.v-tk-popover.v-tk-relative .v-window-contents > div > .v-verticallayout .v-verticallayout-margin {
 	padding-top:    7px;
 	padding-bottom: 7px;
 }
 
- .v-window-contents {
+.v-window-contents {
 	top: 0;
+	left: 0;
+	margin-right: 0;
 	margin-bottom: 0;
 	position: block;
 }
-
 
 .v-tk-popover .v-window-closebox,
 .v-tk-popover .v-window-outerheader,
@@ -538,18 +533,18 @@
 	margin-top: 2px;
 }
 
-.v-tk-popover.relative .v-navpanel-container {
+.v-tk-popover.v-tk-relative .v-tk-navpanel-container {
 	background: transparent;
 }
-.v-tk-popover.relative .v-navbar {
+.v-tk-popover.v-tk-relative .v-tk-navbar {
 	background: transparent;
 	border: 0;
 }
-.v-tk-popover.relative .v-navview-tb {
+.v-tk-popover.v-tk-relative .v-tk-navview-toolbar {
 	border: 0;
 }
 
-.v-tk-popover.relative .v-navview-tb .v-toolbar {
+.v-tk-popover.v-tk-relative .v-tk-navview-toolbar .v-tk-toolbar {
 	background: toolbarPopoverGradient;
 }
 
@@ -558,7 +553,7 @@
  * http://css3wizardry.com/2010/09/16/making-an-iphone-switch-control-without-images/
  */
 
-.v-switch {
+.v-tk-switch {
 	width: 81px;
 	height: 20px;
 	overflow: hidden;
@@ -569,15 +564,15 @@
 	-webkit-border-radius: 3px;
 }
 
-@sprite .v-switch-slider {
+@sprite .v-tk-switch-slider {
 	gwt-image: "switchImage";
 	position: absolute;
 	top: 0;
 	left: 0;
 }
 
-.v-switch-focus,
-.v-switch:focus {
+.v-tk-switch-focus,
+.v-tk-switch:focus {
 	outline: none;
 	border-color: #4f83b4 #5b97d0 #5ca0df;
 }
@@ -591,7 +586,7 @@
 	position:relative;	
 }
 
-.v-csslayout-touchkit-tabsbelow .v-toolbar  {
+.v-csslayout-touchkit-tabsbelow .v-tk-toolbar  {
 	position:absolute;
 	bottom:0;
 	height:46px;
@@ -609,24 +604,27 @@
 	border-radius: 4px;
 }
 
-.v-navbar .v-button-no-decoration {
+.v-tk-navbar .v-button-no-decoration {
 	background: transparent;
 	-webkit-border-image: none;
 	border: none;
 }
 
-.v-navbar .v-button-no-decoration .v-button-wrap {
+.v-tk-navbar .v-button-no-decoration .v-button-wrap {
 	border: none;
 	-webkit-border-image: none;
 	background: transparent;
 }
 
-.red {
+/* General styles */
+
+/* button coloring: */
+.v-tk-redbg {
 	background-color: red !important;
 }
-.blue {
+.v-tk-bluebg {
 	background-color: blue !important;
 }
-.green {
+.v-tk-greenbg {
 	background-color: green !important;
 }

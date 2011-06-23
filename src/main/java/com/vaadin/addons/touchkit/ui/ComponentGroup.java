@@ -17,7 +17,7 @@ import com.vaadin.ui.CssLayout;
 public class ComponentGroup extends CssLayout {
 
     public ComponentGroup() {
-        setStyleName("v-optionlayout");
+        setStyleName("v-tk-componentgroup");
         setWidth("100%");
     }
 

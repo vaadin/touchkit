@@ -21,9 +21,9 @@ import com.vaadin.terminal.gwt.client.VConsole;
 
 public class VNavigationPanel extends ComplexPanel implements Container {
 
-    private static final String CONTAINER_CLASSNAME = "v-navpanel-container";
-    private static final String WRAPPER_CLASSNAME = "v-navpanel-wrapper";
-    private static final String CLASSNAME = "v-navpanel";
+    private static final String CONTAINER_CLASSNAME = "v-tk-navpanel-container";
+    private static final String WRAPPER_CLASSNAME = "v-tk-navpanel-wrapper";
+    private static final String CLASSNAME = "v-tk-navpanel";
     private ApplicationConnection client;
     private Paintable currentView;
     private Paintable prevView;

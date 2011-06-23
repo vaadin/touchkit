@@ -16,13 +16,13 @@ public class VOptionLayout extends VCssLayout {
 
     @Override
     public void setStyleName(String style) {
-        super.setStyleName(style + " v-optionlayout");
+        super.setStyleName(style + " v-tk-componentgroup");
     }
 
     @Override
     public void updateCaption(Paintable component, UIDL uidl) {
         super.updateCaption(component, uidl);
-        ((Widget) component).setStyleName("tk-has-caption",
+        ((Widget) component).setStyleName("v-tk-has-caption",
                 VCaption.isNeeded(uidl));
     }
 

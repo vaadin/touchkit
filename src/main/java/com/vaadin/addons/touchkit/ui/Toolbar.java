@@ -16,7 +16,7 @@ import com.vaadin.ui.HorizontalLayout;
  */
 public class Toolbar extends HorizontalLayout {
 
-	private static final String STYLENAME = "v-toolbar";
+	private static final String STYLENAME = "v-tk-toolbar";
 
 	public Toolbar() {
 		setMargin(false);

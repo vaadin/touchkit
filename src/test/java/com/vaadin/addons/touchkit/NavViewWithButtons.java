@@ -14,7 +14,7 @@ class NavViewWithButtons extends NavigationView implements ClickListener {
         setCaption("Test buttons");
 
         CssLayout cssLayout = new CssLayout();
-        cssLayout.setStyleName("buttongroup");
+        cssLayout.setStyleName("v-tk-buttongroup");
 
         Button button = new Button(null, this);
         button.setIcon(new ClassResource("mail.png", NavPanelTestWithViews.app));

@@ -11,7 +11,7 @@ public class VTouchKitView extends VView {
 
     @Override
     public void setStyleName(String style) {
-        super.setStyleName(style + " v-touchkit-view");
+        super.setStyleName(style + " v-tk-view");
     }
 
     @Override

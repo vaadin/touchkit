@@ -26,7 +26,7 @@ public class VTabsheet extends VCssLayout {
 			Iterator<Widget> iterator = p.iterator();
 			while(iterator.hasNext()) {
 				Widget next = iterator.next();
-				if(next.getStyleName().contains("v-toolbar")) {
+				if(next.getStyleName().contains("v-tk-toolbar")) {
 					tabbarheight  = next.getOffsetHeight();
 					break;
 				}

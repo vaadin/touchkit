@@ -15,7 +15,7 @@ import com.vaadin.terminal.gwt.client.UIDL;
 
 public class VNavigationBar extends ComplexPanel implements Container {
 
-    private static final String CLASSNAME = "v-navbar";
+    private static final String CLASSNAME = "v-tk-navbar";
     private ApplicationConnection client;
     private DivElement caption = Document.get().createDivElement();
     private DivElement rightComponentElement = Document.get().createDivElement();
