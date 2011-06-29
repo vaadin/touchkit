@@ -339,7 +339,7 @@
 
 
 /* TODO unite w/ backbutton rule */
-.v-tk-navbar-right .v-button-caption {
+.v-tk-navbar .v-button-caption {
 	font-weight: bold;
 	text-align: center;
 	color: white;
