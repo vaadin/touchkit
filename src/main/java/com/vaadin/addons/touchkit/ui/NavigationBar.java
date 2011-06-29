@@ -11,8 +11,14 @@ import com.vaadin.ui.ClientWidget;
 import com.vaadin.ui.Component;
 
 /**
- * A native looking navigation bar that contains an xhtml caption in the middle
- * and component areas (most commonly for buttons) on the left and right.
+ * A navigation bar that contains an XHTML caption in the middle and component
+ * areas (most commonly for buttons) on the left and right. A back-button is
+ * automatically shown if a <code>previousView</code> is available.
+ * <p>
+ * Ususally used in a {@link NavigationView}.
+ * </p>
+ * 
+ * @see NavigationView
  */
 @ClientWidget(VNavigationBar.class)
 public class NavigationBar extends AbstractComponentContainer {
@@ -65,6 +71,12 @@ public class NavigationBar extends AbstractComponentContainer {
         requestRepaint();
     }
 
+    /**
+     * Sets which view (component) will be navigated to when the back-button is
+     * pressed.
+     * 
+     * @param component
+     */
     public void setPreviousView(Component component) {
         getBackButton().setTargetView(component);
         if (getBackButton().getParent() == null) {
@@ -73,6 +85,13 @@ public class NavigationBar extends AbstractComponentContainer {
         getBackButton().setVisible(component != null);
     }
 
+    /**
+     * Get the previousView that will be navigated to when the back-button is
+     * pressed.
+     * 
+     * @return the previousView or null if n/a
+     * @see #setPreviousView(Component)
+     */
     public Component getPreviousView() {
         return getBackButton().getTargetView();
     }
