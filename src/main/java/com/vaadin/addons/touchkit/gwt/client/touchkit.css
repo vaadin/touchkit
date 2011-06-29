@@ -18,7 +18,11 @@
 .v-tk-view .v-button,
 .v-tk-view .v-button-wrap,
 .v-tk-popover .v-button,
-.v-tk-popover .v-button-wrap {
+.v-tk-popover .v-button-wrap,
+.v-tk-view .v-disabled.v-button,
+.v-tk-view .v-disabled.v-button .v-button-wrap,
+.v-tk-popover .v-disabled.v-button,
+.v-tk-popover .v-disabled.v-button .v-button-wrap {
 	background-image: none !important;
 	padding:0 5px;
 }
@@ -315,20 +319,22 @@
 	max-width: 33%;
 }
 
-.v-tk-componentgroup-h .v-button {
+.v-tk-componentgroup-h .v-button,
+.v-tk-componentgroup-h .v-disabled.v-button {
 	position: relative;
 	padding: 0;
 	border: 0;
 	background-color: transparent;
 }
 
-.v-tk-componentgroup-h .v-button-wrap {
+.v-tk-componentgroup-h .v-button-wrap,
+.v-tk-componentgroup-h .v-disabled.v-button .v-button-wrap {
 	border-left: 1px solid;
 	border-radius: 0;
 }
 
 .v-tk-componentgroup-h > div > div > div:first-child .v-button-wrap {
-	border-left: 0;
+	border-left: 0 !important; /* override .v-disabled.v-button selector */ 
 }
 
 
@@ -383,6 +389,9 @@
 
 .v-tk-toolbar {
 	background: toolbarGradient;
+	/* Text by default white with shadow */ 
+	color:white;
+	text-shadow: 0px 1px 0px #222;
 }
 
 .v-tk-navview-toolbar {
