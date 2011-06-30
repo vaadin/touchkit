@@ -5,27 +5,50 @@ import com.vaadin.data.Property;
 import com.vaadin.ui.ClientWidget;
 import com.vaadin.ui.TextField;
 
+/**
+ * A {@link TextField} that is intended for numerical input.
+ * <p>
+ * Modern browsers and devices provide a better interface for entering numbers
+ * when this field is used. This is especially important for touch devices that
+ * can provide a on-screen keyboard customized for numerical input.
+ * </p>
+ */
 @ClientWidget(VNumberField.class)
 public class NumberField extends TextField {
 
-	public NumberField() {
-		super();
-	}
+    /**
+     * @see TextField#TextField()
+     */
+    public NumberField() {
+        super();
+    }
 
-	public NumberField(Property dataSource) {
-		super(dataSource);
-	}
+    /**
+     * @see TextField#TextField(Property)
+     */
+    public NumberField(Property dataSource) {
+        super(dataSource);
+    }
 
-	public NumberField(String caption, Property dataSource) {
-		super(caption, dataSource);
-	}
+    /**
+     * @see TextField#TextField(String, Property)
+     */
+    public NumberField(String caption, Property dataSource) {
+        super(caption, dataSource);
+    }
 
-	public NumberField(String caption, String value) {
-		super(caption, value);
-	}
+    /**
+     * @see TextField#TextField(String, String)
+     */
+    public NumberField(String caption, String value) {
+        super(caption, value);
+    }
 
-	public NumberField(String caption) {
-		super(caption);
-	}
+    /**
+     * @see TextField#TextField(String)
+     */
+    public NumberField(String caption) {
+        super(caption);
+    }
 
 }
