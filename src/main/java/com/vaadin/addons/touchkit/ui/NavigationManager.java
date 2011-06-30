@@ -12,174 +12,244 @@ import com.vaadin.ui.ClientWidget;
 import com.vaadin.ui.Component;
 
 /**
- * Support all components, but back buttons are updated automatically only for
- * {@link NavigationView}s.
+ * A non-visible component container that allows for smooth navigation between
+ * components, or views. It support all components, but back buttons are updated
+ * automatically only for {@link NavigationView}s.
  * <p>
- * TODO deprecate + throw on component container mutation methods.
+ * When a component is navigated to, it replaces the currently visible
+ * component, which in turn is pushed on to the stack of previous views. One can
+ * navigate backwards by calling {@link #navigateBack()}, in which case the
+ * currently visible view is forgotten and the previous view is restored from
+ * the stack and made visible.
  * <p>
- * TODO make automatic breakcrump configurable, developers might want to release
- * previous views from memory and handle back navigation by themselves. E.g.
- * keep only one view backwards in memory and reload older ones if necessary.
- * 
+ * When used with @link {@link NavigationView}s, @link {@link NavigationBar}s
+ * and @link {@link NavigationButton}s, navigation is smooth and quite
+ * automatic.
+ * <p>
  */
 @ClientWidget(VNavigationManager.class)
 public class NavigationManager extends AbstractComponentContainer {
+    /*-
+    TODO deprecate + throw on component container mutation methods.
+    
+    TODO make automatic viewStack configurable, developers might want to release
+    previous views from memory and handle back navigation by themselves. E.g.
+    keep only one view backwards in memory and reload older ones if necessary.
+    -*/
 
-	private Stack<Component> breadCrump = new Stack<Component>();
+    /*
+     * Implementation notes
+     * 
+     * Actually has three 'active' components: previous, current and next. The
+     * previous component is actually pushed onto the viewStack only when
+     * natigateTo() pushes everything down. I.e setPreviousComponent() actually
+     * replaces the previous component before it's pushed onto the stack. In
+     * javadoc, this is simplified to ignore implementation details, instead
+     * pretending the previous component is topmost on the 'history'.
+     */
 
-	private Component currentComponent;
-	private Component previousComponent;
-	private Component nextComponent;
+    private Stack<Component> viewStack = new Stack<Component>();
 
-	public NavigationManager() {
-		setSizeFull();
-	}
+    private Component currentComponent;
+    private Component previousComponent;
+    private Component nextComponent;
 
-	public void navigateTo(Component c) {
-		if (c == null) {
-			throw new UnsupportedOperationException(
-					"Some component must always be visible in navigation panel");
-		} else if (c == currentComponent) {
-			/*
-			 * Already nagigated to this component.
-			 */
-			return;
-		} else if (previousComponent == c) {
-			/*
-			 * Same as navigateBack
-			 */
-			navigateBack();
-			return;
-		}
+    /**
+     * Constructs a {@link NavigationManager} that is 100% wide and high.
+     */
+    public NavigationManager() {
+        setSizeFull();
+    }
 
-		if (nextComponent != c) {
-			if (nextComponent != null) {
-				removeComponent(nextComponent);
-			}
-			addComponent(c);
-			if (c instanceof NavigationView) {
-				NavigationView view = (NavigationView) c;
-				if (view.getPreviousComponent() == null) {
-					view.setPreviousComponent(currentComponent);
-				}
-			}
-		} else {
-			nextComponent = null;
-		}
-		if (previousComponent != null) {
-			removeComponent(previousComponent);
-			breadCrump.push(previousComponent);
-		}
-		previousComponent = currentComponent;
-		currentComponent = c;
-		notifyViewOfBecomingVisible();
-		requestRepaint();
-	}
+    /**
+     * Navigates to the given component, effectively making it the new visible
+     * component. If the given component is actually the previous component in
+     * the history, {@link #navigateBack()} is performed, otherwise the replaced
+     * view (previously visible) is pushed onto the history.
+     * 
+     * @param c
+     *            the view to navigate to
+     */
+    public void navigateTo(Component c) {
+        if (c == null) {
+            throw new UnsupportedOperationException(
+                    "Some component must always be visible");
+        } else if (c == currentComponent) {
+            /*
+             * Already navigated to this component.
+             */
+            return;
+        } else if (previousComponent == c) {
+            /*
+             * Same as navigateBack
+             */
+            navigateBack();
+            return;
+        }
 
-	private void notifyViewOfBecomingVisible() {
-		if (currentComponent instanceof NavigationView) {
-			NavigationView v = (NavigationView) currentComponent;
-			v.onBecomingVisible();
-			/*
-			 * TODO consider forcing setting the previous component here.
-			 */
-		}
+        if (nextComponent != c) {
+            if (nextComponent != null) {
+                removeComponent(nextComponent);
+            }
+            addComponent(c);
+            if (c instanceof NavigationView) {
+                NavigationView view = (NavigationView) c;
+                if (view.getPreviousComponent() == null) {
+                    view.setPreviousComponent(currentComponent);
+                }
+            }
+        } else {
+            nextComponent = null;
+        }
+        if (previousComponent != null) {
+            removeComponent(previousComponent);
+            viewStack.push(previousComponent);
+        }
+        previousComponent = currentComponent;
+        currentComponent = c;
+        notifyViewOfBecomingVisible();
+        requestRepaint();
+    }
 
-	}
+    private void notifyViewOfBecomingVisible() {
+        if (currentComponent instanceof NavigationView) {
+            NavigationView v = (NavigationView) currentComponent;
+            v.onBecomingVisible();
+            /*
+             * TODO consider forcing setting the previous component here.
+             */
+        }
 
-	public void navigateBack() {
-		if (previousComponent == null) {
-			return;
-		}
-		if (nextComponent != null) {
-			removeComponent(nextComponent);
-		}
-		nextComponent = currentComponent;
-		currentComponent = previousComponent;
-		previousComponent = breadCrump.isEmpty() ? null : breadCrump.pop();
-		if (previousComponent != null) {
-			addComponent(previousComponent);
-		}
-		notifyViewOfBecomingVisible();
-		requestRepaint();
-	}
+    }
 
-	public void setCurrentComponent(Component currentComponent) {
-		navigateTo(currentComponent);
-	}
+    /**
+     * Makes the previous component in the history visible, replacing (nad
+     * essentially forgetting) the component that was previously visible.
+     */
+    public void navigateBack() {
+        if (previousComponent == null) {
+            return;
+        }
+        if (nextComponent != null) {
+            removeComponent(nextComponent);
+        }
+        // nextComponent is kept for the animation and in case the user
+        // navigates 'back to the future':
+        nextComponent = currentComponent;
+        currentComponent = previousComponent;
+        previousComponent = viewStack.isEmpty() ? null : viewStack.pop();
+        if (previousComponent != null) {
+            addComponent(previousComponent);
+        }
+        notifyViewOfBecomingVisible();
+        requestRepaint();
+    }
 
-	public Component getCurrentComponent() {
-		return currentComponent;
-	}
+    /*- TODO should _replace_ currentComponent as setPreviousComponent(), or be renamed.
+    public void setCurrentComponent(Component currentComponent) {
+        // navigateTo(currentComponent); <- not so good
+    }
+    -*/
 
-	public void setPreviousComponent(Component newPreviousComponent) {
-		if (previousComponent != newPreviousComponent) {
-			if (previousComponent != null) {
-				removeComponent(newPreviousComponent);
-			}
-			previousComponent = newPreviousComponent;
-			if (currentComponent instanceof NavigationView) {
-				NavigationView view = (NavigationView) currentComponent;
-				view.setPreviousComponent(newPreviousComponent);
-			}
-			addComponent(previousComponent);
-			requestRepaint();
-		}
-	}
+    /**
+     * Returns the currently visible component.
+     * 
+     * @return the component that is currently visible
+     */
+    public Component getCurrentComponent() {
+        return currentComponent;
+    }
 
-	public Component getPreviousComponent() {
-		return previousComponent;
-	}
+    /**
+     * Replaces the topmost component in the history, forgetting the replaced
+     * component - i.e modifies the history.
+     * 
+     * @param newPreviousComponent
+     */
+    public void setPreviousComponent(Component newPreviousComponent) {
+        if (previousComponent != newPreviousComponent) {
+            if (previousComponent != null) {
+                removeComponent(previousComponent);
+            }
+            previousComponent = newPreviousComponent;
+            if (currentComponent instanceof NavigationView) {
+                NavigationView view = (NavigationView) currentComponent;
+                view.setPreviousComponent(newPreviousComponent);
+            }
+            addComponent(newPreviousComponent);
+            requestRepaint();
+        }
+    }
 
-	/**
-	 * If the developer know the next component where user is going to navigate,
-	 * it can be set with this method. Having a null as nextComponent shows a
-	 * placeholder content until the next view is rendered.
-	 */
-	public void setNextComponent(Component nextComponent) {
-		this.nextComponent = nextComponent;
-		requestRepaint();
-	}
+    /**
+     * Gets the previous component from the history.
+     * 
+     * @return the previous component, or null if n/a
+     */
+    public Component getPreviousComponent() {
+        return previousComponent;
+    }
 
-	public Component getNextComponent() {
-		return nextComponent;
-	}
+    /**
+     * If the developer knows the next component where user is going to
+     * navigate, it can be set with this method. This might allow the component
+     * to be pre-rendered before the actual navigation (and animation) occurs.
+     * Having a null as nextComponent shows a placeholder content until the next
+     * view is rendered.
+     */
+    public void setNextComponent(Component nextComponent) {
+        this.nextComponent = nextComponent;
+        requestRepaint();
+    }
 
-	public void replaceComponent(Component oldComponent, Component newComponent) {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * Gets the next component, if one is set.
+     * 
+     * @see #setNextComponent(Component)
+     * @return the next component, or null id n/a
+     */
+    public Component getNextComponent() {
+        return nextComponent;
+    }
 
-	@Override
-	public void paintContent(PaintTarget target) throws PaintException {
-		super.paintContent(target);
-		if (currentComponent != null) {
-			target.addAttribute("c", currentComponent);
-		}
-		if (nextComponent != null) {
-			target.addAttribute("n", nextComponent);
-		}
-		if (previousComponent != null) {
-			target.addAttribute("p", previousComponent);
-		}
-		Iterator<Component> componentIterator = getComponentIterator();
-		while (componentIterator.hasNext()) {
-			Component next = componentIterator.next();
-			next.paint(target);
-		}
-	}
+    /**
+     * This operation is not supported
+     */
+    public void replaceComponent(Component oldComponent, Component newComponent) {
+        throw new UnsupportedOperationException();
+    }
 
-	public Iterator<Component> getComponentIterator() {
-		ArrayList<Component> components = new ArrayList<Component>(3);
-		if (previousComponent != null) {
-			components.add(previousComponent);
-		}
-		if (currentComponent != null) {
-			components.add(currentComponent);
-		}
-		if (nextComponent != null) {
-			components.add(nextComponent);
-		}
-		return components.iterator();
-	}
+    @Override
+    public void paintContent(PaintTarget target) throws PaintException {
+        super.paintContent(target);
+        if (currentComponent != null) {
+            target.addAttribute("c", currentComponent);
+        }
+        if (nextComponent != null) {
+            target.addAttribute("n", nextComponent);
+        }
+        if (previousComponent != null) {
+            target.addAttribute("p", previousComponent);
+        }
+        Iterator<Component> componentIterator = getComponentIterator();
+        while (componentIterator.hasNext()) {
+            Component next = componentIterator.next();
+            next.paint(target);
+        }
+    }
+
+    public Iterator<Component> getComponentIterator() {
+        ArrayList<Component> components = new ArrayList<Component>(3);
+        if (previousComponent != null) {
+            components.add(previousComponent);
+        }
+        if (currentComponent != null) {
+            components.add(currentComponent);
+        }
+        if (nextComponent != null) {
+            components.add(nextComponent);
+        }
+        return components.iterator();
+    }
 
 }
