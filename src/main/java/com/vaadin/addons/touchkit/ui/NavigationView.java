@@ -12,14 +12,18 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 
 /**
- * A layout consisting of a NavigationBar and content area. The content area is
- * scrollable (no need to use Panel in it). NavigatioView is most commonly used
- * in {@link NavigationManager} which provides smooth forwared/back animations.
+ * A component container which integrates well with the
+ * {@link NavigationManager}, and consists of a {@link NavigationBar}, a content
+ * area, and optionally a {@link Toolbar}.
+ * <p>
+ * The content area is scrollable (i.e. no need to use a Panel in it).
+ * {@link NavigationView} is most commonly used with {@link NavigationManager}
+ * which provides smooth forward/back animations.
  * <p>
  * In addition to the main content area (set with {@link #setContent(Component)}
- * method), {@link NavigationView} can contain a secondary component that is by
+ * ), {@link NavigationView} can contain a secondary component that is by
  * default positioned at the bottom of the layout. The secondary content is set
- * with setToolbarComponent most often contains a Toolbar.
+ * with {@link #setToolbar(Component)}, and is usually a {@link Toolbar}.
  * 
  */
 @ClientWidget(VNavigationView.class)
@@ -29,6 +33,11 @@ public class NavigationView extends AbstractComponentContainer {
     private Component mainComponent;
     private Component toolbar;
 
+    /**
+     * Creates a {@link NavigationView} with the given content.
+     * 
+     * @param content
+     */
     public NavigationView(Component content) {
         setSizeFull();
         mainComponent = content;
@@ -36,20 +45,42 @@ public class NavigationView extends AbstractComponentContainer {
         super.addComponent(getNavigationBar());
     }
 
+    /**
+     * Creates a {@link NavigationView} with an empty {@link CssLayout} as
+     * content.
+     */
     public NavigationView() {
         this(new CssLayout());
     }
 
+    /**
+     * Creates a {@link NavigationView} with the given caption and an empty
+     * {@link CssLayout} as content.
+     * 
+     * @param captionHtml
+     */
     public NavigationView(String captionHtml) {
         this();
         setCaption(captionHtml);
     }
-    
+
+    /**
+     * Creates a {@link NavigationView} with the given caption and content.
+     * 
+     * @param captionHtml
+     * @param content
+     */
     public NavigationView(String captionHtml, Component content) {
-    	this(content);
-    	setCaption(captionHtml);
+        this(content);
+        setCaption(captionHtml);
     }
 
+    /**
+     * Sets the main content. If nulled, an empty {@link CssLayout} will be set
+     * as content.
+     * 
+     * @param c
+     */
     public void setContent(Component c) {
         if (mainComponent == c) {
             return;
@@ -64,6 +95,11 @@ public class NavigationView extends AbstractComponentContainer {
         mainComponent = c;
     }
 
+    /**
+     * Gets the component currently set as content.
+     * 
+     * @return
+     */
     public Component getContent() {
         return mainComponent;
     }
@@ -77,25 +113,39 @@ public class NavigationView extends AbstractComponentContainer {
         setContent(c);
     }
 
+    /**
+     * The toolbar or content can be removed - other attempts will result in an
+     * {@link IllegalArgumentException}. If the content is removed, an empty
+     * {@link CssLayout} is set as content.
+     */
     @Override
     public void removeComponent(Component c) {
         if (c == toolbar) {
             super.removeComponent(c);
             toolbar = null;
-        } else if(c == mainComponent) {
-        	setContent(null);
+        } else if (c == mainComponent) {
+            setContent(null);
         } else {
             throw new IllegalArgumentException(
-                    " Only main toolbar can be removed from NavigationView");
+                    " Only the toolbar or main content can be removed");
         }
     }
 
+    /**
+     * Removes the toolbar, and the current content (setting the content to an
+     * empty {@link CssLayout}).
+     */
     @Override
     public void removeAllComponents() {
         removeComponent(mainComponent);
         removeComponent(toolbar);
     }
 
+    /**
+     * Gets the {@link NavigationBar}
+     * 
+     * @return
+     */
     public NavigationBar getNavigationBar() {
         return navigationBar;
     }
@@ -119,10 +169,16 @@ public class NavigationView extends AbstractComponentContainer {
         getNavigationBar().setLeftComponent(c);
     }
 
+    /**
+     * @see NavigationBar#getPreviousView()
+     */
     public Component getPreviousComponent() {
         return getNavigationBar().getPreviousView();
     }
 
+    /**
+     * @see NavigationBar#setPreviousView(Component)
+     */
     public void setPreviousComponent(Component component) {
         getNavigationBar().setPreviousView(component);
     }
@@ -137,6 +193,10 @@ public class NavigationView extends AbstractComponentContainer {
         return getNavigationBar().getCaption();
     }
 
+    /**
+     * Called by {@link NavigationManager} when the view is about to become
+     * visible.
+     */
     protected void onBecomingVisible() {
         /*
          * Due to limitations with Paintble references in UIDL, reset previous
@@ -148,11 +208,18 @@ public class NavigationView extends AbstractComponentContainer {
         }
     }
 
+    /**
+     * The main content and the toolbar can be replaced - other attempts will
+     * result in an {@link IllegalArgumentException}
+     */
     public void replaceComponent(Component oldComponent, Component newComponent) {
         if (mainComponent == oldComponent) {
             setContent(newComponent);
         } else if (toolbar == oldComponent) {
             setToolbar(newComponent);
+        } else {
+            throw new IllegalArgumentException(
+                    " Only the toolbar or main content can be replaced");
         }
     }
 
@@ -166,6 +233,12 @@ public class NavigationView extends AbstractComponentContainer {
         return linkedList.iterator();
     }
 
+    /**
+     * Sets the toolbar component, usually a {@link Toolbar}. If a previous
+     * toolbar is set, it is removed from the layout and forgotten.
+     * 
+     * @param toolbar
+     */
     public void setToolbar(Component toolbar) {
         if (this.toolbar != null && this.toolbar != toolbar) {
             super.removeComponent(this.toolbar);
