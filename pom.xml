@@ -10,6 +10,10 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<vaadin.version.maven>6.6-SNAPSHOT</vaadin.version.maven>
+		<gwt.version>2.3.0</gwt.version>
+		<snapshot.repository.url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</snapshot.repository.url>
 	</properties>
 
 	<description>Provides a customized servlet and client-server communication for Vaadin to allow cross site embedding an application to a third party domain.</description>
@@ -102,7 +106,7 @@
 	<repositories>
 		<repository>
 			<id>vaadin-snapshots</id>
-			<url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+			<url>${snapshot.repository.url}</url>
 			<releases>
 				<enabled>false</enabled>
 			</releases>
@@ -129,7 +133,7 @@
 		</pluginRepository>
 		<pluginRepository>
 			<id>vaadin-snapshots</id>
-			<url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+			<url>${snapshot.repository.url}</url>
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
@@ -143,14 +147,14 @@
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin</artifactId>
-			<version>6.6-SNAPSHOT</version>
+			<version>${vaadin.version.maven}</version>
 			<!-- <scope>system</scope> <systemPath>/Users/mattitahvonenitmill/Desktop/tmp/vaadin-6.6.0.dev.jar</systemPath> -->
 		</dependency>
 		<!-- This is also used by gwt-maven-plugin to deduce GWT version number. -->
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
-			<version>2.3.0</version>
+			<version>${gwt.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
