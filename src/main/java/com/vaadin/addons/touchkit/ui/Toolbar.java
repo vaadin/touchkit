@@ -5,30 +5,38 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 
 /**
- * A native looking toolbar for e.g. buttons. Button icons will be on top of the
- * caption text and each button shall be equally sized.
- * 
+ * A native looking toolbar, mainly for {@link Button}s. Button icons will be on
+ * top of the caption text and each button shall be equally sized.
  * <p>
- * Impl. note. If we'd want buttons to layout exactly like in ios, we'd need to
- * add spacers between components and expand spacers. Currently space spread
- * equally and components aligned center.
+ * Mostly used with {@link NavigationView}.
  * 
  */
 public class Toolbar extends HorizontalLayout {
 
-	private static final String STYLENAME = "v-tk-toolbar";
+    /*-
+     *  Implementation notes
+     *  
+     * If we'd want buttons to layout exactly like in ios, we'd need to add 
+     * spacers between components and expand spacers. Currently space spread
+     * equally and components aligned center.
+     */
 
-	public Toolbar() {
-		setMargin(false);
-		setStyleName(STYLENAME);
-		setWidth(100,UNITS_PERCENTAGE);
-		setHeight(40, UNITS_PIXELS);
-	}
+    private static final String STYLENAME = "v-tk-toolbar";
 
-	@Override
-	public void addComponent(Component c) {
-		super.addComponent(c);
-		setComponentAlignment(c, Alignment.MIDDLE_CENTER);
-	}
+    /**
+     * By default the Toolbar has no margin, is 100% wide and 40px high.
+     */
+    public Toolbar() {
+        setMargin(false);
+        setStyleName(STYLENAME);
+        setWidth(100, UNITS_PERCENTAGE);
+        setHeight(40, UNITS_PIXELS);
+    }
+
+    @Override
+    public void addComponent(Component c) {
+        super.addComponent(c);
+        setComponentAlignment(c, Alignment.MIDDLE_CENTER);
+    }
 
 }
