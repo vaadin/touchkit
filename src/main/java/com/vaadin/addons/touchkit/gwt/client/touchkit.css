@@ -41,7 +41,7 @@
 }
 
 .v-tk-view .v-button:active .v-button-caption,
-.v-tk-popover .v-button .v-button-caption {
+.v-tk-popover .v-button:active .v-button-caption {
 	text-shadow: 0 0 15px #fff;
 }
 
