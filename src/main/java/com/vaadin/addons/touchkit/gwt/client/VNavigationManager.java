@@ -351,6 +351,7 @@ public class VNavigationManager extends ComplexPanel implements Container {
             wrapper.getStyle().setProperty("webkitTransition", "none");
             currentWrapperPos = 0;
             animateHorizontally(0);
+            transitionPending = false;
             Scheduler.get().scheduleDeferred(new ScheduledCommand() {
                 public void execute() {
                     wrapper.getStyle().setProperty("webkitTransition", "");
@@ -394,8 +395,7 @@ public class VNavigationManager extends ComplexPanel implements Container {
 
             if (!rendering) {
                 if (!transitionPending) {
-                    Scheduler.get().scheduleDeferred(
-                            handleChildSizesAndPositions);
+                    handleChildSizesAndPositions.execute();
                 } else {
                     resizeWhenTransitionDone = true;
                 }
