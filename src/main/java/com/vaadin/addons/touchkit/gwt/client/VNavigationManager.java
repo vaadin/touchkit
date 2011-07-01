@@ -10,6 +10,7 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.terminal.gwt.client.ApplicationConnection;
@@ -29,8 +30,7 @@ public class VNavigationManager extends ComplexPanel implements Container {
     private Paintable prevView;
     private Paintable nextView;
     private DivElement wrapper = Document.get().createDivElement();
-    private UIDL uidl;
-    private ScheduledCommand unregisterOrphaned;
+    private TouchKitApplicationConnection ac;
 
     public VNavigationManager() {
         TouchKitResources.INSTANCE.css().ensureInjected();
@@ -56,18 +56,15 @@ public class VNavigationManager extends ComplexPanel implements Container {
     private void onTransitionEnd() {
         VConsole.log("Trs end");
         transitionPending = false;
-        if (uidl != null) {
-            doUpdate();
-        }
-        if (unregisterOrphaned != null) {
-            unregisterOrphaned.execute();
-        }
+        ac.resumeRendering(this);
+
         if (resizeWhenTransitionDone) {
             Scheduler.get().scheduleDeferred(handleChildSizesAndPositions);
         }
     }
 
     public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
+        ac = (TouchKitApplicationConnection) client;
         rendering = true;
         this.client = client;
         if (client.updateComponent(this, uidl, true)) {
@@ -75,18 +72,10 @@ public class VNavigationManager extends ComplexPanel implements Container {
             return;
         }
 
-        this.uidl = uidl;
-        /*
-         * Postpone rendering if transition is on to avoid flickering.
-         */
-        if (!transitionPending) {
-            doUpdate();
-        } else {
-            VConsole.log("Postponing content update to let animation finish.");
-        }
+        doUpdate(uidl);
     }
 
-    private void doUpdate() {
+    private void doUpdate(UIDL uidl) {
         final ArrayList<Widget> orphanedPaintables = new ArrayList<Widget>();
         for (Widget w : getChildren()) {
             if (w instanceof Paintable) {
@@ -106,7 +95,7 @@ public class VNavigationManager extends ComplexPanel implements Container {
         final Paintable newNext = uidl.getPaintableAttribute("n", client);
         Paintable newCurrent = uidl.getPaintableAttribute("c", client);
         final Paintable newPrev = uidl.getPaintableAttribute("p", client);
-        updatePaintable(newCurrent, getChildUidl(newCurrent));
+        updatePaintable(newCurrent, getChildUidl(newCurrent, uidl));
         if (newCurrent == currentView) {
             /*
              * already at correct position due to NavigationButtonClick -> no
@@ -131,8 +120,8 @@ public class VNavigationManager extends ComplexPanel implements Container {
             slideFromRight(newCurrent);
         }
 
-        final UIDL newNextUidl = getChildUidl(newNext);
-        final UIDL newPrevUidl = getChildUidl(newPrev);
+        final UIDL newNextUidl = getChildUidl(newNext, uidl);
+        final UIDL newPrevUidl = getChildUidl(newPrev, uidl);
         Scheduler.get().scheduleDeferred(new ScheduledCommand() {
             public void execute() {
                 VConsole.log("Updating next and previous...");
@@ -157,20 +146,12 @@ public class VNavigationManager extends ComplexPanel implements Container {
          * is complete.
          */
 
-        unregisterOrphaned = new ScheduledCommand() {
-            public void execute() {
-                for (Widget widget : orphanedPaintables) {
-                    com.google.gwt.dom.client.Element wrapperElement = widget
-                            .getElement().getParentElement();
-                    widget.removeFromParent();
-                    client.unregisterPaintable((Paintable) widget);
-                    wrapper.removeChild(wrapperElement);
-                }
-                unregisterOrphaned = null;
-            }
-        };
-        if (!transitionPending) {
-            unregisterOrphaned.execute();
+        for (Widget widget : orphanedPaintables) {
+            com.google.gwt.dom.client.Element wrapperElement = widget
+                    .getElement().getParentElement();
+            widget.removeFromParent();
+            client.unregisterPaintable((Paintable) widget);
+            wrapper.removeChild(wrapperElement);
         }
 
         uidl = null;
@@ -202,6 +183,7 @@ public class VNavigationManager extends ComplexPanel implements Container {
 
     private void animateHorizontally(final int views) {
         transitionPending = true;
+        ac.suspendRendering(this);
         currentWrapperPos += views;
         Style style = wrapper.getStyle();
         setLeftUsingTranslate3d(style, currentWrapperPos);
@@ -251,7 +233,7 @@ public class VNavigationManager extends ComplexPanel implements Container {
         moveAside(parentElement);
     }
 
-    private UIDL getChildUidl(Paintable p) {
+    private UIDL getChildUidl(Paintable p, UIDL uidl) {
         for (int i = 0; i < uidl.getChildCount(); i++) {
             UIDL childUIDL = uidl.getChildUIDL(i);
             Paintable paintable2 = client.getPaintable(childUIDL);
@@ -398,6 +380,17 @@ public class VNavigationManager extends ComplexPanel implements Container {
                     handleChildSizesAndPositions.execute();
                 } else {
                     resizeWhenTransitionDone = true;
+                    new Timer() {
+
+                        @Override
+                        public void run() {
+                            if (transitionPending) {
+                                VConsole.error("Transition still pending?? Not for real. Must be a bug");
+                                handleChildSizesAndPositions.execute();
+                            }
+                        }
+
+                    }.schedule(1000);
                 }
             }
         }
