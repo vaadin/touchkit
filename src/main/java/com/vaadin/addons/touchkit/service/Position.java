@@ -19,7 +19,10 @@ public class Position {
             String field = split[i];
             String[] split2 = field.split(":");
             String fieldName = split2[0].replaceAll("\"", "");
-            String value = split2[1];
+            String value = null;
+            if(split2.length> 1) {
+            	value = split2[1];
+            }
             keyValue.put(fieldName, value);
         }
 
