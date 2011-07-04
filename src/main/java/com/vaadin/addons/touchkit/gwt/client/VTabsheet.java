@@ -9,30 +9,34 @@ import com.vaadin.terminal.gwt.client.ui.VCssLayout;
 
 public class VTabsheet extends VCssLayout {
 
-	public VTabsheet() {
-		TouchKitResources.INSTANCE.css().ensureInjected();
-	}
-	
-	private int tabbarheight;
+    public static final String CLASSNAME = "v-tk-tabsheet";
 
-	@Override
-	public RenderSpace getAllocatedSpace(Widget child) {
-		return new RenderSpace(getOffsetWidth(), getOffsetHeight() - getTabbarHeight());
-	}
+    public VTabsheet() {
+        setStyleName(CLASSNAME);
+        TouchKitResources.INSTANCE.css().ensureInjected();
+    }
 
-	private int getTabbarHeight() {
-		if(tabbarheight == 0) {
-			HasWidgets p  = (HasWidgets) getWidget();
-			Iterator<Widget> iterator = p.iterator();
-			while(iterator.hasNext()) {
-				Widget next = iterator.next();
-				if(next.getStyleName().contains("v-tk-toolbar")) {
-					tabbarheight  = next.getOffsetHeight();
-					break;
-				}
-			}
-		}
-		return tabbarheight;
-	}
+    private int tabbarheight;
+
+    @Override
+    public RenderSpace getAllocatedSpace(Widget child) {
+        return new RenderSpace(getOffsetWidth(), getOffsetHeight()
+                - getTabbarHeight());
+    }
+
+    private int getTabbarHeight() {
+        if (tabbarheight == 0) {
+            HasWidgets p = (HasWidgets) getWidget();
+            Iterator<Widget> iterator = p.iterator();
+            while (iterator.hasNext()) {
+                Widget next = iterator.next();
+                if (next.getStyleName().contains("v-tk-toolbar")) {
+                    tabbarheight = next.getOffsetHeight();
+                    break;
+                }
+            }
+        }
+        return tabbarheight;
+    }
 
 }

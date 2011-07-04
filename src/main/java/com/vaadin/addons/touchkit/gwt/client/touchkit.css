@@ -583,13 +583,13 @@
 
 /* Tabsheet tabs below */
 
-.v-csslayout-touchkit-tabsbelow .v-csslayout-container,
-.v-csslayout-touchkit-tabsbelow .v-csslayout-margin {
+.v-tk-tabsheet .v-csslayout-container,
+.v-tk-tabsheet .v-csslayout-margin {
 	height:100%;
 	position:relative;	
 }
 
-.v-csslayout-touchkit-tabsbelow .v-tk-toolbar  {
+.v-tk-tabsheet .v-tk-toolbar  {
 	position:absolute;
 	bottom:0;
 	height:46px;
@@ -598,11 +598,11 @@
 	border-top: 1px solid black;
 }
 
-.v-csslayout-touchkit-tabsbelow>div>div>.v-caption {
+.v-tk-tabsheet>div>div>.v-caption {
 	display:none;
 }
 
-.v-csslayout-touchkit-tabsbelow .v-button-selected {
+.v-tk-tabsheet .v-button-selected {
 	background: rgba(255,255,255,0.22);	
 	border-radius: 4px;
 }

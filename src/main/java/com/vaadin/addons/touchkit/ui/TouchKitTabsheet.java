@@ -8,32 +8,45 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.ClientWidget;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
+import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.TabSheet.Tab;
 
 /**
- * A TouchKitTabsheet implementation that mimics native tabsheet in ios. E.g. the tabbar
- * is below the main content.
+ * A tabsheet implementation that mimics the native tabsheet (TabBarView) in e.g
+ * iOS. By default a bar with equally sized tab buttons is shown below the tab
+ * content.
  */
 @ClientWidget(VTabsheet.class)
 public class TouchKitTabsheet extends CssLayout {
 
-    Toolbar tabbar = new Toolbar();
+    private Toolbar tabbar = new Toolbar();
     private Component currentComponent;
 
+    /**
+     * Creates a {@link TouchKitTabsheet} that is 100% wide and high.
+     */
     public TouchKitTabsheet() {
         super();
-        setStyleName("touchkit-tabsbelow");
         setSizeFull();
-        tabbar.addStyleName("tabbar");
         tabbar.setHeight("46px");
         addComponent(tabbar);
     }
 
-    public Tab addTab(Component tab1) {
-        TabButton tabButton = new TabButton(tab1);
+    /**
+     * Adds a new sheet to the {@link TouchKitTabsheet}, and adds a button
+     * representing it to the tab bar.
+     * 
+     * @param tabContent
+     *            the sheet content
+     * @return tab 'meta-data' that can be used to configure the tab further
+     * @see Tab
+     * 
+     */
+    public Tab addTab(Component tabContent) {
+        TabButton tabButton = new TabButton(tabContent);
         tabbar.addComponent(tabButton);
         if (currentComponent == null) {
-            setSelectedTab(tab1);
+            setSelectedTab(tabContent);
         }
         return tabButton;
     }
@@ -58,26 +71,50 @@ public class TouchKitTabsheet extends CssLayout {
 
     }
 
+    /**
+     * Removes the given tab (content and tab-bar button) from the
+     * {@link TabSheet}
+     * 
+     * @param tab
+     */
     public void removeTab(Tab tab) {
         removeComponent(tab.getComponent());
     }
 
-    public void setSelectedTab(Component tab1) {
+    /**
+     * Sets the active tab, i.e. sets the content as currently visible and marks
+     * its button in the tab-bar as active.
+     * 
+     * @param tab
+     *            the content to show
+     */
+    public void setSelectedTab(Component tab) {
         if (currentComponent != null) {
             getTabButton(currentComponent).setSelected(false);
             super.removeComponent(currentComponent);
         }
-        addComponent(tab1);
-        currentComponent = tab1;
+        addComponent(tab);
+        currentComponent = tab;
         getTabButton(currentComponent).setSelected(true);
 
     }
 
-    private TabButton getTabButton(Component tab1) {
+    /**
+     * Sets the active {@link Tab}, i.e. sets the tab content as currently
+     * visible and marks its button in the tab-bar as active.
+     * 
+     * @param tab
+     *            the {@link Tab} to show
+     */
+    public void setSelectedTab(Tab tab) {
+        setSelectedTab(tab.getComponent());
+    }
+
+    private TabButton getTabButton(Component tab) {
         Iterator<Component> componentIterator = tabbar.getComponentIterator();
         while (componentIterator.hasNext()) {
             TabButton next = (TabButton) componentIterator.next();
-            if (next.getComponent() == tab1) {
+            if (next.getComponent() == tab) {
                 return next;
             }
         }
