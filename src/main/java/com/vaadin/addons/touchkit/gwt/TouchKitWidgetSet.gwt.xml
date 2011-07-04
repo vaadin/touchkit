@@ -2,7 +2,7 @@
 	<!-- WS Compiler: manually edited -->
 	<inherits name="com.vaadin.terminal.gwt.DefaultWidgetSet" />
 	<inherits name="com.google.gwt.resources.Resources" />
-
+ 
 	<!-- Developmen time setting to speed up compilation -->
 	<set-configuration-property name="CssResource.style"
 		value="pretty" />
@@ -12,8 +12,11 @@
 		<when-type-is class="com.vaadin.terminal.gwt.client.ui.VView" />
 	</replace-with>
 
-
+	<replace-with class="com.vaadin.addons.touchkit.gwt.client.TouchKitApplicationConnection">
+		<when-type-is class="com.vaadin.terminal.gwt.client.ApplicationConnection" />
+	</replace-with>
+   
 	<!-- Load css etc eagerly to avoid calc errors -->
 	<entry-point class="com.vaadin.addons.touchkit.gwt.client.EagerResourceLoader" />
-	
+	 
 </module>
