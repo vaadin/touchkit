@@ -49,18 +49,31 @@ public abstract class TouchKitApplication extends Application implements
         setMainWindow(new TouchKitWindow());
     }
 
+    /**
+     * Gets the active application instance for this thread. Allows one to do
+     * <code>MyTouchKitApplication.get()</code> to get the application instance
+     * anywhere in the UI code, provided we're in the request/response thread
+     * (using the ThreadLocal pattern).
+     * 
+     * @return the active application instance
+     */
     public static TouchKitApplication get() {
         return activeApplication.get();
     }
 
+    /**
+     * @see WebApplicationContext#getBrowser()
+     */
     public WebBrowser getBrowser() {
         return ((WebApplicationContext) getContext()).getBrowser();
     }
 
     /**
      * UI building should happen when this method is called. At this point all
-     * details in WebBrowser is available. A {@link TouchKitWindow} is set as
-     * the main window.
+     * details in {@link WebBrowser} ({@link #getBrowser()}) is available - i.e
+     * the type of device and screen size is known, allowing for decisions about
+     * which type of UI to show. A {@link TouchKitWindow} is set as the main
+     * window.
      */
     public abstract void onBrowserDetailsReady();
 
@@ -85,6 +98,19 @@ public abstract class TouchKitApplication extends Application implements
         return (TouchKitWindow) super.getWindow(name);
     }
 
+    /**
+     * Performs two tasks:
+     * <ul>
+     * <li>Waits for browser details to become available, then calls
+     * {@link #onBrowserDetailsReady()}.</li>
+     * <li>Sets the active application instance for this thread, allowing it to
+     * be fetched within this reqest/response (or thread, more specifically)
+     * using {@link TouchKitApplication#get()} (ThreadLocal pattern)</li>
+     * </ul>
+     * 
+     * @see com.vaadin.terminal.gwt.server.HttpServletRequestListener#onRequestStart(javax.servlet.http.HttpServletRequest,
+     *      javax.servlet.http.HttpServletResponse)
+     */
     public void onRequestStart(HttpServletRequest request,
             HttpServletResponse response) {
 
@@ -107,6 +133,13 @@ public abstract class TouchKitApplication extends Application implements
         }
     }
 
+    /**
+     * Unsets the active application instance for this thread before the
+     * request/response ends (ThreadLocal pattern)
+     * 
+     * @see com.vaadin.terminal.gwt.server.HttpServletRequestListener#onRequestEnd(javax.servlet.http.HttpServletRequest,
+     *      javax.servlet.http.HttpServletResponse)
+     */
     public void onRequestEnd(HttpServletRequest request,
             HttpServletResponse response) {
         activeApplication.set(null);
