@@ -3,14 +3,12 @@ package com.vaadin.addons.touchkit.gwt.client;
 import java.util.ArrayList;
 import java.util.Set;
 
-import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.Element;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.terminal.gwt.client.ApplicationConnection;
@@ -19,6 +17,7 @@ import com.vaadin.terminal.gwt.client.Paintable;
 import com.vaadin.terminal.gwt.client.RenderSpace;
 import com.vaadin.terminal.gwt.client.UIDL;
 import com.vaadin.terminal.gwt.client.VConsole;
+import com.vaadin.terminal.gwt.client.ui.VLazyExecutor;
 
 public class VNavigationManager extends ComplexPanel implements Container {
 
@@ -56,11 +55,11 @@ public class VNavigationManager extends ComplexPanel implements Container {
     private void onTransitionEnd() {
         VConsole.log("Trs end");
         transitionPending = false;
-        ac.resumeRendering(this);
-
-        if (resizeWhenTransitionDone) {
-            Scheduler.get().scheduleDeferred(handleChildSizesAndPositions);
+        if (pendingWidth != null) {
+            setWidth(pendingWidth);
+            pendingWidth = null;
         }
+        ac.resumeRendering(this);
     }
 
     public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
@@ -73,6 +72,9 @@ public class VNavigationManager extends ComplexPanel implements Container {
         }
 
         doUpdate(uidl);
+
+        verifyPositions.trigger();
+
     }
 
     private void doUpdate(UIDL uidl) {
@@ -101,7 +103,6 @@ public class VNavigationManager extends ComplexPanel implements Container {
              * already at correct position due to NavigationButtonClick -> no
              * transition.
              */
-
         } else if (prevView == newCurrent) {
             /*
              * Back navigation, slide right then ensure positions.
@@ -122,28 +123,14 @@ public class VNavigationManager extends ComplexPanel implements Container {
 
         final UIDL newNextUidl = getChildUidl(newNext, uidl);
         final UIDL newPrevUidl = getChildUidl(newPrev, uidl);
-        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-            public void execute() {
-                VConsole.log("Updating next and previous...");
-                if (newNext != null) {
-                    updatePaintable(newNext, newNextUidl);
-                    setPosition(newNext, -currentWrapperPos + 1);
-                }
-                if (newPrev != null) {
-                    updatePaintable(newPrev, newPrevUidl);
-                    setPosition(newPrev, -currentWrapperPos - 1);
-                }
-                VConsole.log("...done.");
-            }
-        });
 
         currentView = newCurrent;
         nextView = newNext;
         prevView = newPrev;
 
         /*
-         * detach orphaned components. In timer, not to remove before transition
-         * is complete.
+         * Detach orphaned components. Must be eagerly done so that orphaned
+         * components don't send variables anymore.
          */
 
         for (Widget widget : orphanedPaintables) {
@@ -154,9 +141,25 @@ public class VNavigationManager extends ComplexPanel implements Container {
             wrapper.removeChild(wrapperElement);
         }
 
-        uidl = null;
+        if (newNext != null) {
+            updatePaintable(newNext, newNextUidl);
+            setPosition(newNext, -currentWrapperPos + 1);
+        }
+        if (newPrev != null) {
+            updatePaintable(newPrev, newPrevUidl);
+            setPosition(newPrev, -currentWrapperPos - 1);
+        }
+
+        hidePlaceHolder();
+
         rendering = false;
 
+    }
+
+    private void hidePlaceHolder() {
+        if (_placeHolder != null) {
+            moveAside(_placeHolder.getElement());
+        }
     }
 
     private void slideFromLeft() {
@@ -180,13 +183,23 @@ public class VNavigationManager extends ComplexPanel implements Container {
     private boolean transitionPending;
     private boolean rendering;
     private int pixelWidth;
+    private int lastSizeUsedForWrapper;
+    private int lastPixelWidthForPaintable;
 
     private void animateHorizontally(final int views) {
-        transitionPending = true;
-        ac.suspendRendering(this);
+        animateHorizontally(views, true);
+    }
+
+    private void animateHorizontally(final int views, final boolean lockClient) {
+        if (lockClient) {
+            VConsole.log("Locking client until transition has finished");
+            transitionPending = true;
+            ac.suspendRendering(this);
+        }
         currentWrapperPos += views;
-        Style style = wrapper.getStyle();
-        setLeftUsingTranslate3d(style, currentWrapperPos);
+        lastSizeUsedForWrapper = getPixelWidth();
+        setLeftUsingTranslate3d(wrapper.getStyle(), currentWrapperPos);
+
     }
 
     /**
@@ -211,6 +224,7 @@ public class VNavigationManager extends ComplexPanel implements Container {
         if (newView != null) {
             setPosition(((Widget) newView).getElement().getParentElement()
                     .getStyle(), pos);
+            lastPixelWidthForPaintable = getPixelWidth();
         }
     }
 
@@ -225,6 +239,7 @@ public class VNavigationManager extends ComplexPanel implements Container {
 
     private void moveAside(com.google.gwt.dom.client.Element element) {
         element.getStyle().setOpacity(0);
+        element.getStyle().setTop(100, Unit.PCT);
     }
 
     private void moveAside(Paintable p) {
@@ -249,7 +264,6 @@ public class VNavigationManager extends ComplexPanel implements Container {
         if (widgetIndex == -1) {
             // new widget, attach
             add((Widget) paintable, createContainerElement());
-            VConsole.log("Added new component...");
         }
         paintable.updateFromUIDL(childUIDL, client);
 
@@ -292,6 +306,7 @@ public class VNavigationManager extends ComplexPanel implements Container {
             if (paintable != null) {
                 if (paintable == nextView) {
                     animateHorizontally(-1);
+                    prevView = currentView;
                     currentView = paintable;
                     return;
                 } else if (paintable == prevView) {
@@ -299,7 +314,9 @@ public class VNavigationManager extends ComplexPanel implements Container {
                      * Back button.
                      */
                     animateHorizontally(1);
+                    nextView = currentView;
                     currentView = paintable;
+                    prevView = null;
                     return;
                 }
             }
@@ -321,46 +338,49 @@ public class VNavigationManager extends ComplexPanel implements Container {
 
     }
 
-    ScheduledCommand handleChildSizesAndPositions = new ScheduledCommand() {
-        public void execute() {
-            VConsole.log("Set width outside render cycle -> resetting view positions");
-            // update positions. Not set with percentages as ios safari bugs
-            // occasionally with percentages in translate3d.
-
-            /*
-             * Disable animation for while.
-             */
-            wrapper.getStyle().setProperty("webkitTransition", "none");
-            currentWrapperPos = 0;
-            animateHorizontally(0);
-            transitionPending = false;
-            Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-                public void execute() {
-                    wrapper.getStyle().setProperty("webkitTransition", "");
-                }
-            });
-            if (currentView != null) {
-                setPosition(currentView, -currentWrapperPos);
-                client.handleComponentRelativeSize((Widget) currentView);
-            }
-            if (prevView != null) {
-                setPosition(prevView, -currentWrapperPos - 1);
-                client.handleComponentRelativeSize((Widget) prevView);
-            }
-            if (nextView != null) {
-                setPosition(nextView, -currentWrapperPos + 1);
-                client.handleComponentRelativeSize((Widget) nextView);
-            }
-            client.runDescendentsLayout(VNavigationManager.this);
-            resizeWhenTransitionDone = false;
+    private void resetPositionsAndChildSizes() {
+        VConsole.log("handleChildSizesAndPositions");
+        if (lastPixelWidthForPaintable == getPixelWidth()
+                && lastSizeUsedForWrapper == getPixelWidth()) {
+            VConsole.log("No adjustements needed ");
+            return;
         }
-    };
-    private boolean resizeWhenTransitionDone;
+        // update positions. Not set with percentages as ios safari bugs
+        // occasionally with percentages in translate3d.
+
+        /*
+         * Disable animation for while.
+         */
+        wrapper.getStyle().setProperty("webkitTransition", "none");
+        currentWrapperPos = 0;
+        animateHorizontally(0, false);
+        transitionPending = false;
+        if (currentView != null) {
+            setPosition(currentView, -currentWrapperPos);
+            client.handleComponentRelativeSize((Widget) currentView);
+        }
+        if (prevView != null) {
+            setPosition(prevView, -currentWrapperPos - 1);
+            client.handleComponentRelativeSize((Widget) prevView);
+        }
+        if (nextView != null) {
+            setPosition(nextView, -currentWrapperPos + 1);
+            client.handleComponentRelativeSize((Widget) nextView);
+        }
+        wrapper.getStyle().setProperty("webkitTransition", "");
+    }
+
     private String width;
+    private String pendingWidth;
 
     @Override
     public void setWidth(String width) {
         VConsole.log("VNavp" + width);
+        if (transitionPending) {
+            VConsole.log("transitionPending, postponing width setting");
+            pendingWidth = width;
+            return;
+        }
         if (this.width == null || !this.width.equals(width)) {
             this.width = width;
             super.setWidth(width);
@@ -374,24 +394,8 @@ public class VNavigationManager extends ComplexPanel implements Container {
                         width.length() - 2));
                 pixelWidth = (int) parseDouble;
             }
-
             if (!rendering) {
-                if (!transitionPending) {
-                    handleChildSizesAndPositions.execute();
-                } else {
-                    resizeWhenTransitionDone = true;
-                    new Timer() {
-
-                        @Override
-                        public void run() {
-                            if (transitionPending) {
-                                VConsole.error("Transition still pending?? Not for real. Must be a bug");
-                                handleChildSizesAndPositions.execute();
-                            }
-                        }
-
-                    }.schedule(1000);
-                }
+                resetPositionsAndChildSizes();
             }
         }
     }
@@ -423,5 +427,16 @@ public class VNavigationManager extends ComplexPanel implements Container {
         }
 
     }
+
+    /**
+     * TODO check if this can be removed.
+     */
+    VLazyExecutor verifyPositions = new VLazyExecutor(350,
+            new ScheduledCommand() {
+                public void execute() {
+                    VConsole.log("Verifying positions");
+                    resetPositionsAndChildSizes();
+                }
+            });
 
 }
