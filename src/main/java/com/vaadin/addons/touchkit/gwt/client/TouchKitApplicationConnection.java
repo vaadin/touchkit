@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.Date;
 
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.Window.Location;
 import com.vaadin.terminal.gwt.client.ApplicationConnection;
 import com.vaadin.terminal.gwt.client.VConsole;
 import com.vaadin.terminal.gwt.client.ValueMap;
@@ -21,18 +23,21 @@ import com.vaadin.terminal.gwt.client.ValueMap;
  */
 public class TouchKitApplicationConnection extends ApplicationConnection {
 
-    private static final int MAX_TIMEOUT = 400;
+    private static final int MAX_TIMEOUT = 5000;
     private Collection<Object> locks = new ArrayList<Object>();
     private Date start;
     private String jsonText;
     private ValueMap json;
 
+    /**
+     * TODO remove this before release.
+     */
     Timer forceHandleMessage = new Timer() {
         @Override
         public void run() {
-            VConsole.log("rendering was never resumed, forcing...");
-            handlePendingMessage();
-            locks.clear();
+            VConsole.log("WARNING: rendering was never resumed, forcing reload...");
+            Window.alert("This should never happen :-) Joo, pyydä matti paikalle.");
+            Location.reload();
         }
     };
 
