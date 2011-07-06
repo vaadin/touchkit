@@ -27,6 +27,17 @@
 	padding:0 5px;
 }
 
+@url buttonBorderImageUrl buttonBorderImage ;
+.v-tk-componentgroup-h,
+.v-tk-view .v-button,
+.v-tk-popover .v-button  {
+	-webkit-border-image: buttonBorderImageUrl 10;
+	border-width: 5px;
+	border-radius: 5px;
+	background-color:white;
+}
+
+
 .v-tk-view .v-button,
 .v-tk-popover .v-button {
 	height: auto;
@@ -43,17 +54,6 @@
 .v-tk-view .v-button:active .v-button-caption,
 .v-tk-popover .v-button:active .v-button-caption {
 	text-shadow: 0 0 15px #fff;
-}
-
-/* TODO rename this: */
-@url navbaractionimage navBarActionImage ;
-.v-tk-componentgroup-h,
-.v-tk-view .v-button,
-.v-tk-popover .v-button  {
-	-webkit-border-image: navbaractionimage 10;
-	border-width: 5px;
-	border-radius: 5px;
-	background-color:white;
 }
 
 .v-tk-navbar .v-button,

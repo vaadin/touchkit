@@ -25,8 +25,8 @@ public interface TouchKitResources extends ClientBundle {
     @Source("back_button.png")
     public DataResource backButtonImage();
 
-    @Source("navbar-action.png")
-    public DataResource navBarActionImage();
+    @Source("button-border-image.png")
+    public DataResource buttonBorderImage();
 
     @Source("background_stripes.png")
     public DataResource backgroundStripesImage();
@@ -52,8 +52,5 @@ public interface TouchKitResources extends ClientBundle {
 
     @Source("popupBackgroundWithToolbar.png")
     public DataResource popupWithToolbarImage();
-
-    @Source("navbar-action.png")
-    public DataResource buttonImage();
 
 }
