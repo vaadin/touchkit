@@ -12,11 +12,23 @@
 		<when-type-is class="com.vaadin.terminal.gwt.client.ui.VView" />
 	</replace-with>
 
-	<replace-with class="com.vaadin.addons.touchkit.gwt.client.TouchKitApplicationConnection">
+	<replace-with
+		class="com.vaadin.addons.touchkit.gwt.client.TouchKitApplicationConnection">
 		<when-type-is class="com.vaadin.terminal.gwt.client.ApplicationConnection" />
 	</replace-with>
-   
+
+	<!-- <replace-with class="com.vaadin.addons.touchkit.gwt.client.VRemoteDebugConsole"> 
+		<when-type-is class="com.vaadin.terminal.gwt.client.VDebugConsole" /> </replace-with> -->
+ 
+	<!-- Use annotation based widget loading strategy instead of the eager method. 
+		Makes initial loading time smaller on a slow network -->
+	<generate-with
+		class="com.vaadin.addons.touchkit.gwt.TouchKitWidgetMapGenerator">
+		<when-type-is class="com.vaadin.terminal.gwt.client.WidgetMap" />
+	</generate-with>
+
 	<!-- Load css etc eagerly to avoid calc errors -->
-	<entry-point class="com.vaadin.addons.touchkit.gwt.client.EagerResourceLoader" />
-	 
+	<entry-point
+		class="com.vaadin.addons.touchkit.gwt.client.EagerResourceLoader" />
+
 </module>
