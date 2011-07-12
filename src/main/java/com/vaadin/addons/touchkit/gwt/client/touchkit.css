@@ -37,6 +37,12 @@
 	background-color:white;
 }
 
+.v-tk-view .v-button-link,
+.v-tk-popover .v-button-link {
+	-webkit-border-image: none;
+	background: transparent;
+	padding:0;
+}
 
 .v-tk-view .v-button,
 .v-tk-popover .v-button {
@@ -163,15 +169,15 @@
 	padding: 0 layoutMarginal;
 }
 
-.v-tk-componentgroup .v-csslayout-container {
+.v-tk-componentgroup>div>div.v-csslayout-container {
 	position:relative;	
 }
 
-.v-tk-componentgroup .v-csslayout-container>* {
+.v-tk-componentgroup>div>div.v-csslayout-container>* {
 	clear:both;
 }
 
-.v-tk-componentgroup .v-csslayout-container>.v-tk-has-caption {
+.v-tk-componentgroup>div>div.v-csslayout-container>.v-tk-has-caption {
 	clear:right;
 	float:right;
 }
@@ -184,7 +190,7 @@
 	height:40px;
 }
 
-.v-tk-componentgroup .v-csslayout-container>.v-caption>.v-captiontext {
+.v-tk-componentgroup>div>div.v-csslayout-container>.v-caption>.v-captiontext {
 	padding-right:3px;	
 }
 
@@ -207,7 +213,7 @@
 }
 
 /* Grey lines between component */
-.v-tk-componentgroup .v-csslayout-container>*:before {
+.v-tk-componentgroup>div>div.v-csslayout-container>*:before {
 	content: "";
 	display: block;
 	position: absolute;
@@ -219,7 +225,7 @@
 }
 
 /* ...hide from the last */
-.v-tk-componentgroup .v-csslayout-container>*:first-child:before {
+.v-tk-componentgroup>div>div.v-csslayout-container>*:first-child:before {
 	display: none;
 }
 
