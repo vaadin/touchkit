@@ -56,10 +56,10 @@ public class TouchKitWindow extends Window {
                 return url;
             }
 
-			public boolean isPreComposed() {
-				return false;
-			}
-            
+            public boolean isPreComposed() {
+                return false;
+            }
+
         });
     }
 
@@ -86,10 +86,9 @@ public class TouchKitWindow extends Window {
                 return url;
             }
 
-			@Override
-			public boolean isPreComposed() {
-				return preComposed;
-			}
+            public boolean isPreComposed() {
+                return preComposed;
+            }
         });
     }
 
