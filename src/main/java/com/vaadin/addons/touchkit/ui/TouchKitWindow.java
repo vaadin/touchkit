@@ -55,6 +55,11 @@ public class TouchKitWindow extends Window {
             public String getHref() {
                 return url;
             }
+
+			public boolean isPreComposed() {
+				return false;
+			}
+            
         });
     }
 
@@ -70,7 +75,7 @@ public class TouchKitWindow extends Window {
      * @param url
      */
     public void addApplicationIcon(final int width, final int height,
-            final String url) {
+            final String url, final boolean preComposed) {
         applicationIcon.add(new ApplicationIcon() {
 
             public String getSizes() {
@@ -80,6 +85,11 @@ public class TouchKitWindow extends Window {
             public String getHref() {
                 return url;
             }
+
+			@Override
+			public boolean isPreComposed() {
+				return preComposed;
+			}
         });
     }
 

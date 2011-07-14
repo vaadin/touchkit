@@ -105,7 +105,7 @@ public class TouchKitApplicationServlet extends
 			}
 			if (w.getStartupImage() != null) {
 				page.append("<link rel=\"apple-touch-startup-image\" "
-						+ "href=\"" + w.getStartupImage() + "");
+						+ "href=\"" + w.getStartupImage() + "\" />");
 			}
 
 		}
