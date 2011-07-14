@@ -28,6 +28,7 @@ import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Layout;
+import com.vaadin.ui.NativeSelect;
 import com.vaadin.ui.Slider;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
@@ -299,6 +300,14 @@ public class NavPanelTestWithViews extends NavigationManager implements
             addSliderWithIcons(componentGroup);
 
             componentGroup.addComponent(new CheckBox("Setting böö"));
+            
+            NativeSelect nativeSelect = new NativeSelect("Some setting");
+            nativeSelect.addItem("Foo");
+            nativeSelect.addItem("Bar");
+            nativeSelect.addItem("Three");
+            
+            componentGroup.addComponent(nativeSelect);
+            
 
             cssLayout.addComponent(componentGroup);
 
