@@ -204,6 +204,11 @@
 	height: 40px;
 }
 
+.v-tk-componentgroup .v-select-select {
+	margin-top: 5px;
+	height:30px;
+}
+
 /*
  * Nav buttons are 40px height, make switch as height in option layouts.
  */
