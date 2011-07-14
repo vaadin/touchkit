@@ -1,17 +1,43 @@
 package com.vaadin.addons.touchkit.gwt.client;
 
+import com.google.gwt.dom.client.DivElement;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.vaadin.terminal.gwt.client.ApplicationConnection;
 import com.vaadin.terminal.gwt.client.Paintable;
 import com.vaadin.terminal.gwt.client.RenderSpace;
 import com.vaadin.terminal.gwt.client.UIDL;
 import com.vaadin.terminal.gwt.client.VCaption;
+import com.vaadin.terminal.gwt.client.VConsole;
 import com.vaadin.terminal.gwt.client.ui.VCssLayout;
 
 public class VComponentGroup extends VCssLayout {
 
 	static {
 		TouchKitResources.INSTANCE.css().ensureInjected();
+	}
+
+	private DivElement breakElement;
+	
+	@Override
+	public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
+		super.updateFromUIDL(uidl, client);
+		ensureBreakElement();
+	}
+
+	/**
+	 * TODO make this with generated content
+	 */
+	private void ensureBreakElement() {
+		if(breakElement == null) {
+			breakElement = Document.get().createDivElement();
+			breakElement.getStyle().setProperty("clear", "both");
+			breakElement.getStyle().setProperty("height", "0");
+		}
+		if(getContainerElement().getLastChild() != breakElement) {
+			getContainerElement().appendChild(breakElement);
+		}
 	}
 
 	@Override
