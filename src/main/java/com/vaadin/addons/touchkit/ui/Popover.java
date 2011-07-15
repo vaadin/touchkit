@@ -4,6 +4,7 @@ import com.vaadin.addons.touchkit.gwt.client.VPopover;
 import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;
 import com.vaadin.ui.ClientWidget;
+import com.vaadin.ui.ClientWidget.LoadStyle;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Window;
 
@@ -12,10 +13,10 @@ import com.vaadin.ui.Window;
  * more options or small form related to an action. {@link Popover} does not
  * support dragging or resizing by the end user.
  * <p>
- * Typical use case by example: In a mobile mail application when you hit an icon,
- * you'll see a {@link Popover} with actions: "Reply", "Forward" and "Print". In
- * e.g iPad the actions would be shown "next to" the clicked icon so they are
- * close to the users finger (the related button can be set with
+ * Typical use case by example: In a mobile mail application when you hit an
+ * icon, you'll see a {@link Popover} with actions: "Reply", "Forward" and
+ * "Print". In e.g iPad the actions would be shown "next to" the clicked icon so
+ * they are close to the users finger (the related button can be set with
  * {@link #showRelativeTo(Component)}), while on smaller screens (e.g iPhone)
  * this kind of UI element fills the whole width of the screen.
  * <p>
@@ -29,7 +30,7 @@ import com.vaadin.ui.Window;
  * allowing the content to dictate the look.
  * 
  */
-@ClientWidget(VPopover.class)
+@ClientWidget(value = VPopover.class, loadStyle = LoadStyle.EAGER)
 public class Popover extends Window {
 
     private Component relatedComponent;

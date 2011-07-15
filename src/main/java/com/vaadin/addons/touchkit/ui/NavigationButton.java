@@ -7,6 +7,7 @@ import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.ClientWidget;
+import com.vaadin.ui.ClientWidget.LoadStyle;
 import com.vaadin.ui.Component;
 
 /**
@@ -21,7 +22,7 @@ import com.vaadin.ui.Component;
  * Note that navigation will only work when the button is used inside a
  * {@link NavigationManager}, otherwise it will work as a regular {@link Button}.
  */
-@ClientWidget(VNavigationButton.class)
+@ClientWidget(value = VNavigationButton.class, loadStyle = LoadStyle.EAGER)
 public class NavigationButton extends Button {
     private Component targetView;
 

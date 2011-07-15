@@ -1,8 +1,8 @@
 package com.vaadin.addons.touchkit.ui;
 
 import com.vaadin.addons.touchkit.gwt.client.VComponentGroup;
-import com.vaadin.addons.touchkit.ui.ComponentGroup.Orientation;
 import com.vaadin.ui.ClientWidget;
+import com.vaadin.ui.ClientWidget.LoadStyle;
 import com.vaadin.ui.CssLayout;
 
 /**
@@ -24,7 +24,7 @@ import com.vaadin.ui.CssLayout;
  * Due to the styling, {@link Orientation#VERTICAL} is by default more flexible
  * than {@link Orientation#HORIZONTAL}, and it can accommodate many components.
  */
-@ClientWidget(VComponentGroup.class)
+@ClientWidget(value = VComponentGroup.class, loadStyle = LoadStyle.EAGER)
 public class ComponentGroup extends CssLayout {
 
     public enum Orientation {

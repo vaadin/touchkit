@@ -3,6 +3,7 @@ package com.vaadin.addons.touchkit.ui;
 import com.vaadin.addons.touchkit.gwt.client.VEmailField;
 import com.vaadin.data.Property;
 import com.vaadin.ui.ClientWidget;
+import com.vaadin.ui.ClientWidget.LoadStyle;
 import com.vaadin.ui.TextField;
 
 /**
@@ -14,7 +15,7 @@ import com.vaadin.ui.TextField;
  * entry.
  * </p>
  */
-@ClientWidget(VEmailField.class)
+@ClientWidget(value = VEmailField.class, loadStyle = LoadStyle.EAGER)
 public class EmailField extends TextField {
 
     /**

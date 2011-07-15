@@ -6,6 +6,7 @@ import com.vaadin.addons.touchkit.gwt.client.VTabsheet;
 import com.vaadin.terminal.gwt.client.MouseEventDetails;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.ClientWidget;
+import com.vaadin.ui.ClientWidget.LoadStyle;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.TabSheet;
@@ -16,7 +17,7 @@ import com.vaadin.ui.TabSheet.Tab;
  * iOS. By default a bar with equally sized tab buttons is shown below the tab
  * content.
  */
-@ClientWidget(VTabsheet.class)
+@ClientWidget(value = VTabsheet.class, loadStyle = LoadStyle.EAGER)
 public class TouchKitTabsheet extends CssLayout {
 
     private Toolbar tabbar = new Toolbar();

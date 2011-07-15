@@ -4,6 +4,7 @@ import com.vaadin.addons.touchkit.gwt.client.VSwitch;
 import com.vaadin.data.Property;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.ClientWidget;
+import com.vaadin.ui.ClientWidget.LoadStyle;
 
 /**
  * A {@link CheckBox} that is rendered as a switch button, which might provide a
@@ -11,7 +12,7 @@ import com.vaadin.ui.ClientWidget;
  * 
  * @see CheckBox
  */
-@ClientWidget(VSwitch.class)
+@ClientWidget(value = VSwitch.class, loadStyle = LoadStyle.EAGER)
 public class Switch extends CheckBox {
 
     /**

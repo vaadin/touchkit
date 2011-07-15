@@ -9,6 +9,7 @@ import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;
 import com.vaadin.ui.AbstractComponentContainer;
 import com.vaadin.ui.ClientWidget;
+import com.vaadin.ui.ClientWidget.LoadStyle;
 import com.vaadin.ui.Component;
 
 /**
@@ -27,7 +28,7 @@ import com.vaadin.ui.Component;
  * automatic.
  * <p>
  */
-@ClientWidget(VNavigationManager.class)
+@ClientWidget(value = VNavigationManager.class, loadStyle = LoadStyle.EAGER)
 public class NavigationManager extends AbstractComponentContainer {
     /*-
     TODO deprecate + throw on component container mutation methods.

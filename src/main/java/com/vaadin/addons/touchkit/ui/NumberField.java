@@ -3,6 +3,7 @@ package com.vaadin.addons.touchkit.ui;
 import com.vaadin.addons.touchkit.gwt.client.VNumberField;
 import com.vaadin.data.Property;
 import com.vaadin.ui.ClientWidget;
+import com.vaadin.ui.ClientWidget.LoadStyle;
 import com.vaadin.ui.TextField;
 
 /**
@@ -13,7 +14,7 @@ import com.vaadin.ui.TextField;
  * can provide a on-screen keyboard customized for numerical input.
  * </p>
  */
-@ClientWidget(VNumberField.class)
+@ClientWidget(value = VNumberField.class, loadStyle = LoadStyle.EAGER)
 public class NumberField extends TextField {
 
     /**

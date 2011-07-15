@@ -8,6 +8,7 @@ import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;
 import com.vaadin.ui.AbstractComponentContainer;
 import com.vaadin.ui.ClientWidget;
+import com.vaadin.ui.ClientWidget.LoadStyle;
 import com.vaadin.ui.Component;
 
 /**
@@ -20,7 +21,7 @@ import com.vaadin.ui.Component;
  * 
  * @see NavigationView
  */
-@ClientWidget(VNavigationBar.class)
+@ClientWidget(value = VNavigationBar.class, loadStyle = LoadStyle.EAGER)
 public class NavigationBar extends AbstractComponentContainer {
 
     private static final String STYLE_NAME_BACK_BUTTON = "backbutton";

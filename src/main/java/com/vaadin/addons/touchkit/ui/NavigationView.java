@@ -8,6 +8,7 @@ import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;
 import com.vaadin.ui.AbstractComponentContainer;
 import com.vaadin.ui.ClientWidget;
+import com.vaadin.ui.ClientWidget.LoadStyle;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 
@@ -26,7 +27,7 @@ import com.vaadin.ui.CssLayout;
  * with {@link #setToolbar(Component)}, and is usually a {@link Toolbar}.
  * 
  */
-@ClientWidget(VNavigationView.class)
+@ClientWidget(value = VNavigationView.class, loadStyle = LoadStyle.EAGER)
 public class NavigationView extends AbstractComponentContainer {
 
     private NavigationBar navigationBar = new NavigationBar();
