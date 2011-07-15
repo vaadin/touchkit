@@ -88,6 +88,10 @@
 
 @url backgroundStripes backgroundStripesImage ;
 
+.v-tk-backgroundstripes {
+	background: backgroundStripes;
+}
+
 .v-tk-navpanel-container, 
 .v-tk-popover.v-tk-fullscreen .v-tk-navpanel-container {
 	position: absolute;
