@@ -81,14 +81,6 @@
 					<draftCompile>false</draftCompile>
 					<style>OBF</style>
 				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>resources</goal>
-							<goal>compile</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 
