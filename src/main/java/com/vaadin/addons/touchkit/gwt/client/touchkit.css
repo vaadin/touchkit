@@ -409,6 +409,10 @@
 	text-shadow: 0px 1px 0px #222;
 }
 
+.v-tk-toolbar>.v-csslayout-margin {
+	padding: 3px;
+}
+
 .v-tk-navview-toolbar {
 	position:absolute;
 	height:41px;

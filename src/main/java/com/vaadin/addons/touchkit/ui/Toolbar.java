@@ -1,7 +1,10 @@
 package com.vaadin.addons.touchkit.ui;
 
+import com.vaadin.terminal.PaintException;
+import com.vaadin.terminal.PaintTarget;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HorizontalLayout;
 
 /**
@@ -11,7 +14,7 @@ import com.vaadin.ui.HorizontalLayout;
  * Mostly used with {@link NavigationView}.
  * 
  */
-public class Toolbar extends HorizontalLayout {
+public class Toolbar extends CssLayout {
 
     /*-
      *  Implementation notes
@@ -22,6 +25,7 @@ public class Toolbar extends HorizontalLayout {
      */
 
     private static final String STYLENAME = "v-tk-toolbar";
+    private int index;
 
     /**
      * By default the Toolbar has no margin, is 100% wide and 40px high.
@@ -36,7 +40,23 @@ public class Toolbar extends HorizontalLayout {
     @Override
     public void addComponent(Component c) {
         super.addComponent(c);
-        setComponentAlignment(c, Alignment.MIDDLE_CENTER);
+        float width = 100 / getComponentCount();
+        for (Component component : components) {
+            component.setWidth(width, UNITS_PERCENTAGE);
+        }
+    }
+
+    @Override
+    public void paintContent(PaintTarget target) throws PaintException {
+        index = 0;
+        super.paintContent(target);
+    }
+
+    @Override
+    protected String getCss(Component c) {
+        String css = "float:left;";
+        index++;
+        return css;
     }
 
 }
