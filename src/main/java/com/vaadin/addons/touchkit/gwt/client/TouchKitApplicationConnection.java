@@ -36,7 +36,6 @@ public class TouchKitApplicationConnection extends ApplicationConnection {
         @Override
         public void run() {
             VConsole.log("WARNING: rendering was never resumed, forcing reload...");
-            Window.alert("This should never happen :-) Joo, pyydä matti paikalle.");
             Location.reload();
         }
     };
