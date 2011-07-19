@@ -58,6 +58,7 @@
 
 	<description>Provides a customized servlet and client-server communication for Vaadin to allow cross site embedding an application to a third party domain.</description>
 	<build>
+        <finalName>vaadin-touchkit-${license.short.name}-${project.version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

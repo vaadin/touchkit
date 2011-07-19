@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+  <id>addon</id>
+
+  <formats>
+    <format>zip</format>
+  </formats>
+
+  <!-- Do not use because we must put META-INF/MANIFEST.MF there. -->
+  <includeBaseDirectory>false</includeBaseDirectory>
+
+  <fileSets>
+    <fileSet>
+      <directory>.</directory>
+      <includes>
+        <include>license-${license.short.name}.txt</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <directory>../vaadin-touchkit/target</directory>
+      <outputDirectory></outputDirectory>
+      <includes>
+        <include>*-${license.short.name}-*.jar</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+
+  <files>
+    <file>
+      <source>licensing-${license.short.name}.txt</source>
+      <outputDirectory></outputDirectory>
+      <destName>licensing.txt</destName>
+    </file>
+    <file>
+      <source>MANIFEST.MF</source>
+      <outputDirectory>META-INF</outputDirectory>
+      <filtered>true</filtered>
+    </file>
+  </files>
+</assembly>

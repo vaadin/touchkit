@@ -1,0 +1,13 @@
+
+= LICENSING =
+
+This Add-on component ("Software") to Vaadin Framework is distributed 
+under the terms GNU Affero General Public License version 3.0 ("AGPL")
+included as license-agpl-3.0.txt in this software package.
+
+You must either accept the terms of the above mentioned license agreement
+or delete the Software immediately. 
+
+Commercial licenses under the terms of Commercial Vaadin Add-on License
+are available for purchase at http://vaadin.com/directory or as a part
+of the Vaadin Pro Account subscription.
