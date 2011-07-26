@@ -9,7 +9,7 @@
     </parent>
 
     <groupId>com.vaadin.addon</groupId>
-    <artifactId>touchkit-assembly</artifactId>
+    <artifactId>vaadin-touchkit-assembly</artifactId>
     <version>${parent.version}</version>
     <packaging>pom</packaging>
     
