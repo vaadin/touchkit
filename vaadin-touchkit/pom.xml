@@ -128,7 +128,7 @@
 							<Vaadin-Package-Version>1</Vaadin-Package-Version>
 
 							<!-- Comma-separated list of widgetsets in the package -->
-							<Vaadin-Widgetsets>com.vaadin.addons.touchkit.gwt.TouchKitWidgetSet</Vaadin-Widgetsets>
+							<Vaadin-Widgetsets>com.vaadin.addon.touchkit.gwt.TouchKitWidgetSet</Vaadin-Widgetsets>
 						</manifestEntries>
 					</archive>
 					<!-- exclude other META-INF data under build directory -->
@@ -152,7 +152,7 @@
 				<configuration>
 					<webappDirectory>${project.build.directory}/${project.build.finalName}/VAADIN/widgetsets</webappDirectory>
 					<modules>
-						<module>com.vaadin.addons.touchkit.gwt.TouchKitWidgetSet</module>
+						<module>com.vaadin.addon.touchkit.gwt.TouchKitWidgetSet</module>
 					</modules>
 					<extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
 					<runTarget>xsite</runTarget>
