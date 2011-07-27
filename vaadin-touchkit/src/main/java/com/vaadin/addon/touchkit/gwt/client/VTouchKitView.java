@@ -33,7 +33,7 @@ public class VTouchKitView extends VView {
 
     	var me = this;
     	var success = function(loc) {
-    		me.@com.vaadin.addon.touchkit.gwt.client.VTouchKitView::onGeolocationSuccess(Lcom/vaadin/addons/touchkit/gwt/client/Position;)(loc);
+    		me.@com.vaadin.addon.touchkit.gwt.client.VTouchKitView::onGeolocationSuccess(Lcom/vaadin/addon/touchkit/gwt/client/Position;)(loc);
     	}
     	var error = function(e) {
     		me.@com.vaadin.addon.touchkit.gwt.client.VTouchKitView::onGeolocationError(I)(e.code);
