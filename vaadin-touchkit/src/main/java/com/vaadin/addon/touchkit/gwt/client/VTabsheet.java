@@ -9,11 +9,10 @@ import com.vaadin.terminal.gwt.client.ui.VCssLayout;
 
 public class VTabsheet extends VCssLayout {
 
-    public static final String CLASSNAME = "v-tk-tabsheet";
+    public static final String CLASSNAME = "v-touchkit-tabsheet";
 
     public VTabsheet() {
         setStyleName(CLASSNAME);
-        TouchKitResources.INSTANCE.css().ensureInjected();
     }
 
     private int tabbarheight;
@@ -30,7 +29,7 @@ public class VTabsheet extends VCssLayout {
             Iterator<Widget> iterator = p.iterator();
             while (iterator.hasNext()) {
                 Widget next = iterator.next();
-                if (next.getStyleName().contains("v-tk-toolbar")) {
+                if (next.getStyleName().contains("v-touchkit-toolbar")) {
                     tabbarheight = next.getOffsetHeight();
                     break;
                 }

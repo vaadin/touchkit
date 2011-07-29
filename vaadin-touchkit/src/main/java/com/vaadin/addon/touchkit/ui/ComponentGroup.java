@@ -44,12 +44,12 @@ public class ComponentGroup extends CssLayout {
      */
     public void setOrientation(Orientation orientation) {
         if (orientation == Orientation.HORIZONTAL) {
-            addStyleName("v-tk-componentgroup-h");
-            removeStyleName("v-tk-componentgroup");
+            addStyleName("v-touchkit-componentgroup-h");
+            removeStyleName("v-touchkit-componentgroup");
             setMargin(false);
         } else {
-            removeStyleName("v-tk-componentgroup-h");
-            addStyleName("v-tk-componentgroup");
+            removeStyleName("v-touchkit-componentgroup-h");
+            addStyleName("v-touchkit-componentgroup");
             setWidth("100%");
         }
     }

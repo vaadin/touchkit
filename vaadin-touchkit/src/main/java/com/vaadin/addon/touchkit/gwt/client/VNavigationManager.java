@@ -21,9 +21,9 @@ import com.vaadin.terminal.gwt.client.ui.VLazyExecutor;
 
 public class VNavigationManager extends ComplexPanel implements Container {
 
-    private static final String CONTAINER_CLASSNAME = "v-tk-navpanel-container";
-    private static final String WRAPPER_CLASSNAME = "v-tk-navpanel-wrapper";
-    private static final String CLASSNAME = "v-tk-navpanel";
+    private static final String CONTAINER_CLASSNAME = "v-touchkit-navpanel-container";
+    private static final String WRAPPER_CLASSNAME = "v-touchkit-navpanel-wrapper";
+    private static final String CLASSNAME = "v-touchkit-navpanel";
     private ApplicationConnection client;
     private Paintable currentView;
     private Paintable prevView;
@@ -32,7 +32,6 @@ public class VNavigationManager extends ComplexPanel implements Container {
     private TouchKitApplicationConnection ac;
 
     public VNavigationManager() {
-        TouchKitResources.INSTANCE.css().ensureInjected();
         setElement(Document.get().createDivElement());
         setStyleName(CLASSNAME);
         wrapper.setClassName(WRAPPER_CLASSNAME);

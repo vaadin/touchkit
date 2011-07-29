@@ -15,16 +15,16 @@ import com.vaadin.terminal.gwt.client.UIDL;
 
 public class VNavigationBar extends ComplexPanel implements Container {
 
-    private static final String CLASSNAME = "v-tk-navbar";
+    private static final String CLASSNAME = "v-touchkit-navbar";
     private ApplicationConnection client;
     private DivElement caption = Document.get().createDivElement();
-    private DivElement rightComponentElement = Document.get().createDivElement();
+    private DivElement rightComponentElement = Document.get()
+            .createDivElement();
     private DivElement leftComponentElement = Document.get().createDivElement();
     private Paintable leftComponent;
     private Paintable rightComponent;
 
     public VNavigationBar() {
-        TouchKitResources.INSTANCE.css().ensureInjected();
         setElement(Document.get().createDivElement());
         setStyleName(CLASSNAME);
         getElement().appendChild(caption);
@@ -83,7 +83,8 @@ public class VNavigationBar extends ComplexPanel implements Container {
             rightComponent = paintable;
             if (!(((Widget) rightComponent)).isAttached()) {
                 add((Widget) rightComponent,
-                        (com.google.gwt.user.client.Element) rightComponentElement.cast());
+                        (com.google.gwt.user.client.Element) rightComponentElement
+                                .cast());
             }
 
             rightComponent.updateFromUIDL(componentUidl, client);
@@ -111,7 +112,7 @@ public class VNavigationBar extends ComplexPanel implements Container {
     }
 
     public boolean hasChildComponent(Widget component) {
-        if (component == leftComponent || component == this.rightComponent) {
+        if (component == leftComponent || component == rightComponent) {
             return true;
         }
         return false;

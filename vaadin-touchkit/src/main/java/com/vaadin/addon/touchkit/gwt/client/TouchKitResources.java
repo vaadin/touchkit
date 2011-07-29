@@ -13,44 +13,92 @@ public interface TouchKitResources extends ClientBundle {
     public static final TouchKitResources INSTANCE = GWT
             .create(TouchKitResources.class);
 
-    /**
-     * TODO consider splitting this per components/related components
-     * 
-     * @return
-     */
     @NotStrict
-    @Source("touchkit.css")
+    @Source("theme/touchkit.css")
     public CssResource css();
 
-    @Source("back_button.png")
+    @NotStrict
+    @Source("theme/high-dpi.css")
+    public CssResource highDpiCss();
+
+    @Source("theme/img/spinner.png")
+    public DataResource spinnerImage();
+
+    @Source("theme/img/linen-bg.png")
+    public DataResource linenBgImage();
+
+    @Source("theme/img/back-button.png")
     public DataResource backButtonImage();
 
-    @Source("button-border-image.png")
-    public DataResource buttonBorderImage();
+    @Source("theme/img/back-button-2x.png")
+    public DataResource backButtonImage2x();
 
-    @Source("background_stripes.png")
-    public DataResource backgroundStripesImage();
+    @Source("theme/img/back-button-popover.png")
+    public DataResource popoverBackButtonImage();
 
-    @Source("slider-handle.png")
+    @Source("theme/img/back-button-popover-2x.png")
+    public DataResource popoverBackButtonImage2x();
+
+    /**
+     * Arrow used in Navbuttons (right pointing gray arrow)
+     */
+
+    @Source("theme/img/nav-arrow.png")
+    public DataResource navArrowImage();
+
+    @Source("theme/img/nav-arrow-2x.png")
+    public DataResource navArrowImage2x();
+
+    /**
+     * Custom navbar icons for button
+     */
+
+    @Source("theme/img/navbar-arrow-up.png")
+    public DataResource navbarArrowUpImage();
+
+    @Source("theme/img/navbar-arrow-up-2x.png")
+    public DataResource navbarArrowUpImage2x();
+
+    @Source("theme/img/navbar-arrow-down.png")
+    public DataResource navbarArrowDownImage();
+
+    @Source("theme/img/navbar-arrow-down-2x.png")
+    public DataResource navbarArrowDownImage2x();
+
+    @Source("theme/img/navbar-arrow-left.png")
+    public DataResource navbarArrowLeftImage();
+
+    @Source("theme/img/navbar-arrow-left-2x.png")
+    public DataResource navbarArrowLeftImage2x();
+
+    @Source("theme/img/navbar-arrow-right.png")
+    public DataResource navbarArrowRightImage();
+
+    @Source("theme/img/navbar-arrow-right-2x.png")
+    public DataResource navbarArrowRightImage2x();
+
+    /**
+     * Popover images
+     */
+
+    @Source("theme/img/popover-arrow.png")
+    @ImageOptions(repeatStyle = RepeatStyle.None)
+    public ImageResource popoverArrowImage();
+
+    @Source("theme/img/popover-arrow-down.png")
+    @ImageOptions(repeatStyle = RepeatStyle.None)
+    public ImageResource popoverArrowDownImage();
+
+    /*
+     * TODO get rid of these
+     */
+
+    @Source("theme/img/slider-handle.png")
     @ImageOptions(repeatStyle = RepeatStyle.None)
     public ImageResource sliderHandle();
 
-    @Source("modalWindowArrow.png")
-    @ImageOptions(repeatStyle = RepeatStyle.None)
-    public ImageResource modalWindowArrow();
-
-    @Source("modalWindowArrowDown.png")
-    @ImageOptions(repeatStyle = RepeatStyle.None)
-    public ImageResource modalWindowArrowDown();
-
-    @Source("switch.png")
+    @Source("theme/img/switch.png")
     @ImageOptions(repeatStyle = RepeatStyle.None)
     public ImageResource switchImage();
-
-    @Source("popupBackground.png")
-    public DataResource popupImage();
-
-    @Source("popupBackgroundWithToolbar.png")
-    public DataResource popupWithToolbarImage();
 
 }

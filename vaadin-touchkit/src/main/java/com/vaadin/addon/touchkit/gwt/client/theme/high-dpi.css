@@ -1,0 +1,47 @@
+.v-loading-indicator,
+.v-loading-indicator-delay,
+.v-loading-indicator-wait {
+	 -webkit-background-size: 25px 25px;
+	}
+
+@url backButton2xUrl backButtonImage2x;
+.v-touchkit-navbar-left .v-touchkit-navbutton {
+	-webkit-border-image: backButton2xUrl 0 11 0 28 stretch stretch;
+	}
+
+@url popoverBackButton2xUrl popoverBackButtonImage2x;
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar-left .v-touchkit-navbutton {
+	-webkit-border-image: popoverBackButton2xUrl 0 11 0 28 stretch stretch;
+	}
+
+@url navArrow2xUrl navArrowImage2x;
+.v-touchkit-navbutton:after {
+	background-image: navArrow2xUrl;
+	 -webkit-background-size: 9px 13px;
+	}
+
+
+/* Navbar custom icon buttons */
+@url navbarArrowUp2x navbarArrowUpImage2x;
+.v-touchkit-navbar .icon-arrow-up .v-button-caption {
+	background-image: navbarArrowUp2x;
+	 -webkit-background-size: 17px 15px;
+	}
+
+@url navbarArrowDown2x navbarArrowDownImage2x;
+.v-touchkit-navbar .icon-arrow-down .v-button-caption {
+	background-image: navbarArrowDown2x;
+	 -webkit-background-size: 17px 15px;
+	}
+
+@url navbarArrowLeft2x navbarArrowLeftImage2x;
+.v-touchkit-navbar .icon-arrow-left .v-button-caption {
+	background-image: navbarArrowLeft2x;
+	 -webkit-background-size: 14px 18px;
+	}
+
+@url navbarArrowRight2x navbarArrowRightImage2x;
+.v-touchkit-navbar .icon-arrow-right .v-button-caption {
+	background-image: navbarArrowRight2x;
+	 -webkit-background-size: 14px 18px;
+	}

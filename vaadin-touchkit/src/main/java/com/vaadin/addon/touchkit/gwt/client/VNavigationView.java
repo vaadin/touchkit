@@ -19,7 +19,7 @@ import com.vaadin.terminal.gwt.client.ui.TouchScrollDelegate;
 
 public class VNavigationView extends ComplexPanel implements Container {
 
-    private static final String CLASSNAME = "v-tk-navview";
+    private static final String CLASSNAME = "v-touchkit-navview";
     private static final int NAVBARHEIGHT = 42;
     private Element wrapper = Document.get().createDivElement().cast();
     private Element toolbarDiv = Document.get().createDivElement().cast();
@@ -32,7 +32,6 @@ public class VNavigationView extends ComplexPanel implements Container {
     private boolean rendering;
 
     public VNavigationView() {
-        TouchKitResources.INSTANCE.css().ensureInjected();
         setElement(Document.get().createDivElement());
         setStyleName(CLASSNAME);
         wrapper.setClassName(CLASSNAME + "-wrapper");

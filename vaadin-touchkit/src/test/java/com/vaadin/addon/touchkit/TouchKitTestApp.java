@@ -26,6 +26,9 @@ public class TouchKitTestApp extends Application {
 
     @Override
     public void init() {
+        // All TouchKit apps should inherint from Base in order for the theme to
+        // work correctly
+        setTheme("base");
         final TouchKitWindow mainWindow = new TouchKitWindow();
         mainWindow.setContent(new CssLayout());
         mainWindow.addListener(new Window.ResizeListener() {
@@ -51,7 +54,8 @@ public class TouchKitTestApp extends Application {
 
         // mainWindow.addComponent(b);
 
-        b = new Button("NavPanelTest witn navButtons");
+        b = new Button("NavPanelTest with navButtons");
+        b.addStyleName("white");
         b.addListener(new ClickListener() {
             public void buttonClick(ClickEvent event) {
                 mainWindow.setContent(new NavPanelTestWithNavButtons());
@@ -60,7 +64,8 @@ public class TouchKitTestApp extends Application {
 
         // mainWindow.addComponent(b);
 
-        b = new Button("NavPanelTest witn views");
+        b = new Button("NavPanelTest with views");
+        b.addStyleName("white");
         b.addListener(new ClickListener() {
             public void buttonClick(ClickEvent event) {
                 NavPanelTestWithViews.app = TouchKitTestApp.this;

@@ -2,6 +2,7 @@ package com.vaadin.addon.touchkit;
 
 import com.vaadin.Application;
 import com.vaadin.addon.touchkit.ui.ComponentGroup;
+import com.vaadin.addon.touchkit.ui.ComponentGroup.Orientation;
 import com.vaadin.addon.touchkit.ui.EmailField;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.addon.touchkit.ui.NavigationManager;
@@ -11,7 +12,6 @@ import com.vaadin.addon.touchkit.ui.Popover;
 import com.vaadin.addon.touchkit.ui.Switch;
 import com.vaadin.addon.touchkit.ui.Toolbar;
 import com.vaadin.addon.touchkit.ui.TouchKitTabsheet;
-import com.vaadin.addon.touchkit.ui.ComponentGroup.Orientation;
 import com.vaadin.terminal.ClassResource;
 import com.vaadin.terminal.Resource;
 import com.vaadin.terminal.ThemeResource;
@@ -151,21 +151,14 @@ public class NavPanelTestWithViews extends NavigationManager implements
 
         testView.setContent(cssLayout);
 
-        CssLayout buttons = new CssLayout() {
-            @Override
-            protected String getCss(Component c) {
-                return "margin-left: 5px;";
-            }
-        };
-        // buttons.setSpacing(true);
         Button b = new Button("Yes");
-        b.setStyleName("v-tk-greenbg");
+        b.setStyleName("green");
         cssLayout.addComponent(b);
         b = new Button("No");
-        b.setStyleName("v-tk-redbg");
+        b.setStyleName("red");
         cssLayout.addComponent(b);
-        b = new Button("Ok");
-        b.setStyleName("v-tk-bluebg");
+        b = new Button("OK");
+        b.setStyleName("blue");
         cssLayout.addComponent(b);
 
         Button button2 = new Button("Link style");
@@ -173,11 +166,9 @@ public class NavPanelTestWithViews extends NavigationManager implements
         cssLayout.addComponent(button2);
 
         ComponentGroup group = new ComponentGroup(Orientation.HORIZONTAL);
-        buttons.addComponent(group);
-        group.addStyleName("v-tk-redbg");
-        testView.setRightComponent(buttons);
+        testView.setRightComponent(group);
         Component metoo = new Button("TopRight", listener);
-        // metoo.setWidth("40px");
+        metoo.addStyleName("blue");
         group.addComponent(new Button("No toolbar", new Button.ClickListener() {
 
             public void buttonClick(ClickEvent event) {
@@ -185,13 +176,15 @@ public class NavPanelTestWithViews extends NavigationManager implements
                 popover.setWidth("360px");
                 ((VerticalLayout) popover.getContent()).setMargin(false);
                 // touchKitSubWindow.setHeight("80%");
-                Button b = new Button("Asd");
+                Button b = new Button("Save Draft");
+                b.addStyleName("white");
                 b.setWidth("100%");
                 popover.addComponent(b);
-                b = new Button("Foo");
+                b = new Button("Delete Draft");
+                b.addStyleName("red");
                 b.setWidth("100%");
                 popover.addComponent(b);
-                b = new Button("Bar");
+                b = new Button("Cancel");
                 b.setWidth("100%");
                 popover.addComponent(b);
 
@@ -245,8 +238,8 @@ public class NavPanelTestWithViews extends NavigationManager implements
         }
 
         private Component createActionButton5() {
-            Button button = new Button(null, this);
-            button.setIcon(new ThemeResource("../runo/icons/64/cancel.png"));
+            Button button = new Button("Delete", this);
+            button.addStyleName("red");
             return button;
         }
 
@@ -300,14 +293,13 @@ public class NavPanelTestWithViews extends NavigationManager implements
             addSliderWithIcons(componentGroup);
 
             componentGroup.addComponent(new CheckBox("Setting böö"));
-            
+
             NativeSelect nativeSelect = new NativeSelect("Some setting");
             nativeSelect.addItem("Foo");
             nativeSelect.addItem("Bar");
             nativeSelect.addItem("Three");
-            
+
             componentGroup.addComponent(nativeSelect);
-            
 
             cssLayout.addComponent(componentGroup);
 

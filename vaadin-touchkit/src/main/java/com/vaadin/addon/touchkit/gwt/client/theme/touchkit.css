@@ -1,0 +1,962 @@
+/**
+ * GWT's CssResource is unfortunately so limited that sharing def's across 
+ * multiple stylesheets is near-impossible. Because of that, all styles are in 
+ * this one huge file.
+ */
+
+
+/**
+ * General borders
+ */
+@def divider 1px solid #9f9f9f;
+@def lightDivider 1px solid rgba(187,187,187,.5);
+@def listBorder 1px solid #bbb;
+
+
+/**
+ * Layout dimensions
+ */ 
+@def layoutMargin 20px;
+@def negativeLayoutMargin -20px;
+@def listLayoutMargin 12px;
+@def negativeListLayoutMargin -12px;
+@def listLayoutMarginx2 24px;
+
+/**
+ * Default buttons (iPhone style, full-width)
+ */
+@def buttonInsetBoxShadow inset 0 1px 2px rgba(0,0,0,.5);
+@def buttonInsetBackground rgba(37,38,40,.6);
+@def buttonBoxShadow 0 1px 2px rgba(0,0,0,.5);
+@def buttonTextShadow 0 -1px 0 rgba(0,0,0,.75);
+@def buttonColor #fff;
+@def buttonFontSize 20px;
+@def buttonGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(246,246,246,.46)), to(rgba(145,149,159,.46)), color-stop(.49, rgba(160,162,167,.46)), color-stop(.51, rgba(130,133,142,.46)))');
+
+
+
+/**
+ * Navbar
+ */
+@def navbarTextShadow 0 1px 1px rgba(255,255,255,.75);
+@def navbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#f1f2f2), to(#c9cccf), color-stop(.025, #fff))');
+
+/**
+ * Navbar buttons
+ */
+@def navbarButtonColor #3d3f41;
+@def navbarButtonTextShadow 0 1px 0 rgba(255,255,255,.5);
+@def navbarButtonGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,.23)), to(rgba(73,73,73,.23)))');
+@def navbarButtonBorder 1px solid rgba(142,147,152,.66);
+@def navbarButtonBoxShadow 0 1px 0 rgba(255,255,255,.25), inset 0 1px 0 rgba(255,255,255,.3);
+
+
+/* Tabbar */
+@def tabbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#48494b), to(#222324), color-stop(0.49, #3a3b3c), color-stop(0.51, #2e2f30))');
+
+
+/* Default popover */
+@def popoverGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(93,101,109,.86)), to(rgba(24,25,26,.9)), color-stop(.25, rgba(40,45,51,.86)))');
+@def popoverNavbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0)), to(rgba(0,0,0,0)), color-stop(.49, rgba(0,0,0,.2)), color-stop(.51, rgba(0,0,0,.45)))');
+@def popoverToolbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0)), to(rgba(255,255,255,0)), color-stop(.2, rgba(255,255,255,.15)), color-stop(.55, rgba(255,255,255,.1)), color-stop(.56, rgba(255,255,255,.05)))');
+
+.v-app,
+.v-window,
+.v-popupview-popup,
+.v-tooltip,
+.v-app input,
+.v-app select,
+.v-app button,
+.v-app textarea,
+.v-window input,
+.v-window select,
+.v-window button,
+.v-window textarea,
+.v-popupview-popup input,
+.v-popupview-popup select,
+.v-popupview-popup button,
+.v-popupview-popup textarea,
+.v-filterselect-suggestpopup,
+.v-datefield-popup,
+.v-contextmenu,
+.v-Notification,
+.v-menubar-submenu,
+.v-drag-element {
+	font-family: "Helvetica Neue", Helvetica, Arial, Tahoma, Verdana, sans-serif;
+	font-size: 14px;
+	line-height: 19px;
+	color: #222;
+	}
+
+/* Default background for application */
+@url linenBg linenBgImage ;
+.v-app,
+.v-touchkit-backgroundstripes {
+	background: #e0e1e3 linenBg;
+	text-shadow: 0 1px 0 rgba(255,255,255,.3);
+	}
+
+
+
+/* Loading indicator */
+@url spinner spinnerImage ;
+.v-loading-indicator,
+.v-loading-indicator-delay,
+.v-loading-indicator-wait {
+	background: spinner no-repeat 50%;
+	opacity: 1;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: 0;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	-webkit-animation-name: spinnerRotate;
+	-webkit-animation-duration: 2s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+	}
+
+@-webkit-keyframes spinnerRotate {
+	from {
+		-webkit-transform:rotate(0deg);
+	}
+	to {
+		-webkit-transform:rotate(360deg);
+	}
+}
+
+.v-loading-indicator {
+	opacity: .5;
+	}
+
+.v-loading-indicator-delay {
+	opacity: .7;
+	}
+
+
+
+/* Clear Vaadin core theme styles from buttons */
+.v-button {
+	background: transparent;
+	padding: 0;
+	margin: 0;
+	border: none;
+	width: auto;
+	height: auto;
+	}
+
+.v-button:focus {
+	outline: none;
+	}
+
+
+
+
+
+
+/* Default view buttons */
+.v-button {
+	display: block;
+	border-radius: listLayoutMargin;
+	background: buttonInsetBackground;
+	-webkit-box-shadow: buttonInsetBoxShadow;
+	padding: 3px;
+	height: 45px;
+	margin: listLayoutMargin;
+	}
+
+.v-touchkit-popover .v-button {
+	margin: 2px 0;
+	}
+
+.v-button-wrap {
+	display: block;
+	border-radius: 9px;
+	background: buttonGradient;
+	-webkit-box-shadow: buttonBoxShadow;
+	padding: 0 listLayoutMargin;
+	height: 39px;
+	line-height: 37px;
+	font-size: buttonFontSize;
+	font-weight: bold;
+	color: buttonColor;
+	text-shadow: buttonTextShadow;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	}
+
+.v-button-caption {
+	line-height: 37px;
+	}
+
+
+
+
+
+
+
+/* Link style buttons */
+.v-button-link,
+.v-button-link .v-button-wrap {
+	display: inline-block;
+	border-radius: 0;
+	background: transparent;
+	-webkit-box-shadow: none;
+	padding: 0;
+	height: auto;
+	margin: 0;
+	font-size: 14px;
+	font-weight: normal;
+	text-shadow: none;
+	color: #1b699f;
+	}
+
+
+
+
+
+
+/* Navbar buttons */
+.v-touchkit-navbar .v-button,
+.v-touchkit-navbar .v-touchkit-componentgroup-h {
+	display: inline-block;
+	margin: 0;
+	background: transparent;
+	border: navbarButtonBorder;
+	border-radius: 5px;
+	color: navbarButtonColor;
+	text-shadow: navbarButtonTextShadow;
+	-webkit-box-shadow: navbarButtonBoxShadow;
+	height: 29px;
+	padding: 0;
+	overflow: hidden;
+	}
+
+.v-touchkit-navbar .v-button-wrap {
+	background: navbarButtonGradient;
+	height: 27px;
+	border-radius: 4px;
+	-webkit-box-shadow: none;
+	color: navbarButtonColor;
+	text-shadow: navbarButtonTextShadow;
+	font-size: 12px;
+	line-height: 27px;
+	padding: 0 13px;
+	}
+
+.v-touchkit-navbar .v-button-caption {
+	line-height: 27px;
+	}
+
+/* Strip some styles from buttons inside a componentgroup */
+.v-touchkit-navbar .v-touchkit-componentgroup-h {
+	height: 27px;
+	-webkit-box-shadow: navbarButtonBoxShadow;
+	}
+
+.v-touchkit-navbar .v-touchkit-componentgroup-h .v-button {
+	border: none;
+	height: 27px;
+	border-radius: 0;
+	border-left: 1px solid #adb0b3;
+	}
+
+.v-touchkit-navbar .v-touchkit-componentgroup-h > div > div .v-button:first-child {
+	border-left: none;
+	}
+
+.v-touchkit-navbar .v-touchkit-componentgroup-h .v-button-wrap {
+	border-radius: 0;
+	}
+
+
+
+/* Navbar custom icon buttons */
+@url navbarArrowUp navbarArrowUpImage;
+.v-touchkit-navbar .icon-arrow-up .v-button-caption,
+.v-touchkit-navbar .icon-arrow-down .v-button-caption,
+.v-touchkit-navbar .icon-arrow-left .v-button-caption,
+.v-touchkit-navbar .icon-arrow-right .v-button-caption {
+	display: inline-block;
+	width: 18px;
+	height: 27px;
+	text-indent: -999px;
+	overflow: hidden;
+	background: navbarArrowUp no-repeat 50%;
+	}
+
+.v-touchkit-navbar .icon-arrow-left .v-button-wrap,
+.v-touchkit-navbar .icon-arrow-right .v-button-wrap {
+	padding: 0 10px;
+	}
+
+.v-touchkit-navbar .icon-arrow-left .v-button-caption,
+.v-touchkit-navbar .icon-arrow-right .v-button-caption {
+	width: 19px;
+	}
+
+@url navbarArrowDown navbarArrowDownImage;
+.v-touchkit-navbar .icon-arrow-down .v-button-caption {
+	background-image: navbarArrowDown;
+	background-position: 0 60%;
+	}
+
+@url navbarArrowLeft navbarArrowLeftImage;
+.v-touchkit-navbar .icon-arrow-left .v-button-caption {
+	background-image: navbarArrowLeft;
+	margin-left: -2px;
+	}
+
+@url navbarArrowRight navbarArrowRightImage;
+.v-touchkit-navbar .icon-arrow-right .v-button-caption {
+	background-image: navbarArrowRight;
+	margin-right: -2px;
+	}
+
+
+
+
+
+
+/* Toolbar buttons */
+.v-touchkit-toolbar .v-button,
+.v-touchkit-toolbar .v-touchkit-componentgroup-h {
+	display: inline-block;
+	margin: 0;
+	background: transparent;
+	border-radius: 4px;
+	-webkit-box-shadow: none;
+	height: auto;
+	padding: 0;
+	}
+
+.v-touchkit-toolbar .v-button-wrap {
+	background: transparent;
+	height: auto;
+	padding: 0;
+	border-radius: 4px;
+	-webkit-box-shadow: none;
+	font-size: 11px;
+	line-height: 1;
+	color: navbarButtonColor;
+	text-shadow: navbarButtonTextShadow;
+	}
+
+.v-touchkit-toolbar .v-button-caption {
+	display: block;
+	line-height: 1;
+	}
+
+
+
+
+
+
+
+
+
+
+.v-touchkit-navpanel {
+	position: relative;
+	overflow: hidden;
+}
+
+.v-touchkit-navpanel-wrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	-webkit-transform: translate3d(0, 0, 0);
+	-webkit-transition: -webkit-transform 0.3s linear;
+}
+
+.v-touchkit-navpanel-container, 
+.v-touchkit-popover.v-touchkit-fullscreen .v-touchkit-navpanel-container {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: #e0e1e3 linenBg;
+	/* Not visible until positioned */
+	opacity: 0;
+	-webkit-transition: opacity 0.15s linear;
+}
+
+.v-touchkit-navpanel-placeholder, 
+.v-touchkit-popover.v-touchkit-fullscreen .v-touchkit-navpanel-placeholder  {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: backgroundStripes;
+}
+
+
+/* TODO giallo for placeholder */
+.v-touchkit-navpanel-notransit {
+	-webkit-transition: none;
+}
+
+.v-touchkit-navbutton {
+	-webkit-appearance: none;
+	display:block;
+	position:relative;
+	background: white;
+	font-size: 17px;
+	font-weight: bold;
+	line-height: 43px;
+	margin:0;
+	padding:0;
+}
+
+.v-touchkit-navbutton .v-icon {
+	height: 30px;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+
+.v-touchkit-navbutton-desc {
+	color: #73787c;
+	font-weight: normal;
+	position: absolute;
+	right: 32px;
+	top: 0px;
+	}
+
+.v-touchkit-navbutton-emphasis .v-touchkit-navbutton-desc {
+	color: #73787c;
+	}
+
+/* Borders backgrounds etc. for the margin element.*/
+.v-touchkit-componentgroup > div {
+	margin: listLayoutMargin;
+	border: listBorder;
+	border-radius: listLayoutMargin;
+	background: white;
+	padding: 0 listLayoutMargin;
+	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.5);
+	}
+
+.v-touchkit-componentgroup > div > .v-csslayout-container {
+	position: relative;	
+	}
+
+.v-touchkit-componentgroup>div>div.v-csslayout-container>* {
+	clear:both;
+	}
+
+.v-touchkit-componentgroup>div>div.v-csslayout-container>.v-touchkit-has-caption {
+	clear: right;
+	float: right;
+	}
+
+.v-touchkit-componentgroup>div>.v-csslayout-container>.v-caption {
+	float: left;
+	font-weight: bold;
+	font-size: 17px;
+	line-height: 43px;
+	height: 43px;
+}
+
+.v-touchkit-componentgroup>div>div.v-csslayout-container>.v-caption>.v-captiontext {
+	padding-right: 3px;	
+}
+
+.v-touchkit-componentgroup input.v-textfield {
+	-webkit-appearance: none;
+	border:0;
+	padding:0 4px;
+	background: transparent;
+	color: #4e64a1;
+	font-size:16px;
+	line-height:40px;
+	height: 40px;
+}
+
+.v-touchkit-componentgroup .v-select-select {
+	margin-top: 5px;
+	height:30px;
+}
+
+/*
+ * Nav buttons are 43px height, make switch as height in option layouts.
+ */
+.v-touchkit-componentgroup .v-touchkit-switch {
+	margin-top: 12px;
+	margin-bottom: 8px;
+}
+
+/* Grey lines between component */
+.v-touchkit-componentgroup > div > .v-csslayout-container > *:before {
+	content: "";
+	display: block;
+	position: absolute;
+	margin:0;
+	padding:0;
+	left: negativeListLayoutMargin;
+	right: negativeListLayoutMargin;
+	border-top: listBorder;
+	}
+
+/* ...hide from the first */
+.v-touchkit-componentgroup > div > .v-csslayout-container > *:first-child:before {
+	display: none;
+	}
+
+.v-touchkit-componentgroup .v-formlayout > table {
+	margin-left: negativeListLayoutMargin;
+	margin-right: negativeListLayoutMargin;
+	}
+
+.v-touchkit-componentgroup .v-formlayout-captioncell {
+	padding-left: listLayoutMargin;
+	text-align: left;
+	}
+
+.v-formlayout-captioncell > .v-caption {
+	font-weight: bold;
+	font-size: 17px;
+	line-height: 43px;
+	height: 43px;
+	}
+
+.v-formlayout-row > td {
+	border-bottom: listBorder;
+}
+.v-formlayout-lastrow > td {
+	border-bottom: none;
+}
+
+@url navArrowUrl navArrowImage;
+
+.v-touchkit-navbutton:after {
+	content: "";
+	position: absolute;
+	right: listLayoutMargin;
+	top: 0;
+	bottom: 0;
+	background: navArrowUrl no-repeat 50%;
+	width: 10px;
+	margin-right: -1px;
+	}
+
+@url backButtonUrl backButtonImage;
+
+.v-touchkit-navbar-left .v-touchkit-navbutton {
+	display:inline-block;
+	-webkit-border-image: backButtonUrl 0 6 0 13 stretch stretch;
+	border-width: 0 6px 0 13px;
+	width: auto;
+	height: 30px;
+	padding: 0 4px 0 3px;
+	background: transparent;
+	font-weight: bold;
+	text-align: left;
+	color: navbarButtonColor;
+	text-shadow: navbarButtonTextShadow;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 12px;
+	line-height: 30px;
+	margin-right: auto;
+	}
+
+.v-touchkit-navbar-left .v-touchkit-navbutton:after {
+	display:none;	
+}
+
+.v-touchkit-navbar-left {
+	position: absolute;
+	left: 6px;
+	top: 7px;
+	max-width: 33%;
+	z-index: 1;
+	}
+
+.v-touchkit-navbar,
+.v-touchkit-navpanel-placeholder > div,
+.v-touchkit-popover.v-touchkit-fullscreen .v-touchkit-navpanel-placeholder > div {
+	background: navbarGradient;
+	color: #52555a;
+	display: block;
+	height: 43px;
+	line-height: 43px;
+	font-size: 20px;
+	font-weight: bold;
+	text-decoration: none;
+	text-shadow: navbarTextShadow;
+	border-bottom: divider;
+	text-align: center;
+	}
+
+.v-touchkit-navbar-caption {
+	position: absolute;
+	text-align: center;
+	left: 0;
+	right: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	}
+
+.v-touchkit-navbar-right {
+	position: absolute;
+	right: 6px;
+	top: 7px;
+	max-width: 33%;
+}
+
+
+.v-touchkit-navbar .v-button .v-icon {
+	height: 20px;
+	margin: 3px 0 0;
+	}
+
+
+.v-touchkit-navview-notoolbar .v-touchkit-navview-toolbar {
+	display: none;
+}
+
+
+/* NavigationView */
+
+.v-touchkit-navview {
+	position:relative;	
+}
+
+.v-touchkit-navview-wrapper {
+	position: absolute;
+	top: 44px;
+	bottom: 44px;
+	left: 0;
+	right: 0;	
+	overflow: auto;
+}
+.v-touchkit-navview-notoolbar .v-touchkit-navview-wrapper {
+	position:absolute;
+	top: 44px;
+	bottom: 0;
+	left: 0;
+	right: 0;	
+}
+
+
+.v-touchkit-toolbar {
+	background: navbarGradient;
+	color: navbarButtonColor;
+	text-shadow: navbarButtonTextShadow;
+	height: 43px;
+	}
+
+.v-touchkit-toolbar > .v-csslayout-margin {
+	padding: 2px;
+	}
+
+.v-touchkit-navview-toolbar {
+	position: absolute;
+	height: 43px;
+	bottom: 0;
+	left: 0;
+	right: 0;	
+	overflow: hidden;
+	border-top: divider;
+}
+
+.v-touchkit-toolbar .v-button .v-icon {
+	height: 25px;
+	margin: 0;
+	padding: 0;
+}
+
+.v-touchkit-navview-notoolbar .v-touchkit-navview-toolbar {
+	display: none;
+}
+
+.v-label-grey-title,
+.v-caption-v-touchkit-componentgroup .v-captiontext {
+	font-size: 17px;
+	font-weight: bold;
+	color: #44698b;
+	text-shadow: 0 1px 0px rgba(255,255,255,.3);
+	margin: listLayoutMargin listLayoutMarginx2 0;
+}
+
+@sprite .v-slider-handle {
+	gwt-image: "sliderHandle";
+	/* TODO make me bigger */
+	background-position: center center;
+	width:30px;
+	height:30px;
+	margin-top:-15px;
+}
+
+/* touchkit sub window */
+.v-window {
+	background: transparent;
+	}
+
+.v-window-modalitycurtain {
+	background: #3d3e40;
+	opacity: .7;
+	}
+
+.v-window-modalitycurtain.relative {
+	opacity: 0;
+	}
+
+.v-touchkit-popover.v-touchkit-plain {
+	/* popover that is not relative to component, nor fullscreen */
+	-webkit-box-shadow: 0 0 40px rgba(0,0,0,.5);
+	background: #fff;
+	/* Disabled, too slow on 1st-gen iPad
+	-webkit-animation-name: popup;
+	-webkit-animation-duration: .2s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-out;
+	-webkit-animation-delay: .05s;
+	*/
+}
+/*
+@-webkit-keyframes popup {
+	from {
+		top: 100%;
+	}
+	to {
+		top: 0;
+	}
+}
+*/
+
+.v-touchkit-popover.v-touchkit-relative .v-window-wrap {
+	overflow: visible;
+	background: transparent;
+	position: relative;
+	-webkit-box-shadow: 0 0 40px rgba(0,0,0,.6);
+	border-radius: listLayoutMargin;
+	border: 1px solid rgba(25,33,40,.5);
+	background: popoverGradient;
+}
+
+.v-touchkit-popover.v-touchkit-relative .v-window-contents {
+	border-radius: 11px;
+	position: relative;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.15), inset 0 0 1px rgba(255,255,255,.2);
+}
+
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navpanel-placeholder,
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navpanel-placeholder > div {
+	background: transparent;
+	border-top: 0;
+	border-bottom: 0;
+}
+
+.v-touchkit-popover.v-touchkit-relative .v-window-contents > div > .v-verticallayout .v-verticallayout-margin {
+	padding-top: 7px;
+	padding-bottom: 7px;
+	padding-left: 7px;
+	padding-right: 7px;
+}
+
+.v-window-contents {
+	top: 0;
+	left: 0;
+	margin-right: 0;
+	margin-bottom: 0;
+	position: block;
+}
+
+.v-touchkit-popover .v-window-closebox,
+.v-touchkit-popover .v-window-outerheader,
+.v-touchkit-popover .v-window-footer {
+	display: none;
+	}
+
+.v-touchkit-opacity-transition {
+	-webkit-transition: opacity 0.1s linear;
+	}
+
+@sprite .v-touchkit-popover-pointer {
+	gwt-image: "popoverArrowDownImage";
+	position: absolute;
+	margin-top: -1px;
+}
+
+@sprite .v-touchkit-popover-pointer-bottom {
+	gwt-image: "popoverArrowImage";
+	position: absolute;
+	margin-top: 3px;
+}
+
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navview-wrapper {
+	background: #e0e1e3;
+	margin: 4px 5px;
+	-webkit-box-shadow: inset 0 3px 2px rgba(0,0,0,.4);
+	border-radius: 6px;
+	z-index: 1;
+}
+
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navpanel-container {
+	background: transparent;
+}
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar {
+	background: transparent;
+	border: 0;
+}
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar-caption,
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navpanel-placeholder,
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navpanel-placeholder > div {
+	color: buttonColor;
+	text-shadow: buttonTextShadow;
+	background: popoverNavbarGradient;
+}
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navview-toolbar {
+	border: 0;
+	background: popoverToolbarGradient;
+	height: 43px;
+	padding-top: 12px;
+}
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar .v-button,
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar .v-touchkit-componentgroup-h {
+	border-color: rgba(0,0,0,.4);
+	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.1);
+}
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar .v-button-wrap {
+	color: buttonColor;
+	text-shadow: buttonTextShadow;
+}
+
+@url popoverBackButtonUrl popoverBackButtonImage;
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar-left .v-touchkit-navbutton {
+	color: buttonColor;
+	text-shadow: buttonTextShadow;
+	-webkit-border-image: popoverBackButtonUrl 0 6 0 13 stretch stretch;
+}
+
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-toolbar {
+	border: 0;
+	background: transparent;
+	}
+
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-toolbar .v-button-wrap {
+	color: buttonColor;
+	text-shadow: buttonTextShadow;
+	}
+
+
+/* Switch style checkbox.
+ * TODO Consider styling with pure css:
+ * http://css3wizardry.com/2010/09/16/making-an-iphone-switch-control-without-images/
+ */
+
+.v-touchkit-switch {
+	width: 81px;
+	height: 20px;
+	overflow: hidden;
+	border: 1px solid #bfbfbf;	
+	position: relative;
+	cursor: pointer !important;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+@sprite .v-touchkit-switch-slider {
+	gwt-image: "switchImage";
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.v-touchkit-switch-focus,
+.v-touchkit-switch:focus {
+	outline: none;
+	border-color: #4f83b4 #5b97d0 #5ca0df;
+}
+
+
+/* Tabsheet tabs below */
+
+.v-touchkit-tabsheet .v-csslayout-container,
+.v-touchkit-tabsheet .v-csslayout-margin {
+	height:100%;
+	position:relative;	
+}
+
+.v-touchkit-tabsheet > div > div > .v-touchkit-toolbar  {
+	position: absolute;
+	bottom: 0;
+	height: 48px;
+	background: tabbarGradient;
+	border-top: 1px solid #4c4c4c;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.2);
+	color: buttonColor;
+	text-shadow: buttonTextShadow;
+}
+
+.v-touchkit-tabsheet>div>div>.v-caption {
+	display:none;
+}
+
+.v-touchkit-tabsheet > div > div > .v-touchkit-toolbar .v-button {
+	padding: 3px;
+	height: 42px;
+}
+
+.v-touchkit-tabsheet > div > div > .v-touchkit-toolbar .v-button-wrap {
+	color: #bbb;
+	text-shadow: none;
+}
+
+.v-touchkit-tabsheet > div > div > .v-touchkit-toolbar .v-button-selected {
+	background: rgba(255,255,255,.15);	
+	border-radius: 4px;
+}
+
+.v-touchkit-tabsheet > div > div > .v-touchkit-toolbar .v-button-selected .v-button-wrap {
+	color: #fff;
+}
+
+.v-touchkit-navbar .v-button-no-decoration {
+	background: transparent;
+	border: none;
+}
+
+
+
+/* Button customizations */
+
+
+.v-touchkit-navbar .v-button-no-decoration .v-button-wrap {
+	border: none;
+	background: transparent;
+	}
+
+.v-button-white .v-button-wrap {
+	background-color: #fff;
+	color: #222;
+	text-shadow: navbarButtonTextShadow;
+	}
+
+.v-button-red .v-button-wrap,
+.v-touchkit-navbar .v-button-red {
+	background-color: #e30101;
+	}
+
+.v-button-blue .v-button-wrap,
+.v-touchkit-navbar .v-button-blue {
+	background-color: #0171e3;
+	}
+
+.v-button-green .v-button-wrap,
+.v-touchkit-navbar .v-button-green {
+	background-color: #29c100;
+	}
+
+.v-touchkit-navbar .v-button-red .v-button-wrap,
+.v-touchkit-navbar .v-button-blue .v-button-wrap,
+.v-touchkit-navbar .v-button-green .v-button-wrap {
+	color: buttonColor;
+	text-shadow: buttonTextShadow;
+	background-color: transparent;
+	}

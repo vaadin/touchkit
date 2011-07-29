@@ -1,5 +1,7 @@
 package com.vaadin.addon.touchkit;
 
+import com.vaadin.addon.touchkit.ui.ComponentGroup;
+import com.vaadin.addon.touchkit.ui.ComponentGroup.Orientation;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.Toolbar;
 import com.vaadin.terminal.ClassResource;
@@ -13,34 +15,39 @@ class NavViewWithButtons extends NavigationView implements ClickListener {
     NavViewWithButtons() {
         setCaption("Test buttons");
 
-        CssLayout cssLayout = new CssLayout();
-        cssLayout.setStyleName("v-tk-buttongroup");
+        ComponentGroup group = new ComponentGroup(Orientation.HORIZONTAL);
 
-        Button button = new Button(null, this);
-        button.setIcon(new ClassResource("mail.png", NavPanelTestWithViews.app));
+        Button button = new Button("Up", this);
+        button.addStyleName("icon-arrow-up");
 
-        cssLayout.addComponent(button);
+        group.addComponent(button);
 
-        Button button2 = new Button(null, this);
-        button2.setIcon(new ClassResource("mail.png", NavPanelTestWithViews.app));
-        cssLayout.addComponent(button2);
+        Button button2 = new Button("Down", this);
+        button2.addStyleName("icon-arrow-down");
+        group.addComponent(button2);
 
-        setLeftComponent(cssLayout);
+        setLeftComponent(group);
 
-        CssLayout cssLayout2 = new CssLayout();
+        CssLayout right = new CssLayout();
 
-        button2 = new Button(null, this);
-        button2.setIcon(new ClassResource("mail.png", NavPanelTestWithViews.app));
+        ComponentGroup group2 = new ComponentGroup(Orientation.HORIZONTAL);
+
+        button2 = new Button("No deco", this);
         button2.setStyleName("no-decoration");
 
-        cssLayout2.addComponent(button2);
+        right.addComponent(button2);
 
-        button2 = new Button(null, this);
-        button2.setIcon(new ClassResource("mail.png", NavPanelTestWithViews.app));
+        button2 = new Button("Left", this);
+        button2.addStyleName("icon-arrow-left");
 
-        cssLayout2.addComponent(button2);
+        group2.addComponent(button2);
+        button2 = new Button("Right", this);
+        button2.addStyleName("icon-arrow-right");
 
-        setRightComponent(cssLayout2);
+        group2.addComponent(button2);
+        right.addComponent(group2);
+
+        setRightComponent(right);
 
         Toolbar toolbar = new Toolbar();
 

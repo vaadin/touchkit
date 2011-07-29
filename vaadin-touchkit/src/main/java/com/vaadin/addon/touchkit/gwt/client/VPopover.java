@@ -49,13 +49,15 @@ public class VPopover extends VWindow {
         setShadowEnabled(false);
         if (fullscreen) {
             // fullscreen window
-            style += " v-tk-popover v-tk-fullscreen";
+            style += " v-touchkit-popover v-touchkit-fullscreen";
+            getModalityCurtain().addClassName("fullscreen");
         } else if (relComponentId != null) {
             // real popover (black)
-            style += " v-tk-popover v-tk-relative";
+            style += " v-touchkit-popover v-touchkit-relative";
+            getModalityCurtain().addClassName("relative");
         } else {
             // regular (white)
-            style += " v-tk-popover v-tk-plain";
+            style += " v-touchkit-popover v-touchkit-plain";
         }
         super.setStyleName(style);
     }
@@ -79,14 +81,15 @@ public class VPopover extends VWindow {
                 /*
                  * fade in the modality curtain unless in fullscreen mode.
                  */
-                getModalityCurtain().removeClassName("v-tk-opacity-transition");
+                getModalityCurtain().removeClassName(
+                        "v-touchkit-opacity-transition");
                 DOM.sinkEvents(getModalityCurtain(), Event.TOUCHEVENTS);
                 final Style style = getModalityCurtain().getStyle();
                 style.setOpacity(0);
                 Scheduler.get().scheduleDeferred(new ScheduledCommand() {
                     public void execute() {
                         getModalityCurtain().addClassName(
-                                "v-tk-opacity-transition");
+                                "v-touchkit-opacity-transition");
                         /* Final value from the theme */
                         style.setProperty("opacity", "");
                     }
@@ -189,9 +192,9 @@ public class VPopover extends VWindow {
 
     private void showReferenceArrow(boolean onTop,
             int centerOfReferencComponent, Widget ref) {
-        UIObject.setStyleName(arrowElement, "v-tk-popover-pointer-bottom",
-                !onTop);
-        UIObject.setStyleName(arrowElement, "v-tk-popover-pointer", onTop);
+        UIObject.setStyleName(arrowElement,
+                "v-touchkit-popover-pointer-bottom", !onTop);
+        UIObject.setStyleName(arrowElement, "v-touchkit-popover-pointer", onTop);
 
         int horizontalpoint = centerOfReferencComponent
                 - arrowElement.getOffsetWidth() / 2;
