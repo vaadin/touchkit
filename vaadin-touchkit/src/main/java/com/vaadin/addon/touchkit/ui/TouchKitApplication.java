@@ -11,6 +11,7 @@ import com.vaadin.terminal.gwt.server.HttpServletRequestListener;
 import com.vaadin.terminal.gwt.server.WebApplicationContext;
 import com.vaadin.terminal.gwt.server.WebBrowser;
 import com.vaadin.ui.Window;
+import com.vaadin.ui.themes.BaseTheme;
 
 /**
  * TouchKitApplication is a specialized {@link Application} implementation to
@@ -47,6 +48,7 @@ public abstract class TouchKitApplication extends Application implements
     @Override
     public void init() {
         setMainWindow(new TouchKitWindow());
+        setTheme(BaseTheme.THEME_NAME);
     }
 
     /**
