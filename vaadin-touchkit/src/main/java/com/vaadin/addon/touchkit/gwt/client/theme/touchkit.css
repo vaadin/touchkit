@@ -468,6 +468,11 @@
 	color: #1b699f;
 	}
 
+.v-touchkit-navbutton:active .v-touchkit-navbutton-desc,
+.v-touchkit-navbutton:focus .v-touchkit-navbutton-desc {
+	color: #fff;
+	}
+
 .v-touchkit-navbutton-pill .v-touchkit-navbutton-desc {
 	color: #fff;
 	padding: 1px 10px 2px;
