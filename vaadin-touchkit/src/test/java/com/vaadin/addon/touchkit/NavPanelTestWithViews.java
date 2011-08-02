@@ -10,8 +10,8 @@ import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.NumberField;
 import com.vaadin.addon.touchkit.ui.Popover;
 import com.vaadin.addon.touchkit.ui.Switch;
-import com.vaadin.addon.touchkit.ui.Toolbar;
 import com.vaadin.addon.touchkit.ui.TabBar;
+import com.vaadin.addon.touchkit.ui.Toolbar;
 import com.vaadin.terminal.ClassResource;
 import com.vaadin.terminal.Resource;
 import com.vaadin.terminal.ThemeResource;
@@ -394,6 +394,14 @@ public class NavPanelTestWithViews extends NavigationManager implements
                 navigationButton.setTargetView(simpleNavView);
                 if ((i + 1) % 5 == 0) {
                     navigationButton.setDescription("Status quo");
+                }
+                if ((i + 1) % 7 == 0) {
+                    navigationButton.setDescription("Important");
+                    navigationButton.addStyleName("emphasis");
+                }
+                if ((i + 1) % 9 == 0) {
+                    navigationButton.setDescription("123");
+                    navigationButton.addStyleName("pill");
                 }
                 components.addComponent(navigationButton);
             }

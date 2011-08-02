@@ -55,11 +55,32 @@
 @def tabbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#48494b), to(#222324), color-stop(0.49, #3a3b3c), color-stop(0.51, #2e2f30))');
 
 
+/* Navbuttons */
+@def navButtonGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4d8cb9), to(#3e6fa8))');
+
+/* Slider */
+@def sliderBaseGradient literal('-webkit-gradient(linear, 0% 0%, 0% 90%, from(#ccc), to(#fff))');
+@def sliderHandleGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#ddd), to(#fff))');
+
+
 /* Default popover */
 @def popoverGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(93,101,109,.86)), to(rgba(24,25,26,.9)), color-stop(.25, rgba(40,45,51,.86)))');
 @def popoverNavbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0)), to(rgba(0,0,0,0)), color-stop(.49, rgba(0,0,0,.2)), color-stop(.51, rgba(0,0,0,.45)))');
 @def popoverToolbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0)), to(rgba(255,255,255,0)), color-stop(.2, rgba(255,255,255,.15)), color-stop(.55, rgba(255,255,255,.1)), color-stop(.56, rgba(255,255,255,.05)))');
 
+
+/* Hide default view scrollbars */
+.v-view {
+	overflow: hidden;
+	}
+
+/* Hide default shadow implementation, shadows should be created using -webkit-box-shadow on the actual element that requires the shadow. */
+.v-shadow,
+.v-shadow-window {
+	display: none;
+	}
+
+/* Fonts */
 .v-app,
 .v-window,
 .v-popupview-popup,
@@ -95,7 +116,6 @@
 	background: #e0e1e3 linenBg;
 	text-shadow: 0 1px 0 rgba(255,255,255,.3);
 	}
-
 
 
 /* Loading indicator */
@@ -201,7 +221,8 @@
 
 /* Link style buttons */
 .v-button-link,
-.v-button-link .v-button-wrap {
+.v-button-link .v-button-wrap,
+.v-nativebutton-link {
 	display: inline-block;
 	border-radius: 0;
 	background: transparent;
@@ -213,6 +234,12 @@
 	font-weight: normal;
 	text-shadow: none;
 	color: #1b699f;
+	}
+
+.v-button-link .v-button-caption,
+.v-nativebutton-link .v-button-caption {
+	text-decoration: none;
+	line-height: 1;
 	}
 
 
@@ -256,6 +283,7 @@
 .v-touchkit-navbar .v-touchkit-componentgroup-h {
 	height: 27px;
 	-webkit-box-shadow: navbarButtonBoxShadow;
+	white-space: nowrap;
 	}
 
 .v-touchkit-navbar .v-touchkit-componentgroup-h .v-button {
@@ -396,18 +424,30 @@
 /* TODO giallo for placeholder */
 .v-touchkit-navpanel-notransit {
 	-webkit-transition: none;
-}
+	}
 
 .v-touchkit-navbutton {
 	-webkit-appearance: none;
-	display:block;
-	position:relative;
-	background: white;
+	display: block;
+	position: relative;
 	font-size: 17px;
 	font-weight: bold;
 	line-height: 43px;
-	margin:0;
-	padding:0;
+	margin: 0;
+	padding: 0;
+}
+
+.v-touchkit-componentgroup .v-touchkit-navbutton {
+	margin: 0 negativeListLayoutMargin;
+	padding: 0 listLayoutMargin;
+	outline: none;
+}
+
+.v-touchkit-componentgroup .v-touchkit-navbutton:focus,
+.v-touchkit-componentgroup .v-touchkit-navbutton:active {
+	background: navButtonGradient;
+	color: #fff;
+	text-shadow: 0 1px 1px #396897;
 }
 
 .v-touchkit-navbutton .v-icon {
@@ -425,7 +465,25 @@
 	}
 
 .v-touchkit-navbutton-emphasis .v-touchkit-navbutton-desc {
-	color: #73787c;
+	color: #1b699f;
+	}
+
+.v-touchkit-navbutton-pill .v-touchkit-navbutton-desc {
+	color: #fff;
+	padding: 1px 10px 2px;
+	background: #5d81ab;
+	border-radius: 1em;
+	line-height: 1;
+	top: 11px;
+	font-weight: bold;
+	text-shadow: none;
+	}
+
+.v-touchkit-navbutton-pill:focus .v-touchkit-navbutton-desc,
+.v-touchkit-navbutton-pill:active .v-touchkit-navbutton-desc {
+	background: #fff;
+	color: #5d81ab;
+	text-shadow: none;
 	}
 
 /* Borders backgrounds etc. for the margin element.*/
@@ -436,6 +494,7 @@
 	background: white;
 	padding: 0 listLayoutMargin;
 	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.5);
+	overflow: hidden;
 	}
 
 .v-touchkit-componentgroup > div > .v-csslayout-container {
@@ -457,6 +516,8 @@
 	font-size: 17px;
 	line-height: 43px;
 	height: 43px;
+	margin-left: negativeListLayoutMargin;
+	padding-left: listLayoutMargin;
 }
 
 .v-touchkit-componentgroup>div>div.v-csslayout-container>.v-caption>.v-captiontext {
@@ -479,14 +540,6 @@
 	height:30px;
 }
 
-/*
- * Nav buttons are 43px height, make switch as height in option layouts.
- */
-.v-touchkit-componentgroup .v-touchkit-switch {
-	margin-top: 12px;
-	margin-bottom: 8px;
-}
-
 /* Grey lines between component */
 .v-touchkit-componentgroup > div > .v-csslayout-container > *:before {
 	content: "";
@@ -503,6 +556,18 @@
 .v-touchkit-componentgroup > div > .v-csslayout-container > *:first-child:before {
 	display: none;
 	}
+
+/* Need to explicitly round the first and last components corners, otherwise they will stick out from the component group */
+.v-touchkit-componentgroup > div > div > .v-touchkit-navbutton:first-child {
+	border-top-left-radius: 11px; /* listLayoutMargin - 1px */
+	border-top-right-radius: 11px;
+	}
+
+.v-touchkit-componentgroup > div > div > .v-touchkit-navbutton:last-child {
+	border-bottom-left-radius: 11px; /* listLayoutMargin - 1px */
+	border-bottom-right-radius: 11px;
+	}
+
 
 .v-touchkit-componentgroup .v-formlayout > table {
 	margin-left: negativeListLayoutMargin;
@@ -529,7 +594,6 @@
 }
 
 @url navArrowUrl navArrowImage;
-
 .v-touchkit-navbutton:after {
 	content: "";
 	position: absolute;
@@ -539,6 +603,12 @@
 	background: navArrowUrl no-repeat 50%;
 	width: 10px;
 	margin-right: -1px;
+	}
+
+@url navArrowWhiteUrl navArrowWhiteImage;
+.v-touchkit-navbutton:focus:after,
+.v-touchkit-navbutton:active:after {
+	background-image: navArrowWhiteUrl;
 	}
 
 @url backButtonUrl backButtonImage;
@@ -571,7 +641,7 @@
 	position: absolute;
 	left: 6px;
 	top: 7px;
-	max-width: 33%;
+	max-width: 30%;
 	z-index: 1;
 	}
 
@@ -605,7 +675,7 @@
 	position: absolute;
 	right: 6px;
 	top: 7px;
-	max-width: 33%;
+	max-width: 30%;
 }
 
 
@@ -650,6 +720,10 @@
 	height: 43px;
 	}
 
+.v-touchkit-navview-toolbar .v-touchkit-navbar-caption {
+	font-size: 13px;
+	}
+
 .v-touchkit-toolbar > .v-csslayout-margin {
 	padding: 2px;
 	}
@@ -683,14 +757,31 @@
 	margin: listLayoutMargin listLayoutMarginx2 0;
 }
 
-@sprite .v-slider-handle {
-	gwt-image: "sliderHandle";
-	/* TODO make me bigger */
-	background-position: center center;
-	width:30px;
-	height:30px;
-	margin-top:-15px;
-}
+.v-slider:focus {
+	outline: none;
+	}
+
+.v-slider-base {
+	height: 6px;
+	background: sliderBaseGradient;
+	border-radius: 4px;
+	border: 1px solid rgba(0,0,0,.3);
+	border-bottom-color: rgba(0,0,0,0);
+	}
+
+.v-slider-handle {
+	background: sliderHandleGradient;
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	margin-top: -8px;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 1px 2px rgba(0,0,0,.3);
+	border: 1px solid rgba(0,0,0,.3);
+	}
+
+.v-slider-handle-active {
+	background: #ccc;
+	}
 
 /* touchkit sub window */
 .v-window {
@@ -850,30 +941,57 @@
  * http://css3wizardry.com/2010/09/16/making-an-iphone-switch-control-without-images/
  */
 
+@url switch switchImage;
 .v-touchkit-switch {
-	width: 81px;
-	height: 20px;
 	overflow: hidden;
-	border: 1px solid #bfbfbf;	
 	position: relative;
-	cursor: pointer !important;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-}
+	width: 92px;
+	height: 25px;
+	overflow: hidden;
+	background: switch;
+	background-position-y: -1px;
+	border: 1px solid rgba(0,0,0,.3);
+	border-radius: 4px;
+	}
 
-@sprite .v-touchkit-switch-slider {
-	gwt-image: "switchImage";
+.v-touchkit-switch-slider {
+	/* Used only for measuring the slide amount. The dimensions of this element should match the dimensions of the switch image */
 	position: absolute;
-	top: 0;
-	left: 0;
-}
+	width: 148px;
+	height: 25px;
+	}
 
 .v-touchkit-switch-focus,
 .v-touchkit-switch:focus {
 	outline: none;
-	border-color: #4f83b4 #5b97d0 #5ca0df;
-}
+	}
 
+.v-touchkit-componentgroup > div > .v-csslayout-container > .v-touchkit-switch:before {
+	display: none;
+	}
+
+.v-slider-feedback {
+	font-size: 20px;
+	line-height: 1;
+	padding: 4px 7px;
+	-webkit-box-shadow: 0 1px 5px rgba(0,0,0,.5);
+	margin-top: -14px !important;
+	}
+
+/*
+ * Nav buttons are 43px height, make switch/checkbox as high in option layouts
+ */
+.v-touchkit-componentgroup .v-touchkit-switch {
+	margin-top: 8px;
+	margin-bottom: 7px;
+	}
+
+.v-touchkit-componentgroup .v-checkbox {
+	height: 43px;
+	line-height: 43px;
+	font-size: 17px;
+	font-weight: bold;
+	}
 
 /* Tabsheet tabs below */
 
@@ -920,6 +1038,7 @@
 .v-touchkit-navbar .v-button-no-decoration {
 	background: transparent;
 	border: none;
+	-webkit-box-shadow: none;
 }
 
 

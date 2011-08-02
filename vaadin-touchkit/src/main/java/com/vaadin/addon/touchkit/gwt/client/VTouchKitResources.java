@@ -49,6 +49,12 @@ public interface VTouchKitResources extends ClientBundle {
     @Source("theme/img/nav-arrow-2x.png")
     public DataResource navArrowImage2x();
 
+    @Source("theme/img/nav-arrow-white.png")
+    public DataResource navArrowWhiteImage();
+
+    @Source("theme/img/nav-arrow-white-2x.png")
+    public DataResource navArrowWhiteImage2x();
+
     /**
      * Custom navbar icons for button
      */
@@ -89,16 +95,12 @@ public interface VTouchKitResources extends ClientBundle {
     @ImageOptions(repeatStyle = RepeatStyle.None)
     public ImageResource popoverArrowDownImage();
 
-    /*
-     * TODO get rid of these
+    /**
+     * Switch
      */
-
-    @Source("theme/img/slider-handle.png")
-    @ImageOptions(repeatStyle = RepeatStyle.None)
-    public ImageResource sliderHandle();
 
     @Source("theme/img/switch.png")
     @ImageOptions(repeatStyle = RepeatStyle.None)
-    public ImageResource switchImage();
+    public DataResource switchImage();
 
 }

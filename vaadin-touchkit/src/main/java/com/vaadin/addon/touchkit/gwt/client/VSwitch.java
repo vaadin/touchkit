@@ -224,16 +224,17 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
                 final int targetLeft = (value ? 0 : -getUnvisiblePartWidth());
 
                 if (skipAnimation) {
-                    slider.getStyle().setProperty("left", targetLeft + "px");
+                    getElement().getStyle().setProperty("backgroundPositionX",
+                            targetLeft + "px");
                 } else {
                     Animation a = new Animation() {
 
                         @Override
                         protected void onUpdate(double progress) {
-                            int currentLeft = slider.getOffsetLeft();
+                            int currentLeft = getCurrentPosition();
                             int newLeft = (int) (currentLeft + (progress * (targetLeft - currentLeft)));
-                            slider.getStyle().setProperty("left",
-                                    newLeft + "px");
+                            getElement().getStyle().setProperty(
+                                    "backgroundPositionX", newLeft + "px");
                         }
                     };
                     a.run(ANIMATION_DURATION_MS);
@@ -246,6 +247,17 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
         } else {
             command.execute();
         }
+    }
+
+    private int getCurrentPosition() {
+        String currentLeftString = getElement().getStyle().getProperty(
+                "backgroundPositionX");
+        if (currentLeftString == null) {
+            currentLeftString = "0px";
+        }
+        int currentLeft = Integer.parseInt(currentLeftString.substring(0,
+                currentLeftString.length() - 2));
+        return currentLeft;
     }
 
     public void onKeyUp(KeyUpEvent event) {
@@ -265,7 +277,7 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
     private void handleMouseDown(int clientX) {
         mouseDown = true;
         dragStart = clientX;
-        sliderOffsetLeft = slider.getOffsetLeft();
+        sliderOffsetLeft = getCurrentPosition();
     }
 
     public void onMouseUp(MouseUpEvent event) {
@@ -278,7 +290,7 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
         if (!dragging) {
             setValue(!value);
         } else {
-            if (slider.getOffsetLeft() < (-getUnvisiblePartWidth() / 2)) {
+            if (getCurrentPosition() < (-getUnvisiblePartWidth() / 2)) {
                 setValue(false);
             } else {
                 setValue(true);
@@ -320,7 +332,8 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
                 }
 
                 // set the CSS left
-                slider.getStyle().setProperty("left", left + "px");
+                getElement().getStyle().setProperty("backgroundPositionX",
+                        left + "px");
             }
         }
     }

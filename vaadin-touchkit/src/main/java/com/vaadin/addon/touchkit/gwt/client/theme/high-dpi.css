@@ -20,6 +20,11 @@
 	 -webkit-background-size: 9px 13px;
 	}
 
+@url navArrowWhite2xUrl navArrowWhiteImage2x;
+.v-touchkit-navbutton:focus:after,
+.v-touchkit-navbutton:active:after {
+	background-image: navArrowWhite2xUrl;
+	}
 
 /* Navbar custom icon buttons */
 @url navbarArrowUp2x navbarArrowUpImage2x;

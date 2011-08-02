@@ -4,6 +4,7 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.terminal.gwt.client.ApplicationConnection;
@@ -11,7 +12,7 @@ import com.vaadin.terminal.gwt.client.Paintable;
 import com.vaadin.terminal.gwt.client.UIDL;
 import com.vaadin.terminal.gwt.client.ui.Icon;
 
-public class VNavigationButton extends HTML implements Paintable {
+public class VNavigationButton extends HTML implements Paintable, Focusable {
     private static final String NAVBUTTON_CLASSNAME = "v-touchkit-navbutton";
     private String nextViewId;
     private ApplicationConnection client;
@@ -19,10 +20,10 @@ public class VNavigationButton extends HTML implements Paintable {
 
     public VNavigationButton() {
         setStyleName(NAVBUTTON_CLASSNAME);
+        setTabIndex(0);
         addClickHandler(new ClickHandler() {
-
             public void onClick(ClickEvent event) {
-                getElement().focus();
+                setFocus(true);
                 navigate();
                 String pid = client.getPid(getElement());
                 // client.updateVariable(pid, "mousedetails",
@@ -84,6 +85,26 @@ public class VNavigationButton extends HTML implements Paintable {
 
     public String getCaption() {
         return caption;
+    }
+
+    public int getTabIndex() {
+        return 0;
+    }
+
+    public void setAccessKey(char key) {
+        // TODO Auto-generated method stub
+    }
+
+    public void setFocus(boolean focused) {
+        if (focused) {
+            getElement().focus();
+        } else {
+            getElement().blur();
+        }
+    }
+
+    public void setTabIndex(int index) {
+        getElement().setAttribute("tabIndex", "" + index);
     }
 
 }
