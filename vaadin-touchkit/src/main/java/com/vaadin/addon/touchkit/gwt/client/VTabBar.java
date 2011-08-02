@@ -7,11 +7,11 @@ import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.terminal.gwt.client.RenderSpace;
 import com.vaadin.terminal.gwt.client.ui.VCssLayout;
 
-public class VTabsheet extends VCssLayout {
+public class VTabBar extends VCssLayout {
 
-    public static final String CLASSNAME = "v-touchkit-tabsheet";
+    public static final String CLASSNAME = "v-touchkit-tabbar";
 
-    public VTabsheet() {
+    public VTabBar() {
         setStyleName(CLASSNAME);
     }
 

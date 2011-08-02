@@ -4,7 +4,7 @@ import com.vaadin.addon.touchkit.ui.ComponentGroup;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.addon.touchkit.ui.NavigationManager;
 import com.vaadin.addon.touchkit.ui.NavigationView;
-import com.vaadin.addon.touchkit.ui.TouchKitTabsheet;
+import com.vaadin.addon.touchkit.ui.TabBar;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -13,7 +13,7 @@ import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TabSheet.Tab;
 
-public class TabsheetTest extends TouchKitTabsheet implements ClickListener {
+public class TabsheetTest extends TabBar implements ClickListener {
 
     public TabsheetTest() {
 

@@ -29,7 +29,7 @@ public class VNavigationManager extends ComplexPanel implements Container {
     private Paintable prevView;
     private Paintable nextView;
     private DivElement wrapper = Document.get().createDivElement();
-    private TouchKitApplicationConnection ac;
+    private VTouchKitApplicationConnection ac;
 
     public VNavigationManager() {
         setElement(Document.get().createDivElement());
@@ -62,7 +62,7 @@ public class VNavigationManager extends ComplexPanel implements Container {
     }
 
     public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
-        ac = (TouchKitApplicationConnection) client;
+        ac = (VTouchKitApplicationConnection) client;
         rendering = true;
         this.client = client;
         if (client.updateComponent(this, uidl, true)) {

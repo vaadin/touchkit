@@ -21,7 +21,7 @@ import com.vaadin.terminal.gwt.client.ValueMap;
  * (which would otherwise be perfect match for mobile webkits).
  * 
  */
-public class TouchKitApplicationConnection extends ApplicationConnection {
+public class VTouchKitApplicationConnection extends ApplicationConnection {
 
     private static final int MAX_TIMEOUT = 5000;
     private Collection<Object> locks = new ArrayList<Object>();

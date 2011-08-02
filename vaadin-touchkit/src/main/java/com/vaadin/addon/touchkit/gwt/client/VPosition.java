@@ -8,8 +8,8 @@ import com.google.gwt.core.client.JavaScriptObject;
  * TODO extend with GeoPositionAddress etc
  * 
  */
-public class Position extends JavaScriptObject {
-    protected Position() {}
+public class VPosition extends JavaScriptObject {
+    protected VPosition() {}
 
      public final native double getLatitude() 
      /*-{ 

@@ -9,9 +9,9 @@ import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.resources.client.ImageResource.ImageOptions;
 import com.google.gwt.resources.client.ImageResource.RepeatStyle;
 
-public interface TouchKitResources extends ClientBundle {
-    public static final TouchKitResources INSTANCE = GWT
-            .create(TouchKitResources.class);
+public interface VTouchKitResources extends ClientBundle {
+    public static final VTouchKitResources INSTANCE = GWT
+            .create(VTouchKitResources.class);
 
     @NotStrict
     @Source("theme/touchkit.css")

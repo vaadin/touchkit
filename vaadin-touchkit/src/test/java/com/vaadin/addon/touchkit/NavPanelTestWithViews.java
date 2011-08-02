@@ -11,7 +11,7 @@ import com.vaadin.addon.touchkit.ui.NumberField;
 import com.vaadin.addon.touchkit.ui.Popover;
 import com.vaadin.addon.touchkit.ui.Switch;
 import com.vaadin.addon.touchkit.ui.Toolbar;
-import com.vaadin.addon.touchkit.ui.TouchKitTabsheet;
+import com.vaadin.addon.touchkit.ui.TabBar;
 import com.vaadin.terminal.ClassResource;
 import com.vaadin.terminal.Resource;
 import com.vaadin.terminal.ThemeResource;
@@ -98,7 +98,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
                 if (event.getButton() == fullScreen) {
                     popover.setSizeFull();
                     popover.setModal(false);
-                    TouchKitTabsheet touchKitTabsheet = new TouchKitTabsheet();
+                    TabBar touchKitTabsheet = new TabBar();
                     popover.setContent(touchKitTabsheet);
 
                     content.setCaption("TAB1");

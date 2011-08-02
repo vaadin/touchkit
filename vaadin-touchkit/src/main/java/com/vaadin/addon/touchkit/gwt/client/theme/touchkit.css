@@ -877,13 +877,13 @@
 
 /* Tabsheet tabs below */
 
-.v-touchkit-tabsheet .v-csslayout-container,
-.v-touchkit-tabsheet .v-csslayout-margin {
+.v-touchkit-tabbar .v-csslayout-container,
+.v-touchkit-tabbar .v-csslayout-margin {
 	height:100%;
 	position:relative;	
 }
 
-.v-touchkit-tabsheet > div > div > .v-touchkit-toolbar  {
+.v-touchkit-tabbar > div > div > .v-touchkit-toolbar  {
 	position: absolute;
 	bottom: 0;
 	height: 48px;
@@ -894,26 +894,26 @@
 	text-shadow: buttonTextShadow;
 }
 
-.v-touchkit-tabsheet>div>div>.v-caption {
+.v-touchkit-tabbar>div>div>.v-caption {
 	display:none;
 }
 
-.v-touchkit-tabsheet > div > div > .v-touchkit-toolbar .v-button {
+.v-touchkit-tabbar > div > div > .v-touchkit-toolbar .v-button {
 	padding: 3px;
 	height: 42px;
 }
 
-.v-touchkit-tabsheet > div > div > .v-touchkit-toolbar .v-button-wrap {
+.v-touchkit-tabbar > div > div > .v-touchkit-toolbar .v-button-wrap {
 	color: #bbb;
 	text-shadow: none;
 }
 
-.v-touchkit-tabsheet > div > div > .v-touchkit-toolbar .v-button-selected {
+.v-touchkit-tabbar > div > div > .v-touchkit-toolbar .v-button-selected {
 	background: rgba(255,255,255,.15);	
 	border-radius: 4px;
 }
 
-.v-touchkit-tabsheet > div > div > .v-touchkit-toolbar .v-button-selected .v-button-wrap {
+.v-touchkit-tabbar > div > div > .v-touchkit-toolbar .v-button-selected .v-button-wrap {
 	color: #fff;
 }
 

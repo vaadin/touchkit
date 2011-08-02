@@ -2,7 +2,7 @@ package com.vaadin.addon.touchkit.ui;
 
 import java.util.Iterator;
 
-import com.vaadin.addon.touchkit.gwt.client.VTabsheet;
+import com.vaadin.addon.touchkit.gwt.client.VTabBar;
 import com.vaadin.terminal.gwt.client.MouseEventDetails;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.ClientWidget;
@@ -17,24 +17,24 @@ import com.vaadin.ui.TabSheet.Tab;
  * iOS. By default a bar with equally sized tab buttons is shown below the tab
  * content.
  */
-@ClientWidget(value = VTabsheet.class, loadStyle = LoadStyle.EAGER)
-public class TouchKitTabsheet extends CssLayout {
+@ClientWidget(value = VTabBar.class, loadStyle = LoadStyle.EAGER)
+public class TabBar extends CssLayout {
 
-    private Toolbar tabbar = new Toolbar();
+    private Toolbar toolbar = new Toolbar();
     private Component currentComponent;
 
     /**
-     * Creates a {@link TouchKitTabsheet} that is 100% wide and high.
+     * Creates a {@link TabBar} that is 100% wide and high.
      */
-    public TouchKitTabsheet() {
+    public TabBar() {
         super();
         setSizeFull();
-        tabbar.setHeight("46px");
-        addComponent(tabbar);
+        toolbar.setHeight("46px");
+        addComponent(toolbar);
     }
 
     /**
-     * Adds a new sheet to the {@link TouchKitTabsheet}, and adds a button
+     * Adds a new sheet to the {@link TabBar}, and adds a button
      * representing it to the tab bar.
      * 
      * @param tabContent
@@ -45,7 +45,7 @@ public class TouchKitTabsheet extends CssLayout {
      */
     public Tab addTab(Component tabContent) {
         TabButton tabButton = new TabButton(tabContent);
-        tabbar.addComponent(tabButton);
+        toolbar.addComponent(tabButton);
         if (currentComponent == null) {
             setSelectedTab(tabContent);
         }
@@ -54,13 +54,13 @@ public class TouchKitTabsheet extends CssLayout {
 
     @Override
     public void removeComponent(Component c) {
-        if (c == tabbar) {
+        if (c == toolbar) {
             throw new UnsupportedOperationException(
-                    "Tabbar cannot be removed from tabsheet");
+                    "The toolbar cannot be removed from a TabBar");
         }
         TabButton tabButton = getTabButton(c);
         if (tabButton != null) {
-            tabbar.removeComponent(tabButton);
+            toolbar.removeComponent(tabButton);
             if (c == currentComponent) {
                 super.removeComponent(c);
                 Component next = getComponentIterator().next();
@@ -112,7 +112,7 @@ public class TouchKitTabsheet extends CssLayout {
     }
 
     private TabButton getTabButton(Component tab) {
-        Iterator<Component> componentIterator = tabbar.getComponentIterator();
+        Iterator<Component> componentIterator = toolbar.getComponentIterator();
         while (componentIterator.hasNext()) {
             TabButton next = (TabButton) componentIterator.next();
             if (next.getComponent() == tab) {
