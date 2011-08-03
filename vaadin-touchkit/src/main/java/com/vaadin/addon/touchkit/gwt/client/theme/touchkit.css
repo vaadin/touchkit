@@ -51,7 +51,7 @@
 
 
 /* Tabbar */
-@def tabbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#48494b), to(#222324), color-stop(0.49, #3a3b3c), color-stop(0.51, #2e2f30))');
+@def tabbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#48494b), to(#222324), color-stop(0.49, #333435), color-stop(0.51, #2e2f30))');
 
 
 /* Navbuttons */
@@ -397,10 +397,8 @@
 
 .v-touchkit-toolbar .v-button-wrap {
 	background: transparent;
-	width: 1px;
-	height: 1px;
-	padding: 9px;
-	border-radius: 5px;
+	height: auto;
+	padding: 0;
 	-webkit-box-shadow: none;
 	font-size: 10px;
 	line-height: 1;
@@ -408,24 +406,10 @@
 	text-shadow: navbarButtonTextShadow;
 	overflow: visible;
 	display: inline-block;
-	margin: 11px;
 	}
 
-.v-touchkit-toolbar .v-button .v-button-wrap,
-.v-touchkit-navbar .v-button-no-decoration .v-button-caption {
-	-webkit-transition: .1s linear;
-	-webkit-transition-property: -webkit-box-shadow, background-color;
-	}
-
-.v-touchkit-toolbar .v-button:active .v-button-wrap,
-.v-touchkit-navbar .v-button-no-decoration:active .v-button-caption {
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
-	border-bottom-left-radius: 5px;
-	-webkit-box-shadow: 0 0 20px 10px #fff;
-	background: #fff;
-	-webkit-transition: none;
+.v-touchkit-toolbar .v-button:active .v-button-wrap {
+	background: transparent;
 	}
 
 .v-touchkit-toolbar .v-button-caption {
@@ -435,12 +419,34 @@
 
 .v-touchkit-toolbar .v-button .v-icon {
 	height: 25px;
-	margin: -12px;
-	padding: 0;
+	margin-top: 7px;
 	}
 
 
 
+
+
+
+/* Touch highlight */
+.v-touchkit-toolbar .v-button .v-button-wrap:before,
+.v-touchkit-navbar .v-button-no-decoration .v-button-wrap:before {
+	content: "";
+	display: block;
+	position: absolute;
+	-webkit-transition: .3s linear all;
+	border-radius: 10px;
+	width: 20px;
+	height: 20px;
+	margin: 7px 0 0 2px;
+	opacity: 0;
+	}
+
+.v-touchkit-toolbar .v-button:active .v-button-wrap:before,
+.v-touchkit-navbar .v-button-no-decoration:active .v-button-wrap:before {
+	-webkit-box-shadow: 0 0 25px 13px #fff;
+	background: #fff;
+	opacity: .8;
+	}
 
 
 
@@ -946,7 +952,7 @@
 }
 
 .v-touchkit-popover.v-touchkit-relative .v-touchkit-navview-wrapper {
-	background: #e0e1e3;
+	background: #f6f6f7;
 	margin: 0 5px;
 	-webkit-box-shadow: inset 0 3px 2px rgba(0,0,0,.4);
 	border-radius: 6px;
@@ -1097,16 +1103,20 @@
 
 .v-touchkit-tabbar > div > div > .v-touchkit-toolbar .v-button-caption {
 	display: block;
-	margin-top: 3px;
+	margin: 3px 0 0 0;
+	position: static;
+	width: auto;
+	height: auto;
+	border-radius: 0;
+	text-indent: 0;
+}
+
+.v-touchkit-tabbar > div > div > .v-touchkit-toolbar .v-button-wrap:before {
+	display: none;
 }
 
 .v-touchkit-tabbar > div > div > .v-touchkit-toolbar .v-button .v-icon {
 	margin: 0;
-}
-
-.v-touchkit-tabbar > div > div > .v-touchkit-toolbar .v-button:active .v-button-wrap {
-	background: transparent;
-	-webkit-box-shadow: none;
 }
 
 .v-touchkit-tabbar > div > div > .v-touchkit-toolbar .v-button-selected {
