@@ -30,7 +30,9 @@ public class TouchKitTestApp extends Application {
         // work correctly
         setTheme("base");
         final TouchKitWindow mainWindow = new TouchKitWindow();
-        mainWindow.setContent(new CssLayout());
+        CssLayout content = new CssLayout();
+        content.setMargin(true);
+        mainWindow.setContent(content);
         mainWindow.addListener(new Window.ResizeListener() {
             public void windowResized(ResizeEvent e) {
                 System.err.println("Window size now:"

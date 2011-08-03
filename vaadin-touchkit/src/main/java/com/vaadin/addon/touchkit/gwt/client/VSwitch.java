@@ -51,6 +51,13 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
     private final int DRAG_THRESHOLD_PIXELS = 10;
     private final int ANIMATION_DURATION_MS = 300;
 
+    /**
+     * The amount of pixels to move the background so that it is under the
+     * border. In iPhone 4 the amount is different because of pixel scaling.
+     */
+    private static final int BACKGROUND_POSITION_X_OFFSET = VEagerResourceLoader
+            .isHighDPI() ? -1 : 0;
+
     /** The client side widget identifier */
     protected String paintableId;
 
@@ -225,7 +232,7 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
 
                 if (skipAnimation) {
                     getElement().getStyle().setProperty("backgroundPositionX",
-                            targetLeft + "px");
+                            targetLeft + BACKGROUND_POSITION_X_OFFSET + "px");
                 } else {
                     Animation a = new Animation() {
 
@@ -234,7 +241,9 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
                             int currentLeft = getCurrentPosition();
                             int newLeft = (int) (currentLeft + (progress * (targetLeft - currentLeft)));
                             getElement().getStyle().setProperty(
-                                    "backgroundPositionX", newLeft + "px");
+                                    "backgroundPositionX",
+                                    newLeft + BACKGROUND_POSITION_X_OFFSET
+                                            + "px");
                         }
                     };
                     a.run(ANIMATION_DURATION_MS);
@@ -333,7 +342,7 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
 
                 // set the CSS left
                 getElement().getStyle().setProperty("backgroundPositionX",
-                        left + "px");
+                        left + BACKGROUND_POSITION_X_OFFSET + "px");
             }
         }
     }

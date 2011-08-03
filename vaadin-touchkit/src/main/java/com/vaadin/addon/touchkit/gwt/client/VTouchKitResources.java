@@ -103,4 +103,8 @@ public interface VTouchKitResources extends ClientBundle {
     @ImageOptions(repeatStyle = RepeatStyle.None)
     public DataResource switchImage();
 
+    @Source("theme/img/switch-2x.png")
+    @ImageOptions(repeatStyle = RepeatStyle.None)
+    public DataResource switchImage2x();
+
 }

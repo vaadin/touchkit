@@ -4,7 +4,7 @@ import com.vaadin.addon.touchkit.ui.ComponentGroup;
 import com.vaadin.addon.touchkit.ui.ComponentGroup.Orientation;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.Toolbar;
-import com.vaadin.terminal.ClassResource;
+import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -51,21 +51,22 @@ class NavViewWithButtons extends NavigationView implements ClickListener {
 
         Toolbar toolbar = new Toolbar();
 
-        button2 = new Button(null, this);
-        button2.setIcon(new ClassResource("mail.png", NavPanelTestWithViews.app));
+        button2 = new Button(null);
+        button2.setIcon(new ThemeResource("../runo/icons/64/document-web.png"));
         toolbar.addComponent(button2);
 
-        button2 = new Button(null, this);
-        button2.setIcon(new ClassResource("mail.png", NavPanelTestWithViews.app));
+        button2 = new Button(null);
+        button2.setIcon(new ThemeResource(
+                "../runo/icons/64/document-delete.png"));
         toolbar.addComponent(button2);
-        button2 = new Button(null, this);
-        button2.setIcon(new ClassResource("mail.png", NavPanelTestWithViews.app));
+        button2 = new Button(null);
+        button2.setIcon(new ThemeResource("../runo/icons/64/document-edit.png"));
         toolbar.addComponent(button2);
-        button2 = new Button(null, this);
-        button2.setIcon(new ClassResource("mail.png", NavPanelTestWithViews.app));
+        button2 = new Button(null);
+        button2.setIcon(new ThemeResource("../runo/icons/64/document-doc.png"));
         toolbar.addComponent(button2);
-        button2 = new Button(null, this);
-        button2.setIcon(new ClassResource("mail.png", NavPanelTestWithViews.app));
+        button2 = new Button(null);
+        button2.setIcon(new ThemeResource("../runo/icons/64/document-ppt.png"));
         toolbar.addComponent(button2);
 
         setToolbar(toolbar);

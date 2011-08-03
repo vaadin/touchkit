@@ -50,3 +50,12 @@
 	background-image: navbarArrowRight2x;
 	 -webkit-background-size: 14px 18px;
 	}
+
+
+
+@url switch2x switchImage2x;
+.v-touchkit-switch {
+	background: switch2x;
+	-webkit-background-size: 150px 27px;
+	background-position-y: -1px;
+	}

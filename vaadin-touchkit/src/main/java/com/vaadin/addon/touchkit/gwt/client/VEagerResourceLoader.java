@@ -11,7 +11,7 @@ public class VEagerResourceLoader implements EntryPoint {
         }
     }
 
-    private static native boolean isHighDPI()
+    public static native boolean isHighDPI()
     /*-{
         if (window.devicePixelRatio >= 2) {
             return true;

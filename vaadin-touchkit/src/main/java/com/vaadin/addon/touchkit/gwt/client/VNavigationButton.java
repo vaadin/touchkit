@@ -32,6 +32,27 @@ public class VNavigationButton extends HTML implements Paintable, Focusable {
                 client.updateVariable(pid, "state", true, true);
             }
         });
+
+        // Once the scrollDelegate in VNavigationView allows us to handle touch
+        // events more freely, activate these to mimic navigation selection
+        // styling more accurately
+
+        // sinkEvents(Event.TOUCHEVENTS);
+        // addTouchStartHandler(new TouchStartHandler() {
+        // public void onTouchStart(TouchStartEvent event) {
+        // setFocus(true);
+        // }
+        // });
+        // addTouchCancelHandler(new TouchCancelHandler() {
+        // public void onTouchCancel(TouchCancelEvent event) {
+        // setFocus(false);
+        // }
+        // });
+        // addTouchMoveHandler(new TouchMoveHandler() {
+        // public void onTouchMove(TouchMoveEvent event) {
+        // setFocus(false);
+        // }
+        // });
     }
 
     private void navigate() {

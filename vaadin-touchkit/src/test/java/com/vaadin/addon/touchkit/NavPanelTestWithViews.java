@@ -273,6 +273,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
         private void generateLeafContent() {
             CssLayout cssLayout = new CssLayout();
             cssLayout.setWidth("100%");
+            cssLayout.setMargin(true);
             Component label = new Label("Foobar");
             label.setStyleName("grey-title");
             cssLayout.addComponent(label);
@@ -386,6 +387,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
 
         private void generateSubViews() {
             ComponentGroup components = new ComponentGroup();
+            components.setMargin(true);
             int amount = getDepth() % 2 == 1 ? 3 : 25;
             for (int i = 0; i < amount; i++) {
                 SimpleNavView simpleNavView = new SimpleNavView(this, i);

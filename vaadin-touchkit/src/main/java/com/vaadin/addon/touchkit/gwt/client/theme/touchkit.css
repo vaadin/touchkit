@@ -15,12 +15,9 @@
 
 /**
  * Layout dimensions
- */ 
-@def layoutMargin 20px;
-@def negativeLayoutMargin -20px;
-@def listLayoutMargin 12px;
-@def negativeListLayoutMargin -12px;
-@def listLayoutMarginx2 24px;
+ */
+@def listLayoutMargin 10px;
+@def negativeListLayoutMargin -10px;
 
 /**
  * Default buttons (iPhone style, full-width)
@@ -32,6 +29,7 @@
 @def buttonColor #fff;
 @def buttonFontSize 20px;
 @def buttonGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(246,246,246,.46)), to(rgba(145,149,159,.46)), color-stop(.49, rgba(160,162,167,.46)), color-stop(.51, rgba(130,133,142,.46)))');
+@def buttonActiveGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(200,200,200,.55)), to(rgba(128,131,141,.55)), color-stop(.49, rgba(132,134,138,.55)), color-stop(.51, rgba(101,104,113,.55)))');
 
 
 
@@ -39,7 +37,7 @@
  * Navbar
  */
 @def navbarTextShadow 0 1px 1px rgba(255,255,255,.75);
-@def navbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#f1f2f2), to(#c9cccf), color-stop(.025, #fff))');
+@def navbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#e5e7e8), to(#b8bcc0), color-stop(.025, #fff))');
 
 /**
  * Navbar buttons
@@ -47,6 +45,7 @@
 @def navbarButtonColor #3d3f41;
 @def navbarButtonTextShadow 0 1px 0 rgba(255,255,255,.5);
 @def navbarButtonGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,.23)), to(rgba(73,73,73,.23)))');
+@def navbarButtonActiveGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(180,180,180,.3)), to(rgba(30,30,30,.3)))');
 @def navbarButtonBorder 1px solid rgba(142,147,152,.66);
 @def navbarButtonBoxShadow 0 1px 0 rgba(255,255,255,.25), inset 0 1px 0 rgba(255,255,255,.3);
 
@@ -69,9 +68,15 @@
 @def popoverToolbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0)), to(rgba(255,255,255,0)), color-stop(.2, rgba(255,255,255,.15)), color-stop(.55, rgba(255,255,255,.1)), color-stop(.56, rgba(255,255,255,.05)))');
 
 
+
 /* Hide default view scrollbars */
 .v-view {
 	overflow: hidden;
+	}
+
+/* CssLayouts don't need to be overflow: hidden in webkit */
+.v-csslayout {
+	overflow: visible;
 	}
 
 /* Hide default shadow implementation, shadows should be created using -webkit-box-shadow on the actual element that requires the shadow. */
@@ -185,7 +190,7 @@
 	-webkit-box-shadow: buttonInsetBoxShadow;
 	padding: 3px;
 	height: 45px;
-	margin: listLayoutMargin;
+	margin: listLayoutMargin 0;
 	}
 
 .v-touchkit-popover .v-button {
@@ -207,6 +212,10 @@
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
+	}
+
+.v-button:active .v-button-wrap {
+	background-image: buttonActiveGradient;
 	}
 
 .v-button-caption {
@@ -234,6 +243,10 @@
 	font-weight: normal;
 	text-shadow: none;
 	color: #1b699f;
+	}
+
+.v-button-link:active .v-button-wrap {
+	background: transparent;
 	}
 
 .v-button-link .v-button-caption,
@@ -275,6 +288,14 @@
 	padding: 0 13px;
 	}
 
+.v-touchkit-navbar .v-button:active .v-button-wrap {
+	background-image: none;
+	}
+
+.v-touchkit-navbar .v-button:active .v-button-wrap {
+	background: navbarButtonActiveGradient;
+	}
+
 .v-touchkit-navbar .v-button-caption {
 	line-height: 27px;
 	}
@@ -284,6 +305,7 @@
 	height: 27px;
 	-webkit-box-shadow: navbarButtonBoxShadow;
 	white-space: nowrap;
+	overflow: visible;
 	}
 
 .v-touchkit-navbar .v-touchkit-componentgroup-h .v-button {
@@ -293,12 +315,19 @@
 	border-left: 1px solid #adb0b3;
 	}
 
-.v-touchkit-navbar .v-touchkit-componentgroup-h > div > div .v-button:first-child {
-	border-left: none;
-	}
-
 .v-touchkit-navbar .v-touchkit-componentgroup-h .v-button-wrap {
 	border-radius: 0;
+	}
+
+.v-touchkit-navbar .v-touchkit-componentgroup-h .v-button:first-child {
+	border-left: none;
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+	}
+
+.v-touchkit-navbar .v-touchkit-componentgroup-h .v-button:last-child {
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
 	}
 
 
@@ -350,7 +379,11 @@
 
 
 
-/* Toolbar buttons */
+
+
+
+
+/* Toolbar buttons (icons only by default) */
 .v-touchkit-toolbar .v-button,
 .v-touchkit-toolbar .v-touchkit-componentgroup-h {
 	display: inline-block;
@@ -364,19 +397,46 @@
 
 .v-touchkit-toolbar .v-button-wrap {
 	background: transparent;
-	height: auto;
-	padding: 0;
-	border-radius: 4px;
+	width: 1px;
+	height: 1px;
+	padding: 9px;
+	border-radius: 5px;
 	-webkit-box-shadow: none;
-	font-size: 11px;
+	font-size: 10px;
 	line-height: 1;
 	color: navbarButtonColor;
 	text-shadow: navbarButtonTextShadow;
+	overflow: visible;
+	display: inline-block;
+	margin: 11px;
+	}
+
+.v-touchkit-toolbar .v-button .v-button-wrap,
+.v-touchkit-navbar .v-button-no-decoration .v-button-caption {
+	-webkit-transition: .1s linear;
+	-webkit-transition-property: -webkit-box-shadow, background-color;
+	}
+
+.v-touchkit-toolbar .v-button:active .v-button-wrap,
+.v-touchkit-navbar .v-button-no-decoration:active .v-button-caption {
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	-webkit-box-shadow: 0 0 20px 10px #fff;
+	background: #fff;
+	-webkit-transition: none;
 	}
 
 .v-touchkit-toolbar .v-button-caption {
-	display: block;
+	display: none;
 	line-height: 1;
+	}
+
+.v-touchkit-toolbar .v-button .v-icon {
+	height: 25px;
+	margin: -12px;
+	padding: 0;
 	}
 
 
@@ -452,8 +512,8 @@
 
 .v-touchkit-navbutton .v-icon {
 	height: 30px;
-	margin-right: 5px;
-	vertical-align: middle;
+	margin: 0 6px 0 -3px;
+	vertical-align: -9px;
 }
 
 .v-touchkit-navbutton-desc {
@@ -479,9 +539,10 @@
 	background: #5d81ab;
 	border-radius: 1em;
 	line-height: 1;
-	top: 11px;
+	top: 12px;
 	font-weight: bold;
 	text-shadow: none;
+	-webkit-box-shadow: inset 0 1px 0 rgba(0,0,0,.15);
 	}
 
 .v-touchkit-navbutton-pill:focus .v-touchkit-navbutton-desc,
@@ -489,11 +550,13 @@
 	background: #fff;
 	color: #5d81ab;
 	text-shadow: none;
+	-webkit-box-shadow: none;
 	}
 
 /* Borders backgrounds etc. for the margin element.*/
 .v-touchkit-componentgroup > div {
-	margin: listLayoutMargin;
+	margin-top: listLayoutMargin;
+	margin-bottom: listLayoutMargin;
 	border: listBorder;
 	border-radius: listLayoutMargin;
 	background: white;
@@ -564,13 +627,13 @@
 
 /* Need to explicitly round the first and last components corners, otherwise they will stick out from the component group */
 .v-touchkit-componentgroup > div > div > .v-touchkit-navbutton:first-child {
-	border-top-left-radius: 11px; /* listLayoutMargin - 1px */
-	border-top-right-radius: 11px;
+	border-top-left-radius: 9px; /* listLayoutMargin - 1px */
+	border-top-right-radius: 9px;
 	}
 
 .v-touchkit-componentgroup > div > div > .v-touchkit-navbutton:last-child {
-	border-bottom-left-radius: 11px; /* listLayoutMargin - 1px */
-	border-bottom-right-radius: 11px;
+	border-bottom-left-radius: 9px; /* listLayoutMargin - 1px */
+	border-bottom-right-radius: 9px;
 	}
 
 
@@ -738,16 +801,13 @@
 	height: 43px;
 	bottom: 0;
 	left: 0;
-	right: 0;	
-	overflow: hidden;
+	right: 0;
 	border-top: divider;
-}
+	}
 
-.v-touchkit-toolbar .v-button .v-icon {
-	height: 25px;
-	margin: 0;
-	padding: 0;
-}
+.v-touchkit-navview-toolbar > .v-touchkit-toolbar {
+	overflow: visible;
+	}
 
 .v-touchkit-navview-notoolbar .v-touchkit-navview-toolbar {
 	display: none;
@@ -755,11 +815,11 @@
 
 .v-label-grey-title,
 .v-caption-v-touchkit-componentgroup .v-captiontext {
-	font-size: 17px;
+	font-size: 16px;
 	font-weight: bold;
 	color: #44698b;
-	text-shadow: 0 1px 0px rgba(255,255,255,.3);
-	margin: listLayoutMargin listLayoutMarginx2 0;
+	text-shadow: 0 1px 0 rgba(255,255,255,.7);
+	margin: listLayoutMargin listLayoutMargin 0;
 }
 
 .v-slider:focus {
@@ -887,7 +947,7 @@
 
 .v-touchkit-popover.v-touchkit-relative .v-touchkit-navview-wrapper {
 	background: #e0e1e3;
-	margin: 4px 5px;
+	margin: 0 5px;
 	-webkit-box-shadow: inset 0 3px 2px rgba(0,0,0,.4);
 	border-radius: 6px;
 	z-index: 1;
@@ -911,7 +971,7 @@
 	border: 0;
 	background: popoverToolbarGradient;
 	height: 43px;
-	padding-top: 12px;
+	padding-top: 8px;
 }
 .v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar .v-button,
 .v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar .v-touchkit-componentgroup-h {
@@ -954,15 +1014,15 @@
 	height: 25px;
 	overflow: hidden;
 	background: switch;
-	background-position-y: -1px;
-	border: 1px solid rgba(0,0,0,.3);
+	-webkit-background-origin: border-box;
+	border: 1px solid rgba(0,0,0,.2);
 	border-radius: 4px;
 	}
 
 .v-touchkit-switch-slider {
 	/* Used only for measuring the slide amount. The dimensions of this element should match the dimensions of the switch image */
 	position: absolute;
-	width: 148px;
+	width: 146px;
 	height: 25px;
 	}
 
@@ -1027,8 +1087,26 @@
 }
 
 .v-touchkit-tabbar > div > div > .v-touchkit-toolbar .v-button-wrap {
-	color: #bbb;
+	color: #999;
 	text-shadow: none;
+	margin: 0;
+	height: auto;
+	width: auto;
+	padding: 0;
+}
+
+.v-touchkit-tabbar > div > div > .v-touchkit-toolbar .v-button-caption {
+	display: block;
+	margin-top: 3px;
+}
+
+.v-touchkit-tabbar > div > div > .v-touchkit-toolbar .v-button .v-icon {
+	margin: 0;
+}
+
+.v-touchkit-tabbar > div > div > .v-touchkit-toolbar .v-button:active .v-button-wrap {
+	background: transparent;
+	-webkit-box-shadow: none;
 }
 
 .v-touchkit-tabbar > div > div > .v-touchkit-toolbar .v-button-selected {
@@ -1040,20 +1118,22 @@
 	color: #fff;
 }
 
-.v-touchkit-navbar .v-button-no-decoration {
-	background: transparent;
-	border: none;
-	-webkit-box-shadow: none;
-}
-
 
 
 /* Button customizations */
 
+.v-touchkit-navbar .v-button-no-decoration {
+	background: transparent;
+	border: none;
+	-webkit-box-shadow: none;
+	overflow: visible;
+}
 
-.v-touchkit-navbar .v-button-no-decoration .v-button-wrap {
+.v-touchkit-navbar .v-button-no-decoration .v-button-wrap,
+.v-touchkit-navbar .v-button-no-decoration:active .v-button-wrap {
 	border: none;
 	background: transparent;
+	overflow: visible;
 	}
 
 .v-button-white .v-button-wrap {
@@ -1083,4 +1163,84 @@
 	color: buttonColor;
 	text-shadow: buttonTextShadow;
 	background-color: transparent;
+	}
+
+
+
+
+
+
+/* Layout margins */
+.v-orderedlayout-margin-top,
+.v-horizontallayout-margin-top,
+.v-verticallayout-margin-top,
+.v-gridlayout-margin-top,
+.v-csslayout-margin-top {
+	padding-top: listLayoutMargin;
+}
+.v-orderedlayout-margin-right,
+.v-horizontallayout-margin-right,
+.v-verticallayout-margin-right,
+.v-gridlayout-margin-right,
+.v-csslayout-margin-right {
+	padding-right: listLayoutMargin;
+}
+.v-orderedlayout-margin-bottom,
+.v-horizontallayout-margin-bottom,
+.v-verticallayout-margin-bottom,
+.v-gridlayout-margin-bottom,
+.v-csslayout-margin-bottom {
+	padding-bottom: listLayoutMargin;
+}
+.v-orderedlayout-margin-left,
+.v-horizontallayout-margin-left,
+.v-verticallayout-margin-left,
+.v-gridlayout-margin-left,
+.v-csslayout-margin-left {
+	padding-left: listLayoutMargin;
+}
+
+/* CssLayout uses margins instead of padding */
+.v-csslayout-margin-top {
+	margin-top: listLayoutMargin;
+	padding: 0;
+}
+.v-csslayout-margin-right {
+	margin-right: listLayoutMargin;
+	padding: 0;
+}
+.v-csslayout-margin-bottom {
+	margin-bottom: listLayoutMargin;
+	padding: 0;
+}
+.v-csslayout-margin-left {
+	margin-left: listLayoutMargin;
+	padding: 0;
+}
+
+/* Layout spacings */
+.v-orderedlayout-spacing-on,
+.v-horizontallayout-spacing-on,
+.v-verticallayout-spacing-on,
+.v-gridlayout-spacing-on {
+	padding-top: 8px;
+	padding-left: 8px;
+}
+
+
+
+
+/* Notifications */
+.v-Notification {
+	background: popoverGradient;
+	border: 2px solid rgba(0,0,0,.3);
+	border-top-color: rgba(100,100,100,.4);
+	border-bottom-color: rgba(0,0,0,.7);
+	border-radius: listLayoutMargin;
+	padding: 30px 30px;
+	text-align: center;
+	color: #fff;
+	line-height: normal;
+	text-shadow: 0 1px 1px rgba(0,0,0,.2);
+	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.4), 0 2px 1px 1px rgba(0,0,0,.5), inset 0 0 1px rgba(255,255,255,.16); 
 	}
