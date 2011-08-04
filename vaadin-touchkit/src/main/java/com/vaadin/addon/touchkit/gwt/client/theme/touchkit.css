@@ -199,7 +199,7 @@
 
 .v-button-wrap {
 	display: block;
-	border-radius: 9px;
+	border-radius: 7px;
 	background: buttonGradient;
 	-webkit-box-shadow: buttonBoxShadow;
 	padding: 0 listLayoutMargin;
