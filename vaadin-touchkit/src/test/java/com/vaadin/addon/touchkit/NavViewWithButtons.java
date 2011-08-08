@@ -1,7 +1,7 @@
 package com.vaadin.addon.touchkit;
 
-import com.vaadin.addon.touchkit.ui.ComponentGroup;
-import com.vaadin.addon.touchkit.ui.ComponentGroup.Orientation;
+import com.vaadin.addon.touchkit.ui.AbstractComponentGroup;
+import com.vaadin.addon.touchkit.ui.HorizontalComponentGroup;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.Toolbar;
 import com.vaadin.terminal.ThemeResource;
@@ -15,7 +15,7 @@ class NavViewWithButtons extends NavigationView implements ClickListener {
     NavViewWithButtons() {
         setCaption("Test buttons");
 
-        ComponentGroup group = new ComponentGroup(Orientation.HORIZONTAL);
+        HorizontalComponentGroup group = new HorizontalComponentGroup();
 
         Button button = new Button("Up", this);
         button.addStyleName("icon-arrow-up");
@@ -30,7 +30,7 @@ class NavViewWithButtons extends NavigationView implements ClickListener {
 
         CssLayout right = new CssLayout();
 
-        ComponentGroup group2 = new ComponentGroup(Orientation.HORIZONTAL);
+        HorizontalComponentGroup group2 = new HorizontalComponentGroup();
 
         button2 = new Button("No deco", this);
         button2.setStyleName("no-decoration");

@@ -262,7 +262,7 @@
 
 /* Navbar buttons */
 .v-touchkit-navbar .v-button,
-.v-touchkit-navbar .v-touchkit-componentgroup-h {
+.v-touchkit-navbar .v-touchkit-horizontalcomponentgroup {
 	display: inline-block;
 	margin: 0;
 	background: transparent;
@@ -301,31 +301,31 @@
 	}
 
 /* Strip some styles from buttons inside a componentgroup */
-.v-touchkit-navbar .v-touchkit-componentgroup-h {
+.v-touchkit-navbar .v-touchkit-horizontalcomponentgroup {
 	height: 27px;
 	-webkit-box-shadow: navbarButtonBoxShadow;
 	white-space: nowrap;
 	overflow: visible;
 	}
 
-.v-touchkit-navbar .v-touchkit-componentgroup-h .v-button {
+.v-touchkit-navbar .v-touchkit-horizontalcomponentgroup .v-button {
 	border: none;
 	height: 27px;
 	border-radius: 0;
 	border-left: 1px solid #adb0b3;
 	}
 
-.v-touchkit-navbar .v-touchkit-componentgroup-h .v-button-wrap {
+.v-touchkit-navbar .v-touchkit-horizontalcomponentgroup .v-button-wrap {
 	border-radius: 0;
 	}
 
-.v-touchkit-navbar .v-touchkit-componentgroup-h .v-button:first-child {
+.v-touchkit-navbar .v-touchkit-horizontalcomponentgroup .v-button:first-child {
 	border-left: none;
 	border-top-left-radius: 4px;
 	border-bottom-left-radius: 4px;
 	}
 
-.v-touchkit-navbar .v-touchkit-componentgroup-h .v-button:last-child {
+.v-touchkit-navbar .v-touchkit-horizontalcomponentgroup .v-button:last-child {
 	border-top-right-radius: 4px;
 	border-bottom-right-radius: 4px;
 	}
@@ -385,7 +385,7 @@
 
 /* Toolbar buttons (icons only by default) */
 .v-touchkit-toolbar .v-button,
-.v-touchkit-toolbar .v-touchkit-componentgroup-h {
+.v-touchkit-toolbar .v-touchkit-horizontalcomponentgroup {
 	display: inline-block;
 	margin: 0;
 	background: transparent;
@@ -560,7 +560,7 @@
 	}
 
 /* Borders backgrounds etc. for the margin element.*/
-.v-touchkit-componentgroup > div {
+.v-touchkit-verticalcomponentgroup > div {
 	margin-top: listLayoutMargin;
 	margin-bottom: listLayoutMargin;
 	border: listBorder;
@@ -571,20 +571,20 @@
 	overflow: hidden;
 	}
 
-.v-touchkit-componentgroup > div > .v-csslayout-container {
+.v-touchkit-verticalcomponentgroup > div > .v-csslayout-container {
 	position: relative;	
 	}
 
-.v-touchkit-componentgroup>div>div.v-csslayout-container>* {
+.v-touchkit-verticalcomponentgroup>div>div.v-csslayout-container>* {
 	clear:both;
 	}
 
-.v-touchkit-componentgroup>div>div.v-csslayout-container>.v-touchkit-has-caption {
+.v-touchkit-verticalcomponentgroup>div>div.v-csslayout-container>.v-touchkit-has-caption {
 	clear: right;
 	float: right;
 	}
 
-.v-touchkit-componentgroup>div>.v-csslayout-container>.v-caption {
+.v-touchkit-verticalcomponentgroup>div>.v-csslayout-container>.v-caption {
 	float: left;
 	font-weight: bold;
 	font-size: 17px;
@@ -594,11 +594,11 @@
 	padding-left: listLayoutMargin;
 }
 
-.v-touchkit-componentgroup>div>div.v-csslayout-container>.v-caption>.v-captiontext {
+.v-touchkit-verticalcomponentgroup>div>div.v-csslayout-container>.v-caption>.v-captiontext {
 	padding-right: 3px;	
 }
 
-.v-touchkit-componentgroup input.v-textfield {
+.v-touchkit-verticalcomponentgroup input.v-textfield {
 	-webkit-appearance: none;
 	border:0;
 	padding:0 4px;
@@ -609,13 +609,13 @@
 	height: 40px;
 }
 
-.v-touchkit-componentgroup .v-select-select {
+.v-touchkit-verticalcomponentgroup .v-select-select {
 	margin-top: 5px;
 	height:30px;
 }
 
 /* Grey lines between component */
-.v-touchkit-componentgroup > div > .v-csslayout-container > *:before {
+.v-touchkit-verticalcomponentgroup > div > .v-csslayout-container > *:before {
 	content: "";
 	display: block;
 	position: absolute;
@@ -627,7 +627,7 @@
 	}
 
 /* ...hide from the first */
-.v-touchkit-componentgroup > div > .v-csslayout-container > *:first-child:before {
+.v-touchkit-verticalcomponentgroup > div > .v-csslayout-container > *:first-child:before {
 	display: none;
 	}
 
@@ -648,7 +648,7 @@
 	margin-right: negativeListLayoutMargin;
 	}
 
-.v-touchkit-componentgroup .v-formlayout-captioncell {
+.v-touchkit-verticalcomponentgroup .v-formlayout-captioncell {
 	padding-left: listLayoutMargin;
 	text-align: left;
 	}
@@ -820,7 +820,7 @@
 }
 
 .v-label-grey-title,
-.v-caption-v-touchkit-componentgroup .v-captiontext {
+.v-caption-v-touchkit-verticalcomponentgroup .v-captiontext {
 	font-size: 16px;
 	font-weight: bold;
 	color: #44698b;
@@ -980,7 +980,7 @@
 	padding-top: 8px;
 }
 .v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar .v-button,
-.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar .v-touchkit-componentgroup-h {
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar .v-touchkit-horizontalcomponentgroup {
 	border-color: rgba(0,0,0,.4);
 	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.1);
 }

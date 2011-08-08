@@ -1,9 +1,8 @@
 package com.vaadin.addon.touchkit;
 
 import com.vaadin.Application;
-import com.vaadin.addon.touchkit.ui.ComponentGroup;
-import com.vaadin.addon.touchkit.ui.ComponentGroup.Orientation;
 import com.vaadin.addon.touchkit.ui.EmailField;
+import com.vaadin.addon.touchkit.ui.HorizontalComponentGroup;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.addon.touchkit.ui.NavigationManager;
 import com.vaadin.addon.touchkit.ui.NavigationView;
@@ -12,6 +11,7 @@ import com.vaadin.addon.touchkit.ui.Popover;
 import com.vaadin.addon.touchkit.ui.Switch;
 import com.vaadin.addon.touchkit.ui.TabBar;
 import com.vaadin.addon.touchkit.ui.Toolbar;
+import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.terminal.ClassResource;
 import com.vaadin.terminal.Resource;
 import com.vaadin.terminal.ThemeResource;
@@ -165,7 +165,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
         button2.setStyleName(BaseTheme.BUTTON_LINK);
         cssLayout.addComponent(button2);
 
-        ComponentGroup group = new ComponentGroup(Orientation.HORIZONTAL);
+        HorizontalComponentGroup group = new HorizontalComponentGroup();
         testView.setRightComponent(group);
         Component metoo = new Button("TopRight", listener);
         metoo.addStyleName("blue");
@@ -278,7 +278,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
             label.setStyleName("grey-title");
             cssLayout.addComponent(label);
 
-            ComponentGroup componentGroup = new ComponentGroup();
+            VerticalComponentGroup componentGroup = new VerticalComponentGroup();
             Component textField = new TextField("Name");
             textField.setWidth("100%");
             componentGroup.addComponent(textField);
@@ -308,7 +308,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
             label.setStyleName("grey-title");
             cssLayout.addComponent(label);
 
-            componentGroup = new ComponentGroup();
+            componentGroup = new VerticalComponentGroup();
             textField = new TextField("Name");
             textField.setWidth("100%");
             componentGroup.addComponent(textField);
@@ -331,7 +331,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
             label.setStyleName("grey-title");
             cssLayout.addComponent(label);
 
-            ComponentGroup optionLayout2 = new ComponentGroup();
+            VerticalComponentGroup optionLayout2 = new VerticalComponentGroup();
             FormLayout formLayout = new FormLayout();
             formLayout.setSpacing(false);
             formLayout.setMargin(false);
@@ -386,7 +386,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
         }
 
         private void generateSubViews() {
-            ComponentGroup components = new ComponentGroup();
+            VerticalComponentGroup components = new VerticalComponentGroup();
             components.setMargin(true);
             int amount = getDepth() % 2 == 1 ? 3 : 25;
             for (int i = 0; i < amount; i++) {

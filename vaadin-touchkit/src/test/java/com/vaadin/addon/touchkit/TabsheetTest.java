@@ -1,10 +1,11 @@
 package com.vaadin.addon.touchkit;
 
-import com.vaadin.addon.touchkit.ui.ComponentGroup;
+import com.vaadin.addon.touchkit.ui.AbstractComponentGroup;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.addon.touchkit.ui.NavigationManager;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.TabBar;
+import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -63,7 +64,7 @@ public class TabsheetTest extends TabBar implements ClickListener {
         Button button = new Button("Böö");
         button.setWidth("60px");
         navigationView.setRightComponent(button);
-        ComponentGroup componentGroup = new ComponentGroup();
+        VerticalComponentGroup componentGroup = new VerticalComponentGroup();
 
         NavigationButton navigationButton = new NavigationButton("Test me");
         navigationButton.setDescription("no yep");
@@ -95,7 +96,7 @@ public class TabsheetTest extends TabBar implements ClickListener {
         Button button = new Button("Böö");
         button.setWidth("60px");
         navigationView.setRightComponent(button);
-        ComponentGroup componentGroup = new ComponentGroup();
+        VerticalComponentGroup componentGroup = new VerticalComponentGroup();
 
         NavigationButton navigationButton = new NavigationButton("Test me");
         navigationButton.setDescription("no yep");
