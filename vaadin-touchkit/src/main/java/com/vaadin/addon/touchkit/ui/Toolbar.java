@@ -2,14 +2,18 @@ package com.vaadin.addon.touchkit.ui;
 
 import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 
 /**
- * A native looking toolbar, mainly for {@link Button}s. Button icons will be on
- * top of the caption text and each button shall be equally sized.
+ * A native looking toolbar for showing icons.
  * <p>
- * Mostly used with {@link NavigationView}.
+ * Typically {@link Button}s with icons or a {@link HorizontalComponentGroup}
+ * containing Buttons are added to the Toolbar. All components will be rendered
+ * as equally sized and centered vertically in the toolbar.
+ * <p>
+ * Typically used as part of a {@link NavigationView}.
  * 
  */
 public class Toolbar extends CssLayout {
@@ -23,7 +27,6 @@ public class Toolbar extends CssLayout {
      */
 
     private static final String STYLENAME = "v-touchkit-toolbar";
-    private int index;
 
     /**
      * By default the Toolbar has no margin, is 100% wide and 44px high.
@@ -45,14 +48,12 @@ public class Toolbar extends CssLayout {
 
     @Override
     public void paintContent(PaintTarget target) throws PaintException {
-        index = 0;
         super.paintContent(target);
     }
 
     @Override
     protected String getCss(Component c) {
         String css = "float:left;";
-        index++;
         return css;
     }
 

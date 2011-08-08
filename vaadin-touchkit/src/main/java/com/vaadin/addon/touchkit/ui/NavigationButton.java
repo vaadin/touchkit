@@ -27,7 +27,10 @@ public class NavigationButton extends Button {
     private Component targetView;
 
     /**
-     * @see Button#Button(String)
+     * Creates a new navigation button.
+     * 
+     * @param caption
+     *            the Button caption.
      */
     public NavigationButton(String caption) {
         super(caption);
@@ -104,8 +107,8 @@ public class NavigationButton extends Button {
     /**
      * Sets the view that will be navigated to when the button is pressed.
      * <p>
-     * The button communicates directly with a @link {@link NavigationManager}
-     * to make the actual navigation work.
+     * The button communicates directly with a {@link NavigationManager} to make
+     * the actual navigation work.
      * </p>
      * 
      * @param targetView

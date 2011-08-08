@@ -124,7 +124,7 @@ public class NavigationManager extends AbstractComponentContainer {
     }
 
     /**
-     * Makes the previous component in the history visible, replacing (nad
+     * Makes the previous component in the history visible, replacing (and
      * essentially forgetting) the component that was previously visible.
      */
     public void navigateBack() {
