@@ -250,6 +250,15 @@ public class NavigationView extends AbstractComponentContainer {
         }
     }
 
+    /**
+     * Returns the toolbar for the view.
+     * 
+     * @return The toolbar or null if no toolbar has been set
+     */
+    public Component getToolbar() {
+        return toolbar;
+    }
+
     @Override
     public void paintContent(PaintTarget target) throws PaintException {
         super.paintContent(target);
