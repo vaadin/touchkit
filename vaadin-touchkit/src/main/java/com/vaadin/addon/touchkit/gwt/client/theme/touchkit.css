@@ -503,14 +503,14 @@
 	padding: 0;
 }
 
-.v-touchkit-componentgroup .v-touchkit-navbutton {
+.v-touchkit-verticalcomponentgroup .v-touchkit-navbutton {
 	margin: 0 negativeListLayoutMargin;
 	padding: 0 listLayoutMargin;
 	outline: none;
 }
 
-.v-touchkit-componentgroup .v-touchkit-navbutton:focus,
-.v-touchkit-componentgroup .v-touchkit-navbutton:active {
+.v-touchkit-verticalcomponentgroup .v-touchkit-navbutton:focus,
+.v-touchkit-verticalcomponentgroup .v-touchkit-navbutton:active {
 	background: navButtonGradient;
 	color: #fff;
 	text-shadow: 0 1px 1px #396897;
@@ -604,9 +604,10 @@
 	padding:0 4px;
 	background: transparent;
 	color: #4e64a1;
-	font-size:16px;
-	line-height:40px;
-	height: 40px;
+	font-size:17px;
+	line-height:43px;
+	height: 43px;
+	margin-top:1px;
 }
 
 .v-touchkit-verticalcomponentgroup .v-select-select {
@@ -632,18 +633,18 @@
 	}
 
 /* Need to explicitly round the first and last components corners, otherwise they will stick out from the component group */
-.v-touchkit-componentgroup > div > div > .v-touchkit-navbutton:first-child {
+.v-touchkit-verticalcomponentgroup > div > div > .v-touchkit-navbutton:first-child {
 	border-top-left-radius: 9px; /* listLayoutMargin - 1px */
 	border-top-right-radius: 9px;
 	}
 
-.v-touchkit-componentgroup > div > div > .v-touchkit-navbutton:last-child {
+.v-touchkit-verticalcomponentgroup > div > div > .v-touchkit-navbutton:last-child {
 	border-bottom-left-radius: 9px; /* listLayoutMargin - 1px */
 	border-bottom-right-radius: 9px;
 	}
 
 
-.v-touchkit-componentgroup .v-formlayout > table {
+.v-touchkit-verticalcomponentgroup .v-formlayout > table {
 	margin-left: negativeListLayoutMargin;
 	margin-right: negativeListLayoutMargin;
 	}
@@ -826,6 +827,7 @@
 	color: #44698b;
 	text-shadow: 0 1px 0 rgba(255,255,255,.7);
 	margin: listLayoutMargin listLayoutMargin 0;
+	text-indent: listLayoutMargin;
 }
 
 .v-slider:focus {
@@ -880,6 +882,7 @@
 	-webkit-animation-delay: .05s;
 	*/
 }
+
 /*
 @-webkit-keyframes popup {
 	from {
@@ -890,6 +893,10 @@
 	}
 }
 */
+
+.v-touchkit-fullscreen {
+	background: linenBg;
+}
 
 .v-touchkit-popover.v-touchkit-relative .v-window-wrap {
 	overflow: visible;
@@ -1037,7 +1044,7 @@
 	outline: none;
 	}
 
-.v-touchkit-componentgroup > div > .v-csslayout-container > .v-touchkit-switch:before {
+.v-touchkit-verticalcomponentgroup > div > .v-csslayout-container > .v-touchkit-switch:before {
 	display: none;
 	}
 
@@ -1052,12 +1059,12 @@
 /*
  * Nav buttons are 43px height, make switch/checkbox as high in option layouts
  */
-.v-touchkit-componentgroup .v-touchkit-switch {
+.v-touchkit-verticalcomponentgroup .v-touchkit-switch {
 	margin-top: 8px;
 	margin-bottom: 7px;
 	}
 
-.v-touchkit-componentgroup .v-checkbox {
+.v-touchkit-verticalcomponentgroup .v-checkbox {
 	height: 43px;
 	line-height: 43px;
 	font-size: 17px;
