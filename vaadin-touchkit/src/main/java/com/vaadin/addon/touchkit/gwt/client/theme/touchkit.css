@@ -37,7 +37,7 @@
  * Navbar
  */
 @def navbarTextShadow 0 1px 1px rgba(255,255,255,.75);
-@def navbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#e5e7e8), to(#b8bcc0), color-stop(.025, #fff))');
+@def navbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#edeeef), to(#c9cccf))');
 
 /**
  * Navbar buttons
