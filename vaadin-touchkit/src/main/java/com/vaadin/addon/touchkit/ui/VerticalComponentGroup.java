@@ -34,6 +34,7 @@ public class VerticalComponentGroup extends AbstractComponentGroup {
         super(caption);
         setWidth("100%");
         setStyleName(STYLE_NAME);
+        setMargin(true);
     }
 
 }
