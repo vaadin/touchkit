@@ -128,6 +128,7 @@ public class TabBar extends CssLayout {
 
         public TabButton(Component tab1) {
             relatedComponent = tab1;
+            setCaption(tab1.getCaption());
         }
 
         public void setSelected(boolean b) {
