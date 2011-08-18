@@ -1,14 +1,18 @@
 package com.vaadin.addon.touchkit.ui;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 
 import com.vaadin.addon.touchkit.gwt.client.VTabBar;
+import com.vaadin.terminal.PaintException;
+import com.vaadin.terminal.PaintTarget;
 import com.vaadin.terminal.gwt.client.MouseEventDetails;
+import com.vaadin.ui.AbstractComponentContainer;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.ClientWidget;
 import com.vaadin.ui.ClientWidget.LoadStyle;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.CssLayout;
+import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.TabSheet.Tab;
 
@@ -18,10 +22,12 @@ import com.vaadin.ui.TabSheet.Tab;
  * content.
  */
 @ClientWidget(value = VTabBar.class, loadStyle = LoadStyle.EAGER)
-public class TabBar extends CssLayout {
+public class TabBar extends AbstractComponentContainer {
 
     private Toolbar toolbar = new Toolbar();
     private Component currentComponent;
+
+    private LinkedList<Component> tabs = new LinkedList<Component>();
 
     /**
      * Creates a {@link TabBar} that is 100% wide and high.
@@ -30,12 +36,12 @@ public class TabBar extends CssLayout {
         super();
         setSizeFull();
         toolbar.setHeight("46px");
-        addComponent(toolbar);
+        super.addComponent(toolbar);
     }
 
     /**
-     * Adds a new sheet to the {@link TabBar}, and adds a button
-     * representing it to the tab bar.
+     * Adds a new sheet to the {@link TabBar}, and adds a button representing it
+     * to the tab bar.
      * 
      * @param tabContent
      *            the sheet content
@@ -49,15 +55,27 @@ public class TabBar extends CssLayout {
         if (currentComponent == null) {
             setSelectedTab(tabContent);
         }
+        tabs.add(tabContent);
         return tabButton;
     }
 
-    @Override
-    public void removeComponent(Component c) {
-        if (c == toolbar) {
-            throw new UnsupportedOperationException(
-                    "The toolbar cannot be removed from a TabBar");
-        }
+    /**
+     * @deprecated Behavior differs from regular {@link ComponentContainer}s,
+     *             use the specialized API instead: {@link #addTab(Component)}
+     *             and {@link #removeTab(Component)}
+     */
+    public void addComponent(Component c) {
+        throw new UnsupportedOperationException(
+                "Use the specialized API instead.");
+    }
+
+    /**
+     * Removes the given tab content and the tab button associated with it.
+     * 
+     * @param c
+     *            the tab content to remove
+     */
+    public void removeTab(Component c) {
         TabButton tabButton = getTabButton(c);
         if (tabButton != null) {
             toolbar.removeComponent(tabButton);
@@ -69,7 +87,18 @@ public class TabBar extends CssLayout {
                 }
             }
         }
+        tabs.remove(c);
 
+    }
+
+    /**
+     * @deprecated Behavior differs from regular {@link ComponentContainer}s,
+     *             use the specialized API instead: {@link #addTab(Component)}
+     *             and {@link #removeTab(Component)}
+     */
+    public void removeComponent(Component c) {
+        throw new UnsupportedOperationException(
+                "Use the specialized API instead.");
     }
 
     /**
@@ -79,7 +108,7 @@ public class TabBar extends CssLayout {
      * @param tab
      */
     public void removeTab(Tab tab) {
-        removeComponent(tab.getComponent());
+        removeTab(tab.getComponent());
     }
 
     /**
@@ -94,7 +123,7 @@ public class TabBar extends CssLayout {
             getTabButton(currentComponent).setSelected(false);
             super.removeComponent(currentComponent);
         }
-        addComponent(tab);
+        super.addComponent(tab);
         currentComponent = tab;
         getTabButton(currentComponent).setSelected(true);
 
@@ -111,6 +140,30 @@ public class TabBar extends CssLayout {
         setSelectedTab(tab.getComponent());
     }
 
+    /**
+     * @deprecated Behavior differs from regular {@link ComponentContainer}s,
+     *             use the specialized API instead: {@link #addTab(Component)}
+     *             and {@link #removeTab(Component)}
+     */
+    public void replaceComponent(Component oldComponent, Component newComponent) {
+        throw new UnsupportedOperationException(
+                "Use the specialized API instead.");
+    }
+
+    /**
+     * Otherwise as {@link ComponentContainer#getComponentIterator()}, but note
+     * that a tab is not in the component hierarchy before it is activated, even
+     * tough it has been added with {@link #addTab(Component)}.
+     * 
+     * @see ComponentContainer#getComponentIterator()
+     */
+    public Iterator<Component> getComponentIterator() {
+        LinkedList<Component> list = new LinkedList<Component>();
+        list.add(toolbar);
+        list.add(currentComponent);
+        return list.iterator();
+    }
+
     private TabButton getTabButton(Component tab) {
         Iterator<Component> componentIterator = toolbar.getComponentIterator();
         while (componentIterator.hasNext()) {
@@ -120,6 +173,13 @@ public class TabBar extends CssLayout {
             }
         }
         return null;
+    }
+
+    public void paintContent(PaintTarget target) throws PaintException {
+        super.paintContent(target);
+        toolbar.paint(target);
+        currentComponent.paint(target);
+
     }
 
     private class TabButton extends Button implements Tab {

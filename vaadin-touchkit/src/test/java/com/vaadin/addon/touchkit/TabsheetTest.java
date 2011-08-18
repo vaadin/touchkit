@@ -1,6 +1,5 @@
 package com.vaadin.addon.touchkit;
 
-import com.vaadin.addon.touchkit.ui.AbstractComponentGroup;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.addon.touchkit.ui.NavigationManager;
 import com.vaadin.addon.touchkit.ui.NavigationView;
@@ -13,6 +12,7 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TabSheet.Tab;
+import com.vaadin.ui.VerticalLayout;
 
 public class TabsheetTest extends TabBar implements ClickListener {
 
@@ -26,9 +26,13 @@ public class TabsheetTest extends TabBar implements ClickListener {
         };
         tab1.setSizeFull();
         tab1.setCaption("Foo1");
-        Label label = new Label("Some content for tabsheet");
-        label.setSizeFull();
-        tab1.addComponent(label);
+        VerticalLayout vl = new VerticalLayout();
+        vl.setSpacing(true);
+        for (int i = 0; i < 30; i++) {
+            Label label = new Label("Some content for tabsheet " + i);
+            vl.addComponent(label);
+        }
+        tab1.addComponent(vl);
 
         CssLayout tab2 = new CssLayout();
         tab2.setSizeFull();

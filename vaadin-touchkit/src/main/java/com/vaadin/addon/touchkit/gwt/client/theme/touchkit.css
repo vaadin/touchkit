@@ -1069,7 +1069,11 @@
 	position:relative;	
 }
 
-.v-touchkit-tabbar > div > div > .v-touchkit-toolbar  {
+.v-touchkit-tabbar-wrapper {
+	overflow: auto;
+}
+
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar {
 	position: absolute;
 	bottom: 0;
 	height: 48px;
@@ -1080,16 +1084,16 @@
 	text-shadow: buttonTextShadow;
 }
 
-.v-touchkit-tabbar>div>div>.v-caption {
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-caption {
 	display:none;
 }
 
-.v-touchkit-tabbar > div > div > .v-touchkit-toolbar .v-button {
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button {
 	padding: 3px;
 	height: 42px;
 }
 
-.v-touchkit-tabbar > div > div > .v-touchkit-toolbar .v-button-wrap {
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-wrap {
 	color: #999;
 	text-shadow: none;
 	margin: 0;
@@ -1098,7 +1102,7 @@
 	padding: 0;
 }
 
-.v-touchkit-tabbar > div > div > .v-touchkit-toolbar .v-button-caption {
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-caption {
 	display: block;
 	margin: 3px 0 0 0;
 	position: static;
@@ -1108,20 +1112,20 @@
 	text-indent: 0;
 }
 
-.v-touchkit-tabbar > div > div > .v-touchkit-toolbar .v-button-wrap:before {
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-wrap:before {
 	display: none;
 }
 
-.v-touchkit-tabbar > div > div > .v-touchkit-toolbar .v-button .v-icon {
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button .v-icon {
 	margin: 0;
 }
 
-.v-touchkit-tabbar > div > div > .v-touchkit-toolbar .v-button-selected {
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-selected {
 	background: rgba(255,255,255,.15);	
 	border-radius: 4px;
 }
 
-.v-touchkit-tabbar > div > div > .v-touchkit-toolbar .v-button-selected .v-button-wrap {
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-selected .v-button-wrap {
 	color: #fff;
 }
 
