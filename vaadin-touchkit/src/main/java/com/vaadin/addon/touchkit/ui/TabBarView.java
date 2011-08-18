@@ -22,7 +22,7 @@ import com.vaadin.ui.TabSheet.Tab;
  * content.
  */
 @ClientWidget(value = VTabBar.class, loadStyle = LoadStyle.EAGER)
-public class TabBar extends AbstractComponentContainer {
+public class TabBarView extends AbstractComponentContainer {
 
     private Toolbar toolbar = new Toolbar();
     private Component currentComponent;
@@ -30,9 +30,9 @@ public class TabBar extends AbstractComponentContainer {
     private LinkedList<Component> tabs = new LinkedList<Component>();
 
     /**
-     * Creates a {@link TabBar} that is 100% wide and high.
+     * Creates a {@link TabBarView} that is 100% wide and high.
      */
-    public TabBar() {
+    public TabBarView() {
         super();
         setSizeFull();
         toolbar.setHeight("46px");
@@ -40,7 +40,7 @@ public class TabBar extends AbstractComponentContainer {
     }
 
     /**
-     * Adds a new sheet to the {@link TabBar}, and adds a button representing it
+     * Adds a new sheet to the {@link TabBarView}, and adds a button representing it
      * to the tab bar.
      * 
      * @param tabContent
