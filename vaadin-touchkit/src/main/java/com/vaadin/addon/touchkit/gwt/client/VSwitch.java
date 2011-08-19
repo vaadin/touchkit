@@ -124,13 +124,6 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
             return;
         }
 
-        boolean skipAnimation = true;
-        updateVisibleState(skipAnimation);
-
-        // Save reference to server connection object to be able to send
-        // user interaction later
-        this.client = client;
-
         // Save the client side identifier (paintable id) for the widget
         paintableId = uidl.getId();
 
@@ -170,6 +163,9 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
         setValue(uidl.getBooleanVariable("state"));
         immediate = uidl.getBooleanAttribute("immediate");
 
+        // Save reference to server connection object to be able to send
+        // user interaction later
+        this.client = client;
     }
 
     @Override
@@ -190,19 +186,19 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
     }
 
     private void setValue(boolean value) {
-        if (this.value == value) {
+        if (this.value == value && client != null) {
             return;
         }
+        this.value = value;
+        // update the UI
+        updateVisibleState(client == null);
 
         // update the server state
         if (paintableId == null || client == null) {
             return;
         }
-        this.value = value;
         client.updateVariable(paintableId, "state", this.value, immediate);
 
-        // update the UI
-        updateVisibleState();
     }
 
     private void updateVisibleState() {
