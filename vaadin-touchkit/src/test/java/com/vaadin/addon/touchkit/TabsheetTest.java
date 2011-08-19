@@ -36,7 +36,8 @@ public class TabsheetTest extends TabBarView implements ClickListener {
 
         CssLayout tab2 = new CssLayout();
         tab2.setSizeFull();
-        tab2.setCaption("Bar1");
+        tab2.setCaption("Artists");
+        tab2.setIcon(TouchKitTestApp.getRndRunoIconResource());
         tab2.addComponent(new Label("Some content for tabsheet"));
 
         CssLayout tab3 = new CssLayout();
@@ -52,15 +53,12 @@ public class TabsheetTest extends TabBarView implements ClickListener {
         Tab tab = addTab(tab1);
         tab.setIcon(TouchKitTestApp.getRndRunoIconResource());
         tab.setCaption("Playlists");
+
         tab = addTab(tab2);
-        tab.setCaption("Artists");
-        tab.setIcon(TouchKitTestApp.getRndRunoIconResource());
-        tab = addTab(tab3);
-        tab.setCaption("Vaadin");
-        tab.setIcon(TouchKitTestApp.getRndRunoIconResource());
-        tab = addTab(tab4);
-        tab.setCaption("IT mill");
-        tab.setIcon(TouchKitTestApp.getRndRunoIconResource());
+
+        tab = addTab(tab3, "Vaadin", TouchKitTestApp.getRndRunoIconResource());
+
+        tab = addTab(tab4, "IT Mill");
 
         NavigationManager navigationManager = new NavigationManager();
 

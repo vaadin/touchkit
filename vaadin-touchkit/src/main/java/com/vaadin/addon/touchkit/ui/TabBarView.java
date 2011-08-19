@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import com.vaadin.addon.touchkit.gwt.client.VTabBar;
 import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;
+import com.vaadin.terminal.Resource;
 import com.vaadin.terminal.gwt.client.MouseEventDetails;
 import com.vaadin.ui.AbstractComponentContainer;
 import com.vaadin.ui.Button;
@@ -40,8 +41,9 @@ public class TabBarView extends AbstractComponentContainer {
     }
 
     /**
-     * Adds a new sheet to the {@link TabBarView}, and adds a button representing it
-     * to the tab bar.
+     * Adds a new sheet to the {@link TabBarView}, and adds a button
+     * representing it to the tab bar. The button gets it's caption and icon
+     * from the content.
      * 
      * @param tabContent
      *            the sheet content
@@ -50,12 +52,50 @@ public class TabBarView extends AbstractComponentContainer {
      * 
      */
     public Tab addTab(Component tabContent) {
+        return addTab(tabContent, tabContent.getCaption(), tabContent.getIcon());
+    }
+
+    /**
+     * Adds a new sheet to the {@link TabBarView}, and adds a button
+     * representing it to the tab bar. The button gets the given caption and no
+     * icon.
+     * 
+     * @param tabContent
+     *            the sheet content
+     * @param caption
+     *            the caption to be used in the tab bar button
+     * @return tab 'meta-data' that can be used to configure the tab further
+     * @see Tab
+     * 
+     */
+    public Tab addTab(Component tabContent, String caption) {
+        return addTab(tabContent, caption, null);
+    }
+
+    /**
+     * Adds a new sheet to the {@link TabBarView}, and adds a button
+     * representing it to the tab bar. The button gets the given caption and
+     * icon.
+     * 
+     * @param tabContent
+     *            the sheet content
+     * @param caption
+     *            the caption to be used in the tab bar button
+     * @param icon
+     *            the icon to be used in the tab bar button
+     * @return tab 'meta-data' that can be used to configure the tab further
+     * @see Tab
+     * 
+     */
+    public Tab addTab(Component tabContent, String caption, Resource icon) {
         TabButton tabButton = new TabButton(tabContent);
         toolbar.addComponent(tabButton);
         if (currentComponent == null) {
             setSelectedTab(tabContent);
         }
         tabs.add(tabContent);
+        tabButton.setCaption(caption);
+        tabButton.setIcon(icon);
         return tabButton;
     }
 
