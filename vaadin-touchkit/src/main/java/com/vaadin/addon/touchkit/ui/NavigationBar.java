@@ -42,6 +42,7 @@ public class NavigationBar extends AbstractComponentContainer {
      * 
      * @see com.vaadin.ui.AbstractComponent#setCaption(java.lang.String)
      */
+    @Override
     public void setCaption(String caption) {
         super.setCaption(caption);
     }
@@ -68,6 +69,14 @@ public class NavigationBar extends AbstractComponentContainer {
     }
 
     /**
+     * @return the component on the left side of the caption or null if the
+     *         component is not set
+     */
+    public Component getLeftComponent() {
+        return leftNavigationBarComponent;
+    }
+
+    /**
      * Sets the component on the right side of the caption.
      * 
      * @param c
@@ -81,6 +90,13 @@ public class NavigationBar extends AbstractComponentContainer {
         }
         navigationBarComponent = c;
         requestRepaint();
+    }
+
+    /**
+     * @return the component on right side of the caption or null if not set
+     */
+    public Component getRightComponent() {
+        return navigationBarComponent;
     }
 
     /**

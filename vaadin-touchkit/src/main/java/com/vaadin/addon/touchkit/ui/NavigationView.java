@@ -161,6 +161,14 @@ public class NavigationView extends AbstractComponentContainer {
     }
 
     /**
+     * @return the component on the right side of the navigation bar or null if
+     *         not set
+     */
+    public Component getRightComponent() {
+        return getNavigationBar().getRightComponent();
+    }
+
+    /**
      * Sets the component on the left side of the navigation bar. Most commonly
      * this component slot is automatically populated by the NavigationView.
      * 
@@ -168,6 +176,14 @@ public class NavigationView extends AbstractComponentContainer {
      */
     public void setLeftComponent(Component c) {
         getNavigationBar().setLeftComponent(c);
+    }
+
+    /**
+     * @return the component on the left side of the navigation bar or null if
+     *         not set
+     */
+    public Component getLeftComponent() {
+        return getNavigationBar().getLeftComponent();
     }
 
     /**
