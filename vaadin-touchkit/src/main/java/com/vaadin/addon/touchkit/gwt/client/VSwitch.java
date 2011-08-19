@@ -33,7 +33,6 @@ import com.vaadin.terminal.gwt.client.ApplicationConnection;
 import com.vaadin.terminal.gwt.client.Paintable;
 import com.vaadin.terminal.gwt.client.UIDL;
 import com.vaadin.terminal.gwt.client.VTooltip;
-import com.vaadin.terminal.gwt.client.ui.Icon;
 
 /**
  * VSwitch is the client-side implementation of the Switch component.
@@ -67,7 +66,6 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
     private Element slider;
     private boolean value;
     private com.google.gwt.user.client.Element errorIndicatorElement;
-    private Icon icon;
     private boolean immediate;
 
     private boolean mouseDown;
@@ -144,20 +142,6 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
 
         if (uidl.hasAttribute("readonly")) {
             setEnabled(false);
-        }
-
-        if (uidl.hasAttribute("icon")) {
-            if (icon == null) {
-                icon = new Icon(client);
-                DOM.insertChild(getElement(), icon.getElement(), 1);
-                icon.sinkEvents(VTooltip.TOOLTIP_EVENTS);
-                icon.sinkEvents(Event.ONCLICK);
-            }
-            icon.setUri(uidl.getStringAttribute("icon"));
-        } else if (icon != null) {
-            // detach icon
-            DOM.removeChild(getElement(), icon.getElement());
-            icon = null;
         }
 
         setValue(uidl.getBooleanVariable("state"));
