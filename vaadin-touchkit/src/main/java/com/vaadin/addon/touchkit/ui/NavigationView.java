@@ -40,6 +40,7 @@ public class NavigationView extends AbstractComponentContainer {
      * @param content
      */
     public NavigationView(Component content) {
+        navigationBar.setWidth("100%");
         setSizeFull();
         mainComponent = content;
         super.addComponent(getContent());
