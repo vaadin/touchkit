@@ -26,6 +26,7 @@ public class VNavigationBar extends ComplexPanel implements Container {
     private Paintable leftComponent;
     private Paintable rightComponent;
     private boolean rendering;
+    private int captionWidth;
 
     public VNavigationBar() {
         setElement(Document.get().createDivElement());
@@ -49,7 +50,12 @@ public class VNavigationBar extends ComplexPanel implements Container {
         /*
          * Note, HTML caption. TODO XSS vuln.
          */
+        if (hasAbsolutelyPositionedCaption()) {
+            caption.getStyle().setProperty("left", "0");
+            caption.getStyle().setProperty("right", "");
+        }
         caption.setInnerHTML(uidl.getStringAttribute("caption"));
+        captionWidth = caption.getOffsetWidth(); // cache the caption size
 
         UIDL backUidl = uidl.getChildByTagName("back");
         if (backUidl == null && leftComponent != null) {
@@ -109,40 +115,54 @@ public class VNavigationBar extends ComplexPanel implements Container {
      */
     private void avoidCaptionOverlap() {
         int freeLeftCoordinate = leftComponent != null ? leftComponentElement
-                .getAbsoluteRight() : 0;
+                .getAbsoluteRight() - getAbsoluteLeft() : 0;
 
         int freeRightCoordinate = rightComponent != null ? rightComponentElement
-                .getAbsoluteLeft() : getOffsetWidth();
+                .getAbsoluteLeft() - getAbsoluteLeft()
+                : getOffsetWidth();
 
-        // check if can return to centered positioning
-        if (hasAbsolutelyPositionedCaption()) {
-            caption.getStyle().setProperty("left", "");
+        int maxCenteredSizeByRightComponent = getOffsetWidth() - 2
+                * (getOffsetWidth() - freeRightCoordinate);
+        int maxCenteredSizeByLeftComponent = getOffsetWidth() - 2
+                * freeLeftCoordinate;
 
-            int maxCenteredSizeByRightComponent = getOffsetWidth() - 2
-                    * (getOffsetWidth() - freeRightCoordinate);
-            int maxCenteredSizeByLeftComponent = getOffsetWidth() - 2
-                    * freeLeftCoordinate;
-
-            if (caption.getOffsetWidth() < maxCenteredSizeByRightComponent
-                    || caption.getOffsetWidth() < maxCenteredSizeByLeftComponent) {
+        boolean canBeCentered = captionWidth < maxCenteredSizeByRightComponent
+                && captionWidth < maxCenteredSizeByLeftComponent;
+        if (canBeCentered) {
+            if (hasAbsolutelyPositionedCaption()) {
                 makeCenteredCaption();
-                return;
             }
+            return;
         }
 
-        if (caption.getAbsoluteRight() > freeRightCoordinate) {
-            makeCaptionAbsolutelyPositioned();
-            // try to align right first
-            caption.getStyle().setRight(
-                    (getOffsetWidth() - freeRightCoordinate), Unit.PX);
+        makeCaptionAbsolutelyPositioned();
+
+        boolean fitsWithoutClipping = freeRightCoordinate - freeLeftCoordinate > captionWidth;
+
+        boolean fixLeft = false;
+        boolean fixRight = false;
+        if (fitsWithoutClipping) {
+            if (freeLeftCoordinate < freeRightCoordinate) {
+                fixRight = true;
+            } else {
+                fixLeft = true;
+            }
+        } else {
+            fixLeft = true;
+            fixRight = true;
         }
-        if (caption.getAbsoluteLeft() < freeLeftCoordinate) {
-            makeCaptionAbsolutelyPositioned();
+
+        if (fixLeft) {
             caption.getStyle().setLeft(freeLeftCoordinate, Unit.PX);
-            // also ensure right as it can now get over the right max again
-            caption.getStyle().setRight(
-                    (getOffsetWidth() - freeRightCoordinate), Unit.PX);
+
         }
+        caption.getStyle().setProperty("left",
+                fixLeft ? freeLeftCoordinate + "px" : "");
+        caption.getStyle()
+                .setProperty(
+                        "right",
+                        fixRight ? (getOffsetWidth() - freeRightCoordinate)
+                                + "px" : "");
     }
 
     private void makeCenteredCaption() {
@@ -156,6 +176,7 @@ public class VNavigationBar extends ComplexPanel implements Container {
     @Override
     public void setWidth(String width) {
         super.setWidth(width);
+        // This is just to make resizing to work for development purposes
         if (!rendering) {
             avoidCaptionOverlap();
         }
