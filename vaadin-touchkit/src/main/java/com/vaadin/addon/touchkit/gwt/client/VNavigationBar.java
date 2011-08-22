@@ -5,6 +5,8 @@ import java.util.Set;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Style.Display;
+import com.google.gwt.dom.client.Style.Position;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.terminal.gwt.client.ApplicationConnection;
@@ -93,6 +95,66 @@ public class VNavigationBar extends ComplexPanel implements Container {
             clearComponent();
         }
 
+        avoidCaptionOverlap();
+
+    }
+
+    /**
+     * Does some magic to avoid situation where caption is overlapped by
+     * components in case the caption is centered to the component. This happens
+     * with long caption and big right/left component.
+     */
+    private void avoidCaptionOverlap() {
+        int freeLeftCoordinate = leftComponent != null ? leftComponentElement
+                .getAbsoluteRight() : 0;
+        int freeRightCoordinate = rightComponent != null ? getElement()
+                .getAbsoluteRight() - rightComponentElement.getAbsoluteLeft()
+                : getOffsetWidth();
+
+        // check if can return to centered positioning
+        if (hasAbsolutelyPositionedCaption()) {
+            caption.getStyle().setProperty("left", "");
+
+            int maxCenteredSizeBeRightComponent = getOffsetWidth() - 2
+                    * freeRightCoordinate;
+            int maxCenteredSizeByLeftComponent = getOffsetWidth() - 2
+                    * freeLeftCoordinate;
+
+            if (caption.getOffsetWidth() < maxCenteredSizeBeRightComponent
+                    || caption.getOffsetWidth() < maxCenteredSizeByLeftComponent) {
+                makeCenteredCaption();
+                return;
+            }
+        }
+        if (caption.getAbsoluteRight() > freeRightCoordinate) {
+            makeCaptionAbsolutelyPositioned();
+            // try to align right first
+            caption.getStyle().setRight(freeRightCoordinate, Unit.PX);
+        }
+        if (caption.getAbsoluteLeft() < freeLeftCoordinate) {
+            makeCaptionAbsolutelyPositioned();
+            caption.getStyle().setLeft(freeLeftCoordinate, Unit.PX);
+            // also ensure right as it can now get over the right max again
+            caption.getStyle().setRight(freeRightCoordinate, Unit.PX);
+        }
+    }
+
+    private void makeCenteredCaption() {
+        caption.getStyle().setPosition(Position.STATIC);
+    }
+
+    private boolean hasAbsolutelyPositionedCaption() {
+        return caption.getStyle().getPosition().equals("absolute");
+    }
+
+    @Override
+    public void setWidth(String width) {
+        super.setWidth(width);
+        avoidCaptionOverlap();
+    }
+
+    private void makeCaptionAbsolutelyPositioned() {
+        caption.getStyle().setPosition(Position.ABSOLUTE);
     }
 
     private void clearBackComponent() {

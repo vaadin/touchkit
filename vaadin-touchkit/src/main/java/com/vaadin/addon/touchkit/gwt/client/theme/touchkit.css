@@ -708,7 +708,8 @@
 	top: 7px;
 	max-width: 30%;
 	z-index: 1;
-	}
+	padding-right:2px;
+}
 
 .v-touchkit-navbar,
 .v-touchkit-navpanel-placeholder > div,
@@ -724,23 +725,22 @@
 	text-shadow: navbarTextShadow;
 	border-bottom: divider;
 	text-align: center;
-	}
+	position: relative;
+}
 
 .v-touchkit-navbar-caption {
-	position: absolute;
-	text-align: center;
-	left: 0;
-	right: 0;
+	display: inline-block;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	}
+}
 
 .v-touchkit-navbar-right {
 	position: absolute;
 	right: 6px;
 	top: 7px;
 	max-width: 30%;
+	padding-left:2px;
 }
 
 
