@@ -25,6 +25,7 @@ public class VNavigationBar extends ComplexPanel implements Container {
     private DivElement leftComponentElement = Document.get().createDivElement();
     private Paintable leftComponent;
     private Paintable rightComponent;
+    private boolean rendering;
 
     public VNavigationBar() {
         setElement(Document.get().createDivElement());
@@ -38,8 +39,10 @@ public class VNavigationBar extends ComplexPanel implements Container {
     }
 
     public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
+        rendering = true;
         this.client = client;
         if (client.updateComponent(this, uidl, false)) {
+            rendering = false;
             return;
         }
 
@@ -96,7 +99,7 @@ public class VNavigationBar extends ComplexPanel implements Container {
         }
 
         avoidCaptionOverlap();
-
+        rendering = false;
     }
 
     /**
@@ -107,35 +110,38 @@ public class VNavigationBar extends ComplexPanel implements Container {
     private void avoidCaptionOverlap() {
         int freeLeftCoordinate = leftComponent != null ? leftComponentElement
                 .getAbsoluteRight() : 0;
-        int freeRightCoordinate = rightComponent != null ? getElement()
-                .getAbsoluteRight() - rightComponentElement.getAbsoluteLeft()
-                : getOffsetWidth();
+
+        int freeRightCoordinate = rightComponent != null ? rightComponentElement
+                .getAbsoluteLeft() : getOffsetWidth();
 
         // check if can return to centered positioning
         if (hasAbsolutelyPositionedCaption()) {
             caption.getStyle().setProperty("left", "");
 
-            int maxCenteredSizeBeRightComponent = getOffsetWidth() - 2
-                    * freeRightCoordinate;
+            int maxCenteredSizeByRightComponent = getOffsetWidth() - 2
+                    * (getOffsetWidth() - freeRightCoordinate);
             int maxCenteredSizeByLeftComponent = getOffsetWidth() - 2
                     * freeLeftCoordinate;
 
-            if (caption.getOffsetWidth() < maxCenteredSizeBeRightComponent
+            if (caption.getOffsetWidth() < maxCenteredSizeByRightComponent
                     || caption.getOffsetWidth() < maxCenteredSizeByLeftComponent) {
                 makeCenteredCaption();
                 return;
             }
         }
+
         if (caption.getAbsoluteRight() > freeRightCoordinate) {
             makeCaptionAbsolutelyPositioned();
             // try to align right first
-            caption.getStyle().setRight(freeRightCoordinate, Unit.PX);
+            caption.getStyle().setRight(
+                    (getOffsetWidth() - freeRightCoordinate), Unit.PX);
         }
         if (caption.getAbsoluteLeft() < freeLeftCoordinate) {
             makeCaptionAbsolutelyPositioned();
             caption.getStyle().setLeft(freeLeftCoordinate, Unit.PX);
             // also ensure right as it can now get over the right max again
-            caption.getStyle().setRight(freeRightCoordinate, Unit.PX);
+            caption.getStyle().setRight(
+                    (getOffsetWidth() - freeRightCoordinate), Unit.PX);
         }
     }
 
@@ -150,7 +156,9 @@ public class VNavigationBar extends ComplexPanel implements Container {
     @Override
     public void setWidth(String width) {
         super.setWidth(width);
-        avoidCaptionOverlap();
+        if (!rendering) {
+            avoidCaptionOverlap();
+        }
     }
 
     private void makeCaptionAbsolutelyPositioned() {

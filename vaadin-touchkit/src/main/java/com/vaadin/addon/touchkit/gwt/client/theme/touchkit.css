@@ -708,7 +708,7 @@
 	top: 7px;
 	max-width: 30%;
 	z-index: 1;
-	padding-right:2px;
+	padding-right:4px;
 }
 
 .v-touchkit-navbar,
@@ -740,7 +740,7 @@
 	right: 6px;
 	top: 7px;
 	max-width: 30%;
-	padding-left:2px;
+	padding-left:4px;
 }
 
 
