@@ -847,7 +847,7 @@
 	}
 
 /* touchkit sub window */
-.v-window {
+.v-touchkit-popover {
 	background: transparent;
 	}
 
@@ -916,14 +916,6 @@
 	padding-bottom: 7px;
 	padding-left: 7px;
 	padding-right: 7px;
-}
-
-.v-window-contents {
-	top: 0;
-	left: 0;
-	margin-right: 0;
-	margin-bottom: 0;
-	position: block;
 }
 
 .v-touchkit-popover .v-window-closebox,
