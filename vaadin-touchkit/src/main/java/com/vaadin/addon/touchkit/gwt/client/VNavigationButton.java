@@ -88,7 +88,7 @@ public class VNavigationButton extends HTML implements Paintable, Focusable {
             SpanElement desc = Document.get().createSpanElement();
             desc.setClassName(NAVBUTTON_CLASSNAME + "-desc");
             desc.setInnerHTML(stringAttribute);
-            getElement().appendChild(desc);
+            getElement().insertFirst(desc);
         }
 
         if (uidl.hasAttribute("nv")) {

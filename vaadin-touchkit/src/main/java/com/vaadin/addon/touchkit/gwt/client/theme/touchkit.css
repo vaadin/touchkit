@@ -491,6 +491,9 @@
 	line-height: 43px;
 	margin: 0;
 	padding: 0;
+	overflow:hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .v-touchkit-verticalcomponentgroup .v-touchkit-navbutton {
@@ -515,10 +518,10 @@
 .v-touchkit-navbutton-desc {
 	color: #73787c;
 	font-weight: normal;
-	position: absolute;
-	right: 32px;
-	top: 0px;
-	}
+	float:right;
+	margin-right: 22px;
+	margin-left: 10px;
+}
 
 .v-touchkit-navbutton-emphasis .v-touchkit-navbutton-desc {
 	color: #1b699f;
@@ -535,7 +538,7 @@
 	background: #5d81ab;
 	border-radius: 1em;
 	line-height: 1;
-	top: 12px;
+	margin-top: 12px;
 	font-weight: bold;
 	text-shadow: none;
 	-webkit-box-shadow: inset 0 1px 0 rgba(0,0,0,.15);
@@ -733,6 +736,11 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+
+.v-touchkit-navpanel-placeholder > div {
+	white-space:nowrap;
+	overflow:hidden;
 }
 
 .v-touchkit-navbar-right {
