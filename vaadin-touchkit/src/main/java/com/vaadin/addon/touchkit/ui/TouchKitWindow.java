@@ -9,6 +9,7 @@ import com.vaadin.addon.touchkit.service.Position;
 import com.vaadin.addon.touchkit.service.PositionCallback;
 import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;
+import com.vaadin.terminal.gwt.server.WebApplicationContext;
 import com.vaadin.ui.Window;
 
 /**
@@ -34,6 +35,7 @@ public class TouchKitWindow extends Window {
     private boolean webAppCapable = true;
     private String statusBarStyle;
     private String startupImage;
+    private boolean persistentSessionCookie;
 
     private LinkedList<ApplicationIcon> applicationIcon = new LinkedList<ApplicationIcon>();
     private LinkedList<PositionCallback> positionCbs;
@@ -295,6 +297,13 @@ public class TouchKitWindow extends Window {
         if (positionCbs != null && !positionCbs.isEmpty()) {
             target.addAttribute("geoloc", true);
         }
+        if (isPersistentSessionCookie()) {
+            WebApplicationContext context = (WebApplicationContext) getApplication()
+                    .getContext();
+            int maxInactiveInterval = context.getHttpSession()
+                    .getMaxInactiveInterval();
+            target.addAttribute("persistSession", maxInactiveInterval);
+        }
     }
 
     @Override
@@ -312,6 +321,40 @@ public class TouchKitWindow extends Window {
             }
             positionCbs.clear();
         }
+    }
+
+    /**
+     * Vaadin uses the servlet's session mechanism to track users. With its
+     * default settings all sessions will be discarded when the browser
+     * application closes. For mobile web applications (such as web apps in iOS
+     * devices that are added to home screen) this might not be the desired
+     * solution. With this method the session cookie can be made persistent. A
+     * returning user can then be shown his/her previous UI state.
+     * <p>
+     * 
+     * Note, that the normal session lifetime is still respected although
+     * persistent cookies are in use.
+     * 
+     * @param persistentCookie
+     *            true if persistent session cookies should be used
+     */
+    public void setPersistentSessionCookie(boolean persistentCookie) {
+        persistentSessionCookie = persistentCookie;
+        requestRepaint();
+    }
+
+    /**
+     * Vaadin uses the servlet's session mechanism to track users. With its
+     * default settings all sessions will be discarded when the browser
+     * application closes. For mobile web applications (such as web apps in iOS
+     * devices that are added to home screen) this might not be the desired
+     * solution.
+     * 
+     * @return true if session cookie will be made persistent when closing the
+     *         browser application
+     */
+    public boolean isPersistentSessionCookie() {
+        return persistentSessionCookie;
     }
 
 }
