@@ -588,7 +588,11 @@
 }
 
 .v-touchkit-verticalcomponentgroup>div>div.v-csslayout-container>.v-caption>.v-captiontext {
-	padding-right: 3px;	
+	text-overflow: ellipsis;	
+}
+.v-touchkit-verticalcomponentgroup>div>div.v-csslayout-container>.v-caption>.v-icon {
+	height:30px;
+	margin-top: 6px;
 }
 
 .v-touchkit-verticalcomponentgroup input.v-textfield {

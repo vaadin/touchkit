@@ -30,6 +30,7 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.Layout;
 import com.vaadin.ui.NativeSelect;
 import com.vaadin.ui.Slider;
+import com.vaadin.ui.TabSheet.Tab;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
@@ -102,7 +103,8 @@ public class NavPanelTestWithViews extends NavigationManager implements
                     popover.setContent(touchKitTabsheet);
 
                     content.setCaption("TAB1");
-                    touchKitTabsheet.addTab(content);
+                    Tab addTab = touchKitTabsheet.addTab(content);
+                    addTab.setCaption("TAB1??");
                     CssLayout cssLayout = new CssLayout();
                     cssLayout.setCaption("TAB2");
                     touchKitTabsheet.addTab(cssLayout);
@@ -313,8 +315,9 @@ public class NavPanelTestWithViews extends NavigationManager implements
             textField.setWidth("100%");
             componentGroup.addComponent(textField);
             // email field
-            emailField = new EmailField("Longer caption");
-            emailField.setWidth("100%");
+            emailField = new EmailField(
+                    "Longer caption for non 100% width field which might be clipped with ellipsis");
+            // emailField.setWidth("100%");
             componentGroup.addComponent(emailField);
             // number field
             numberField = new NumberField("Age");
@@ -409,7 +412,30 @@ public class NavPanelTestWithViews extends NavigationManager implements
             }
             Switch switch1 = new Switch();
             switch1.setCaption("ios wannabe check");
+            switch1.setIcon(getNextIcon());
+            switch1.setImmediate(true);
             components.addComponent(switch1);
+
+            switch1 = new Switch();
+            switch1.setCaption("ios wannabe checkbox with very long caption that will easily be clipped");
+            switch1.setIcon(getNextIcon());
+            components.addComponent(switch1);
+
+            NavigationButton navigationButton = new NavigationButton(
+                    "NavigationButton with rather long caption in it, which shouldn't cause the caption to pop on next line.");
+
+            navigationButton.setIcon(getNextIcon());
+            navigationButton.setDescription("Foobar");
+            navigationButton.setTargetView(new SimpleNavView(this, i));
+
+            components.addComponent(navigationButton);
+            
+            Button b = new Button("Normal button");
+            // FIXME normal buttons in verticalcomponentgroup
+            // components.addComponent(b);
+
+            
+
             setContent(components);
         }
 

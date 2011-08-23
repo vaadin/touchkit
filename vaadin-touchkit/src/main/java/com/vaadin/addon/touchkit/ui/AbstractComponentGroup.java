@@ -1,8 +1,5 @@
 package com.vaadin.addon.touchkit.ui;
 
-import com.vaadin.addon.touchkit.gwt.client.VComponentGroup;
-import com.vaadin.ui.ClientWidget;
-import com.vaadin.ui.ClientWidget.LoadStyle;
 import com.vaadin.ui.CssLayout;
 
 /**
@@ -10,7 +7,6 @@ import com.vaadin.ui.CssLayout;
  * {@link HorizontalComponentGroup} and {@link VerticalComponentGroup}. Does not
  * support changing orientation on the fly.
  */
-@ClientWidget(value = VComponentGroup.class, loadStyle = LoadStyle.EAGER)
 public abstract class AbstractComponentGroup extends CssLayout {
 
     /**
