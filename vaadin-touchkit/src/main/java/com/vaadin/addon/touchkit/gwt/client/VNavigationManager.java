@@ -9,6 +9,7 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.terminal.gwt.client.ApplicationConnection;
@@ -149,7 +150,16 @@ public class VNavigationManager extends ComplexPanel implements Container {
             setPosition(newPrev, -currentWrapperPos - 1);
         }
 
-        hidePlaceHolder();
+        /**
+         * Stylesheet fades in new navigation views in 150ms. After they have
+         * become visible, remove placeholder below them.
+         */
+        new Timer() {
+            @Override
+            public void run() {
+                hidePlaceHolder();
+            }
+        }.schedule(160);
 
         rendering = false;
 
