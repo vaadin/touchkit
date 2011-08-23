@@ -104,6 +104,8 @@ public class TabBarView extends AbstractComponentContainer {
      *             use the specialized API instead: {@link #addTab(Component)}
      *             and {@link #removeTab(Component)}
      */
+    @Deprecated
+    @Override
     public void addComponent(Component c) {
         throw new UnsupportedOperationException(
                 "Use the specialized API instead.");
@@ -136,6 +138,8 @@ public class TabBarView extends AbstractComponentContainer {
      *             use the specialized API instead: {@link #addTab(Component)}
      *             and {@link #removeTab(Component)}
      */
+    @Deprecated
+    @Override
     public void removeComponent(Component c) {
         throw new UnsupportedOperationException(
                 "Use the specialized API instead.");
@@ -185,6 +189,7 @@ public class TabBarView extends AbstractComponentContainer {
      *             use the specialized API instead: {@link #addTab(Component)}
      *             and {@link #removeTab(Component)}
      */
+    @Deprecated
     public void replaceComponent(Component oldComponent, Component newComponent) {
         throw new UnsupportedOperationException(
                 "Use the specialized API instead.");
@@ -200,7 +205,9 @@ public class TabBarView extends AbstractComponentContainer {
     public Iterator<Component> getComponentIterator() {
         LinkedList<Component> list = new LinkedList<Component>();
         list.add(toolbar);
-        list.add(currentComponent);
+        if (currentComponent != null) {
+            list.add(currentComponent);
+        }
         return list.iterator();
     }
 
@@ -215,6 +222,7 @@ public class TabBarView extends AbstractComponentContainer {
         return null;
     }
 
+    @Override
     public void paintContent(PaintTarget target) throws PaintException {
         super.paintContent(target);
         toolbar.paint(target);
