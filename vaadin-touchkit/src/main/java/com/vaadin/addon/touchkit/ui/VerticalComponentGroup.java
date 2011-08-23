@@ -21,6 +21,8 @@ import com.vaadin.ui.ClientWidget.LoadStyle;
 @ClientWidget(value = VVerticalComponentGroup.class, loadStyle = LoadStyle.EAGER)
 public class VerticalComponentGroup extends AbstractComponentGroup {
 
+    private static final String STYLE_NAME = "v-touchkit-verticalcomponentgroup";
+
     /**
      * Creates a vertical component group.
      * <p>
@@ -37,6 +39,7 @@ public class VerticalComponentGroup extends AbstractComponentGroup {
         super(caption);
         setWidth("100%");
         setMargin(true);
+        setStyleName(STYLE_NAME);
     }
 
 }

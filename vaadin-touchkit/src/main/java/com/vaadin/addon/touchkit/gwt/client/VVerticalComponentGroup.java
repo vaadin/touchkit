@@ -15,8 +15,6 @@ import com.vaadin.terminal.gwt.client.ui.VCssLayout;
 
 public class VVerticalComponentGroup extends VCssLayout {
 
-    private static final String STYLE_NAME = "v-touchkit-verticalcomponentgroup";
-
     private DivElement breakElement;
 
     private ArrayList<Paintable> componentsWithCaptions;
@@ -33,11 +31,6 @@ public class VVerticalComponentGroup extends VCssLayout {
         ensureBreakElement();
         checkCaptionWidths();
         rendering = false;
-    }
-
-    @Override
-    public void setStyleName(String style) {
-        super.setStyleName(style + " " + STYLE_NAME);
     }
 
     @Override
