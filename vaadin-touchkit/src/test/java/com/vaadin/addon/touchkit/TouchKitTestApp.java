@@ -15,6 +15,7 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Embedded;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Table;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.ResizeEvent;
 
@@ -30,6 +31,7 @@ public class TouchKitTestApp extends Application {
         // work correctly
         setTheme("base");
         final TouchKitWindow mainWindow = new TouchKitWindow();
+        mainWindow.setPersistentSessionCookie(true);
         CssLayout content = new CssLayout();
         content.setMargin(true);
         mainWindow.setContent(content);
@@ -137,6 +139,20 @@ public class TouchKitTestApp extends Application {
                         mainWindow.setContent(new NavViewWithButtons());
                     }
                 }));
+
+        Table table = new Table();
+        table.addContainerProperty("Property", String.class, "value");
+        table.addContainerProperty("Another", String.class, "value");
+        table.addContainerProperty("Third", String.class, "value");
+        for (int i = 0; i < 100; i++) {
+            table.addItem();
+        }
+
+        table.setColumnCollapsingAllowed(true);
+        table.setColumnReorderingAllowed(true);
+        table.setSelectable(true);
+
+        mainWindow.addComponent(table);
 
         setMainWindow(mainWindow);
     }

@@ -83,7 +83,7 @@ public interface VTouchKitResources extends ClientBundle {
     @Source("theme/img/navbar-arrow-right-2x.png")
     public DataResource navbarArrowRightImage2x();
 
-    /**
+    /*
      * Popover images
      */
 
@@ -95,7 +95,7 @@ public interface VTouchKitResources extends ClientBundle {
     @ImageOptions(repeatStyle = RepeatStyle.None)
     public ImageResource popoverArrowDownImage();
 
-    /**
+    /*
      * Switch
      */
 
@@ -106,5 +106,21 @@ public interface VTouchKitResources extends ClientBundle {
     @Source("theme/img/switch-2x.png")
     @ImageOptions(repeatStyle = RepeatStyle.None)
     public DataResource switchImage2x();
+
+    /*
+     * Table
+     */
+
+    @Source("theme/img/asc-light.png")
+    @ImageOptions(repeatStyle = RepeatStyle.None)
+    public ImageResource columnAscending();
+
+    @Source("theme/img/desc-light.png")
+    @ImageOptions(repeatStyle = RepeatStyle.None)
+    public ImageResource columnDescending();
+
+    @Source("theme/img/col-sel-light.png")
+    @ImageOptions(repeatStyle = RepeatStyle.None)
+    public ImageResource columnSelector();
 
 }
