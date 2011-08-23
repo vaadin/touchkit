@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Date;
 
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.Location;
 import com.vaadin.terminal.gwt.client.ApplicationConnection;
 import com.vaadin.terminal.gwt.client.VConsole;
@@ -50,6 +49,9 @@ public class VTouchKitApplicationConnection extends ApplicationConnection {
             this.jsonText = jsonText;
             this.json = json;
             forceHandleMessage.schedule(MAX_TIMEOUT);
+        }
+        if (getView() instanceof VTouchKitView) {
+            ((VTouchKitView) getView()).updateSessionCookieExpiration();
         }
     }
 
