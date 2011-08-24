@@ -45,10 +45,13 @@ public abstract class TouchKitApplication extends Application implements
 
     private static ThreadLocal<TouchKitApplication> activeApplication = new ThreadLocal<TouchKitApplication>();
 
+    public TouchKitApplication() {
+        setTheme(BaseTheme.THEME_NAME);
+    }
+
     @Override
     public void init() {
         setMainWindow(new TouchKitWindow());
-        setTheme(BaseTheme.THEME_NAME);
     }
 
     /**
