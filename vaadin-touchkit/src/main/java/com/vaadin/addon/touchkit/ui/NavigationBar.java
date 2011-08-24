@@ -106,11 +106,11 @@ public class NavigationBar extends AbstractComponentContainer {
      * @param component
      */
     public void setPreviousView(Component component) {
-        getBackButton().setTargetView(component);
-        if (getBackButton().getParent() == null) {
-            setLeftComponent(getBackButton());
+        if (getBackButton().getParent() != null) {
+            // only if the left component has not been changed
+            getBackButton().setTargetView(component);
+            getBackButton().setVisible(component != null);
         }
-        getBackButton().setVisible(component != null);
     }
 
     /**
