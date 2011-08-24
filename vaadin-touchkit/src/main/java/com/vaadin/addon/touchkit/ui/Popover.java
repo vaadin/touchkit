@@ -6,6 +6,7 @@ import com.vaadin.terminal.PaintTarget;
 import com.vaadin.ui.ClientWidget;
 import com.vaadin.ui.ClientWidget.LoadStyle;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.Window;
 
 /**
@@ -36,11 +37,21 @@ public class Popover extends Window {
     private Component relatedComponent;
 
     /**
-     * By default, the {@link Popover} is modal. This is usually the most
-     * sensible approach on devices.
+     * Constructs a new Popover. By default, the {@link Popover} is modal. This
+     * is usually the most sensible approach on devices.
      */
     public Popover() {
         setModal(true);
+    }
+
+    /**
+     * Constructs a new Popover with given content.
+     * 
+     * @param content
+     */
+    public Popover(ComponentContainer content) {
+        this();
+        setContent(content);
     }
 
     /**
