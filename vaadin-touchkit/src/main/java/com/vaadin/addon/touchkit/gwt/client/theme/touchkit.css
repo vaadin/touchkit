@@ -1114,15 +1114,17 @@
 	height: auto;
 	border-radius: 0;
 	text-indent: 0;
+	margin: 27px 0 0 0; /* At the bottom of the button, even without icon */
+}
+
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button .v-icon {
+	margin: 0 0 -25px 0; /* Compensate the space consumed by icon as caption is positioned with margin */
 }
 
 .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-wrap:before {
 	display: none;
 }
 
-.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button .v-icon {
-	margin: 0;
-}
 
 .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-selected {
 	background: rgba(255,255,255,.15);	
