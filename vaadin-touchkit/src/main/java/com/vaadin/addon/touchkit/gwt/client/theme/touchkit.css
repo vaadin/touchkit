@@ -575,7 +575,7 @@
 .v-touchkit-verticalcomponentgroup>div>div.v-csslayout-container>.v-touchkit-has-caption {
 	clear: right;
 	float: right;
-	}
+}
 
 .v-touchkit-verticalcomponentgroup>div>.v-csslayout-container>.v-caption {
 	float: left;
@@ -625,9 +625,10 @@
 	}
 
 /* ...hide from the first */
-.v-touchkit-verticalcomponentgroup > div > .v-csslayout-container > *:first-child:before {
+.v-touchkit-verticalcomponentgroup > div > .v-csslayout-container > *:first-child:before,
+.v-touchkit-verticalcomponentgroup>div>div.v-csslayout-container>.v-touchkit-has-caption:before {
 	display: none;
-	}
+}
 
 /* Need to explicitly round the first and last components corners, otherwise they will stick out from the component group */
 .v-touchkit-verticalcomponentgroup > div > div > .v-touchkit-navbutton:first-child {
