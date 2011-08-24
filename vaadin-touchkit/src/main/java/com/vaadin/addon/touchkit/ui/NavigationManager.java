@@ -146,11 +146,36 @@ public class NavigationManager extends AbstractComponentContainer {
         requestRepaint();
     }
 
-    /*- TODO should _replace_ currentComponent as setPreviousComponent(), or be renamed.
-    public void setCurrentComponent(Component currentComponent) {
-        // navigateTo(currentComponent); <- not so good
+    /**
+     * Sets the currently displayed component in the NavigationManager.
+     * <p>
+     * If current component is already set it is overridden. If the new
+     * component or the next component is of type NavigationView, their previous
+     * components will be automatically re-assigned.
+     * 
+     * @param newcurrentComponent
+     */
+    public void setCurrentComponent(Component newcurrentComponent) {
+        if (currentComponent != newcurrentComponent) {
+            if (currentComponent != null) {
+                removeComponent(currentComponent);
+            }
+            currentComponent = newcurrentComponent;
+            addComponent(newcurrentComponent);
+            if (previousComponent != null
+                    && currentComponent instanceof NavigationView) {
+                NavigationView view = (NavigationView) currentComponent;
+                view.setPreviousComponent(previousComponent);
+            }
+            if (nextComponent != null
+                    && nextComponent instanceof NavigationView) {
+                NavigationView view = (NavigationView) nextComponent;
+                view.setPreviousComponent(currentComponent);
+
+            }
+            requestRepaint();
+        }
     }
-    -*/
 
     /**
      * Returns the currently visible component.
