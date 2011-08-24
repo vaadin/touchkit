@@ -7,13 +7,13 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 
 /**
- * A native looking toolbar for showing icons.
+ * A native looking toolbar for showing buttons.
  * <p>
  * Typically {@link Button}s with icons or a {@link HorizontalComponentGroup}
  * containing Buttons are added to the Toolbar. All components will be rendered
  * as equally sized and centered vertically in the toolbar.
  * <p>
- * Typically used as part of a {@link NavigationView}.
+ * Toolbar is typically used as a part of a {@link NavigationView}.
  * 
  */
 public class Toolbar extends CssLayout {
