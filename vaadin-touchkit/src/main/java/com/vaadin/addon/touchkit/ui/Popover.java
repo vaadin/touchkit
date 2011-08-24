@@ -44,9 +44,10 @@ public class Popover extends Window {
     }
 
     /**
-     * This will open the {@link Popover} below or on top of the given
-     * component, <em>unless</em> this is a 'small screen' device, e.g phone. By
-     * default, an arrow pointing to the given related component will be shown.
+     * This method will add the {@link Popover} to the top level window so that
+     * it is aligned below or on top of the given component, <em>unless</em>
+     * this is a 'small screen' device, e.g phone. By default, an arrow pointing
+     * to the given related component will be shown.
      * <p>
      * On a small screen device, a 100% wide overlay will slide in from the
      * bottom or top depending on the given related components position (in an
@@ -93,6 +94,15 @@ public class Popover extends Window {
     @Override
     public void setClosable(boolean closable) {
         super.setClosable(closable);
+    }
+
+    /**
+     * Removes the popover from the parent {@link Window}.
+     */
+    public void removeFromParent() {
+        if (getParent() != null) {
+            getParent().removeWindow(this);
+        }
     }
 
 }
