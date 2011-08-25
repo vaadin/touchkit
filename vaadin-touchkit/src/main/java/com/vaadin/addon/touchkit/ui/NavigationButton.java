@@ -30,7 +30,7 @@ public class NavigationButton extends Button {
      * Creates a new navigation button.
      * 
      * @param caption
-     *            the Button caption.
+     *            the Button caption
      */
     public NavigationButton(String caption) {
         super(caption);
@@ -45,6 +45,20 @@ public class NavigationButton extends Button {
      */
     public NavigationButton(Component targetView) {
         super(targetView.getCaption());
+        this.targetView = targetView;
+    }
+
+    /**
+     * Constructs a button with the specified target view, and sets the caption
+     * explicitly.
+     * 
+     * @param caption
+     *            the Button caption
+     * @param targetView
+     *            the view to navigate to when pressed
+     */
+    public NavigationButton(String caption, Component targetView) {
+        super(caption);
         this.targetView = targetView;
     }
 
