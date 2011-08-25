@@ -23,10 +23,12 @@ import com.vaadin.ui.Component;
  * currently visible view is forgotten and the previous view is restored from
  * the stack and made visible.
  * <p>
- * When used with @link {@link NavigationView}s, @link {@link NavigationBar}s
- * and @link {@link NavigationButton}s, navigation is smooth and quite
- * automatic.
+ * When used with {@link NavigationView}s, {@link NavigationBar}s and
+ * {@link NavigationButton}s, navigation is smooth and quite automatic.
  * <p>
+ * Bootstrap the navigation by giving the {@link NavigationManager} an initial
+ * view, either by using the constructor {@link #NavigationManager(Component)}
+ * or by calling {@link #navigateTo(Component)}.
  */
 @ClientWidget(value = VNavigationManager.class, loadStyle = LoadStyle.EAGER)
 public class NavigationManager extends AbstractComponentContainer {
@@ -60,6 +62,15 @@ public class NavigationManager extends AbstractComponentContainer {
      */
     public NavigationManager() {
         setSizeFull();
+    }
+
+    /**
+     * Constructs a {@link NavigationManager} that is 100% wide and high, and
+     * initially navigates to (shows) the given component.
+     */
+    public NavigationManager(Component c) {
+        this();
+        navigateTo(c);
     }
 
     /**
