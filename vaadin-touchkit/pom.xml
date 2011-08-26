@@ -208,6 +208,12 @@
 		</pluginRepository>
 	</pluginRepositories>
 
+	<distributionManagement>
+		<snapshotRepository>
+			<id>vaadin-snapshots</id>
+			<url>${snapshot.repository.url}</url>
+		</snapshotRepository>
+	</distributionManagement>
 	<dependencies>
 		<dependency>
 			<groupId>com.vaadin</groupId>
