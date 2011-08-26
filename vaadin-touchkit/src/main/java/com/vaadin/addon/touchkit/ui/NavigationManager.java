@@ -102,6 +102,7 @@ public class NavigationManager extends AbstractComponentContainer {
         if (nextComponent != c) {
             if (nextComponent != null) {
                 removeComponent(nextComponent);
+                nextComponent = null;
             }
             addComponent(c);
             if (c instanceof NavigationView) {
