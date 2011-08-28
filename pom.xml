@@ -1,66 +1,74 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.vaadin.addon</groupId>
-    <artifactId>vaadin-touchkit-root</artifactId>
-    <packaging>pom</packaging>
-    <version>${touchkit.version}</version>
-    <name>Vaadin TouchKit</name>
-    <description>Vaadin TouchKit Root Project</description>
-    <organization>
-        <name>Vaadin Ltd</name>
-        <url>http://vaadin.com/</url>
-    </organization>
-    <url>http://vaadin.com/</url>
-    <scm>
-        <connection>scm:svn:http://dev.vaadin.com/svn/addons/TouchKit</connection>
-        <developerConnection>scm:svn:http://dev.vaadin.com/svn/addons/TouchKit</developerConnection>
-        <url>http://dev.vaadin.com/browser/addons/TouchKit</url>
-    </scm>
-    <issueManagement>
-        <system>trac</system>
-        <url>http://dev.vaadin.com/</url>
-    </issueManagement>
-    <developers>
-        <developer>
-            <name>Matti Tahvonen</name>
-            <id>matti</id>
-            <email>matti at vaadin.com</email>
-            <organization>Vaadin Ltd</organization>
-            <timezone>+2</timezone>
-        </developer>
-    </developers>
-    <licenses>
-        <!-- For the license that applies to this distribution package, see licensing.txt -->
-        <license>
-            <name>GNU Affero General Public License version 3.0</name>
-            <url>http://www.gnu.org/licenses/agpl-3.0.html</url>
-            <distribution>repo</distribution>
-        </license>
-        <license>
-            <name>Commercial Vaadin Add-On License version 2.0</name>
-            <url>http://vaadin.com/license/cval-2.0</url>
-            <distribution>manual</distribution>
-        </license>
-    </licenses>
+	<groupId>com.vaadin.addon</groupId>
+	<artifactId>vaadin-touchkit-root</artifactId>
+	<packaging>pom</packaging>
+	<version>${touchkit.version}</version>
+	<name>Vaadin TouchKit</name>
+	<description>Vaadin TouchKit Root Project</description>
+	<organization>
+		<name>Vaadin Ltd</name>
+		<url>http://vaadin.com/</url>
+	</organization>
+	<url>http://vaadin.com/</url>
+	<scm>
+		<connection>scm:svn:http://dev.vaadin.com/svn/addons/TouchKit</connection>
+		<developerConnection>scm:svn:http://dev.vaadin.com/svn/addons/TouchKit</developerConnection>
+		<url>http://dev.vaadin.com/browser/addons/TouchKit</url>
+	</scm>
+	<issueManagement>
+		<system>trac</system>
+		<url>http://dev.vaadin.com/</url>
+	</issueManagement>
+	<developers>
+		<developer>
+			<name>Matti Tahvonen</name>
+			<id>matti</id>
+			<email>matti at vaadin.com</email>
+			<organization>Vaadin Ltd</organization>
+			<timezone>+2</timezone>
+		</developer>
+	</developers>
+	<licenses>
+		<!-- For the license that applies to this distribution package, see licensing.txt -->
+		<license>
+			<name>GNU Affero General Public License version 3.0</name>
+			<url>http://www.gnu.org/licenses/agpl-3.0.html</url>
+			<distribution>repo</distribution>
+		</license>
+		<license>
+			<name>Commercial Vaadin Add-On License version 2.0</name>
+			<url>http://vaadin.com/license/cval-2.0</url>
+			<distribution>manual</distribution>
+		</license>
+	</licenses>
 
-    <properties>
-        <!-- May be overridden by the build system when creating CVAL licensed packages -->
-        <license.short.name>agpl-3.0</license.short.name>
+	<properties>
+		<!-- May be overridden by the build system when creating CVAL licensed 
+			packages -->
+		<license.short.name>agpl-3.0</license.short.name>
 
-        <Implementation-Version>${project.version}</Implementation-Version>
-        <!-- Must not change this because of the Directory -->
-        <Implementation-Title>Vaadin TouchKit</Implementation-Title>
-        <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
-        <Vaadin-Addon>vaadin-touchkit-${license.short.name}-${project.version}.jar</Vaadin-Addon>
-        
-        <snapshot.repository.url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</snapshot.repository.url>
-    </properties>
+		<Implementation-Version>${project.version}</Implementation-Version>
+		<!-- Must not change this because of the Directory -->
+		<Implementation-Title>Vaadin TouchKit</Implementation-Title>
+		<Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
+		<Vaadin-Addon>vaadin-touchkit-${license.short.name}-${project.version}.jar</Vaadin-Addon>
 
-    <modules>
-        <module>vaadin-touchkit</module>
-        <module>assembly</module>
-    </modules>
+		<snapshot.repository.url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</snapshot.repository.url>
+	</properties>
+	<distributionManagement>
+		<snapshotRepository>
+			<id>vaadin-snapshots</id>
+			<name>Vaadin snapshot repository</name>
+			<url>${snapshot.repository.url}</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<modules>
+		<module>vaadin-touchkit</module>
+		<module>assembly</module>
+	</modules>
 
 </project>
