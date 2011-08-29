@@ -2,6 +2,7 @@ package com.vaadin.addon.touchkit.ui;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Map;
 
 import com.vaadin.addon.touchkit.gwt.client.VNavigationView;
 import com.vaadin.terminal.PaintException;
@@ -33,6 +34,7 @@ public class NavigationView extends AbstractComponentContainer {
     private NavigationBar navigationBar = new NavigationBar();
     private Component mainComponent;
     private Component toolbar;
+    private int scrollPosition;
 
     /**
      * Creates a {@link NavigationView} with the given content.
@@ -279,10 +281,29 @@ public class NavigationView extends AbstractComponentContainer {
     @Override
     public void paintContent(PaintTarget target) throws PaintException {
         super.paintContent(target);
+        target.addVariable(this, "sp", scrollPosition);
         for (Iterator<Component> componentIterator = getComponentIterator(); componentIterator
                 .hasNext();) {
             Component next = componentIterator.next();
             next.paint(target);
+        }
+    }
+
+    public void setScrollPosition(int scrollPosition) {
+        this.scrollPosition = scrollPosition;
+        requestRepaint();
+    }
+
+    public int getScrollPosition() {
+        return scrollPosition;
+    }
+
+    @Override
+    public void changeVariables(Object source, Map<String, Object> variables) {
+        super.changeVariables(source, variables);
+        Integer newScrollPosition = (Integer) variables.get("sp");
+        if (newScrollPosition != null) {
+            this.scrollPosition = newScrollPosition;
         }
     }
 

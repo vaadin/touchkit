@@ -3,8 +3,11 @@ package com.vaadin.addon.touchkit.gwt.client;
 import java.util.Set;
 
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.event.dom.client.ScrollEvent;
+import com.google.gwt.event.dom.client.ScrollHandler;
 import com.google.gwt.event.dom.client.TouchStartEvent;
 import com.google.gwt.event.dom.client.TouchStartHandler;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.ComplexPanel;
@@ -17,7 +20,8 @@ import com.vaadin.terminal.gwt.client.UIDL;
 import com.vaadin.terminal.gwt.client.Util;
 import com.vaadin.terminal.gwt.client.ui.TouchScrollDelegate;
 
-public class VNavigationView extends ComplexPanel implements Container {
+public class VNavigationView extends ComplexPanel implements Container,
+        ScrollHandler {
 
     private static final String CLASSNAME = "v-touchkit-navview";
     private static final int NAVBARHEIGHT = 42;
@@ -50,6 +54,9 @@ public class VNavigationView extends ComplexPanel implements Container {
                 touchScrollDelegate.onTouchStart(event);
             }
         }, TouchStartEvent.getType());
+
+        DOM.sinkEvents(wrapper, Event.ONSCROLL);
+        addHandler(this, ScrollEvent.getType());
     }
 
     @Override
@@ -105,6 +112,8 @@ public class VNavigationView extends ComplexPanel implements Container {
         } else if (toolbar != null) {
             forgetComponent(client, toolbar);
         }
+
+        wrapper.setScrollTop(uidl.getIntVariable("sp"));
 
         Util.runWebkitOverflowAutoFix(wrapper);
         rendering = false;
@@ -166,6 +175,13 @@ public class VNavigationView extends ComplexPanel implements Container {
             if (toolbar != null) {
                 client.handleComponentRelativeSize((Widget) toolbar);
             }
+        }
+    }
+
+    public void onScroll(ScrollEvent event) {
+        if (client != null && isAttached()) {
+            client.updateVariable(client.getPid(this), "sp",
+                    wrapper.getScrollTop(), false);
         }
     }
 
