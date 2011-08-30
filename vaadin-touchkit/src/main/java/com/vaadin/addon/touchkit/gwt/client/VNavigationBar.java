@@ -47,14 +47,11 @@ public class VNavigationBar extends ComplexPanel implements Container {
             return;
         }
 
-        /*
-         * Note, HTML caption. TODO XSS vuln.
-         */
         if (hasAbsolutelyPositionedCaption()) {
             caption.getStyle().setProperty("left", "0");
             caption.getStyle().setProperty("right", "");
         }
-        caption.setInnerHTML(uidl.getStringAttribute("caption"));
+        caption.setInnerText(uidl.getStringAttribute("caption"));
         captionWidth = caption.getOffsetWidth(); // cache the caption size
 
         UIDL backUidl = uidl.getChildByTagName("back");

@@ -36,18 +36,6 @@ public class NavigationBar extends AbstractComponentContainer {
     }
 
     /**
-     * Note, NavigationBar's caption supports XHTML styling unlike default
-     * Vaadin component captions. Be sure to only add safe content to the
-     * caption.
-     * 
-     * @see com.vaadin.ui.AbstractComponent#setCaption(java.lang.String)
-     */
-    @Override
-    public void setCaption(String caption) {
-        super.setCaption(caption);
-    }
-
-    /**
      * Sets the component on the left side of the caption.
      * 
      * <p>
