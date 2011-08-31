@@ -61,22 +61,22 @@ public class NavigationView extends AbstractComponentContainer {
      * Creates a {@link NavigationView} with the given caption and an empty
      * {@link CssLayout} as content.
      * 
-     * @param captionHtml
+     * @param caption
      */
-    public NavigationView(String captionHtml) {
+    public NavigationView(String caption) {
         this();
-        setCaption(captionHtml);
+        setCaption(caption);
     }
 
     /**
      * Creates a {@link NavigationView} with the given caption and content.
      * 
-     * @param captionHtml
+     * @param caption
      * @param content
      */
-    public NavigationView(String captionHtml, Component content) {
+    public NavigationView(String caption, Component content) {
         this(content);
-        setCaption(captionHtml);
+        setCaption(caption);
     }
 
     /**
