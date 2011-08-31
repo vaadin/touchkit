@@ -12,6 +12,7 @@ import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Embedded;
 import com.vaadin.ui.Label;
@@ -145,14 +146,24 @@ public class TouchKitTestApp extends Application {
         table.addContainerProperty("Another", String.class, "value");
         table.addContainerProperty("Third", String.class, "value");
         for (int i = 0; i < 100; i++) {
-            table.addItem();
+            Object addItem = table.addItem();
+            table.getItem(addItem).getItemProperty("Property")
+                    .setValue("value " + i);
         }
 
         table.setColumnCollapsingAllowed(true);
         table.setColumnReorderingAllowed(true);
         table.setSelectable(true);
 
+        ComboBox comboBox = new ComboBox();
+        comboBox.setContainerDataSource(table);
+        comboBox.setValue(comboBox.getItemIds().iterator().next());
+        comboBox.setItemCaptionPropertyId("Property");
+
+        // TODO reduce a bug: put these into different order and table is hidden
+        // until combobox menu is opened
         mainWindow.addComponent(table);
+        mainWindow.addComponent(comboBox);
 
         setMainWindow(mainWindow);
     }
