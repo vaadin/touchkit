@@ -87,6 +87,13 @@ public class TouchKitTestApp extends Application {
             }
         });
 
+        b = new Button("Junkyard");
+        b.addListener(new ClickListener() {
+            public void buttonClick(ClickEvent event) {
+                mainWindow.setContent(new JunkYard());
+            }
+        });
+
         mainWindow.addComponent(b);
 
         mainWindow.addComponent(new Button("Geolocation",

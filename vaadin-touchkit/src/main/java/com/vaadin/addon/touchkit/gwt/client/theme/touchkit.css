@@ -68,6 +68,9 @@
 @def popoverToolbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0)), to(rgba(255,255,255,0)), color-stop(.2, rgba(255,255,255,.15)), color-stop(.55, rgba(255,255,255,.1)), color-stop(.56, rgba(255,255,255,.05)))');
 
 
+/* Table */
+@def tableSelectionGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4d8cb9), to(#3e6fa8))');
+
 
 /* Hide default view scrollbars */
 .v-view {
@@ -1409,28 +1412,232 @@
 
 
 /* ComboBox */
-
-.v-app .v-filterselect-input, .v-window .v-filterselect-input, .v-popupview-popup .v-filterselect-input {
-	-webkit-appearance: none;
-	border-radius: 4px 0 0 4px;
+.v-filterselect,
+.v-datefield-popupcalendar {
+	/* To contain the floats */
+	overflow: hidden;
+	border: 1px solid rgba(0,0,0,.35);
+	border-radius: 4px;
+	background: #fff;
+	-webkit-box-shadow: inset 0 1px rgba(0,0,0,.12);
 	height: 25px;
-	border: 1px solid #999;
-	border-right:0;
-	background: navbarGradient;
-}
+	padding: 2px 0 2px 4px;
+	}
+
+.v-app .v-filterselect-input,
+.v-window .v-filterselect-input,
+.v-popupview-popup .v-filterselect-input,
+input.v-datefield-textfield {
+	-webkit-appearance: none;
+	border: none;
+	background: transparent;
+	font-size: 17px;
+	font-weight: bold;
+	margin: 0;
+	}
 
 .v-filterselect-button {
-	background-color: rgba(0,0,0,0.15);
-	border-radius: 0 10px 10px 0;	
-	height:29px;
-	border: 1px solid #999;
-	border-left:0;
-	background-position-y: -5px;
+	height: 25px;
+	background-position-y: -6px;
 	background-position-x: -2px;
 	width: 25px;
-}
+	opacity: .3;
+	}
+
+.v-filterselect-button:active {
+	opacity: 1;
+	}
+
+.v-filterselect-input:focus,
+.v-datefield-textfield:focus {
+	outline: none;
+	}
+
+.v-filterselect-focus,
+.v-datefield-focus {
+	-webkit-box-shadow: 0 0 3px 1px #5d81ab;
+	}
+
+.v-filterselect-prompt .v-filterselect-input {
+	font-style: normal;
+	}
+
+.v-filterselect .v-icon {
+	height: 23px;
+	margin-top: 2px !important;
+	}
+
+.v-filterselect-suggestmenu {
+	min-width: 290px;
+	}
+
+.v-filterselect-suggestpopup,
+.v-datefield-popup {
+	-webkit-box-shadow: 0 1px 10px 1px rgba(0,0,0,.5);
+	border-radius: 4px;
+	margin-top: 4px !important;
+	overflow: hidden;
+	border: none;
+	font-size: 17px;
+	font-weight: bold;
+	}
+
+.v-filterselect-suggestpopup .v-icon {
+	height: 32px;
+	vertical-align: middle;
+	}
+
+.v-filterselect-suggestpopup .gwt-MenuItem {
+	height: 36px;
+	line-height: 36px;
+	padding: 2px 10px;
+	border-top: 1px solid #e0e0e0;
+	}
+
+.v-filterselect-suggestpopup tr:last-child .gwt-MenuItem {
+	border-bottom: 1px solid #e0e0e0;
+	}
+
+.v-filterselect-suggestpopup .gwt-MenuItem-selected,
+.v-filterselect-suggestpopup .gwt-MenuItem:active,
+.v-filterselect-suggestpopup .gwt-MenuItem:hover,
+.v-filterselect-suggestpopup .gwt-MenuItem:focus {
+	background: tableSelectionGradient;
+	}
+
+.v-filterselect-nextpage,
+.v-filterselect-nextpage-off,
+.v-filterselect-prevpage-off,
+.v-filterselect-prevpage {
+	width: 75px;
+	height: 32px;
+	border: 1px solid rgba(0,0,0,.25);
+	border-top-color: #d0d1d3;
+	border-bottom-color: rgba(0,0,0,.5);
+	background: literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#e5e5e6), to(#b4b6b8))');
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3), inset 0 -1px 0 rgba(255,255,255,.15);
+	overflow: hidden;
+	border-radius: 17px;
+	margin: 7px auto;
+	}
 
 
-.v-filterselect-nextpage, .v-filterselect-nextpage-off, .v-filterselect-prevpage-off, .v-filterselect-prevpage {
-	
-}
+@url comboBoxArrowDown comboBoxArrowDown2x;
+@url comboBoxArrowUp comboBoxArrowUp2x;
+
+.v-filterselect-nextpage span,
+.v-filterselect-prevpage span {
+	display: block;
+	height: 32px;
+	background: comboBoxArrowDown no-repeat 50%;
+	-webkit-background-size: 20px 11px;
+	text-indent: -9999px;
+	}
+
+.v-filterselect-prevpage span {
+	background-image: comboBoxArrowUp;
+	}
+
+.v-filterselect-nextpage-off,
+.v-filterselect-prevpage-off {
+	opacity: 0;
+	}
+
+.v-filterselect-status {
+	position: absolute;
+	right: 12px;
+	bottom: 15px;
+	color: #B7B9BB;
+	font-size: 14px;
+	}
+
+.v-filterselect-suggestmenu {
+	-webkit-tap-highlight-color: transparent;
+	}
+
+
+/* DateField */
+.v-datefield-popupcalendar {
+	clear: both;
+	float: none;
+	padding: 0 0 0 4px;
+	-webkit-box-sizing: border-box;
+	height: 31px;
+	}
+
+.v-datefield-textfield,
+.v-datefield-button {
+	-webkit-box-sizing: border-box;
+	margin: 0;
+	}
+
+.v-datefield-textfield {
+	height: 27px;
+	line-height: 27px;
+	}
+
+@url calendar calendar2x;
+.v-datefield-button {
+	-webkit-appearance: none;
+	border: none;
+	background: transparent calendar no-repeat 0 50%;
+	-webkit-background-size: 16px 16px;
+	width: 25px;
+	height: 27px;
+	}
+
+.v-datefield-error {
+	border: 2px solid rgba(250,40,0,.6);
+	}
+
+.v-datefield-calendarpanel {
+	border: 1px solid rgba(0,0,0,.3);
+	}
+
+.v-datefield-popup .v-datefield-calendarpanel {
+	border: none;
+	}
+
+.v-datefield-full .v-datefield-calendarpanel {
+	width: 350px;
+	}
+
+.v-datefield-calendarpanel button,
+td.v-datefield-calendarpanel-month {
+	font-size: 24px;
+	font-weight: bold;
+	-webkit-appearance: none;
+	display: block;
+	width: 100%;
+	padding: 0 10px 5px;
+	height: 25px;
+	border: none;
+	border-right: 1px solid rgba(0,0,0,.25);
+	border-bottom: 1px solid rgba(0,0,0,.25);
+	border-top-color: #d0d1d3;
+	border-bottom-color: rgba(0,0,0,.5);
+	background: literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#e5e5e6), to(#b4b6b8))');
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3), inset 0 -1px 0 rgba(255,255,255,.15);
+	overflow: hidden;
+	margin: 0;
+	text-shadow: 0 1px 0 rgba(255,255,255,.7);
+	}
+
+.v-datefield-calendarpanel button {
+	font-family: arial, sans-serif;
+	}
+
+td.v-datefield-calendarpanel-month {
+	font-size: 15px;
+	padding-left: 0;
+	padding-right: 0;
+	height: 19px;
+	}
+
+.v-datefield-calendarpanel .v-button-nextyear {
+	border-right: none;
+	}
+
+.v-datefield-popup {
+	overflow: hidden;
+	}

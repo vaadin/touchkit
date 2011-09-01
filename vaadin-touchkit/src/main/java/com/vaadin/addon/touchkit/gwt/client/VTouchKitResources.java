@@ -123,4 +123,19 @@ public interface VTouchKitResources extends ClientBundle {
     @ImageOptions(repeatStyle = RepeatStyle.None)
     public ImageResource columnSelector();
 
+    /*
+     * ComboBox
+     */
+    @Source("theme/img/combobox-arrow-down-2x.png")
+    public DataResource comboBoxArrowDown2x();
+
+    @Source("theme/img/combobox-arrow-up-2x.png")
+    public DataResource comboBoxArrowUp2x();
+
+    /*
+     * DateField
+     */
+    @Source("theme/img/calendar-2x.png")
+    public DataResource calendar2x();
+
 }
