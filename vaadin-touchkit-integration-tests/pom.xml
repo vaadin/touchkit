@@ -10,7 +10,7 @@
 
 	<properties>
 		<testbench.hubhost>testbench-hub.intra.itmill.com</testbench.hubhost>
-		<testbench.browsers>winxp-safari5</testbench.browsers>
+		<testbench.browsers>win7-googlechrome-stable</testbench.browsers>
 	</properties>
 
 	<artifactId>vaadin-touchkit-integration-tests</artifactId>
@@ -169,7 +169,7 @@
 							<!-- Define some necessary system properties for testbench junit tests -->
 							<systemPropertyVariables>
 								<com.vaadin.testbench.tester.host>${testbench.hubhost}</com.vaadin.testbench.tester.host>
-								<com.vaadin.testbench.deployment.url>${localIP}</com.vaadin.testbench.deployment.url>
+								<com.vaadin.testbench.deployment.url>http://${localIP}:5678/</com.vaadin.testbench.deployment.url>
 								<com.vaadin.testbench.screenshot.directory>${basedir}/src/test/resources/screenshots</com.vaadin.testbench.screenshot.directory>
 							</systemPropertyVariables>
 							<encoding>UTF-8</encoding>
