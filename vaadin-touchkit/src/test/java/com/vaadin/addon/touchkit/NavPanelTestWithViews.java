@@ -286,6 +286,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
             componentGroup.addComponent(textField);
             // email field
             EmailField emailField = new EmailField("Email");
+            emailField.setIcon(new ThemeResource("../runo/icons/64/email.png"));
             emailField.setWidth("100%");
             componentGroup.addComponent(emailField);
             // number field
@@ -429,12 +430,10 @@ public class NavPanelTestWithViews extends NavigationManager implements
             navigationButton.setTargetView(new SimpleNavView(this, i));
 
             components.addComponent(navigationButton);
-            
+
             Button b = new Button("Normal button");
             // FIXME normal buttons in verticalcomponentgroup
             // components.addComponent(b);
-
-            
 
             setContent(components);
         }

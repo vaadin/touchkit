@@ -1,6 +1,7 @@
 package com.vaadin.addon.touchkit.gwt.client;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
@@ -21,6 +22,8 @@ public class VVerticalComponentGroup extends VCssLayout {
 
     private boolean rendering;
 
+    private ApplicationConnection client;
+
     @Override
     public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
         rendering = true;
@@ -28,6 +31,7 @@ public class VVerticalComponentGroup extends VCssLayout {
             componentsWithCaptions = new ArrayList<Paintable>();
         }
         super.updateFromUIDL(uidl, client);
+        this.client = client;
         ensureBreakElement();
         checkCaptionWidths();
         rendering = false;
@@ -81,22 +85,41 @@ public class VVerticalComponentGroup extends VCssLayout {
         FlowPane pane = (FlowPane) getWidget();
         for (Paintable paintableWithPendingCaptionWidthCheck : componentsWithCaptions) {
             if (paintableWithPendingCaptionWidthCheck != null) {
-                Widget c = (Widget) paintableWithPendingCaptionWidthCheck;
-                int offsetWidth = c.getOffsetWidth();
-                VCaption caption = (VCaption) pane.getWidget(pane
-                        .getWidgetIndex(c) - 1);
-                int requiredWidth = caption.getRequiredWidth();
-                int availableForCaption = availableSpace - offsetWidth;
-                if (requiredWidth > availableForCaption
-                        && availableForCaption > 100) {
-                    // clip
-                    caption.setMaxWidth((availableSpace - offsetWidth) - 10);
-                } else {
-                    caption.setMaxWidth(requiredWidth);
-                }
+                checkCaptionWidth(availableSpace, pane,
+                        paintableWithPendingCaptionWidthCheck);
             }
-
         }
+    }
+
+    private void checkCaptionWidth(int availableSpace, FlowPane pane,
+            Paintable paintableWithPendingCaptionWidthCheck) {
+        Widget c = (Widget) paintableWithPendingCaptionWidthCheck;
+        int offsetWidth = c.getOffsetWidth();
+        VCaption caption = (VCaption) pane
+                .getWidget(pane.getWidgetIndex(c) - 1);
+        int requiredWidth = caption.getRequiredWidth();
+        int availableForCaption = availableSpace - offsetWidth;
+        if (requiredWidth > availableForCaption && availableForCaption > 100) {
+            // clip
+            caption.setMaxWidth((availableSpace - offsetWidth) - 10);
+        } else {
+            caption.setMaxWidth(requiredWidth);
+        }
+    }
+
+    @Override
+    public boolean requestLayout(Set<Paintable> children) {
+
+        int availableSpace = getContainerElement().getFirstChildElement()
+                .getOffsetWidth();
+        FlowPane pane = (FlowPane) getWidget();
+
+        for (Paintable paintable : children) {
+            client.handleComponentRelativeSize((Widget) paintable);
+            checkCaptionWidth(availableSpace, pane, paintable);
+        }
+
+        return super.requestLayout(children);
     }
 
     @Override
