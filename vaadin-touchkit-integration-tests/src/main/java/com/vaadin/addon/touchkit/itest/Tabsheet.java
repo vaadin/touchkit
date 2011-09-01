@@ -18,7 +18,6 @@ import com.vaadin.ui.Table;
 public class Tabsheet extends AbstractTouchKitIntegrationTest {
 
     public Tabsheet() {
-
         TabBarView tabBarView = new TabBarView();
 
         tabBarView.addTab(getTable(), "First", new ThemeResource(
@@ -56,7 +55,7 @@ public class Tabsheet extends AbstractTouchKitIntegrationTest {
         Table table = new Table();
         table.addContainerProperty("Col1", String.class, "some random data");
         table.addContainerProperty("Number", String.class, "123");
-        table.addContainerProperty("Date", Date.class, new Date(1314886401678l));
+        table.addContainerProperty("Col3", String.class, "other data");
         for (int i = 0; i < 100; i++) {
             table.addItem();
         }
