@@ -170,7 +170,7 @@
 							<systemPropertyVariables>
 								<com.vaadin.testbench.tester.host>${testbench.hubhost}</com.vaadin.testbench.tester.host>
 								<com.vaadin.testbench.deployment.url>http://${localIP}:5678/</com.vaadin.testbench.deployment.url>
-								<com.vaadin.testbench.screenshot.directory>${basedir}/src/test/resources/screenshots</com.vaadin.testbench.screenshot.directory>
+								<com.vaadin.testbench.screenshot.directory>${project.build.directory}/test-classes/screenshots</com.vaadin.testbench.screenshot.directory>
 							</systemPropertyVariables>
 							<encoding>UTF-8</encoding>
 						</configuration>
