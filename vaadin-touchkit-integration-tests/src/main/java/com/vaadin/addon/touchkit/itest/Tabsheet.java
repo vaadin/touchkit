@@ -64,7 +64,8 @@ public class Tabsheet extends AbstractTouchKitIntegrationTest {
 
     private Component getDateSelector() {
         InlineDateField inlineDateField = new InlineDateField();
-        inlineDateField.setValue(new Date(1314886401678l));
+        inlineDateField.setValue(new Date(1314886401678l - 1000 * 60 * 60 * 24
+                * 3));
         return inlineDateField;
     }
 
