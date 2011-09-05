@@ -72,11 +72,6 @@
 @def tableSelectionGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4d8cb9), to(#3e6fa8))');
 
 
-/* Hide default view scrollbars */
-.v-view {
-	overflow: hidden;
-	}
-
 /* CssLayouts don't need to be overflow: hidden in webkit */
 .v-csslayout {
 	overflow: visible;
@@ -1472,7 +1467,7 @@ input.v-datefield-textfield {
 	}
 
 .v-filterselect-suggestpopup,
-.v-datefield-popup {
+.v-datefield-calendarpanel {
 	-webkit-box-shadow: 0 1px 10px 1px rgba(0,0,0,.5);
 	border-radius: 4px;
 	margin-top: 4px !important;
@@ -1591,8 +1586,8 @@ input.v-datefield-textfield {
 	}
 
 .v-datefield-calendarpanel {
-	border: 1px solid rgba(0,0,0,.3);
-	}
+	background: #fff;
+}
 
 .v-datefield-popup .v-datefield-calendarpanel {
 	border: none;
@@ -1621,7 +1616,13 @@ td.v-datefield-calendarpanel-month {
 	overflow: hidden;
 	margin: 0;
 	text-shadow: 0 1px 0 rgba(255,255,255,.7);
+	line-height: 19px;
 	}
+
+/* Fix the month width, otherwise jumpy when changing month */
+td.v-datefield-calendarpanel-month {
+	width: 223px;
+}
 
 .v-datefield-calendarpanel button {
 	font-family: arial, sans-serif;
@@ -1637,6 +1638,19 @@ td.v-datefield-calendarpanel-month {
 .v-datefield-calendarpanel .v-button-nextyear {
 	border-right: none;
 	}
+
+.v-datefield-calendarpanel table,
+.v-datefield-time {
+	padding: 0 10px;
+}
+.v-datefield-time {
+	padding-bottom: 10px;
+}
+
+.v-datefield-calendarpanel td {
+	text-align: center;
+}
+
 
 .v-datefield-popup {
 	overflow: hidden;
