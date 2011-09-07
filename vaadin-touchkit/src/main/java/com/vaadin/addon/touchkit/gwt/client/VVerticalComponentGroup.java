@@ -12,7 +12,6 @@ import com.vaadin.terminal.gwt.client.Paintable;
 import com.vaadin.terminal.gwt.client.RenderSpace;
 import com.vaadin.terminal.gwt.client.UIDL;
 import com.vaadin.terminal.gwt.client.VCaption;
-import com.vaadin.terminal.gwt.client.VConsole;
 import com.vaadin.terminal.gwt.client.ui.VCssLayout;
 
 public class VVerticalComponentGroup extends VCssLayout {
@@ -97,7 +96,6 @@ public class VVerticalComponentGroup extends VCssLayout {
         Widget c = (Widget) paintableWithPendingCaptionWidthCheck;
         int captionIndex = pane.getWidgetIndex(c) - 1;
         if (captionIndex < 0) {
-            VConsole.log("FIXME: Widget was not in pane!");
             return;
         }
         int offsetWidth = c.getOffsetWidth();
