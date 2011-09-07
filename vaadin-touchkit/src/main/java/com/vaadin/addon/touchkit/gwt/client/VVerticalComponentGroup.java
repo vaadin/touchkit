@@ -12,6 +12,7 @@ import com.vaadin.terminal.gwt.client.Paintable;
 import com.vaadin.terminal.gwt.client.RenderSpace;
 import com.vaadin.terminal.gwt.client.UIDL;
 import com.vaadin.terminal.gwt.client.VCaption;
+import com.vaadin.terminal.gwt.client.VConsole;
 import com.vaadin.terminal.gwt.client.ui.VCssLayout;
 
 public class VVerticalComponentGroup extends VCssLayout {
@@ -94,9 +95,13 @@ public class VVerticalComponentGroup extends VCssLayout {
     private void checkCaptionWidth(int availableSpace, FlowPane pane,
             Paintable paintableWithPendingCaptionWidthCheck) {
         Widget c = (Widget) paintableWithPendingCaptionWidthCheck;
+        int captionIndex = pane.getWidgetIndex(c) - 1;
+        if (captionIndex < 0) {
+            VConsole.log("FIXME: Widget was not in pane!");
+            return;
+        }
         int offsetWidth = c.getOffsetWidth();
-        VCaption caption = (VCaption) pane
-                .getWidget(pane.getWidgetIndex(c) - 1);
+        VCaption caption = (VCaption) pane.getWidget(captionIndex);
         int requiredWidth = caption.getRequiredWidth();
         int availableForCaption = availableSpace - offsetWidth;
         if (requiredWidth > availableForCaption && availableForCaption > 100) {
