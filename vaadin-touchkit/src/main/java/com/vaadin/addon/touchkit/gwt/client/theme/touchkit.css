@@ -1601,7 +1601,7 @@ td.v-datefield-calendarpanel-month {
 .v-touchkit-verticalcomponentgroup .v-datefield-popupcalendar,
 .v-touchkit-verticalcomponentgroup .v-filterselect {
 	border: 0;
-	-webkit-box-shadow: 0;
+	-webkit-box-shadow: none;
 }
 
 .v-touchkit-verticalcomponentgroup .v-filterselect {
