@@ -1359,9 +1359,7 @@ input.v-datefield-textfield {
 	margin-top: 4px !important;
 	overflow: hidden;
 	border: none;
-	font-size: 17px;
-	font-weight: bold;
-	}
+}
 
 .v-filterselect-suggestpopup .v-icon {
 	height: 32px;
@@ -1444,7 +1442,8 @@ input.v-datefield-textfield {
 	padding: 0 0 0 4px;
 	-webkit-box-sizing: border-box;
 	height: 31px;
-	}
+	border-collapse: collapse;
+}
 
 .v-datefield-textfield,
 .v-datefield-button {
@@ -1475,55 +1474,54 @@ input.v-datefield-textfield {
 	background: #fff;
 }
 
-.v-datefield-popup .v-datefield-calendarpanel {
+.v-datefield-calendarpanel {
 	border: none;
-	}
-
-.v-datefield-full .v-datefield-calendarpanel {
-	width: 350px;
-	}
-
-.v-datefield-calendarpanel button,
-td.v-datefield-calendarpanel-month {
-	font-size: 24px;
-	font-weight: bold;
-	-webkit-appearance: none;
-	display: block;
-	width: 100%;
-	padding: 0 10px 5px;
-	height: 25px;
-	border: none;
-	border-right: 1px solid rgba(0,0,0,.25);
-	border-bottom: 1px solid rgba(0,0,0,.25);
-	border-top-color: #d0d1d3;
-	border-bottom-color: rgba(0,0,0,.5);
-	background: literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#e5e5e6), to(#b4b6b8))');
-	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3), inset 0 -1px 0 rgba(255,255,255,.15);
-	overflow: hidden;
-	margin: 0;
-	text-shadow: 0 1px 0 rgba(255,255,255,.7);
-	line-height: 19px;
-	}
-
-/* Fix the month width, otherwise jumpy when changing month */
-td.v-datefield-calendarpanel-month {
-	width: 223px;
 }
 
 .v-datefield-calendarpanel button {
-	font-family: arial, sans-serif;
-	}
+	-webkit-appearance: none;
+	background:transparent;
+	display: block;
+	border: none;
+	margin: 0;
+	padding:0;
+}
+.v-datefield-calendarpanel-header td {
+	background: literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#e5e5e6), to(#b4b6b8))');
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3), inset 0 -1px 0 rgba(255,255,255,.15);
+	text-shadow: 0 1px 0 rgba(255,255,255,.7);
+	line-height: 19px;
+	height: 25px;
+	font-size: 20px;
+	font-weight: bold;
+}
 
-td.v-datefield-calendarpanel-month {
+.v-datefield-calendarpanel button {
+	/* Needed to make < and << look proper  */
+	font-family: arial;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+/* Fix the month width, otherwise jumpy when changing month */
+.v-datefield-calendarpanel-header td {
+	width: 1px;
+	border-right: 1px solid rgba(0,0,0,.25);
+	border-bottom: 1px solid rgba(0,0,0,.5);
+	padding: 0 6px 3px;
+}	
+.v-datefield-calendarpanel-header td.v-datefield-calendarpanel-month {
+	width:auto;
+	min-width:140px;
+}
+span.v-datefield-calendarpanel-month {
+	line-height:26px;
 	font-size: 15px;
-	padding-left: 0;
-	padding-right: 0;
-	height: 19px;
-	}
+}
 
 .v-datefield-calendarpanel .v-button-nextyear {
 	border-right: none;
-	}
+}
 
 .v-datefield-calendarpanel table,
 .v-datefield-time {
@@ -1539,6 +1537,19 @@ td.v-datefield-calendarpanel-month {
 
 .v-datefield-popup {
 	overflow: hidden;
+}
+
+/* Tree styles */
+
+.v-tree-node {
+	background-position: 6px -34px;
+	padding: 3px 0;
+}
+.v-tree-node-expanded {
+	background-position: -6px -6px;
+}
+.v-tree-node-caption {
+	margin-left: 1.5em;
 }
 
 /** Component group stylings must be as last as they override default styles */
@@ -1602,6 +1613,12 @@ td.v-datefield-calendarpanel-month {
 .v-touchkit-verticalcomponentgroup .v-filterselect {
 	border: 0;
 	-webkit-box-shadow: none;
+}
+
+.v-touchkit-verticalcomponentgroup .v-filterselect>input {
+	color: #4e64a1;
+	padding-top: 10px;
+	font-size:17px;
 }
 
 .v-touchkit-verticalcomponentgroup .v-filterselect {
