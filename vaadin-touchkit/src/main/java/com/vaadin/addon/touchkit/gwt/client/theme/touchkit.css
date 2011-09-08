@@ -550,120 +550,6 @@
 	-webkit-box-shadow: none;
 	}
 
-/* Borders backgrounds etc. for the margin element.*/
-.v-touchkit-verticalcomponentgroup > div {
-	margin-top: listLayoutMargin;
-	margin-bottom: listLayoutMargin;
-	border: listBorder;
-	border-radius: listLayoutMargin;
-	background: white;
-	padding: 0 listLayoutMargin;
-	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.5);
-	overflow: hidden;
-	}
-
-.v-touchkit-verticalcomponentgroup > div > .v-csslayout-container {
-	position: relative;	
-	}
-
-.v-touchkit-verticalcomponentgroup>div>div.v-csslayout-container>* {
-	clear:both;
-	}
-
-.v-touchkit-verticalcomponentgroup>div>div.v-csslayout-container>.v-touchkit-has-caption {
-	clear: right;
-	float: right;
-}
-
-.v-touchkit-verticalcomponentgroup>div>.v-csslayout-container>.v-caption {
-	float: left;
-	font-weight: bold;
-	font-size: 17px;
-	line-height: 43px;
-	height: 43px;
-	margin-left: negativeListLayoutMargin;
-	padding-left: listLayoutMargin;
-}
-
-.v-touchkit-verticalcomponentgroup>div>div.v-csslayout-container>.v-caption>.v-captiontext {
-	text-overflow: ellipsis;	
-}
-.v-touchkit-verticalcomponentgroup>div>div.v-csslayout-container>.v-caption>.v-icon {
-	height:30px;
-	margin-top: 6px;
-}
-
-.v-touchkit-verticalcomponentgroup input.v-textfield {
-	-webkit-appearance: none;
-	border:0;
-	padding:0 4px;
-	background: transparent;
-	color: #4e64a1;
-	font-size:17px;
-	line-height:43px;
-	height: 43px;
-	margin-top:1px;
-}
-
-.v-touchkit-verticalcomponentgroup .v-select-select {
-	margin-top: 5px;
-	height:30px;
-}
-
-/* Grey lines between component */
-.v-touchkit-verticalcomponentgroup > div > .v-csslayout-container > *:before {
-	content: "";
-	display: block;
-	position: absolute;
-	margin:0;
-	padding:0;
-	left: negativeListLayoutMargin;
-	right: negativeListLayoutMargin;
-	border-top: listBorder;
-	}
-
-/* ...hide from the first */
-.v-touchkit-verticalcomponentgroup > div > .v-csslayout-container > *:first-child:before,
-.v-touchkit-verticalcomponentgroup>div>div.v-csslayout-container>.v-touchkit-has-caption:before {
-	display: none;
-}
-
-/* Need to explicitly round the first and last components corners, otherwise they will stick out from the component group */
-.v-touchkit-verticalcomponentgroup > div > div > .v-touchkit-navbutton:first-child {
-	border-top-left-radius: 9px; /* listLayoutMargin - 1px */
-	border-top-right-radius: 9px;
-	}
-
-.v-touchkit-verticalcomponentgroup > div > div > .v-touchkit-navbutton:last-child {
-	border-bottom-left-radius: 9px; /* listLayoutMargin - 1px */
-	border-bottom-right-radius: 9px;
-	}
-
-
-.v-touchkit-verticalcomponentgroup .v-formlayout > table {
-	margin-left: negativeListLayoutMargin;
-	margin-right: negativeListLayoutMargin;
-	}
-
-.v-touchkit-verticalcomponentgroup .v-formlayout-captioncell {
-	padding-left: listLayoutMargin;
-	text-align: left;
-	}
-
-.v-formlayout-captioncell > .v-caption {
-	font-weight: bold;
-	font-size: 17px;
-	line-height: 43px;
-	height: 43px;
-	}
-
-.v-formlayout-row > td {
-	border-bottom: listBorder;
-}
-.v-formlayout-lastrow > td {
-	border-bottom: none;
-}
-
 @url navArrowUrl navArrowImage;
 .v-touchkit-navbutton:after {
 	content: "";
@@ -1426,8 +1312,8 @@ input.v-datefield-textfield {
 	-webkit-appearance: none;
 	border: none;
 	background: transparent;
-	font-size: 17px;
-	font-weight: bold;
+/* 	font-size: 17px; */
+/* 	font-weight: bold; */
 	margin: 0;
 	}
 
@@ -1453,9 +1339,9 @@ input.v-datefield-textfield {
 	-webkit-box-shadow: 0 0 3px 1px #5d81ab;
 	}
 
-.v-filterselect-prompt .v-filterselect-input {
-	font-style: normal;
-	}
+/* .v-filterselect-prompt .v-filterselect-input { */
+/* 	font-style: normal; */
+/* 	} */
 
 .v-filterselect .v-icon {
 	height: 23px;
@@ -1651,7 +1537,137 @@ td.v-datefield-calendarpanel-month {
 	text-align: center;
 }
 
-
 .v-datefield-popup {
 	overflow: hidden;
+}
+
+/** Component group stylings must be as last as they override default styles */
+
+/* Borders backgrounds etc. for the margin element.*/
+.v-touchkit-verticalcomponentgroup > div {
+	margin-top: listLayoutMargin;
+	margin-bottom: listLayoutMargin;
+	border: listBorder;
+	border-radius: listLayoutMargin;
+	background: white;
+	padding: 0 listLayoutMargin;
+	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.5);
+	overflow: hidden;
 	}
+
+.v-touchkit-verticalcomponentgroup > div > .v-csslayout-container {
+	position: relative;	
+	}
+
+.v-touchkit-verticalcomponentgroup>div>div.v-csslayout-container>* {
+	clear:both;
+	}
+
+.v-touchkit-verticalcomponentgroup>div>div.v-csslayout-container>.v-touchkit-has-caption {
+	clear: right;
+	float: right;
+}
+
+.v-touchkit-verticalcomponentgroup>div>.v-csslayout-container>.v-caption {
+	float: left;
+	font-weight: bold;
+	font-size: 17px;
+	line-height: 43px;
+	height: 43px;
+	margin-left: negativeListLayoutMargin;
+	padding-left: listLayoutMargin;
+}
+
+.v-touchkit-verticalcomponentgroup>div>div.v-csslayout-container>.v-caption>.v-captiontext {
+	text-overflow: ellipsis;	
+}
+.v-touchkit-verticalcomponentgroup>div>div.v-csslayout-container>.v-caption>.v-icon {
+	height:30px;
+	margin-top: 6px;
+}
+
+.v-touchkit-verticalcomponentgroup input.v-textfield {
+	-webkit-appearance: none;
+	border:0;
+	padding:0 4px;
+	background: transparent;
+	color: #4e64a1;
+	font-size:17px;
+	line-height:43px;
+	height: 43px;
+	margin-top:1px;
+}
+
+.v-touchkit-verticalcomponentgroup .v-datefield-popupcalendar,
+.v-touchkit-verticalcomponentgroup .v-filterselect {
+	border: 0;
+	-webkit-box-shadow: 0;
+}
+
+.v-touchkit-verticalcomponentgroup .v-filterselect {
+	padding-top: 10px;
+}
+
+.v-touchkit-verticalcomponentgroup .v-datefield-button {
+	margin-top:8px;
+	background-position: 6px;
+}
+
+.v-touchkit-verticalcomponentgroup .v-select-select {
+	margin-top: 5px;
+	height:30px;
+}
+
+/* Grey lines between component */
+.v-touchkit-verticalcomponentgroup > div > .v-csslayout-container > *:before {
+	content: "";
+	display: block;
+	position: absolute;
+	margin:0;
+	padding:0;
+	left: negativeListLayoutMargin;
+	right: negativeListLayoutMargin;
+	border-top: listBorder;
+	}
+
+/* ...hide from the first */
+.v-touchkit-verticalcomponentgroup > div > .v-csslayout-container > *:first-child:before,
+.v-touchkit-verticalcomponentgroup>div>div.v-csslayout-container>.v-touchkit-has-caption:before {
+	display: none;
+}
+
+/* Need to explicitly round the first and last components corners, otherwise they will stick out from the component group */
+.v-touchkit-verticalcomponentgroup > div > div > .v-touchkit-navbutton:first-child {
+	border-top-left-radius: 9px; /* listLayoutMargin - 1px */
+	border-top-right-radius: 9px;
+	}
+
+.v-touchkit-verticalcomponentgroup > div > div > .v-touchkit-navbutton:last-child {
+	border-bottom-left-radius: 9px; /* listLayoutMargin - 1px */
+	border-bottom-right-radius: 9px;
+	}
+
+
+.v-touchkit-verticalcomponentgroup .v-formlayout > table {
+	margin-left: negativeListLayoutMargin;
+	margin-right: negativeListLayoutMargin;
+	}
+
+.v-touchkit-verticalcomponentgroup .v-formlayout-captioncell {
+	padding-left: listLayoutMargin;
+	text-align: left;
+	}
+
+.v-formlayout-captioncell > .v-caption {
+	font-weight: bold;
+	font-size: 17px;
+	line-height: 43px;
+	height: 43px;
+	}
+
+.v-formlayout-row > td {
+	border-bottom: listBorder;
+}
+.v-formlayout-lastrow > td {
+	border-bottom: none;
+}

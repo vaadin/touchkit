@@ -8,6 +8,7 @@ import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.InlineDateField;
 import com.vaadin.ui.Table;
+import com.vaadin.ui.TextField;
 import com.vaadin.ui.Tree;
 
 public class JunkYard extends CssLayout {
@@ -15,6 +16,10 @@ public class JunkYard extends CssLayout {
     public JunkYard() {
         setMargin(true);
         setWidth("100%");
+        
+        TextField textField = new TextField("Textfield");
+        textField.setInputPrompt("prompt");
+        addComponent(textField);
 
         /**
          * ComboBox

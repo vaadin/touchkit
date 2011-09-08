@@ -1,5 +1,7 @@
 package com.vaadin.addon.touchkit;
 
+import java.util.Date;
+
 import com.vaadin.Application;
 import com.vaadin.addon.touchkit.ui.EmailField;
 import com.vaadin.addon.touchkit.ui.HorizontalComponentGroup;
@@ -20,9 +22,11 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.CheckBox;
+import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.CssLayout;
+import com.vaadin.ui.DateField;
 import com.vaadin.ui.Embedded;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
@@ -293,6 +297,20 @@ public class NavPanelTestWithViews extends NavigationManager implements
             NumberField numberField = new NumberField("Age");
             numberField.setWidth("100%");
             componentGroup.addComponent(numberField);
+            
+            DateField df = new DateField("Datefield");
+            df.setWidth("100%");
+            df.setValue(new Date());
+            componentGroup.addComponent(df);
+            
+            ComboBox comboBox = new ComboBox("Combobox");
+            comboBox.setWidth("100%");
+            comboBox.addItem("Pekka");
+            comboBox.addItem("Pirjo");
+            comboBox.addItem("Irma");
+            comboBox.addItem("Marko");
+            componentGroup.addComponent(comboBox);
+            
 
             addSliderWithIcons(componentGroup);
 
@@ -315,6 +333,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
             textField = new TextField("Name");
             textField.setWidth("100%");
             componentGroup.addComponent(textField);
+            
             // email field
             emailField = new EmailField(
                     "Longer caption for non 100% width field which might be clipped with ellipsis");
@@ -350,6 +369,19 @@ public class NavPanelTestWithViews extends NavigationManager implements
             numberField = new NumberField("Age");
             numberField.setWidth("100%");
             formLayout.addComponent(numberField);
+            
+            df = new DateField("Datefield");
+            df.setWidth("100%");
+            df.setValue(new Date());
+            formLayout.addComponent(df);
+            
+            comboBox = new ComboBox("Combobox");
+            comboBox.addItem("Pekka");
+            comboBox.addItem("Pirjo");
+            comboBox.addItem("Irma");
+            comboBox.addItem("Marko");
+            comboBox.setWidth("100%");
+            formLayout.addComponent(comboBox);
 
             addSliderWithIcons(formLayout);
 
@@ -392,7 +424,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
         private void generateSubViews() {
             VerticalComponentGroup components = new VerticalComponentGroup();
             components.setMargin(true);
-            int amount = getDepth() % 2 == 1 ? 3 : 25;
+            int amount = getDepth() % 2 == 1 ? 25 : 3;
             for (int i = 0; i < amount; i++) {
                 SimpleNavView simpleNavView = new SimpleNavView(this, i);
                 NavigationButton navigationButton = new NavigationButton();
