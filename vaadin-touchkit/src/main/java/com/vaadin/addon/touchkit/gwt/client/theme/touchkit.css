@@ -1542,11 +1542,11 @@ span.v-datefield-calendarpanel-month {
 /* Tree styles */
 
 .v-tree-node {
-	background-position: 6px -34px;
-	padding: 3px 0;
+	background-position: 6px -33px;
+	padding: 4px 0;
 }
 .v-tree-node-expanded {
-	background-position: -6px -6px;
+	background-position: -6px -5px;
 }
 .v-tree-node-caption {
 	margin-left: 1.5em;
