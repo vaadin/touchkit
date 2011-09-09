@@ -6,8 +6,8 @@
     <artifactId>vaadin-touchkit-agpl</artifactId>
     <packaging>jar</packaging>
     <version>${touchkit.version}</version>
-    <name>Vaadin TouchKit</name>
-
+    <name>Vaadin TouchKit AGPL</name>
+    
     <organization>
         <name>Vaadin Ltd</name>
         <url>http://vaadin.com/</url>
@@ -44,8 +44,8 @@
 
         <!-- May be overridden by the build system -->
         <license.short.name>agpl</license.short.name>
-
-        <vaadin.version.maven>6.6.3</vaadin.version.maven>
+        <touchkit.version>2.0.0-SNAPHOT</touchkit.version>
+        <vaadin.version.maven>6.6.6</vaadin.version.maven>
         <gwt.version>2.3.0</gwt.version>
     </properties>
 

@@ -6,7 +6,7 @@
     <artifactId>vaadin-touchkit-cval</artifactId>
     <packaging>jar</packaging>
     <version>${touchkit.version}</version>
-    <name>Vaadin TouchKit</name>
+    <name>Vaadin TouchKit CVAL</name>
 
     <organization>
         <name>Vaadin Ltd</name>
@@ -43,8 +43,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- May be overridden by the build system -->
+        <touchkit.version>2.0.0-SNAPHOT</touchkit.version>
         <license.short.name>cval</license.short.name>
-
         <vaadin.version.maven>6.6.3</vaadin.version.maven>
         <gwt.version>2.3.0</gwt.version>
     </properties>
