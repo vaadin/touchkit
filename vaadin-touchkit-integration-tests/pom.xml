@@ -11,11 +11,13 @@
 	<properties>
 		<testbench.hubhost>testbench-hub.intra.itmill.com</testbench.hubhost>
 		<testbench.browsers>win7-googlechrome-stable</testbench.browsers>
+        <!-- Which TouchKit package to use for testing -->
+        <license.short.name>agpl</license.short.name>
 	</properties>
 
 	<artifactId>vaadin-touchkit-integration-tests</artifactId>
 	<packaging>war</packaging>
-	<name>Integration tests for vaadiin-touchkit</name>
+	<name>Integration tests for vaadin-touchkit</name>
 	<dependencies>
 		<dependency>
 			<groupId>com.vaadin.addon</groupId>

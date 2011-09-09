@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.vaadin.addon</groupId>
+    <artifactId>vaadin-touchkit-agpl</artifactId>
+    <packaging>jar</packaging>
+    <version>${touchkit.version}</version>
+    <name>Vaadin TouchKit</name>
+
+    <organization>
+        <name>Vaadin Ltd</name>
+        <url>http://vaadin.com/</url>
+    </organization>
+    <url>http://vaadin.com/</url>
+    <scm>
+        <connection>scm:svn:http://dev.vaadin.com/svn/addons/TouchKit</connection>
+        <developerConnection>scm:svn:http://dev.vaadin.com/svn/addons/TouchKit</developerConnection>
+        <url>http://dev.vaadin.com/browser/addons/TouchKit</url>
+    </scm>
+    <issueManagement>
+        <system>trac</system>
+        <url>http://dev.vaadin.com/</url>
+    </issueManagement>
+    <developers>
+        <developer>
+            <name>Matti Tahvonen</name>
+            <id>matti</id>
+            <email>matti at vaadin.com</email>
+            <organization>Vaadin Ltd</organization>
+            <timezone>+2</timezone>
+        </developer>
+    </developers>
+    <licenses>
+		<license>
+			<name>GNU Affero General Public License version 3.0</name>
+			<url>http://www.gnu.org/licenses/agpl-3.0.html</url>
+			<distribution>repo</distribution>
+		</license>
+    </licenses>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- May be overridden by the build system -->
+        <license.short.name>agpl</license.short.name>
+
+        <vaadin.version.maven>6.6.3</vaadin.version.maven>
+        <gwt.version>2.3.0</gwt.version>
+    </properties>
+
+    <description>Provides components and features for mobile devices.</description>
+    <build>
+        <sourceDirectory>../vaadin-touchkit/src/main/java</sourceDirectory>
+        <testSourceDirectory>../vaadin-touchkit/src/test/java</testSourceDirectory>
+    
+        <resources>
+            <!-- Use sources from a sister project.
+                 These are also needed for the sources required by the GWT compiler
+                 to be included in the produced JARs -->
+            <resource>
+                <directory>../vaadin-touchkit/src/main/java</directory>
+            </resource>
+            <resource>
+                <directory>../vaadin-touchkit/src/main/resources</directory>
+            </resource>
+
+            <!-- This is needed to filter the POM that goes into the JAR (artifact 
+                ID with license info) -->
+            <resource>
+                <directory>.</directory>
+                <includes>
+                    <include>pom.xml</include>
+                </includes>
+                <filtering>true</filtering>
+                <targetPath>${project.build.directory}/classes/META-INF/maven/${project.groupId}/${project.artifactId}</targetPath>
+            </resource>
+            <resource>
+                <directory>packaging</directory>
+                <includes>
+                    <include>pom.properties</include>
+                </includes>
+                <filtering>true</filtering>
+                <targetPath>${project.build.directory}/classes/META-INF/maven/${project.groupId}/${project.artifactId}</targetPath>
+            </resource>
+
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                    <optimize>false</optimize>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.3.1</version>
+                <configuration>
+                    <archive>
+                        <index>true</index>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <!-- Implementation-Title and Implementation-Version come from the 
+                                POM by default -->
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <!-- Package format version - do not change -->
+                            <Vaadin-Package-Version>1</Vaadin-Package-Version>
+
+                            <!-- Comma-separated list of widgetsets in the package -->
+                            <Vaadin-Widgetsets>com.vaadin.addon.touchkit.gwt.TouchKitWidgetSet</Vaadin-Widgetsets>
+                        </manifestEntries>
+                    </archive>
+                    <!-- exclude other META-INF data under build directory -->
+                    <includes>
+                        <include>META-INF/maven/${project.groupId}/${project.artifactId}/**</include>
+                        <include>com/**</include>
+                    </includes>
+                </configuration>
+            </plugin>
+			<!-- Compiles your custom GWT components with the GWT compiler -->
+			<!-- A hosted mode browser for client-side widget debugging can be run 
+				with the goal gwt:run after uncommenting the correct line below. A remote 
+				debugger can then be connected to port 8998. Note that e.g. a Jetty server 
+				should be running with the server side parts - use the goal jetty:run . -->
+			<!-- TODO investigate how this can be disabled on "package/install etc". 
+				Compilation only needed for debugging via the test server -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<version>2.3.0-1</version>
+				<configuration>
+					<webappDirectory>${project.build.directory}/${project.build.finalName}/VAADIN/widgetsets</webappDirectory>
+					<modules>
+						<module>com.vaadin.addon.touchkit.gwt.TouchKitWidgetSet</module>
+					</modules>
+					<extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
+					<runTarget>xsite</runTarget>
+					<hostedWebapp>${project.build.directory}/${project.build.finalName}</hostedWebapp>
+					<noServer>true</noServer>
+					<port>8080</port>
+					<soyc>false</soyc>
+					<draftCompile>false</draftCompile>
+					<style>OBF</style>
+				</configuration>
+			</plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.2.1</version>
+                <configuration>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <descriptors>
+                        <descriptor>../assembly/assembly.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>vaadin-snapshots</id>
+            <url>${snapshot.repository.url}</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>vaadin-addons</id>
+            <url>http://maven.vaadin.com/vaadin-addons</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>codehaus-snapshots</id>
+            <url>http://nexus.codehaus.org/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+        <pluginRepository>
+            <id>vaadin-snapshots</id>
+            <url>${snapshot.repository.url}</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>vaadin-snapshots</id>
+            <url>${snapshot.repository.url}</url>
+        </snapshotRepository>
+    </distributionManagement>
+    <dependencies>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin</artifactId>
+            <version>${vaadin.version.maven}</version>
+            <!-- <scope>system</scope> <systemPath>/Users/mattitahvonenitmill/Desktop/tmp/vaadin-6.6.0.dev.jar</systemPath> -->
+        </dependency>
+        <!-- This is also used by gwt-maven-plugin to deduce GWT version number. -->
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <version>${gwt.version}</version>
+            <scope>provided</scope>
+        </dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-dev</artifactId>
+			<version>${gwt.version}</version>
+			<scope>provided</scope>
+		</dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.3</version>
+            <scope>provided</scope>
+        </dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-server</artifactId>
+			<version>7.2.2.v20101205</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-servlet</artifactId>
+			<version>7.2.2.v20101205</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-webapp</artifactId>
+			<version>7.2.2.v20101205</version>
+			<scope>test</scope>
+		</dependency>
+    </dependencies>
+
+</project>

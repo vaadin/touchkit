@@ -4,6 +4,8 @@
     xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
   <id>addon</id>
 
+  <!-- Note: the base directory for this assembly descriptor is one of the license specific subprojects -->
+
   <formats>
     <format>zip</format>
   </formats>
@@ -15,26 +17,22 @@
     <fileSet>
       <directory>.</directory>
       <includes>
-        <include>license-${license.short.name}.txt</include>
+        <include>license-*.txt</include>
+        <include>licensing.txt</include>
       </includes>
     </fileSet>
     <fileSet>
-      <directory>../vaadin-touchkit/target</directory>
+      <directory>target</directory>
       <outputDirectory></outputDirectory>
       <includes>
-        <include>*-${license.short.name}-*.jar</include>
+        <include>*.jar</include>
       </includes>
     </fileSet>
   </fileSets>
 
   <files>
     <file>
-      <source>licensing-${license.short.name}.txt</source>
-      <outputDirectory></outputDirectory>
-      <destName>licensing.txt</destName>
-    </file>
-    <file>
-      <source>MANIFEST.MF</source>
+      <source>../assembly/MANIFEST.MF</source>
       <outputDirectory>META-INF</outputDirectory>
       <filtered>true</filtered>
     </file>
