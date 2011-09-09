@@ -64,7 +64,7 @@
     <modules>
         <module>vaadin-touchkit-cval</module>
         <module>vaadin-touchkit-agpl</module>
-<!--        <module>vaadin-touchkit-integration-tests</module> -->
+        <module>vaadin-touchkit-integration-tests</module>
     </modules>
     
     <build>
