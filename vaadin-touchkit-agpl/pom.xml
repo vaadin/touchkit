@@ -44,7 +44,7 @@
 
         <!-- May be overridden by the build system -->
         <license.short.name>agpl</license.short.name>
-        <touchkit.version>2.0.0-SNAPHOT</touchkit.version>
+        <touchkit.version>2.0.0-SNAPSHOT</touchkit.version>
         <vaadin.version.maven>6.6.6</vaadin.version.maven>
         <gwt.version>2.3.0</gwt.version>
     </properties>
