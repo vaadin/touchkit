@@ -848,16 +848,16 @@
 .v-touchkit-popover.v-touchkit-relative .v-touchkit-navpanel-container {
 	background: transparent;
 }
-.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar {
-	background: transparent;
+
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar,
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navpanel-placeholder {
+	background: popoverNavbarGradient;
 	border: 0;
 }
 .v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar-caption,
-.v-touchkit-popover.v-touchkit-relative .v-touchkit-navpanel-placeholder,
 .v-touchkit-popover.v-touchkit-relative .v-touchkit-navpanel-placeholder > div {
 	color: buttonColor;
 	text-shadow: buttonTextShadow;
-	background: popoverNavbarGradient;
 }
 .v-touchkit-popover.v-touchkit-relative .v-touchkit-navview-toolbar {
 	border: 0;

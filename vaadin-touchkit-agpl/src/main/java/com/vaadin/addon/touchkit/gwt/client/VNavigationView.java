@@ -154,11 +154,11 @@ public class VNavigationView extends ComplexPanel implements Container,
             return new RenderSpace(wrapper.getOffsetWidth(),
                     wrapper.getOffsetHeight(), true);
         } else if (child == toolbar) {
-            return new RenderSpace(wrapper.getOffsetWidth(), NAVBARHEIGHT,
+            return new RenderSpace(getOffsetWidth(), NAVBARHEIGHT,
                     false);
 
         } else if (child == navbar) {
-            return new RenderSpace(wrapper.getOffsetWidth(),
+            return new RenderSpace(getOffsetWidth(),
                     toolbarDiv.getOffsetHeight(), false);
         } else {
             throw new IllegalArgumentException();
