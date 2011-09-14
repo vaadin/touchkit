@@ -1,6 +1,7 @@
 package com.vaadin.addon.touchkit;
 
 import java.util.Date;
+import java.util.logging.Logger;
 
 import com.vaadin.Application;
 import com.vaadin.addon.touchkit.ui.EmailField;
@@ -14,6 +15,7 @@ import com.vaadin.addon.touchkit.ui.Switch;
 import com.vaadin.addon.touchkit.ui.TabBarView;
 import com.vaadin.addon.touchkit.ui.Toolbar;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
+import com.vaadin.addon.touchkit.ui.NavigationManager.NavigationEvent;
 import com.vaadin.terminal.ClassResource;
 import com.vaadin.terminal.Resource;
 import com.vaadin.terminal.ThemeResource;
@@ -49,6 +51,12 @@ public class NavPanelTestWithViews extends NavigationManager implements
     private Button notRelative;
 
     public NavPanelTestWithViews() {
+    	
+    	addListener(new NavigationListener() {
+			public void navigate(NavigationEvent event) {
+				Logger.getAnonymousLogger().info("Navigated " + event.getDirection());
+			}
+		});
 
         views = new SimpleNavView[7];
         for (int i = 0; i < views.length; i++) {
