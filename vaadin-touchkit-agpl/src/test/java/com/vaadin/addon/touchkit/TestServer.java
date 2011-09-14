@@ -9,6 +9,7 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 import com.vaadin.addon.touchkit.server.TouchKitApplicationServlet;
+import com.vaadin.terminal.gwt.server.Constants;
 
 public class TestServer {
 
@@ -35,6 +36,10 @@ public class TestServer {
                 "com.vaadin.addon.touchkit.gwt.TouchKitWidgetSet");
         servletHolder.setInitParameter("application",
                 TouchKitTestApp.class.getName());
+        
+        // test fallback app and widgetset
+        servletHolder.setInitParameter("fallbackApplication", FallbackApplication.class.getName());
+        servletHolder.setInitParameter("fallbackWidgetset", Constants.DEFAULT_WIDGETSET);
 
         File file = new File("./target");
         File[] listFiles = file.listFiles();

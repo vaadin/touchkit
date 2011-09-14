@@ -1,24 +1,10 @@
-/*
- * Copyright 2011 Vaadin Ltd.
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
- */
 package com.vaadin.addon.touchkit.server;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,6 +18,26 @@ public class TouchKitApplicationServlet extends
 		com.vaadin.terminal.gwt.server.ApplicationServlet {
 
 	private Window window;
+	private Class<? extends Application> fallbackApplicationClass;
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void init(ServletConfig servletConfig) throws ServletException {
+		super.init(servletConfig);
+
+		// Gets the fallback application class name
+		final String fallbackapplicationClassName = servletConfig
+				.getInitParameter("fallbackApplication");
+		if (fallbackapplicationClassName != null) {
+			try {
+				fallbackApplicationClass = (Class<? extends Application>) getClassLoader()
+						.loadClass(fallbackapplicationClassName);
+			} catch (final ClassNotFoundException e) {
+				throw new ServletException("Failed to load application class: "
+						+ fallbackapplicationClassName);
+			}
+		}
+	}
 
 	@Override
 	protected void writeAjaxPage(HttpServletRequest request,
@@ -42,8 +48,29 @@ public class TouchKitApplicationServlet extends
 		 * definitions.
 		 */
 		this.window = window;
+		String fallbackWidgetset = getWidgetset(request, window);
+		if (fallbackWidgetset != null) {
+			request.setAttribute(REQUEST_WIDGETSET, fallbackWidgetset);
+		}
+
 		super.writeAjaxPage(request, response, window, application);
 		this.window = null;
+	}
+
+	/**
+	 * Return a possible custom widgetset for a window. The default behavior is
+	 * to return fallbackWidgetset init parameter for non TouchKitWindow's.
+	 * 
+	 * @param request
+	 * @param window
+	 * @return
+	 */
+	protected String getWidgetset(HttpServletRequest request, Window window) {
+		if (!(window instanceof TouchKitWindow)) {
+			String widgetset = getApplicationProperty("fallbackWidgetset");
+			return widgetset;
+		}
+		return null;
 	}
 
 	@Override
@@ -111,6 +138,59 @@ public class TouchKitApplicationServlet extends
 		}
 	}
 
+	@Override
+	protected Application getNewApplication(HttpServletRequest request)
+			throws ServletException {
+		if (!isSupportedBrowser(request)) {
+			Application app = getNewFallbackApplication(request);
+			if (app != null) {
+				return app;
+			}
+		}
+		return super.getNewApplication(request);
+	}
+
+	/**
+	 * Method detects whether the main application is supported by the TouchKit
+	 * application. It controls whether an optional fallback application should
+	 * be served for the end user. By default the method just ensures that the
+	 * browser is webkit based.
+	 * 
+	 * @param request
+	 * @return true if the normal application should be served
+	 */
+	protected boolean isSupportedBrowser(HttpServletRequest request) {
+		String header = request.getHeader("User-Agent");
+		return !(header == null || !header.toLowerCase().contains("webkit"));
+	}
+
+	/**
+	 * @param request
+	 * @return an application instance to be used for non touchkit compatible
+	 *         browsers
+	 * @throws ServletException
+	 */
+	protected Application getNewFallbackApplication(HttpServletRequest request)
+			throws ServletException {
+		if (fallbackApplicationClass != null) {
+			try {
+				final Application application = getFallbackApplicationClass()
+						.newInstance();
+
+				return application;
+			} catch (final IllegalAccessException e) {
+				throw new ServletException("getNewApplication failed", e);
+			} catch (final InstantiationException e) {
+				throw new ServletException("getNewApplication failed", e);
+			}
+		}
+		return null;
+	}
+
+	protected Class<? extends Application> getFallbackApplicationClass() {
+		return fallbackApplicationClass;
+	}
+
 	private void closeSingleElementTag(BufferedWriter page) throws IOException {
 		page.write("\" />\n");
 	}
@@ -124,4 +204,5 @@ public class TouchKitApplicationServlet extends
 		}
 		return true;
 	}
+
 }
