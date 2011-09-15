@@ -50,6 +50,8 @@ public class NavigationManagerView extends AbstractTouchKitIntegrationTest {
         toolbar.addComponent(button);
         secondView.setToolbar(toolbar);
 
+        
+        makeSmallTabletSize(navigationManager);
         setContent(navigationManager);
 
     }
