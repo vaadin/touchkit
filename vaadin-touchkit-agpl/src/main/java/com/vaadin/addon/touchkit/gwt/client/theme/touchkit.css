@@ -971,6 +971,7 @@
 	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.2);
 	color: buttonColor;
 	text-shadow: buttonTextShadow;
+	overflow: hidden;
 }
 
 .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-caption {
@@ -1633,6 +1634,13 @@ span.v-datefield-calendarpanel-month {
 .v-touchkit-verticalcomponentgroup .v-select-select {
 	margin-top: 5px;
 	height:30px;
+}
+
+.v-touchkit-verticalcomponentgroup .v-slider {
+	margin-top: 20px;
+}
+.v-touchkit-verticalcomponentgroup .v-slider-base {
+	margin-left: 5px;
 }
 
 /* Grey lines between component */
