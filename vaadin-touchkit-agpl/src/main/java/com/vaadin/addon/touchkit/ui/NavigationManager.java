@@ -297,7 +297,7 @@ public class NavigationManager extends AbstractComponentContainer {
 		return components.iterator();
 	}
 	
-	public static class NavigationEvent extends Component.Event {
+	public static class NavigationEvent extends Event {
 
 		public enum Direction {
 			BACK, FORWARD
