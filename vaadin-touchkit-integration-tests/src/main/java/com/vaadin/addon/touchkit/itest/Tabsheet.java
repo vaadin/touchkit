@@ -12,6 +12,7 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.InlineDateField;
+import com.vaadin.ui.NativeSelect;
 import com.vaadin.ui.Slider;
 import com.vaadin.ui.Table;
 
@@ -47,6 +48,15 @@ public class Tabsheet extends AbstractTouchKitIntegrationTest {
         verticalComponentGroup.addComponent(s);
         verticalComponentGroup.addComponent(new NumberField("Numbers only"));
         verticalComponentGroup.addComponent(new DateField("Date please"));
+        
+        NativeSelect nativeSelect = new NativeSelect();
+        nativeSelect.setCaption("Native select");
+        nativeSelect.addItem("One");
+        nativeSelect.addItem("Two");
+        nativeSelect.addItem("Three");
+        nativeSelect.setImmediate(true);
+        verticalComponentGroup.addComponent(nativeSelect);
+        
         cssLayout.addComponent(verticalComponentGroup);
         return cssLayout;
     }
