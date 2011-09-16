@@ -201,5 +201,44 @@ public class TouchKitTestApp extends Application {
         embedded.setHeight(32, Embedded.UNITS_PIXELS);
         return embedded;
     }
+    
+    /**
+     * Returns test views (instances of TouchKitWindow) by their name.
+     * 
+     * @see com.vaadin.addon.touchkit.ui.TouchKitApplication#getWindow(java.lang.
+     *      String)
+     */
+    @Override
+    public Window getWindow(String name) {
+        Window window = (Window) super.getWindow(name);
+        if (window == null && name != null && !"".equals(name)
+                && !name.contains(".ico")) {
+
+            try {
+
+                String className = getClass().getPackage().getName() + "."
+                        + name;
+                Class<?> forName = Class.forName(className);
+                if (forName != null) {
+                    TouchKitWindow newInstance = (TouchKitWindow) forName
+                            .newInstance();
+                    window = newInstance;
+                    addWindow(window);
+                }
+            } catch (ClassNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+        }
+        return window;
+    }
+    
 
 }

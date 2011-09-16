@@ -1651,8 +1651,39 @@ span.v-datefield-calendarpanel-month {
 	margin-left: 5px;
 }
 
-/* Grey lines between component */
-.v-touchkit-verticalcomponentgroup > div > .v-csslayout-container > *:before {
+.v-touchkit-verticalcomponentgroup .v-select-optiongroup .v-select-option {
+	height: 40px;
+	position:relative;
+}
+
+.v-touchkit-verticalcomponentgroup .v-select-optiongroup .v-select-option input {
+	font-size: large;
+}
+
+.v-touchkit-verticalcomponentgroup .v-select-optiongroup .v-select-option>* {
+	margin: 14px 0px;
+}
+
+.v-touchkit-verticalcomponentgroup .v-select-optiongroup .v-select-option>label {
+	display: block;
+	position:absolute;
+	top:0;left:0; right:0;
+	padding-left:20px;
+	padding-top:10px;
+	margin:0;
+	font-weight: bold;
+	color: navbarButtonColor;
+	vertical-align:top;
+	line-height:normal;
+	font-size:17px;
+}
+
+
+/* Grey lines between component,
+ * also set then for selects inside component group.
+ */
+.v-touchkit-verticalcomponentgroup > div > .v-csslayout-container > *:before,
+.v-touchkit-verticalcomponentgroup .v-select-optiongroup>.v-select-option:before {
 	content: "";
 	display: block;
 	position: absolute;
@@ -1665,7 +1696,8 @@ span.v-datefield-calendarpanel-month {
 
 /* ...hide from the first */
 .v-touchkit-verticalcomponentgroup > div > .v-csslayout-container > *:first-child:before,
-.v-touchkit-verticalcomponentgroup>div>div.v-csslayout-container>.v-touchkit-has-caption:before {
+.v-touchkit-verticalcomponentgroup>div>div.v-csslayout-container>.v-touchkit-has-caption:before,
+.v-touchkit-verticalcomponentgroup .v-select-optiongroup :first-child:before {
 	display: none;
 }
 
