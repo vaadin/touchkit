@@ -75,6 +75,8 @@ public class NavPanelTestWithViews extends NavigationManager implements
         testView.setPreviousComponent(currentComponent2);
 
         Button.ClickListener listener = new Button.ClickListener() {
+            private int i;
+
             public void buttonClick(ClickEvent event) {
                 Popover popover = new Popover();
                 popover.setWidth("360px");
@@ -105,6 +107,12 @@ public class NavPanelTestWithViews extends NavigationManager implements
                  * 
                  * } }));
                  */
+                
+                if(i++%2 == 1) {
+                    // Test that popover with navigationview should look fine without toolbar too
+                    NavigationView currentComponent3 = (NavigationView) content.getCurrentComponent();
+                    currentComponent3.setToolbar(null);
+                }
 
                 popover.setContent(content);
 
@@ -181,7 +189,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
 
         HorizontalComponentGroup group = new HorizontalComponentGroup();
         testView.setRightComponent(group);
-        Component metoo = new Button("TopRight", listener);
+        Component metoo = new Button("T", listener);
         metoo.addStyleName("blue");
         group.addComponent(new Button("No toolbar", new Button.ClickListener() {
 

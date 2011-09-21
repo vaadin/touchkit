@@ -25,6 +25,7 @@ public class VPopover extends VWindow {
 
     private static final int SMALL_SCREEN_WIDTH_THRESHOLD = 500;
     private static final int MIN_EDGE_DISTANCE = 10;
+    private static final int MIN_ARROW_EDGE_DISTANCE = 2*MIN_EDGE_DISTANCE;
     private String relComponentId;
     private boolean fullscreen;
     private DivElement arrowElement;
@@ -198,12 +199,12 @@ public class VPopover extends VWindow {
 
         int horizontalpoint = centerOfReferencComponent
                 - arrowElement.getOffsetWidth() / 2;
-        if (horizontalpoint - MIN_EDGE_DISTANCE < 0) {
-            horizontalpoint = MIN_EDGE_DISTANCE;
+        if (horizontalpoint - MIN_ARROW_EDGE_DISTANCE < 0) {
+            horizontalpoint = MIN_ARROW_EDGE_DISTANCE;
         } else if (horizontalpoint + arrowElement.getOffsetWidth()
-                + MIN_EDGE_DISTANCE > Window.getClientWidth()) {
+                + MIN_ARROW_EDGE_DISTANCE > Window.getClientWidth()) {
             horizontalpoint = Window.getClientWidth()
-                    - arrowElement.getOffsetWidth() - MIN_EDGE_DISTANCE;
+                    - arrowElement.getOffsetWidth() - MIN_ARROW_EDGE_DISTANCE;
         }
 
         arrowElement.getStyle().setLeft(horizontalpoint, Unit.PX);

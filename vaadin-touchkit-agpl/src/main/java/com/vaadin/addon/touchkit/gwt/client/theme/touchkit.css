@@ -844,6 +844,9 @@
 	border-radius: 6px;
 	z-index: 1;
 }
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navview-notoolbar .v-touchkit-navview-wrapper {
+	bottom: 5px;
+}
 
 .v-touchkit-popover.v-touchkit-relative .v-touchkit-navpanel-container {
 	background: transparent;
@@ -1676,6 +1679,7 @@ span.v-datefield-calendarpanel-month {
 	vertical-align:top;
 	line-height:normal;
 	font-size:17px;
+	height:30px;
 }
 
 
