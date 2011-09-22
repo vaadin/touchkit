@@ -48,6 +48,7 @@
         <vaadin.version.maven>6.6.6</vaadin.version.maven>
         <gwt.version>2.3.0</gwt.version>
         <gpg.passphrase.file>empty.properties</gpg.passphrase.file>
+        <snapshot.repository.url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</snapshot.repository.url>
     </properties>
 
     <distributionManagement>
