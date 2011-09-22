@@ -571,7 +571,7 @@
 @url backButtonUrl backButtonImage;
 
 .v-touchkit-navbar-left .v-touchkit-navbutton {
-	display:inline-block;
+	display:block;
 	-webkit-border-image: backButtonUrl 0 6 0 13 stretch stretch;
 	border-width: 0 6px 0 13px;
 	width: auto;
@@ -598,7 +598,7 @@
 	position: absolute;
 	left: 6px;
 	top: 7px;
-	max-width: 30%;
+	max-width: 35%;
 	z-index: 1;
 	padding-right:4px;
 }
@@ -636,10 +636,14 @@
 	position: absolute;
 	right: 6px;
 	top: 7px;
-	max-width: 30%;
+	max-width: 35%;
 	padding-left:4px;
 }
 
+.v-touchkit-navbar-right .v-button,
+.v-touchkit-navbar-left .v-button {
+	display:block;
+}
 
 .v-touchkit-navbar .v-button .v-icon {
 	height: 20px;
