@@ -7,6 +7,9 @@ import com.vaadin.addon.touchkit.service.Position;
 import com.vaadin.addon.touchkit.service.PositionCallback;
 import com.vaadin.addon.touchkit.ui.Switch;
 import com.vaadin.addon.touchkit.ui.TouchKitWindow;
+import com.vaadin.data.Property;
+import com.vaadin.data.Property.ValueChangeEvent;
+import com.vaadin.terminal.ExternalResource;
 import com.vaadin.terminal.Resource;
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Button;
@@ -16,6 +19,7 @@ import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Embedded;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.NativeSelect;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.ResizeEvent;
@@ -47,6 +51,18 @@ public class TouchKitTestApp extends Application {
         mainWindow.setCaption("Hello mobile user");
         final Label label = new Label("Hello mobile user");
         mainWindow.addComponent(label);
+        
+        NativeSelect nativeSelect = new NativeSelect("Select test");
+        nativeSelect.setImmediate(true);
+        nativeSelect.addItem(Selects.class.getSimpleName());
+        nativeSelect.addItem(PersonView.class.getSimpleName());
+        nativeSelect.addListener(new Property.ValueChangeListener() {
+            public void valueChange(ValueChangeEvent event) {
+                getMainWindow().open(new ExternalResource(getURL().toString() + event.getProperty() + "/"));
+            }
+        });
+        
+        mainWindow.addComponent(nativeSelect);
 
         Button b = new Button("NavPanelTest");
         b.addListener(new ClickListener() {
