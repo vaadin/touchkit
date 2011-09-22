@@ -149,10 +149,6 @@ public class VNavigationBar extends ComplexPanel implements Container {
             fixRight = true;
         }
 
-        if (fixLeft) {
-            caption.getStyle().setLeft(freeLeftCoordinate, Unit.PX);
-
-        }
         caption.getStyle().setProperty("left",
                 fixLeft ? freeLeftCoordinate + "px" : "");
         caption.getStyle()
