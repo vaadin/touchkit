@@ -139,7 +139,7 @@ public class VNavigationBar extends ComplexPanel implements Container {
         boolean fixLeft = false;
         boolean fixRight = false;
         if (fitsWithoutClipping) {
-            if (freeLeftCoordinate < freeRightCoordinate) {
+            if (freeLeftCoordinate < getOffsetWidth() - freeRightCoordinate) {
                 fixRight = true;
             } else {
                 fixLeft = true;
