@@ -47,7 +47,21 @@
         <touchkit.version>2.0.0-SNAPSHOT</touchkit.version>
         <vaadin.version.maven>6.6.6</vaadin.version.maven>
         <gwt.version>2.3.0</gwt.version>
+        <gpg.passphrase.file>empty.properties</gpg.passphrase.file>
     </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>vaadin-staging</id>
+            <name>Vaadin release staging repository</name>
+            <url>http://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+        <snapshotRepository>
+            <id>vaadin-snapshots</id>
+            <name>Vaadin snapshot repository</name>
+            <url>${snapshot.repository.url}</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <description>Provides components and features for mobile devices.</description>
     <build>
@@ -157,15 +171,41 @@
                 </executions>
             </plugin>
 
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0-alpha-2</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <file>${gpg.passphrase.file}</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 
-    <distributionManagement>
-        <snapshotRepository>
-            <id>vaadin-snapshots</id>
-            <url>${snapshot.repository.url}</url>
-        </snapshotRepository>
-    </distributionManagement>
     <dependencies>
         <dependency>
             <groupId>com.vaadin</groupId>
