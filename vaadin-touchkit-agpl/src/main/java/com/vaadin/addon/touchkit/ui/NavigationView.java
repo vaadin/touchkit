@@ -307,4 +307,18 @@ public class NavigationView extends AbstractComponentContainer {
         }
     }
 
+    /**
+     * Gets the @link {@link NavigationManager} in which this button is
+     * contained.
+     * 
+     * @return the {@link NavigationManager} or null if not inside one
+     */
+    public NavigationManager getNavigationManager() {
+        Component p = getParent();
+        if(p instanceof NavigationManager) {
+            return (NavigationManager) p;
+        }
+        return null;
+    }
+
 }
