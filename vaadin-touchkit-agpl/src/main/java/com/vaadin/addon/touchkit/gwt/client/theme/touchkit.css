@@ -303,6 +303,7 @@
 	height: 27px;
 	border-radius: 0;
 	border-left: 1px solid #adb0b3;
+	display: inline-block;
 	}
 
 .v-touchkit-navbar .v-touchkit-horizontalcomponentgroup .v-button-wrap {
@@ -640,8 +641,8 @@
 	padding-left:4px;
 }
 
-.v-touchkit-navbar-right .v-button,
-.v-touchkit-navbar-left .v-button {
+.v-touchkit-navbar-right>.v-button,
+.v-touchkit-navbar-left>.v-button {
 	display:block;
 }
 
