@@ -1625,6 +1625,11 @@ span.v-datefield-calendarpanel-month {
 	margin-top:1px;
 }
 
+/* Display readonly inputs without special color */
+.v-touchkit-verticalcomponentgroup input:read-only {
+	color: #000;
+}
+
 .v-touchkit-verticalcomponentgroup .v-datefield-popupcalendar,
 .v-touchkit-verticalcomponentgroup .v-filterselect {
 	border: 0;
