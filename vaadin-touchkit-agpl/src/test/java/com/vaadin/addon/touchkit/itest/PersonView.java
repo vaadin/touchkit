@@ -14,8 +14,9 @@ public class PersonView extends TouchKitWindow {
     public PersonView() {
         view = new NavigationView();
         setContent(view);
-        
+        view.setCaption("Pekka Puupää");
         buildSimpleReadOnlyView();
+        TestUtils.makeSmallTabletSize(view);
     }
 
     private void buildSimpleReadOnlyView() {
