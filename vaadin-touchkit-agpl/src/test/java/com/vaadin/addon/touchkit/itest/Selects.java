@@ -41,6 +41,8 @@ public class Selects extends TouchKitWindow {
 
         navigationView.setContent(l);
         setContent(navigationView);
+        
+        TestUtils.makeSmallTabletSize(navigationView);
 
     }
 
