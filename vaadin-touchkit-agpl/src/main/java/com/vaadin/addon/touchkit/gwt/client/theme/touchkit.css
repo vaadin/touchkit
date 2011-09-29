@@ -183,7 +183,6 @@
 	background: buttonInsetBackground;
 	-webkit-box-shadow: buttonInsetBoxShadow;
 	padding: 3px;
-	height: 45px;
 	margin: listLayoutMargin 0;
 	}
 
@@ -252,7 +251,7 @@
 
 /* Navbar buttons */
 .v-touchkit-navbar .v-button,
-.v-touchkit-navbar .v-touchkit-horizontalcomponentgroup {
+.v-touchkit-horizontalcomponentgroup>div>div {
 	display: inline-block;
 	margin: 0;
 	background: transparent;
@@ -264,19 +263,24 @@
 	height: 29px;
 	padding: 0;
 	overflow: hidden;
-	}
+	box-sizing: border-box;
+}
 
-.v-touchkit-navbar .v-button-wrap {
+.v-touchkit-navbar .v-button .v-button-wrap,
+.v-touchkit-horizontalcomponentgroup>div>div {
 	background: navbarButtonGradient;
-	height: 27px;
 	border-radius: 4px;
-	-webkit-box-shadow: none;
+	padding: 0 13px;
+	}
+	
+.v-touchkit-navbar .v-button .v-button-wrap,
+.v-touchkit-horizontalcomponentgroup .v-button-wrap {
 	color: navbarButtonColor;
 	text-shadow: navbarButtonTextShadow;
 	font-size: 12px;
 	line-height: 27px;
-	padding: 0 13px;
-	}
+	-webkit-box-shadow: none;
+}
 
 .v-touchkit-navbar .v-button:active .v-button-wrap {
 	background-image: none;
@@ -286,40 +290,55 @@
 	background: navbarButtonActiveGradient;
 	}
 
-.v-touchkit-navbar .v-button-caption {
+.v-touchkit-navbar .v-button .v-button-caption,
+.v-touchkit-horizontalcomponentgroup .v-button-caption {
 	line-height: 27px;
 	}
 
-/* Strip some styles from buttons inside a componentgroup */
+.v-touchkit-horizontalcomponentgroup>div>div {
+	padding:0;
+	display:block;
+}
+.v-touchkit-horizontalcomponentgroup {
+	/* Float left to "sqeeze" non used space, inline-block cannot be used to keep sizes working */
+	float:left;
+}
 .v-touchkit-navbar .v-touchkit-horizontalcomponentgroup {
-	height: 27px;
-	-webkit-box-shadow: navbarButtonBoxShadow;
-	white-space: nowrap;
-	overflow: visible;
-	}
+	float:none;
+	display:inline-block
+}
 
-.v-touchkit-navbar .v-touchkit-horizontalcomponentgroup .v-button {
-	border: none;
-	height: 27px;
-	border-radius: 0;
-	border-left: 1px solid #adb0b3;
-	display: inline-block;
-	}
+.v-touchkit-verticalcomponentgroup .v-touchkit-horizontalcomponentgroup>div {
+	padding: listLayoutMargin 0;
+}
 
-.v-touchkit-navbar .v-touchkit-horizontalcomponentgroup .v-button-wrap {
-	border-radius: 0;
-	}
+/* Strip some styles from buttons inside a componentgroup */
+.v-touchkit-horizontalcomponentgroup .v-button {
+	border:0;
+	margin:0;
+	padding:0;
+	background: transparent;
+	-webkit-box-shadow: none;
+	display:inline-block;
+	border-left: navbarButtonBorder;
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+}
+.v-touchkit-horizontalcomponentgroup .v-button-wrap {
+	background:none;
+}
 
-.v-touchkit-navbar .v-touchkit-horizontalcomponentgroup .v-button:first-child {
+.v-touchkit-horizontalcomponentgroup .v-button:first-child {
 	border-left: none;
 	border-top-left-radius: 4px;
 	border-bottom-left-radius: 4px;
 	}
 
-.v-touchkit-navbar .v-touchkit-horizontalcomponentgroup .v-button:last-child {
+.v-touchkit-horizontalcomponentgroup .v-button:last-child {
 	border-top-right-radius: 4px;
 	border-bottom-right-radius: 4px;
-	}
+}
+
 
 /* Navbar custom icon buttons */
 @url navbarArrowUp navbarArrowUpImage;
@@ -1703,6 +1722,21 @@ span.v-datefield-calendarpanel-month {
 	height:30px;
 }
 
+.v-touchkit-verticalcomponentgroup>div>div>.v-button {
+	margin-top:0;
+	position:relative;
+	top: listLayoutMargin;
+	margin-bottom: 20px;
+}
+
+.v-touchkit-verticalcomponentgroup>div>div>.v-button .v-button-wrap {
+	height: 32px;
+}
+.v-touchkit-verticalcomponentgroup>div>div>.v-button .v-button-caption {
+	line-height:32px;
+	font-size: 16px;
+}
+
 
 /* Grey lines between component,
  * also set then for selects inside component group.
@@ -1724,6 +1758,17 @@ span.v-datefield-calendarpanel-month {
 .v-touchkit-verticalcomponentgroup>div>div.v-csslayout-container>.v-touchkit-has-caption:before,
 .v-touchkit-verticalcomponentgroup .v-select-optiongroup :first-child:before {
 	display: none;
+}
+
+.v-touchkit-verticalcomponentgroup > div > .v-csslayout-container > .v-button:before {
+	margin-top:-13px; /* negative listLayoutMargin + 3pixels for the border?) */
+}
+
+.v-touchkit-verticalcomponentgroup > div > .v-csslayout-container > .v-button {
+	
+}
+.v-touchkit-verticalcomponentgroup > div > .v-csslayout-container > .v-button:first-child {
+	
 }
 
 /* Need to explicitly round the first and last components corners, otherwise they will stick out from the component group */
