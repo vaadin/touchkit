@@ -1,4 +1,4 @@
-package com.vaadin.addon.touchkit;
+package com.vaadin.addon.touchkit.itest;
 
 import java.util.Date;
 import java.util.logging.Logger;

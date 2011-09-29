@@ -1,4 +1,4 @@
-package com.vaadin.addon.touchkit;
+package com.vaadin.addon.touchkit.itest;
 
 import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.addon.touchkit.ui.NavigationManager;

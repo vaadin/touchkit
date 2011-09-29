@@ -1,4 +1,4 @@
-package com.vaadin.addon.touchkit;
+package com.vaadin.addon.touchkit.itest;
 
 import com.vaadin.terminal.Sizeable;
 import com.vaadin.ui.Component;

@@ -8,6 +8,8 @@ import org.eclipse.jetty.server.nio.SelectChannelConnector;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.webapp.WebAppContext;
 
+import com.vaadin.addon.touchkit.itest.FallbackApplication;
+import com.vaadin.addon.touchkit.itest.TouchKitTestApp;
 import com.vaadin.addon.touchkit.server.TouchKitApplicationServlet;
 import com.vaadin.terminal.gwt.server.Constants;
 
