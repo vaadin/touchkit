@@ -49,8 +49,18 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/lib/vaadin-testbench-2.4.2.development.201109231327.jar</systemPath>
 		</dependency>
+	<!-- Needed to compile test sources from main project -->
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-webapp</artifactId>
+			<version>7.2.2.v20101205</version>
+			<scope>compile</scope>
+		</dependency>
+		
 	</dependencies>
 	<build>
+		<!-- Use test sources from core package -->
+		<sourceDirectory>../vaadin-touchkit-agpl/src/test/java</sourceDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
