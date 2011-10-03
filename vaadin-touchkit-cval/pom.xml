@@ -6,7 +6,7 @@
     <artifactId>vaadin-touchkit-cval</artifactId>
     <packaging>jar</packaging>
     <version>${touchkit.version}</version>
-    <name>Vaadin TouchKit CVAL</name>
+    <name>Vaadin TouchKit</name>
 
     <organization>
         <name>Vaadin Ltd</name>

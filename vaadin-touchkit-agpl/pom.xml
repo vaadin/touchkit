@@ -6,7 +6,7 @@
     <artifactId>vaadin-touchkit-agpl</artifactId>
     <packaging>jar</packaging>
     <version>${touchkit.version}</version>
-    <name>Vaadin TouchKit AGPL</name>
+    <name>Vaadin TouchKit</name>
     
     <organization>
         <name>Vaadin Ltd</name>
