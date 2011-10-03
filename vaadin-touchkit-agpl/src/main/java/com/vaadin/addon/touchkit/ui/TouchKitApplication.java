@@ -1,12 +1,15 @@
 package com.vaadin.addon.touchkit.ui;
 
+import java.net.URL;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.vaadin.Application;
+import com.vaadin.service.ApplicationContext;
 import com.vaadin.terminal.gwt.server.HttpServletRequestListener;
 import com.vaadin.terminal.gwt.server.WebApplicationContext;
 import com.vaadin.terminal.gwt.server.WebBrowser;
@@ -132,10 +135,21 @@ public abstract class TouchKitApplication extends Application implements
                     window.setWidth(viewWidth, TouchKitWindow.UNITS_PIXELS);
                     window.setHeight(viewHeight, TouchKitWindow.UNITS_PIXELS);
                 }
-                onBrowserDetailsReady();
                 browserDetailsReady = true;
+                if(isRunning()) {
+                	onBrowserDetailsReady();
+                }
             }
         }
+    }
+    
+    @Override
+    public void start(URL applicationUrl, Properties applicationProperties,
+    		ApplicationContext context) {
+    	super.start(applicationUrl, applicationProperties, context);
+    	if(browserDetailsReady) {
+    		onBrowserDetailsReady();
+    	}
     }
 
     /**
