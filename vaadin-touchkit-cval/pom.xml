@@ -47,6 +47,13 @@
         <license.short.name>cval</license.short.name>
         <vaadin.version.maven>6.6.3</vaadin.version.maven>
         <gwt.version>2.3.0</gwt.version>
+        
+        <Implementation-Version>${project.version}</Implementation-Version>
+        <!-- Must not change this because of the Directory -->
+        <Implementation-Title>Vaadin TouchKit</Implementation-Title>
+        <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
+        <Vaadin-Addon>vaadin-touchkit-${license.short.name}-${project.version}.jar</Vaadin-Addon>
+        
     </properties>
 
     <description>Provides components and features for mobile devices.</description>

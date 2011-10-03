@@ -36,5 +36,9 @@
       <outputDirectory>META-INF</outputDirectory>
       <filtered>true</filtered>
     </file>
+    <file>
+      <source>../assembly/README.html</source>
+      <filtered>true</filtered>
+    </file>
   </files>
 </assembly>
