@@ -28,6 +28,10 @@
         <include>*.jar</include>
       </includes>
     </fileSet>
+	<fileSet>
+		<directory>../assembly/tutorial</directory>
+		<outputDirectory>tutorial</outputDirectory>
+	</fileSet>
   </fileSets>
 
   <files>

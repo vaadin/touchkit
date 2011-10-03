@@ -1,0 +1,18 @@
+body { background: black }
+div#content {
+  border: thick solid black;
+  border-radius: 20px;
+  background: white;
+  width: 800px;
+  margin-left: 20%;
+  margin-right: 20%;
+  padding: 10px;
+}
+
+p { margin-bottom: 0.21cm }
+
+h1 { font-size: 24pt; }
+
+h2 { margin-bottom: 0.21cm }
+h3 { margin-bottom: 0.21cm }
+A:link { so-language: zxx }
