@@ -99,14 +99,19 @@ public class VVerticalComponentGroup extends VCssLayout {
             return;
         }
         int offsetWidth = c.getOffsetWidth();
-        VCaption caption = (VCaption) pane.getWidget(captionIndex);
-        int requiredWidth = caption.getRequiredWidth();
-        int availableForCaption = availableSpace - offsetWidth;
-        if (requiredWidth > availableForCaption && availableForCaption > 100) {
-            // clip
-            caption.setMaxWidth((availableSpace - offsetWidth) - 10);
-        } else {
-            caption.setMaxWidth(requiredWidth);
+
+        Widget component = pane.getWidget(captionIndex);
+        if (component instanceof VCaption) {
+            VCaption caption = (VCaption) component;
+            int requiredWidth = caption.getRequiredWidth();
+            int availableForCaption = availableSpace - offsetWidth;
+            if (requiredWidth > availableForCaption
+                    && availableForCaption > 100) {
+                // clip
+                caption.setMaxWidth((availableSpace - offsetWidth) - 10);
+            } else {
+                caption.setMaxWidth(requiredWidth);
+            }
         }
     }
 
