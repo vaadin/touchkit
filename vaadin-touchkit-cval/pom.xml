@@ -43,7 +43,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- May be overridden by the build system -->
-        <touchkit.version>2.0.1-SNAPSHOT</touchkit.version>
+        <touchkit.version>2.0.1</touchkit.version>
         <license.short.name>cval</license.short.name>
         <vaadin.version.maven>6.6.3</vaadin.version.maven>
         <gwt.version>2.3.0</gwt.version>
