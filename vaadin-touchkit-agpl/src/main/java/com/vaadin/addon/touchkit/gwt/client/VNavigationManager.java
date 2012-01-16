@@ -3,6 +3,8 @@ package com.vaadin.addon.touchkit.gwt.client;
 import java.util.ArrayList;
 import java.util.Set;
 
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
@@ -60,6 +62,31 @@ public class VNavigationManager extends ComplexPanel implements Container {
             pendingWidth = null;
         }
         ac.resumeRendering(this);
+    }
+
+    static boolean rerendering = false;
+
+    // TODO: remove this once Android 2.x is no longer relevant and newer
+    // versions actually fix the bug where nativeselects don't work on the
+    // second+ page in a VNavigationManager.
+    public void forceRerender() {
+        if (rerendering) {
+            return;
+        }
+        rerendering = true;
+        final String oldWidth = width;
+        setWidth("100px");
+        Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
+            public boolean execute() {
+                if ("".equals(oldWidth) || oldWidth == null) {
+                    setWidth("100%");
+                } else {
+                    setWidth(oldWidth);
+                }
+                rerendering = false;
+                return false;
+            }
+        }, 50);
     }
 
     public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
