@@ -16,7 +16,12 @@
 		class="com.vaadin.addon.touchkit.gwt.client.VTouchKitApplicationConnection">
 		<when-type-is class="com.vaadin.terminal.gwt.client.ApplicationConnection" />
 	</replace-with>
-
+	
+    <replace-with
+        class="com.vaadin.addon.touchkit.gwt.client.VCustomNativeSelect">
+        <when-type-is class="com.vaadin.terminal.gwt.client.ui.VNativeSelect" />
+    </replace-with>
+    
 	<!-- <replace-with class="com.vaadin.addon.touchkit.gwt.client.VRemoteDebugConsole"> 
 		<when-type-is class="com.vaadin.terminal.gwt.client.VDebugConsole" /> </replace-with> -->
  
