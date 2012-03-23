@@ -111,11 +111,28 @@
 	line-height: 19px;
 	color: #222;
 	}
+	
+.v-touchkit-offlinemode-panel {
+	padding-top:10%;
+	padding-left: 17%;
+	padding-right: 17%;
+	text-align:center;
+}
+
+.v-touchkit-sadface {
+	display:inline-block;
+	-webkit-transform: rotate(90deg);
+	font-size: 4em;
+	font-weight: bold;
+	height:1em;
+	margin-left: -0.5em;
+}
 
 /* Default background for application */
 @url linenBg linenBgImage ;
 .v-app,
-.v-touchkit-backgroundstripes {
+.v-touchkit-backgroundstripes,
+.v-touchkit-offlinemode {
 	background: #e0e1e3 linenBg;
 	text-shadow: 0 1px 0 rgba(255,255,255,.3);
 	}

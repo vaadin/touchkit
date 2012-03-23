@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.Location;
 import com.vaadin.terminal.gwt.client.ApplicationConnection;
 import com.vaadin.terminal.gwt.client.VConsole;
@@ -16,8 +20,8 @@ import com.vaadin.terminal.gwt.client.ValueMap;
  * communication is still safe.
  * 
  * TODO consider moving this stuff to core. Having own AC in touchkit makes it
- * hard for enusers to incorporate for e.g. DontPush for websocket communication
- * (which would otherwise be perfect match for mobile webkits).
+ * hard for end users to incorporate for e.g. DontPush for websocket
+ * communication (which would otherwise be perfect match for mobile webkits).
  * 
  */
 public class VTouchKitApplicationConnection extends ApplicationConnection {
@@ -27,6 +31,16 @@ public class VTouchKitApplicationConnection extends ApplicationConnection {
     private Date start;
     private String jsonText;
     private ValueMap json;
+    boolean online = false;
+    private Timer requestTimeoutTracker = new Timer() {
+        @Override
+        public void run() {
+            goOffline(
+                    "Response from server seems to take very long time. "
+                            + "Server is either down or there is an issue with network.",
+                    -1);
+        }
+    };
 
     /**
      * TODO remove this before release.
@@ -39,20 +53,51 @@ public class VTouchKitApplicationConnection extends ApplicationConnection {
         }
     };
 
+    private TouchKitOfflineApp offlineApp;
+    private boolean onlineAppStarted = false;
+
+    @Override
+    protected void handleWhenCSSLoaded(String jsonText, ValueMap json) {
+        requestTimeoutTracker.cancel();
+        super.handleWhenCSSLoaded(jsonText, json);
+    }
+
     @Override
     protected void handleUIDLMessage(Date start, String jsonText, ValueMap json) {
-        if (locks.isEmpty()) {
-            super.handleUIDLMessage(start, jsonText, json);
+        requestTimeoutTracker.cancel();
+        if (!online) {
+            // We got a response although we were supposed to be offline.
+            // Possibly a very sluggish xhr finally arrived. Skip paint phase as
+            // resuming will repaint the screen anyways.
+            getOfflineApp().deactivate();
         } else {
-            VConsole.log("Posponing UIDL handling due to lock...");
-            this.start = start;
-            this.jsonText = jsonText;
-            this.json = json;
-            forceHandleMessage.schedule(MAX_TIMEOUT);
+
+            if (locks.isEmpty()) {
+                super.handleUIDLMessage(start, jsonText, json);
+            } else {
+                VConsole.log("Postponing UIDL handling due to lock...");
+                this.start = start;
+                this.jsonText = jsonText;
+                this.json = json;
+                forceHandleMessage.schedule(MAX_TIMEOUT);
+            }
+            if (getView() instanceof VTouchKitView) {
+                ((VTouchKitView) getView()).updateSessionCookieExpiration();
+            }
         }
-        if (getView() instanceof VTouchKitView) {
-            ((VTouchKitView) getView()).updateSessionCookieExpiration();
+    }
+
+    @Override
+    protected void endRequest() {
+        super.endRequest();
+        if (online && !onlineAppStarted) {
+            onlineApplicationStarted();
         }
+    }
+
+    private void onlineApplicationStarted() {
+        onlineAppStarted = true;
+        getOfflineApp().onlineApplicationStarted();
     }
 
     /**
@@ -80,6 +125,83 @@ public class VTouchKitApplicationConnection extends ApplicationConnection {
             super.handleUIDLMessage(start, jsonText, json);
             json = null;
         }
+    }
+
+    @Override
+    protected void showCommunicationError(String details, int statusCode) {
+        goOffline(details, statusCode);
+    }
+
+    public TouchKitOfflineApp getOfflineApp() {
+        if (offlineApp == null) {
+            offlineApp = GWT.create(TouchKitOfflineApp.class);
+            offlineApp.init(this);
+        }
+        return offlineApp;
+    }
+
+    public void goOffline(String details, int statusCode) {
+        getOfflineApp().activate(details, statusCode);
+        if (!isNetworkOnline()) {
+            Scheduler.get().scheduleFixedPeriod(new CheckForNetwork(), 1000);
+        }
+        if (hasActiveRequest()) {
+            endRequest();
+        }
+    }
+
+    @Override
+    protected void makeUidlRequest(String requestData, String extraParams,
+            boolean forceSync) {
+        super.makeUidlRequest(requestData, extraParams, forceSync);
+        requestTimeoutTracker.schedule(MAX_TIMEOUT * 2);
+    }
+
+    public void resume() {
+        online = true;
+        onlineAppStarted = false;
+        if (applicationRunning) {
+            repaintAll();
+        } else {
+            start();
+        }
+    }
+
+    @Override
+    public void start() {
+        if (isNetworkOnline()) {
+            online = true;
+            super.start();
+        } else {
+            goOffline("No network connection", -1);
+        }
+    }
+
+    public void reload() {
+        Window.Location.reload();
+    }
+
+    public static native boolean isNetworkOnline()
+    /*-{
+        if($wnd.navigator.onLine != undefined) {
+            return $wnd.navigator.onLine;
+        }
+        return true;
+    }-*/;
+
+    /**
+     * Polls whether network connection has returned
+     */
+    public class CheckForNetwork implements RepeatingCommand {
+        public boolean execute() {
+            boolean networkOnline = isNetworkOnline();
+
+            if (networkOnline) {
+                getOfflineApp().deactivate();
+            }
+            return !networkOnline;
+        }
+
     }
 
 }

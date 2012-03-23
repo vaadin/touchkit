@@ -81,9 +81,7 @@ public class VNavigationView extends ComplexPanel implements Container,
         // we assume navbar never changes
         UIDL navbaruidl = uidl.getChildUIDL(0);
         navbar = (VNavigationBar) client.getPaintable(navbaruidl);
-        if (!navbar.isAttached()) {
-            insert(navbar, getElement(), 0, true);
-        }
+        setNavigationBar(navbar);
         navbar.updateFromUIDL(navbaruidl, client);
 
         setStyleDependentName("notoolbar", !hasToolbar);
@@ -95,7 +93,7 @@ public class VNavigationView extends ComplexPanel implements Container,
         }
         content = paintable;
         if (!((Widget) content).isAttached()) {
-            add((Widget) content, wrapper);
+            addContent((Widget) content);
         }
         content.updateFromUIDL(childUIDL, client);
         if (hasToolbar) {
@@ -117,6 +115,20 @@ public class VNavigationView extends ComplexPanel implements Container,
 
         Util.runWebkitOverflowAutoFix(wrapper);
         rendering = false;
+    }
+
+    public void addContent(Widget content) {
+        add(content, wrapper);
+    }
+
+    public void setNavigationBar(VNavigationBar newNavBar) {
+        if (navbar != newNavBar && navbar != null) {
+            navbar.removeFromParent();
+        }
+        navbar = newNavBar;
+        if (!navbar.isAttached()) {
+            insert(navbar, getElement(), 0, true);
+        }
     }
 
     private void forgetComponent(ApplicationConnection client,
@@ -154,8 +166,7 @@ public class VNavigationView extends ComplexPanel implements Container,
             return new RenderSpace(wrapper.getOffsetWidth(),
                     wrapper.getOffsetHeight(), true);
         } else if (child == toolbar) {
-            return new RenderSpace(getOffsetWidth(), NAVBARHEIGHT,
-                    false);
+            return new RenderSpace(getOffsetWidth(), NAVBARHEIGHT, false);
 
         } else if (child == navbar) {
             return new RenderSpace(getOffsetWidth(),

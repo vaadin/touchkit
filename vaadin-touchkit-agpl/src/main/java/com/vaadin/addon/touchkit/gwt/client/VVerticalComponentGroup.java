@@ -6,6 +6,7 @@ import java.util.Set;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.terminal.gwt.client.ApplicationConnection;
 import com.vaadin.terminal.gwt.client.Paintable;
@@ -23,6 +24,10 @@ public class VVerticalComponentGroup extends VCssLayout {
     private boolean rendering;
 
     private ApplicationConnection client;
+
+    public VVerticalComponentGroup() {
+        addStyleName("v-touchkit-verticalcomponentgroup");
+    }
 
     @Override
     public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
@@ -151,4 +156,23 @@ public class VVerticalComponentGroup extends VCssLayout {
         }
         return new RenderSpace(width, allocatedSpace.getHeight());
     }
+
+    /**
+     * @return the panel that actually contains all child widgets.
+     */
+    public Panel getContainerPanel() {
+        return (Panel) getWidget();
+    }
+
+    /**
+     * Helper method to ease usage as standalone GWT widget. This method add the
+     * given widget to the container panel.
+     * 
+     * @see #getContainerPanel()
+     */
+    @Override
+    public void add(Widget child) {
+        getContainerPanel().add(child);
+    }
+
 }

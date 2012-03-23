@@ -2,7 +2,7 @@
 	<!-- WS Compiler: manually edited -->
 	<inherits name="com.vaadin.terminal.gwt.DefaultWidgetSet" />
 	<inherits name="com.google.gwt.resources.Resources" />
- 
+
 	<!-- Developmen time setting to speed up compilation -->
 	<set-configuration-property name="CssResource.style"
 		value="pretty" />
@@ -16,15 +16,15 @@
 		class="com.vaadin.addon.touchkit.gwt.client.VTouchKitApplicationConnection">
 		<when-type-is class="com.vaadin.terminal.gwt.client.ApplicationConnection" />
 	</replace-with>
-	
-    <replace-with
-        class="com.vaadin.addon.touchkit.gwt.client.VCustomNativeSelect">
-        <when-type-is class="com.vaadin.terminal.gwt.client.ui.VNativeSelect" />
-    </replace-with>
-    
+
+	<replace-with
+		class="com.vaadin.addon.touchkit.gwt.client.VCustomNativeSelect">
+		<when-type-is class="com.vaadin.terminal.gwt.client.ui.VNativeSelect" />
+	</replace-with>
+
 	<!-- <replace-with class="com.vaadin.addon.touchkit.gwt.client.VRemoteDebugConsole"> 
 		<when-type-is class="com.vaadin.terminal.gwt.client.VDebugConsole" /> </replace-with> -->
- 
+
 	<!-- Use annotation based widget loading strategy instead of the eager method. 
 		Makes initial loading time smaller on a slow network -->
 	<generate-with
@@ -35,5 +35,12 @@
 	<!-- Load css etc eagerly to avoid calc errors -->
 	<entry-point
 		class="com.vaadin.addon.touchkit.gwt.client.VEagerResourceLoader" />
+
+	<define-configuration-property name='touchkit.manifestlinker.additionalCacheRoot'
+		is-multi-valued='true' />
+		
+	<define-linker name="touchkitcachemanifest"
+		class="com.vaadin.addon.touchkit.gwt.CacheManifestLinker" />
+	<add-linker name="touchkitcachemanifest" />
 
 </module>

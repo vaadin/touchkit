@@ -39,6 +39,7 @@ public class TouchKitWindow extends Window {
 
     private LinkedList<ApplicationIcon> applicationIcon = new LinkedList<ApplicationIcon>();
     private LinkedList<PositionCallback> positionCbs;
+    private boolean goOffline;
 
     /**
      * Sets the webpage icon for this web app. This icon may be used by the
@@ -304,6 +305,10 @@ public class TouchKitWindow extends Window {
                     .getMaxInactiveInterval();
             target.addAttribute("persistSession", maxInactiveInterval);
         }
+        if (goOffline) {
+            target.addAttribute("goOffline", true);
+            goOffline = false;
+        }
     }
 
     @Override
@@ -355,6 +360,16 @@ public class TouchKitWindow extends Window {
      */
     public boolean isPersistentSessionCookie() {
         return persistentSessionCookie;
+    }
+
+    /**
+     * Instructs the client side to get into offline mode. Can be used
+     * beforehand if e.g. the user knows he is about to lose his network
+     * connection.
+     */
+    public void goOffline() {
+        goOffline = true;
+        requestRepaint();
     }
 
 }

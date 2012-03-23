@@ -44,8 +44,8 @@
 
         <!-- May be overridden by the build system -->
         <license.short.name>agpl</license.short.name>
-        <touchkit.version>2.0.1</touchkit.version>
-        <vaadin.version.maven>6.6.6</vaadin.version.maven>
+        <touchkit.version>2.1.0-SNAPSHOT</touchkit.version>
+        <vaadin.version.maven>6.7.6</vaadin.version.maven>
         <gwt.version>2.3.0</gwt.version>
         <gpg.passphrase.file>empty.properties</gpg.passphrase.file>
 		<gpg.skip>true</gpg.skip>
@@ -154,8 +154,9 @@
 					<noServer>true</noServer>
 					<port>8080</port>
 					<soyc>false</soyc>
-					<draftCompile>false</draftCompile>
+					<draftCompile>true</draftCompile>
 					<style>OBF</style>
+					
 				</configuration>
 			</plugin>
 

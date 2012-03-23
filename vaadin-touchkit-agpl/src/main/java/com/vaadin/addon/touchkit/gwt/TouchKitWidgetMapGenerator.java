@@ -71,7 +71,19 @@ public class TouchKitWidgetMapGenerator extends WidgetMapGenerator {
         if (lazyComponents.contains(paintableType)) {
             return LoadStyle.LAZY;
         }
-        return super.getLoadStyle(paintableType);
+        LoadStyle loadStyle = super.getLoadStyle(paintableType);
+        if (isUseCacheManifest()) {
+            if (loadStyle == LoadStyle.DEFERRED) {
+                // with cache manifest everything is
+                // cached automatically anyways
+                loadStyle = LoadStyle.LAZY;
+            }
+        }
+        return loadStyle;
+    }
+
+    protected boolean isUseCacheManifest() {
+        return true;
     }
 
 }

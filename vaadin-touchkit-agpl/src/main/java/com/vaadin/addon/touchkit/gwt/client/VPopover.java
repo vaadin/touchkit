@@ -25,7 +25,7 @@ public class VPopover extends VWindow {
 
     private static final int SMALL_SCREEN_WIDTH_THRESHOLD = 500;
     private static final int MIN_EDGE_DISTANCE = 10;
-    private static final int MIN_ARROW_EDGE_DISTANCE = 2*MIN_EDGE_DISTANCE;
+    private static final int MIN_ARROW_EDGE_DISTANCE = 2 * MIN_EDGE_DISTANCE;
     private String relComponentId;
     private boolean fullscreen;
     private DivElement arrowElement;
@@ -35,12 +35,16 @@ public class VPopover extends VWindow {
     public VPopover() {
     }
 
+    public void setFullscreen(boolean fullscreen) {
+        this.fullscreen = fullscreen;
+    }
+
     @Override
     public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
         if (!uidl.hasAttribute("cached")) {
             relComponentId = uidl.hasAttribute("rel") ? uidl
                     .getStringAttribute("rel") : null;
-            fullscreen = uidl.hasAttribute("fc");
+            setFullscreen(uidl.hasAttribute("fc"));
         }
         super.updateFromUIDL(uidl, client);
     }

@@ -37,6 +37,11 @@ public class VTouchKitView extends VView {
             persistentSessionTimeout = null;
         }
 
+        if (uidl.getBooleanAttribute("goOffline")) {
+            ((VTouchKitApplicationConnection) client).goOffline(
+                    "Going offline manually", -1);
+        }
+
     }
 
     private native void doGeoLocationLookup()

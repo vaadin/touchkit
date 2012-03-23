@@ -6,7 +6,6 @@ import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.dom.client.Style.Position;
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.terminal.gwt.client.ApplicationConnection;
@@ -51,8 +50,7 @@ public class VNavigationBar extends ComplexPanel implements Container {
             caption.getStyle().setProperty("left", "0");
             caption.getStyle().setProperty("right", "");
         }
-        caption.setInnerText(uidl.getStringAttribute("caption"));
-        captionWidth = caption.getOffsetWidth(); // cache the caption size
+        setCaption(uidl.getStringAttribute("caption"));
 
         UIDL backUidl = uidl.getChildByTagName("back");
         if (backUidl == null && leftComponent != null) {
@@ -103,6 +101,11 @@ public class VNavigationBar extends ComplexPanel implements Container {
 
         avoidCaptionOverlap();
         rendering = false;
+    }
+
+    public void setCaption(String stringAttribute) {
+        caption.setInnerText(stringAttribute);
+        captionWidth = caption.getOffsetWidth(); // cache the caption size
     }
 
     /**

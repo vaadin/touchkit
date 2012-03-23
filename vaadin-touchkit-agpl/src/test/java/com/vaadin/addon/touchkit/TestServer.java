@@ -2,6 +2,7 @@ package com.vaadin.addon.touchkit;
 
 import java.io.File;
 
+import org.eclipse.jetty.http.MimeTypes;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.nio.SelectChannelConnector;
@@ -38,10 +39,17 @@ public class TestServer {
                 "com.vaadin.addon.touchkit.gwt.TouchKitWidgetSet");
         servletHolder.setInitParameter("application",
                 TouchKitTestApp.class.getName());
-        
+
+        MimeTypes mimeTypes = context.getMimeTypes();
+        mimeTypes.addMimeMapping("appcache", "text/cache-manifest");
+        mimeTypes.addMimeMapping("manifest", "text/cache-manifest");
+        context.setMimeTypes(mimeTypes);
+
         // test fallback app and widgetset
-        servletHolder.setInitParameter("fallbackApplication", FallbackApplication.class.getName());
-        servletHolder.setInitParameter("fallbackWidgetset", Constants.DEFAULT_WIDGETSET);
+        servletHolder.setInitParameter("fallbackApplication",
+                FallbackApplication.class.getName());
+        servletHolder.setInitParameter("fallbackWidgetset",
+                Constants.DEFAULT_WIDGETSET);
 
         File file = new File("./target");
         File[] listFiles = file.listFiles();
