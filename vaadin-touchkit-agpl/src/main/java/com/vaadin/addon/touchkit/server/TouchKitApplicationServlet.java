@@ -82,16 +82,24 @@ public class TouchKitApplicationServlet extends
                 + "\"http://www.w3.org/TR/xhtml1/"
                 + "DTD/xhtml1-transitional.dtd\">\n");
 
-        String staticFilesLocation = getStaticFilesLocation(request);
+        String manifest;
+        if (request.getQueryString() != null
+                && request.getQueryString().contains(
+                        URL_PARAMETER_RESTART_APPLICATION)) {
+            manifest = "";
+        } else {
+            String staticFilesLocation = getStaticFilesLocation(request);
 
-        String widgetset = getApplicationProperty(PARAMETER_WIDGETSET);
-        widgetset = stripSpecialChars(widgetset);
+            String widgetset = getApplicationProperty(PARAMETER_WIDGETSET);
+            widgetset = stripSpecialChars(widgetset);
 
-        final String widgetsetFilePath = staticFilesLocation + "/"
-                + WIDGETSET_DIRECTORY_PATH + widgetset + "/";
-        page.write("<html xmlns=\"http://www.w3.org/1999/xhtml\""
-                + " manifest=\"" + widgetsetFilePath
-                + "cache.manifest\">\n<head>\n");
+            final String widgetsetFilePath = staticFilesLocation + "/"
+                    + WIDGETSET_DIRECTORY_PATH + widgetset + "/";
+            manifest = " manifest=\"" + widgetsetFilePath + "cache.manifest\"";
+
+        }
+        page.write("<html xmlns=\"http://www.w3.org/1999/xhtml\"" + manifest
+                + ">\n<head>\n");
     }
 
     @Override
