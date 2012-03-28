@@ -4,7 +4,6 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.terminal.gwt.client.ApplicationConnection;
@@ -12,58 +11,39 @@ import com.vaadin.terminal.gwt.client.Paintable;
 import com.vaadin.terminal.gwt.client.UIDL;
 import com.vaadin.terminal.gwt.client.ui.Icon;
 
-public class VNavigationButton extends HTML implements Paintable, Focusable {
+public class VNavigationButton extends HTML implements Paintable {
     private static final String NAVBUTTON_CLASSNAME = "v-touchkit-navbutton";
     private String nextViewId;
     private ApplicationConnection client;
     private String caption;
+    private boolean enabled;
 
     public VNavigationButton() {
         setStyleName(NAVBUTTON_CLASSNAME);
-        setTabIndex(0);
         addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent event) {
-                setFocus(true);
-                navigate();
-                String pid = client.getPid(getElement());
-                // client.updateVariable(pid, "mousedetails",
-                // new MouseEventDetails(event.getNativeEvent())
-                // .toString(), false);
-                client.updateVariable(pid, "state", true, true);
+                if (enabled) {
+                    getElement().focus();
+                    navigate();
+                    String pid = client.getPid(getElement());
+                    // client.updateVariable(pid, "mousedetails",
+                    // new MouseEventDetails(event.getNativeEvent())
+                    // .toString(), false);
+                    client.updateVariable(pid, "state", true, true);
+                }
             }
         });
-
-        // Once the scrollDelegate in VNavigationView allows us to handle touch
-        // events more freely, activate these to mimic navigation selection
-        // styling more accurately
-
-        // sinkEvents(Event.TOUCHEVENTS);
-        // addTouchStartHandler(new TouchStartHandler() {
-        // public void onTouchStart(TouchStartEvent event) {
-        // setFocus(true);
-        // }
-        // });
-        // addTouchCancelHandler(new TouchCancelHandler() {
-        // public void onTouchCancel(TouchCancelEvent event) {
-        // setFocus(false);
-        // }
-        // });
-        // addTouchMoveHandler(new TouchMoveHandler() {
-        // public void onTouchMove(TouchMoveEvent event) {
-        // setFocus(false);
-        // }
-        // });
     }
 
     private void navigate() {
-        VNavigationManager panel = findNavigationPanel();
+        VNavigationManager panel = findNavigationPanel(this);
         if (panel != null) {
             panel.onNaviButtonClick(this);
         }
     }
 
-    private VNavigationManager findNavigationPanel() {
-        Widget parent2 = getParent();
+    public static VNavigationManager findNavigationPanel(Widget w) {
+        Widget parent2 = w.getParent();
         while (parent2 != null && !(parent2 instanceof VNavigationManager)) {
             parent2 = parent2.getParent();
         }
@@ -77,6 +57,7 @@ public class VNavigationButton extends HTML implements Paintable, Focusable {
         this.client = client;
         caption = uidl.getStringAttribute("caption");
         setText(caption);
+        enabled = !uidl.getBooleanAttribute("disabled");
 
         if (uidl.hasAttribute("icon")) {
             Icon icon = new Icon(client, uidl.getStringAttribute("icon"));
@@ -106,26 +87,6 @@ public class VNavigationButton extends HTML implements Paintable, Focusable {
 
     public String getCaption() {
         return caption;
-    }
-
-    public int getTabIndex() {
-        return 0;
-    }
-
-    public void setAccessKey(char key) {
-        // TODO Auto-generated method stub
-    }
-
-    public void setFocus(boolean focused) {
-        if (focused) {
-            getElement().focus();
-        } else {
-            getElement().blur();
-        }
-    }
-
-    public void setTabIndex(int index) {
-        getElement().setAttribute("tabIndex", "" + index);
     }
 
 }
