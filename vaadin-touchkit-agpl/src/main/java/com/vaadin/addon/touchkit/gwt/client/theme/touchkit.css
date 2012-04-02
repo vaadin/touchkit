@@ -607,7 +607,8 @@
 
 @url backButtonUrl backButtonImage;
 
-.v-touchkit-navbar-left .v-touchkit-navbutton {
+.v-touchkit-navbutton-back,
+.v-touchkit-navbutton-forward {
 	display:block;
 	-webkit-border-image: backButtonUrl 0 6 0 13 stretch stretch;
 	border-width: 0 6px 0 13px;
@@ -626,8 +627,21 @@
 	line-height: 30px;
 	margin-right: auto;
 	}
+@url forwardButtonUrl forwardButtonImage;
+.v-touchkit-navbutton-forward {
+	-webkit-border-image: forwardButtonUrl 0 13 0 6 stretch stretch;
+	border-width: 0 13px 0 6px;
+	width: auto;
+	height: 30px;
+	padding: 0 3px 0 4px;
+	color: navbarButtonColor;
+	text-shadow: navbarButtonTextShadow;
+	margin-left: auto;
+	margin-right:0;
+}
 
-.v-touchkit-navbar-left .v-touchkit-navbutton:after {
+.v-touchkit-navbutton-back:after,
+.v-touchkit-navbutton-forward:after {
 	display:none;	
 }
 
@@ -920,10 +934,17 @@
 }
 
 @url popoverBackButtonUrl popoverBackButtonImage;
-.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar-left .v-touchkit-navbutton {
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbutton-back {
 	color: buttonColor;
 	text-shadow: buttonTextShadow;
 	-webkit-border-image: popoverBackButtonUrl 0 6 0 13 stretch stretch;
+}
+
+@url popoverForwardButtonUrl popoverForwardButtonImage;
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbutton-forward {
+	color: buttonColor;
+	text-shadow: buttonTextShadow;
+	-webkit-border-image: popoverForwardButtonUrl 0 6 0 13 stretch stretch;
 }
 
 .v-touchkit-popover.v-touchkit-relative .v-touchkit-toolbar {

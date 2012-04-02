@@ -3,6 +3,7 @@ package com.vaadin.addon.touchkit.ui;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Stack;
 
 import com.vaadin.addon.touchkit.gwt.client.VNavigationManager;
@@ -40,10 +41,7 @@ public class NavigationManager extends AbstractComponentContainer {
     /*-
     TODO deprecate + throw on component container mutation methods.
     
-    TODO make automatic viewStack configurable, developers might want to release
-    previous views from memory and handle back navigation by themselves. E.g.
-    keep only one view backwards in memory and reload older ones if necessary.
-    -*/
+     */
 
     /*
      * Implementation notes
@@ -57,6 +55,7 @@ public class NavigationManager extends AbstractComponentContainer {
      */
 
     private Stack<Component> viewStack = new Stack<Component>();
+    private boolean maintainBreadcrump = true;
 
     private Component currentComponent;
     private Component previousComponent;
@@ -76,6 +75,22 @@ public class NavigationManager extends AbstractComponentContainer {
     public NavigationManager(Component c) {
         this();
         navigateTo(c);
+    }
+
+    /**
+     * viewStack holds components that are kind of before the previous
+     * components. By default NavigatioManager automatically maintains this
+     * stack so that it can provide automatic "back navigation". Developers can
+     * override components in this stack if they want to manually modify the
+     * "breadcrump" or e.g. release previous views for garbage collection.
+     * 
+     * @see #isMaintainBreadcrump()
+     * 
+     * @return components that the navigation manager has saved to be on the
+     *         "left side" of previous component.
+     */
+    public Stack<Component> getViewStack() {
+        return viewStack;
     }
 
     /**
@@ -121,7 +136,9 @@ public class NavigationManager extends AbstractComponentContainer {
         }
         if (previousComponent != null) {
             removeComponent(previousComponent);
-            viewStack.push(previousComponent);
+            if (isMaintainBreadcrump()) {
+                getViewStack().push(previousComponent);
+            }
         }
         previousComponent = currentComponent;
         currentComponent = c;
@@ -156,7 +173,12 @@ public class NavigationManager extends AbstractComponentContainer {
         // navigates 'back to the future':
         nextComponent = currentComponent;
         currentComponent = previousComponent;
-        previousComponent = viewStack.isEmpty() ? null : viewStack.pop();
+        if (isMaintainBreadcrump()) {
+            previousComponent = getViewStack().isEmpty() ? null
+                    : getViewStack().pop();
+        } else {
+            previousComponent = null;
+        }
         if (previousComponent != null) {
             addComponent(previousComponent);
         }
@@ -243,7 +265,16 @@ public class NavigationManager extends AbstractComponentContainer {
      * view is rendered.
      */
     public void setNextComponent(Component nextComponent) {
+        if (this.nextComponent == nextComponent) {
+            return;
+        }
+        if (this.nextComponent != null) {
+            removeComponent(this.nextComponent);
+        }
         this.nextComponent = nextComponent;
+        if (nextComponent != null) {
+            addComponent(nextComponent);
+        }
         requestRepaint();
     }
 
@@ -280,6 +311,19 @@ public class NavigationManager extends AbstractComponentContainer {
         while (componentIterator.hasNext()) {
             Component next = componentIterator.next();
             next.paint(target);
+        }
+    }
+
+    @Override
+    public void changeVariables(Object source, Map<String, Object> variables) {
+        super.changeVariables(source, variables);
+        Integer navigated = (Integer) variables.get("navigated");
+        if (navigated != null) {
+            if (navigated > 0) {
+                navigateTo(nextComponent);
+            } else {
+                navigateBack();
+            }
         }
     }
 
@@ -330,6 +374,27 @@ public class NavigationManager extends AbstractComponentContainer {
     public void removeListener(NavigationListener listener) {
         removeListener(NavigationEvent.class, listener,
                 NavigationListener.METHOD);
+    }
+
+    /**
+     * @return true if NavigationManager should maintain "breadcrump" of
+     *         previous views. The default is true.
+     * @see #setMaintainBreadcrump(boolean)
+     */
+    public boolean isMaintainBreadcrump() {
+        return maintainBreadcrump;
+    }
+
+    /**
+     * Configures whether the NavigationManager maintains "breadcrump"
+     * automatically. This is handy when using NavigationViews to dive into a
+     * deep hierarchy.
+     * 
+     * @param maintainBreadcrump
+     *            true if "breadcrump" should be maintained
+     */
+    public void setMaintainBreadcrump(boolean maintainBreadcrump) {
+        this.maintainBreadcrump = maintainBreadcrump;
     }
 
 }

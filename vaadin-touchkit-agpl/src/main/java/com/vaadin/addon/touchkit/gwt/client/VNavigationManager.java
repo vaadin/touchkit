@@ -234,7 +234,11 @@ public class VNavigationManager extends ComplexPanel implements Container {
         }
         currentWrapperPos += views;
         lastSizeUsedForWrapper = getPixelWidth();
-        setLeftUsingTranslate3d(wrapper.getStyle(), currentWrapperPos);
+        Style style = wrapper.getStyle();
+        // ensure animation are "on" (from css), they might not be on due
+        // setHorizontalOffset
+        style.setProperty("webkitTransition", "");
+        setLeftUsingTranslate3d(style, currentWrapperPos);
 
     }
 
@@ -243,9 +247,10 @@ public class VNavigationManager extends ComplexPanel implements Container {
      * @param pos
      *            multiple of panel width
      */
-    private void setLeftUsingTranslate3d(Style style, int pos) {
-        style.setProperty("webkitTransform", "translate3d("
-                + (pos * getPixelWidth()) + "px,0,0)");
+    private void setLeftUsingTranslate3d(Style style, double pos) {
+        style.setProperty("webkitTransform",
+                "translate3d(" + Math.round((int) (pos * getPixelWidth()))
+                        + "px,0,0)");
     }
 
     private int getPixelWidth() {
@@ -264,7 +269,7 @@ public class VNavigationManager extends ComplexPanel implements Container {
         }
     }
 
-    private void setPosition(Style style, int pos) {
+    private void setPosition(Style style, double pos) {
         if (style != null) {
             style.setTop(0, Unit.PCT);
             // style.setLeft(pos * getOffsetWidth(), Unit.PX);
@@ -341,24 +346,40 @@ public class VNavigationManager extends ComplexPanel implements Container {
             Paintable paintable = client.getPaintable(nextViewId);
             if (paintable != null) {
                 if (paintable == nextView) {
-                    animateHorizontally(-1);
-                    prevView = currentView;
-                    currentView = paintable;
+                    navigateForward(false);
                     return;
                 } else if (paintable == prevView) {
                     /*
                      * Back button.
                      */
-                    animateHorizontally(1);
-                    nextView = currentView;
-                    currentView = paintable;
-                    prevView = null;
+                    navigateBackward(false);
                     return;
                 }
             }
         }
         preparePlaceHolder(vNavigationButton);
         animateHorizontally(-1);
+    }
+
+    public void navigateBackward(boolean visitServer) {
+        animateHorizontally(1);
+        Paintable paintable = prevView;
+        nextView = currentView;
+        currentView = paintable;
+        prevView = null;
+        if (visitServer) {
+            client.updateVariable(client.getPid(this), "navigated", -1, true);
+        }
+    }
+
+    public void navigateForward(boolean visitServer) {
+        animateHorizontally(-1);
+        Paintable paintable = nextView;
+        prevView = currentView;
+        currentView = paintable;
+        if (visitServer) {
+            client.updateVariable(client.getPid(this), "navigated", 1, true);
+        }
     }
 
     private void preparePlaceHolder(VNavigationButton vNavigationButton) {
@@ -474,5 +495,29 @@ public class VNavigationManager extends ComplexPanel implements Container {
                     resetPositionsAndChildSizes();
                 }
             });
+
+    public void setHorizontalOffset(int deltaX, boolean animate) {
+        final Style style = wrapper.getStyle();
+        if (!animate) {
+            style.setProperty("webkitTransition", "none");
+        }
+        setPosition(style, currentWrapperPos + deltaX
+                / (double) getPixelWidth());
+        if (!animate) {
+            Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+                public void execute() {
+                    style.setProperty("webkitTransition", "");
+                }
+            });
+        }
+    }
+
+    public Paintable getPreviousView() {
+        return prevView;
+    }
+
+    public Paintable getNextView() {
+        return nextView;
+    }
 
 }

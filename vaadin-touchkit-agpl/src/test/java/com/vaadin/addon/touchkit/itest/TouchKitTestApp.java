@@ -3,6 +3,7 @@ package com.vaadin.addon.touchkit.itest;
 import java.util.Random;
 
 import com.vaadin.Application;
+import com.vaadin.addon.touchkit.itest.SwipeViewTest.SwipeViewTestMgr;
 import com.vaadin.addon.touchkit.service.Position;
 import com.vaadin.addon.touchkit.service.PositionCallback;
 import com.vaadin.addon.touchkit.ui.Switch;
@@ -51,17 +52,19 @@ public class TouchKitTestApp extends Application {
         mainWindow.setCaption("Hello mobile user");
         final Label label = new Label("Hello mobile user");
         mainWindow.addComponent(label);
-        
+
         NativeSelect nativeSelect = new NativeSelect("Select test");
         nativeSelect.setImmediate(true);
         nativeSelect.addItem(Selects.class.getSimpleName());
         nativeSelect.addItem(PersonView.class.getSimpleName());
         nativeSelect.addListener(new Property.ValueChangeListener() {
             public void valueChange(ValueChangeEvent event) {
-                getMainWindow().open(new ExternalResource(getURL().toString() + event.getProperty() + "/"));
+                getMainWindow().open(
+                        new ExternalResource(getURL().toString()
+                                + event.getProperty() + "/"));
             }
         });
-        
+
         mainWindow.addComponent(nativeSelect);
 
         Button b = new Button("NavPanelTest");
@@ -102,6 +105,14 @@ public class TouchKitTestApp extends Application {
                 mainWindow.setContent(new TabsheetTest());
             }
         });
+
+        b = new Button("SwipeView test");
+        b.addListener(new ClickListener() {
+            public void buttonClick(ClickEvent event) {
+                mainWindow.setContent(new SwipeViewTestMgr());
+            }
+        });
+        mainWindow.addComponent(b);
 
         b = new Button("Junkyard");
         b.addListener(new ClickListener() {
@@ -217,7 +228,7 @@ public class TouchKitTestApp extends Application {
         embedded.setHeight(32, Embedded.UNITS_PIXELS);
         return embedded;
     }
-    
+
     /**
      * Returns test views (instances of TouchKitWindow) by their name.
      * 
@@ -226,7 +237,7 @@ public class TouchKitTestApp extends Application {
      */
     @Override
     public Window getWindow(String name) {
-        Window window = (Window) super.getWindow(name);
+        Window window = super.getWindow(name);
         if (window == null && name != null && !"".equals(name)
                 && !name.contains(".ico")) {
 
@@ -255,6 +266,5 @@ public class TouchKitTestApp extends Application {
         }
         return window;
     }
-    
 
 }

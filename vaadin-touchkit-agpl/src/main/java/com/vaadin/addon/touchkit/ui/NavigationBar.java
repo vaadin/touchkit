@@ -24,7 +24,7 @@ import com.vaadin.ui.Component;
 @ClientWidget(value = VNavigationBar.class, loadStyle = LoadStyle.EAGER)
 public class NavigationBar extends AbstractComponentContainer {
 
-    private static final String STYLE_NAME_BACK_BUTTON = "backbutton";
+    private static final String STYLE_NAME_BACK_BUTTON = "back";
     private NavigationButton backButton = new NavigationButton();
     private Component navigationBarComponent;
     private Component leftNavigationBarComponent;

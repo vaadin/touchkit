@@ -39,6 +39,18 @@ public interface VTouchKitResources extends ClientBundle {
     @Source("theme/img/back-button-popover-2x.png")
     public DataResource popoverBackButtonImage2x();
 
+    @Source("theme/img/forward-button.png")
+    public DataResource forwardButtonImage();
+
+    @Source("theme/img/forward-button-2x.png")
+    public DataResource forwardButtonImage2x();
+
+    @Source("theme/img/forward-button-popover.png")
+    public DataResource popoverForwardButtonImage();
+
+    @Source("theme/img/forward-button-popover-2x.png")
+    public DataResource popoverForwardButtonImage2x();
+
     /**
      * Arrow used in Navbuttons (right pointing gray arrow)
      */

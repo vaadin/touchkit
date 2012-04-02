@@ -45,7 +45,7 @@
         <!-- May be overridden by the build system -->
         <license.short.name>agpl</license.short.name>
         <touchkit.version>2.1.0-SNAPSHOT</touchkit.version>
-        <vaadin.version.maven>6.7.6</vaadin.version.maven>
+        <vaadin.version.maven>6.7-SNAPSHOT</vaadin.version.maven>
         <gwt.version>2.3.0</gwt.version>
         <gpg.passphrase.file>empty.properties</gpg.passphrase.file>
 		<gpg.skip>true</gpg.skip>
@@ -73,6 +73,13 @@
     </distributionManagement>
 
     <description>Provides components and features for mobile devices.</description>
+    
+    <repositories>
+    	<repository>
+    	<id>vaadin-snapshots</id>
+    		<url>${snapshot.repository.url}</url>
+    	</repository>
+    </repositories>
     <build>
     
         <resources>
