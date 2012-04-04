@@ -110,7 +110,8 @@
 	font-size: 14px;
 	line-height: 19px;
 	color: #222;
-	}
+	-webkit-text-size-adjust: none;
+}
 	
 .v-touchkit-offlinemode-panel {
 	padding-top:10%;
