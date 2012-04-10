@@ -383,7 +383,7 @@ public class VNavigationManager extends ComplexPanel implements Container {
     }
 
     private void preparePlaceHolder(VNavigationButton vNavigationButton) {
-        String innerText = vNavigationButton.getCaption();
+        String innerText = vNavigationButton.getNextViewCaption();
         getPlaceHolder().setHTML(innerText);
         getPlaceHolder().moveToNextPosition();
         if (nextView != null) {

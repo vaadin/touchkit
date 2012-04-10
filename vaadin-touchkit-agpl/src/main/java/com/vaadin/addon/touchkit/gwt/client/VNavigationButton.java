@@ -17,6 +17,7 @@ public class VNavigationButton extends HTML implements Paintable {
     private ApplicationConnection client;
     private String caption;
     private boolean enabled;
+    private String nextViewCaption;
 
     public VNavigationButton() {
         setStyleName(NAVBUTTON_CLASSNAME);
@@ -57,6 +58,7 @@ public class VNavigationButton extends HTML implements Paintable {
         this.client = client;
         caption = uidl.getStringAttribute("caption");
         setText(caption);
+        nextViewCaption = uidl.getStringAttribute("nvc");
         enabled = !uidl.getBooleanAttribute("disabled");
 
         if (uidl.hasAttribute("icon")) {
@@ -87,6 +89,13 @@ public class VNavigationButton extends HTML implements Paintable {
 
     public String getCaption() {
         return caption;
+    }
+
+    public String getNextViewCaption() {
+        if (nextViewCaption != null) {
+            return nextViewCaption;
+        }
+        return getCaption();
     }
 
 }

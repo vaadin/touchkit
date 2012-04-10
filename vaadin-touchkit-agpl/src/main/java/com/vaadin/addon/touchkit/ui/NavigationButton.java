@@ -24,7 +24,10 @@ import com.vaadin.ui.Component;
  */
 @ClientWidget(value = VNavigationButton.class, loadStyle = LoadStyle.EAGER)
 public class NavigationButton extends Button {
+
     private Component targetView;
+
+    private String targetViewCaption;
 
     /**
      * Creates a new navigation button.
@@ -116,6 +119,10 @@ public class NavigationButton extends Button {
         if (targetView != null && targetView.getApplication() != null) {
             target.addAttribute("nv", targetView);
         }
+        String nvc = getTargetViewCaption();
+        if (nvc != null && !nvc.equals(getCaption())) {
+            target.addAttribute("nvc", nvc);
+        }
     }
 
     /**
@@ -165,6 +172,38 @@ public class NavigationButton extends Button {
      */
     public Component getTargetView() {
         return targetView;
+    }
+
+    /**
+     * Returns the caption that is expected to be on the view this button
+     * navigates to.
+     * <p>
+     * If the caption is not set explicitly with
+     * {@link #setTargetViewCaption(String)}, the caption of target view is
+     * used. In case neither explicit target view caption or the target view is
+     * not defined the button caption is used.
+     * 
+     * @return the caption that will be used for placeholder of the target view.
+     */
+    public String getTargetViewCaption() {
+        if (targetViewCaption != null) {
+            return targetViewCaption;
+        }
+        if (targetView != null && targetView.getCaption() != null) {
+            return targetView.getCaption();
+        }
+        return getCaption();
+    }
+
+    /**
+     * Sets the caption that is expected to be on the view this button navigates
+     * to.
+     * 
+     * @param targetViewCaption
+     *            the explicit caption of the target view.
+     */
+    public void setTargetViewCaption(String targetViewCaption) {
+        this.targetViewCaption = targetViewCaption;
     }
 
 }
