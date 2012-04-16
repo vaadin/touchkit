@@ -112,6 +112,37 @@
 	color: #222;
 	-webkit-text-size-adjust: none;
 }
+
+.v-contextmenu {
+	background: #f8f8f9;
+	border: none;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-o-border-radius: 3px;
+	overflow: hidden;
+	padding: 4px 0;
+	-webkit-box-shadow: 0 0 40px rgba(0, 0, 0, .6);
+}
+.v-contextmenu .gwt-MenuItem {
+	padding: 1px 12px 1px 8px;
+	height: 30px;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	cursor: default;
+}
+
+.v-contextmenu .gwt-MenuItem .v-icon {
+	margin-right: 3px;
+}
+
+.v-contextmenu .gwt-MenuItem-selected div {
+	background: transparent;
+	color:black;
+}
+
+*/
 	
 .v-touchkit-offlinemode-panel {
 	padding-top:10%;
