@@ -3,12 +3,13 @@
 <HEAD>
 	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
 	<TITLE></TITLE>
-	<META NAME="GENERATOR" CONTENT="OpenOffice.org 3.2  (Linux)">
+	<META NAME="GENERATOR" CONTENT="LibreOffice 3.4  (Unix)">
 	<META NAME="AUTHOR" CONTENT="Marko Grönroos">
 	<META NAME="CREATED" CONTENT="20110922;16053300">
+	<META NAME="CHANGED" CONTENT="20120416;16040900">
 	<META NAME="CHANGEDBY" CONTENT="Marko Grönroos">
-	<META NAME="CHANGED" CONTENT="20111003;11444200">
 	<META NAME="CHANGEDBY" CONTENT="Marko Grönroos">
+	<link href="styles.css" rel="stylesheet" type="text/css" />
 	<STYLE TYPE="text/css">
 	<!--
 		@page { margin: 2cm }
@@ -24,7 +25,6 @@
 		TT.cjk { font-family: "AR PL UMing HK", monospace }
 	-->
 	</STYLE>
-    <link href="styles.css" rel="stylesheet" type="text/css" />
 </HEAD>
 <BODY LANG="en-US" DIR="LTR">
 <DIV ID="content" DIR="LTR">
@@ -658,7 +658,7 @@ ClassificationGroup subgroup = (ClassificationGroup) classificationItem;
 <FONT COLOR="#000000">        </FONT><FONT COLOR="#000000"><FONT FACE="Monospace"><FONT SIZE=2>setHeight(</FONT></FONT></FONT><FONT COLOR="#2a00ff"><FONT FACE="Monospace"><FONT SIZE=2>&quot;65%&quot;</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Monospace"><FONT SIZE=2>);</FONT></FONT></FONT></PRE><P>
 	As pop-up windows easily take much of the screen space available in
 	a mobile phone, they are more useful in tablets.</P>
-	<P ALIGN=CENTER><IMG SRC="vornitologist-observations-popup-tablet.jpg" NAME="grafiikka7" ALIGN=BOTTOM WIDTH=834 HEIGHT=471 BORDER=0></P>
+	<P ALIGN=CENTER><IMG SRC="vornitologist-observations-popup-tablet.jpg" NAME="grafiikka7" ALIGN=BOTTOM WIDTH=800 HEIGHT=450 BORDER=0></P>
 	<H2 CLASS="western">Displaying an Alternate User Interface for
 	Unsupported Browsers</H2>
 	<P>TouchKit is designed for mobile browsers and supports currently
@@ -682,8 +682,7 @@ ClassificationGroup subgroup = (ClassificationGroup) classificationItem;
 <FONT COLOR="#008080">  </FONT><FONT COLOR="#000000">  </FONT><FONT COLOR="#008080">&lt;</FONT><FONT COLOR="#3f7f7f">param-name</FONT><FONT COLOR="#008080">&gt;</FONT><FONT COLOR="#000000">fallbackWidgetset</FONT><FONT COLOR="#008080">&lt;/</FONT><FONT COLOR="#3f7f7f">param-name</FONT><FONT COLOR="#008080">&gt;</FONT>
 <FONT COLOR="#008080">  </FONT><FONT COLOR="#000000">  </FONT><FONT COLOR="#008080">&lt;</FONT><FONT COLOR="#3f7f7f">param-value</FONT><FONT COLOR="#008080">&gt;</FONT><FONT COLOR="#000000">com.vaadin.terminal.gwt.DefaultWidgetSet</FONT><FONT COLOR="#008080">&lt;/</FONT><FONT COLOR="#3f7f7f">param-value</FONT><FONT COLOR="#008080">&gt;</FONT>
 <FONT COLOR="#008080">  &lt;/</FONT><FONT COLOR="#3f7f7f">init-param</FONT><FONT COLOR="#008080">&gt;</FONT>
-<FONT COLOR="#008080">&lt;/</FONT><FONT COLOR="#3f7f7f">servlet</FONT><FONT COLOR="#008080">&gt;</FONT>
-</PRE><P>
+<FONT COLOR="#008080">&lt;/</FONT><FONT COLOR="#3f7f7f">servlet</FONT><FONT COLOR="#008080">&gt;</FONT></PRE><P>
 	The fallback application can be a regular Vaadin application, a
 	“Sorry!” message, or a redirection to an alternative user
 	interface.</P>
@@ -714,11 +713,96 @@ ClassificationGroup subgroup = (ClassificationGroup) classificationItem;
 	<BR>The generator must be defined in the widget set definition file,
 	in Vornitologist in <TT CLASS="western">VornitologistWidgetset.gwt.xml</TT>
 	as follows:</P>
-	<PRE CLASS="western">
-<FONT COLOR="#008080">&lt;</FONT><FONT COLOR="#3f7f7f">generate-with</FONT> <FONT COLOR="#7f007f">class</FONT><FONT COLOR="#000000">=</FONT><FONT COLOR="#2a00ff"><I>&quot;com.vornitologist.widgetset.WidgetMapGenerator&quot;</I></FONT><FONT COLOR="#008080">&gt;</FONT>
+	<PRE CLASS="western"><FONT COLOR="#008080">&lt;</FONT><FONT COLOR="#3f7f7f">generate-with</FONT> <FONT COLOR="#7f007f">class</FONT><FONT COLOR="#000000">=</FONT><FONT COLOR="#2a00ff"><I>&quot;com.vornitologist.widgetset.WidgetMapGenerator&quot;</I></FONT><FONT COLOR="#008080">&gt;</FONT>
 <FONT COLOR="#008080">    &lt;</FONT><FONT COLOR="#3f7f7f">when-type-is</FONT> <FONT COLOR="#7f007f">class</FONT><FONT COLOR="#000000">=</FONT><FONT COLOR="#2a00ff"><I>&quot;com.vaadin.terminal.gwt.client.WidgetMap&quot;</I></FONT> <FONT COLOR="#008080">/&gt;</FONT>
-<FONT COLOR="#008080">&lt;/</FONT><FONT COLOR="#3f7f7f">generate-with</FONT><FONT COLOR="#008080">&gt;</FONT>
-</PRE>
+<FONT COLOR="#008080">&lt;/</FONT><FONT COLOR="#3f7f7f">generate-with</FONT><FONT COLOR="#008080">&gt;</FONT></PRE><H2 CLASS="western">
+	Creating an offline mode for &quot;outback access&quot;</H2>
+	<P>Consider that you are a typical end user of Vornitologist, an
+	ornitologist yourself, and you travel to the middle of Australia for
+	a bird watching trip. Although modern mobile networks cover most
+	places nowadays, the network still is not always reachable. The
+	&quot;Java only on the server-side&quot; architecture of Vaadin is
+	great for improving the productivity of developers, but it has a
+	problem if the server-side is not there.</P>
+	<P>Despite the server-centric approach of Vaadin and TouchKit, there
+	is a method to build parts of the user interface so that it can work
+	offline. TouchKit creates a so-called <I>HTML5 cache manifest</I> to
+	instruct browsers to cache resources stronger than usual. Using
+	these resources, an application can start up without any connection
+	to network. By default, if the connection is down, only a dialog
+	stating the situation is displayed. This &quot;off-line application&quot;
+	can easily be overridden with a custom offline mode written with
+	plain GWT code.</P>
+	<P>Let us consider a simple offline mode for Vornitologist that you
+	can use to add observations of birds. Observations are stored
+	temporarily in the HTML5 local storage until the server connection
+	is up again. At that point, the application asks whether the user
+	wishes to synchronize observations from local storage to the server.</P>
+	<P ALIGN=CENTER><IMG SRC="vornitologist-offline.png" NAME="grafiikka8" ALIGN=BOTTOM WIDTH=302 HEIGHT=454 BORDER=0></P>
+	<P>Using the offline mode, we can gain offline use for a critical
+	feature, while still keeping the &quot;cost&quot; of the application
+	down due to the superior developer productivity of Vaadin. Most
+	other features would be somewhat handicapped in offline mode anyway.
+	For example, it might be impractical to store all observation in the
+	local storage of mobile devices and it would be impossible to
+	receive new observations near you without access to shared data on
+	the server.</P>
+	<P>Note that if you end up doing an offline app, you will be working
+	in the &quot;real web development&quot;, which is a rare and fragile
+	area to work in. In this area, Vaadin can no more shield you from
+	the difficulties of web development and, for example, all goodies of
+	Java JVM are no more available. Consider making some compromises to
+	keep your development costs down. Yet, you do have a good starting
+	point for this advanced territory, as Vaadin uses GWT for the
+	client-side development and the offline mode of TouchKit uses the
+	same environment. We consider GWT to be the easiest method for doing
+	serious browser development.</P>
+	<H3 CLASS="western">Enabling Offline Mode</H3>
+	<P>To replace the default offline mode of TouchKit, create a class
+	that extends
+	<B>com.vaadin.addon.touchkit.gwt.client.TouchKitOfflineApp</B>. It
+	needs to sit in the &quot;<TT CLASS="western">client</TT>&quot;
+	sub-package next to the widget set definition file of your
+	application. You will also need to add a rebinding rule to widget
+	set such as the following:</P>
+	<PRE CLASS="western"><FONT COLOR="#999999">&lt;replace-with class=&quot;<FONT COLOR="#0000ff">com.vornitologist.widgetset.client.VornitologistOfflineMode</FONT>&quot;&gt;</FONT>
+<FONT COLOR="#999999">    &lt;when-type-is class=&quot;<FONT COLOR="#0000ff">com.vaadin.addon.touchkit.gwt.client.TouchKitOfflineApp</FONT>&quot; /&gt;</FONT>
+<FONT COLOR="#999999">&lt;/replace-with&gt;</FONT></PRE><P>
+	There are several methods (see the JavaDocs) that you may wish to
+	override depending on your requirements. In Vornitologist, we
+	override <I>buildDefaultContent()</I>, <I>onlineApplicationStarted()</I>,
+	and <I>deactivate()</I>.</P>
+	<P>The <I>buildDefaultContent()</I> is the basic method that builds
+	the user interface of the offline view. The Vornitologist offline
+	mode uses many client-side components of Vaadin and TouchKit to
+	achieve similar look and feel with the rest of the Vaadin app. Any
+	GWT widgets and methods can also be used.</P>
+	<P>The <I>onlineApplicationStarted()</I> &nbsp;method is called by
+	the client-side when it is able to open connection to the server.
+	The Vornitologist offline mode checks the status of the locally
+	stored observations and suggests to send them to the server. 
+	</P>
+	<P>For synchronizing observations to server, Vornitologist uses the
+	normal Vaadin communication mechanism of the main window object. On
+	the server-side, the <B>VornitologistWindow</B> detects posted
+	observations and stores them to a data structure shared by all
+	users. You can also use any other method to post the data collected
+	offline to the server, for example, using a separate servlet.</P>
+	<P>The <I>deactivate()</I> method is called by the client-side when
+	the server is reachable again. Vornitologist overrides this method
+	to disable the automatic closing of the offline mode. This way
+	filling a new observation is not interrupted if the connection is
+	suddenly restored. Instead, we return to online mode
+	programmatically when the user is ready.</P>
+	<H3 CLASS="western">Project Organization</H3>
+	<P>The offline mode of Vornitologist is written mostly in the
+	<B>VornitologistOfflineMode</B> class. If your offline mode grows
+	large, you should use common Java patterns to keep you code clean.
+	If you want to have an example of using HTML5 local storage usage,
+	please see <B>com.vornitologist.widgetset.client.OfflineDataService</B>.
+	In addition to handling locally stored observations, the service
+	class also provides a list of <B>Species</B> objects for the user
+	interface, which it reads with an XHR from a cached flat file.</P>
 </DIV>
 </BODY>
 </HTML>
