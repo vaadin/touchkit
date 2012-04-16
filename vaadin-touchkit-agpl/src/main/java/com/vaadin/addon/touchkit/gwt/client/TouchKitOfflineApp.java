@@ -1,5 +1,6 @@
 package com.vaadin.addon.touchkit.gwt.client;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -12,11 +13,24 @@ import com.vaadin.terminal.gwt.client.ui.VButton;
 import com.vaadin.terminal.gwt.client.ui.VOverlay;
 
 /**
- * TODO review API naming
- * 
- * TODO javadocs
- * 
- * TODO i18n, make it ease at leas
+ * This class is the "default offline mode" used by Vaadin TouchKit. It is
+ * displayed when network connection is down or if the server cannot be reached
+ * for some other reason.
+ * <p>
+ * Applications that need a to have offline mode connect their offline mode
+ * written with pure GWT to an extended version of this class. This class can be
+ * replaced by adding following GWT deferred binding rule to your widgetset:
+ * <code><pre>
+        <replace-with
+                class="com.example.widgetset.client.MyOfflineMode">
+                <when-type-is
+                        class="com.vaadin.addon.touchkit.gwt.client.TouchKitOfflineApp" />
+        </replace-with>
+ * </pre></code>
+ * <p>
+ * Messages displayed by the default "offline mode", the can replaced by adding
+ * customized properties files for {@link OfflineModeMessages} bundle. See GWT
+ * int18n docs for more details.
  * 
  */
 public class TouchKitOfflineApp {
@@ -28,6 +42,7 @@ public class TouchKitOfflineApp {
     private String activationMessage;
     private int statusCode;
     private boolean active;
+    private OfflineModeMessages msg;
 
     /**
      * Returns the panel created by default activate function. Extended offline
@@ -96,13 +111,15 @@ public class TouchKitOfflineApp {
      * {@link #getPanel()} method.
      */
     protected void buildDefaultContent() {
+        msg = GWT.create(OfflineModeMessages.class);
+
         FlowPanel fp = new FlowPanel();
         getPanel().add(fp);
         fp.setStyleName("v-touchkit-offlinemode-panel");
         StringBuilder sb = new StringBuilder();
         sb.append("<div class=\"v-touchkit-sadface\">:-(</div>");
         sb.append("<h1>");
-        sb.append("Server connection is down");
+        sb.append(msg.serverCannotBeReachedMsg());
         sb.append("</h1>");
         sb.append("<p>");
         sb.append(getActivationMessage());
@@ -111,12 +128,10 @@ public class TouchKitOfflineApp {
         fp.add(new HTML(sb.toString()));
 
         if (!VTouchKitApplicationConnection.isNetworkOnline()) {
-            fp.add(new Label(
-                    "Your network connection seems to be down.Application "
-                            + "will automatically try resume once your connection is restored."));
+            fp.add(new Label(msg.offlineDueToNetworkMsg()));
         } else {
             VButton vButton = new VButton();
-            vButton.setText("Try again");
+            vButton.setText(msg.tryAgainMsg());
             vButton.addClickHandler(new ClickHandler() {
                 public void onClick(ClickEvent event) {
                     overlay.hide();
