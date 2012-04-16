@@ -190,7 +190,12 @@ public class TouchKitApplicationServlet extends
      */
     protected boolean isSupportedBrowser(HttpServletRequest request) {
         String header = request.getHeader("User-Agent");
-        return !(header == null || !header.toLowerCase().contains("webkit"));
+        /*
+         * CFNetwork is reported by ios web apps in some cases (when updating
+         * cache stuff ?). It is thus also accepted.
+         */
+        return !(header == null || !(header.toLowerCase().contains("webkit") || header
+                .toLowerCase().contains("CFNetwork")));
     }
 
     /**
