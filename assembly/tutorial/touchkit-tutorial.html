@@ -299,20 +299,15 @@
 		the device</P>
 		<LI><P>Disable session expiration message (auto reload)</P>
 	</UL>
-	<P>These features are defined should be set up in the <I>init()</I>
-	method. In Vornitologist, they are done in the <I>configureMainWindow()</I>
-	method as follows:</P>
-	<PRE CLASS="western"><FONT COLOR="#000000">    </FONT><FONT COLOR="#7f0055"><B>private</B></FONT><FONT COLOR="#000000"> </FONT><FONT COLOR="#7f0055"><B>void</B></FONT><FONT COLOR="#000000"> configureMainWindow() {</FONT>
-<FONT COLOR="#000000">        </FONT><FONT COLOR="#0000c0">mainWindow</FONT><FONT COLOR="#000000"> = </FONT><FONT COLOR="#7f0055"><B>new</B></FONT><FONT COLOR="#000000"> TouchKitWindow();</FONT>
-<FONT COLOR="#000000">        </FONT><FONT COLOR="#0000c0">mainWindow</FONT><FONT COLOR="#000000">.setCaption(</FONT><FONT COLOR="#2a00ff">&quot;Vornitologist&quot;</FONT><FONT COLOR="#000000">);</FONT>
-
-        // These configurations modify how the <U>app</U> behaves as &quot;<U>ios</U> <U>webapp</U>&quot;.
-<FONT COLOR="#000000">        </FONT><FONT COLOR="#0000c0">mainWindow</FONT><FONT COLOR="#000000">.addApplicationIcon(getURL()</FONT>
+	<P>These features should be set up before window is first loaded by client like in the <I>init()</I>
+	method. In Vornitologist, they are done in the <I>attacg()</I>
+	method of the VornitologistWindow as follows:</P>
+	<PRE CLASS="western"><FONT COLOR="#000000">    </FONT><FONT COLOR="#000000">        </FONT><FONT COLOR="#000000">addApplicationIcon(getApplication().getURL()</FONT>
 <FONT COLOR="#000000">                + </FONT><FONT COLOR="#2a00ff">&quot;VAADIN/themes/vornitologist/icon.png&quot;</FONT><FONT COLOR="#000000">);</FONT>
-<FONT COLOR="#000000">        </FONT><FONT COLOR="#0000c0">mainWindow</FONT><FONT COLOR="#000000">.setStartupImage(getURL()</FONT>
+<FONT COLOR="#000000">        </FONT><FONT COLOR="#000000">setStartupImage(getApplication().getURL()</FONT>
 <FONT COLOR="#000000">                + </FONT><FONT COLOR="#2a00ff">&quot;VAADIN/themes/vornitologist/startup.png&quot;</FONT><FONT COLOR="#000000">);</FONT>
-<FONT COLOR="#000000">        </FONT><FONT COLOR="#0000c0">mainWindow</FONT><FONT COLOR="#000000">.setWebAppCapable(</FONT><FONT COLOR="#7f0055"><B>true</B></FONT><FONT COLOR="#000000">);</FONT>
-<FONT COLOR="#000000">        </FONT><FONT COLOR="#0000c0">mainWindow</FONT><FONT COLOR="#000000">.setPersistentSessionCookie(</FONT><FONT COLOR="#7f0055"><B>true</B></FONT><FONT COLOR="#000000">);</FONT>
+<FONT COLOR="#000000">        </FONT><FONT COLOR="#000000">setWebAppCapable(</FONT><FONT COLOR="#7f0055"><B>true</B></FONT><FONT COLOR="#000000">);</FONT>
+<FONT COLOR="#000000">        </FONT><FONT COLOR="#000000">setPersistentSessionCookie(</FONT><FONT COLOR="#7f0055"><B>true</B></FONT><FONT COLOR="#000000">);</FONT>
 
 <FONT COLOR="#000000">        setMainWindow(</FONT><FONT COLOR="#0000c0">mainWindow</FONT><FONT COLOR="#000000">);</FONT>
     }</PRE><P>
