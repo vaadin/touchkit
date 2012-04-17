@@ -10,6 +10,7 @@ import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.Location;
+import com.vaadin.terminal.gwt.client.ApplicationConfiguration;
 import com.vaadin.terminal.gwt.client.ApplicationConnection;
 import com.vaadin.terminal.gwt.client.VConsole;
 import com.vaadin.terminal.gwt.client.ValueMap;
@@ -90,7 +91,7 @@ public class VTouchKitApplicationConnection extends ApplicationConnection {
     @Override
     protected void endRequest() {
         super.endRequest();
-        if (online && !onlineAppStarted) {
+        if (applicationRunning && online && !onlineAppStarted) {
             onlineApplicationStarted();
         }
     }
@@ -141,12 +142,17 @@ public class VTouchKitApplicationConnection extends ApplicationConnection {
     }
 
     public void goOffline(String details, int statusCode) {
-        getOfflineApp().activate(details, statusCode);
-        if (!isNetworkOnline()) {
-            Scheduler.get().scheduleFixedPeriod(new CheckForNetwork(), 1000);
-        }
-        if (hasActiveRequest()) {
-            endRequest();
+        online = false;
+        applicationRunning = false;
+        if (!getOfflineApp().isActive()) {
+            getOfflineApp().activate(details, statusCode);
+            if (!isNetworkOnline()) {
+                Scheduler.get()
+                        .scheduleFixedPeriod(new CheckForNetwork(), 1000);
+            }
+            if (hasActiveRequest()) {
+                endRequest();
+            }
         }
     }
 
@@ -158,14 +164,16 @@ public class VTouchKitApplicationConnection extends ApplicationConnection {
     }
 
     public void resume() {
-        online = true;
-        onlineAppStarted = false;
-        if (applicationRunning) {
-            repaintAll();
-        } else {
-            start();
-        }
+        ApplicationConfiguration.getRunningApplications().remove(this);
+        resetInitializedFlag(getConfiguration().getRootPanelId());
+        ApplicationConfiguration.initConfigurations();
+        ApplicationConfiguration.startNextApplication();
     }
+
+    private static native void resetInitializedFlag(String rootPanelId)
+    /*-{
+        delete $wnd.vaadin.vaadinConfigurations[rootPanelId].initialized;
+    }-*/;
 
     @Override
     public void start() {
