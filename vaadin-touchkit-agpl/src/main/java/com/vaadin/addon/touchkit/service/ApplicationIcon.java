@@ -1,7 +1,11 @@
 package com.vaadin.addon.touchkit.service;
 
-public interface ApplicationIcon {
-	String getSizes();
-	String getHref();
-	boolean isPreComposed();
+import java.io.Serializable;
+
+public interface ApplicationIcon extends Serializable {
+    String getSizes();
+
+    String getHref();
+
+    boolean isPreComposed();
 }
