@@ -258,7 +258,7 @@
     <font color="#000000">setTheme(</font><font color="#2a00ff">"vornitologist"</font><font color="#000000">);</font>
 
 <font color="#000000">    </font>// Set a nice default for user for demo purposes
-    <font color="#000000">setUser(</font><font color="#2a00ff">"Eräjorma"</font><font color="#000000">);</font>
+    <font color="#000000">setUser(</font><font color="#2a00ff">"Eräjorma"</font><font color="#000000">);</font> // Willy Wilderness, Skogsbörje
 }</pre>
       <p> The configuration of the main window is described a bit later.</p>
       <h3 class="western">Configuring the Touch Device Experience</h3>
@@ -509,6 +509,7 @@ href="http://developer.apple.com/library/ios/#documentation/UserExperience/Conce
 
 
 
+
           views in iOS</a> for navigating hierarchical data. The pattern
         is based on <b>NavigationManager</b> tha proviceds navigation
         between views with animations. NavigationManeger will also help
@@ -636,6 +637,7 @@ ClassificationGroup subgroup = (ClassificationGroup) classificationItem;
 
 
 
+
         Wrapper</a> to visualize bird observations on a map. Its slippy
       map implementation is optimized for touch devices and especially
       for devices that suppor multitouch events like iOS and latest
@@ -717,7 +719,7 @@ ClassificationGroup subgroup = (ClassificationGroup) classificationItem;
 <font color="#000000">        setModal(</font><font color="#7f0055"><b>true</b></font><font color="#000000">);</font>
 
 <font color="#000000">        setWidth(</font><font color="#2a00ff">"350px"</font><font color="#000000">);</font>
-<font color="#000000">        </font><font color="#000000"><font face="Monospace"><font size="2">setHeight(</font></font></font><font color="#2a00ff"><font face="Monospace"><font size="2">"65%"</font></font></font><font color="#000000"><font face="Monospace"><font size="2">);</font></font></font></pre>
+<font color="#000000">        </font><font color="#000000"><font face="Monospace">setHeight(</font></font><font color="#2a00ff"><font face="Monospace">"65%"</font></font><font color="#000000"><font face="Monospace">);</font></font></pre>
       <p> As pop-up windows easily take much of the screen space
         available in a mobile phone, they are more useful in tablets.</p>
       <p align="CENTER"><img
@@ -807,8 +809,13 @@ ClassificationGroup subgroup = (ClassificationGroup) classificationItem;
 <font color="#000000">    a.add(com.vaadin.addon.touchkit.ui.NumberField.</font><font color="#7f0055"><b>class</b></font><font color="#000000">);</font>
 <font color="#000000">    a.add(com.vaadin.ui.CssLayout.</font><font color="#7f0055"><b>class</b></font><font color="#000000">);</font>
 <font color="#000000">    </font>…</pre>
-      <h2> <span style="font-weight: bold;"></span>Creating an offline
-        mode for "outback access"</h2>
+      <p>Note, that enabling gzip compression for your deployment is an
+        essential part if you wish to optimize your startup time and
+        minimize the amount of transferred data. The best method for
+        doing this highly depends on your hosting setup so we do not
+        cover this in this tutorial.<br>
+        <span style="font-weight: bold;"></span></p>
+      <h2>Creating an offline mode for "outback access"</h2>
       <p>Consider that you are a typical end user of Vornitologist, an
         ornitologist yourself, and you travel to the middle of Australia
         for a bird watching trip. Although modern mobile networks cover
