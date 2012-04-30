@@ -16,14 +16,15 @@
         demo app was built. We will not go through every step, but will
         discuss the most essential parts from the perspective of
         TouchKit. You will be familiarized with TouchKit features and
-        can then continue to build your own mobile web application. In
-        addition to this article, you should should prepare to import
-        the project sources to your IDE for more detailed inspection and
-        additional testing. Basic knowledge of Vaadin development is
-        expected. </p>
+        can then continue to build your own mobile web application. <br>
+      </p>
+      <p>While reading this article, you should prepare to import the
+        Vornitologist project sources to your IDE for more detailed
+        inspection and additional testing. Basic knowledge of Vaadin
+        development is expected. </p>
       <p style="text-decoration: none" align="CENTER"><img
           src="vornitologist-maintabsheet.png" name="grafiikka3"
-          align="BOTTOM" border="0" height="308" width="796"></p>
+          width="796" height="308" align="BOTTOM" border="0"></p>
       <p>Vornitologist is a mobile web application for <a
           href="http://en.wikipedia.org/wiki/Birdwatching">birdwatching</a>.
         The target device is a smartphone, such as iPhone, but the
@@ -31,35 +32,43 @@
         even with desktop browsers. With the demo app, birdwatchers can
         keep log of their observations and share interesting data with
         each other. Believe it or not, it is a fairly popular hobby in
-        Finland. Although the example may not feel that business
-        centric, it contains lots of charasteristic common many business
-        apps.<font color="#000000"><span style="text-decoration: none"><font
-              face="Arial"><font size="3"><span style="font-style:
-                  normal"><span style="font-weight: normal"><span
-                      style="background: transparent"><br>
+        Finland. Although the example may not feel exactly
+        business-centric, it contains many of characteristics common to
+        most business apps.<font color="#000000"><span
+            style="text-decoration: none"><font face="Arial"><font
+                size="3"><span style="font-style: normal"><span
+                    style="font-weight: normal"><span style="background:
+                      transparent"><br>
                     </span></span></span></font></font></span></font></p>
       <p style="font-style: normal; font-weight: normal;
-        text-decoration: none"> The tutorial will go through the
+        text-decoration: none">The tutorial will go through the
         following tasks:</p>
       <ul>
         <li>Setting up a Vaadin project that uses TouchKit </li>
         <li>Configuring the application for mobile use: setting up home
           page icons, persistent session etc. </li>
         <li>Building top-level navigation for the application with
-          TabBarView (a TabSheet optimized for touch interfaces) </li>
+          <span style="font-weight: bold;"> TabBarView</span> (a
+          TabSheet optimized for touch interfaces) </li>
         <li>Discover some of the touch-UI-optimized form components
-          provided by TouchKit, such as Switch, EmailField and
-          NumberField. </li>
-        <li>Setting up a NavigationManager to easily dig into bird
-          species via the classification hierarchy </li>
-        <li>Using NavigationViews in the NavigationManager </li>
+          provided by TouchKit, such as <span style="font-weight:
+            bold;">Switch</span>, <span style="font-weight: bold;">EmailField</span>
+          and
+          <span style="font-weight: bold;"> NumberField</span>. </li>
+        <li>Setting up a <span style="font-weight: bold;">NavigationManager</span>
+          to easily dig into bird species via the classification
+          hierarchy </li>
+        <li>Using <span style="font-weight: bold;">NavigationViews</span>
+          in the <span style="font-weight: bold;">NavigationManager</span>
+        </li>
         <li> Creating modal views to be displayed temporarily over the
           main view </li>
         <li> Using geolocation </li>
-        <li> Adding a third party add-on from the Vaadin Directory </li>
+        <li> Adding a third-party add-on from the Vaadin Directory </li>
         <li> Building a widget set optimized for mobile devices </li>
         <li> Building a fallback view that can work without connection
-          to the server aka offline mode<br>
+          to the server aka <span style="font-style: italic;">offline
+            mode</span><br>
         </li>
       </ul>
       <h2 class="western">Setting up a TouchKit Project</h2>
@@ -68,42 +77,34 @@
       <h3 class="western">Importing the Vornitologist Project</h3>
       <p>Before proceeding further, you should import the Vornitologist
         project to your favorite IDE. As the project is Maven-based,
-        Eclipse users need to install the m2e (or m2eclipse for older
-        versions) plugin to be able to import Maven projects, as well as
-        <i>Subclipse</i> for making SVN access easier. Once they are
-        installed, you should be able to import Vornitologist as
-        follows:</p>
+        Eclipse users need to install the <span style="font-family:
+          monospace;">m2e</span> (or <span style="font-family:
+          monospace;">m2eclipse</span> for older versions) plugin to be
+        able to import Maven projects, as well as <i>Subclipse</i> for
+        making SVN access easier. Once they are installed, you should be
+        able to import Vornitologist as follows:</p>
       <ol>
         <li>
           <p>Select <b>File </b>→ <b>Import</b></p>
         </li>
         <li>
-          <p><font face="Times New Roman, serif">Select </font><font
-              face="Times New Roman, serif"><b>Maven → Check out Maven
-                Project from SCM</b></font><font face="Times New Roman,
-              serif">, and click </font><font face="Times New Roman,
-              serif"><b>Next</b></font><font face="Times New Roman,
-              serif">.</font></p>
+          <p>Select <span style="font-weight: bold;">Maven</span> → <span
+              style="font-weight: bold;">Check out Maven Project from
+              SCM</span>, and click <span style="font-weight: bold;">Next</span>.</p>
         </li>
         <li>
-          <p><font face="Times New Roman, serif">In </font><font
-              face="Times New Roman, serif"><b>SCM URL</b></font><font
-              face="Times New Roman, serif">, select </font><font
-              face="Times New Roman, serif"><span style="font-style:
-                normal"><b>svn</b></span></font> <font face="Times New
-              Roman, serif">and enter URL <a
-                href="http://dev.vaadin.com/svn/demo/vornitologist/">http://dev.vaadin.com/svn/demo/vornitologist/</a></font></p>
+          <p>In<span style="font-weight: bold;"> SCM URL</span>, select
+            <span style="font-weight: bold;">svn</span> and enter URL <a
+              href="http://dev.vaadin.com/svn/demo/vornitologist/">http://dev.vaadin.com/svn/demo/vornitologist/</a></p>
         </li>
         <li>
-          <p><font face="Times New Roman, serif">Click </font><font
-              face="Times New Roman, serif"><b>Finish</b></font><font
-              face="Times New Roman, serif">.</font></p>
+          <p>Click <span style="font-weight: bold;">Finish</span>.</p>
         </li>
       </ol>
-      <font face="Times New Roman, serif">Importing the project takes a
-        while as the maven downloads dependecies. After it is finished,
-        please take some time to inspect the project structure and files
-        in Eclipse. Find the location of the following files:</font>
+      Importing the project takes a while as the maven downloads
+      dependecies. After it is finished, please take some time to
+      inspect the project structure and files in Eclipse. Find the
+      location of the following files:
       <ul>
         <li>
           <p><tt class="western">VornitologistApplication.java</tt></p>
@@ -115,22 +116,17 @@
           <p><tt class="western">web.xml</tt></p>
         </li>
       </ul>
-      <p><font face="Times New Roman, serif">The </font><font
-          face="Times New Roman, serif"><b>Project Explorer</b></font> <font
-          face="Times New Roman, serif">in Eclipse organizes Java source
-          files and libraries under the </font><font face="Times New
-          Roman, serif"><b>Java Resources</b></font> <font face="Times
-          New Roman, serif">and web application contents under the </font><font
-          face="Times New Roman, serif"><b>Web Resources</b></font> <font
-          face="Times New Roman, serif">virtual folder.</font></p>
-      <h3 class="western"><font face="Times New Roman, serif">Browsing
-          the Sources Online</font></h3>
-      <p><font face="Times New Roman, serif">If you do not wish to
-          import the Vornitologist project, you can inspect the source
-          code on-line at <a
-            href="http://dev.vaadin.com/browser/demo/vornitologist">http://dev.vaadin.com/browser/demo/vornitologist</a>.</font></p>
+      <p>The <span style="font-weight: bold;">Project Explorer</span>
+        in Eclipse organizes Java source files and libraries under the <span
+          style="font-weight: bold;">Java Resources</span> and web
+        application contents under the <span style="font-weight: bold;">Web
+          Resources</span> virtual folder.</p>
+      <h3 class="western">Browsing the Sources Online</h3>
+      <p>If you do not wish to import the Vornitologist project, you can
+        inspect the source code on-line at <a
+          href="http://dev.vaadin.com/browser/demo/vornitologist">http://dev.vaadin.com/browser/demo/vornitologist</a>.</p>
       <h3 class="western">Creating Your Own Project</h3>
-      <p>Creating your own project from scracth is a simple. You can
+      <p>Creating your own project from scratch is a simple. You can
         choose to create it as a regular Vaadin project in Eclipse or as
         a Maven project using TouchKit specific archetype. The latter
         makes most essential setups for you automatically.<br>
@@ -210,7 +206,7 @@
 <font color="#000000">        </font><font color="#008080">&lt;</font><font color="#3f7f7f">param-name</font><font color="#008080">&gt;</font>widgetset<font color="#008080">&lt;/</font><font color="#3f7f7f">param-name</font><font color="#008080">&gt;</font>
 <font color="#000000">        </font><font color="#008080">&lt;</font><font color="#3f7f7f">param-value</font><font color="#008080">&gt;</font><font color="#000000"><b>com.example.mytest.gwt.AppWidgetSet</b></font><font color="#008080">&lt;/</font><font color="#3f7f7f">param-value</font><font color="#008080">&gt;</font>
 <font color="#000000">    </font><font color="#008080">&lt;/</font><font color="#3f7f7f">init-param</font><font color="#008080">&gt;</font>
-<font color="#008080"><font face="Monospace"><font size="2">&lt;/</font></font></font><font color="#3f7f7f"><font face="Monospace"><font size="2">servlet</font></font></font><font color="#008080"><font face="Monospace"><font size="2">&gt;</font></font></font></pre>
+<big><font color="#008080"><font face="Monospace"><font size="2"><big>&lt;/</big></font></font></font><font color="#3f7f7f"><font face="Monospace"><font size="2"><big>servlet</big></font></font></font><font color="#008080"><font face="Monospace"><font size="2"><big>&gt;</big></font></font></font></big></pre>
       <p>As TouchKit contains both server and client side extensions we
         use a project-specific widget set, which requires GWT
         compilation. TouchKit allows defining also a <i>fallback</i> <span
@@ -224,15 +220,15 @@
         if for you.<br>
       </p>
       <pre class="western">&lt;module&gt;
-  &lt;!--
+<span style="color: rgb(204, 0, 0);">  &lt;!--
     This file is automatically updated based on new dependencies
     by the goal "vaadin:update-widgetset".
   --&gt;
+</span>
+<span style="color: rgb(204, 0, 0);">  &lt;!-- Inherit DefaultWidgetSet --&gt;</span>
+  &lt;inherits name="<span style="color: rgb(51, 51, 255);">com.vaadin.terminal.gwt.DefaultWidgetSet</span>" /&gt; 
 
-  &lt;!-- Inherit DefaultWidgetSet --&gt;
-  &lt;inherits name="com.vaadin.terminal.gwt.DefaultWidgetSet" /&gt; 
-
-  &lt;inherits name="com.vaadin.addon.touchkit.gwt.TouchKitWidgetSet" /&gt;
+  &lt;inherits name="<span style="color: rgb(51, 51, 255);">com.vaadin.addon.touchkit.gwt.TouchKitWidgetSe</span>t" /&gt;
 &lt;/module&gt;</pre>
       <p> If you add any add-on components containing a widget set
         later, you need to update the project widget set with “<tt
@@ -249,7 +245,7 @@
         for the main window, instead of the regular <b>Window</b>. In
         Vornitologist, we configure the window in a dedicated method.</p>
       <pre class="western"><font color="#7f0055"><b>private</b></font><font color="#000000"> TouchKitWindow </font><font color="#0000c0">mainWindow</font><font color="#000000">;</font>
-@Override
+<br>@Override
 <font color="#7f0055"><b>public</b></font><font color="#000000"> </font><font color="#7f0055"><b>void</b></font><font color="#000000"> init() {</font>
 <font color="#000000">    </font>// Custom configurations (<u>app</u> icons etc) for main window need
 <font color="#000000">    </font>// to be set eagerly as they are written on the "host page".
@@ -291,7 +287,7 @@
         by client like in the <i>init()</i> method. In Vornitologist,
         they are done in the constructor of the VornitologistWindow as
         follows:</p>
-      <pre class="western">        addApplicationIcon(VornitologistApplication.get().getURL()<br>                + "VAADIN/themes/vornitologist/icon.png");<br>        setStartupImage(VornitologistApplication.get().getURL()<br>                + "VAADIN/themes/vornitologist/startup.png");<br>        setWebAppCapable(true);<br>        setPersistentSessionCookie(true);<br><br></pre>
+      <pre class="western">        addApplicationIcon(VornitologistApplication.get().getURL()<br>                + "VAADIN/themes/vornitologist/icon.png");<br>        setStartupImage(VornitologistApplication.get().getURL()<br>                + "VAADIN/themes/vornitologist/startup.png");<br>        setWebAppCapable(true);<br>        setPersistentSessionCookie(true);<br></pre>
       <p> The normal session expiration message is not as suitable for
         mobile devices as it is for desktop browsers, so it is better to
         simply reload the application automatically. This is done in the
@@ -337,34 +333,37 @@ href="https://vaadin.com/book/-/page/advanced.global.html#advanced.global.thread
         <span style="font-weight: normal">in Book of Vaadin.</span></p>
       <h2 class="western">Building Top-Level Navigation for the
         Application</h2>
-      The user interface is initialized in the application class once
+      The user interface is initialized in the application class after
       the server receives browser details from the device. When these
-      details are available, TouchKit calls onBrowserDetailsReady
-      method. Browser details include screen dimensions of the device,
-      so you could use that information here to give different user
-      interfaces to e.g. mobile phones and tablets. Vornitologist does
-      it simple and gives just one user interface, but you can check out
-      the MobileMail application for the same part if you wish to
-      optimize you UI for different sized devices.<br>
+      details are available, TouchKit calls <span style="font-style:
+        italic;">onBrowserDetailsReady()</span> method. The browser
+      details include screen dimensions of the device, so you can use
+      that information here to give different user interfaces in, for
+      example, mobile phones and tablets. Vornitologist does it simple
+      and gives just one user interface, but you can check out the
+      MobileMail application for the same part if you wish to optimize
+      your UI for different sized devices.<br>
       <br>
-      In onBrowserDetailsReady method Vornitologist sets the content of
-      the main window to a MainTabsheet wich provides navigation between
-      main views of the application.<br>
+      In the <span style="font-style: italic;">onBrowserDetailsReady()</span>
+      method, Vornitologist sets the content of the main window to a <span
+        style="font-weight: bold;">MainTabsheet</span> which provides
+      navigation between main views of the application.<br>
       <pre class="western"><font color="#000000">    </font><font color="#646464">@Override</font>
 <font color="#000000">    </font><font color="#7f0055"><b>public</b></font><font color="#000000"> </font><font color="#7f0055"><b>void</b></font><font color="#000000"> onBrowserDetailsReady() {</font>
 <font color="#000000">        </font><font color="#0000c0">mainWindow</font><font color="#000000">.setContent(</font><font color="#7f0055"><b>new</b></font><font color="#000000"> MainTabsheet());</font>
     }</pre>
       <h3 class="western"> MainTabsheet Class</h3>
-      <p>This is the main view of the application. It extends the <b>TabBarView</b>
-        component in TouchKit that has a tab bar at the bottom of the
-        screen.<br>
+      <p>This is the main view of the application. It extends the
+        TouchKit <b>TabBarView</b> component that has a tab bar at the
+        bottom of the screen.<br>
       </p>
       <p style="text-decoration: none" align="CENTER"><font
           color="#000000"><span style="background: transparent"><img
               src="vornitologist-maintabsheet.png" name="grafiikka6"
-              align="BOTTOM" border="0" height="311" width="803"></span></font></p>
-      <p>The MainTabsheet provides navigation between applications main
-        views. The main views are:</p>
+              width="803" height="311" align="BOTTOM" border="0"></span></font></p>
+      <p>The <span style="font-weight: bold;">MainTabsheet</span>
+        provides navigation between applications main views. The main
+        views are:</p>
       <ul>
         <li>
           <p><b>ClassificationHierarchy</b></p>
@@ -490,8 +489,8 @@ componentGroup.addComponent(switch1);
 <font color="#000000">switch1 = </font><font color="#7f0055"><b>new</b></font><font color="#000000"> Switch(</font><font color="#2a00ff">"Alerts"</font><font color="#000000">);</font>
 componentGroup.addComponent(switch1);</pre>
       <p align="CENTER"> <img src="vornitologist-settings-middle.jpg"
-          name="grafiikka2" align="BOTTOM" border="0" height="379"
-          width="227"></p>
+          name="grafiikka2" width="227" height="379" align="BOTTOM"
+          border="0"></p>
       <p>There is also an equivalent <b>HorizontalComponentGroup</b>
         for horizontal grouping.</p>
       <p>In addition to the new touch components, the TouchKit theme
@@ -510,12 +509,13 @@ href="http://developer.apple.com/library/ios/#documentation/UserExperience/Conce
 
 
 
+
           views in iOS</a> for navigating hierarchical data. The pattern
-        is based on <b>NavigationManager</b> tha proviceds navigation
-        between views with animations. NavigationManeger will also help
-        to automatically keep "breakcrump" so users can easily get up in
-        the hierarchy. NavigationManager is a nice component to dig into
-        hierarchical structures.<br>
+        is based on <b>NavigationManager</b> tha provides navigation
+        between views with animations. <span style="font-weight: bold;">NavigationManager</span>
+        also helps with managing "breadcrumps", so that users can easily
+        navigate up in the hierarchy. <span style="font-weight: bold;">NavigationManager</span>
+        is a nice component for digging into hierarchical structures.<br>
       </p>
       <p>Vornitologist displays the taxonomy of birds from orders to
         species. The species are represented as a simple bean class <b>ClassificationItem</b>
@@ -523,8 +523,8 @@ href="http://developer.apple.com/library/ios/#documentation/UserExperience/Conce
         classification is represented as a <b>ClassificationGroup</b>
         bean, which additionally has a <i>children</i> property.</p>
       <p align="CENTER"><img src="vornitologist-birds-hierarchy.png"
-          name="grafiikka1" align="BOTTOM" border="0" height="401"
-          width="714"></p>
+          name="grafiikka1" width="714" height="401" align="BOTTOM"
+          border="0"></p>
       <p>The <i>Birds</i> view is implemented as <b>ClassificationHierarchy</b>
         that extends <b>NavigationManager</b>. It manages <b>ClassificationGroupView</b>s
         that display a taxonomy group and <b>SpeciesView</b> to display
@@ -587,33 +587,43 @@ ClassificationGroup subgroup = (ClassificationGroup) classificationItem;
         }
     }
 <font color="#000000">}<br></font></pre>
-      <p class="western">NavigationButton is a special kind of Button
-        that works nicely together with NavigationManager. When clicked
-        it can start view change animation right away on the client side
-        without server side visit making the UI feel very responsive,
-        even if the new view was big or there was some latency in
-        communication due to a slow network. NavigationView
-        automatically configures one NavigationButton as "back button"
-        when it is used inside a NavigationManager.<br>
+      <p class="western"><span style="font-weight: bold;">NavigationButton</span>
+        is a special kind of <span style="font-weight: bold;">Button</span>
+        that works nicely together with <span style="font-weight:
+          bold;">NavigationManager</span>. When clicked, it starts the
+        view change animation immediately on the client-side before
+        making a server-side request. This makes the user interface feel
+        very responsive, even if the new view is heavy to load or there
+        is some latency in communication due to a slow network. <span
+          style="font-weight: bold;">NavigationView</span> automatically
+        configures one <span style="font-weight: bold;">NavigationButton</span>
+        as the "back button" when it is used inside a <span
+          style="font-weight: bold;">NavigationManager</span>.<br>
       </p>
-      <p class="western">NavigationButton can be controlled with
-        ClickListeners like normal buttons, but it can also be coupled
-        with a target view like when used as a back button. In
-        ItemNavigationButton we will just use plain old ClickListener in
-        which we lazily instanticate target view and then call <span
-          style="font-style: italic;">getNavigationManager().navigateTo(Component)</span>
-        method. This way we will save a lot of memory as all views for
-        various classification groups and species don't need to be
-        created until they really accessed. <br>
+      <p class="western">Clicks in a <span style="font-weight: bold;">NavigationButton</span>
+        can be handled with a
+        <span style="font-weight: bold;"> ClickListener</span>, just
+        like with normal buttons, but it can also be coupled with a
+        target view when used as a "Back" button. In the
+        <span style="font-weight: bold;"> ItemNavigationButton</span> in
+        Vornitologist, we just use plain old <span style="font-weight:
+          bold;">ClickListener</span> in which we lazily instantiate the
+        target view and then call <span style="font-style: italic;">getNavigationManager().navigateTo(Component)</span>.
+        This way, we save a lot of memory as views for various
+        classification groups and species do not need to be created
+        until they really accessed. <br>
       </p>
-      <p class="western">Even when used in this manner NavigationButton
-        together with NavigationManager can give instant feedback to
-        user and start the view change animation. If the next view is
-        not prepared and sent to client, client uses a "fake navigation
-        view" with a caption drawn from the NavigationButton. When the
+      <p class="western">Even when used in this manner, using <span
+          style="font-weight: bold;">NavigationButton</span> together
+        with <span style="font-weight: bold;">NavigationManager</span>,
+        it can give instant feedback to the user and start the view
+        change animation immediately. If the next view is not prepared
+        beforehand (and sent to client), the client uses a "fake
+        navigation view" with a caption of the <span
+          style="font-weight: bold;">NavigationButton</span>. When the
         transition is ready, the server round trip is also most likely
         done and then the real view can be displayed. The view change is
-        smooth&nbsp; and feels responsive also when used in this way.<br>
+        smooth and feels responsive also when used in this way.<br>
       </p>
       <h2 class="western"> Using Geolocation with a Map Add-on from the
         Vaadin Directory</h2>
@@ -623,13 +633,15 @@ ClassificationGroup subgroup = (ClassificationGroup) classificationItem;
         Vaadin add-ons with TouchKit project is just the same as with
         standard Vaadin apps. Most add-ons can be used with touch
         devices as well, but some may use technologies like Flash that
-        don't work well with mobile devices.<br>
+        do not work well with mobile devices.<br>
       </p>
-      <p>Also one must note that some rare add-on's require users to
+      <p>Also, you have to notice that some rare add-ons require you to
         incorporate a custom servlet implementation. As TouhcKit itself
         already has a custom servlet, using this kind of add-ons may be
-        impossible. In some cases user might be able to combine features
-        of custom servlets into an own custom servlet implementation.</p>
+        difficult or even impossible. In some cases, you may be able to
+        combine the features of such custom servlets into your own
+        custom servlet implementation that also includes the TouchKit
+        servlet functionality.</p>
       In Vornitologist, we use the <a
         href="http://vaadin.com/directory#addon/openlayers-wrapper">OpenLayers
 
@@ -638,12 +650,13 @@ ClassificationGroup subgroup = (ClassificationGroup) classificationItem;
 
 
 
+
         Wrapper</a> to visualize bird observations on a map. Its slippy
       map implementation is optimized for touch devices and especially
-      for devices that suppor multitouch events like iOS and latest
-      Android versions. As Vornitologist is a Maven project, installing
-      an add-on simply requires defining a <i>dependency</i>. The
-      dependency is defined in the <tt class="western">pom.xml</tt>
+      for devices that suppor multitouch events, such as iOS and the
+      latest Android versions. As Vornitologist is a Maven project,
+      installing an add-on simply requires defining a <i>dependency</i>.
+      The dependency is defined in the <tt class="western">pom.xml</tt>
       file.
       <pre class="western"><font color="#008080">&lt;</font><font color="#3f7f7f">dependencies</font><font color="#008080">&gt;</font>
 <font color="#008080">    ...</font>
@@ -689,8 +702,8 @@ ClassificationGroup subgroup = (ClassificationGroup) classificationItem;
         close to you. There are birdwatchers who quit their working day
         if a rare species is spotted nearby.</p>
       <p align="CENTER"><img src="vornitologist-map.jpg"
-          name="grafiikka4" align="BOTTOM" border="0" height="403"
-          width="242"></p>
+          name="grafiikka4" width="242" height="403" align="BOTTOM"
+          border="0"></p>
       The geolocation API in TouchKit is asynchronous because
       geolocation requests tend to be slow, taking anywhere between
       seconds to several minutes. Especially first requests may be slow
@@ -708,8 +721,8 @@ ClassificationGroup subgroup = (ClassificationGroup) classificationItem;
         defferently than on tablets.<br>
       </p>
       <p align="CENTER"><img src="vornitologist-observations-popup.jpg"
-          name="grafiikka5" align="BOTTOM" border="0" height="548"
-          width="329"></p>
+          name="grafiikka5" width="329" height="548" align="BOTTOM"
+          border="0"></p>
       <p>In Vornitologist, Popover is used in the <b>LatestObservations</b>
         view by extending <b>Popover</b> as <b>ObservationDetailPopover</b>.</p>
       <pre class="western"><font color="#7f0055"><b>public</b></font><font color="#000000"> </font><font color="#7f0055"><b>class</b></font><font color="#000000"> </font><font color="#000000"><u>ObservationDetailPopover</u></font><font color="#000000"> </font><font color="#7f0055"><b>extends</b></font><font color="#000000"> Popover {</font>
@@ -724,8 +737,8 @@ ClassificationGroup subgroup = (ClassificationGroup) classificationItem;
         available in a mobile phone, they are more useful in tablets.</p>
       <p align="CENTER"><img
           src="vornitologist-observations-popup-tablet.jpg"
-          name="grafiikka7" align="BOTTOM" border="0" height="450"
-          width="800"></p>
+          name="grafiikka7" width="800" height="450" align="BOTTOM"
+          border="0"></p>
       <p class="western">Popover can also be made full screen. In full
         screen mode they show no "chrome" in the window and hide the
         existing UI completely. They may be usefull to display a
@@ -815,7 +828,7 @@ ClassificationGroup subgroup = (ClassificationGroup) classificationItem;
         doing this highly depends on your hosting setup so we do not
         cover this in this tutorial.<br>
         <span style="font-weight: bold;"></span></p>
-      <h2>Creating an offline mode for "outback access"</h2>
+      <h2>Creating an Offline Mode for "Outback Access"</h2>
       <p>Consider that you are a typical end user of Vornitologist, an
         ornitologist yourself, and you travel to the middle of Australia
         for a bird watching trip. Although modern mobile networks cover
@@ -839,8 +852,8 @@ ClassificationGroup subgroup = (ClassificationGroup) classificationItem;
         whether the user wishes to synchronize observations from local
         storage to the server.</p>
       <p align="CENTER"><img src="vornitologist-offline.png"
-          name="grafiikka8" align="BOTTOM" border="0" height="454"
-          width="302"></p>
+          name="grafiikka8" width="302" height="454" align="BOTTOM"
+          border="0"></p>
       <p>Using the offline mode, we can gain offline use for a critical
         feature, while still keeping the "cost" of the application down
         due to the superior developer productivity of Vaadin. Most other
@@ -900,11 +913,11 @@ ClassificationGroup subgroup = (ClassificationGroup) classificationItem;
       <p>The offline mode of Vornitologist is written mostly in the <b>VornitologistOfflineMode</b>
         class. If your offline mode grows large, you should use common
         Java patterns to keep you code clean. If you want to have an
-        example of using HTML5 local storage usage, please see <b>com.vornitologist.widgetset.client.OfflineDataService</b>.
-        In addition to handling locally stored observations, the service
-        class also provides a list of <b>Species</b> objects for the
-        user interface, which it reads with an XHR from a cached flat
-        file.</p>
+        example of using HTML5 local storage usage, please see the <b>com.vornitologist.widgetset.client.OfflineDataService</b>
+        class. In addition to handling locally stored observations, the
+        service class also provides a list of <b>Species</b> objects
+        for the user interface, which it reads with an XHR from a cached
+        flat file.</p>
     </div>
   </body>
 </html>

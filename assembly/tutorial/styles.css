@@ -20,3 +20,11 @@ A:link { so-language: zxx }
 pre {
   font-size: 10pt;
 }
+
+span {
+  font-size: 11pt;
+}
+
+tt { 
+  font-size: 11pt;
+}
