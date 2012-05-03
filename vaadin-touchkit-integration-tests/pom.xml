@@ -7,13 +7,13 @@
 		<version>${touchkit.version}</version>
 		<relativePath>..</relativePath>
 	</parent>
-	
+
 	<properties>
 		<testbench.hubhost>testbench-hub.intra.itmill.com</testbench.hubhost>
 		<testbench.browsers>win7-googlechrome-stable</testbench.browsers>
-        <!-- Which TouchKit package to use for testing -->
-        <license.short.name>agpl</license.short.name>
-        <touchkit.version>2.1.0</touchkit.version>
+		<!-- Which TouchKit package to use for testing -->
+		<license.short.name>agpl</license.short.name>
+		<touchkit.version>2.1.0</touchkit.version>
 	</properties>
 
 	<artifactId>vaadin-touchkit-integration-tests</artifactId>
@@ -28,7 +28,7 @@
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin</artifactId>
-			<version>6.7.7</version>
+			<version>6.7.8</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -43,26 +43,32 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.vaadin</groupId>
-			<artifactId>testbench</artifactId>
-			<version>2.4.2-SNAPSHOT</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/vaadin-testbench-2.4.2.development.201109231327.jar</systemPath>
-		</dependency>
-	<!-- Needed to compile test sources from main project -->
-		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-webapp</artifactId>
 			<version>7.2.2.v20101205</version>
 			<scope>compile</scope>
 		</dependency>
-		
+
+	<!-- Note that test bench snapshot is installad with custom name, TODO change 
+		this to real dependency when version is released. -->
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-testbench</artifactId>
+			<version>3.0.0-SNAPSHOT</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<resources>
-			<resource><directory>src/main/resources</directory></resource>
-			<resource><directory>src/test/resources</directory></resource>
-			<resource><directory>../vaadin-touchkit-agpl/src/test/resources</directory></resource>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>src/test/resources</directory>
+			</resource>
+			<resource>
+				<directory>../vaadin-touchkit-agpl/src/test/resources</directory>
+			</resource>
 		</resources>
 		<!-- Use test sources from core package -->
 		<sourceDirectory>../vaadin-touchkit-agpl/src/test/java</sourceDirectory>
@@ -142,58 +148,22 @@
 					</execution>
 				</executions>
 			</plugin>
-
-
-
-			<plugin>
-				<groupId>org.codehaus.groovy.maven</groupId>
-				<artifactId>gmaven-plugin</artifactId>
-				<version>1.0</version>
-				<executions>
-					<execution>
-						<!-- Hackish method to retrieve the address of executing machine for 
-							test bench hub -->
-						<id>get-local-ip</id>
-						<phase>initialize</phase>
-						<goals>
-							<goal>execute</goal>
-						</goals>
-						<configuration>
-							<classpath>
-								<element>
-									<groupId>commons-lang</groupId>
-									<artifactId>commons-lang</artifactId>
-									<version>2.4</version>
-								</element>
-							</classpath>
-							<source>
-								java.net.InetAddress address=InetAddress.getLocalHost();
-								project.properties.localIP=address.getHostAddress();
-							</source>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>2.8.1</version>
 				<executions>
+					<execution>
+						<id>default</id>
+						<configuration>
+							<skip>true</skip>
+						</configuration>
+					</execution>
 					<execution>
 						<id>integration-test</id>
 						<goals>
 							<goal>integration-test</goal>
 						</goals>
-						<configuration>
-							<!-- Define some necessary system properties for testbench junit tests -->
-							<systemPropertyVariables>
-								<com.vaadin.testbench.tester.host>${testbench.hubhost}</com.vaadin.testbench.tester.host>
-								<com.vaadin.testbench.deployment.url>http://${localIP}:5678/</com.vaadin.testbench.deployment.url>
-								<com.vaadin.testbench.screenshot.directory>${project.build.directory}/test-classes/screenshots</com.vaadin.testbench.screenshot.directory>
-							</systemPropertyVariables>
-							<encoding>UTF-8</encoding>
-						</configuration>
 					</execution>
 					<execution>
 						<id>verify</id>
@@ -204,52 +174,6 @@
 				</executions>
 			</plugin>
 
-			<plugin>
-				<!-- Exec plugin is used at generate-test-sourses phase to convert native 
-					test bench files (.html files) to JUnit tests. -->
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.1.1</version>
-				<executions>
-					<execution>
-						<phase>generate-test-sources</phase>
-						<goals>
-							<goal>java</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<classpathScope>test</classpathScope>
-					<mainClass>com.vaadin.testbench.util.DirectoryTestConverter</mainClass>
-					<arguments>
-						<argument>${project.build.directory}/testbench-generated</argument>
-						<argument>${testbench.browsers}</argument>
-						<argument>${basedir}/src/test/resources</argument>
-					</arguments>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<!-- testSourceRoot om exec plugin don't seem to work so we are using 
-					build-helper-maven-plugin to do add generated (html to junit) test bench 
-					tests to test sources -->
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>add-test-source</id>
-						<phase>generate-test-sources</phase>
-						<goals>
-							<goal>add-test-source</goal>
-						</goals>
-						<configuration>
-							<sources>
-								<source>${project.build.directory}/testbench-generated</source>
-							</sources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<artifactId>maven-clean-plugin</artifactId>
 				<configuration>
@@ -263,74 +187,13 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
-					only. It has no influence on the Maven build itself. -->
+
 				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
+					<artifactId>maven-surefire-plugin</artifactId>
 					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											org.codehaus.mojo
-										</groupId>
-										<artifactId>
-											exec-maven-plugin
-										</artifactId>
-										<versionRange>
-											[1.1.1,)
-										</versionRange>
-										<goals>
-											<goal>java</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											org.codehaus.mojo
-										</groupId>
-										<artifactId>
-											build-helper-maven-plugin
-										</artifactId>
-										<versionRange>
-											[1.5,)
-										</versionRange>
-										<goals>
-											<goal>add-test-source</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											org.codehaus.groovy.maven
-										</groupId>
-										<artifactId>
-											gmaven-plugin
-										</artifactId>
-										<versionRange>
-											[1.0,)
-										</versionRange>
-										<goals>
-											<goal>execute</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
+						<excludes>
+							<exclude>**/itest/*</exclude>
+						</excludes>
 					</configuration>
 				</plugin>
 			</plugins>
