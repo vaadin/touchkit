@@ -1,8 +1,9 @@
 package com.vaadin.addon.touchkit.service;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Position {
+public class Position implements Serializable {
 
     private double latitude;
     private double longitude;
@@ -45,25 +46,5 @@ public class Position {
     public double getLongitude() {
         return longitude;
     }
-
-    // public final native double getAltitude()
-    // /*-{
-    // return this.coords.altitude;
-    // }-*/;
-    //
-    // public final native double getAltitudeAccuracy()
-    // /*-{
-    // return this.coords.altitudeAccuracy;
-    // }-*/;
-    //
-    // public final native double getHeading()
-    // /*-{
-    // return this.coords.heading;
-    // }-*/;
-    //
-    // public final native double getSpeed()
-    // /*-{
-    // return this.coords.speed;
-    // }-*/;
 
 }
