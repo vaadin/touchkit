@@ -27,7 +27,11 @@ import com.vaadin.terminal.gwt.client.ValueMap;
  */
 public class VTouchKitApplicationConnection extends ApplicationConnection {
 
-    private static final int MAX_TIMEOUT = 5000;
+    /**
+     * The max timeout the application connection may be suspended (postponing
+     * rendering phase)
+     */
+    private static final int MAX_SUSPENDED_TIMEOUT = 5000;
     private Collection<Object> locks = new ArrayList<Object>();
     private Date start;
     private String jsonText;
@@ -56,6 +60,21 @@ public class VTouchKitApplicationConnection extends ApplicationConnection {
 
     private TouchKitOfflineApp offlineApp;
     private boolean onlineAppStarted = false;
+    private int offlineTimeoutMillis;
+
+    public VTouchKitApplicationConnection() {
+        super();
+        offlineTimeoutMillis = readOfflineTimeout() * 1000;
+    }
+
+    private static native final int readOfflineTimeout()
+    /*-{
+        try {
+            return $wnd.vaadin.touchkit.offlineTimeout;
+        } catch(e) {
+            return 10;
+        }
+     }-*/;
 
     @Override
     protected void handleWhenCSSLoaded(String jsonText, ValueMap json) {
@@ -80,7 +99,7 @@ public class VTouchKitApplicationConnection extends ApplicationConnection {
                 this.start = start;
                 this.jsonText = jsonText;
                 this.json = json;
-                forceHandleMessage.schedule(MAX_TIMEOUT);
+                forceHandleMessage.schedule(MAX_SUSPENDED_TIMEOUT);
             }
             if (getView() instanceof VTouchKitView) {
                 ((VTouchKitView) getView()).updateSessionCookieExpiration();
@@ -160,7 +179,9 @@ public class VTouchKitApplicationConnection extends ApplicationConnection {
     protected void makeUidlRequest(String requestData, String extraParams,
             boolean forceSync) {
         super.makeUidlRequest(requestData, extraParams, forceSync);
-        requestTimeoutTracker.schedule(MAX_TIMEOUT * 2);
+        if (offlineTimeoutMillis >= 0) {
+            requestTimeoutTracker.schedule(offlineTimeoutMillis);
+        }
     }
 
     public void resume() {
