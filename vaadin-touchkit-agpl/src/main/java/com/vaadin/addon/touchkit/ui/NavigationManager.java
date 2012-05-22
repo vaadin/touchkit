@@ -243,7 +243,9 @@ public class NavigationManager extends AbstractComponentContainer {
                 NavigationView view = (NavigationView) currentComponent;
                 view.setPreviousComponent(newPreviousComponent);
             }
-            addComponent(newPreviousComponent);
+            if (previousComponent != null) {
+                addComponent(newPreviousComponent);
+            }
             requestRepaint();
         }
     }
