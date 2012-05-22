@@ -40,6 +40,7 @@ public class TouchKitWindow extends Window {
     private LinkedList<ApplicationIcon> applicationIcon = new LinkedList<ApplicationIcon>();
     private LinkedList<PositionCallback> positionCbs;
     private boolean goOffline;
+    private int offlineTimeout = 10;
 
     /**
      * Sets the webpage icon for this web app. This icon may be used by the
@@ -370,6 +371,27 @@ public class TouchKitWindow extends Window {
     public void goOffline() {
         goOffline = true;
         requestRepaint();
+    }
+
+    /**
+     * Returns the amount of seconds the client side waits request from the
+     * server until it opens the offline mode. -1 means "offline mode" is
+     * completely disabled on slow connection.
+     */
+    public int getOfflineTimeout() {
+        return offlineTimeout;
+    }
+
+    /**
+     * Sets the timeout (in seconds) how long the client side waits for server
+     * to respond before falling back to "offline mode". If the value is set for
+     * -1, the client side waits forever.
+     * 
+     * @param offlineTimeout
+     *            timeout in seconds
+     */
+    public void setOfflineTimeout(int offlineTimeout) {
+        this.offlineTimeout = offlineTimeout;
     }
 
 }

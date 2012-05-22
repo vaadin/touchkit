@@ -164,6 +164,11 @@ public class TouchKitApplicationServlet extends
                         + "href=\"" + w.getStartupImage() + "\" />");
             }
 
+            int offlineTimeout = w.getOfflineTimeout();
+            page.append("<script type=\"text/javascript\"> vaadin = {touchkit : { offlineTimeout: ");
+            page.append(Integer.toString(offlineTimeout));
+            page.append("}};</script>");
+
         }
     }
 
