@@ -1,5 +1,7 @@
 package com.vaadin.addon.touchkit.itest;
 
+import org.junit.Ignore;
+
 import com.vaadin.addon.touchkit.ui.NavigationManager;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -8,6 +10,7 @@ import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
 
+@Ignore
 public class NavPanelTest extends NavigationManager implements
 		ComponentContainer, ClickListener {
 

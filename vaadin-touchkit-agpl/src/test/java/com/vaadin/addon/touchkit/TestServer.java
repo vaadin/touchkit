@@ -8,12 +8,14 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.nio.SelectChannelConnector;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.webapp.WebAppContext;
+import org.junit.Ignore;
 
 import com.vaadin.addon.touchkit.itest.FallbackApplication;
 import com.vaadin.addon.touchkit.itest.TouchKitTestApp;
 import com.vaadin.addon.touchkit.server.TouchKitApplicationServlet;
 import com.vaadin.terminal.gwt.server.Constants;
 
+@Ignore
 public class TestServer {
 
     /**

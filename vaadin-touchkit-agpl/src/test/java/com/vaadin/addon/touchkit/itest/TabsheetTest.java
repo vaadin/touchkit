@@ -1,5 +1,7 @@
 package com.vaadin.addon.touchkit.itest;
 
+import org.junit.Ignore;
+
 import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.addon.touchkit.ui.NavigationManager;
 import com.vaadin.addon.touchkit.ui.NavigationView;
@@ -14,6 +16,7 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.TabSheet.Tab;
 import com.vaadin.ui.VerticalLayout;
 
+@Ignore
 public class TabsheetTest extends TabBarView implements ClickListener {
 
     public TabsheetTest() {

@@ -2,6 +2,8 @@ package com.vaadin.addon.touchkit.itest;
 
 import java.net.URL;
 
+import org.junit.Ignore;
+
 import com.vaadin.Application;
 import com.vaadin.addon.touchkit.ui.NavigationBar;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
@@ -25,6 +27,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.Window;
 
 @SuppressWarnings("serial")
+@Ignore
 public class SwipeViewTest extends TouchKitWindow {
 
     public SwipeViewTest() {
