@@ -4,7 +4,6 @@ import java.net.URL;
 
 import org.junit.Ignore;
 
-import com.vaadin.Application;
 import com.vaadin.addon.touchkit.ui.NavigationBar;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.addon.touchkit.ui.NavigationManager;
@@ -15,8 +14,6 @@ import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.terminal.DownloadStream;
-import com.vaadin.terminal.ExternalResource;
-import com.vaadin.terminal.URIHandler;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Embedded;
@@ -24,7 +21,6 @@ import com.vaadin.ui.Form;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.NativeSelect;
 import com.vaadin.ui.TextField;
-import com.vaadin.ui.Window;
 
 @SuppressWarnings("serial")
 @Ignore
@@ -182,7 +178,7 @@ public class SwipeViewTest extends TouchKitWindow {
             }
         }
 
-        class ImageView extends SwipeView implements URIHandler {
+        class ImageView extends SwipeView {
 
             private String ss;
             private Embedded embedded = new Embedded();
@@ -218,21 +214,22 @@ public class SwipeViewTest extends TouchKitWindow {
             public void attach() {
                 super.attach();
 
-                Window window = getWindow();
-                window.addURIHandler(this);
+//                FIXME
+//                Window window = getWindow();
+//                window.addURIHandler(this);
 
-                Application application = getApplication();
-                if (application == null) {
-                    throw new RuntimeException("WTF!!");
-                }
-                ExternalResource source = new ExternalResource(window.getURL()
-                        + ss);
-                embedded.setSource(source);
+//                Application application = getApplication();
+//                if (application == null) {
+//                    throw new RuntimeException("WTF!!");
+//                }
+//                ExternalResource source = new ExternalResource(window.getURL()
+//                        + ss);
+//                embedded.setSource(source);
             }
 
             @Override
             public void detach() {
-                getWindow().removeURIHandler(this);
+//                getWindow().removeURIHandler(this);
                 super.detach();
             }
 

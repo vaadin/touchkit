@@ -6,6 +6,7 @@ import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.Toolbar;
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.CssLayout;
@@ -74,6 +75,6 @@ class NavViewWithButtons extends NavigationView implements ClickListener {
     }
 
     public void buttonClick(ClickEvent event) {
-        getWindow().showNotification("Clicked");
+        Notification.show("clicked");
     }
 }

@@ -5,16 +5,10 @@ import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import com.vaadin.addon.touchkit.gwt.client.VTabBar;
-import com.vaadin.terminal.PaintException;
-import com.vaadin.terminal.PaintTarget;
 import com.vaadin.terminal.Resource;
-import com.vaadin.terminal.gwt.client.MouseEventDetails;
 import com.vaadin.tools.ReflectTools;
 import com.vaadin.ui.AbstractComponentContainer;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.ClientWidget;
-import com.vaadin.ui.ClientWidget.LoadStyle;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.TabSheet.Tab;
@@ -24,7 +18,6 @@ import com.vaadin.ui.TabSheet.Tab;
  * iOS. By default a bar with equally sized tab buttons is shown below the tab
  * content.
  */
-@ClientWidget(value = VTabBar.class, loadStyle = LoadStyle.EAGER)
 public class TabBarView extends AbstractComponentContainer {
 
     private Toolbar toolbar = new Toolbar();
@@ -225,13 +218,14 @@ public class TabBarView extends AbstractComponentContainer {
         return null;
     }
 
-    @Override
-    public void paintContent(PaintTarget target) throws PaintException {
-        super.paintContent(target);
-        toolbar.paint(target);
-        currentComponent.paint(target);
-
-    }
+//    TODO
+//    @Override
+//    public void paintContent(PaintTarget target) throws PaintException {
+//        super.paintContent(target);
+//        toolbar.paint(target);
+//        currentComponent.paint(target);
+//
+//    }
 
     private class TabButton extends Button implements Tab {
 
@@ -268,11 +262,12 @@ public class TabBarView extends AbstractComponentContainer {
             super.fireClick();
         }
 
-        @Override
-        protected void fireClick(MouseEventDetails details) {
-            setSelectedTab(getComponent());
-            super.fireClick(details);
-        }
+//        FIXME
+//        @Override
+//        protected void fireClick(MouseEventDetails details) {
+//            setSelectedTab(getComponent());
+//            super.fireClick(details);
+//        }
 
     }
 
@@ -357,6 +352,11 @@ public class TabBarView extends AbstractComponentContainer {
      */
     protected void fireSelectedTabChange() {
         fireEvent(new SelectedTabChangeEvent(this));
+    }
+
+    public int getComponentCount() {
+        // TODO Auto-generated method stub
+        return 0;
     }
 
 }

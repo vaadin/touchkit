@@ -1,8 +1,5 @@
 package com.vaadin.addon.touchkit.ui;
 
-import com.vaadin.addon.touchkit.gwt.client.VVerticalComponentGroup;
-import com.vaadin.ui.ClientWidget;
-import com.vaadin.ui.ClientWidget.LoadStyle;
 
 /**
  * A layout to group controls vertically. Items in a
@@ -18,7 +15,6 @@ import com.vaadin.ui.ClientWidget.LoadStyle;
  * flexible than {@link HorizontalComponentGroup} and it can accommodate many
  * components.
  */
-@ClientWidget(value = VVerticalComponentGroup.class, loadStyle = LoadStyle.EAGER)
 public class VerticalComponentGroup extends AbstractComponentGroup {
 
     private static final String STYLE_NAME = "v-touchkit-verticalcomponentgroup";

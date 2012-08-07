@@ -2,12 +2,9 @@ package com.vaadin.addon.touchkit.ui;
 
 import java.util.Map;
 
-import com.vaadin.addon.touchkit.gwt.client.VNavigationButton;
 import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.ClientWidget;
-import com.vaadin.ui.ClientWidget.LoadStyle;
 import com.vaadin.ui.Component;
 
 /**
@@ -22,7 +19,6 @@ import com.vaadin.ui.Component;
  * Note that navigation will only work when the button is used inside a
  * {@link NavigationManager}, otherwise it will work as a regular {@link Button}.
  */
-@ClientWidget(value = VNavigationButton.class, loadStyle = LoadStyle.EAGER)
 public class NavigationButton extends Button {
 
     private Component targetView;
@@ -88,16 +84,17 @@ public class NavigationButton extends Button {
     // super.fireClick();
     // }
 
-    @Override
-    public void changeVariables(Object source, Map<String, Object> variables) {
-        // FIXME since #6605 click implementation in Button sucks. Fix it then
-        // uncomment the previous method or something.
-        // super.changeVariables(source, variables);
-        if (targetView != null) {
-            getNavigationManager().navigateTo(targetView);
-        }
-        fireClick();
-    }
+//    FIXME
+//    @Override
+//    public void changeVariables(Object source, Map<String, Object> variables) {
+//        // FIXME since #6605 click implementation in Button sucks. Fix it then
+//        // uncomment the previous method or something.
+//        // super.changeVariables(source, variables);
+//        if (targetView != null) {
+//            getNavigationManager().navigateTo(targetView);
+//        }
+//        fireClick();
+//    }
 
     /**
      * Gets the @link {@link NavigationManager} in which this button is
@@ -113,17 +110,18 @@ public class NavigationButton extends Button {
         return (NavigationManager) p;
     }
 
-    @Override
-    public void paintContent(PaintTarget target) throws PaintException {
-        super.paintContent(target);
-        if (targetView != null && targetView.getApplication() != null) {
-            target.addAttribute("nv", targetView);
-        }
-        String nvc = getTargetViewCaption();
-        if (nvc != null && !nvc.equals(getCaption())) {
-            target.addAttribute("nvc", nvc);
-        }
-    }
+//    FIXME
+//    @Override
+//    public void paintContent(PaintTarget target) throws PaintException {
+//        super.paintContent(target);
+//        if (targetView != null && targetView.getApplication() != null) {
+//            target.addAttribute("nv", targetView);
+//        }
+//        String nvc = getTargetViewCaption();
+//        if (nvc != null && !nvc.equals(getCaption())) {
+//            target.addAttribute("nvc", nvc);
+//        }
+//    }
 
     /**
      * Sets the view that will be navigated to when the button is pressed.

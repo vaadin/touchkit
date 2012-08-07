@@ -1,12 +1,5 @@
 package com.vaadin.addon.touchkit.ui;
 
-import java.util.Map;
-
-import com.vaadin.addon.touchkit.gwt.client.VSwipeView;
-import com.vaadin.terminal.PaintException;
-import com.vaadin.terminal.PaintTarget;
-import com.vaadin.ui.ClientWidget;
-import com.vaadin.ui.ClientWidget.LoadStyle;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 
@@ -19,7 +12,6 @@ import com.vaadin.ui.CssLayout;
  * To make the usage fluent, developer is suggested to fill both next and
  * previous component.
  */
-@ClientWidget(value = VSwipeView.class, loadStyle = LoadStyle.EAGER)
 public class SwipeView extends CssLayout {
 
     private int scrollPosition;
@@ -42,11 +34,12 @@ public class SwipeView extends CssLayout {
         setCaption(caption);
     }
 
-    @Override
-    public void paintContent(PaintTarget target) throws PaintException {
-        super.paintContent(target);
-        target.addVariable(this, "sp", scrollPosition);
-    }
+//    FIXME
+//    @Override
+//    public void paintContent(PaintTarget target) throws PaintException {
+//        super.paintContent(target);
+//        target.addVariable(this, "sp", scrollPosition);
+//    }
 
     public void setScrollPosition(int scrollPosition) {
         this.scrollPosition = scrollPosition;
@@ -57,14 +50,15 @@ public class SwipeView extends CssLayout {
         return scrollPosition;
     }
 
-    @Override
-    public void changeVariables(Object source, Map<String, Object> variables) {
-        super.changeVariables(source, variables);
-        Integer newScrollPosition = (Integer) variables.get("sp");
-        if (newScrollPosition != null) {
-            scrollPosition = newScrollPosition;
-        }
-    }
+//    FIXME
+//    @Override
+//    public void changeVariables(Object source, Map<String, Object> variables) {
+//        super.changeVariables(source, variables);
+//        Integer newScrollPosition = (Integer) variables.get("sp");
+//        if (newScrollPosition != null) {
+//            scrollPosition = newScrollPosition;
+//        }
+//    }
 
     /**
      * Gets the @link {@link NavigationManager} in which this view is contained.

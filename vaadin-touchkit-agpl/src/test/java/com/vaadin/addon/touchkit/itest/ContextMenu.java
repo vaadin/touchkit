@@ -29,8 +29,7 @@ public class ContextMenu extends TouchKitWindow {
                     new Action("Paste") };
 
             public void handleAction(Action action, Object sender, Object target) {
-
-                table.getWindow().showNotification("Just test");
+            	getRoot().showNotification("Just test");
             }
 
             public Action[] getActions(Object target, Object sender) {

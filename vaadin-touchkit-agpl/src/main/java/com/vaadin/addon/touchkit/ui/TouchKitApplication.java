@@ -13,6 +13,7 @@ import com.vaadin.service.ApplicationContext;
 import com.vaadin.terminal.gwt.server.HttpServletRequestListener;
 import com.vaadin.terminal.gwt.server.WebApplicationContext;
 import com.vaadin.terminal.gwt.server.WebBrowser;
+import com.vaadin.ui.Root.LegacyWindow;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.themes.BaseTheme;
 
@@ -41,7 +42,7 @@ import com.vaadin.ui.themes.BaseTheme;
  * Note, that only {@link TouchKitWindow}s are supported as top level windows.
  */
 @SuppressWarnings("serial")
-public abstract class TouchKitApplication extends Application implements
+public abstract class TouchKitApplication extends Application.LegacyApplication implements
         HttpServletRequestListener {
 
     private boolean browserDetailsReady = false;
@@ -54,7 +55,8 @@ public abstract class TouchKitApplication extends Application implements
 
     @Override
     public void init() {
-        setMainWindow(new TouchKitWindow());
+//        FIXME
+//        setMainWindow(new TouchKitWindow());
     }
 
     /**
@@ -85,26 +87,26 @@ public abstract class TouchKitApplication extends Application implements
      */
     public abstract void onBrowserDetailsReady();
 
-    @Override
-    public void setMainWindow(Window mainWindow) {
-        if (mainWindow instanceof TouchKitWindow) {
-            super.setMainWindow(mainWindow);
-        } else {
-            throw new IllegalArgumentException("Only "
-                    + TouchKitWindow.class.getSimpleName()
-                    + " can be set as main window");
-        }
-    }
-
-    @Override
-    public TouchKitWindow getMainWindow() {
-        return (TouchKitWindow) super.getMainWindow();
-    }
-
-    @Override
-    public TouchKitWindow getWindow(String name) {
-        return (TouchKitWindow) super.getWindow(name);
-    }
+//    @Override
+//    public void setMainWindow(Window mainWindow) {
+//        if (mainWindow instanceof TouchKitWindow) {
+//            super.setMainWindow(mainWindow);
+//        } else {
+//            throw new IllegalArgumentException("Only "
+//                    + TouchKitWindow.class.getSimpleName()
+//                    + " can be set as main window");
+//        }
+//    }
+//
+//    @Override
+//    public TouchKitWindow getMainWindow() {
+//        return (TouchKitWindow) super.getMainWindow();
+//    }
+//
+//    @Override
+//    public TouchKitWindow getWindow(String name) {
+//        return (TouchKitWindow) super.getWindow(name);
+//    }
 
     /**
      * Performs two tasks:
@@ -128,8 +130,8 @@ public abstract class TouchKitApplication extends Application implements
             if (request.getParameter("repaintAll") != null) {
                 int viewWidth = Integer.parseInt(request.getParameter("vw"));
                 int viewHeight = Integer.parseInt(request.getParameter("vh"));
-                Collection<Window> windows2 = getWindows();
-                for (Iterator<Window> iterator = windows2.iterator(); iterator
+                Collection<LegacyWindow> windows2 = getWindows();
+                for (Iterator<LegacyWindow> iterator = windows2.iterator(); iterator
                         .hasNext();) {
                     TouchKitWindow window = (TouchKitWindow) iterator.next();
                     window.setWidth(viewWidth, TouchKitWindow.UNITS_PIXELS);
@@ -143,14 +145,14 @@ public abstract class TouchKitApplication extends Application implements
         }
     }
     
-    @Override
-    public void start(URL applicationUrl, Properties applicationProperties,
-    		ApplicationContext context) {
-    	super.start(applicationUrl, applicationProperties, context);
-    	if(browserDetailsReady) {
-    		onBrowserDetailsReady();
-    	}
-    }
+//    @Override
+//    public void start(URL applicationUrl, Properties applicationProperties,
+//    		ApplicationContext context) {
+//    	super.start(applicationUrl, applicationProperties, context);
+//    	if(browserDetailsReady) {
+//    		onBrowserDetailsReady();
+//    	}
+//    }
 
     /**
      * Unsets the active application instance for this thread before the

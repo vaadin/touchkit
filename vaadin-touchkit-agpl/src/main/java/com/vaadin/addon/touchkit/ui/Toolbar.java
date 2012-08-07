@@ -46,10 +46,6 @@ public class Toolbar extends CssLayout {
         }
     }
 
-    @Override
-    public void paintContent(PaintTarget target) throws PaintException {
-        super.paintContent(target);
-    }
 
     @Override
     protected String getCss(Component c) {

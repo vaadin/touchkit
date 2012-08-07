@@ -10,6 +10,7 @@ import com.vaadin.addon.touchkit.service.PositionCallback;
 import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;
 import com.vaadin.terminal.gwt.server.WebApplicationContext;
+import com.vaadin.ui.Root.LegacyWindow;
 import com.vaadin.ui.Window;
 
 /**
@@ -24,7 +25,7 @@ import com.vaadin.ui.Window;
  * setting a startup image ('splash-screen') and detecting the current
  * geographical location of the device.
  */
-public class TouchKitWindow extends Window {
+public class TouchKitWindow extends LegacyWindow {
 
     private static final String DEVICE_WIDTH = "device-width";
     private Boolean viewPortUserScalable = false;

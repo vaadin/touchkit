@@ -9,6 +9,8 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.Root;
 
 @Ignore
 public class NavPanelTest extends NavigationManager implements
@@ -49,8 +51,7 @@ public class NavPanelTest extends NavigationManager implements
 			for (int i = 0; i < views.length; i++) {
 				if (views[i] == event.getButton().getParent()) {
 					if (i + 1 >= views.length) {
-						event.getButton().getWindow()
-								.showNotification("No more views");
+						Notification.show("No more views");
 					} else {
 						navigateTo(views[i + 1]);
 					}

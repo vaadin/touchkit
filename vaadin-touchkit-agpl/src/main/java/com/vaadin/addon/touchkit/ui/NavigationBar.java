@@ -3,12 +3,7 @@ package com.vaadin.addon.touchkit.ui;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import com.vaadin.addon.touchkit.gwt.client.VNavigationBar;
-import com.vaadin.terminal.PaintException;
-import com.vaadin.terminal.PaintTarget;
 import com.vaadin.ui.AbstractComponentContainer;
-import com.vaadin.ui.ClientWidget;
-import com.vaadin.ui.ClientWidget.LoadStyle;
 import com.vaadin.ui.Component;
 
 /**
@@ -21,7 +16,6 @@ import com.vaadin.ui.Component;
  * 
  * @see NavigationView
  */
-@ClientWidget(value = VNavigationBar.class, loadStyle = LoadStyle.EAGER)
 public class NavigationBar extends AbstractComponentContainer {
 
     private static final String STYLE_NAME_BACK_BUTTON = "back";
@@ -139,23 +133,24 @@ public class NavigationBar extends AbstractComponentContainer {
                 "Navigation bar does not support general container mutation methods. Use setRightComponent, setCaption and setPreviousVew methods to control the componen.");
     }
 
-    @Override
-    public void paintContent(PaintTarget target) throws PaintException {
-        super.paintContent(target);
-
-        if (leftNavigationBarComponent != null) {
-            target.startTag("back");
-            leftNavigationBarComponent.paint(target);
-            target.endTag("back");
-        }
-
-        if (navigationBarComponent != null) {
-            target.startTag("component");
-            navigationBarComponent.paint(target);
-            target.endTag("component");
-        }
-
-    }
+//    FIXME
+//    @Override
+//    public void paintContent(PaintTarget target) throws PaintException {
+//        super.paintContent(target);
+//
+//        if (leftNavigationBarComponent != null) {
+//            target.startTag("back");
+//            leftNavigationBarComponent.paint(target);
+//            target.endTag("back");
+//        }
+//
+//        if (navigationBarComponent != null) {
+//            target.startTag("component");
+//            navigationBarComponent.paint(target);
+//            target.endTag("component");
+//        }
+//
+//    }
 
     public Iterator<Component> getComponentIterator() {
         LinkedList<Component> components = new LinkedList<Component>();
@@ -164,6 +159,11 @@ public class NavigationBar extends AbstractComponentContainer {
             components.add(navigationBarComponent);
         }
         return components.iterator();
+    }
+
+    public int getComponentCount() {
+        // TODO Auto-generated method stub
+        return 0;
     }
 
 }

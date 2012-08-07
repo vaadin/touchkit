@@ -1,12 +1,10 @@
 package com.vaadin.addon.touchkit.ui;
 
-import com.vaadin.addon.touchkit.gwt.client.VPopover;
 import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;
-import com.vaadin.ui.ClientWidget;
-import com.vaadin.ui.ClientWidget.LoadStyle;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;
+import com.vaadin.ui.Root;
 import com.vaadin.ui.Window;
 
 /**
@@ -31,7 +29,6 @@ import com.vaadin.ui.Window;
  * allowing the content to dictate the look.
  * 
  */
-@ClientWidget(value = VPopover.class, loadStyle = LoadStyle.EAGER)
 public class Popover extends Window {
 
     private Component relatedComponent;
@@ -71,11 +68,8 @@ public class Popover extends Window {
         this.relatedComponent = relatedComponent;
         requestRepaint();
         if (relatedComponent != null && getParent() == null) {
-            Window window = relatedComponent.getWindow();
-            if (window.getParent() != null) {
-                window = window.getParent();
-            }
-            window.addWindow(this);
+            Root root = relatedComponent.getRoot();
+            root.addWindow(this);
         }
     }
 
@@ -112,7 +106,7 @@ public class Popover extends Window {
      */
     public void removeFromParent() {
         if (getParent() != null) {
-            getParent().removeWindow(this);
+            getRoot().removeWindow(this);
         }
     }
 

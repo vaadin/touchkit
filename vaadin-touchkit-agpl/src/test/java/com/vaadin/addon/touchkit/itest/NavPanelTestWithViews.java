@@ -35,6 +35,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Layout;
 import com.vaadin.ui.NativeSelect;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.Slider;
 import com.vaadin.ui.TabSheet.Tab;
 import com.vaadin.ui.TextField;
@@ -134,15 +135,12 @@ public class NavPanelTestWithViews extends NavigationManager implements
                 }
 
                 if (event.getButton() == notRelative) {
-                    Window w = getWindow();
-                    if (w.getParent() != null) {
-                        w = w.getParent();
-                    }
+                   
                     popover.setWidth("50%");
                     popover.setHeight("100%");
                     popover.center();
                     popover.requestRepaint();
-                    w.addWindow(popover);
+                    getRoot().addWindow(popover);
                 } else {
                     popover.showRelativeTo(event.getButton());
                 }
@@ -507,7 +505,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
         }
 
         public void buttonClick(ClickEvent event) {
-            getWindow().showNotification("Just a demo!");
+            Notification.show("Just a demo!");
         }
 
     }

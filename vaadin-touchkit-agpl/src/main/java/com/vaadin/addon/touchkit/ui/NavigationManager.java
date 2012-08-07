@@ -3,18 +3,12 @@ package com.vaadin.addon.touchkit.ui;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Stack;
 
-import com.vaadin.addon.touchkit.gwt.client.VNavigationManager;
 import com.vaadin.addon.touchkit.ui.NavigationManager.NavigationEvent.Direction;
 import com.vaadin.event.ComponentEventListener;
-import com.vaadin.terminal.PaintException;
-import com.vaadin.terminal.PaintTarget;
 import com.vaadin.tools.ReflectTools;
 import com.vaadin.ui.AbstractComponentContainer;
-import com.vaadin.ui.ClientWidget;
-import com.vaadin.ui.ClientWidget.LoadStyle;
 import com.vaadin.ui.Component;
 
 /**
@@ -35,7 +29,6 @@ import com.vaadin.ui.Component;
  * view, either by using the constructor {@link #NavigationManager(Component)}
  * or by calling {@link #navigateTo(Component)}.
  */
-@ClientWidget(value = VNavigationManager.class, loadStyle = LoadStyle.EAGER)
 public class NavigationManager extends AbstractComponentContainer {
 
     /*-
@@ -297,37 +290,38 @@ public class NavigationManager extends AbstractComponentContainer {
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public void paintContent(PaintTarget target) throws PaintException {
-        super.paintContent(target);
-        if (currentComponent != null) {
-            target.addAttribute("c", currentComponent);
-        }
-        if (nextComponent != null) {
-            target.addAttribute("n", nextComponent);
-        }
-        if (previousComponent != null) {
-            target.addAttribute("p", previousComponent);
-        }
-        Iterator<Component> componentIterator = getComponentIterator();
-        while (componentIterator.hasNext()) {
-            Component next = componentIterator.next();
-            next.paint(target);
-        }
-    }
-
-    @Override
-    public void changeVariables(Object source, Map<String, Object> variables) {
-        super.changeVariables(source, variables);
-        Integer navigated = (Integer) variables.get("navigated");
-        if (navigated != null) {
-            if (navigated > 0) {
-                navigateTo(nextComponent);
-            } else {
-                navigateBack();
-            }
-        }
-    }
+//    FIXME
+//    @Override
+//    public void paintContent(PaintTarget target) throws PaintException {
+//        super.paintContent(target);
+//        if (currentComponent != null) {
+//            target.addAttribute("c", currentComponent);
+//        }
+//        if (nextComponent != null) {
+//            target.addAttribute("n", nextComponent);
+//        }
+//        if (previousComponent != null) {
+//            target.addAttribute("p", previousComponent);
+//        }
+//        Iterator<Component> componentIterator = getComponentIterator();
+//        while (componentIterator.hasNext()) {
+//            Component next = componentIterator.next();
+//            next.paint(target);
+//        }
+//    }
+//
+//    @Override
+//    public void changeVariables(Object source, Map<String, Object> variables) {
+//        super.changeVariables(source, variables);
+//        Integer navigated = (Integer) variables.get("navigated");
+//        if (navigated != null) {
+//            if (navigated > 0) {
+//                navigateTo(nextComponent);
+//            } else {
+//                navigateBack();
+//            }
+//        }
+//    }
 
     public Iterator<Component> getComponentIterator() {
         ArrayList<Component> components = new ArrayList<Component>(3);
@@ -397,6 +391,11 @@ public class NavigationManager extends AbstractComponentContainer {
      */
     public void setMaintainBreadcrump(boolean maintainBreadcrump) {
         this.maintainBreadcrump = maintainBreadcrump;
+    }
+
+    public int getComponentCount() {
+        // TODO Auto-generated method stub
+        return 0;
     }
 
 }
