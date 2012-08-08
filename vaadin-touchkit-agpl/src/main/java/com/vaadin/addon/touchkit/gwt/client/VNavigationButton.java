@@ -26,11 +26,11 @@ public class VNavigationButton extends HTML implements Paintable {
                 if (enabled) {
                     getElement().focus();
                     navigate();
-                    String pid = client.getPid(getElement());
-                    // client.updateVariable(pid, "mousedetails",
-                    // new MouseEventDetails(event.getNativeEvent())
-                    // .toString(), false);
-                    client.updateVariable(pid, "state", true, true);
+//                    String pid = client.getPid(getElement());
+//                    // client.updateVariable(pid, "mousedetails",
+//                    // new MouseEventDetails(event.getNativeEvent())
+//                    // .toString(), false);
+//                    client.updateVariable(pid, "state", true, true);
                 }
             }
         });

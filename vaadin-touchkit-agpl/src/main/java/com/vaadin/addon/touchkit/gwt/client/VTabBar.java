@@ -10,14 +10,13 @@ import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.terminal.gwt.client.ApplicationConnection;
-import com.vaadin.terminal.gwt.client.Container;
 import com.vaadin.terminal.gwt.client.Paintable;
 import com.vaadin.terminal.gwt.client.RenderSpace;
 import com.vaadin.terminal.gwt.client.UIDL;
 import com.vaadin.terminal.gwt.client.Util;
 import com.vaadin.terminal.gwt.client.ui.TouchScrollDelegate;
 
-public class VTabBar extends ComplexPanel implements Container {
+public class VTabBar extends ComplexPanel {
 
     private static final String CLASSNAME = "v-touchkit-tabbar";
     private static final int TOOLBARHEIGHT = 46;
@@ -60,36 +59,36 @@ public class VTabBar extends ComplexPanel implements Container {
 
         // toolbar
         UIDL toolbaruidl = uidl.getChildUIDL(0);
-        Paintable paintable2 = client.getPaintable(toolbaruidl);
-        if (toolbar != null && toolbar != paintable2) {
-            forgetComponent(client, toolbar);
-        }
-        toolbar = paintable2;
-        if (!((Widget) toolbar).isAttached()) {
-            add((Widget) toolbar, toolbarDiv);
-        }
-        toolbar.updateFromUIDL(toolbaruidl, client);
-
-        // and we always have content in second slot
-        UIDL childUIDL = uidl.getChildUIDL(1);
-        Paintable paintable = client.getPaintable(childUIDL);
-        if (content != null && content != paintable) {
-            forgetComponent(client, content);
-        }
-        content = paintable;
-        if (!((Widget) content).isAttached()) {
-            add((Widget) content, wrapper);
-        }
-        content.updateFromUIDL(childUIDL, client);
-
-        Util.runWebkitOverflowAutoFix(wrapper);
-        rendering = false;
+//        Paintable paintable2 = client.getPaintable(toolbaruidl);
+//        if (toolbar != null && toolbar != paintable2) {
+//            forgetComponent(client, toolbar);
+//        }
+//        toolbar = paintable2;
+//        if (!((Widget) toolbar).isAttached()) {
+//            add((Widget) toolbar, toolbarDiv);
+//        }
+//        toolbar.updateFromUIDL(toolbaruidl, client);
+//
+//        // and we always have content in second slot
+//        UIDL childUIDL = uidl.getChildUIDL(1);
+//        Paintable paintable = client.getPaintable(childUIDL);
+//        if (content != null && content != paintable) {
+//            forgetComponent(client, content);
+//        }
+//        content = paintable;
+//        if (!((Widget) content).isAttached()) {
+//            add((Widget) content, wrapper);
+//        }
+//        content.updateFromUIDL(childUIDL, client);
+//
+//        Util.runWebkitOverflowAutoFix(wrapper);
+//        rendering = false;
     }
 
     private void forgetComponent(ApplicationConnection client,
             Paintable content2) {
         ((Widget) content2).removeFromParent();
-        client.unregisterPaintable(content2);
+//        client.unregisterPaintable(content2);
         if (content == content2) {
             content = null;
         } else {

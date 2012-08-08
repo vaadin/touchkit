@@ -101,9 +101,9 @@ public class VTouchKitApplicationConnection extends ApplicationConnection {
                 this.json = json;
                 forceHandleMessage.schedule(MAX_SUSPENDED_TIMEOUT);
             }
-            if (getView() instanceof VTouchKitView) {
-                ((VTouchKitView) getView()).updateSessionCookieExpiration();
-            }
+//            if (getView() instanceof VTouchKitView) {
+//                ((VTouchKitView) getView()).updateSessionCookieExpiration();
+//            }
         }
     }
 
@@ -187,8 +187,8 @@ public class VTouchKitApplicationConnection extends ApplicationConnection {
     public void resume() {
         ApplicationConfiguration.getRunningApplications().remove(this);
         resetInitializedFlag(getConfiguration().getRootPanelId());
-        ApplicationConfiguration.initConfigurations();
-        ApplicationConfiguration.startNextApplication();
+//        ApplicationConfiguration.initConfigurations();
+//        ApplicationConfiguration.startNextApplication();
     }
 
     private static native void resetInitializedFlag(String rootPanelId)

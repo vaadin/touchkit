@@ -14,14 +14,13 @@ import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.terminal.gwt.client.ApplicationConnection;
 import com.vaadin.terminal.gwt.client.UIDL;
-import com.vaadin.terminal.gwt.client.ui.VWindow;
 
 /**
  * TouchKit "subwindow". Both for iPad style 'popover' windows, and iPhone style
  * 'fullscreen' (actionsheet) windows.
  * 
  */
-public class VPopover extends VWindow {
+public class VPopover extends com.vaadin.terminal.gwt.client.ui.window.VWindow {
 
     private static final int SMALL_SCREEN_WIDTH_THRESHOLD = 500;
     private static final int MIN_EDGE_DISTANCE = 10;
@@ -39,15 +38,15 @@ public class VPopover extends VWindow {
         this.fullscreen = fullscreen;
     }
 
-    @Override
-    public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
-        if (!uidl.hasAttribute("cached")) {
-            relComponentId = uidl.hasAttribute("rel") ? uidl
-                    .getStringAttribute("rel") : null;
-            setFullscreen(uidl.hasAttribute("fc"));
-        }
-        super.updateFromUIDL(uidl, client);
-    }
+//    @Override
+//    public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
+//        if (!uidl.hasAttribute("cached")) {
+//            relComponentId = uidl.hasAttribute("rel") ? uidl
+//                    .getStringAttribute("rel") : null;
+//            setFullscreen(uidl.hasAttribute("fc"));
+//        }
+//        super.updateFromUIDL(uidl, client);
+//    }
 
     @Override
     public void setStyleName(String style) {
@@ -67,11 +66,11 @@ public class VPopover extends VWindow {
         super.setStyleName(style);
     }
 
-    @Override
-    protected void updateShadowSizeAndPosition() {
-        doSpecialPositioning();
-        super.updateShadowSizeAndPosition();
-    }
+//    @Override
+//    protected void updateShadowSizeAndPosition() {
+//        doSpecialPositioning();
+//        super.updateShadowSizeAndPosition();
+//    }
 
     private void doSpecialPositioning() {
         /*
@@ -103,9 +102,9 @@ public class VPopover extends VWindow {
                 if (isSmallScreenDevice()) {
                     slideIn();
                 } else if (relComponentId != null) {
-                    Widget paintable = (Widget) client
-                            .getPaintable(relComponentId);
-                    showNextTo(paintable);
+//                    Widget paintable = (Widget) client
+//                            .getPaintable(relComponentId);
+//                    showNextTo(paintable);
                 }
             }
             specialPositioningRunning = false;
@@ -120,12 +119,12 @@ public class VPopover extends VWindow {
 
         int top = 0;
         if (relComponentId != null) {
-            Widget paintable = (Widget) client.getPaintable(relComponentId);
-            boolean isCloseToBottom = paintable.getAbsoluteTop()
-                    - Window.getScrollTop() > Window.getClientHeight() / 2;
-            if (isCloseToBottom) {
-                top = Window.getClientHeight() - getOffsetHeight();
-            }
+//            Widget paintable = (Widget) client.getPaintable(relComponentId);
+//            boolean isCloseToBottom = paintable.getAbsoluteTop()
+//                    - Window.getScrollTop() > Window.getClientHeight() / 2;
+//            if (isCloseToBottom) {
+//                top = Window.getClientHeight() - getOffsetHeight();
+//            }
         }
 
         setPopupPosition(0, top);
@@ -290,7 +289,7 @@ public class VPopover extends VWindow {
              * Close on events outside window. Special handling for mousemove
              * etc to aid compatibility with desktop (testing purposes).
              */
-            client.updateVariable(client.getPid(this), "close", true, true);
+//            client.updateVariable(client.getPid(this), "close", true, true);
         }
         return superAccepts;
     }

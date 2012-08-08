@@ -1,6 +1,5 @@
 package com.vaadin.addon.touchkit.gwt.client;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 import com.google.gwt.core.client.Scheduler;
@@ -11,18 +10,16 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.Element;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.terminal.gwt.client.ApplicationConnection;
-import com.vaadin.terminal.gwt.client.Container;
 import com.vaadin.terminal.gwt.client.Paintable;
 import com.vaadin.terminal.gwt.client.RenderSpace;
 import com.vaadin.terminal.gwt.client.UIDL;
 import com.vaadin.terminal.gwt.client.VConsole;
 import com.vaadin.terminal.gwt.client.ui.VLazyExecutor;
 
-public class VNavigationManager extends ComplexPanel implements Container {
+public class VNavigationManager extends ComplexPanel {
 
     private static final String CONTAINER_CLASSNAME = "v-touchkit-navpanel-container";
     private static final String WRAPPER_CLASSNAME = "v-touchkit-navpanel-wrapper";
@@ -105,90 +102,90 @@ public class VNavigationManager extends ComplexPanel implements Container {
     }
 
     private void doUpdate(UIDL uidl) {
-        final ArrayList<Widget> orphanedPaintables = new ArrayList<Widget>();
-        for (Widget w : getChildren()) {
-            if (w instanceof Paintable) {
-                orphanedPaintables.add(w);
-            }
-        }
-        /*
-         * First render visible component. We'll lazy render others but the next
-         * visible.
-         */
-        int childCount = uidl.getChildCount();
-        for (int i = 0; i < childCount; i++) {
-            UIDL childUIDL = uidl.getChildUIDL(i);
-            Paintable paintable = client.getPaintable(childUIDL);
-            orphanedPaintables.remove(paintable);
-        }
-        final Paintable newNext = uidl.getPaintableAttribute("n", client);
-        Paintable newCurrent = uidl.getPaintableAttribute("c", client);
-        final Paintable newPrev = uidl.getPaintableAttribute("p", client);
-        updatePaintable(newCurrent, getChildUidl(newCurrent, uidl));
-        if (newCurrent == currentView) {
-            /*
-             * already at correct position due to NavigationButtonClick -> no
-             * transition.
-             */
-        } else if (prevView == newCurrent) {
-            /*
-             * Back navigation, slide right then ensure positions.
-             */
-            slideFromLeft();
-        } else if (currentView == null) {
-            /*
-             * Placeholder or initial rendering.
-             */
-            setPosition(newCurrent, -currentWrapperPos);
-        } else {
-            /*
-             * Forward navigation, slide left. First ensure newNext is on the
-             * right side.
-             */
-            slideFromRight(newCurrent);
-        }
-
-        final UIDL newNextUidl = getChildUidl(newNext, uidl);
-        final UIDL newPrevUidl = getChildUidl(newPrev, uidl);
-
-        currentView = newCurrent;
-        nextView = newNext;
-        prevView = newPrev;
-
-        /*
-         * Detach orphaned components. Must be eagerly done so that orphaned
-         * components don't send variables anymore.
-         */
-
-        for (Widget widget : orphanedPaintables) {
-            com.google.gwt.dom.client.Element wrapperElement = widget
-                    .getElement().getParentElement();
-            widget.removeFromParent();
-            client.unregisterPaintable((Paintable) widget);
-            wrapper.removeChild(wrapperElement);
-        }
-
-        if (newNext != null) {
-            updatePaintable(newNext, newNextUidl);
-            setPosition(newNext, -currentWrapperPos + 1);
-        }
-        if (newPrev != null) {
-            updatePaintable(newPrev, newPrevUidl);
-            setPosition(newPrev, -currentWrapperPos - 1);
-        }
-
-        /**
-         * Stylesheet fades in new navigation views in 150ms. After they have
-         * become visible, remove placeholder below them.
-         */
-        new Timer() {
-            @Override
-            public void run() {
-                hidePlaceHolder();
-            }
-        }.schedule(160);
-
-        rendering = false;
+//        final ArrayList<Widget> orphanedPaintables = new ArrayList<Widget>();
+//        for (Widget w : getChildren()) {
+//            if (w instanceof Paintable) {
+//                orphanedPaintables.add(w);
+//            }
+//        }
+//        /*
+//         * First render visible component. We'll lazy render others but the next
+//         * visible.
+//         */
+//        int childCount = uidl.getChildCount();
+//        for (int i = 0; i < childCount; i++) {
+//            UIDL childUIDL = uidl.getChildUIDL(i);
+//            Paintable paintable = client.getPaintable(childUIDL);
+//            orphanedPaintables.remove(paintable);
+//        }
+//        final Paintable newNext = uidl.getPaintableAttribute("n", client);
+//        Paintable newCurrent = uidl.getPaintableAttribute("c", client);
+//        final Paintable newPrev = uidl.getPaintableAttribute("p", client);
+//        updatePaintable(newCurrent, getChildUidl(newCurrent, uidl));
+//        if (newCurrent == currentView) {
+//            /*
+//             * already at correct position due to NavigationButtonClick -> no
+//             * transition.
+//             */
+//        } else if (prevView == newCurrent) {
+//            /*
+//             * Back navigation, slide right then ensure positions.
+//             */
+//            slideFromLeft();
+//        } else if (currentView == null) {
+//            /*
+//             * Placeholder or initial rendering.
+//             */
+//            setPosition(newCurrent, -currentWrapperPos);
+//        } else {
+//            /*
+//             * Forward navigation, slide left. First ensure newNext is on the
+//             * right side.
+//             */
+//            slideFromRight(newCurrent);
+//        }
+//
+//        final UIDL newNextUidl = getChildUidl(newNext, uidl);
+//        final UIDL newPrevUidl = getChildUidl(newPrev, uidl);
+//
+//        currentView = newCurrent;
+//        nextView = newNext;
+//        prevView = newPrev;
+//
+//        /*
+//         * Detach orphaned components. Must be eagerly done so that orphaned
+//         * components don't send variables anymore.
+//         */
+//
+//        for (Widget widget : orphanedPaintables) {
+//            com.google.gwt.dom.client.Element wrapperElement = widget
+//                    .getElement().getParentElement();
+//            widget.removeFromParent();
+//            client.unregisterPaintable((Paintable) widget);
+//            wrapper.removeChild(wrapperElement);
+//        }
+//
+//        if (newNext != null) {
+//            updatePaintable(newNext, newNextUidl);
+//            setPosition(newNext, -currentWrapperPos + 1);
+//        }
+//        if (newPrev != null) {
+//            updatePaintable(newPrev, newPrevUidl);
+//            setPosition(newPrev, -currentWrapperPos - 1);
+//        }
+//
+//        /**
+//         * Stylesheet fades in new navigation views in 150ms. After they have
+//         * become visible, remove placeholder below them.
+//         */
+//        new Timer() {
+//            @Override
+//            public void run() {
+//                hidePlaceHolder();
+//            }
+//        }.schedule(160);
+//
+//        rendering = false;
 
     }
 
@@ -289,16 +286,16 @@ public class VNavigationManager extends ComplexPanel implements Container {
         moveAside(parentElement);
     }
 
-    private UIDL getChildUidl(Paintable p, UIDL uidl) {
-        for (int i = 0; i < uidl.getChildCount(); i++) {
-            UIDL childUIDL = uidl.getChildUIDL(i);
-            Paintable paintable2 = client.getPaintable(childUIDL);
-            if (paintable2 == p) {
-                return childUIDL;
-            }
-        }
-        return null;
-    }
+//    private UIDL getChildUidl(Paintable p, UIDL uidl) {
+//        for (int i = 0; i < uidl.getChildCount(); i++) {
+//            UIDL childUIDL = uidl.getChildUIDL(i);
+//            Paintable paintable2 = client.getPaintable(childUIDL);
+//            if (paintable2 == p) {
+//                return childUIDL;
+//            }
+//        }
+//        return null;
+//    }
 
     private void updatePaintable(Paintable paintable, UIDL childUIDL) {
         int widgetIndex = getWidgetIndex((Widget) paintable);
@@ -343,19 +340,19 @@ public class VNavigationManager extends ComplexPanel implements Container {
     public void onNaviButtonClick(VNavigationButton vNavigationButton) {
         String nextViewId = vNavigationButton.getNextViewId();
         if (nextViewId != null) {
-            Paintable paintable = client.getPaintable(nextViewId);
-            if (paintable != null) {
-                if (paintable == nextView) {
-                    navigateForward(false);
-                    return;
-                } else if (paintable == prevView) {
-                    /*
-                     * Back button.
-                     */
-                    navigateBackward(false);
-                    return;
-                }
-            }
+//            Paintable paintable = client.getPaintable(nextViewId);
+//            if (paintable != null) {
+//                if (paintable == nextView) {
+//                    navigateForward(false);
+//                    return;
+//                } else if (paintable == prevView) {
+//                    /*
+//                     * Back button.
+//                     */
+//                    navigateBackward(false);
+//                    return;
+//                }
+//            }
         }
         preparePlaceHolder(vNavigationButton);
         animateHorizontally(-1);
@@ -368,7 +365,7 @@ public class VNavigationManager extends ComplexPanel implements Container {
         currentView = paintable;
         prevView = null;
         if (visitServer) {
-            client.updateVariable(client.getPid(this), "navigated", -1, true);
+//            client.updateVariable(client.getPid(this), "navigated", -1, true);
         }
     }
 
@@ -378,7 +375,7 @@ public class VNavigationManager extends ComplexPanel implements Container {
         prevView = currentView;
         currentView = paintable;
         if (visitServer) {
-            client.updateVariable(client.getPid(this), "navigated", 1, true);
+//            client.updateVariable(client.getPid(this), "navigated", 1, true);
         }
     }
 

@@ -4,11 +4,10 @@ import java.util.Date;
 
 import com.google.gwt.user.client.Cookies;
 import com.vaadin.terminal.gwt.client.ApplicationConnection;
-import com.vaadin.terminal.gwt.client.UIDL;
 import com.vaadin.terminal.gwt.client.VConsole;
-import com.vaadin.terminal.gwt.client.ui.VView;
+import com.vaadin.terminal.gwt.client.ui.root.VRoot;
 
-public class VTouchKitView extends VView {
+public class VTouchKitView extends VRoot {
 
     private ApplicationConnection client;
     private Integer persistentSessionTimeout;
@@ -18,31 +17,31 @@ public class VTouchKitView extends VView {
         super.setStyleName(style + " v-touchkit-view");
     }
 
-    @Override
-    public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
-        super.updateFromUIDL(uidl, client);
-        if (uidl.hasAttribute("geoloc")) {
-            try {
-                VConsole.log("Making geolocation request");
-                doGeoLocationLookup();
-            } catch (Exception e) {
-                onGeolocationError(GEOLOCATION_ERROR_UNKNOWN);
-            }
-        }
-        this.client = client;
-
-        if (uidl.hasAttribute("persistSession")) {
-            persistentSessionTimeout = uidl.getIntAttribute("persistSession");
-        } else if (persistentSessionTimeout != null) {
-            persistentSessionTimeout = null;
-        }
-
-        if (uidl.getBooleanAttribute("goOffline")) {
-            ((VTouchKitApplicationConnection) client).goOffline(
-                    "Going offline manually", -1);
-        }
-
-    }
+//    @Override
+//    public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
+//        super.updateFromUIDL(uidl, client);
+//        if (uidl.hasAttribute("geoloc")) {
+//            try {
+//                VConsole.log("Making geolocation request");
+//                doGeoLocationLookup();
+//            } catch (Exception e) {
+//                onGeolocationError(GEOLOCATION_ERROR_UNKNOWN);
+//            }
+//        }
+//        this.client = client;
+//
+//        if (uidl.hasAttribute("persistSession")) {
+//            persistentSessionTimeout = uidl.getIntAttribute("persistSession");
+//        } else if (persistentSessionTimeout != null) {
+//            persistentSessionTimeout = null;
+//        }
+//
+//        if (uidl.getBooleanAttribute("goOffline")) {
+//            ((VTouchKitApplicationConnection) client).goOffline(
+//                    "Going offline manually", -1);
+//        }
+//
+//    }
 
     private native void doGeoLocationLookup()
     /*-{
@@ -63,7 +62,7 @@ public class VTouchKitView extends VView {
 
         VConsole.log("Position detected.");
         String json = position.toJson();
-        client.updateVariable(client.getPid(this), "position", json, true);
+//        client.updateVariable(client.getPid(this), "position", json, true);
     }
 
     private static final int GEOLOCATION_ERROR_PERMISSION_DENIED = 1;
@@ -73,8 +72,8 @@ public class VTouchKitView extends VView {
 
     private void onGeolocationError(int errorCode) {
         VConsole.log("Error in geolocation" + 0);
-        client.updateVariable(client.getPid(this), "positionError", errorCode,
-                true);
+//        client.updateVariable(client.getPid(this), "positionError", errorCode,
+//                true);
     }
 
     public void updateSessionCookieExpiration() {

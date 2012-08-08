@@ -9,8 +9,8 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
-import com.vaadin.terminal.gwt.client.ui.VButton;
 import com.vaadin.terminal.gwt.client.ui.VOverlay;
+import com.vaadin.terminal.gwt.client.ui.nativebutton.VNativeButton;
 
 /**
  * This class is the "default offline mode" used by Vaadin TouchKit. It is
@@ -130,7 +130,7 @@ public class TouchKitOfflineApp {
         if (!VTouchKitApplicationConnection.isNetworkOnline()) {
             fp.add(new Label(msg.offlineDueToNetworkMsg()));
         } else {
-            VButton vButton = new VButton();
+            VNativeButton vButton = new VNativeButton();
             vButton.setText(msg.tryAgainMsg());
             vButton.addClickHandler(new ClickHandler() {
                 public void onClick(ClickEvent event) {

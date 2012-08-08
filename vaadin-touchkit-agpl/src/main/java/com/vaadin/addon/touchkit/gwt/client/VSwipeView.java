@@ -27,14 +27,11 @@ import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
 import com.vaadin.terminal.gwt.client.ApplicationConnection;
 import com.vaadin.terminal.gwt.client.BrowserInfo;
-import com.vaadin.terminal.gwt.client.Container;
-import com.vaadin.terminal.gwt.client.UIDL;
 import com.vaadin.terminal.gwt.client.Util;
 import com.vaadin.terminal.gwt.client.VConsole;
 import com.vaadin.terminal.gwt.client.ui.TouchScrollDelegate;
-import com.vaadin.terminal.gwt.client.ui.VCssLayout;
 
-public class VSwipeView extends VCssLayout implements Container, ScrollHandler {
+public class VSwipeView extends com.vaadin.terminal.gwt.client.ui.csslayout.VCssLayout implements ScrollHandler {
 
     private static final double SPEED_THRESHOLD = 0.35;
     private static final String CLASSNAME = "v-touchkit-navview";
@@ -218,20 +215,20 @@ public class VSwipeView extends VCssLayout implements Container, ScrollHandler {
         }
     }
 
-    @Override
-    public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
-        rendering = true;
-        this.client = client;
-        super.updateFromUIDL(uidl, client);
-        Util.runWebkitOverflowAutoFix(getContainerElement());
-        rendering = false;
-        np = VNavigationButton.findNavigationPanel(this);
-    }
-
+//    @Override
+//    public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
+//        rendering = true;
+//        this.client = client;
+//        super.updateFromUIDL(uidl, client);
+//        Util.runWebkitOverflowAutoFix(getContainerElement());
+//        rendering = false;
+//        np = VNavigationButton.findNavigationPanel(this);
+//    }
+//
     public void onScroll(ScrollEvent event) {
         if (client != null && isAttached()) {
-            client.updateVariable(client.getPid(this), "sp",
-                    getContainerElement().getScrollTop(), false);
+//            client.updateVariable(client.getPid(this), "sp",
+//                    getContainerElement().getScrollTop(), false);
         }
     }
 

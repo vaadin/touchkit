@@ -13,14 +13,12 @@ import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.terminal.gwt.client.ApplicationConnection;
-import com.vaadin.terminal.gwt.client.Container;
 import com.vaadin.terminal.gwt.client.Paintable;
 import com.vaadin.terminal.gwt.client.RenderSpace;
 import com.vaadin.terminal.gwt.client.UIDL;
-import com.vaadin.terminal.gwt.client.Util;
 import com.vaadin.terminal.gwt.client.ui.TouchScrollDelegate;
 
-public class VNavigationView extends ComplexPanel implements Container,
+public class VNavigationView extends ComplexPanel implements 
         ScrollHandler {
 
     private static final String CLASSNAME = "v-touchkit-navview";
@@ -68,53 +66,53 @@ public class VNavigationView extends ComplexPanel implements Container,
     }
 
     public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
-        if (!uidl.hasAttribute("cached")) {
-            int childCount = uidl.getChildCount();
-            hasToolbar = childCount > 2;
-        }
-        if (client.updateComponent(this, uidl, false)) {
-            return;
-        }
-        rendering = true;
-        this.client = client;
-
-        // we assume navbar never changes
-        UIDL navbaruidl = uidl.getChildUIDL(0);
-        navbar = (VNavigationBar) client.getPaintable(navbaruidl);
-        setNavigationBar(navbar);
-        navbar.updateFromUIDL(navbaruidl, client);
-
-        setStyleDependentName("notoolbar", !hasToolbar);
-        // and we always have content in second slot
-        UIDL childUIDL = uidl.getChildUIDL(1);
-        Paintable paintable = client.getPaintable(childUIDL);
-        if (content != null && content != paintable) {
-            forgetComponent(client, content);
-        }
-        content = paintable;
-        if (!((Widget) content).isAttached()) {
-            addContent((Widget) content);
-        }
-        content.updateFromUIDL(childUIDL, client);
-        if (hasToolbar) {
-            UIDL toolbaruidl = uidl.getChildUIDL(2);
-            Paintable paintable2 = client.getPaintable(toolbaruidl);
-            if (toolbar != null && toolbar != paintable2) {
-                forgetComponent(client, toolbar);
-            }
-            toolbar = paintable2;
-            if (!((Widget) toolbar).isAttached()) {
-                add((Widget) toolbar, toolbarDiv);
-            }
-            toolbar.updateFromUIDL(toolbaruidl, client);
-        } else if (toolbar != null) {
-            forgetComponent(client, toolbar);
-        }
-
-        wrapper.setScrollTop(uidl.getIntVariable("sp"));
-
-        Util.runWebkitOverflowAutoFix(wrapper);
-        rendering = false;
+//        if (!uidl.hasAttribute("cached")) {
+//            int childCount = uidl.getChildCount();
+//            hasToolbar = childCount > 2;
+//        }
+//        if (client.updateComponent(this, uidl, false)) {
+//            return;
+//        }
+//        rendering = true;
+//        this.client = client;
+//
+//        // we assume navbar never changes
+//        UIDL navbaruidl = uidl.getChildUIDL(0);
+//        navbar = (VNavigationBar) client.getPaintable(navbaruidl);
+//        setNavigationBar(navbar);
+//        navbar.updateFromUIDL(navbaruidl, client);
+//
+//        setStyleDependentName("notoolbar", !hasToolbar);
+//        // and we always have content in second slot
+//        UIDL childUIDL = uidl.getChildUIDL(1);
+//        Paintable paintable = client.getPaintable(childUIDL);
+//        if (content != null && content != paintable) {
+//            forgetComponent(client, content);
+//        }
+//        content = paintable;
+//        if (!((Widget) content).isAttached()) {
+//            addContent((Widget) content);
+//        }
+//        content.updateFromUIDL(childUIDL, client);
+//        if (hasToolbar) {
+//            UIDL toolbaruidl = uidl.getChildUIDL(2);
+//            Paintable paintable2 = client.getPaintable(toolbaruidl);
+//            if (toolbar != null && toolbar != paintable2) {
+//                forgetComponent(client, toolbar);
+//            }
+//            toolbar = paintable2;
+//            if (!((Widget) toolbar).isAttached()) {
+//                add((Widget) toolbar, toolbarDiv);
+//            }
+//            toolbar.updateFromUIDL(toolbaruidl, client);
+//        } else if (toolbar != null) {
+//            forgetComponent(client, toolbar);
+//        }
+//
+//        wrapper.setScrollTop(uidl.getIntVariable("sp"));
+//
+//        Util.runWebkitOverflowAutoFix(wrapper);
+//        rendering = false;
     }
 
     public void addContent(Widget content) {
@@ -134,7 +132,7 @@ public class VNavigationView extends ComplexPanel implements Container,
     private void forgetComponent(ApplicationConnection client,
             Paintable content2) {
         ((Widget) content2).removeFromParent();
-        client.unregisterPaintable(content2);
+//        client.unregisterPaintable(content2);
         if (content == content2) {
             content = null;
         } else {
@@ -191,8 +189,8 @@ public class VNavigationView extends ComplexPanel implements Container,
 
     public void onScroll(ScrollEvent event) {
         if (client != null && isAttached()) {
-            client.updateVariable(client.getPid(this), "sp",
-                    wrapper.getScrollTop(), false);
+//            client.updateVariable(client.getPid(this), "sp",
+//                    wrapper.getScrollTop(), false);
         }
     }
 
