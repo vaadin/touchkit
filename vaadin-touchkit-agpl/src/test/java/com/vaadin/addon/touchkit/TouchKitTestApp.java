@@ -1,7 +1,11 @@
 package com.vaadin.addon.touchkit;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Random;
 
+import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.terminal.Resource;
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.terminal.WrappedRequest;
@@ -9,6 +13,8 @@ import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Embedded;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Root;
+import com.vaadin.ui.Table;
+import com.vaadin.ui.Table.ColumnGenerator;
 
 /**
  * The Application's "main" class
@@ -218,32 +224,89 @@ public class TouchKitTestApp extends Root {
         // setTheme("base");
 
         String requestPathInfo = request.getRequestPathInfo();
+        if(requestPathInfo.length() > 3) {
+            try {
 
-        try {
-
-            String className = getClass().getPackage().getName() + ".itest."
-                    + requestPathInfo.substring(1);
-            Class<?> forName = Class.forName(className);
-            if (forName != null) {
-                CssLayout newInstance = (CssLayout) forName.newInstance();
-                addComponent(newInstance);
+                String className = getClass().getPackage().getName() + ".itest."
+                        + requestPathInfo.substring(1);
+                Class<?> forName = Class.forName(className);
+                if (forName != null) {
+                    CssLayout newInstance = (CssLayout) forName.newInstance();
+                    addComponent(newInstance);
+                }
+                return;
+            } catch (ClassNotFoundException e) {
+                // TODO Auto-generated catch block
+                 e.printStackTrace();
+            } catch (InstantiationException e) {
+                // TODO Auto-generated catch block
+                // e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                // TODO Auto-generated catch block
+                // e.printStackTrace();
             }
-            return;
-        } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            // e.printStackTrace();
-        } catch (InstantiationException e) {
-            // TODO Auto-generated catch block
-            // e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
-            // e.printStackTrace();
         }
 
         Label label = new Label(
                 "TouchKit test server, get test by adding its name to url, eg: Selects or subpackage.FooBar");
         addComponent(label);
         addComponent(new Label("TODO add list of available tests here"));
+        
+        File itestroot = new File("src/test/java/" + getClass().getPackage().getName().replace(".", "/") + "/itest");
+        
+        Collection<Class<? extends AbstractTouchKitIntegrationTest>> tests = new ArrayList<Class<? extends AbstractTouchKitIntegrationTest>>();
+        addTests(getClass().getPackage().getName() + ".itest", itestroot, tests);
+        
+        Table table = new Table();
+        BeanItemContainer<Class<? extends AbstractTouchKitIntegrationTest>> beanItemContainer = new BeanItemContainer<Class<? extends AbstractTouchKitIntegrationTest>>(tests);
+        table.setContainerDataSource(beanItemContainer);
+        table.setVisibleColumns(new Object[]{"canonicalName"});
+        table.addGeneratedColumn("description", new ColumnGenerator() {
+            public Object generateCell(Table source, Object itemId, Object columnId) {
+                Class<?> c = (Class<?>) itemId;
+                try {
+                    AbstractTouchKitIntegrationTest t = (AbstractTouchKitIntegrationTest) c.newInstance();
+                    Label label2 = new Label(t.getDescription());
+//                    label2.setWidth("300px");
+//                    label2.setHeight("50px");
+                    return label2;
+                } catch (InstantiationException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        });
+        addComponent(table);
 
+    }
+
+    private void addTests(String base, File itestroot,
+            Collection<Class<? extends AbstractTouchKitIntegrationTest>> tests) {
+        File[] listFiles = itestroot.listFiles();
+        for (File file : listFiles) {
+            if(file.isDirectory()) {
+                addTests(base + "." + file.getName(), file, tests);
+            } else if(file.getName().endsWith(".java")) {
+                String name = file.getName().substring(0, file.getName().indexOf("."));
+                try {
+                    Class<?> forName = Class.forName(base + "." + name);
+                    
+                    if(AbstractTouchKitIntegrationTest.class.isAssignableFrom(forName)) {
+                        tests.add((Class<? extends AbstractTouchKitIntegrationTest>) forName);
+                    }
+                } catch (ClassNotFoundException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                
+            }
+            
+        }
+        
+        
     }
 }
