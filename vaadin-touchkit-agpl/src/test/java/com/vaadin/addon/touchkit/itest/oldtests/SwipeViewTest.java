@@ -1,4 +1,4 @@
-package com.vaadin.addon.touchkit.itest;
+package com.vaadin.addon.touchkit.itest.oldtests;
 
 import java.net.URL;
 

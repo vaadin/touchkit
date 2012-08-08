@@ -1,7 +1,8 @@
-package com.vaadin.addon.touchkit.itest;
+package com.vaadin.addon.touchkit.itest.oldtests;
 
 import java.util.Date;
 
+import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
 import com.vaadin.addon.touchkit.ui.NumberField;
 import com.vaadin.addon.touchkit.ui.Switch;
 import com.vaadin.addon.touchkit.ui.TabBarView;

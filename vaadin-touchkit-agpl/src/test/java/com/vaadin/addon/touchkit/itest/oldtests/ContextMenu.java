@@ -1,5 +1,6 @@
-package com.vaadin.addon.touchkit.itest;
+package com.vaadin.addon.touchkit.itest.oldtests;
 
+import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
 import com.vaadin.addon.touchkit.ui.NavigationManager;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.TouchKitWindow;

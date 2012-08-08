@@ -1,4 +1,4 @@
-package com.vaadin.addon.touchkit.itest;
+package com.vaadin.addon.touchkit;
 
 import java.util.Random;
 
@@ -221,7 +221,7 @@ public class TouchKitTestApp extends Root {
 
         try {
 
-            String className = getClass().getPackage().getName() + "."
+            String className = getClass().getPackage().getName() + ".itest."
                     + requestPathInfo.substring(1);
             Class<?> forName = Class.forName(className);
             if (forName != null) {
