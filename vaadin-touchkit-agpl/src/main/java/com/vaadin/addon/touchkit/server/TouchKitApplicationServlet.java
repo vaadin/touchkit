@@ -25,18 +25,18 @@ public class TouchKitApplicationServlet extends
     public void init(ServletConfig servletConfig) throws ServletException {
         super.init(servletConfig);
 
-        // Gets the fallback application class name
-        final String fallbackapplicationClassName = servletConfig
-                .getInitParameter("fallbackApplication");
-        if (fallbackapplicationClassName != null) {
-            try {
-                fallbackApplicationClass = (Class<? extends Application>) getClassLoader()
-                        .loadClass(fallbackapplicationClassName);
-            } catch (final ClassNotFoundException e) {
-                throw new ServletException("Failed to load application class: "
-                        + fallbackapplicationClassName);
-            }
-        }
+//        // Gets the fallback application class name
+//        final String fallbackapplicationClassName = servletConfig
+//                .getInitParameter("fallbackApplication");
+//        if (fallbackapplicationClassName != null) {
+//            try {
+//                fallbackApplicationClass = (Class<? extends Application>) getClassLoader()
+//                        .loadClass(fallbackapplicationClassName);
+//            } catch (final ClassNotFoundException e) {
+//                throw new ServletException("Failed to load application class: "
+//                        + fallbackapplicationClassName);
+//            }
+//        }
     }
 
 //    @Override

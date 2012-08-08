@@ -7,12 +7,12 @@ import com.vaadin.event.Action;
 import com.vaadin.event.Action.Handler;
 import com.vaadin.ui.Table;
 
-public class ContextMenu extends TouchKitWindow {
+public class ContextMenu extends AbstractTouchKitIntegrationTest {
 
     public ContextMenu() {
 
         NavigationManager navigationManager = new NavigationManager();
-        setContent(navigationManager);
+        addComponent(navigationManager);
 
         NavigationView iv = new NavigationView();
         iv.setCaption("Table with context menu");

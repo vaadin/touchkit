@@ -39,7 +39,7 @@ public class TestServer {
                 TouchKitApplicationServlet.class);
         servletHolder.setInitParameter("widgetset",
                 "com.vaadin.addon.touchkit.gwt.TouchKitWidgetSet");
-        servletHolder.setInitParameter("application",
+        servletHolder.setInitParameter("root",
                 TouchKitTestApp.class.getName());
 
         MimeTypes mimeTypes = context.getMimeTypes();

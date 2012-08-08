@@ -52,7 +52,6 @@ public class NavigationManagerView extends AbstractTouchKitIntegrationTest {
 
         
         makeSmallTabletSize(navigationManager);
-        setContent(navigationManager);
-
+        addComponent(navigationManager);
     }
 }

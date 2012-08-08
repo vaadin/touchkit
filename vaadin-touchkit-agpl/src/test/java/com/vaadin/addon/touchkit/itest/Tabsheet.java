@@ -32,8 +32,7 @@ public class Tabsheet extends AbstractTouchKitIntegrationTest {
         
         
         makeSmallTabletSize(tabBarView);
-
-        setContent(tabBarView);
+        addComponent(tabBarView);
 
     }
 

@@ -10,56 +10,55 @@ import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
-import com.vaadin.ui.Root;
 
 @Ignore
 public class NavPanelTest extends NavigationManager implements
-		ComponentContainer, ClickListener {
+        ComponentContainer, ClickListener {
 
-	private CssLayout[] views;
+    private CssLayout[] views;
 
-	public NavPanelTest() {
+    public NavPanelTest() {
 
-		views = new CssLayout[7];
-		for (int i = 0; i < views.length; i++) {
-			views[i] = getView();
-			views[i].addComponent(new Label("View " + i));
-			views[i].setDebugId("V" + i);
-		}
+        views = new CssLayout[7];
+        for (int i = 0; i < views.length; i++) {
+            views[i] = getView();
+            views[i].addComponent(new Label("View " + i));
+            views[i].setDebugId("V" + i);
+        }
 
-		navigateTo(views[0]);
-		setNextComponent(views[1]);
+        navigateTo(views[0]);
+        setNextComponent(views[1]);
 
-	}
+    }
 
-	private CssLayout getView() {
-		CssLayout cssLayout = new CssLayout();
-		Button back = new Button("Back");
-		back.addListener(this);
-		cssLayout.addComponent(back);
-		Button forward = new Button("Forward");
-		forward.addListener(this);
-		cssLayout.addComponent(forward);
-		cssLayout.setSizeFull();
-		return cssLayout;
-	}
+    private CssLayout getView() {
+        CssLayout cssLayout = new CssLayout();
+        Button back = new Button("Back");
+        back.addListener(this);
+        cssLayout.addComponent(back);
+        Button forward = new Button("Forward");
+        forward.addListener(this);
+        cssLayout.addComponent(forward);
+        cssLayout.setSizeFull();
+        return cssLayout;
+    }
 
-	public void buttonClick(ClickEvent event) {
-		if (event.getButton().getCaption().equals("Back")) {
-			navigateBack();
-		} else {
-			for (int i = 0; i < views.length; i++) {
-				if (views[i] == event.getButton().getParent()) {
-					if (i + 1 >= views.length) {
-						Notification.show("No more views");
-					} else {
-						navigateTo(views[i + 1]);
-					}
-					return;
-				}
-			}
-		}
+    public void buttonClick(ClickEvent event) {
+        if (event.getButton().getCaption().equals("Back")) {
+            navigateBack();
+        } else {
+            for (int i = 0; i < views.length; i++) {
+                if (views[i] == event.getButton().getParent()) {
+                    if (i + 1 >= views.length) {
+                        Notification.show("No more views");
+                    } else {
+                        navigateTo(views[i + 1]);
+                    }
+                    return;
+                }
+            }
+        }
 
-	}
+    }
 
 }

@@ -6,7 +6,7 @@ import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.OptionGroup;
 
-public class Selects extends TouchKitWindow {
+public class Selects extends AbstractTouchKitIntegrationTest {
 
     public Selects() {
         NavigationView navigationView = new NavigationView();
@@ -40,7 +40,7 @@ public class Selects extends TouchKitWindow {
         
 
         navigationView.setContent(l);
-        setContent(navigationView);
+        addComponent(navigationView);
         
         TestUtils.makeSmallTabletSize(navigationView);
 
