@@ -42,5 +42,8 @@
 	<define-linker name="touchkitcachemanifest"
 		class="com.vaadin.addon.touchkit.gwt.CacheManifestLinker" />
 	<add-linker name="touchkitcachemanifest" />
+	
+	<add-linker name="xsiframe"/>
+	<set-configuration-property name="devModeRedirectEnabled" value="true" />
 
 </module>
