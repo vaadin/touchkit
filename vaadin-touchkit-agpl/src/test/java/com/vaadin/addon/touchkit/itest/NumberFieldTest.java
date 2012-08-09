@@ -9,26 +9,26 @@ import com.vaadin.ui.TextField;
 
 public class NumberFieldTest extends AbstractTouchKitIntegrationTest {
 
-	public NumberFieldTest() {
-		setDescription("This is NumberField test");
+    public NumberFieldTest() {
+        setDescription("This is NumberField test");
 
-		final NumberField nf = new NumberField("NumberField");
-		nf.setImmediate(true);
-		nf.addListener(new TextChangeListener() {
-			public void textChange(TextChangeEvent event) {
-				Notification.show("New numberfield value: " + event.getText());
-			}
-		});
+        final NumberField nf = new NumberField("NumberField");
+        nf.setImmediate(true);
+        nf.addListener(new TextChangeListener() {
+            public void textChange(TextChangeEvent event) {
+                Notification.show("New numberfield value: " + event.getText());
+            }
+        });
 
-		final TextField tf = new TextField("TextField");
-		tf.setImmediate(true);
-		tf.addListener(new TextChangeListener() {
-			public void textChange(TextChangeEvent event) {
-				nf.setValue(event.getText());
-			}
-		});
+        final TextField tf = new TextField("TextField");
+        tf.setImmediate(true);
+        tf.addListener(new TextChangeListener() {
+            public void textChange(TextChangeEvent event) {
+                nf.setValue(event.getText());
+            }
+        });
 
-		addComponent(tf);
-		addComponent(nf);
-	}
+        addComponent(tf);
+        addComponent(nf);
+    }
 }

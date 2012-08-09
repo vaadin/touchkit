@@ -8,14 +8,14 @@ import com.vaadin.terminal.gwt.client.ui.textfield.TextFieldConnector;
 @Connect(com.vaadin.addon.touchkit.ui.NumberField.class)
 public class NumberFieldConnector extends TextFieldConnector {
 
-	@Override
-	protected Widget createWidget() {
-		return GWT.create(NumberFieldWidget.class);
-	}
+    @Override
+    protected Widget createWidget() {
+        return GWT.create(NumberFieldWidget.class);
+    }
 
-	@Override
-	public NumberFieldWidget getWidget() {
-		return (NumberFieldWidget) super.getWidget();
-	}
+    @Override
+    public NumberFieldWidget getWidget() {
+        return (NumberFieldWidget) super.getWidget();
+    }
 
 }
