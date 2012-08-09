@@ -548,9 +548,10 @@ public abstract class BootstrapHandler implements RequestHandler {
         
       boolean viewportOpen = false;
           viewportOpen = prepareViewPort(viewportOpen, page);
-          page.write("width=device-widdth");
+          page.write("width=device-width");
           viewportOpen = prepareViewPort(viewportOpen, page);
           page.write("user-scalable=no");
+          viewportOpen = prepareViewPort(viewportOpen, page);
           page.write("initial-scale=1");
           viewportOpen = prepareViewPort(viewportOpen, page);
           page.write("maximum-scale=1");
