@@ -195,6 +195,14 @@ public abstract class BootstrapHandler implements RequestHandler {
         return context;
     }
 
+    public BootstrapContext createContext(WrappedRequest request,
+            WrappedResponse response, Application application, Integer rootId,
+            Map map) {
+        BootstrapContext context = new BootstrapContext(response, request,
+                application, rootId);
+        return context;
+    }
+
     protected String getMainDivStyle(BootstrapContext context) {
         return null;
     }
