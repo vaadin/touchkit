@@ -1,15 +1,18 @@
 package com.vaadin.addon.touchkit.ui;
 
-import java.util.Map;
+import java.io.Serializable;
+import java.lang.reflect.Method;
 
-import com.vaadin.terminal.PaintException;
-import com.vaadin.terminal.PaintTarget;
+import com.vaadin.addon.touchkit.gwt.client.vaadincomm.NavigationButtonRpc;
+import com.vaadin.shared.MouseEventDetails;
+import com.vaadin.tools.ReflectTools;
+import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 
 /**
- * A {@link Button} implementation optimized to be used inside a
- * {@link NavigationManager}.
+ * A Button implementation optimized to be used inside a
+ * {@link NavigationManager} or generally in touch devices.
  * <p>
  * Clicking button will automatically navigate to the target view if one is
  * defined in this button (via constructor or {@link #setTargetView(Component)}
@@ -19,12 +22,12 @@ import com.vaadin.ui.Component;
  * Note that navigation will only work when the button is used inside a
  * {@link NavigationManager}, otherwise it will work as a regular {@link Button}.
  */
-public class NavigationButton extends Button {
+public class NavigationButton extends AbstractComponent {
 
     private Component targetView;
 
     private String targetViewCaption;
-
+    
     /**
      * Creates a new navigation button.
      * 
@@ -32,7 +35,8 @@ public class NavigationButton extends Button {
      *            the Button caption
      */
     public NavigationButton(String caption) {
-        super(caption);
+        this();
+        setCaption(caption);
     }
 
     /**
@@ -43,7 +47,7 @@ public class NavigationButton extends Button {
      *            the view to navigate to when pressed
      */
     public NavigationButton(Component targetView) {
-        super(targetView.getCaption());
+        this(targetView.getCaption());
         this.targetView = targetView;
     }
 
@@ -57,14 +61,20 @@ public class NavigationButton extends Button {
      *            the view to navigate to when pressed
      */
     public NavigationButton(String caption, Component targetView) {
-        super(caption);
+        this(caption);
         this.targetView = targetView;
     }
 
     /**
-     * @see Button#Button()
+     * Creates a navigation button without caption nor target view.
      */
     public NavigationButton() {
+        registerRpc(new NavigationButtonRpc() {
+            @Override
+            public void click() {
+                NavigationButton.this.click();
+            }
+        });
     }
 
     // @Override
@@ -202,6 +212,87 @@ public class NavigationButton extends Button {
      */
     public void setTargetViewCaption(String targetViewCaption) {
         this.targetViewCaption = targetViewCaption;
+    }
+    
+    /**
+     * Click event. This event is thrown, when the button is clicked.
+     */
+    public class NavigationButtonClickEvent extends Component.Event {
+
+        /**
+         * New instance of text change event.
+         * 
+         * @param source
+         *            the Source of the event.
+         */
+        public NavigationButtonClickEvent(Component source) {
+            super(source);
+        }
+
+    }
+
+    /**
+     * Interface for listening for a {@link NavigationButtonClickEvent} fired by a
+     * {@link Component}.
+     */
+    public interface NavigationButtonClickListener extends Serializable {
+
+        public static final Method BUTTON_CLICK_METHOD = ReflectTools
+                .findMethod(NavigationButtonClickListener.class, "buttonClick",
+                        NavigationButtonClickEvent.class);
+
+        /**
+         * Called when a {@link Button} has been clicked. A reference to the
+         * button is given by {@link NavigationButtonClickEvent#getButton()}.
+         * 
+         * @param event
+         *            An event containing information about the click.
+         */
+        public void buttonClick(NavigationButtonClickEvent event);
+
+    }
+
+    /**
+     * Adds the button click listener.
+     * 
+     * @param listener
+     *            the Listener to be added.
+     */
+    public void addClickListener(NavigationButtonClickListener listener) {
+        addListener(NavigationButtonClickEvent.class, listener,
+                NavigationButtonClickListener.BUTTON_CLICK_METHOD);
+    }
+
+    /**
+     * Removes the button click listener.
+     * 
+     * @param listener
+     *            the Listener to be removed.
+     */
+    public void removeClickListener(NavigationButtonClickListener listener) {
+        removeListener(NavigationButtonClickEvent.class, listener,
+                NavigationButtonClickListener.BUTTON_CLICK_METHOD);
+    }
+
+    /**
+     * Simulates a button click, notifying all server-side listeners.
+     * 
+     * No action is taken is the button is disabled.
+     */
+    public void click() {
+        if (isEnabled() && !isReadOnly()) {
+            fireClick();
+        }
+    }
+
+    /**
+     * Fires a click event to all listeners without any event details.
+     * 
+     * In subclasses, override {@link #fireClick(MouseEventDetails)} instead of
+     * this method.
+     */
+    protected void fireClick() {
+        fireEvent(new NavigationButtonClickEvent(this));
     }
 
 }

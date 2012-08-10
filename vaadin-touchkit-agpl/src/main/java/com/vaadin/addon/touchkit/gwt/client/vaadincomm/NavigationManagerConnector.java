@@ -6,19 +6,15 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.addon.touchkit.gwt.client.VNavigationManager;
 import com.vaadin.addon.touchkit.ui.NavigationManager;
-import com.vaadin.shared.ComponentState;
-import com.vaadin.shared.communication.SharedState;
 import com.vaadin.shared.ui.Connect;
 import com.vaadin.terminal.gwt.client.ComponentConnector;
 import com.vaadin.terminal.gwt.client.ConnectorHierarchyChangeEvent;
-import com.vaadin.terminal.gwt.client.Util;
-import com.vaadin.terminal.gwt.client.VConsole;
 import com.vaadin.terminal.gwt.client.ui.AbstractComponentContainerConnector;
 import com.vaadin.terminal.gwt.client.ui.layout.ElementResizeEvent;
 import com.vaadin.terminal.gwt.client.ui.layout.ElementResizeListener;
 
 @Connect(NavigationManager.class)
-public class VNavigationManagerConnector extends
+public class NavigationManagerConnector extends
         AbstractComponentContainerConnector {
 
     @Override

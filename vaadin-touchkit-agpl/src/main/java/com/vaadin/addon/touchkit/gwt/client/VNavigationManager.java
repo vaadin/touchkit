@@ -279,8 +279,8 @@ public class VNavigationManager extends ComplexPanel {
     }
 
     public void onNaviButtonClick(VNavigationButton vNavigationButton) {
-        String nextViewId = vNavigationButton.getNextViewId();
-        if (nextViewId != null) {
+//        String nextViewId = vNavigationButton.getNextViewId();
+//        if (nextViewId != null) {
             // Paintable paintable = client.getPaintable(nextViewId);
             // if (paintable != null) {
             // if (paintable == nextView) {
@@ -294,9 +294,9 @@ public class VNavigationManager extends ComplexPanel {
             // return;
             // }
             // }
-        }
-        preparePlaceHolder(vNavigationButton);
-        animateHorizontally(-1);
+//        }
+//        preparePlaceHolder(vNavigationButton);
+//        animateHorizontally(-1);
     }
 
     public void navigateBackward() {
@@ -321,8 +321,8 @@ public class VNavigationManager extends ComplexPanel {
 
     private void preparePlaceHolder(VNavigationButton vNavigationButton) {
         Window.alert("PREPARE PLACEHOLDER FIXME");
-        String innerText = vNavigationButton.getNextViewCaption();
-        getPlaceHolder().setHTML(innerText);
+//        String innerText = vNavigationButton.getNextViewCaption();
+//        getPlaceHolder().setHTML(innerText);
         getPlaceHolder().moveToNextPosition();
         if (nextView != null) {
             moveAside(nextView);

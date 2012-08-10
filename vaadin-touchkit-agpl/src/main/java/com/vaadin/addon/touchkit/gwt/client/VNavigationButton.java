@@ -11,13 +11,13 @@ import com.vaadin.terminal.gwt.client.Paintable;
 import com.vaadin.terminal.gwt.client.UIDL;
 import com.vaadin.terminal.gwt.client.ui.Icon;
 
-public class VNavigationButton extends HTML implements Paintable {
+public class VNavigationButton extends HTML {
     private static final String NAVBUTTON_CLASSNAME = "v-touchkit-navbutton";
-    private String nextViewId;
-    private ApplicationConnection client;
-    private String caption;
     private boolean enabled;
-    private String nextViewCaption;
+    private Widget targetWidget;
+    private String placeHolderCaption;
+    private String caption;
+    private Icon icon;
 
     public VNavigationButton() {
         setStyleName(NAVBUTTON_CLASSNAME);
@@ -26,11 +26,11 @@ public class VNavigationButton extends HTML implements Paintable {
                 if (enabled) {
                     getElement().focus();
                     navigate();
-//                    String pid = client.getPid(getElement());
-//                    // client.updateVariable(pid, "mousedetails",
-//                    // new MouseEventDetails(event.getNativeEvent())
-//                    // .toString(), false);
-//                    client.updateVariable(pid, "state", true, true);
+                    // String pid = client.getPid(getElement());
+                    // // client.updateVariable(pid, "mousedetails",
+                    // // new MouseEventDetails(event.getNativeEvent())
+                    // // .toString(), false);
+                    // client.updateVariable(pid, "state", true, true);
                 }
             }
         });
@@ -51,51 +51,47 @@ public class VNavigationButton extends HTML implements Paintable {
         return (VNavigationManager) parent2;
     }
 
-    public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
-        if (client.updateComponent(this, uidl, false)) {
-            return;
-        }
-        this.client = client;
-        caption = uidl.getStringAttribute("caption");
-        setText(caption);
-        nextViewCaption = uidl.getStringAttribute("nvc");
-        enabled = !uidl.getBooleanAttribute("disabled");
-
-        if (uidl.hasAttribute("icon")) {
-            Icon icon = new Icon(client, uidl.getStringAttribute("icon"));
-            getElement().insertFirst(icon.getElement());
-        }
-
-        if (uidl.hasAttribute("description")) {
-            String stringAttribute = uidl.getStringAttribute("description");
-            SpanElement desc = Document.get().createSpanElement();
-            desc.setClassName(NAVBUTTON_CLASSNAME + "-desc");
-            desc.setInnerHTML(stringAttribute);
-            getElement().insertFirst(desc);
-        }
-
-        if (uidl.hasAttribute("nv")) {
-            setNextViewId(uidl.getStringAttribute("nv"));
-        }
-    }
-
-    private void setNextViewId(String nextViewId) {
-        this.nextViewId = nextViewId;
-    }
-
-    public String getNextViewId() {
-        return nextViewId;
+    @Override
+    public void setText(String text) {
+        this.caption = text;
+        super.setText(text);
     }
 
     public String getCaption() {
         return caption;
     }
 
-    public String getNextViewCaption() {
-        if (nextViewCaption != null) {
-            return nextViewCaption;
+    public void setTargetWidget(Widget widget) {
+        this.targetWidget = widget;
+    }
+
+    public void setPlaceHolderCaption(String targetViewCaption) {
+        this.placeHolderCaption = targetViewCaption;
+    }
+
+    public String getPlaceHolderCaption() {
+        if (placeHolderCaption != null) {
+            return placeHolderCaption;
         }
         return getCaption();
+    }
+
+    public void setIcon(Icon newIcon) {
+        getElement().insertFirst(newIcon.getElement());
+        this.icon = newIcon;
+    }
+
+    public Icon getIcon() {
+        return icon;
+    }
+
+    public void setDescription(String description) {
+        if (description != null) {
+            SpanElement desc = Document.get().createSpanElement();
+            desc.setClassName(NAVBUTTON_CLASSNAME + "-desc");
+            desc.setInnerHTML(description);
+            getElement().insertFirst(desc);
+        }
     }
 
 }

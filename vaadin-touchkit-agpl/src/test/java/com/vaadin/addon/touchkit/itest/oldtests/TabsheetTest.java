@@ -4,13 +4,13 @@ import org.junit.Ignore;
 
 import com.vaadin.addon.touchkit.TouchKitTestApp;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
+import com.vaadin.addon.touchkit.ui.NavigationButton.NavigationButtonClickEvent;
+import com.vaadin.addon.touchkit.ui.NavigationButton.NavigationButtonClickListener;
 import com.vaadin.addon.touchkit.ui.NavigationManager;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.TabBarView;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
@@ -18,7 +18,7 @@ import com.vaadin.ui.TabSheet.Tab;
 import com.vaadin.ui.VerticalLayout;
 
 @Ignore
-public class TabsheetTest extends TabBarView implements ClickListener {
+public class TabsheetTest extends TabBarView implements NavigationButtonClickListener {
 
     public TabsheetTest() {
 
@@ -74,10 +74,10 @@ public class TabsheetTest extends TabBarView implements ClickListener {
 
         NavigationButton navigationButton = new NavigationButton("Test me");
         navigationButton.setDescription("no yep");
-        navigationButton.addListener(this);
+        navigationButton.addClickListener(this);
         componentGroup.addComponent(navigationButton);
         navigationButton = new NavigationButton("Me too");
-        navigationButton.addListener(this);
+        navigationButton.addClickListener(this);
         componentGroup.addComponent(navigationButton);
 
         navigationView.setContent(componentGroup);
@@ -92,10 +92,10 @@ public class TabsheetTest extends TabBarView implements ClickListener {
 
     }
 
-    public void buttonClick(ClickEvent event) {
+    public void buttonClick(NavigationButtonClickEvent event) {
 
-        String caption2 = event.getButton().getCaption();
-        NavigationView view = (NavigationView) event.getButton().getParent()
+        String caption2 = event.getComponent().getCaption();
+        NavigationView view = (NavigationView) event.getComponent().getParent()
                 .getParent();
 
         NavigationView navigationView = new NavigationView(caption2);
@@ -106,10 +106,10 @@ public class TabsheetTest extends TabBarView implements ClickListener {
 
         NavigationButton navigationButton = new NavigationButton("Test me");
         navigationButton.setDescription("no yep");
-        navigationButton.addListener(this);
+        navigationButton.addClickListener(this);
         componentGroup.addComponent(navigationButton);
         navigationButton = new NavigationButton("Me too");
-        navigationButton.addListener(this);
+        navigationButton.addClickListener(this);
         componentGroup.addComponent(navigationButton);
 
         navigationView.setContent(componentGroup);

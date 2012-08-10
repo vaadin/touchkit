@@ -1,11 +1,9 @@
 package com.vaadin.addon.touchkit.itest.oldtests;
 
 import com.vaadin.addon.touchkit.ui.NavigationButton;
+import com.vaadin.addon.touchkit.ui.NavigationButton.NavigationButtonClickEvent;
+import com.vaadin.addon.touchkit.ui.NavigationButton.NavigationButtonClickListener;
 import com.vaadin.addon.touchkit.ui.NavigationManager;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
@@ -65,8 +63,8 @@ public class NavPanelTestWithNavButtons extends NavigationManager implements
 			addComponent(new Label("Nav view " + counter++));
 			addComponent(prev);
 			addComponent(next);
-			prev.addListener(new ClickListener() {
-				public void buttonClick(ClickEvent event) {
+			prev.addClickListener(new NavigationButtonClickListener() {
+				public void buttonClick(NavigationButtonClickEvent event) {
 					/*
 					 * Hack to make test somewhat working.
 					 * addAttribute(Paintable) don't support painting un
