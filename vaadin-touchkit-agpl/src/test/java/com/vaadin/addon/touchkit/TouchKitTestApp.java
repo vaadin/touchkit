@@ -241,7 +241,7 @@ public class TouchKitTestApp extends Root {
                 Class<?> forName = Class.forName(className);
                 if (forName != null) {
                     CssLayout newInstance = (CssLayout) forName.newInstance();
-                    addComponent(newInstance);
+                    setContent(newInstance);
                 }
                 return;
             } catch (ClassNotFoundException e) {
