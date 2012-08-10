@@ -31,7 +31,9 @@ import com.vaadin.terminal.gwt.client.Util;
 import com.vaadin.terminal.gwt.client.VConsole;
 import com.vaadin.terminal.gwt.client.ui.TouchScrollDelegate;
 
-public class VSwipeView extends com.vaadin.terminal.gwt.client.ui.csslayout.VCssLayout implements ScrollHandler {
+public class VSwipeView extends
+        com.vaadin.terminal.gwt.client.ui.csslayout.VCssLayout implements
+        ScrollHandler {
 
     private static final double SPEED_THRESHOLD = 0.35;
     private static final String CLASSNAME = "v-touchkit-navview";
@@ -201,11 +203,13 @@ public class VSwipeView extends com.vaadin.terminal.gwt.client.ui.csslayout.VCss
                     if (np.getPreviousView() != null
                             && (deltaX > getOffsetWidth() / 2 || lastSpeed > SPEED_THRESHOLD)) {
                         // navigate backward
-                        np.navigateBackward(true);
+                        // FIXME
+                        // np.navigateBackward(true);
                     } else if (np.getNextView() != null
                             && (deltaX < -getOffsetWidth() / 2 || (lastSpeed < -SPEED_THRESHOLD))) {
                         // navigate forward
-                        np.navigateForward(true);
+                        // FIXME
+                        // np.navigateForward(true);
                     } else {
                         np.setHorizontalOffset(0, true);
                     }
@@ -215,20 +219,20 @@ public class VSwipeView extends com.vaadin.terminal.gwt.client.ui.csslayout.VCss
         }
     }
 
-//    @Override
-//    public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
-//        rendering = true;
-//        this.client = client;
-//        super.updateFromUIDL(uidl, client);
-//        Util.runWebkitOverflowAutoFix(getContainerElement());
-//        rendering = false;
-//        np = VNavigationButton.findNavigationPanel(this);
-//    }
-//
+    // @Override
+    // public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
+    // rendering = true;
+    // this.client = client;
+    // super.updateFromUIDL(uidl, client);
+    // Util.runWebkitOverflowAutoFix(getContainerElement());
+    // rendering = false;
+    // np = VNavigationButton.findNavigationPanel(this);
+    // }
+    //
     public void onScroll(ScrollEvent event) {
         if (client != null && isAttached()) {
-//            client.updateVariable(client.getPid(this), "sp",
-//                    getContainerElement().getScrollTop(), false);
+            // client.updateVariable(client.getPid(this), "sp",
+            // getContainerElement().getScrollTop(), false);
         }
     }
 

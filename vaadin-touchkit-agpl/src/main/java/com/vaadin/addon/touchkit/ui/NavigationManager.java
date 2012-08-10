@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Stack;
 
+import com.vaadin.addon.touchkit.gwt.client.vaadincomm.NavigationManagerSharedState;
 import com.vaadin.addon.touchkit.ui.NavigationManager.NavigationEvent.Direction;
 import com.vaadin.event.ComponentEventListener;
 import com.vaadin.tools.ReflectTools;
@@ -50,10 +51,6 @@ public class NavigationManager extends AbstractComponentContainer {
     private Stack<Component> viewStack = new Stack<Component>();
     private boolean maintainBreadcrump = true;
 
-    private Component currentComponent;
-    private Component previousComponent;
-    private Component nextComponent;
-
     /**
      * Constructs a {@link NavigationManager} that is 100% wide and high.
      */
@@ -68,6 +65,11 @@ public class NavigationManager extends AbstractComponentContainer {
     public NavigationManager(Component c) {
         this();
         navigateTo(c);
+    }
+    
+    @Override
+    public NavigationManagerSharedState getState() {
+        return (NavigationManagerSharedState) super.getState();
     }
 
     /**
@@ -99,12 +101,12 @@ public class NavigationManager extends AbstractComponentContainer {
         if (c == null) {
             throw new UnsupportedOperationException(
                     "Some component must always be visible");
-        } else if (c == currentComponent) {
+        } else if (c == getCurrentComponent()) {
             /*
              * Already navigated to this component.
              */
             return;
-        } else if (previousComponent == c) {
+        } else if (getPreviousComponent() == c) {
             /*
              * Same as navigateBack
              */
@@ -112,37 +114,37 @@ public class NavigationManager extends AbstractComponentContainer {
             return;
         }
 
-        if (nextComponent != c) {
-            if (nextComponent != null) {
-                removeComponent(nextComponent);
-                nextComponent = null;
+        if (getNextComponent() != c) {
+            if (getNextComponent() != null) {
+                removeComponent(getNextComponent());
+                getState().setNextComponent(null);
             }
             addComponent(c);
             if (c instanceof NavigationView) {
                 NavigationView view = (NavigationView) c;
                 if (view.getPreviousComponent() == null) {
-                    view.setPreviousComponent(currentComponent);
+                    view.setPreviousComponent((Component) getCurrentComponent());
                 }
             }
         } else {
-            nextComponent = null;
+            getState().setNextComponent(null);
         }
-        if (previousComponent != null) {
-            removeComponent(previousComponent);
+        if (getPreviousComponent() != null) {
+            removeComponent(getPreviousComponent());
             if (isMaintainBreadcrump()) {
-                getViewStack().push(previousComponent);
+                getViewStack().push(getPreviousComponent());
             }
         }
-        previousComponent = currentComponent;
-        currentComponent = c;
+        getState().setPreviousComponent(getCurrentComponent());
+        getState().setCurrentComponent(c);
         notifyViewOfBecomingVisible();
         requestRepaint();
         fireEvent(new NavigationEvent(this, Direction.FORWARD));
     }
 
     private void notifyViewOfBecomingVisible() {
-        if (currentComponent instanceof NavigationView) {
-            NavigationView v = (NavigationView) currentComponent;
+        if (getCurrentComponent() instanceof NavigationView) {
+            NavigationView v = (NavigationView) getCurrentComponent();
             v.onBecomingVisible();
             /*
              * TODO consider forcing setting the previous component here.
@@ -156,24 +158,25 @@ public class NavigationManager extends AbstractComponentContainer {
      * essentially forgetting) the component that was previously visible.
      */
     public void navigateBack() {
-        if (previousComponent == null) {
+        if (getPreviousComponent() == null) {
             return;
         }
-        if (nextComponent != null) {
-            removeComponent(nextComponent);
+        if (getNextComponent() != null) {
+            removeComponent(getNextComponent());
         }
         // nextComponent is kept for the animation and in case the user
         // navigates 'back to the future':
-        nextComponent = currentComponent;
-        currentComponent = previousComponent;
+        getState().setNextComponent(getCurrentComponent());
+        getState().setCurrentComponent(getPreviousComponent());
         if (isMaintainBreadcrump()) {
-            previousComponent = getViewStack().isEmpty() ? null
-                    : getViewStack().pop();
+            getState().setPreviousComponent(
+            getViewStack().isEmpty() ? null
+                    : getViewStack().pop());
         } else {
-            previousComponent = null;
+            getState().setPreviousComponent(null);
         }
-        if (previousComponent != null) {
-            addComponent(previousComponent);
+        if (getPreviousComponent() != null) {
+            addComponent(getPreviousComponent());
         }
         notifyViewOfBecomingVisible();
         requestRepaint();
@@ -190,21 +193,21 @@ public class NavigationManager extends AbstractComponentContainer {
      * @param newcurrentComponent
      */
     public void setCurrentComponent(Component newcurrentComponent) {
-        if (currentComponent != newcurrentComponent) {
-            if (currentComponent != null) {
-                removeComponent(currentComponent);
+        if (getCurrentComponent() != newcurrentComponent) {
+            if (getCurrentComponent() != null) {
+                removeComponent((Component) getCurrentComponent());
             }
-            currentComponent = newcurrentComponent;
+            getState().setCurrentComponent(newcurrentComponent);
             addComponent(newcurrentComponent);
-            if (previousComponent != null
-                    && currentComponent instanceof NavigationView) {
-                NavigationView view = (NavigationView) currentComponent;
-                view.setPreviousComponent(previousComponent);
+            if (getPreviousComponent() != null
+                    && getCurrentComponent() instanceof NavigationView) {
+                NavigationView view = (NavigationView) getCurrentComponent();
+                view.setPreviousComponent(getPreviousComponent());
             }
-            if (nextComponent != null
-                    && nextComponent instanceof NavigationView) {
-                NavigationView view = (NavigationView) nextComponent;
-                view.setPreviousComponent(currentComponent);
+            if (getNextComponent() != null
+                    && getNextComponent() instanceof NavigationView) {
+                NavigationView view = (NavigationView) getNextComponent();
+                view.setPreviousComponent((Component) getCurrentComponent());
 
             }
             requestRepaint();
@@ -217,7 +220,7 @@ public class NavigationManager extends AbstractComponentContainer {
      * @return the component that is currently visible
      */
     public Component getCurrentComponent() {
-        return currentComponent;
+        return (Component) getState().getCurrentComponent();
     }
 
     /**
@@ -227,16 +230,16 @@ public class NavigationManager extends AbstractComponentContainer {
      * @param newPreviousComponent
      */
     public void setPreviousComponent(Component newPreviousComponent) {
-        if (previousComponent != newPreviousComponent) {
-            if (previousComponent != null) {
-                removeComponent(previousComponent);
+        if (getPreviousComponent() != newPreviousComponent) {
+            if (getPreviousComponent() != null) {
+                removeComponent(getPreviousComponent());
             }
-            previousComponent = newPreviousComponent;
-            if (currentComponent instanceof NavigationView) {
-                NavigationView view = (NavigationView) currentComponent;
+            getState().setPreviousComponent(newPreviousComponent);
+            if (getCurrentComponent() instanceof NavigationView) {
+                NavigationView view = (NavigationView) getCurrentComponent();
                 view.setPreviousComponent(newPreviousComponent);
             }
-            if (previousComponent != null) {
+            if (getPreviousComponent() != null) {
                 addComponent(newPreviousComponent);
             }
             requestRepaint();
@@ -249,7 +252,7 @@ public class NavigationManager extends AbstractComponentContainer {
      * @return the previous component, or null if n/a
      */
     public Component getPreviousComponent() {
-        return previousComponent;
+        return (Component) getState().getPreviousComponent();
     }
 
     /**
@@ -260,13 +263,13 @@ public class NavigationManager extends AbstractComponentContainer {
      * view is rendered.
      */
     public void setNextComponent(Component nextComponent) {
-        if (this.nextComponent == nextComponent) {
+        if (this.getNextComponent() == nextComponent) {
             return;
         }
-        if (this.nextComponent != null) {
-            removeComponent(this.nextComponent);
+        if (this.getNextComponent() != null) {
+            removeComponent(this.getNextComponent());
         }
-        this.nextComponent = nextComponent;
+        getState().setNextComponent(nextComponent);
         if (nextComponent != null) {
             addComponent(nextComponent);
         }
@@ -280,7 +283,7 @@ public class NavigationManager extends AbstractComponentContainer {
      * @return the next component, or null id n/a
      */
     public Component getNextComponent() {
-        return nextComponent;
+        return (Component) getState().getNextComponent();
     }
 
     /**
@@ -324,17 +327,22 @@ public class NavigationManager extends AbstractComponentContainer {
 //    }
 
     public Iterator<Component> getComponentIterator() {
-        ArrayList<Component> components = new ArrayList<Component>(3);
-        if (previousComponent != null) {
-            components.add(previousComponent);
-        }
-        if (currentComponent != null) {
-            components.add(currentComponent);
-        }
-        if (nextComponent != null) {
-            components.add(nextComponent);
-        }
+        ArrayList<Component> components = getComponents();
         return components.iterator();
+    }
+
+    private ArrayList<Component> getComponents() {
+        ArrayList<Component> components = new ArrayList<Component>(3);
+        if (getPreviousComponent() != null) {
+            components.add(getPreviousComponent());
+        }
+        if (getCurrentComponent() != null) {
+            components.add(getCurrentComponent());
+        }
+        if (getNextComponent() != null) {
+            components.add(getNextComponent());
+        }
+        return components;
     }
 
     public static class NavigationEvent extends com.vaadin.ui.Component.Event {
@@ -394,8 +402,7 @@ public class NavigationManager extends AbstractComponentContainer {
     }
 
     public int getComponentCount() {
-        // TODO Auto-generated method stub
-        return 0;
+        return getComponents().size();
     }
 
 }
