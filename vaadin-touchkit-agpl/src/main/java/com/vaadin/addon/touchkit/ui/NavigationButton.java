@@ -4,11 +4,16 @@ import java.io.Serializable;
 import java.lang.reflect.Method;
 
 import com.vaadin.addon.touchkit.gwt.client.vaadincomm.NavigationButtonRpc;
+import com.vaadin.addon.touchkit.gwt.client.vaadincomm.NavigationButtonSharedState;
+import com.vaadin.addon.touchkit.ui.NavigationManager.NavigationListener;
+import com.vaadin.shared.Connector;
 import com.vaadin.shared.MouseEventDetails;
 import com.vaadin.tools.ReflectTools;
 import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.ComponentContainer.ComponentAttachEvent;
+import com.vaadin.ui.ComponentContainer.ComponentAttachListener;
 
 /**
  * A Button implementation optimized to be used inside a
@@ -23,11 +28,9 @@ import com.vaadin.ui.Component;
  * {@link NavigationManager}, otherwise it will work as a regular {@link Button}.
  */
 public class NavigationButton extends AbstractComponent {
-
-    private Component targetView;
-
-    private String targetViewCaption;
     
+    private ComponentAttachListener componentAttachListener;
+
     /**
      * Creates a new navigation button.
      * 
@@ -48,7 +51,7 @@ public class NavigationButton extends AbstractComponent {
      */
     public NavigationButton(Component targetView) {
         this(targetView.getCaption());
-        this.targetView = targetView;
+        setTargetView(targetView);
     }
 
     /**
@@ -62,7 +65,7 @@ public class NavigationButton extends AbstractComponent {
      */
     public NavigationButton(String caption, Component targetView) {
         this(caption);
-        this.targetView = targetView;
+        setTargetView(targetView);
     }
 
     /**
@@ -76,36 +79,18 @@ public class NavigationButton extends AbstractComponent {
             }
         });
     }
+    
+    @Override
+    public void updateState() {
+        super.updateState();
+        System.out.println("updateState() d" + getConnectorId() + " in " + getParent().getDebugId() + " enabled" + isConnectorEnabled() +" tvce:" + getTargetView().isConnectorEnabled());
+    }
 
-    // @Override
-    // protected void fireClick() {
-    // /*
-    // * TODO remove debug timeout
-    // */
-    // // try {
-    // // Thread.sleep(300);
-    // // } catch (InterruptedException e) {
-    // // // TODO Auto-generated catch block
-    // // e.printStackTrace();
-    // // }
-    // if (targetView != null) {
-    // getNavigationPanel().navigateTo(targetView);
-    // }
-    // super.fireClick();
-    // }
-
-//    FIXME
-//    @Override
-//    public void changeVariables(Object source, Map<String, Object> variables) {
-//        // FIXME since #6605 click implementation in Button sucks. Fix it then
-//        // uncomment the previous method or something.
-//        // super.changeVariables(source, variables);
-//        if (targetView != null) {
-//            getNavigationManager().navigateTo(targetView);
-//        }
-//        fireClick();
-//    }
-
+    @Override
+    public NavigationButtonSharedState getState() {
+        return (NavigationButtonSharedState) super.getState();
+    }
+    
     /**
      * Gets the @link {@link NavigationManager} in which this button is
      * contained.
@@ -120,19 +105,6 @@ public class NavigationButton extends AbstractComponent {
         return (NavigationManager) p;
     }
 
-//    FIXME
-//    @Override
-//    public void paintContent(PaintTarget target) throws PaintException {
-//        super.paintContent(target);
-//        if (targetView != null && targetView.getApplication() != null) {
-//            target.addAttribute("nv", targetView);
-//        }
-//        String nvc = getTargetViewCaption();
-//        if (nvc != null && !nvc.equals(getCaption())) {
-//            target.addAttribute("nvc", nvc);
-//        }
-//    }
-
     /**
      * Sets the view that will be navigated to when the button is pressed.
      * <p>
@@ -143,8 +115,40 @@ public class NavigationButton extends AbstractComponent {
      * @param targetView
      */
     public void setTargetView(Component targetView) {
-        this.targetView = targetView;
+        getState().setTargetView(targetView);
         requestRepaint();
+    }
+    
+    @Override
+    public void attach() {
+        super.attach();
+        NavigationManager navigationManager = getNavigationManager();
+        if(navigationManager != null) {
+            navigationManager.addListener(getComponentAttachListener());
+        }
+    }
+    
+    @Override
+    public void detach() {
+        if(componentAttachListener != null) {
+            getNavigationManager().removeListener(componentAttachListener);
+        }
+        super.detach();
+    }
+    
+    private ComponentAttachListener getComponentAttachListener() {
+        if(componentAttachListener == null) {
+            componentAttachListener = new ComponentAttachListener() {
+                @Override
+                public void componentAttachedToContainer(ComponentAttachEvent event) {
+                    Component attachedComponent = event.getAttachedComponent();
+                    if(getTargetView() == attachedComponent) {
+                        requestRepaint();
+                    }
+                }
+            };
+        }
+        return componentAttachListener;
     }
 
     /**
@@ -158,17 +162,7 @@ public class NavigationButton extends AbstractComponent {
      */
     @Override
     public String getCaption() {
-        String caption2 = super.getCaption();
-        if (caption2 == null) {
-            /*
-             * Use caption from target view unless explicitly set for this
-             * button
-             */
-            if (targetView != null && targetView.getCaption() != null) {
-                return targetView.getCaption();
-            }
-        }
-        return caption2;
+        return super.getCaption();
     }
 
     /**
@@ -179,7 +173,7 @@ public class NavigationButton extends AbstractComponent {
      * @see #setTargetView(Component)
      */
     public Component getTargetView() {
-        return targetView;
+        return (Component) getState().getTargetView();
     }
 
     /**
@@ -194,13 +188,7 @@ public class NavigationButton extends AbstractComponent {
      * @return the caption that will be used for placeholder of the target view.
      */
     public String getTargetViewCaption() {
-        if (targetViewCaption != null) {
-            return targetViewCaption;
-        }
-        if (targetView != null && targetView.getCaption() != null) {
-            return targetView.getCaption();
-        }
-        return getCaption();
+        return getState().getTargetViewCaption();
     }
 
     /**
@@ -211,7 +199,8 @@ public class NavigationButton extends AbstractComponent {
      *            the explicit caption of the target view.
      */
     public void setTargetViewCaption(String targetViewCaption) {
-        this.targetViewCaption = targetViewCaption;
+        getState().setTargetViewCaption(targetViewCaption);
+        requestRepaint();
     }
     
     /**
@@ -281,6 +270,12 @@ public class NavigationButton extends AbstractComponent {
      */
     public void click() {
         if (isEnabled() && !isReadOnly()) {
+            Connector targetView = getState().getTargetView();
+            
+            if (targetView != null) {
+                getNavigationManager().navigateTo((Component) targetView);
+            }
+
             fireClick();
         }
     }

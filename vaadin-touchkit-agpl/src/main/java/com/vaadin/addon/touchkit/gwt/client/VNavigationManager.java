@@ -1,6 +1,7 @@
 package com.vaadin.addon.touchkit.gwt.client;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.RepeatingCommand;
@@ -13,9 +14,6 @@ import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.vaadin.terminal.gwt.client.RenderSpace;
-import com.vaadin.terminal.gwt.client.UIDL;
-import com.vaadin.terminal.gwt.client.Util;
 import com.vaadin.terminal.gwt.client.VConsole;
 import com.vaadin.terminal.gwt.client.ui.VLazyExecutor;
 
@@ -42,10 +40,9 @@ public class VNavigationManager extends ComplexPanel {
     	var me = this;
         el.addEventListener("webkitTransitionEnd",function(event) {
         	if(event.target == el) {
-    //        	FIXME
-    //    	    	$entry(
-    //    	        	me.@com.vaadin.addon.touchkit.gwt.client.VNavigationManager::onTransitionEnd()()
-    //    	        );
+        	    	$entry(
+        	        	me.@com.vaadin.addon.touchkit.gwt.client.VNavigationManager::onTransitionEnd()()
+        	        );
         	}
         },false);
     }-*/;
@@ -57,6 +54,10 @@ public class VNavigationManager extends ComplexPanel {
             setWidth(pendingWidth);
             pendingWidth = null;
         }
+        for (Widget w : detachAfterAnimation) {
+            w.removeFromParent();
+        }
+        detachAfterAnimation.clear();
     }
 
     static boolean rerendering = false;
@@ -147,7 +148,6 @@ public class VNavigationManager extends ComplexPanel {
 
     private int getPixelWidth() {
         int offsetWidth = getOffsetWidth();
-        VConsole.error("se koko on perketi" + offsetWidth);
         return offsetWidth;
     }
 
@@ -175,7 +175,6 @@ public class VNavigationManager extends ComplexPanel {
         } else if (prevView == w) {
             navigateBackward();
         } else {
-            Window.alert("FOOBAR");
             // replace current with given
             if (currentView != null) {
                 if (currentView == w) {
@@ -193,12 +192,13 @@ public class VNavigationManager extends ComplexPanel {
             return;
         }
         if (prevView != null) {
-            VConsole.error("Replacing previous view");
             remove(prevView);
         }
         if (w != null) {
-            if(w.getParent() != null) {
-                throw new RuntimeException("P Component already has a parent " + w.getElement().getId() + " parent" + w.getParent().getElement().getId());
+            if (w.getParent() != null) {
+                throw new RuntimeException("P Component already has a parent "
+                        + w.getElement().getId() + " parent"
+                        + w.getParent().getElement().getId());
             }
             add(w, -currentWrapperPos - 1);
         }
@@ -206,15 +206,17 @@ public class VNavigationManager extends ComplexPanel {
     }
 
     public void setNextWidget(Widget w) {
-        if(nextView == w) {
+        if (nextView == w) {
             return;
         }
         if (nextView != null) {
             remove(nextView);
         }
         if (w != null) {
-            if(w.getParent() != null) {
-                throw new RuntimeException("P Component already has a parent " + w.getElement().getId() + " parent" + w.getParent().getElement().getId());
+            if (w.getParent() != null) {
+                throw new RuntimeException("P Component already has a parent "
+                        + w.getElement().getId() + " parent"
+                        + w.getParent().getElement().getId());
             }
             add(w, -currentWrapperPos + 1);
         }
@@ -278,27 +280,6 @@ public class VNavigationManager extends ComplexPanel {
         setPosition(child, pos);
     }
 
-    public void onNaviButtonClick(VNavigationButton vNavigationButton) {
-//        String nextViewId = vNavigationButton.getNextViewId();
-//        if (nextViewId != null) {
-            // Paintable paintable = client.getPaintable(nextViewId);
-            // if (paintable != null) {
-            // if (paintable == nextView) {
-            // navigateForward(false);
-            // return;
-            // } else if (paintable == prevView) {
-            // /*
-            // * Back button.
-            // */
-            // navigateBackward(false);
-            // return;
-            // }
-            // }
-//        }
-//        preparePlaceHolder(vNavigationButton);
-//        animateHorizontally(-1);
-    }
-
     public void navigateBackward() {
         animateHorizontally(1);
         if (nextView != null) {
@@ -308,7 +289,7 @@ public class VNavigationManager extends ComplexPanel {
         currentView = prevView;
         prevView = null;
     }
-    
+
     public void navigateForward() {
         animateHorizontally(-1);
         if (prevView != null) {
@@ -319,18 +300,12 @@ public class VNavigationManager extends ComplexPanel {
         nextView = null;
     }
 
-    private void preparePlaceHolder(VNavigationButton vNavigationButton) {
-        Window.alert("PREPARE PLACEHOLDER FIXME");
-//        String innerText = vNavigationButton.getNextViewCaption();
-//        getPlaceHolder().setHTML(innerText);
+    private void preparePlaceHolder(String placeholdercaption) {
+        getPlaceHolder().setHTML(placeholdercaption);
         getPlaceHolder().moveToNextPosition();
         if (nextView != null) {
             moveAside(nextView);
         }
-
-        prevView = currentView;
-        currentView = null;
-
     }
 
     public void resetPositionsAndChildSizes() {
@@ -413,17 +388,6 @@ public class VNavigationManager extends ComplexPanel {
 
     }
 
-    /**
-     * TODO check if this can be removed.
-     */
-    VLazyExecutor verifyPositions = new VLazyExecutor(350,
-            new ScheduledCommand() {
-                public void execute() {
-                    VConsole.log("Verifying positions");
-                    resetPositionsAndChildSizes();
-                }
-            });
-
     public void setHorizontalOffset(int deltaX, boolean animate) {
         final Style style = wrapper.getStyle();
         if (!animate) {
@@ -446,6 +410,25 @@ public class VNavigationManager extends ComplexPanel {
 
     public Widget getNextView() {
         return nextView;
+    }
+
+    private Collection<Widget> detachAfterAnimation = new ArrayList<Widget>();
+
+    /**
+     * Navigates to a placeholder component that mimics VNavigationView by
+     * default. During the animation developers can commonly make a server visit
+     * and fetch real content for new view. The given string is used in the
+     * placeholder as a caption.
+     * 
+     * @param placeHolderCaption
+     */
+    public void navigateToPlaceholder(String placeHolderCaption) {
+        preparePlaceHolder(placeHolderCaption);
+        animateHorizontally(-1);
+
+        detachAfterAnimation.add(prevView);
+        prevView = currentView;
+        currentView = null;
     }
 
 }

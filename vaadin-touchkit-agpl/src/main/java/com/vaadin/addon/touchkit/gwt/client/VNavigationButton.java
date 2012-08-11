@@ -6,14 +6,11 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
-import com.vaadin.terminal.gwt.client.ApplicationConnection;
-import com.vaadin.terminal.gwt.client.Paintable;
-import com.vaadin.terminal.gwt.client.UIDL;
 import com.vaadin.terminal.gwt.client.ui.Icon;
 
 public class VNavigationButton extends HTML {
     private static final String NAVBUTTON_CLASSNAME = "v-touchkit-navbutton";
-    private boolean enabled;
+    private boolean enabled = true;
     private Widget targetWidget;
     private String placeHolderCaption;
     private String caption;
@@ -26,20 +23,28 @@ public class VNavigationButton extends HTML {
                 if (enabled) {
                     getElement().focus();
                     navigate();
-                    // String pid = client.getPid(getElement());
-                    // // client.updateVariable(pid, "mousedetails",
-                    // // new MouseEventDetails(event.getNativeEvent())
-                    // // .toString(), false);
-                    // client.updateVariable(pid, "state", true, true);
                 }
             }
         });
     }
 
+    public Widget getTargetWidget() {
+        return targetWidget;
+    }
+
     private void navigate() {
         VNavigationManager panel = findNavigationPanel(this);
         if (panel != null) {
-            panel.onNaviButtonClick(this);
+            if (getTargetWidget() != null) {
+                if(getTargetWidget().getParent() == panel) {
+                    panel.setCurrentWidget(getTargetWidget());
+                } else {
+                    panel.setNextWidget(getTargetWidget());
+                    panel.navigateForward();
+                }
+            } else {
+                panel.navigateToPlaceholder(getPlaceHolderCaption());
+            }
         }
     }
 

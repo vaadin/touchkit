@@ -8,8 +8,10 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.addon.touchkit.gwt.client.VNavigationButton;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
+import com.vaadin.shared.ComponentState;
 import com.vaadin.shared.Connector;
 import com.vaadin.shared.ui.Connect;
+import com.vaadin.terminal.gwt.client.VConsole;
 import com.vaadin.terminal.gwt.client.communication.RpcProxy;
 import com.vaadin.terminal.gwt.client.communication.StateChangeEvent;
 import com.vaadin.terminal.gwt.client.ui.AbstractComponentConnector;
@@ -50,13 +52,17 @@ public class NavigationButtonConnector extends AbstractComponentConnector {
 
         Connector targetView = getState().getTargetView();
         if (targetView == null) {
+            VConsole.error("Targetview null, using placeholder target.");
             getWidget().setTargetWidget(null);
             getWidget()
                     .setPlaceHolderCaption(getState().getTargetViewCaption());
         } else {
+            VConsole.error("Targetview set.");
             getWidget().setPlaceHolderCaption(null);
             getWidget().setTargetWidget(
                     ((AbstractComponentConnector) targetView).getWidget());
+            VConsole.log(((ComponentState)targetView.getState()).getDebugId());
+            VConsole.log("W"+ ((AbstractComponentConnector) targetView).getWidget().getElement().getInnerText());
         }
 
         if (getState().getIcon() != null) {
@@ -67,7 +73,6 @@ public class NavigationButtonConnector extends AbstractComponentConnector {
         
         String description = getState().getDescription();
         getWidget().setDescription(description);
-
 
     }
 
