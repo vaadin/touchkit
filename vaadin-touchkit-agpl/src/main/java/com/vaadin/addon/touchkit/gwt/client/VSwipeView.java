@@ -14,8 +14,6 @@ import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseMoveHandler;
 import com.google.gwt.event.dom.client.MouseUpEvent;
 import com.google.gwt.event.dom.client.MouseUpHandler;
-import com.google.gwt.event.dom.client.ScrollEvent;
-import com.google.gwt.event.dom.client.ScrollHandler;
 import com.google.gwt.event.dom.client.TouchEndEvent;
 import com.google.gwt.event.dom.client.TouchEndHandler;
 import com.google.gwt.event.dom.client.TouchMoveEvent;
@@ -25,20 +23,24 @@ import com.google.gwt.event.dom.client.TouchStartHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
-import com.vaadin.terminal.gwt.client.ApplicationConnection;
+import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.terminal.gwt.client.BrowserInfo;
 import com.vaadin.terminal.gwt.client.Util;
 import com.vaadin.terminal.gwt.client.VConsole;
 import com.vaadin.terminal.gwt.client.ui.TouchScrollDelegate;
 
 public class VSwipeView extends
-        com.vaadin.terminal.gwt.client.ui.csslayout.VCssLayout implements
-        ScrollHandler {
+        com.vaadin.terminal.gwt.client.ui.csslayout.VCssLayout {
+    
+    public interface SwipeListener {
+        void onSwipeBack();
+        void onSwipeForward();
+    }
+    
+    private SwipeListener swipeListener;
 
     private static final double SPEED_THRESHOLD = 0.35;
-    private static final String CLASSNAME = "v-touchkit-navview";
-    private ApplicationConnection client;
-    private boolean rendering;
+    private static final String CLASSNAME = "v-touchkit-swipeview";
     private int dragstartX;
     private int dragstartY;
     private boolean dragging;
@@ -53,6 +55,8 @@ public class VSwipeView extends
     private Element scrollElement;
     private TouchStartEvent dragStartEvent;
     private TouchScrollDelegate touchScrollDelegate;
+
+    private boolean enabled = true;
 
     public VSwipeView() {
         setStyleName(CLASSNAME);
@@ -70,9 +74,7 @@ public class VSwipeView extends
         sinkEvents(Event.MOUSEEVENTS);
         DOM.sinkEvents(scrollElement, Event.ONSCROLL);
         touchScrollDelegate = new TouchScrollDelegate(scrollElement);
-
-        addHandler(this, ScrollEvent.getType());
-
+        
         addHandler(new TouchStartHandler() {
             public void onTouchStart(TouchStartEvent event) {
                 dragStartEvent = event;
@@ -117,11 +119,20 @@ public class VSwipeView extends
             }
         }, TouchEndEvent.getType());
     }
+    
+    
+    public boolean isEnabled() {
+        return enabled;
+    }
+    
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
     protected void dragStart(HumanInputEvent event) {
         NativeEvent ne = event.getNativeEvent();
         VConsole.log("Drag start" + ne.getType());
-        if (!dragging && np != null && !client.hasActiveRequest()) {
+        if (!dragging && np != null && isEnabled()) {
             dragging = true;
             touchDrag = Event.as(ne).getTypeInt() == Event.ONTOUCHSTART;
             dragstartX = Util.getTouchOrMouseClientX(ne);
@@ -130,14 +141,22 @@ public class VSwipeView extends
             if (!BrowserInfo.get().isTouchDevice()) {
                 // avoid drag start on images
                 // FIXME shouln't be this way, but disables dragstart on images
-                // in demo
+                // in demo with desktop browsers and this way makes development easier
                 Element el = ne.getEventTarget().cast();
-
                 String msg = el.getParentElement().getClassName();
                 if (msg.contains("embedded")) {
                     ne.preventDefault();
                 }
             }
+        }
+    }
+    
+    @Override
+    protected void onAttach() {
+        super.onAttach();
+        Widget parent2 = getParent();
+        if (parent2 instanceof VNavigationManager) {
+            np = (VNavigationManager) parent2;
         }
     }
 
@@ -203,13 +222,17 @@ public class VSwipeView extends
                     if (np.getPreviousView() != null
                             && (deltaX > getOffsetWidth() / 2 || lastSpeed > SPEED_THRESHOLD)) {
                         // navigate backward
-                        // FIXME
-                        // np.navigateBackward(true);
+                         np.navigateBackward();
+                         if(swipeListener != null) {
+                             swipeListener.onSwipeBack();
+                         }
                     } else if (np.getNextView() != null
                             && (deltaX < -getOffsetWidth() / 2 || (lastSpeed < -SPEED_THRESHOLD))) {
                         // navigate forward
-                        // FIXME
-                        // np.navigateForward(true);
+                         np.navigateForward();
+                         if(swipeListener != null) {
+                             swipeListener.onSwipeForward();
+                         }
                     } else {
                         np.setHorizontalOffset(0, true);
                     }
@@ -218,22 +241,17 @@ public class VSwipeView extends
             }
         }
     }
+    
+    public int getScrollTop()  {
+        return scrollElement.getScrollTop();
+    }
 
-    // @Override
-    // public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
-    // rendering = true;
-    // this.client = client;
-    // super.updateFromUIDL(uidl, client);
-    // Util.runWebkitOverflowAutoFix(getContainerElement());
-    // rendering = false;
-    // np = VNavigationButton.findNavigationPanel(this);
-    // }
-    //
-    public void onScroll(ScrollEvent event) {
-        if (client != null && isAttached()) {
-            // client.updateVariable(client.getPid(this), "sp",
-            // getContainerElement().getScrollTop(), false);
-        }
+    public SwipeListener getSwipeListener() {
+        return swipeListener;
+    }
+
+    public void setSwipeListener(SwipeListener swipeListener) {
+        this.swipeListener = swipeListener;
     }
 
 }

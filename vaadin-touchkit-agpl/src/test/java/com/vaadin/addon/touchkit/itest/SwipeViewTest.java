@@ -1,19 +1,25 @@
-package com.vaadin.addon.touchkit.itest.oldtests;
+package com.vaadin.addon.touchkit.itest;
 
-import java.net.URL;
+import java.io.IOException;
+import java.io.InputStream;
 
 import org.junit.Ignore;
 
+import com.vaadin.Application;
+import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
 import com.vaadin.addon.touchkit.ui.NavigationBar;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.addon.touchkit.ui.NavigationManager;
 import com.vaadin.addon.touchkit.ui.NavigationManager.NavigationEvent.Direction;
 import com.vaadin.addon.touchkit.ui.SwipeView;
-import com.vaadin.addon.touchkit.ui.TouchKitWindow;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
-import com.vaadin.terminal.DownloadStream;
+import com.vaadin.external.org.apache.commons.io.IOUtils;
+import com.vaadin.terminal.ExternalResource;
+import com.vaadin.terminal.RequestHandler;
+import com.vaadin.terminal.WrappedRequest;
+import com.vaadin.terminal.WrappedResponse;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Embedded;
@@ -24,10 +30,37 @@ import com.vaadin.ui.TextField;
 
 @SuppressWarnings("serial")
 @Ignore
-public class SwipeViewTest extends TouchKitWindow {
+public class SwipeViewTest extends AbstractTouchKitIntegrationTest {
 
     public SwipeViewTest() {
-        setContent(new SwipeViewTestMgr());
+        addComponent(new SwipeViewTestMgr());
+    }
+
+    @Override
+    public void attach() {
+        super.attach();
+
+        getApplication().addRequestHandler(new RequestHandler() {
+
+            @Override
+            public boolean handleRequest(Application application,
+                    WrappedRequest request, WrappedResponse response)
+                    throws IOException {
+                String requestPathInfo = request.getRequestPathInfo();
+                if (requestPathInfo.contains("winterphotos/")) {
+                    response.setCacheTime(60 * 60 * 1000);
+                    response.setContentType("image/jpeg");
+
+                    String ss = requestPathInfo.substring(requestPathInfo
+                            .lastIndexOf("/") + 1);
+                    InputStream resourceAsStream = getClass()
+                            .getResourceAsStream("/winterphotos/" + ss);
+                    IOUtils.copy(resourceAsStream, response.getOutputStream());
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     public static class SwipeViewTestMgr extends NavigationManager {
@@ -195,7 +228,8 @@ public class SwipeViewTest extends TouchKitWindow {
                         " "));
                 button = new NavigationButton(">");
                 navigationBar.setRightComponent(button);
-                addComponent(navigationBar);
+                // FIXME (add back when NavigationBar works.
+//                addComponent(navigationBar);
                 button.setStyleName("forward");
                 embedded.setWidth("100%");
                 addComponent(embedded);
@@ -214,34 +248,18 @@ public class SwipeViewTest extends TouchKitWindow {
             public void attach() {
                 super.attach();
 
-//                FIXME
-//                Window window = getWindow();
-//                window.addURIHandler(this);
-
-//                Application application = getApplication();
-//                if (application == null) {
-//                    throw new RuntimeException("WTF!!");
-//                }
-//                ExternalResource source = new ExternalResource(window.getURL()
-//                        + ss);
-//                embedded.setSource(source);
+                Application application = getApplication();
+                if (application == null) {
+                    throw new RuntimeException("WTF!!");
+                }
+                ExternalResource source = new ExternalResource(getApplication()
+                        .getURL() +"winterphotos/"+ ss);
+                embedded.setSource(source);
             }
 
             @Override
             public void detach() {
-//                getWindow().removeURIHandler(this);
                 super.detach();
-            }
-
-            public DownloadStream handleURI(URL context, String relativeUri) {
-                if (relativeUri.endsWith(ss)) {
-                    DownloadStream downloadStream = new DownloadStream(
-                            getClass().getResourceAsStream(
-                                    "/winterphotos/" + ss), "image/jpeg", ss);
-                    downloadStream.setCacheTime(60 * 60 * 1000);
-                    return downloadStream;
-                }
-                return null;
             }
         }
 

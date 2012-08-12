@@ -1,5 +1,7 @@
 package com.vaadin.addon.touchkit.ui;
 
+import com.vaadin.addon.touchkit.gwt.client.vaadincomm.SwipeViewRpc;
+import com.vaadin.addon.touchkit.gwt.client.vaadincomm.SwipeViewSharedState;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 
@@ -14,13 +16,33 @@ import com.vaadin.ui.CssLayout;
  */
 public class SwipeView extends CssLayout {
 
-    private int scrollPosition;
-
     /**
      * Creates a {@link SwipeView}.
      */
     public SwipeView() {
         setSizeFull();
+        registerRpc(new SwipeViewRpc() {
+            @Override
+            public void setScrollTop(int scrollTop) {
+                getState().setScrollTop(scrollTop);
+            }
+
+            @Override
+            public void navigateForward() {
+                getNavigationManager().navigateTo(
+                        getNavigationManager().getNextComponent());
+            }
+
+            @Override
+            public void navigateBackward() {
+                getNavigationManager().navigateBack();
+            }
+        });
+    }
+
+    @Override
+    public SwipeViewSharedState getState() {
+        return (SwipeViewSharedState) super.getState();
     }
 
     /**
@@ -34,31 +56,14 @@ public class SwipeView extends CssLayout {
         setCaption(caption);
     }
 
-//    FIXME
-//    @Override
-//    public void paintContent(PaintTarget target) throws PaintException {
-//        super.paintContent(target);
-//        target.addVariable(this, "sp", scrollPosition);
-//    }
-
     public void setScrollPosition(int scrollPosition) {
-        this.scrollPosition = scrollPosition;
+        getState().setScrollTop(scrollPosition);
         requestRepaint();
     }
 
     public int getScrollPosition() {
-        return scrollPosition;
+        return getState().getScrollTop();
     }
-
-//    FIXME
-//    @Override
-//    public void changeVariables(Object source, Map<String, Object> variables) {
-//        super.changeVariables(source, variables);
-//        Integer newScrollPosition = (Integer) variables.get("sp");
-//        if (newScrollPosition != null) {
-//            scrollPosition = newScrollPosition;
-//        }
-//    }
 
     /**
      * Gets the @link {@link NavigationManager} in which this view is contained.

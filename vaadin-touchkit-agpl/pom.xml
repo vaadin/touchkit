@@ -299,6 +299,13 @@
 			<scope>test</scope>
 			<version>4.10</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>LATEST</version>
+			<scope>test</scope>
+		</dependency>
     </dependencies>
 
 </project>
