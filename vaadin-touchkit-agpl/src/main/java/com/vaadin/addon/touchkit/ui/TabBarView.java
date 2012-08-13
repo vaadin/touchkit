@@ -181,6 +181,13 @@ public class TabBarView extends AbstractComponentContainer {
     }
 
     /**
+     * @return the currently selected Tab
+     */
+    public Tab getSelelectedTab() {
+        return getTabButton(currentComponent);
+    }
+
+    /**
      * @deprecated Behavior differs from regular {@link ComponentContainer}s,
      *             use the specialized API instead: {@link #addTab(Component)}
      *             and {@link #removeTab(Component)}
@@ -218,14 +225,14 @@ public class TabBarView extends AbstractComponentContainer {
         return null;
     }
 
-//    TODO
-//    @Override
-//    public void paintContent(PaintTarget target) throws PaintException {
-//        super.paintContent(target);
-//        toolbar.paint(target);
-//        currentComponent.paint(target);
-//
-//    }
+    // TODO
+    // @Override
+    // public void paintContent(PaintTarget target) throws PaintException {
+    // super.paintContent(target);
+    // toolbar.paint(target);
+    // currentComponent.paint(target);
+    //
+    // }
 
     private class TabButton extends Button implements Tab {
 
@@ -262,12 +269,12 @@ public class TabBarView extends AbstractComponentContainer {
             super.fireClick();
         }
 
-//        FIXME
-//        @Override
-//        protected void fireClick(MouseEventDetails details) {
-//            setSelectedTab(getComponent());
-//            super.fireClick(details);
-//        }
+        // FIXME
+        // @Override
+        // protected void fireClick(MouseEventDetails details) {
+        // setSelectedTab(getComponent());
+        // super.fireClick(details);
+        // }
 
     }
 
@@ -355,8 +362,7 @@ public class TabBarView extends AbstractComponentContainer {
     }
 
     public int getComponentCount() {
-        // TODO Auto-generated method stub
-        return 0;
+        return 1 + (currentComponent != null ? 1 : 0);
     }
 
 }
