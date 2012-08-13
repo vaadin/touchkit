@@ -1,17 +1,18 @@
 package com.vaadin.addon.touchkit.itest.oldtests;
 
+import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.addon.touchkit.ui.NavigationManager;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.TouchKitWindow;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 
-public class TargetViewCaption extends TouchKitWindow {
+public class TargetViewCaption extends AbstractTouchKitIntegrationTest {
 
     public TargetViewCaption() {
 
         NavigationManager navigationManager = new NavigationManager();
-        setContent(navigationManager);
+        addComponent(navigationManager);
 
         NavigationView iv = new NavigationView();
         iv.setCaption("Test placeholder caption");

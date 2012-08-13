@@ -1,21 +1,21 @@
 package com.vaadin.addon.touchkit.ui;
 
-import java.net.URL;
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.Properties;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.HashSet;
 
 import com.vaadin.Application;
-import com.vaadin.service.ApplicationContext;
-import com.vaadin.terminal.gwt.server.HttpServletRequestListener;
-import com.vaadin.terminal.gwt.server.WebApplicationContext;
+import com.vaadin.RootRequiresMoreInformationException;
+import com.vaadin.addon.touchkit.rootextensions.ApplicationIcons;
+import com.vaadin.addon.touchkit.rootextensions.IosWebAppSettings;
+import com.vaadin.addon.touchkit.rootextensions.ViewPortSettings;
+import com.vaadin.terminal.Extension;
+import com.vaadin.terminal.WrappedRequest;
+import com.vaadin.terminal.WrappedRequest.BrowserDetails;
+import com.vaadin.terminal.gwt.server.BootstrapFragmentResponse;
+import com.vaadin.terminal.gwt.server.BootstrapListener;
+import com.vaadin.terminal.gwt.server.BootstrapPageResponse;
 import com.vaadin.terminal.gwt.server.WebBrowser;
-import com.vaadin.ui.Root.LegacyWindow;
-import com.vaadin.ui.Window;
-import com.vaadin.ui.themes.BaseTheme;
+import com.vaadin.ui.Root;
 
 /**
  * TouchKitApplication is a specialized {@link Application} implementation to
@@ -42,128 +42,107 @@ import com.vaadin.ui.themes.BaseTheme;
  * Note, that only {@link TouchKitWindow}s are supported as top level windows.
  */
 @SuppressWarnings("serial")
-public abstract class TouchKitApplication extends Application.LegacyApplication implements
-        HttpServletRequestListener {
+public abstract class TouchKitApplication extends Application implements BootstrapListener {
 
     private boolean browserDetailsReady = false;
 
-    private static ThreadLocal<TouchKitApplication> activeApplication = new ThreadLocal<TouchKitApplication>();
-
     public TouchKitApplication() {
-        setTheme(BaseTheme.THEME_NAME);
+        addExtension(new ViewPortSettings());
+        addExtension(new IosWebAppSettings());
+        addExtension(new ApplicationIcons());
+        addBootstrapListener(this);
     }
+
+    private Collection<Extension> touchkitHostPageExtensions = new HashSet<Extension>();
+    
+    private void addExtension(Extension extension) {
+        touchkitHostPageExtensions.add(extension);
+    }
+    
+    /**
+     * 
+     * @return viewport settings used for this Root, null if this root has no
+     *         {@link ViewPortSettings} extension attached
+     */
+    public ViewPortSettings getViewPortSettings() {
+        for (Extension e : getTouchkitHostPageExtensions()) {
+            if (e instanceof ViewPortSettings) {
+                return (ViewPortSettings) e;
+            }
+        }
+        return null;
+    }
+    
+    private Collection<Extension> getTouchkitHostPageExtensions() {
+        return touchkitHostPageExtensions;
+    }
+
+    public IosWebAppSettings getIosWebAppSettings() {
+        for (Extension e : getTouchkitHostPageExtensions()) {
+            if (e instanceof IosWebAppSettings) {
+                return (IosWebAppSettings) e;
+            }
+        }
+        return null;
+    }
+
+    public ApplicationIcons getApplicationIcons() {
+        for (Extension e : getTouchkitHostPageExtensions()) {
+            if (e instanceof ApplicationIcons) {
+                return (ApplicationIcons) e;
+            }
+        }
+        return null;
+    }
+
 
     @Override
-    public void init() {
-//        FIXME
-//        setMainWindow(new TouchKitWindow());
-    }
+    protected Root getRoot(WrappedRequest request)
+            throws RootRequiresMoreInformationException {
+        BrowserDetails browserDetails = request.getBrowserDetails();
+        // This is a limitation of 7.0.0.alpha1 that there is no better way to
+        // check if WebBrowser has been fully initialized
+        if (!browserDetailsReady && browserDetails.getUriFragment() == null) {
+            throw new RootRequiresMoreInformationException();
+        }
+        browserDetailsReady = true;
 
-    /**
-     * Gets the active application instance for this thread. Allows one to do
-     * <code>MyTouchKitApplication.get()</code> to get the application instance
-     * anywhere in the UI code, provided we're in the request/response thread
-     * (using the ThreadLocal pattern).
-     * 
-     * @return the active application instance
-     */
-    public static TouchKitApplication get() {
-        return activeApplication.get();
-    }
-
-    /**
-     * @see WebApplicationContext#getBrowser()
-     */
-    public WebBrowser getBrowser() {
-        return ((WebApplicationContext) getContext()).getBrowser();
-    }
-
-    /**
-     * UI building should happen when this method is called. At this point all
-     * details in {@link WebBrowser} ({@link #getBrowser()}) is available - i.e
-     * the type of device and screen size is known, allowing for decisions about
-     * which type of UI to show. A {@link TouchKitWindow} is set as the main
-     * window.
-     */
-    public abstract void onBrowserDetailsReady();
-
-//    @Override
-//    public void setMainWindow(Window mainWindow) {
-//        if (mainWindow instanceof TouchKitWindow) {
-//            super.setMainWindow(mainWindow);
-//        } else {
-//            throw new IllegalArgumentException("Only "
-//                    + TouchKitWindow.class.getSimpleName()
-//                    + " can be set as main window");
-//        }
-//    }
-//
-//    @Override
-//    public TouchKitWindow getMainWindow() {
-//        return (TouchKitWindow) super.getMainWindow();
-//    }
-//
-//    @Override
-//    public TouchKitWindow getWindow(String name) {
-//        return (TouchKitWindow) super.getWindow(name);
-//    }
-
-    /**
-     * Performs two tasks:
-     * <ul>
-     * <li>Waits for browser details to become available, then calls
-     * {@link #onBrowserDetailsReady()}.</li>
-     * <li>Sets the active application instance for this thread, allowing it to
-     * be fetched within this reqest/response (or thread, more specifically)
-     * using {@link TouchKitApplication#get()} (ThreadLocal pattern)</li>
-     * </ul>
-     * 
-     * @see com.vaadin.terminal.gwt.server.HttpServletRequestListener#onRequestStart(javax.servlet.http.HttpServletRequest,
-     *      javax.servlet.http.HttpServletResponse)
-     */
-    public void onRequestStart(HttpServletRequest request,
-            HttpServletResponse response) {
-
-        activeApplication.set(this);
-
-        if (!browserDetailsReady) {
-            if (request.getParameter("repaintAll") != null) {
-                int viewWidth = Integer.parseInt(request.getParameter("vw"));
-                int viewHeight = Integer.parseInt(request.getParameter("vh"));
-                Collection<LegacyWindow> windows2 = getWindows();
-                for (Iterator<LegacyWindow> iterator = windows2.iterator(); iterator
-                        .hasNext();) {
-                    TouchKitWindow window = (TouchKitWindow) iterator.next();
-                    window.setWidth(viewWidth, TouchKitWindow.UNITS_PIXELS);
-                    window.setHeight(viewHeight, TouchKitWindow.UNITS_PIXELS);
-                }
-                browserDetailsReady = true;
-                if(isRunning()) {
-                	onBrowserDetailsReady();
-                }
-            }
+        
+        // could also use screen size, browser version etc.
+        if (browserDetails.getWebBrowser().isTouchDevice()) {
+            Root touchRoot = getTouchRoot(request);
+            return touchRoot;
+        } else {
+            return getFallbackRoot(request);
         }
     }
     
-//    @Override
-//    public void start(URL applicationUrl, Properties applicationProperties,
-//    		ApplicationContext context) {
-//    	super.start(applicationUrl, applicationProperties, context);
-//    	if(browserDetailsReady) {
-//    		onBrowserDetailsReady();
-//    	}
-//    }
+    public abstract Root getTouchRoot(WrappedRequest request);
+    
+    public Root getFallbackRoot(WrappedRequest request) {
+        return getTouchRoot(request);
+    }
+    
+    @Override
+    public void modifyBootstrapFragment(BootstrapFragmentResponse response) {
+        // NOP
+    }
 
-    /**
-     * Unsets the active application instance for this thread before the
-     * request/response ends (ThreadLocal pattern)
-     * 
-     * @see com.vaadin.terminal.gwt.server.HttpServletRequestListener#onRequestEnd(javax.servlet.http.HttpServletRequest,
-     *      javax.servlet.http.HttpServletResponse)
-     */
-    public void onRequestEnd(HttpServletRequest request,
-            HttpServletResponse response) {
-        activeApplication.set(null);
+    @Override
+    public void modifyBootstrapPage(BootstrapPageResponse response) {
+//        if(response.getRoot() != null) {
+//            for (Extension e : response.getRoot().getExtensions()) {
+//                if (e instanceof BootstrapListener) {
+//                    ((BootstrapListener) e).modifyBootstrapPage(response);
+//                }
+//            }
+//        } else {
+            for (Extension e : getTouchkitHostPageExtensions()) {
+                if (e instanceof BootstrapListener) {
+                    ((BootstrapListener) e).modifyBootstrapPage(response);
+                }
+            }
+//        }
     }
 
 }

@@ -2,6 +2,7 @@ package com.vaadin.addon.touchkit.itest.oldtests;
 
 import java.io.Serializable;
 
+import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.TouchKitWindow;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
@@ -14,10 +15,10 @@ import com.vaadin.ui.Form;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.NativeSelect;
 
-public class MeetingRoomView extends TouchKitWindow {
+public class MeetingRoomView extends AbstractTouchKitIntegrationTest {
 
     public MeetingRoomView() {
-        setContent(new RootView());
+        addComponent(new RootView());
     }
 
     public class RootView extends NavigationView implements Component {

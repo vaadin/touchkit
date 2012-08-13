@@ -2,6 +2,7 @@ package com.vaadin.addon.touchkit.itest.oldtests;
 
 import java.util.Iterator;
 
+import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
 import com.vaadin.addon.touchkit.ui.HorizontalComponentGroup;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.TouchKitWindow;
@@ -12,7 +13,7 @@ import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 
-public class ButtonsInComponentGroups extends TouchKitWindow {
+public class ButtonsInComponentGroups extends AbstractTouchKitIntegrationTest {
 
     public ButtonsInComponentGroups() {
         NavigationView navigationView = new NavigationView();
@@ -72,7 +73,7 @@ public class ButtonsInComponentGroups extends TouchKitWindow {
         
         navigationView.setLeftComponent(new Button("Left"));
         
-        setContent(navigationView);
+        addComponent(navigationView);
         TestUtils.makeSmallTabletSize(navigationView);
 
     }

@@ -1,5 +1,6 @@
 package com.vaadin.addon.touchkit.itest.oldtests;
 
+import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.TouchKitWindow;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
@@ -8,12 +9,12 @@ import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Link;
 
-public class PersonView extends TouchKitWindow {
+public class PersonView extends AbstractTouchKitIntegrationTest {
     private NavigationView view;
 
     public PersonView() {
         view = new NavigationView();
-        setContent(view);
+        addComponent(view);
         view.setCaption("Pekka Puupää");
         buildSimpleReadOnlyView();
         TestUtils.makeSmallTabletSize(view);

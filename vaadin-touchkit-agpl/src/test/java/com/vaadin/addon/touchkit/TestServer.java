@@ -12,6 +12,7 @@ import org.junit.Ignore;
 
 import com.vaadin.addon.touchkit.itest.oldtests.FallbackApplication;
 import com.vaadin.addon.touchkit.server.TouchKitApplicationServlet;
+import com.vaadin.terminal.gwt.server.ApplicationServlet;
 import com.vaadin.terminal.gwt.server.Constants;
 
 @Ignore
@@ -35,22 +36,23 @@ public class TestServer {
         WebAppContext context = new WebAppContext();
 
         ServletHolder servletHolder = new ServletHolder(
-                TouchKitApplicationServlet.class);
+                ApplicationServlet.class);
+        servletHolder.setInitParameter("application",
+                TouchKitTestApp.class.getName());
         servletHolder.setInitParameter("widgetset",
                 "com.vaadin.addon.touchkit.gwt.TouchKitWidgetSet");
-        servletHolder.setInitParameter("root",
-                TouchKitTestApp.class.getName());
+        servletHolder.setInitParameter("root", FakeRoot.class.getName());
 
         MimeTypes mimeTypes = context.getMimeTypes();
         mimeTypes.addMimeMapping("appcache", "text/cache-manifest");
         mimeTypes.addMimeMapping("manifest", "text/cache-manifest");
         context.setMimeTypes(mimeTypes);
 
-        // test fallback app and widgetset
-        servletHolder.setInitParameter("fallbackApplication",
-                FallbackApplication.class.getName());
-        servletHolder.setInitParameter("fallbackWidgetset",
-                Constants.DEFAULT_WIDGETSET);
+        // // test fallback app and widgetset
+        // servletHolder.setInitParameter("fallbackApplication",
+        // FallbackApplication.class.getName());
+        // servletHolder.setInitParameter("fallbackWidgetset",
+        // Constants.DEFAULT_WIDGETSET);
 
         File file = new File("./target");
         File[] listFiles = file.listFiles();
