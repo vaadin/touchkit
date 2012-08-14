@@ -1,5 +1,8 @@
 package com.vaadin.addon.touchkit.itest;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
 import com.vaadin.addon.touchkit.ui.UrlField;
 import com.vaadin.event.FieldEvents.TextChangeEvent;
@@ -15,7 +18,11 @@ public class UrlFieldTest extends AbstractTouchKitIntegrationTest {
         nf.setImmediate(true);
         nf.addListener(new TextChangeListener() {
             public void textChange(TextChangeEvent event) {
-                Notification.show("New urlfield value: " + event.getText());
+                try {
+                    Notification.show("New urlfield value: " + nf.getUrl());
+                } catch (MalformedURLException e) {
+                    Notification.show("Not valid: "+e.getMessage());
+                }
             }
         });
 
@@ -23,7 +30,11 @@ public class UrlFieldTest extends AbstractTouchKitIntegrationTest {
         tf.setImmediate(true);
         tf.addListener(new TextChangeListener() {
             public void textChange(TextChangeEvent event) {
-                nf.setValue(event.getText());
+                try {
+                    nf.setUrl(new URL(event.getText()));
+                } catch (MalformedURLException e) {
+                    Notification.show("Not valid: "+e.getMessage());
+                }
             }
         });
 

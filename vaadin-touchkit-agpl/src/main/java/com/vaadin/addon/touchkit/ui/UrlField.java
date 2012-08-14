@@ -49,13 +49,25 @@ public class UrlField extends TextField {
     public UrlField(String caption) {
         super(caption);
     }
-    
-    /*public URL getUrl() throws MalformedURLException {
+
+    /**
+     * Convenience getter to cast java.net.URL.
+     * 
+     * @return Field value as URL.
+     * @throws MalformedURLException
+     */
+    public URL getUrl() throws MalformedURLException {
         return new URL(getValue());
     }
-    
+
+    /**
+     * Convenience setter for java.net.URL
+     * 
+     * @param url
+     *            Field value to be set.
+     */
     public void setUrl(URL url) {
-        
-    }*/
+        setValue(url.toString());
+    }
 
 }
