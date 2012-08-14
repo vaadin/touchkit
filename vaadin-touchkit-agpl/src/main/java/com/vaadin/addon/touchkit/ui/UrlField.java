@@ -1,5 +1,8 @@
 package com.vaadin.addon.touchkit.ui;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import com.vaadin.data.Property;
 import com.vaadin.ui.TextField;
 
@@ -46,5 +49,13 @@ public class UrlField extends TextField {
     public UrlField(String caption) {
         super(caption);
     }
+    
+    /*public URL getUrl() throws MalformedURLException {
+        return new URL(getValue());
+    }
+    
+    public void setUrl(URL url) {
+        
+    }*/
 
 }
