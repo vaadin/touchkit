@@ -320,12 +320,9 @@ public class TouchKitTestApp extends TouchKitApplication {
                             // label2.setWidth("300px");
                             // label2.setHeight("50px");
                             return label2;
-                        } catch (InstantiationException e) {
+                        } catch (Exception e) {
                             // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        } catch (IllegalAccessException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
+                            //                            e.printStackTrace();
                         }
                         return null;
                     }
