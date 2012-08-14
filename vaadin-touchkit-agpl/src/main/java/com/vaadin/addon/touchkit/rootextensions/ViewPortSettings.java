@@ -131,7 +131,6 @@ public class ViewPortSettings extends AbstractExtension implements BootstrapList
 
     @Override
     public void modifyBootstrapPage(BootstrapPageResponse response) {
-        // FIXME change this part to use variables in this object
         
         Document document = response.getDocument();
         
@@ -145,18 +144,30 @@ public class ViewPortSettings extends AbstractExtension implements BootstrapList
         Element element = document.createElement("meta");
         element.attr("name", "viewport");
         StringBuilder content = new StringBuilder();
-        content.append("width=device-width");
-        content.append(",");
-        content.append("user-scalable=no");
-        content.append(",");
-        content.append("initial-scale=1");
-        content.append(",");
-        content.append("maximum-scale=1");
-        content.append(",");
-        content.append("minimum-scale=1");
+        boolean open = false;
+        open = addViewPortRule(content, open, "width", getViewPortWidth());
+        if(!isViewPortUserScalable()) {
+            open = addViewPortRule(content, open, "user-scalable", "no");
+        }
+        open = addViewPortRule(content, open, "initial-scale", getViewPortInitialScale());
+        open = addViewPortRule(content, open, "maximum-scale", getViewPortMaximumScale());
+        open = addViewPortRule(content, open, "minimum-scale", getViewPortMaximumScale());
         element.attr("content", content.toString());
         head.appendChild(element);
         
+    }
+
+    private boolean addViewPortRule(StringBuilder content, boolean open, String name, Object value){
+        if(value == null) {
+            return open;
+        }
+        if(open) {
+            content.append(",");
+        }
+        content.append(name);
+        content.append("=");
+        content.append(value);
+        return true;
     }
 
     
