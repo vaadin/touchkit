@@ -1,0 +1,25 @@
+Development instructions for TouchKit add-on
+
+Coding convetions are the same as in core Vaadin.
+
+Actual add-on  code lives in  vaadin-touchkit-agpl project. That is  also mainly
+used  for development.  Integration test  apps are  in src/test/java  directory.
+TestServer has  main method  that can  be run  during development  straight from
+IDE. TestServer is embedded jetty that uses port 7777
+
+Tests that  implement AbstractTouchKitTest  are listed automatically  on default
+screen and  can be  started by their  name (e.g. fully  qualified class  name or
+short name without com.vaadin.addon.touchkit.itest)
+
+Essential maven targets that are needed during development:
+
+mvn install // builds a snapshot release of the addon to your local repo
+mvn gwt:compile // compiles widgetset for testing
+mvn gwt:debug // starts gwt hosted mode and waits for remote debugger to be attached
+mvn gwt:run-codeserver // starts "superdevmode" server
+
+Automated    integration   tests    are    kept   in    a   separate    project:
+vaadin-touchkit-integrationt-tests.  It builds  a  war file  and during  install
+phase also executes interation  test scripts automatically. TestBench (WebDriver
+based) is used to execute tests. See README in that project for more details.
+
