@@ -7,14 +7,16 @@ import java.io.IOException;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
-public class TabsheetITCase extends AbstractTouchKitTest {
+import com.vaadin.addon.touchkit.itest.oldtests.Tabsheet;
+
+public class TabsheetITCase extends AbstractTestBenchTest {
 
     @Test
     public void testNavigationMananger() throws IOException, AssertionError,
             InterruptedException {
         startBrowser();
         try {
-            driver.navigate().to(BASEURL + "Tabsheet");
+            driver.navigate().to(BASEURL + Tabsheet.class.getName());
 
             try {
                 // Wait a moment to let scrollbar dissappear if testing on

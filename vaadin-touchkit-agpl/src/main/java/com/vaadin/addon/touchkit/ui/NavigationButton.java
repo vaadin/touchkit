@@ -5,7 +5,6 @@ import java.lang.reflect.Method;
 
 import com.vaadin.addon.touchkit.gwt.client.vaadincomm.NavigationButtonRpc;
 import com.vaadin.addon.touchkit.gwt.client.vaadincomm.NavigationButtonSharedState;
-import com.vaadin.addon.touchkit.ui.NavigationManager.NavigationListener;
 import com.vaadin.shared.Connector;
 import com.vaadin.shared.MouseEventDetails;
 import com.vaadin.tools.ReflectTools;
@@ -83,7 +82,6 @@ public class NavigationButton extends AbstractComponent {
     @Override
     public void updateState() {
         super.updateState();
-        System.out.println("updateState() d" + getConnectorId() + " in " + getParent().getDebugId() + " enabled" + isConnectorEnabled() +" tvce:" + getTargetView().isConnectorEnabled());
     }
 
     @Override

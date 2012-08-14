@@ -11,13 +11,15 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class SwipeViewITCase extends AbstractTouchKitTest {
+import com.vaadin.addon.touchkit.itest.SwipeViewTest;
+
+public class SwipeViewITCase extends AbstractTestBenchTest {
 
     @Test
     public void testSwipeView() throws IOException, AssertionError {
         startBrowser();
         try {
-            driver.navigate().to(BASEURL + "SwipeViewTest");
+            driver.navigate().to(BASEURL + SwipeViewTest.class.getName());
 
             for (int i = 0; i < 11; i++) {
                 List<WebElement> findElements = driver.findElements(By

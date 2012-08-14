@@ -6,13 +6,15 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-public class ButtonsInComponentGroupsITCase extends AbstractTouchKitTest {
+import com.vaadin.addon.touchkit.itest.oldtests.ButtonsInComponentGroups;
+
+public class ButtonsInComponentGroupsITCase extends AbstractTestBenchTest {
 
     @Test
     public void testSwipeView() throws IOException, AssertionError {
         startBrowser();
         try {
-            driver.navigate().to(BASEURL + "ButtonsInComponentGroups");
+            driver.navigate().to(BASEURL + ButtonsInComponentGroups.class.getName());
 
             assertTrue(testBench
                     .compareScreen(getReferenceImage("buttonsincomponentgroups.png")));

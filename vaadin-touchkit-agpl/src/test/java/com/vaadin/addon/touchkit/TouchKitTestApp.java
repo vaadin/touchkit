@@ -250,17 +250,9 @@ public class TouchKitTestApp extends TouchKitApplication {
         }
 
     }
-    
-    @Override
-    protected Root getRoot(WrappedRequest request)
-            throws RootRequiresMoreInformationException {
-        // TODO Auto-generated method stub
-        return super.getRoot(request);
-    }
 
-    @Override
     public Root getTouchRoot(WrappedRequest request) {
-        return new Root(){
+        return new Root() {
 
             @Override
             protected void init(WrappedRequest request) {
@@ -275,12 +267,13 @@ public class TouchKitTestApp extends TouchKitApplication {
                         if (requestPathInfo.startsWith("/com.")) {
                             className = requestPathInfo.substring(1);
                         } else {
-                            className = getClass().getPackage().getName() + ".itest."
-                                    + requestPathInfo.substring(1);
+                            className = getClass().getPackage().getName()
+                                    + ".itest." + requestPathInfo.substring(1);
                         }
                         Class<?> forName = Class.forName(className);
                         if (forName != null) {
-                            CssLayout newInstance = (CssLayout) forName.newInstance();
+                            CssLayout newInstance = (CssLayout) forName
+                                    .newInstance();
                             setContent(newInstance);
                             System.out.println("Initialized " + className);
                         }
@@ -302,12 +295,14 @@ public class TouchKitTestApp extends TouchKitApplication {
                 addComponent(label);
                 addComponent(new Label("TODO add list of available tests here"));
 
-                File itestroot = new File("src/test/java/"
-                        + getClass().getPackage().getName().replace(".", "/")
-                        + "/itest");
+                File itestroot = new File(
+                        "../vaadin-touchkit-agpl/src/test/java/"
+                                + getClass().getPackage().getName()
+                                        .replace(".", "/") + "/itest");
 
                 Collection<Class<? extends AbstractTouchKitIntegrationTest>> tests = new ArrayList<Class<? extends AbstractTouchKitIntegrationTest>>();
-                addTests(getClass().getPackage().getName() + ".itest", itestroot, tests);
+                addTests(getClass().getPackage().getName() + ".itest",
+                        itestroot, tests);
 
                 Table table = new Table();
                 BeanItemContainer<Class<? extends AbstractTouchKitIntegrationTest>> beanItemContainer = new BeanItemContainer<Class<? extends AbstractTouchKitIntegrationTest>>(
@@ -340,10 +335,12 @@ public class TouchKitTestApp extends TouchKitApplication {
                     public void itemClick(ItemClickEvent event) {
                         Class<?> itemId = (Class<?>) event.getItemId();
                         String canonicalName = itemId.getCanonicalName();
-                        Page.getCurrent().open(new ExternalResource(canonicalName));
+                        Page.getCurrent().open(
+                                new ExternalResource(canonicalName));
                     }
                 });
                 addComponent(table);
-            }};
+            }
+        };
     }
 }

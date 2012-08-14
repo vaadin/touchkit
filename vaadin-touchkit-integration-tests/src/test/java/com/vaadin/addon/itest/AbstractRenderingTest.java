@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-public abstract class AbstractRenderingTest extends AbstractTouchKitTest {
+public abstract class AbstractRenderingTest extends AbstractTestBenchTest {
 
     @Test
     public void test() throws IOException, AssertionError {

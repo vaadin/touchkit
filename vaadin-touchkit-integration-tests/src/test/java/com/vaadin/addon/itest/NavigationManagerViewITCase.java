@@ -7,14 +7,16 @@ import java.io.IOException;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
-public class NavigationManagerViewITCase extends AbstractTouchKitTest {
+import com.vaadin.addon.touchkit.itest.oldtests.NavigationManagerView;
+
+public class NavigationManagerViewITCase extends AbstractTestBenchTest {
 
     @Test
     public void testNavigationMananger() throws IOException, AssertionError,
             InterruptedException {
         startBrowser();
         try {
-            driver.navigate().to(BASEURL + "NavigationManagerView");
+            driver.navigate().to(BASEURL + NavigationManagerView.class.getName());
 
             driver.findElement(By.id("toSecondView")).click();
 

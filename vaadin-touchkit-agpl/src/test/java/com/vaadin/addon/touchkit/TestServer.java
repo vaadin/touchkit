@@ -10,10 +10,7 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.junit.Ignore;
 
-import com.vaadin.addon.touchkit.itest.oldtests.FallbackApplication;
-import com.vaadin.addon.touchkit.server.TouchKitApplicationServlet;
 import com.vaadin.terminal.gwt.server.ApplicationServlet;
-import com.vaadin.terminal.gwt.server.Constants;
 
 @Ignore
 public class TestServer {
@@ -41,7 +38,6 @@ public class TestServer {
                 TouchKitTestApp.class.getName());
         servletHolder.setInitParameter("widgetset",
                 "com.vaadin.addon.touchkit.gwt.TouchKitWidgetSet");
-        servletHolder.setInitParameter("root", FakeRoot.class.getName());
 
         MimeTypes mimeTypes = context.getMimeTypes();
         mimeTypes.addMimeMapping("appcache", "text/cache-manifest");
