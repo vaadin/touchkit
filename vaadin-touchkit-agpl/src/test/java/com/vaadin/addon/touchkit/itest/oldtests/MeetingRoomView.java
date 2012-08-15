@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
 import com.vaadin.addon.touchkit.ui.NavigationView;
-import com.vaadin.addon.touchkit.ui.TouchKitWindow;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItem;

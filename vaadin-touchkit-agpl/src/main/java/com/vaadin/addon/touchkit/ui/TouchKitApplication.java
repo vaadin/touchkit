@@ -7,6 +7,7 @@ import com.vaadin.Application;
 import com.vaadin.RootRequiresMoreInformationException;
 import com.vaadin.addon.touchkit.rootextensions.ApplicationIcons;
 import com.vaadin.addon.touchkit.rootextensions.IosWebAppSettings;
+import com.vaadin.addon.touchkit.rootextensions.OfflineModeSettings;
 import com.vaadin.addon.touchkit.rootextensions.ViewPortSettings;
 import com.vaadin.terminal.Extension;
 import com.vaadin.terminal.WrappedRequest;
@@ -50,6 +51,7 @@ public abstract class TouchKitApplication extends Application implements Bootstr
         addExtension(new ViewPortSettings());
         addExtension(new IosWebAppSettings());
         addExtension(new ApplicationIcons());
+        addExtension(new OfflineModeSettings());
         addBootstrapListener(this);
     }
 
@@ -68,6 +70,15 @@ public abstract class TouchKitApplication extends Application implements Bootstr
         for (Extension e : getTouchkitHostPageExtensions()) {
             if (e instanceof ViewPortSettings) {
                 return (ViewPortSettings) e;
+            }
+        }
+        return null;
+    }
+    
+    public OfflineModeSettings getOfflineModeSettings() {
+        for (Extension e : getTouchkitHostPageExtensions()) {
+            if (e instanceof OfflineModeSettings) {
+                return (OfflineModeSettings) e;
             }
         }
         return null;
@@ -107,16 +118,21 @@ public abstract class TouchKitApplication extends Application implements Bootstr
         }
         browserDetailsReady = true;
 
-        
+        Root r;
         // could also use screen size, browser version etc.
         if (browserDetails.getWebBrowser().isTouchDevice()) {
-            Root touchRoot = getTouchRoot(request);
-            return touchRoot;
+            r = getTouchRoot(request);
         } else {
-            return getFallbackRoot(request);
+            r = getFallbackRoot(request);
         }
+        ensureInitialized(r);
+        return r;
     }
     
+    private void ensureInitialized(Root r) {
+        // TODO add or clone extensions for roots here??
+    }
+
     public abstract Root getTouchRoot(WrappedRequest request);
     
     public Root getFallbackRoot(WrappedRequest request) {

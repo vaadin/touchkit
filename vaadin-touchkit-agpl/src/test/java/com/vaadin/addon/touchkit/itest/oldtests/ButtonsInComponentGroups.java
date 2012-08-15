@@ -5,7 +5,6 @@ import java.util.Iterator;
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
 import com.vaadin.addon.touchkit.ui.HorizontalComponentGroup;
 import com.vaadin.addon.touchkit.ui.NavigationView;
-import com.vaadin.addon.touchkit.ui.TouchKitWindow;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;

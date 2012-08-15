@@ -4,7 +4,6 @@ import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.addon.touchkit.ui.NavigationManager;
 import com.vaadin.addon.touchkit.ui.NavigationView;
-import com.vaadin.addon.touchkit.ui.TouchKitWindow;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 
 public class TargetViewCaption extends AbstractTouchKitIntegrationTest {
