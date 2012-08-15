@@ -28,7 +28,7 @@ public class SmokeITCase {
         String line;
         boolean isInitPage = false;
         while ((line = bufferedReader.readLine()) != null) {
-            if (line.contains("vaadin.vaadinConfigurations")) {
+            if (line.contains("vaadin.initApplication")) {
                 isInitPage = true;
             }
         }
