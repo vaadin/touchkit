@@ -1,11 +1,8 @@
 package com.vaadin.addon.touchkit.ui;
 
-import java.util.LinkedList;
 import java.util.Map;
 
 import com.vaadin.addon.touchkit.server.TouchKitApplicationServlet;
-import com.vaadin.addon.touchkit.service.Position;
-import com.vaadin.addon.touchkit.service.PositionCallback;
 import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;
 import com.vaadin.terminal.gwt.server.WebApplicationContext;
@@ -27,7 +24,6 @@ public abstract class TouchKitWindow extends Root {
 
     private boolean persistentSessionCookie;
 
-    private LinkedList<PositionCallback> positionCbs;
     private boolean goOffline;
     private int offlineTimeout = 10;
 
@@ -35,31 +31,14 @@ public abstract class TouchKitWindow extends Root {
     }
 
     /**
-     * This method is used to detect the current geographic position of the
-     * client. The detection happens asynchronously and the position is reported
-     * to the callback given as argument.
-     * 
-     * @param positionCallback
-     */
-    public void detectCurrentPosition(PositionCallback positionCallback) {
-        if (positionCbs == null) {
-            positionCbs = new LinkedList<PositionCallback>();
-        }
-        positionCbs.add(positionCallback);
-        requestRepaint();
-    }
-
-    /**
      * Old paintcontent method, to be removed.
+     * 
      * @param target
      * @throws PaintException
      */
     public synchronized void oldPaintContent(PaintTarget target)
             throws PaintException {
         super.paintContent(target);
-        if (positionCbs != null && !positionCbs.isEmpty()) {
-            target.addAttribute("geoloc", true);
-        }
         if (isPersistentSessionCookie()) {
             WebApplicationContext context = (WebApplicationContext) getApplication()
                     .getContext();
@@ -76,18 +55,18 @@ public abstract class TouchKitWindow extends Root {
     @Override
     public void changeVariables(Object source, Map<String, Object> variables) {
         super.changeVariables(source, variables);
-        if (variables.containsKey("position")) {
-            for (PositionCallback cb : positionCbs) {
-                cb.onSuccess(new Position((String) variables.get("position")));
-            }
-            positionCbs.clear();
-        } else if (variables.containsKey("positionError")) {
-            for (PositionCallback cb : positionCbs) {
-                Integer errorCode = (Integer) variables.get("positionError");
-                cb.onFailure(errorCode.intValue());
-            }
-            positionCbs.clear();
-        }
+        // if (variables.containsKey("position")) {
+        // for (PositionCallback cb : positionCbs) {
+        // cb.onSuccess(new Position((String) variables.get("position")));
+        // }
+        // positionCbs.clear();
+        // } else if (variables.containsKey("positionError")) {
+        // for (PositionCallback cb : positionCbs) {
+        // Integer errorCode = (Integer) variables.get("positionError");
+        // cb.onFailure(errorCode.intValue());
+        // }
+        // positionCbs.clear();
+        // }
     }
 
     /**
