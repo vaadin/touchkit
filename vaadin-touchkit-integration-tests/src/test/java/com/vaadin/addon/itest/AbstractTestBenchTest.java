@@ -29,8 +29,6 @@ public class AbstractTestBenchTest {
         Parameters.setScreenshotErrorDirectory("target/testbench/errors/");
         Parameters.setScreenshotComparisonTolerance(0.01);
         Parameters.setCaptureScreenshotOnFailure(true);
-        System.setProperty("webdriver.chrome.driver",
-                "/usr/local/bin/chromedriver");
     }
 
     @After
