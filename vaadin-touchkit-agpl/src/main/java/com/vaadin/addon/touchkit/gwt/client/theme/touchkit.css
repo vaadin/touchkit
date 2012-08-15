@@ -463,7 +463,7 @@
 	display: inline-block;
 	}
 
-.v-touchkit-toolbar .v-button:active .v-button-wrap {
+.v-touchkit-toolbar .v-button .v-button-wrap {
 	background: transparent;
 	}
 
