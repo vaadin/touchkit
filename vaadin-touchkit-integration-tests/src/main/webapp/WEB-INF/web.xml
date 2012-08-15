@@ -9,7 +9,7 @@
 	</context-param>
 	<servlet>
 		<servlet-name>TouchTest</servlet-name>
-		<servlet-class>com.vaadin.addon.touchkit.server.TouchKitApplicationServlet</servlet-class>
+		<servlet-class>com.vaadin.terminal.gwt.server.ApplicationServlet</servlet-class>
 		<init-param>
 			<description>
 			Vaadin application class to start</description>
