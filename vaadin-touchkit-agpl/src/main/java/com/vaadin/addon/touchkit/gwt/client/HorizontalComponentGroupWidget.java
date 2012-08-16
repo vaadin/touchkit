@@ -22,7 +22,7 @@ public class HorizontalComponentGroupWidget extends FlowPanel {
      *            A {@link VMarginInfo} object that provides info on
      *            top/left/bottom/right margins
      */
-    protected void setMarginStyles(VMarginInfo margins) {
+    public void setMarginStyles(VMarginInfo margins) {
         setStyleName(getElement(), CLASSNAME + "-" + StyleConstants.MARGIN_TOP,
                 margins.hasTop());
         setStyleName(getElement(), CLASSNAME + "-"

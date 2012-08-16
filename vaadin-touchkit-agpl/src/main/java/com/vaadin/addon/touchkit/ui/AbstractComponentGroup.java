@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.vaadin.addon.touchkit.gwt.client.AbstractComponentGroupState;
+import com.vaadin.addon.touchkit.gwt.client.vaadincomm.AbstractComponentGroupState;
 import com.vaadin.ui.AbstractComponentContainer;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Layout.MarginInfo;

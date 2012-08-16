@@ -1,4 +1,4 @@
-package com.vaadin.addon.touchkit.gwt.client;
+package com.vaadin.addon.touchkit.gwt.client.vaadincomm;
 
 import com.vaadin.shared.ui.AbstractLayoutState;
 

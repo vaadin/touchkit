@@ -66,7 +66,7 @@ public class VerticalComponentGroupWidget extends FlowPanel {
      *            A {@link VMarginInfo} object that provides info on
      *            top/left/bottom/right margins
      */
-    protected void setMarginStyles(VMarginInfo margins) {
+    public void setMarginStyles(VMarginInfo margins) {
         content.setStyleName(getElement(), TAGNAME + "-"
                 + StyleConstants.MARGIN_TOP, margins.hasTop());
         content.setStyleName(getElement(), TAGNAME + "-"
