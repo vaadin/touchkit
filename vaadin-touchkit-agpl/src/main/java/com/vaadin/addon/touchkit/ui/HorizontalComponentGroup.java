@@ -10,8 +10,6 @@ package com.vaadin.addon.touchkit.ui;
  */
 public class HorizontalComponentGroup extends AbstractComponentGroup {
 
-    private static final String STYLE_NAME = "v-touchkit-horizontalcomponentgroup";
-
     /**
      * Creates a horizontal component group
      */
@@ -21,9 +19,8 @@ public class HorizontalComponentGroup extends AbstractComponentGroup {
 
     public HorizontalComponentGroup(String caption) {
         super(caption);
+        setWidth(null);
         setMargin(false);
-        setStyleName(STYLE_NAME);
-
     }
 
 }
