@@ -224,7 +224,8 @@
 
 
 /* Default view buttons */
-.v-button {
+.v-button,
+.v-button:focus {
 	display: block;
 	border-radius: listLayoutMargin;
 	background: buttonInsetBackground;
@@ -233,7 +234,13 @@
 	margin: listLayoutMargin 0;
 	}
 
-.v-button-wrap {
+.v-button:active,
+.v-button.v-pressed {
+	background: buttonInsetBackground;
+	}
+
+.v-button-wrap,
+.v-button:focus .v-button-wrap {
 	display: block;
 	border-radius: 7px;
 	background: buttonGradient;
@@ -241,21 +248,22 @@
 	padding: 0 listLayoutMargin;
 	height: 39px;
 	line-height: 37px;
-	font-size: buttonFontSize;
-	font-weight: bold;
-	color: buttonColor;
-	text-shadow: buttonTextShadow;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	}
 
-.v-button:active .v-button-wrap {
+.v-button:active .v-button-wrap,
+.v-button.v-pressed .v-button-wrap {
 	background-image: buttonActiveGradient;
 	}
 
 .v-button-caption {
 	line-height: 37px;
+	color: buttonColor;
+	text-shadow: buttonTextShadow;
+	font-size: buttonFontSize;
+	font-weight: bold;
 	}
 
 
