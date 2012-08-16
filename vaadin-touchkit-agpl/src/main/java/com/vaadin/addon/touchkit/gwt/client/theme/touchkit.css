@@ -298,7 +298,7 @@
 
 /* Navbar buttons */
 .v-touchkit-navbar .v-button,
-.v-touchkit-horizontalcomponentgroup>div>div {
+.v-touchkit-horizontalcomponentgroup {
 	display: inline-block;
 	margin: 0;
 	background: transparent;
@@ -314,7 +314,7 @@
 }
 
 .v-touchkit-navbar .v-button .v-button-wrap,
-.v-touchkit-horizontalcomponentgroup>div>div {
+.v-touchkit-horizontalcomponentgroup {
 	background: navbarButtonGradient;
 	border-radius: 4px;
 	padding: 0 13px;
@@ -342,7 +342,7 @@
 	line-height: 27px;
 	}
 
-.v-touchkit-horizontalcomponentgroup>div>div {
+.v-touchkit-horizontalcomponentgroup {
 	padding:0;
 	display:block;
 }
@@ -353,10 +353,6 @@
 .v-touchkit-navbar .v-touchkit-horizontalcomponentgroup {
 	float:none;
 	display:inline-block
-}
-
-.v-touchkit-verticalcomponentgroup .v-touchkit-horizontalcomponentgroup>div {
-	padding: listLayoutMargin 0;
 }
 
 /* Strip some styles from buttons inside a componentgroup */
@@ -792,8 +788,8 @@
 	display: none;
 }
 
-.v-label-grey-title,
-.v-caption-v-touchkit-verticalcomponentgroup .v-captiontext {
+.v-touchkit-verticalcomponentgroup-caption
+{
 	font-size: 16px;
 	font-weight: bold;
 	color: #44698b;
@@ -1018,7 +1014,7 @@
 	outline: none;
 	}
 
-.v-touchkit-verticalcomponentgroup > div > .v-csslayout-container > .v-touchkit-switch:before {
+.v-touchkit-verticalcomponentgroup > .v-touchkit-switch:before {
 	display: none;
 	}
 
@@ -1659,7 +1655,7 @@ span.v-datefield-calendarpanel-month {
 /** Component group stylings must be as last as they override default styles */
 
 /* Borders backgrounds etc. for the margin element.*/
-.v-touchkit-verticalcomponentgroup > div {
+.v-touchkit-verticalcomponentgroup {
 	margin-top: listLayoutMargin;
 	margin-bottom: listLayoutMargin;
 	border: listBorder;
@@ -1668,22 +1664,19 @@ span.v-datefield-calendarpanel-month {
 	padding: 0 listLayoutMargin;
 	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.5);
 	overflow: hidden;
+	position: relative;
 	}
 
-.v-touchkit-verticalcomponentgroup > div > .v-csslayout-container {
-	position: relative;	
-	}
-
-.v-touchkit-verticalcomponentgroup>div>div.v-csslayout-container>* {
+.v-touchkit-verticalcomponentgroup>* {
 	clear:both;
 	}
 
-.v-touchkit-verticalcomponentgroup>div>div.v-csslayout-container>.v-touchkit-has-caption {
+.v-touchkit-verticalcomponentgroup>.v-touchkit-has-caption {
 	clear: right;
 	float: right;
 }
 
-.v-touchkit-verticalcomponentgroup>div>.v-csslayout-container>.v-caption {
+.v-touchkit-verticalcomponentgroup>.v-caption {
 	float: left;
 	font-weight: bold;
 	font-size: 17px;
@@ -1691,26 +1684,22 @@ span.v-datefield-calendarpanel-month {
 	height: 43px;
 	margin-left: negativeListLayoutMargin;
 	padding-left: listLayoutMargin;
+	text-overflow: ellipsis;
 }
 
-.v-touchkit-verticalcomponentgroup>div>div.v-csslayout-container>.v-caption>.v-captiontext {
-	text-overflow: ellipsis;	
-}
-.v-touchkit-verticalcomponentgroup>div>div.v-csslayout-container>.v-caption>.v-icon {
+.v-touchkit-verticalcomponentgroup>.v-icon {
 	height:30px;
 	margin-top: 6px;
 }
 
-.v-touchkit-verticalcomponentgroup input.v-textfield {
+.v-touchkit-verticalcomponentgroup > .v-textfield {
 	-webkit-appearance: none;
 	border:0;
 	padding:0 4px;
 	background: transparent;
 	color: #4e64a1;
 	font-size:17px;
-	line-height:43px;
-	height: 43px;
-	margin-top:1px;
+	margin-top:10px;
 }
 
 /* Display readonly inputs without special color */
@@ -1734,7 +1723,7 @@ span.v-datefield-calendarpanel-month {
 	padding-top: 10px;
 }
 
-.v-touchkit-verticalcomponentgroup>div>div>.v-label.v-touchkit-has-caption {
+.v-touchkit-verticalcomponentgroup>.v-label.v-touchkit-has-caption {
 	font-size: 17px;
 	text-align:right;
 	padding-top: 12px;
@@ -1790,18 +1779,17 @@ span.v-datefield-calendarpanel-month {
 	height:30px;
 }
 
-.v-touchkit-verticalcomponentgroup>div>div>.v-button {
+.v-touchkit-verticalcomponentgroup>.v-button {
 	margin-top:0;
 	position:relative;
 	top: listLayoutMargin;
 	margin-bottom: 20px;
 }
 
-.v-touchkit-verticalcomponentgroup>div>div>.v-button .v-button-wrap {
+.v-touchkit-verticalcomponentgroup>.v-button .v-button-wrap {
 	height: 32px;
 }
-.v-touchkit-verticalcomponentgroup>div>div>.v-button .v-button-caption {
-	line-height:32px;
+.v-touchkit-verticalcomponentgroup>.v-button .v-button-caption {
 	font-size: 16px;
 }
 
@@ -1809,7 +1797,7 @@ span.v-datefield-calendarpanel-month {
 /* Grey lines between component,
  * also set then for selects inside component group.
  */
-.v-touchkit-verticalcomponentgroup > div > .v-csslayout-container > *:before,
+.v-touchkit-verticalcomponentgroup > *:before,
 .v-touchkit-verticalcomponentgroup .v-select-optiongroup>.v-select-option:before {
 	content: "";
 	display: block;
@@ -1822,30 +1810,43 @@ span.v-datefield-calendarpanel-month {
 	}
 
 /* ...hide from the first */
-.v-touchkit-verticalcomponentgroup > div > .v-csslayout-container > *:first-child:before,
-.v-touchkit-verticalcomponentgroup>div>div.v-csslayout-container>.v-touchkit-has-caption:before,
+.v-touchkit-verticalcomponentgroup > *:first-child:before,
+.v-touchkit-verticalcomponentgroup >.v-touchkit-has-caption:before,
 .v-touchkit-verticalcomponentgroup .v-select-optiongroup :first-child:before {
 	display: none;
 }
 
-.v-touchkit-verticalcomponentgroup > div > .v-csslayout-container > .v-button:before {
+.v-touchkit-verticalcomponentgroup > .v-button:before {
 	margin-top:-13px; /* negative listLayoutMargin + 3pixels for the border?) */
 }
 
-.v-touchkit-verticalcomponentgroup > div > .v-csslayout-container > .v-button {
+.v-touchkit-verticalcomponentgroup > .v-button {
 	
 }
-.v-touchkit-verticalcomponentgroup > div > .v-csslayout-container > .v-button:first-child {
+.v-touchkit-verticalcomponentgroup > .v-button:first-child {
 	
 }
 
+.verticalcomponentgroup-margin-top {
+	margin-top: 10px;
+}
+.verticalcomponentgroup-margin-right {
+	margin-right: 10px;
+}
+.verticalcomponentgroup-margin-bottom {
+	margin-bottom: 10px;
+}
+.verticalcomponentgroup-margin-left {
+	margin-left: 10px;
+}
+
 /* Need to explicitly round the first and last components corners, otherwise they will stick out from the component group */
-.v-touchkit-verticalcomponentgroup > div > div > .v-touchkit-navbutton:first-child {
+.v-touchkit-verticalcomponentgroup > .v-touchkit-navbutton:first-child {
 	border-top-left-radius: 9px; /* listLayoutMargin - 1px */
 	border-top-right-radius: 9px;
 	}
 
-.v-touchkit-verticalcomponentgroup > div > div > .v-touchkit-navbutton:last-child {
+.v-touchkit-verticalcomponentgroup > .v-touchkit-navbutton:last-child {
 	border-bottom-left-radius: 9px; /* listLayoutMargin - 1px */
 	border-bottom-right-radius: 9px;
 	}
@@ -1867,6 +1868,15 @@ span.v-datefield-calendarpanel-month {
 	line-height: 43px;
 	height: 43px;
 	}
+	
+.v-touchkit-verticalcomponentgroup > .v-touchkit-horizontalcomponentgroup:before {
+	margin-top:-17px; 
+}
+
+.v-touchkit-verticalcomponentgroup .v-touchkit-horizontalcomponentgroup {
+	margin-bottom: 15px;
+	margin-top: 15px; 
+}
 
 .v-formlayout-row > td {
 	border-bottom: listBorder;

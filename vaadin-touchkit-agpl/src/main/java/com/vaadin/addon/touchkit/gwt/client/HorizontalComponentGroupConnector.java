@@ -1,0 +1,64 @@
+package com.vaadin.addon.touchkit.gwt.client;
+
+import java.util.List;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.ui.Widget;
+import com.vaadin.addon.touchkit.ui.HorizontalComponentGroup;
+import com.vaadin.shared.communication.URLReference;
+import com.vaadin.shared.ui.Connect;
+import com.vaadin.shared.ui.VMarginInfo;
+import com.vaadin.terminal.gwt.client.ComponentConnector;
+import com.vaadin.terminal.gwt.client.ConnectorHierarchyChangeEvent;
+import com.vaadin.terminal.gwt.client.communication.StateChangeEvent;
+import com.vaadin.terminal.gwt.client.ui.AbstractComponentContainerConnector;
+
+@Connect(HorizontalComponentGroup.class)
+public class HorizontalComponentGroupConnector extends
+        AbstractComponentContainerConnector {
+
+    private HorizontalComponentGroupWidget theWidget;
+
+    @Override
+    public AbstractComponentGroupState getState() {
+        return (AbstractComponentGroupState) super.getState();
+    }
+
+    @Override
+    public void onStateChanged(StateChangeEvent stateChangeEvent) {
+        super.onStateChanged(stateChangeEvent);
+
+        ((HorizontalComponentGroupWidget) getWidget())
+                .setMarginStyles(new VMarginInfo(getState().getMarginsBitmask()));
+    }
+
+    @Override
+    public void onConnectorHierarchyChange(ConnectorHierarchyChangeEvent event) {
+        List<ComponentConnector> children = getChildComponents();
+        HorizontalComponentGroupWidget widget = (HorizontalComponentGroupWidget) getWidget();
+        widget.clear();
+        for (ComponentConnector connector : children) {
+            URLReference urlRef = connector.getState().getIcon();
+            String caption = connector.getState().getCaption();
+            String url = "";
+            if (urlRef != null) {
+                url = urlRef.getURL();
+            }
+
+            ((HorizontalComponentGroupWidget) getWidget()).add(connector
+                    .getWidget());
+        }
+        super.onConnectorHierarchyChange(event);
+    }
+
+    @Override
+    protected Widget createWidget() {
+        theWidget = GWT.create(HorizontalComponentGroupWidget.class);
+        return theWidget;
+    }
+
+    @Override
+    public void updateCaption(ComponentConnector connector) {
+    }
+
+}

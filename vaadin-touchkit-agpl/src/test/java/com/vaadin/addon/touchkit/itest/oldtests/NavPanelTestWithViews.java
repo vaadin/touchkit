@@ -15,7 +15,6 @@ import com.vaadin.addon.touchkit.ui.Switch;
 import com.vaadin.addon.touchkit.ui.TabBarView;
 import com.vaadin.addon.touchkit.ui.Toolbar;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
-import com.vaadin.addon.touchkit.ui.NavigationManager.NavigationEvent;
 import com.vaadin.terminal.ClassResource;
 import com.vaadin.terminal.Resource;
 import com.vaadin.terminal.ThemeResource;
@@ -33,14 +32,12 @@ import com.vaadin.ui.Embedded;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
-import com.vaadin.ui.Layout;
 import com.vaadin.ui.NativeSelect;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Slider;
 import com.vaadin.ui.TabSheet.Tab;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Window;
 import com.vaadin.ui.themes.BaseTheme;
 
 public class NavPanelTestWithViews extends NavigationManager implements
@@ -52,12 +49,14 @@ public class NavPanelTestWithViews extends NavigationManager implements
     private Button notRelative;
 
     public NavPanelTestWithViews() {
-    	
-    	addListener(new NavigationListener() {
-			public void navigate(NavigationEvent event) {
-				Logger.getAnonymousLogger().info("Navigated " + event.getDirection());
-			}
-		});
+
+        addListener(new NavigationListener() {
+            @Override
+            public void navigate(NavigationEvent event) {
+                Logger.getAnonymousLogger().info(
+                        "Navigated " + event.getDirection());
+            }
+        });
 
         views = new SimpleNavView[7];
         for (int i = 0; i < views.length; i++) {
@@ -78,6 +77,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
         Button.ClickListener listener = new Button.ClickListener() {
             private int i;
 
+            @Override
             public void buttonClick(ClickEvent event) {
                 Popover popover = new Popover();
                 popover.setWidth("360px");
@@ -108,10 +108,12 @@ public class NavPanelTestWithViews extends NavigationManager implements
                  * 
                  * } }));
                  */
-                
-                if(i++%2 == 1) {
-                    // Test that popover with navigationview should look fine without toolbar too
-                    NavigationView currentComponent3 = (NavigationView) content.getCurrentComponent();
+
+                if (i++ % 2 == 1) {
+                    // Test that popover with navigationview should look fine
+                    // without toolbar too
+                    NavigationView currentComponent3 = (NavigationView) content
+                            .getCurrentComponent();
                     currentComponent3.setToolbar(null);
                 }
 
@@ -135,7 +137,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
                 }
 
                 if (event.getButton() == notRelative) {
-                   
+
                     popover.setWidth("50%");
                     popover.setHeight("100%");
                     popover.center();
@@ -191,6 +193,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
         metoo.addStyleName("blue");
         group.addComponent(new Button("No toolbar", new Button.ClickListener() {
 
+            @Override
             public void buttonClick(ClickEvent event) {
                 Popover popover = new Popover();
                 popover.setWidth("360px");
@@ -311,12 +314,12 @@ public class NavPanelTestWithViews extends NavigationManager implements
             NumberField numberField = new NumberField("Age");
             numberField.setWidth("100%");
             componentGroup.addComponent(numberField);
-            
+
             DateField df = new DateField("Datefield");
             df.setWidth("100%");
             df.setValue(new Date());
             componentGroup.addComponent(df);
-            
+
             ComboBox comboBox = new ComboBox("Combobox");
             comboBox.setWidth("100%");
             comboBox.addItem("Pekka");
@@ -324,7 +327,6 @@ public class NavPanelTestWithViews extends NavigationManager implements
             comboBox.addItem("Irma");
             comboBox.addItem("Marko");
             componentGroup.addComponent(comboBox);
-            
 
             addSliderWithIcons(componentGroup);
 
@@ -347,7 +349,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
             textField = new TextField("Name");
             textField.setWidth("100%");
             componentGroup.addComponent(textField);
-            
+
             // email field
             emailField = new EmailField(
                     "Longer caption for non 100% width field which might be clipped with ellipsis");
@@ -383,12 +385,12 @@ public class NavPanelTestWithViews extends NavigationManager implements
             numberField = new NumberField("Age");
             numberField.setWidth("100%");
             formLayout.addComponent(numberField);
-            
+
             df = new DateField("Datefield");
             df.setWidth("100%");
             df.setValue(new Date());
             formLayout.addComponent(df);
-            
+
             comboBox = new ComboBox("Combobox");
             comboBox.addItem("Pekka");
             comboBox.addItem("Pirjo");
@@ -408,7 +410,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
 
         }
 
-        private void addSliderWithIcons(Layout optionLayout) {
+        private void addSliderWithIcons(ComponentContainer optionLayout) {
             final Component emb = new Embedded(null, getNextIcon());
             emb.setWidth("32px");
             final Embedded emb2 = new Embedded(null, getNextIcon());
@@ -504,6 +506,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
             return icons[i++ % icons.length];
         }
 
+        @Override
         public void buttonClick(ClickEvent event) {
             Notification.show("Just a demo!");
         }

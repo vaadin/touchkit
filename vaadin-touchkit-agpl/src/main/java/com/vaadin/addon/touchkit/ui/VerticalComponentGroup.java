@@ -1,6 +1,5 @@
 package com.vaadin.addon.touchkit.ui;
 
-
 /**
  * A layout to group controls vertically. Items in a
  * {@link VerticalComponentGroup} have by default white background, margins and
@@ -17,8 +16,6 @@ package com.vaadin.addon.touchkit.ui;
  */
 public class VerticalComponentGroup extends AbstractComponentGroup {
 
-    private static final String STYLE_NAME = "v-touchkit-verticalcomponentgroup";
-
     /**
      * Creates a vertical component group.
      * <p>
@@ -33,9 +30,13 @@ public class VerticalComponentGroup extends AbstractComponentGroup {
      */
     public VerticalComponentGroup(String caption) {
         super(caption);
-        setWidth("100%");
-        setMargin(true);
-        setStyleName(STYLE_NAME);
+        setWidth(null);
+    }
+
+    @Override
+    public void setCaption(String caption) {
+        super.setCaption("");
+        getState().setVisibleCaption(caption);
     }
 
 }
