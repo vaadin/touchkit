@@ -1,19 +1,13 @@
-package com.vaadin.addon.touchkit.gwt.client;
+package com.vaadin.addon.touchkit.gwt.client.popover;
 
-import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Style;
 import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
-import com.vaadin.terminal.gwt.client.ApplicationConnection;
-import com.vaadin.terminal.gwt.client.UIDL;
 
 /**
  * TouchKit "subwindow". Both for iPad style 'popover' windows, and iPhone style
@@ -25,106 +19,43 @@ public class VPopover extends com.vaadin.terminal.gwt.client.ui.window.VWindow {
     private static final int SMALL_SCREEN_WIDTH_THRESHOLD = 500;
     private static final int MIN_EDGE_DISTANCE = 10;
     private static final int MIN_ARROW_EDGE_DISTANCE = 2 * MIN_EDGE_DISTANCE;
-    private String relComponentId;
-    private boolean fullscreen;
+    private Widget relComponent;
     private DivElement arrowElement;
     protected int zIndex;
-    private boolean specialPositioningRunning;
 
     public VPopover() {
     }
 
-    public void setFullscreen(boolean fullscreen) {
-        this.fullscreen = fullscreen;
+    public void setRelatedComponent(Widget relComponent) {
+        this.relComponent = relComponent;
     }
 
-//    @Override
-//    public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
-//        if (!uidl.hasAttribute("cached")) {
-//            relComponentId = uidl.hasAttribute("rel") ? uidl
-//                    .getStringAttribute("rel") : null;
-//            setFullscreen(uidl.hasAttribute("fc"));
-//        }
-//        super.updateFromUIDL(uidl, client);
-//    }
+    // @Override
+    // public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
+    // if (!uidl.hasAttribute("cached")) {
+    // relComponentId = uidl.hasAttribute("rel") ? uidl
+    // .getStringAttribute("rel") : null;
+    // setFullscreen(uidl.hasAttribute("fc"));
+    // }
+    // super.updateFromUIDL(uidl, client);
+    // }
 
-    @Override
-    public void setStyleName(String style) {
-        setShadowEnabled(false);
-        if (fullscreen) {
-            // fullscreen window
-            style += " v-touchkit-popover v-touchkit-fullscreen";
-            getModalityCurtain().addClassName("fullscreen");
-        } else if (relComponentId != null) {
-            // real popover (black)
-            style += " v-touchkit-popover v-touchkit-relative";
-            getModalityCurtain().addClassName("relative");
-        } else {
-            // regular (white)
-            style += " v-touchkit-popover v-touchkit-plain";
-        }
-        super.setStyleName(style);
-    }
-
-//    @Override
-//    protected void updateShadowSizeAndPosition() {
-//        doSpecialPositioning();
-//        super.updateShadowSizeAndPosition();
-//    }
-
-    private void doSpecialPositioning() {
-        /*
-         * FIXME this is currently called twice when the window is opened, from
-         * setWidth/height and finally from the super.updateFromUidl
-         */
-        if (!specialPositioningRunning) {
-            specialPositioningRunning = true;
-            if (isFullScreen()) {
-                setPopupPosition(0, 0);
-            } else {
-                /*
-                 * fade in the modality curtain unless in fullscreen mode.
-                 */
-                getModalityCurtain().removeClassName(
-                        "v-touchkit-opacity-transition");
-                DOM.sinkEvents(getModalityCurtain(), Event.TOUCHEVENTS);
-                final Style style = getModalityCurtain().getStyle();
-                style.setOpacity(0);
-                Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-                    public void execute() {
-                        getModalityCurtain().addClassName(
-                                "v-touchkit-opacity-transition");
-                        /* Final value from the theme */
-                        style.setProperty("opacity", "");
-                    }
-                });
-
-                if (isSmallScreenDevice()) {
-                    slideIn();
-                } else if (relComponentId != null) {
-//                    Widget paintable = (Widget) client
-//                            .getPaintable(relComponentId);
-//                    showNextTo(paintable);
-                }
-            }
-            specialPositioningRunning = false;
-        }
-    }
-
-    private void slideIn() {
+    protected void slideIn() {
         /*
          * Make full width.
          */
         setWidth((Window.getClientWidth() + "px"));
+        // DOM.setStyleAttribute(getWrapperElement(), "padding", "0");
+        // DOM.setStyleAttribute(getWrapperElement(), "borderRadius", "0");
+        // DOM.setStyleAttribute(getContainerElement(), "borderRadius", "0");
 
         int top = 0;
-        if (relComponentId != null) {
-//            Widget paintable = (Widget) client.getPaintable(relComponentId);
-//            boolean isCloseToBottom = paintable.getAbsoluteTop()
-//                    - Window.getScrollTop() > Window.getClientHeight() / 2;
-//            if (isCloseToBottom) {
-//                top = Window.getClientHeight() - getOffsetHeight();
-//            }
+        if (relComponent != null) {
+            boolean isCloseToBottom = relComponent.getAbsoluteTop()
+                    - Window.getScrollTop() > Window.getClientHeight() / 2;
+            if (isCloseToBottom) {
+                top = Window.getClientHeight() - getOffsetHeight();
+            }
         }
 
         setPopupPosition(0, top);
@@ -135,7 +66,11 @@ public class VPopover extends com.vaadin.terminal.gwt.client.ui.window.VWindow {
          */
     }
 
-    private void showNextTo(Widget paintable) {
+    private Element getWrapperElement() {
+        return getElement().getFirstChild().getFirstChild().cast();
+    }
+
+    public void showNextTo(Widget paintable) {
         if (paintable == null || !paintable.isAttached()) {
             // Vaadin may call this via setWidth/setHeight when reference
             // paintable don't exist anymore. The window may actually also be
@@ -261,37 +196,17 @@ public class VPopover extends com.vaadin.terminal.gwt.client.ui.window.VWindow {
         return spaceBelow < requiredHeight;
     }
 
-    private static boolean isSmallScreenDevice() {
+    static boolean isSmallScreenDevice() {
         return Window.getClientWidth() < SMALL_SCREEN_WIDTH_THRESHOLD;
-    }
-
-    private boolean isFullScreen() {
-        return fullscreen;
     }
 
     @Override
     public void center() {
         // Ignore centering if the popover is relative to component, or we're on
         // a small screen device
-        if (relComponentId == null && !isSmallScreenDevice()) {
+        if (relComponent == null && !isSmallScreenDevice()) {
             super.center();
         }
-    }
-
-    private final static int ACCEPTEDEVENTS = Event.MOUSEEVENTS;
-
-    @Override
-    public boolean onEventPreview(Event event) {
-        boolean superAccepts = super.onEventPreview(event);
-        if (isClosable() && !superAccepts
-                && (event.getTypeInt() & ACCEPTEDEVENTS) == 0) {
-            /*
-             * Close on events outside window. Special handling for mousemove
-             * etc to aid compatibility with desktop (testing purposes).
-             */
-//            client.updateVariable(client.getPid(this), "close", true, true);
-        }
-        return superAccepts;
     }
 
     @Override
@@ -302,4 +217,20 @@ public class VPopover extends com.vaadin.terminal.gwt.client.ui.window.VWindow {
         super.hide();
     }
 
+    /* Make the methods below visible in this package */
+
+    @Override
+    public boolean isClosable() {
+        return super.isClosable();
+    }
+
+    @Override
+    protected Element getModalityCurtain() {
+        return super.getModalityCurtain();
+    }
+
+    @Override
+    protected void setShadowEnabled(boolean enabled) {
+        super.setShadowEnabled(enabled);
+    }
 }

@@ -1,10 +1,9 @@
 package com.vaadin.addon.touchkit.ui;
 
-import com.vaadin.terminal.PaintException;
-import com.vaadin.terminal.PaintTarget;
+import com.vaadin.addon.touchkit.gwt.client.popover.PopoverRpc;
+import com.vaadin.addon.touchkit.gwt.client.popover.PopoverState;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;
-import com.vaadin.ui.Root;
 import com.vaadin.ui.Window;
 
 /**
@@ -31,7 +30,12 @@ import com.vaadin.ui.Window;
  */
 public class Popover extends Window {
 
-    private Component relatedComponent;
+    private PopoverRpc rpc = new PopoverRpc() {
+        @Override
+        public void close() {
+            Popover.this.close();
+        }
+    };
 
     /**
      * Constructs a new Popover. By default, the {@link Popover} is modal. This
@@ -39,6 +43,7 @@ public class Popover extends Window {
      */
     public Popover() {
         setModal(true);
+        registerRpc(rpc);
     }
 
     /**
@@ -49,6 +54,11 @@ public class Popover extends Window {
     public Popover(ComponentContainer content) {
         this();
         setContent(content);
+    }
+
+    @Override
+    public PopoverState getState() {
+        return (PopoverState) super.getState();
     }
 
     /**
@@ -65,25 +75,20 @@ public class Popover extends Window {
      * @param relatedComponent
      */
     public void showRelativeTo(Component relatedComponent) {
-        this.relatedComponent = relatedComponent;
-        requestRepaint();
+        getState().setRelatedComponent(relatedComponent);
         if (relatedComponent != null && getParent() == null) {
-            Root root = relatedComponent.getRoot();
-            root.addWindow(this);
+            relatedComponent.getRoot().addWindow(this);
         }
+        requestRepaint();
     }
 
     @Override
-    public synchronized void paintContent(PaintTarget target)
-            throws PaintException {
-        super.paintContent(target);
-        if (relatedComponent != null) {
-            target.addAttribute("rel", relatedComponent);
+    public void requestRepaint() {
+        if (getWidth() == 100 && getWidthUnits() == Unit.PERCENTAGE
+                && getHeight() == 100 && getHeightUnits() == Unit.PERCENTAGE) {
+            getState().setFullscreen(true);
         }
-        if (getWidth() == 100 && getWidthUnits() == UNITS_PERCENTAGE
-                && getHeight() == 100 && getHeightUnits() == UNITS_PERCENTAGE) {
-            target.addAttribute("fc", true);
-        }
+        super.requestRepaint();
     }
 
     /**
