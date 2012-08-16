@@ -28,7 +28,7 @@ public class Switch extends CheckBox {
     /**
      * @see CheckBox#CheckBox(String,Property)
      */
-    public Switch(String caption, Property dataSource) {
+    public Switch(String caption, Property<Boolean> dataSource) {
         super(caption, dataSource);
     }
 

@@ -26,24 +26,26 @@ import com.google.gwt.event.dom.client.TouchMoveEvent;
 import com.google.gwt.event.dom.client.TouchMoveHandler;
 import com.google.gwt.event.dom.client.TouchStartEvent;
 import com.google.gwt.event.dom.client.TouchStartHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.FocusWidget;
+import com.google.gwt.user.client.ui.HasValue;
 import com.vaadin.terminal.gwt.client.ApplicationConnection;
-import com.vaadin.terminal.gwt.client.Paintable;
-import com.vaadin.terminal.gwt.client.UIDL;
-import com.vaadin.terminal.gwt.client.VTooltip;
+import com.vaadin.terminal.gwt.client.ui.Field;
 
 /**
- * VSwitch is the client-side implementation of the Switch component.
+ * VSwitch is the client-side implementation of import
+ * com.vaadin.terminal.gwt.client.ui.Field; the Switch component.
  * 
  * Derived from implementations by Teemu Pöntelin Vaadin Ltd.
  * 
  */
-public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
-        MouseDownHandler, MouseUpHandler, MouseMoveHandler, TouchStartHandler,
-        TouchMoveHandler, TouchEndHandler, TouchCancelHandler, FocusHandler,
-        BlurHandler {
+public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
+        KeyUpHandler, MouseDownHandler, MouseUpHandler, MouseMoveHandler,
+        TouchStartHandler, TouchMoveHandler, TouchEndHandler,
+        TouchCancelHandler, FocusHandler, BlurHandler {
 
     /** Set the CSS class name to allow styling. */
     public static final String CLASSNAME = "v-touchkit-switch";
@@ -66,7 +68,6 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
     private Element slider;
     private boolean value;
     private com.google.gwt.user.client.Element errorIndicatorElement;
-    private boolean immediate;
 
     private boolean mouseDown;
     private int unvisiblePartWidth;
@@ -92,6 +93,7 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
         slider = Document.get().createDivElement();
         slider.setClassName(CLASSNAME + "-slider");
         getElement().appendChild(slider);
+        updateVisibleState(true); // Set the initial position without animation.
 
         addHandlers();
     }
@@ -107,49 +109,6 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
         addDomHandler(this, TouchMoveEvent.getType());
         addDomHandler(this, TouchEndEvent.getType());
         addDomHandler(this, TouchCancelEvent.getType());
-        addDomHandler(this, KeyUpEvent.getType());
-    }
-
-    /**
-     * Called whenever an update is received from the server
-     */
-    public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
-        // This call should be made first.
-        // It handles sizes, captions, tooltips, etc. automatically.
-        if (client.updateComponent(this, uidl, true)) {
-            // If client.updateComponent returns true there has been no changes
-            // and we do not need to update anything.
-            return;
-        }
-
-        // Save the client side identifier (paintable id) for the widget
-        paintableId = uidl.getId();
-
-        // All the following is mostly just copied from VCheckBox
-        if (uidl.hasAttribute("error")) {
-            if (errorIndicatorElement == null) {
-                errorIndicatorElement = DOM.createSpan();
-                errorIndicatorElement.setInnerHTML("&nbsp;");
-                DOM.setElementProperty(errorIndicatorElement, "className",
-                        "v-errorindicator");
-                DOM.appendChild(getElement(), errorIndicatorElement);
-                DOM.sinkEvents(errorIndicatorElement, VTooltip.TOOLTIP_EVENTS
-                        | Event.ONCLICK);
-            }
-        } else if (errorIndicatorElement != null) {
-            DOM.setStyleAttribute(errorIndicatorElement, "display", "none");
-        }
-
-        if (uidl.hasAttribute("readonly")) {
-            setEnabled(false);
-        }
-
-        setValue(uidl.getBooleanVariable("state"));
-        immediate = uidl.getBooleanAttribute("immediate");
-
-        // Save reference to server connection object to be able to send
-        // user interaction later
-        this.client = client;
     }
 
     @Override
@@ -169,27 +128,11 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
         tabIndex = index;
     }
 
-    private void setValue(boolean value) {
-        if (this.value == value && client != null) {
-            return;
-        }
-        this.value = value;
-        // update the UI
-        updateVisibleState(client == null);
-
-        // update the server state
-        if (paintableId == null || client == null) {
-            return;
-        }
-        client.updateVariable(paintableId, "state", this.value, immediate);
-
-    }
-
     private void updateVisibleState() {
         updateVisibleState(false);
     }
 
-    public int getUnvisiblePartWidth() {
+    private int getUnvisiblePartWidth() {
         if (unvisiblePartWidth == 0) {
             // Calculate the width of the part that is not currently visible
             // and init the state on the first rendering.
@@ -231,7 +174,7 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
             }
         };
         if (getUnvisiblePartWidth() == 0) {
-            // Css not properly injected yet
+            // CSS not properly injected yet
             Scheduler.get().scheduleDeferred(command);
         } else {
             command.execute();
@@ -241,7 +184,7 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
     private int getCurrentPosition() {
         String currentLeftString = getElement().getStyle().getProperty(
                 "backgroundPositionX");
-        if (currentLeftString == null) {
+        if (currentLeftString == null || currentLeftString.length() == 0) {
             currentLeftString = "0px";
         }
         int currentLeft = Integer.parseInt(currentLeftString.substring(0,
@@ -252,7 +195,7 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
     public void onKeyUp(KeyUpEvent event) {
         if (isEnabled() && event.getNativeKeyCode() == 32) {
             // 32 = space bar
-            setValue(!value);
+            setValue(!value, true);
         }
     }
 
@@ -277,12 +220,12 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
 
     private void handleMouseUp() {
         if (!dragging) {
-            setValue(!value);
+            setValue(!value, true);
         } else {
             if (getCurrentPosition() < (-getUnvisiblePartWidth() / 2)) {
-                setValue(false);
+                setValue(false, true);
             } else {
-                setValue(true);
+                setValue(true, true);
             }
             updateVisibleState();
             DOM.releaseCapture(getElement());
@@ -299,7 +242,6 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
     }
 
     private void handleMouseMove(int clientX) {
-
         if (mouseDown) {
             int dragDistance = clientX - dragStart;
             if (Math.abs(dragDistance) > DRAG_THRESHOLD_PIXELS) {
@@ -363,4 +305,45 @@ public class VSwitch extends FocusWidget implements Paintable, KeyUpHandler,
         }
     }
 
+    @Override
+    public HandlerRegistration addValueChangeHandler(
+            ValueChangeHandler<Boolean> handler) {
+        return addHandler(handler, ValueChangeEvent.getType());
+    }
+
+    @Override
+    public Boolean getValue() {
+        return value;
+    }
+
+    @Override
+    public void setValue(Boolean value) {
+        setValue(value, false);
+    }
+
+    @Override
+    public void setValue(Boolean value, boolean fireEvents) {
+        if (value == null) {
+            value = Boolean.FALSE;
+        }
+        if (this.value == value) {
+            return;
+        }
+        this.value = value;
+        // update the UI
+        updateVisibleState();
+
+        if (fireEvents) {
+            ValueChangeEvent.fire(this, value);
+        }
+    }
+
+    public com.google.gwt.user.client.Element getErrorIndicator() {
+        return errorIndicatorElement;
+    }
+
+    public void setErrorIndicator(
+            com.google.gwt.user.client.Element errorIndicator) {
+        errorIndicatorElement = errorIndicator;
+    }
 }
