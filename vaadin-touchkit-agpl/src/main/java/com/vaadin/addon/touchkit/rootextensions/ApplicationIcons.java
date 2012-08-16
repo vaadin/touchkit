@@ -2,18 +2,12 @@ package com.vaadin.addon.touchkit.rootextensions;
 
 import java.util.LinkedList;
 
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.DocumentType;
-import org.jsoup.nodes.Element;
-
 import com.vaadin.addon.touchkit.service.ApplicationIcon;
-import com.vaadin.terminal.AbstractExtension;
 import com.vaadin.terminal.gwt.server.BootstrapFragmentResponse;
 import com.vaadin.terminal.gwt.server.BootstrapListener;
 import com.vaadin.terminal.gwt.server.BootstrapPageResponse;
-import com.vaadin.terminal.gwt.server.BootstrapResponse;
 
-public class ApplicationIcons extends AbstractExtension implements BootstrapListener {
+public class ApplicationIcons extends AbstractToucKitRootExtension implements BootstrapListener {
     
     private LinkedList<ApplicationIcon> applicationIcon = new LinkedList<ApplicationIcon>();
     

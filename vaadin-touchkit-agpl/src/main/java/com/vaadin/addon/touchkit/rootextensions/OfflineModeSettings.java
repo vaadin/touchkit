@@ -2,7 +2,6 @@ package com.vaadin.addon.touchkit.rootextensions;
 
 import org.jsoup.nodes.Document;
 
-import com.vaadin.terminal.AbstractExtension;
 import com.vaadin.terminal.gwt.server.BootstrapFragmentResponse;
 import com.vaadin.terminal.gwt.server.BootstrapListener;
 import com.vaadin.terminal.gwt.server.BootstrapPageResponse;
@@ -16,7 +15,7 @@ import com.vaadin.terminal.gwt.server.BootstrapPageResponse;
  * @author mattitahvonen
  *
  */
-public class OfflineModeSettings extends AbstractExtension implements
+public class OfflineModeSettings extends AbstractToucKitRootExtension implements
         BootstrapListener {
     
 //    WebApplicationContext context = (WebApplicationContext) getApplication()

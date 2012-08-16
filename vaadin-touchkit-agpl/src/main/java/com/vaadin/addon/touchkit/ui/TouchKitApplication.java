@@ -1,24 +1,15 @@
 package com.vaadin.addon.touchkit.ui;
 
-import java.util.Collection;
-import java.util.HashSet;
-
 import com.vaadin.Application;
 import com.vaadin.RootRequiresMoreInformationException;
-import com.vaadin.addon.touchkit.rootextensions.ApplicationIcons;
-import com.vaadin.addon.touchkit.rootextensions.IosWebAppSettings;
-import com.vaadin.addon.touchkit.rootextensions.OfflineModeSettings;
-import com.vaadin.addon.touchkit.rootextensions.ViewPortSettings;
-import com.vaadin.terminal.Extension;
 import com.vaadin.terminal.WrappedRequest;
 import com.vaadin.terminal.WrappedRequest.BrowserDetails;
-import com.vaadin.terminal.gwt.server.BootstrapFragmentResponse;
-import com.vaadin.terminal.gwt.server.BootstrapListener;
-import com.vaadin.terminal.gwt.server.BootstrapPageResponse;
 import com.vaadin.terminal.gwt.server.WebBrowser;
 import com.vaadin.ui.Root;
 
 /**
+ * TODO try to get rid of this class, needs changes to core
+ * 
  * TouchKitApplication is a specialized {@link Application} implementation to
  * help building Vaadin applications designed specifically for various touch
  * devices. It provides quick access to the {@link WebBrowser} object via
@@ -43,67 +34,12 @@ import com.vaadin.ui.Root;
  * Note, that only {@link TouchKitWindow}s are supported as top level windows.
  */
 @SuppressWarnings("serial")
-public abstract class TouchKitApplication extends Application implements BootstrapListener {
+public abstract class TouchKitApplication extends Application {
 
-    private boolean browserDetailsReady = false;
+    private boolean browserDetailsReady;
 
     public TouchKitApplication() {
-        addExtension(new ViewPortSettings());
-        addExtension(new IosWebAppSettings());
-        addExtension(new ApplicationIcons());
-        addExtension(new OfflineModeSettings());
-        addBootstrapListener(this);
-    }
-
-    private Collection<Extension> touchkitHostPageExtensions = new HashSet<Extension>();
-    
-    private void addExtension(Extension extension) {
-        touchkitHostPageExtensions.add(extension);
-    }
-    
-    /**
-     * 
-     * @return viewport settings used for this Root, null if this root has no
-     *         {@link ViewPortSettings} extension attached
-     */
-    public ViewPortSettings getViewPortSettings() {
-        for (Extension e : getTouchkitHostPageExtensions()) {
-            if (e instanceof ViewPortSettings) {
-                return (ViewPortSettings) e;
-            }
-        }
-        return null;
-    }
-    
-    public OfflineModeSettings getOfflineModeSettings() {
-        for (Extension e : getTouchkitHostPageExtensions()) {
-            if (e instanceof OfflineModeSettings) {
-                return (OfflineModeSettings) e;
-            }
-        }
-        return null;
-    }
-    
-    private Collection<Extension> getTouchkitHostPageExtensions() {
-        return touchkitHostPageExtensions;
-    }
-
-    public IosWebAppSettings getIosWebAppSettings() {
-        for (Extension e : getTouchkitHostPageExtensions()) {
-            if (e instanceof IosWebAppSettings) {
-                return (IosWebAppSettings) e;
-            }
-        }
-        return null;
-    }
-
-    public ApplicationIcons getApplicationIcons() {
-        for (Extension e : getTouchkitHostPageExtensions()) {
-            if (e instanceof ApplicationIcons) {
-                return (ApplicationIcons) e;
-            }
-        }
-        return null;
+        TouchKitSettings.init(this);
     }
 
 
@@ -122,43 +58,18 @@ public abstract class TouchKitApplication extends Application implements Bootstr
         // could also use screen size, browser version etc.
         if (browserDetails.getWebBrowser().isTouchDevice()) {
             r = getTouchRoot(request);
-        } else {
+            TouchKitSettings.init(r);
+        } else { 
             r = getFallbackRoot(request);
         }
-        ensureInitialized(r);
         return r;
     }
     
-    private void ensureInitialized(Root r) {
-        // TODO add or clone extensions for roots here??
-    }
-
     public abstract Root getTouchRoot(WrappedRequest request);
     
     public Root getFallbackRoot(WrappedRequest request) {
         return getTouchRoot(request);
     }
     
-    @Override
-    public void modifyBootstrapFragment(BootstrapFragmentResponse response) {
-        // NOP
-    }
-
-    @Override
-    public void modifyBootstrapPage(BootstrapPageResponse response) {
-//        if(response.getRoot() != null) {
-//            for (Extension e : response.getRoot().getExtensions()) {
-//                if (e instanceof BootstrapListener) {
-//                    ((BootstrapListener) e).modifyBootstrapPage(response);
-//                }
-//            }
-//        } else {
-            for (Extension e : getTouchkitHostPageExtensions()) {
-                if (e instanceof BootstrapListener) {
-                    ((BootstrapListener) e).modifyBootstrapPage(response);
-                }
-            }
-//        }
-    }
 
 }

@@ -4,13 +4,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.DocumentType;
 import org.jsoup.nodes.Element;
 
-import com.vaadin.terminal.AbstractExtension;
 import com.vaadin.terminal.gwt.server.BootstrapFragmentResponse;
 import com.vaadin.terminal.gwt.server.BootstrapListener;
 import com.vaadin.terminal.gwt.server.BootstrapPageResponse;
-import com.vaadin.terminal.gwt.server.BootstrapResponse;
 
-public class ViewPortSettings extends AbstractExtension implements BootstrapListener {
+public class ViewPortSettings extends AbstractToucKitRootExtension implements BootstrapListener {
     
     private static final String DEVICE_WIDTH = "device-width";
     private Boolean viewPortUserScalable = false;
@@ -18,7 +16,7 @@ public class ViewPortSettings extends AbstractExtension implements BootstrapList
     private Float viewPortMinimumScale = 1f;
     private Float viewPortMaximumScale = 1f;
     private String viewPortWidth = DEVICE_WIDTH;
-
+    
     /**
      * Sets whether the user should be allowed to zoom the content. The default
      * value for TouchKit apps is false, as we expect that applications are
