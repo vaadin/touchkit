@@ -1,13 +1,14 @@
 package com.vaadin.addon.touchkit.gwt;
 
-import com.vaadin.terminal.gwt.widgetsetutils.WidgetMapGenerator;
 
 /**
  * TouchKitWidgetMapGenerator makes some heavy classes that are rarely used in
  * mobile devices loaded lazily. This way saving bandwidth and making the
  * initial loading time smaller.
  */
-public class TouchKitWidgetMapGenerator extends WidgetMapGenerator {
+public class TouchKitWidgetMapGenerator
+//extends WidgetMapGenerator
+{
 
 //    HashSet<Class<? extends Paintable>> lazyComponents = new HashSet<Class<? extends Paintable>>();
 //
