@@ -3,6 +3,7 @@ package com.vaadin.addon.touchkit.ui;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import com.vaadin.addon.touchkit.gwt.client.navigation.NavigationBarState;
 import com.vaadin.ui.AbstractComponentContainer;
 import com.vaadin.ui.Component;
 
@@ -29,6 +30,11 @@ public class NavigationBar extends AbstractComponentContainer {
         setLeftComponent(backButton);
     }
 
+    @Override
+    public NavigationBarState getState() {
+        return (NavigationBarState) super.getState();
+    }
+
     /**
      * Sets the component on the left side of the caption.
      * 
@@ -46,6 +52,7 @@ public class NavigationBar extends AbstractComponentContainer {
         if (c != null) {
             super.addComponent(c);
         }
+        getState().setLeftComponent(c);
         leftNavigationBarComponent = c;
         requestRepaint();
     }
@@ -70,6 +77,7 @@ public class NavigationBar extends AbstractComponentContainer {
         if (c != null) {
             super.addComponent(c);
         }
+        getState().setRightComponent(c);
         navigationBarComponent = c;
         requestRepaint();
     }
@@ -133,25 +141,6 @@ public class NavigationBar extends AbstractComponentContainer {
                 "Navigation bar does not support general container mutation methods. Use setRightComponent, setCaption and setPreviousVew methods to control the componen.");
     }
 
-//    FIXME
-//    @Override
-//    public void paintContent(PaintTarget target) throws PaintException {
-//        super.paintContent(target);
-//
-//        if (leftNavigationBarComponent != null) {
-//            target.startTag("back");
-//            leftNavigationBarComponent.paint(target);
-//            target.endTag("back");
-//        }
-//
-//        if (navigationBarComponent != null) {
-//            target.startTag("component");
-//            navigationBarComponent.paint(target);
-//            target.endTag("component");
-//        }
-//
-//    }
-
     public Iterator<Component> getComponentIterator() {
         LinkedList<Component> components = new LinkedList<Component>();
         components.add(backButton);
@@ -162,8 +151,14 @@ public class NavigationBar extends AbstractComponentContainer {
     }
 
     public int getComponentCount() {
-        // TODO Auto-generated method stub
-        return 0;
+        int count = 0;
+        if (backButton != null) {
+            count++;
+        }
+        if (navigationBarComponent != null) {
+            count++;
+        }
+        return count;
     }
 
 }

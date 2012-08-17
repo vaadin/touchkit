@@ -1,7 +1,6 @@
 package com.vaadin.addon.touchkit.itest;
 
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.ui.NavigationBar;
 import com.vaadin.addon.touchkit.ui.Popover;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -41,8 +40,7 @@ public class PopoverTest extends AbstractTouchKitIntegrationTest {
                 Popover popover = new Popover();
                 popover.setWidth("360px");
 
-                NavigationBar navbar = new NavigationBar();
-                popover.addComponent(navbar);
+                popover.addComponent(new NavigationViewBarTest());
 
                 popover.showRelativeTo(event.getButton());
             }

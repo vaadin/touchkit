@@ -2,10 +2,9 @@ package com.vaadin.addon.touchkit.ui;
 
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Map;
 
-import com.vaadin.terminal.PaintException;
-import com.vaadin.terminal.PaintTarget;
+import com.vaadin.addon.touchkit.gwt.client.navigation.NavigationViewServerRpc;
+import com.vaadin.addon.touchkit.gwt.client.navigation.NavigationViewState;
 import com.vaadin.ui.AbstractComponentContainer;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
@@ -30,7 +29,13 @@ public class NavigationView extends AbstractComponentContainer {
     private NavigationBar navigationBar = new NavigationBar();
     private Component mainComponent;
     private Component toolbar;
-    private int scrollPosition;
+
+    private NavigationViewServerRpc rpc = new NavigationViewServerRpc() {
+        @Override
+        public void updateScrollPosition(int position) {
+            setScrollPosition(position);
+        }
+    };
 
     /**
      * Creates a {@link NavigationView} with the given content.
@@ -38,11 +43,7 @@ public class NavigationView extends AbstractComponentContainer {
      * @param content
      */
     public NavigationView(Component content) {
-        navigationBar.setWidth("100%");
-        setSizeFull();
-        mainComponent = content;
-        super.addComponent(getContent());
-        super.addComponent(getNavigationBar());
+        this("", content);
     }
 
     /**
@@ -71,7 +72,12 @@ public class NavigationView extends AbstractComponentContainer {
      * @param content
      */
     public NavigationView(String caption, Component content) {
-        this(content);
+        registerRpc(rpc);
+        navigationBar.setWidth("100%");
+        setSizeFull();
+        mainComponent = content;
+        super.addComponent(getContent());
+        super.addComponent(getNavigationBar());
         setCaption(caption);
     }
 
@@ -274,36 +280,19 @@ public class NavigationView extends AbstractComponentContainer {
         return toolbar;
     }
 
-//    FIXME
-//    @Override
-//    public void paintContent(PaintTarget target) throws PaintException {
-//        super.paintContent(target);
-//        target.addVariable(this, "sp", scrollPosition);
-//        for (Iterator<Component> componentIterator = getComponentIterator(); componentIterator
-//                .hasNext();) {
-//            Component next = componentIterator.next();
-//            next.paint(target);
-//        }
-//    }
+    @Override
+    public NavigationViewState getState() {
+        return (NavigationViewState) super.getState();
+    }
 
     public void setScrollPosition(int scrollPosition) {
-        this.scrollPosition = scrollPosition;
+        getState().setScrollPosition(scrollPosition);
         requestRepaint();
     }
 
     public int getScrollPosition() {
-        return scrollPosition;
+        return getState().getScrollPosition();
     }
-
-//    FIXME
-//    @Override
-//    public void changeVariables(Object source, Map<String, Object> variables) {
-//        super.changeVariables(source, variables);
-//        Integer newScrollPosition = (Integer) variables.get("sp");
-//        if (newScrollPosition != null) {
-//            scrollPosition = newScrollPosition;
-//        }
-//    }
 
     /**
      * Gets the @link {@link NavigationManager} in which this view is contained.
@@ -319,8 +308,7 @@ public class NavigationView extends AbstractComponentContainer {
     }
 
     public int getComponentCount() {
-        // TODO Auto-generated method stub
-        return 0;
+        return toolbar != null ? 3 : 2;
     }
 
 }

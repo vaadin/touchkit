@@ -3,6 +3,7 @@ package com.vaadin.addon.touchkit.gwt.client;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
+import com.vaadin.addon.touchkit.gwt.client.navigation.VNavigationButton;
 import com.vaadin.shared.ui.VMarginInfo;
 import com.vaadin.terminal.gwt.client.StyleConstants;
 import com.vaadin.terminal.gwt.client.ui.button.VButton;

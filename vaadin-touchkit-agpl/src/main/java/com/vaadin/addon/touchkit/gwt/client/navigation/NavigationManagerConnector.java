@@ -1,10 +1,9 @@
-package com.vaadin.addon.touchkit.gwt.client.vaadincomm;
+package com.vaadin.addon.touchkit.gwt.client.navigation;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.Widget;
-import com.vaadin.addon.touchkit.gwt.client.VNavigationManager;
 import com.vaadin.addon.touchkit.ui.NavigationManager;
 import com.vaadin.shared.ui.Connect;
 import com.vaadin.terminal.gwt.client.ComponentConnector;

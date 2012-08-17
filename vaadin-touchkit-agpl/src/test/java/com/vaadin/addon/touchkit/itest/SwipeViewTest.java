@@ -72,7 +72,7 @@ public class SwipeViewTest extends AbstractTouchKitIntegrationTest {
         SwipeView[] images;
 
         public SwipeViewTestMgr() {
-            setMaintainBreadcrump(false);
+            setMaintainBreadcrumb(false);
             setWidth("100%");
             images = loadImages();
 

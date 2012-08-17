@@ -2,6 +2,7 @@ package com.vaadin.addon.touchkit.gwt.client;
 
 import com.google.gwt.user.client.Window.Navigator;
 import com.google.gwt.user.client.ui.Widget;
+import com.vaadin.addon.touchkit.gwt.client.navigation.VNavigationManager;
 import com.vaadin.terminal.gwt.client.ApplicationConnection;
 import com.vaadin.terminal.gwt.client.UIDL;
 import com.vaadin.terminal.gwt.client.ui.nativeselect.VNativeSelect;

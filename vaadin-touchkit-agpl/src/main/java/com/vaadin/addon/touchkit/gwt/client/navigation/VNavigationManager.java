@@ -1,4 +1,4 @@
-package com.vaadin.addon.touchkit.gwt.client;
+package com.vaadin.addon.touchkit.gwt.client.navigation;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,7 +15,6 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.terminal.gwt.client.VConsole;
-import com.vaadin.terminal.gwt.client.ui.VLazyExecutor;
 
 public class VNavigationManager extends ComplexPanel {
 
@@ -41,7 +40,7 @@ public class VNavigationManager extends ComplexPanel {
         el.addEventListener("webkitTransitionEnd",function(event) {
         	if(event.target == el) {
         	    	$entry(
-        	        	me.@com.vaadin.addon.touchkit.gwt.client.VNavigationManager::onTransitionEnd()()
+        	        	me.@com.vaadin.addon.touchkit.gwt.client.navigation.VNavigationManager::onTransitionEnd()()
         	        );
         	}
         },false);

@@ -327,13 +327,17 @@
 	border-radius: 4px;
 	padding: 0 13px;
 	}
-	
 .v-touchkit-navbar .v-button .v-button-wrap,
 .v-touchkit-horizontalcomponentgroup .v-button-wrap {
+	line-height: 27px;
+}
+
+.v-touchkit-navbar .v-button .v-button-wrap .v-button-caption,
+.v-touchkit-horizontalcomponentgroup .v-button-wrap .v-button-caption {
 	color: navbarButtonColor;
 	text-shadow: navbarButtonTextShadow;
 	font-size: 12px;
-	line-height: 27px;
+	line-height: normal;
 	-webkit-box-shadow: none;
 }
 
@@ -344,11 +348,12 @@
 .v-touchkit-navbar .v-button:active .v-button-wrap {
 	background: navbarButtonActiveGradient;
 	}
-
+/*
 .v-touchkit-navbar .v-button .v-button-caption,
 .v-touchkit-horizontalcomponentgroup .v-button-caption {
 	line-height: 27px;
 	}
+*/
 
 .v-touchkit-horizontalcomponentgroup {
 	padding:0;
@@ -661,6 +666,12 @@
 	line-height: 30px;
 	margin-right: auto;
 	}
+
+.v-touchkit-navbutton.v-touchkit-navbutton-back .v-touchkit-navbutton-desc {
+	margin-left: 0;
+	margin-right: 0;
+}
+
 @url forwardButtonUrl forwardButtonImage;
 .v-touchkit-navbutton-forward {
 	-webkit-border-image: forwardButtonUrl 0 13 0 6 stretch stretch;

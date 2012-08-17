@@ -1,4 +1,4 @@
-package com.vaadin.addon.touchkit.gwt.client.vaadincomm;
+package com.vaadin.addon.touchkit.gwt.client.navigation;
 
 import com.vaadin.shared.ComponentState;
 import com.vaadin.shared.Connector;

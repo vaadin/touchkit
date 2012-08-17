@@ -1,12 +1,9 @@
-package com.vaadin.addon.touchkit.gwt.client.vaadincomm;
+package com.vaadin.addon.touchkit.gwt.client.navigation;
 
 import com.google.gwt.core.shared.GWT;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Widget;
-import com.vaadin.addon.touchkit.gwt.client.VNavigationButton;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.shared.ComponentState;
 import com.vaadin.shared.Connector;
@@ -16,7 +13,6 @@ import com.vaadin.terminal.gwt.client.communication.RpcProxy;
 import com.vaadin.terminal.gwt.client.communication.StateChangeEvent;
 import com.vaadin.terminal.gwt.client.ui.AbstractComponentConnector;
 import com.vaadin.terminal.gwt.client.ui.Icon;
-import com.vaadin.terminal.gwt.client.ui.nativebutton.VNativeButton;
 
 @Connect(NavigationButton.class)
 public class NavigationButtonConnector extends AbstractComponentConnector {
@@ -61,16 +57,19 @@ public class NavigationButtonConnector extends AbstractComponentConnector {
             getWidget().setPlaceHolderCaption(null);
             getWidget().setTargetWidget(
                     ((AbstractComponentConnector) targetView).getWidget());
-            VConsole.log(((ComponentState)targetView.getState()).getDebugId());
-            VConsole.log("W"+ ((AbstractComponentConnector) targetView).getWidget().getElement().getInnerText());
+            VConsole.log(((ComponentState) targetView.getState()).getDebugId());
+            VConsole.log("W"
+                    + ((AbstractComponentConnector) targetView).getWidget()
+                            .getElement().getInnerText());
         }
 
         if (getState().getIcon() != null) {
             Icon newIcon = new Icon(getConnection());
-            newIcon.setUri(getConnection().translateVaadinUri(getState().getIcon().getURL()));
+            newIcon.setUri(getConnection().translateVaadinUri(
+                    getState().getIcon().getURL()));
             getWidget().setIcon(newIcon);
         }
-        
+
         String description = getState().getDescription();
         getWidget().setDescription(description);
 

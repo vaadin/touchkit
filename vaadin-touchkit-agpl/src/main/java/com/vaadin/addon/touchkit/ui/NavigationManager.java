@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Stack;
 
-import com.vaadin.addon.touchkit.gwt.client.vaadincomm.NavigationManagerSharedState;
+import com.vaadin.addon.touchkit.gwt.client.navigation.NavigationManagerSharedState;
 import com.vaadin.addon.touchkit.ui.NavigationManager.NavigationEvent.Direction;
 import com.vaadin.event.ComponentEventListener;
 import com.vaadin.tools.ReflectTools;
@@ -49,7 +49,7 @@ public class NavigationManager extends AbstractComponentContainer {
      */
 
     private Stack<Component> viewStack = new Stack<Component>();
-    private boolean maintainBreadcrump = true;
+    private boolean maintainBreadcrumb = true;
 
     /**
      * Constructs a {@link NavigationManager} that is 100% wide and high.
@@ -66,7 +66,7 @@ public class NavigationManager extends AbstractComponentContainer {
         this();
         navigateTo(c);
     }
-    
+
     @Override
     public NavigationManagerSharedState getState() {
         return (NavigationManagerSharedState) super.getState();
@@ -79,7 +79,7 @@ public class NavigationManager extends AbstractComponentContainer {
      * override components in this stack if they want to manually modify the
      * "breadcrump" or e.g. release previous views for garbage collection.
      * 
-     * @see #isMaintainBreadcrump()
+     * @see #isMaintainBreadcrumb()
      * 
      * @return components that the navigation manager has saved to be on the
      *         "left side" of previous component.
@@ -120,18 +120,20 @@ public class NavigationManager extends AbstractComponentContainer {
                 getState().setNextComponent(null);
             }
             addComponent(c);
-            if (c instanceof NavigationView) {
-                NavigationView view = (NavigationView) c;
-                if (view.getPreviousComponent() == null) {
-                    view.setPreviousComponent((Component) getCurrentComponent());
-                }
-            }
         } else {
             getState().setNextComponent(null);
         }
+
+        if (c instanceof NavigationView) {
+            NavigationView navigationView = (NavigationView) c;
+            if (navigationView.getPreviousComponent() == null) {
+                navigationView.setPreviousComponent(getCurrentComponent());
+            }
+        }
+
         if (getPreviousComponent() != null) {
             removeComponent(getPreviousComponent());
-            if (isMaintainBreadcrump()) {
+            if (isMaintainBreadcrumb()) {
                 getViewStack().push(getPreviousComponent());
             }
         }
@@ -168,10 +170,9 @@ public class NavigationManager extends AbstractComponentContainer {
         // navigates 'back to the future':
         getState().setNextComponent(getCurrentComponent());
         getState().setCurrentComponent(getPreviousComponent());
-        if (isMaintainBreadcrump()) {
+        if (isMaintainBreadcrumb()) {
             getState().setPreviousComponent(
-            getViewStack().isEmpty() ? null
-                    : getViewStack().pop());
+                    getViewStack().isEmpty() ? null : getViewStack().pop());
         } else {
             getState().setPreviousComponent(null);
         }
@@ -293,38 +294,39 @@ public class NavigationManager extends AbstractComponentContainer {
         throw new UnsupportedOperationException();
     }
 
-//    FIXME
-//    @Override
-//    public void paintContent(PaintTarget target) throws PaintException {
-//        super.paintContent(target);
-//        if (currentComponent != null) {
-//            target.addAttribute("c", currentComponent);
-//        }
-//        if (nextComponent != null) {
-//            target.addAttribute("n", nextComponent);
-//        }
-//        if (previousComponent != null) {
-//            target.addAttribute("p", previousComponent);
-//        }
-//        Iterator<Component> componentIterator = getComponentIterator();
-//        while (componentIterator.hasNext()) {
-//            Component next = componentIterator.next();
-//            next.paint(target);
-//        }
-//    }
-//
-//    @Override
-//    public void changeVariables(Object source, Map<String, Object> variables) {
-//        super.changeVariables(source, variables);
-//        Integer navigated = (Integer) variables.get("navigated");
-//        if (navigated != null) {
-//            if (navigated > 0) {
-//                navigateTo(nextComponent);
-//            } else {
-//                navigateBack();
-//            }
-//        }
-//    }
+    // FIXME
+    // @Override
+    // public void paintContent(PaintTarget target) throws PaintException {
+    // super.paintContent(target);
+    // if (currentComponent != null) {
+    // target.addAttribute("c", currentComponent);
+    // }
+    // if (nextComponent != null) {
+    // target.addAttribute("n", nextComponent);
+    // }
+    // if (previousComponent != null) {
+    // target.addAttribute("p", previousComponent);
+    // }
+    // Iterator<Component> componentIterator = getComponentIterator();
+    // while (componentIterator.hasNext()) {
+    // Component next = componentIterator.next();
+    // next.paint(target);
+    // }
+    // }
+    //
+    // @Override
+    // public void changeVariables(Object source, Map<String, Object> variables)
+    // {
+    // super.changeVariables(source, variables);
+    // Integer navigated = (Integer) variables.get("navigated");
+    // if (navigated != null) {
+    // if (navigated > 0) {
+    // navigateTo(nextComponent);
+    // } else {
+    // navigateBack();
+    // }
+    // }
+    // }
 
     public Iterator<Component> getComponentIterator() {
         ArrayList<Component> components = getComponents();
@@ -381,24 +383,24 @@ public class NavigationManager extends AbstractComponentContainer {
     }
 
     /**
-     * @return true if NavigationManager should maintain "breadcrump" of
+     * @return true if NavigationManager should maintain "breadcrumb" of
      *         previous views. The default is true.
-     * @see #setMaintainBreadcrump(boolean)
+     * @see #setMaintainBreadcrumb(boolean)
      */
-    public boolean isMaintainBreadcrump() {
-        return maintainBreadcrump;
+    public boolean isMaintainBreadcrumb() {
+        return maintainBreadcrumb;
     }
 
     /**
-     * Configures whether the NavigationManager maintains "breadcrump"
+     * Configures whether the NavigationManager maintains "breadcrumb"
      * automatically. This is handy when using NavigationViews to dive into a
      * deep hierarchy.
      * 
-     * @param maintainBreadcrump
-     *            true if "breadcrump" should be maintained
+     * @param maintainBreadcrumb
+     *            true if "breadcrumb" should be maintained
      */
-    public void setMaintainBreadcrump(boolean maintainBreadcrump) {
-        this.maintainBreadcrump = maintainBreadcrump;
+    public void setMaintainBreadcrumb(boolean maintainBreadcrumb) {
+        this.maintainBreadcrumb = maintainBreadcrumb;
     }
 
     public int getComponentCount() {

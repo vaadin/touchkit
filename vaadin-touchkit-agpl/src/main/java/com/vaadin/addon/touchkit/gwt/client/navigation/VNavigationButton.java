@@ -1,4 +1,4 @@
-package com.vaadin.addon.touchkit.gwt.client;
+package com.vaadin.addon.touchkit.gwt.client.navigation;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.SpanElement;
