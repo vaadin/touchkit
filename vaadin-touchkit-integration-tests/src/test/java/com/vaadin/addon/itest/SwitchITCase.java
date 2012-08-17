@@ -25,6 +25,16 @@ public class SwitchITCase extends AbstractTestBenchTest {
             driver.findElement(By.id("switchComponent")).click();
             text = driver.findElement(By.id("statusLabel")).getText();
             assertEquals("false", text);
+
+            // Clicking the toggle button should also change the state.
+            driver.findElement(By.id("toggleButton")).click();
+            text = driver.findElement(By.id("statusLabel")).getText();
+            assertEquals("true", text);
+
+            // And toggle back.
+            driver.findElement(By.id("toggleButton")).click();
+            text = driver.findElement(By.id("statusLabel")).getText();
+            assertEquals("false", text);
         } finally {
             driver.quit();
         }
