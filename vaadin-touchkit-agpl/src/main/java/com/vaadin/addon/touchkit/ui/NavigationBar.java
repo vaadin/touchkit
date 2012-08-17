@@ -143,7 +143,7 @@ public class NavigationBar extends AbstractComponentContainer {
 
     public Iterator<Component> getComponentIterator() {
         LinkedList<Component> components = new LinkedList<Component>();
-        components.add(backButton);
+        components.add(leftNavigationBarComponent);
         if (navigationBarComponent != null) {
             components.add(navigationBarComponent);
         }
