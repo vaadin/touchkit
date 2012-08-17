@@ -2,10 +2,11 @@ package com.vaadin.addon.touchkit.gwt.client.popover;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.EventTarget;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.Event.NativePreviewHandler;
@@ -51,7 +52,14 @@ public class PopoverConnector extends WindowConnector implements
 
     @Override
     public void onPreviewNativeEvent(NativePreviewEvent event) {
-        if (getWidget().isClosable() && getState().isVisible()
+        EventTarget target = event.getNativeEvent().getEventTarget();
+        Element targetElement = null;
+        if (Element.is(target)) {
+            targetElement = Element.as(target);
+        }
+
+        if (getWidget().getModalityCurtain().isOrHasChild(targetElement)
+                && getWidget().isClosable() && getState().isVisible()
                 && (event.getTypeInt() & ACCEPTEDEVENTS) == 0) {
             /*
              * Close on events outside window. Special handling for mousemove
@@ -78,7 +86,8 @@ public class PopoverConnector extends WindowConnector implements
                     /*
                      * fade in the modality curtain unless in fullscreen mode.
                      */
-                    Element modalityCurtain = getWidget().getModalityCurtain();
+                    com.google.gwt.user.client.Element modalityCurtain = getWidget()
+                            .getModalityCurtain();
                     modalityCurtain
                             .removeClassName("v-touchkit-opacity-transition");
                     DOM.sinkEvents(modalityCurtain, Event.TOUCHEVENTS);

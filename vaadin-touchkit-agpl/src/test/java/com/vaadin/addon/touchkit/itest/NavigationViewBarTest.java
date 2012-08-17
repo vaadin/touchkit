@@ -12,13 +12,13 @@ import com.vaadin.ui.Label;
 
 public class NavigationViewBarTest extends AbstractTouchKitIntegrationTest {
 
-    private NavigationManager navman;
-
     public NavigationViewBarTest() {
         setDescription("NavigationView and -Bar test");
+        addComponent(makeNavigationManager());
+    }
 
-        navman = new NavigationManager();
-        addComponent(navman);
+    static NavigationManager makeNavigationManager() {
+        final NavigationManager navman = new NavigationManager();
 
         final NavigationView one = createView("One", "one", true);
         final NavigationView two = createView("Two", "two", true);
@@ -28,9 +28,9 @@ public class NavigationViewBarTest extends AbstractTouchKitIntegrationTest {
         navman.setCurrentComponent(one);
         navman.setNextComponent(two);
 
-        addNextButton(one, two);
-        addNextButton(two, three);
-        addNextButton(three, four);
+        addNextButton(navman, one, two);
+        addNextButton(navman, two, three);
+        addNextButton(navman, three, four);
 
         navman.addListener(new NavigationListener() {
             @Override
@@ -44,10 +44,11 @@ public class NavigationViewBarTest extends AbstractTouchKitIntegrationTest {
                 }
             }
         });
+        return navman;
     }
 
-    private void addNextButton(final NavigationView view,
-            final NavigationView next) {
+    private static void addNextButton(final NavigationManager navman,
+            final NavigationView view, final NavigationView next) {
         ((Button) view.getRightComponent())
                 .addListener(new Button.ClickListener() {
                     @Override
@@ -57,7 +58,7 @@ public class NavigationViewBarTest extends AbstractTouchKitIntegrationTest {
                 });
     }
 
-    private NavigationView createView(String caption, String debugId,
+    static NavigationView createView(String caption, String debugId,
             boolean hasNext) {
         final CssLayout layout = new CssLayout();
         layout.setDebugId(debugId);
