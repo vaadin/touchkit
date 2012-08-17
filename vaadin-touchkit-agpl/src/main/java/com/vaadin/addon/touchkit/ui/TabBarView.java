@@ -165,6 +165,7 @@ public class TabBarView extends AbstractComponentContainer {
         super.addComponent(tab);
         currentComponent = tab;
         getTabButton(currentComponent).setSelected(true);
+        requestRepaint();
         fireSelectedTabChange();
 
     }
@@ -192,6 +193,7 @@ public class TabBarView extends AbstractComponentContainer {
      *             use the specialized API instead: {@link #addTab(Component)}
      *             and {@link #removeTab(Component)}
      */
+    @Override
     @Deprecated
     public void replaceComponent(Component oldComponent, Component newComponent) {
         throw new UnsupportedOperationException(
@@ -205,6 +207,7 @@ public class TabBarView extends AbstractComponentContainer {
      * 
      * @see ComponentContainer#getComponentIterator()
      */
+    @Override
     public Iterator<Component> getComponentIterator() {
         LinkedList<Component> list = new LinkedList<Component>();
         list.add(toolbar);
@@ -225,15 +228,6 @@ public class TabBarView extends AbstractComponentContainer {
         return null;
     }
 
-    // TODO
-    // @Override
-    // public void paintContent(PaintTarget target) throws PaintException {
-    // super.paintContent(target);
-    // toolbar.paint(target);
-    // currentComponent.paint(target);
-    //
-    // }
-
     private class TabButton extends Button implements Tab {
 
         private Component relatedComponent;
@@ -241,6 +235,14 @@ public class TabBarView extends AbstractComponentContainer {
         public TabButton(Component tab1) {
             relatedComponent = tab1;
             setCaption(tab1.getCaption());
+
+            addListener(new Button.ClickListener() {
+
+                @Override
+                public void buttonClick(ClickEvent event) {
+                    setSelectedTab(getComponent());
+                }
+            });
         }
 
         public void setSelected(boolean b) {
@@ -251,22 +253,19 @@ public class TabBarView extends AbstractComponentContainer {
             }
         }
 
+        @Override
         public boolean isClosable() {
             return false;
         }
 
+        @Override
         public void setClosable(boolean closable) {
             throw new UnsupportedOperationException();
         }
 
+        @Override
         public Component getComponent() {
             return relatedComponent;
-        }
-
-        @Override
-        protected void fireClick() {
-            setSelectedTab(getComponent());
-            super.fireClick();
         }
 
         // FIXME
@@ -361,6 +360,7 @@ public class TabBarView extends AbstractComponentContainer {
         fireEvent(new SelectedTabChangeEvent(this));
     }
 
+    @Override
     public int getComponentCount() {
         return 1 + (currentComponent != null ? 1 : 0);
     }
