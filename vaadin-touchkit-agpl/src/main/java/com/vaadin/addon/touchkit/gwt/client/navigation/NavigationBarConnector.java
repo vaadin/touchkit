@@ -9,6 +9,11 @@ import com.vaadin.terminal.gwt.client.ui.AbstractComponentContainerConnector;
 
 @Connect(com.vaadin.addon.touchkit.ui.NavigationBar.class)
 public class NavigationBarConnector extends AbstractComponentContainerConnector {
+    
+    @Override
+    public boolean delegateCaptionHandling() {
+        return false;
+    }
 
     @Override
     protected Widget createWidget() {
