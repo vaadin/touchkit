@@ -241,7 +241,7 @@
 
 .v-button-wrap,
 .v-button:focus .v-button-wrap {
-	display: block;
+	/*display: block;
 	border-radius: 7px;
 	background: buttonGradient;
 	-webkit-box-shadow: buttonBoxShadow;
@@ -250,7 +250,7 @@
 	line-height: 37px;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-	overflow: hidden;
+	overflow: hidden;*/
 	}
 
 .v-button:active .v-button-wrap,
