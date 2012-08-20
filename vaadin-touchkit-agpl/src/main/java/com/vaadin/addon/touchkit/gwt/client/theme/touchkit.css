@@ -1701,12 +1701,19 @@ span.v-datefield-calendarpanel-month {
 	float: right;
 }
 
+.v-touchkit-verticalcomponentgroup>.v-touchkit-fitwidth {
+	width: 80%;
+	padding-left: 200px;
+	padding-right: 20px;
+}
+
 .v-touchkit-verticalcomponentgroup>.v-caption {
 	float: left;
 	font-weight: bold;
 	font-size: 17px;
 	line-height: 43px;
 	height: 43px;
+	width: 20%;
 	margin-left: negativeListLayoutMargin;
 	padding-left: listLayoutMargin;
 	text-overflow: ellipsis;
