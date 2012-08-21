@@ -114,18 +114,19 @@ public class TabBarView extends AbstractComponentContainer {
      */
     public void removeTab(Component c) {
         TabButton tabButton = getTabButton(c);
+        tabs.remove(c);
         if (tabButton != null) {
             toolbar.removeComponent(tabButton);
             if (c == currentComponent) {
                 super.removeComponent(c);
-                Component next = getComponentIterator().next();
+
+                Component next = tabs.iterator().next();
+
                 if (next != null) {
                     setSelectedTab(next);
                 }
             }
         }
-        tabs.remove(c);
-
     }
 
     /**
@@ -159,7 +160,10 @@ public class TabBarView extends AbstractComponentContainer {
      */
     public void setSelectedTab(Component tab) {
         if (currentComponent != null) {
-            getTabButton(currentComponent).setSelected(false);
+            TabButton tabButton = getTabButton(currentComponent);
+            if (tabButton != null) {
+                tabButton.setSelected(false);
+            }
             super.removeComponent(currentComponent);
         }
         super.addComponent(tab);
