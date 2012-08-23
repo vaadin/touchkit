@@ -8,11 +8,13 @@ import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.shared.ComponentState;
 import com.vaadin.shared.Connector;
 import com.vaadin.shared.ui.Connect;
+import com.vaadin.terminal.gwt.client.ServerConnector;
 import com.vaadin.terminal.gwt.client.VConsole;
 import com.vaadin.terminal.gwt.client.communication.RpcProxy;
 import com.vaadin.terminal.gwt.client.communication.StateChangeEvent;
 import com.vaadin.terminal.gwt.client.ui.AbstractComponentConnector;
 import com.vaadin.terminal.gwt.client.ui.Icon;
+import com.vaadin.terminal.gwt.server.ClientConnector;
 
 @Connect(NavigationButton.class)
 public class NavigationButtonConnector extends AbstractComponentConnector {
@@ -44,14 +46,28 @@ public class NavigationButtonConnector extends AbstractComponentConnector {
     @Override
     public void onStateChanged(StateChangeEvent stateChangeEvent) {
         super.onStateChanged(stateChangeEvent);
-        getWidget().setText(getState().getCaption());
 
-        Connector targetView = getState().getTargetView();
+        String caption = getState().getCaption();
+        ServerConnector targetView = (ServerConnector) getState()
+                .getTargetView();
+        String targetViewCaption = getState().getTargetViewCaption();
+        if (caption == null) {
+            caption = targetViewCaption;
+            if (caption == null && targetView != null) {
+                caption = ((ComponentState) ((ServerConnector) targetView)
+                        .getState()).getCaption();
+            }
+        }
+        getWidget().setText(caption);
+
         if (targetView == null) {
             VConsole.error("Targetview null, using placeholder target.");
             getWidget().setTargetWidget(null);
+            if(targetViewCaption == null) {
+                targetViewCaption = caption;
+            }
             getWidget()
-                    .setPlaceHolderCaption(getState().getTargetViewCaption());
+                    .setPlaceHolderCaption(targetViewCaption);
         } else {
             VConsole.error("Targetview set.");
             getWidget().setPlaceHolderCaption(null);

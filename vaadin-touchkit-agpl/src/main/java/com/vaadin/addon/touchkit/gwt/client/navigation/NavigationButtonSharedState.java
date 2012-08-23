@@ -10,14 +10,7 @@ public class NavigationButtonSharedState extends ComponentState {
     private Connector targetView;
 
     public String getTargetViewCaption() {
-        if (targetViewCaption != null) {
-            return targetViewCaption;
-        }
-        if (getTargetView() != null
-                && ((ComponentState) getTargetView().getState()).getCaption() != null) {
-            return ((ComponentState) getTargetView().getState()).getCaption();
-        }
-        return getCaption();
+        return targetViewCaption;
     }
 
     public void setTargetViewCaption(String targetViewCaption) {
@@ -30,24 +23,6 @@ public class NavigationButtonSharedState extends ComponentState {
 
     public void setTargetView(Connector targetView) {
         this.targetView = targetView;
-    }
-
-    @Override
-    public String getCaption() {
-        String caption2 = super.getCaption();
-        if (caption2 == null) {
-            /*
-             * Use caption from target view unless explicitly set for this
-             * button
-             */
-            if (getTargetView() != null
-                    && ((ComponentState) getTargetView().getState())
-                            .getCaption() != null) {
-                return ((ComponentState) getTargetView().getState())
-                        .getCaption();
-            }
-        }
-        return caption2;
     }
 
 }

@@ -40,7 +40,8 @@ public class MeetingRoomView extends AbstractTouchKitIntegrationTest {
 
             myForm = new MeetingRoomForm();
             myForm.setItemDataSource(new BeanItem<MeetingRoom>(myRoom));
-            myForm.setWriteThrough(true);
+            myForm.setBuffered(true);
+//            myForm.setWriteThrough(true);
             myForm.setImmediate(true);
             verticalComponentGroup.addComponent(myForm);
 

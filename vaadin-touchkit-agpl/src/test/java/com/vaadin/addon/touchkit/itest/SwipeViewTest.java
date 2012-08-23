@@ -160,7 +160,6 @@ public class SwipeViewTest extends AbstractTouchKitIntegrationTest {
 
         class SwipeViewWithTabsheet extends SwipeView {
             public SwipeViewWithTabsheet() {
-                setMargin(true);
                 Form form = new Form();
 
                 CheckBox cb = new CheckBox();

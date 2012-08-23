@@ -8,7 +8,6 @@ import com.vaadin.addon.touchkit.gwt.client.VerticalComponentGroupWidget;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.shared.communication.URLReference;
 import com.vaadin.shared.ui.Connect;
-import com.vaadin.shared.ui.VMarginInfo;
 import com.vaadin.terminal.gwt.client.ComponentConnector;
 import com.vaadin.terminal.gwt.client.ConnectorHierarchyChangeEvent;
 import com.vaadin.terminal.gwt.client.communication.StateChangeEvent;
@@ -28,8 +27,8 @@ public class VerticalComponentGroupConnector extends
     @Override
     public void onStateChanged(StateChangeEvent stateChangeEvent) {
         super.onStateChanged(stateChangeEvent);
-        ((VerticalComponentGroupWidget) getWidget())
-                .setMarginStyles(new VMarginInfo(getState().getMarginsBitmask()));
+//        ((VerticalComponentGroupWidget) getWidget())
+//                .setMarginStyles(new VMarginInfo(getState().getMarginsBitmask()));
     }
 
     @Override

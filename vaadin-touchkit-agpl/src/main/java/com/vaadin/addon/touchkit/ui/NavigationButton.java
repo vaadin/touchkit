@@ -80,11 +80,6 @@ public class NavigationButton extends AbstractComponent {
     }
     
     @Override
-    public void updateState() {
-        super.updateState();
-    }
-
-    @Override
     public NavigationButtonSharedState getState() {
         return (NavigationButtonSharedState) super.getState();
     }

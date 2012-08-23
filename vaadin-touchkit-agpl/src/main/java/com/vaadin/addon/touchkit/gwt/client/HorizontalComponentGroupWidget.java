@@ -1,7 +1,7 @@
 package com.vaadin.addon.touchkit.gwt.client;
 
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.vaadin.shared.ui.VMarginInfo;
+import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.terminal.gwt.client.StyleConstants;
 
 public class HorizontalComponentGroupWidget extends FlowPanel {
@@ -22,7 +22,7 @@ public class HorizontalComponentGroupWidget extends FlowPanel {
      *            A {@link VMarginInfo} object that provides info on
      *            top/left/bottom/right margins
      */
-    public void setMarginStyles(VMarginInfo margins) {
+    public void setMarginStyles(MarginInfo margins) {
         setStyleName(getElement(), CLASSNAME + "-" + StyleConstants.MARGIN_TOP,
                 margins.hasTop());
         setStyleName(getElement(), CLASSNAME + "-"

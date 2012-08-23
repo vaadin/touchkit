@@ -32,7 +32,6 @@ public class Toolbar extends CssLayout {
      * By default the Toolbar has no margin, is 100% wide and 44px high.
      */
     public Toolbar() {
-        setMargin(false);
         setStyleName(STYLENAME);
         setWidth(100, UNITS_PERCENTAGE);
     }

@@ -20,7 +20,6 @@ public class HorizontalComponentGroup extends AbstractComponentGroup {
     public HorizontalComponentGroup(String caption) {
         super(caption);
         setWidth(null);
-        setMargin(false);
     }
 
 }

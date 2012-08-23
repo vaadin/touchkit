@@ -2,9 +2,10 @@ package com.vaadin.addon.touchkit.gwt.client;
 
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.addon.touchkit.gwt.client.navigation.VNavigationButton;
-import com.vaadin.shared.ui.VMarginInfo;
+import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.terminal.gwt.client.StyleConstants;
 import com.vaadin.terminal.gwt.client.ui.button.VButton;
 
@@ -70,14 +71,14 @@ public class VerticalComponentGroupWidget extends FlowPanel {
      *            A {@link VMarginInfo} object that provides info on
      *            top/left/bottom/right margins
      */
-    public void setMarginStyles(VMarginInfo margins) {
-        content.setStyleName(getElement(), TAGNAME + "-"
+    public void setMarginStyles(MarginInfo margins) {
+        UIObject.setStyleName(getElement(), TAGNAME + "-"
                 + StyleConstants.MARGIN_TOP, margins.hasTop());
-        content.setStyleName(getElement(), TAGNAME + "-"
+        UIObject.setStyleName(getElement(), TAGNAME + "-"
                 + StyleConstants.MARGIN_RIGHT, margins.hasRight());
-        content.setStyleName(getElement(), TAGNAME + "-"
+        UIObject.setStyleName(getElement(), TAGNAME + "-"
                 + StyleConstants.MARGIN_BOTTOM, margins.hasBottom());
-        content.setStyleName(getElement(), TAGNAME + "-"
+        UIObject.setStyleName(getElement(), TAGNAME + "-"
                 + StyleConstants.MARGIN_LEFT, margins.hasLeft());
     }
 }

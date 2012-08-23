@@ -14,7 +14,7 @@ import com.vaadin.ui.Tree;
 public class JunkYard extends CssLayout {
 
     public JunkYard() {
-        setMargin(true);
+//        setMargin(true);
         setWidth("100%");
         
         TextField textField = new TextField("Textfield");

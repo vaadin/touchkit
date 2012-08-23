@@ -19,13 +19,13 @@ public class ButtonsInComponentGroups extends AbstractTouchKitIntegrationTest {
         navigationView.setCaption("Buttons in various places");
 
         CssLayout l = new CssLayout();
-        l.setMargin(true);
+//        l.setMargin(true);
         
         l.addComponent(new Button("Button not in a component group"));
 
         VerticalComponentGroup verticalComponentGroup = new VerticalComponentGroup(
                 "Vertical component group");
-        verticalComponentGroup.setMargin(false);
+//        verticalComponentGroup.setMargin(false);
         verticalComponentGroup.addComponent(new Button("Button"));
         verticalComponentGroup.addComponent(new TextField("TextField"));
         verticalComponentGroup.addComponent(new Button("Button too"));
@@ -35,7 +35,7 @@ public class ButtonsInComponentGroups extends AbstractTouchKitIntegrationTest {
         l.addComponent(verticalComponentGroup);
         
         verticalComponentGroup = new VerticalComponentGroup();
-        verticalComponentGroup.setMargin(false);
+//        verticalComponentGroup.setMargin(false);
         verticalComponentGroup.setCaption("Horizontal in vertical");
         HorizontalComponentGroup horizontalGroup = getHorizontalGroup();
         horizontalGroup.setCaption("Caption");

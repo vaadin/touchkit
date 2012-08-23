@@ -8,7 +8,6 @@ import com.vaadin.addon.touchkit.gwt.client.HorizontalComponentGroupWidget;
 import com.vaadin.addon.touchkit.ui.HorizontalComponentGroup;
 import com.vaadin.shared.communication.URLReference;
 import com.vaadin.shared.ui.Connect;
-import com.vaadin.shared.ui.VMarginInfo;
 import com.vaadin.terminal.gwt.client.ComponentConnector;
 import com.vaadin.terminal.gwt.client.ConnectorHierarchyChangeEvent;
 import com.vaadin.terminal.gwt.client.communication.StateChangeEvent;
@@ -29,8 +28,8 @@ public class HorizontalComponentGroupConnector extends
     public void onStateChanged(StateChangeEvent stateChangeEvent) {
         super.onStateChanged(stateChangeEvent);
 
-        ((HorizontalComponentGroupWidget) getWidget())
-                .setMarginStyles(new VMarginInfo(getState().getMarginsBitmask()));
+//        ((HorizontalComponentGroupWidget) getWidget())
+//                .setMarginStyles(new VMarginInfo(getState().getMarginsBitmask()));
     }
 
     @Override

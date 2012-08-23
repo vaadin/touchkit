@@ -18,7 +18,7 @@ public class VerticalComponentGroupTest extends AbstractTouchKitIntegrationTest 
         setDescription("This is VerticalComponentGroup test");
         VerticalComponentGroup verticalComponentGroup = new VerticalComponentGroup(
                 "Vertical component group");
-        verticalComponentGroup.setMargin(true);
+//        verticalComponentGroup.setMargin(true);
         verticalComponentGroup.addComponent(new Button("Button"));
         verticalComponentGroup.addComponent(new TextField("TextField"));
 
@@ -35,7 +35,7 @@ public class VerticalComponentGroupTest extends AbstractTouchKitIntegrationTest 
         addComponent(verticalComponentGroup);
 
         verticalComponentGroup = new VerticalComponentGroup();
-        verticalComponentGroup.setMargin(false);
+//        verticalComponentGroup.setMargin(false);
         verticalComponentGroup.setCaption("Horizontal in vertical");
         HorizontalComponentGroup horizontalGroup = getHorizontalGroup();
         horizontalGroup.setCaption("Caption");
