@@ -142,7 +142,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
                     popover.setHeight("100%");
                     popover.center();
                     popover.requestRepaint();
-                    getRoot().addWindow(popover);
+                    getUI().addWindow(popover);
                 } else {
                     popover.showRelativeTo(event.getButton());
                 }

@@ -1,11 +1,11 @@
 package com.vaadin.addon.touchkit.ui;
 
 import com.vaadin.Application;
-import com.vaadin.RootRequiresMoreInformationException;
+import com.vaadin.UIRequiresMoreInformationException;
 import com.vaadin.terminal.WrappedRequest;
 import com.vaadin.terminal.WrappedRequest.BrowserDetails;
 import com.vaadin.terminal.gwt.server.WebBrowser;
-import com.vaadin.ui.Root;
+import com.vaadin.ui.UI;
 
 /**
  * TODO try to get rid of this class, needs changes to core
@@ -42,19 +42,18 @@ public abstract class TouchKitApplication extends Application {
         TouchKitSettings.init(this);
     }
 
-
     @Override
-    protected Root getRoot(WrappedRequest request)
-            throws RootRequiresMoreInformationException {
+    protected UI getUI(WrappedRequest request)
+            throws UIRequiresMoreInformationException {
         BrowserDetails browserDetails = request.getBrowserDetails();
         // This is a limitation of 7.0.0.alpha1 that there is no better way to
         // check if WebBrowser has been fully initialized
         if (!browserDetailsReady && browserDetails.getUriFragment() == null) {
-            throw new RootRequiresMoreInformationException();
+            throw new UIRequiresMoreInformationException();
         }
         browserDetailsReady = true;
 
-        Root r;
+        UI r;
         // could also use screen size, browser version etc.
         if (browserDetails.getWebBrowser().isTouchDevice()) {
             r = getTouchRoot(request);
@@ -65,9 +64,9 @@ public abstract class TouchKitApplication extends Application {
         return r;
     }
     
-    public abstract Root getTouchRoot(WrappedRequest request);
+    public abstract UI getTouchRoot(WrappedRequest request);
     
-    public Root getFallbackRoot(WrappedRequest request) {
+    public UI getFallbackRoot(WrappedRequest request) {
         return getTouchRoot(request);
     }
     

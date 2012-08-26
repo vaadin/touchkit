@@ -15,7 +15,7 @@ import com.vaadin.terminal.WrappedResponse;
 import com.vaadin.terminal.gwt.server.BootstrapFragmentResponse;
 import com.vaadin.terminal.gwt.server.BootstrapListener;
 import com.vaadin.terminal.gwt.server.BootstrapPageResponse;
-import com.vaadin.ui.Root;
+import com.vaadin.ui.UI;
 
 public class TouchKitSettings implements RequestHandler, BootstrapListener {
 
@@ -52,7 +52,7 @@ public class TouchKitSettings implements RequestHandler, BootstrapListener {
         app.addRequestHandler(this);
     }
 
-    public TouchKitSettings(Root root) {
+    public TouchKitSettings(UI root) {
         Collection<Extension> extensions = root.getExtensions();
         for (Extension extension : extensions) {
             if (extension instanceof ViewPortSettings) {
@@ -77,7 +77,7 @@ public class TouchKitSettings implements RequestHandler, BootstrapListener {
         return touchKitSettings;
     }
     
-    public static TouchKitSettings init(Root root) {
+    public static TouchKitSettings init(UI root) {
         return null;
     }
 
@@ -95,7 +95,7 @@ public class TouchKitSettings implements RequestHandler, BootstrapListener {
         return get(Application.getCurrent());
     }
     
-    public static TouchKitSettings get(Root root) {
+    public static TouchKitSettings get(UI root) {
         return new TouchKitSettings(root);
     }
 
@@ -114,7 +114,7 @@ public class TouchKitSettings implements RequestHandler, BootstrapListener {
 
     @Override
     public void modifyBootstrapPage(BootstrapPageResponse response) {
-        Root root = response.getRoot();
+        UI root = response.getUI();
         if(root != null) {
             ensureInitialized(root);
             TouchKitSettings rootsettings = get(root);
@@ -131,7 +131,7 @@ public class TouchKitSettings implements RequestHandler, BootstrapListener {
         settings.offlineModeSettings.modifyBootstrapPage(response);
     }
     
-    private static void ensureInitialized(Root root) {
+    private static void ensureInitialized(UI root) {
         if(!isInitializedForTouchDevices(root)) {
             TouchKitSettings appSettings = get();
             appSettings.viewPortSettings.cloneAndExtend(root);
@@ -141,7 +141,7 @@ public class TouchKitSettings implements RequestHandler, BootstrapListener {
         }
     }
 
-    static private boolean isInitializedForTouchDevices(Root r) {
+    static private boolean isInitializedForTouchDevices(UI r) {
         if(r == null) {
             return false;
         }

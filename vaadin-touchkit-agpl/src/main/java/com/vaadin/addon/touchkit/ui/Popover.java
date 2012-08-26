@@ -77,7 +77,7 @@ public class Popover extends Window {
     public void showRelativeTo(Component relatedComponent) {
         getState().setRelatedComponent(relatedComponent);
         if (relatedComponent != null && getParent() == null) {
-            relatedComponent.getRoot().addWindow(this);
+            relatedComponent.getUI().addWindow(this);
         }
         requestRepaint();
     }
@@ -111,7 +111,7 @@ public class Popover extends Window {
      */
     public void removeFromParent() {
         if (getParent() != null) {
-            getRoot().removeWindow(this);
+            getUI().removeWindow(this);
         }
     }
 

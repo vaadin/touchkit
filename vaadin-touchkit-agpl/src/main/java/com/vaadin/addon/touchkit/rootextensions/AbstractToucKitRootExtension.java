@@ -2,11 +2,11 @@ package com.vaadin.addon.touchkit.rootextensions;
 
 import com.vaadin.addon.touchkit.ui.TouchKitApplication;
 import com.vaadin.terminal.AbstractExtension;
-import com.vaadin.ui.Root;
+import com.vaadin.ui.UI;
 
 public class AbstractToucKitRootExtension extends AbstractExtension implements Cloneable {
 
-    public void extend(Root target) {
+    public void extend(UI target) {
         super.extend(target);
     }
 
@@ -17,7 +17,7 @@ public class AbstractToucKitRootExtension extends AbstractExtension implements C
      * 
      * @param root
      */
-    public void cloneAndExtend(Root root) {
+    public void cloneAndExtend(UI root) {
         if (this.getParent() != null) {
             throw new IllegalStateException(
                     "TouchKit root extensions cannot be cloned once attached.");

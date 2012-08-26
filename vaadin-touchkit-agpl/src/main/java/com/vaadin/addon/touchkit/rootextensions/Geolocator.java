@@ -6,7 +6,7 @@ import com.vaadin.addon.touchkit.gwt.client.vaadincomm.Position;
 import com.vaadin.addon.touchkit.service.PositionCallback;
 import com.vaadin.terminal.AbstractExtension;
 import com.vaadin.terminal.Extension;
-import com.vaadin.ui.Root;
+import com.vaadin.ui.UI;
 
 @SuppressWarnings("serial")
 public class Geolocator extends AbstractExtension {
@@ -23,7 +23,7 @@ public class Geolocator extends AbstractExtension {
     public static void detect(PositionCallback callback) {
         Geolocator locator = null;
         // Do we already have a Geolocator attached?
-        for (Extension e : Root.getCurrent().getExtensions()) {
+        for (Extension e : UI.getCurrent().getExtensions()) {
             if (e instanceof Geolocator) {
                 locator = (Geolocator) e;
             }
@@ -31,7 +31,7 @@ public class Geolocator extends AbstractExtension {
         // Attach a Geolocator if none found.
         if (locator == null) {
             locator = new Geolocator();
-            locator.extend(Root.getCurrent());
+            locator.extend(UI.getCurrent());
         }
         locator.detectCurrentPosition(callback);
     }

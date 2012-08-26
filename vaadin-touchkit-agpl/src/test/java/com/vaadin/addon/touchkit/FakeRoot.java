@@ -1,9 +1,9 @@
 package com.vaadin.addon.touchkit;
 
 import com.vaadin.terminal.WrappedRequest;
-import com.vaadin.ui.Root;
+import com.vaadin.ui.UI;
 
-public class FakeRoot extends Root {
+public class FakeRoot extends UI {
 
     @Override
     protected void init(WrappedRequest request) {

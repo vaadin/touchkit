@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
 
-import com.vaadin.RootRequiresMoreInformationException;
 import com.vaadin.addon.touchkit.ui.TouchKitApplication;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.event.ItemClickEvent;
@@ -18,9 +17,9 @@ import com.vaadin.terminal.WrappedRequest;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Embedded;
 import com.vaadin.ui.Label;
-import com.vaadin.ui.Root;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.Table.ColumnGenerator;
+import com.vaadin.ui.UI;
 
 /**
  * The Application's "main" class
@@ -251,8 +250,8 @@ public class TouchKitTestApp extends TouchKitApplication {
 
     }
 
-    public Root getTouchRoot(WrappedRequest request) {
-        return new Root() {
+    public UI getTouchRoot(WrappedRequest request) {
+        return new UI() {
 
             @Override
             protected void init(WrappedRequest request) {

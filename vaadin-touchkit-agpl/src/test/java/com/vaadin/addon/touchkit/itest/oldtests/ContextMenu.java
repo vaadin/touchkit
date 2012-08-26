@@ -29,7 +29,7 @@ public class ContextMenu extends AbstractTouchKitIntegrationTest {
                     new Action("Paste") };
 
             public void handleAction(Action action, Object sender, Object target) {
-            	getRoot().showNotification("Just test");
+            	getUI().showNotification("Just test");
             }
 
             public Action[] getActions(Object target, Object sender) {

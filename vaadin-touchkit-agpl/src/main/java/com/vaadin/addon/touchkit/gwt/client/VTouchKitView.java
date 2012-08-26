@@ -4,9 +4,9 @@ import java.util.Date;
 
 import com.google.gwt.user.client.Cookies;
 import com.vaadin.terminal.gwt.client.ApplicationConnection;
-import com.vaadin.terminal.gwt.client.ui.root.VRoot;
+import com.vaadin.terminal.gwt.client.ui.UI.VUI;
 
-public class VTouchKitView extends VRoot {
+public class VTouchKitView extends VUI {
 
     private ApplicationConnection client;
     private Integer persistentSessionTimeout;
