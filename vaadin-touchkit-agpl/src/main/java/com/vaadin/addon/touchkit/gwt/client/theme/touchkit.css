@@ -1116,6 +1116,9 @@
 }
 
 .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-caption {
+	color: inherit;
+	font-size: 10px;
+	font-family: "Helvetica Neue", Helvetica, Arial, Tahoma, Verdana, sans-serif;
 	display: block;
 	margin: 3px 0 0 0;
 	position: static;
@@ -1128,7 +1131,7 @@
 }
 
 .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button .v-icon {
-	margin: 0 0 -12px 0; /* Compensate the space consumed by icon as caption is positioned with margin */
+	margin: 0 0 -7px 0; /* Compensate the space consumed by icon as caption is positioned with margin */
 }
 
 .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-wrap:before {
