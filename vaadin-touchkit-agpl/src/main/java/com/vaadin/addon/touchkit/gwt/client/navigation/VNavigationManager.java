@@ -69,7 +69,6 @@ public class VNavigationManager extends ComplexPanel {
             }
         }
         detachAfterAnimation.clear();
-        VConsole.log("Trs timer");
     }
 
     static boolean rerendering = false;
