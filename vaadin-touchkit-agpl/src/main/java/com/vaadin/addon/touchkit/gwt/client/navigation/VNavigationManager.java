@@ -11,6 +11,7 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -47,28 +48,27 @@ public class VNavigationManager extends ComplexPanel {
     }-*/;
 
     private void onTransitionEnd() {
-        VConsole.log("Trs end.");
-        transitionPending = false;
-        if (pendingWidth != null) {
-            setWidth(pendingWidth);
-            pendingWidth = null;
-        }
-        for (Widget w : detachAfterAnimation) {
-            w.removeFromParent();
-        }
-        detachAfterAnimation.clear();
+        VConsole.log("Trs end");
 
-        /**
-         * Stylesheet fades in new navigation views in 150ms. After they have
-         * become visible, remove placeholder below them.
-         */
-        new com.google.gwt.user.client.Timer() {
+        new Timer() {
             @Override
             public void run() {
                 VConsole.log("Place holder hide");
                 hidePlaceHolder();
             }
         }.schedule(160);
+
+        transitionPending = false;
+        if (pendingWidth != null) {
+            setWidth(pendingWidth);
+            pendingWidth = null;
+        }
+        for (Widget w : detachAfterAnimation) {
+            if (w != null) {
+                w.removeFromParent();
+            }
+        }
+        detachAfterAnimation.clear();
         VConsole.log("Trs timer");
     }
 
@@ -257,7 +257,6 @@ public class VNavigationManager extends ComplexPanel {
     }
 
     private void moveAside(com.google.gwt.dom.client.Element element) {
-        VConsole.log("mov aside element");
         element.getStyle().setOpacity(0);
         element.getStyle().setTop(100, Unit.PCT);
     }
