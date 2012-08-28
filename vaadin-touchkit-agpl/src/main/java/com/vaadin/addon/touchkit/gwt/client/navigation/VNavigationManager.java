@@ -57,6 +57,18 @@ public class VNavigationManager extends ComplexPanel {
             w.removeFromParent();
         }
         detachAfterAnimation.clear();
+
+        /**
+         * Stylesheet fades in new navigation views in 150ms. After they have
+         * become visible, remove placeholder below them.
+         */
+        new com.google.gwt.user.client.Timer() {
+            @Override
+            public void run() {
+                VConsole.log("Place holder hide");
+                hidePlaceHolder();
+            }
+        }.schedule(160);
     }
 
     static boolean rerendering = false;
@@ -162,8 +174,8 @@ public class VNavigationManager extends ComplexPanel {
      */
     private void setPosition(Widget widget, int pos) {
         if (widget != null && widget.getParent() == this) {
-            setPosition(((Widget) widget).getElement().getParentElement()
-                    .getStyle(), pos);
+            setPosition((widget).getElement().getParentElement().getStyle(),
+                    pos);
             lastPixelWidthForPaintable = getPixelWidth();
         }
     }
@@ -249,8 +261,8 @@ public class VNavigationManager extends ComplexPanel {
     }
 
     private void moveAside(Widget p) {
-        com.google.gwt.dom.client.Element parentElement = ((Widget) p)
-                .getElement().getParentElement();
+        com.google.gwt.dom.client.Element parentElement = (p).getElement()
+                .getParentElement();
         moveAside(parentElement);
     }
 
