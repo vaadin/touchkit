@@ -47,7 +47,7 @@ public class VNavigationManager extends ComplexPanel {
     }-*/;
 
     private void onTransitionEnd() {
-        VConsole.log("Trs end");
+        VConsole.log("Trs end.");
         transitionPending = false;
         if (pendingWidth != null) {
             setWidth(pendingWidth);
@@ -69,6 +69,7 @@ public class VNavigationManager extends ComplexPanel {
                 hidePlaceHolder();
             }
         }.schedule(160);
+        VConsole.log("Trs timer");
     }
 
     static boolean rerendering = false;
@@ -256,6 +257,7 @@ public class VNavigationManager extends ComplexPanel {
     }
 
     private void moveAside(com.google.gwt.dom.client.Element element) {
+        VConsole.log("mov aside element");
         element.getStyle().setOpacity(0);
         element.getStyle().setTop(100, Unit.PCT);
     }
