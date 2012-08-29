@@ -247,8 +247,12 @@ public class NavigationView extends AbstractComponentContainer {
 
     public Iterator<Component> getComponentIterator() {
         LinkedList<Component> linkedList = new LinkedList<Component>();
-        linkedList.add(navigationBar);
-        linkedList.add(mainComponent);
+        if (navigationBar != null) {
+            linkedList.add(navigationBar);
+        }
+        if (mainComponent != null) {
+            linkedList.add(mainComponent);
+        }
         if (toolbar != null) {
             linkedList.add(toolbar);
         }
