@@ -61,7 +61,6 @@ public class NavigationButtonConnector extends AbstractComponentConnector {
         getWidget().setText(caption);
 
         if (targetView == null) {
-            VConsole.error("Targetview null, using placeholder target.");
             getWidget().setTargetWidget(null);
             if(targetViewCaption == null) {
                 targetViewCaption = caption;
@@ -69,14 +68,9 @@ public class NavigationButtonConnector extends AbstractComponentConnector {
             getWidget()
                     .setPlaceHolderCaption(targetViewCaption);
         } else {
-            VConsole.error("Targetview set.");
             getWidget().setPlaceHolderCaption(null);
             getWidget().setTargetWidget(
                     ((AbstractComponentConnector) targetView).getWidget());
-            VConsole.log(((ComponentState) targetView.getState()).getDebugId());
-            VConsole.log("W"
-                    + ((AbstractComponentConnector) targetView).getWidget()
-                            .getElement().getInnerText());
         }
 
         if (getState().getIcon() != null) {
