@@ -46,6 +46,15 @@ public class Popover extends Window {
         registerRpc(rpc);
     }
 
+    @Override
+    public void beforeClientResponse(boolean initial) {
+        if (getWidth() == 100 && getWidthUnits() == Unit.PERCENTAGE
+                && getHeight() == 100 && getHeightUnits() == Unit.PERCENTAGE) {
+            getState().setFullscreen(true);
+        }
+        super.beforeClientResponse(initial);
+    }
+
     /**
      * Constructs a new Popover with given content.
      * 
@@ -80,15 +89,6 @@ public class Popover extends Window {
             relatedComponent.getUI().addWindow(this);
         }
         requestRepaint();
-    }
-
-    @Override
-    public void requestRepaint() {
-        if (getWidth() == 100 && getWidthUnits() == Unit.PERCENTAGE
-                && getHeight() == 100 && getHeightUnits() == Unit.PERCENTAGE) {
-            getState().setFullscreen(true);
-        }
-        super.requestRepaint();
     }
 
     /**
