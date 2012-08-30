@@ -57,10 +57,7 @@ public class VerticalComponentGroupWidget extends FlowPanel {
             widget.addStyleName("v-touchkit-has-caption");
             content.add(caption);
         }
-        if (!(widget instanceof HorizontalComponentGroupWidget
-                || widget instanceof VButton || widget instanceof VNavigationButton)) {
-            widget.addStyleName("v-touchkit-fitwidth");
-        }
+
         content.add(widget);
     }
 
