@@ -42,8 +42,8 @@ public class OfflineModeSettings extends AbstractToucKitRootExtension implements
     public void modifyBootstrapPage(BootstrapPageResponse response) {
         Document document = response.getDocument();
         if (isCacheManifestEnabled()) {
-            document.getElementsByTag("html").attr("manifest",
-                    getCacheManifestLocation(response));
+//            document.getElementsByTag("html").attr("manifest",
+//                    getCacheManifestLocation(response));
         }
     }
 
