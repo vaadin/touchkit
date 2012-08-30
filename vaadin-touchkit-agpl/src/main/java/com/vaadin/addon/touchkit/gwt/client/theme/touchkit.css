@@ -1070,6 +1070,7 @@
 .v-touchkit-tabbar {
 	overflow: hidden;
 	position:relative;
+	padding-bottom: 46px;
 }
 
 .v-touchkit-tabbar .v-csslayout-container,
@@ -1080,6 +1081,7 @@
 
 .v-touchkit-tabbar-wrapper {
 	overflow: auto;
+	height: 100%;
 }
 
 .v-touchkit-tabbar-toolbar .v-touchkit-toolbar {
