@@ -19,6 +19,7 @@ public class NavigationViewConnector extends
         AbstractComponentContainerConnector implements ScrollHandler {
 
     private NavigationBarConnector navigationBar;
+    
     private HandlerRegistration scrollHandler;
 
     NavigationViewServerRpc rpc = RpcProxy.create(
@@ -69,7 +70,10 @@ public class NavigationViewConnector extends
 
     public void onScroll(ScrollEvent event) {
         if (getWidget().isAttached()) {
-            rpc.updateScrollPosition(getWidget().getScrollTop());
+            // Disabled until Vaadin 7 supports delayed rpc. Sending this while
+            // kinectic scrolling will cause new scroll value update back from
+            // server --> earthquake effect
+            //rpc.updateScrollPosition(getWidget().getScrollTop());
         }
     }
 

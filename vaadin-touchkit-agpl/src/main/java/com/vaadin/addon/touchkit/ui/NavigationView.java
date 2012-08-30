@@ -291,7 +291,6 @@ public class NavigationView extends AbstractComponentContainer {
 
     public void setScrollPosition(int scrollPosition) {
         getState().setScrollPosition(scrollPosition);
-        requestRepaint();
     }
 
     public int getScrollPosition() {
