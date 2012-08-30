@@ -5,7 +5,6 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.addon.touchkit.gwt.client.navigation.VNavigationButton;
-import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.terminal.gwt.client.StyleConstants;
 import com.vaadin.terminal.gwt.client.ui.button.VButton;
 
@@ -23,6 +22,15 @@ public class VerticalComponentGroupWidget extends FlowPanel {
         content.addStyleName(CLASSNAME);
         captionWidget = new HTML("");
         captionWidget.addStyleName("v-touchkit-verticalcomponentgroup-caption");
+
+        UIObject.setStyleName(getElement(), TAGNAME + "-"
+                + StyleConstants.MARGIN_TOP, true);
+        UIObject.setStyleName(getElement(), TAGNAME + "-"
+                + StyleConstants.MARGIN_RIGHT, true);
+        UIObject.setStyleName(getElement(), TAGNAME + "-"
+                + StyleConstants.MARGIN_BOTTOM, true);
+        UIObject.setStyleName(getElement(), TAGNAME + "-"
+                + StyleConstants.MARGIN_LEFT, true);
     }
 
     public void setCaption(String caption) {
@@ -59,23 +67,5 @@ public class VerticalComponentGroupWidget extends FlowPanel {
         }
 
         content.add(widget);
-    }
-
-    /**
-     * Sets CSS classes for margin based on the given parameters.
-     * 
-     * @param margins
-     *            A {@link VMarginInfo} object that provides info on
-     *            top/left/bottom/right margins
-     */
-    public void setMarginStyles(MarginInfo margins) {
-        UIObject.setStyleName(getElement(), TAGNAME + "-"
-                + StyleConstants.MARGIN_TOP, margins.hasTop());
-        UIObject.setStyleName(getElement(), TAGNAME + "-"
-                + StyleConstants.MARGIN_RIGHT, margins.hasRight());
-        UIObject.setStyleName(getElement(), TAGNAME + "-"
-                + StyleConstants.MARGIN_BOTTOM, margins.hasBottom());
-        UIObject.setStyleName(getElement(), TAGNAME + "-"
-                + StyleConstants.MARGIN_LEFT, margins.hasLeft());
     }
 }
