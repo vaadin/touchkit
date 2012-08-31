@@ -5,6 +5,10 @@ import java.lang.reflect.Method;
 
 import com.vaadin.addon.touchkit.gwt.client.navigation.NavigationButtonRpc;
 import com.vaadin.addon.touchkit.gwt.client.navigation.NavigationButtonSharedState;
+import com.vaadin.client.ServerConnector;
+import com.vaadin.client.ui.AbstractComponentConnector;
+import com.vaadin.server.ClientConnector;
+import com.vaadin.shared.ComponentState;
 import com.vaadin.shared.Connector;
 import com.vaadin.shared.MouseEventDetails;
 import com.vaadin.tools.ReflectTools;
@@ -82,6 +86,31 @@ public class NavigationButton extends AbstractComponent {
     @Override
     public NavigationButtonSharedState getState() {
         return (NavigationButtonSharedState) super.getState();
+    }
+    
+    @Override
+    public void beforeClientResponse(boolean initial) {
+        super.beforeClientResponse(initial);
+        
+        // Steal caption from target view if not explicitly defined
+        String caption = getState().getCaption();
+        AbstractComponent targetView = (AbstractComponent) getState()
+                .getTargetView();
+        String targetViewCaption = getState().getTargetViewCaption();
+        if (caption == null) {
+            caption = targetViewCaption;
+            if (caption == null && targetView != null) {
+                caption = targetView.getCaption();
+            }
+        }
+        getState().setCaption(caption);
+        
+        if(getState().getTargetViewCaption() == null) {
+            if (targetView == null) {
+                getState().setTargetViewCaption(caption);
+            }
+        }
+        
     }
     
     /**

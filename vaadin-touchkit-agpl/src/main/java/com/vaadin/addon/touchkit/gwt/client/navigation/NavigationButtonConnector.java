@@ -45,29 +45,20 @@ public class NavigationButtonConnector extends AbstractComponentConnector {
         super.onStateChanged(stateChangeEvent);
 
         String caption = getState().getCaption();
+        getWidget().setText(caption);
+
         ServerConnector targetView = (ServerConnector) getState()
                 .getTargetView();
         String targetViewCaption = getState().getTargetViewCaption();
-        if (caption == null) {
-            caption = targetViewCaption;
-            if (caption == null && targetView != null) {
-                caption = ((ComponentState) ((ServerConnector) targetView)
-                        .getState()).getCaption();
-            }
-        }
-        getWidget().setText(caption);
-
         if (targetView == null) {
             getWidget().setTargetWidget(null);
-            if (targetViewCaption == null) {
-                targetViewCaption = caption;
-            }
             getWidget().setPlaceHolderCaption(targetViewCaption);
         } else {
             getWidget().setPlaceHolderCaption(null);
             getWidget().setTargetWidget(
                     ((AbstractComponentConnector) targetView).getWidget());
         }
+        
         // FIXME
         // if (getState().getIcon() != null) {
         // Icon newIcon = new Icon(getConnection());
