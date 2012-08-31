@@ -6,12 +6,12 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.addon.touchkit.gwt.client.VerticalComponentGroupWidget;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
-import com.vaadin.shared.communication.URLReference;
-import com.vaadin.shared.ui.Connect;
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.ConnectorHierarchyChangeEvent;
 import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.AbstractComponentContainerConnector;
+import com.vaadin.shared.communication.URLReference;
+import com.vaadin.shared.ui.Connect;
 
 @Connect(VerticalComponentGroup.class)
 public class VerticalComponentGroupConnector extends
@@ -27,28 +27,26 @@ public class VerticalComponentGroupConnector extends
     @Override
     public void onStateChanged(StateChangeEvent stateChangeEvent) {
         super.onStateChanged(stateChangeEvent);
-//        ((VerticalComponentGroupWidget) getWidget())
-//                .setMarginStyles(new VMarginInfo(getState().getMarginsBitmask()));
     }
 
     @Override
     public void onConnectorHierarchyChange(ConnectorHierarchyChangeEvent event) {
         List<ComponentConnector> children = getChildComponents();
         VerticalComponentGroupWidget widget = (VerticalComponentGroupWidget) getWidget();
-        widget.setCaption(this.getState().getVisibleCaption());
         widget.clear();
         for (ComponentConnector connector : children) {
             // FIXME
             // URLReference urlRef = connector.getState().getIcon();
             URLReference urlRef = null;
             String caption = connector.getState().getCaption();
+            String width = connector.getState().getWidth();
             String url = "";
             if (urlRef != null) {
                 url = urlRef.getURL();
             }
 
             ((VerticalComponentGroupWidget) getWidget()).add(
-                    connector.getWidget(), url, caption);
+                    connector.getWidget(), url, caption, width);
         }
         super.onConnectorHierarchyChange(event);
     }
@@ -61,7 +59,5 @@ public class VerticalComponentGroupConnector extends
 
     @Override
     public void updateCaption(ComponentConnector connector) {
-        theWidget.setCaption(this.getState().getVisibleCaption());
     }
-
 }

@@ -15,13 +15,10 @@ public class VerticalComponentGroupWidget extends FlowPanel {
     public static final String CAPTION_CLASSNAME = "v-caption";
 
     private boolean firstElement = true;
-    private HTML captionWidget;
     private FlowPanel content = new FlowPanel();
 
     public VerticalComponentGroupWidget() {
         content.addStyleName(CLASSNAME);
-        captionWidget = new HTML("");
-        captionWidget.addStyleName("v-touchkit-verticalcomponentgroup-caption");
 
         UIObject.setStyleName(getElement(), TAGNAME + "-"
                 + StyleConstants.MARGIN_TOP, true);
@@ -33,10 +30,6 @@ public class VerticalComponentGroupWidget extends FlowPanel {
                 + StyleConstants.MARGIN_LEFT, true);
     }
 
-    public void setCaption(String caption) {
-        captionWidget.setHTML(caption);
-    }
-
     /**
      * Adds Widget with icon url and caption text
      * 
@@ -45,12 +38,12 @@ public class VerticalComponentGroupWidget extends FlowPanel {
      * @param caption
      */
     public void add(final Widget widget, final String iconUrl,
-            final String captionText) {
+            final String captionText, String widgetWidth) {
         if (firstElement) {
             firstElement = false;
-            add(captionWidget);
             add(content);
         }
+
         if (iconUrl != null
                 && !iconUrl.isEmpty()
                 && !(widget instanceof VButton || widget instanceof VNavigationButton)) {
@@ -65,6 +58,11 @@ public class VerticalComponentGroupWidget extends FlowPanel {
             widget.addStyleName("v-touchkit-has-caption");
             content.add(caption);
         }
+        /*
+         * if (widget instanceof VTextField) { widget.setWidth(null);
+         * widget.getElement().setPropertyString("style",
+         * "max-width:100%;min-width:50%"); }
+         */
 
         content.add(widget);
     }

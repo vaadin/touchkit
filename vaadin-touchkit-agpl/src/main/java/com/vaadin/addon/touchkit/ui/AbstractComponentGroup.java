@@ -7,7 +7,6 @@ import java.util.List;
 import com.vaadin.addon.touchkit.gwt.client.vaadincomm.AbstractComponentGroupState;
 import com.vaadin.ui.AbstractComponentContainer;
 import com.vaadin.ui.Component;
-//import com.vaadin.ui.Layout.MarginInfo;
 
 /**
  * Parent class that encapsulates similarities between
@@ -17,12 +16,20 @@ import com.vaadin.ui.Component;
 public abstract class AbstractComponentGroup extends AbstractComponentContainer {
 
     protected List<Component> children = new ArrayList<Component>();
-//    protected MarginInfo margins = new MarginInfo(false);
 
     @Override
     public AbstractComponentGroupState getState() {
         return (AbstractComponentGroupState) super.getState();
+    }
 
+    /**
+     * Constructs a {@link AbstractComponentGroup} with the given caption.
+     * 
+     * @param caption
+     *            The caption for the component group
+     */
+    protected AbstractComponentGroup(String caption) {
+        setCaption(caption);
     }
 
     @Override
@@ -60,38 +67,4 @@ public abstract class AbstractComponentGroup extends AbstractComponentContainer 
     public Iterator<Component> getComponentIterator() {
         return children.iterator();
     }
-
-    /**
-     * Constructs a {@link AbstractComponentGroup} with the given caption.
-     * 
-     * @param caption
-     *            The caption for the component group
-     */
-    protected AbstractComponentGroup(String caption) {
-        setCaption("");
-        getState().setVisibleCaption(caption);
-    }
-
-//    public void setMargin(boolean enabled) {
-//        margins.setMargins(enabled);
-//        getState().setMarginsBitmask(margins.getBitMask());
-//        requestRepaint();
-//    }
-//
-//    public MarginInfo getMargin() {
-//        return margins;
-//    }
-//
-//    public void setMargin(MarginInfo marginInfo) {
-//        margins.setMargins(marginInfo);
-//        getState().setMarginsBitmask(margins.getBitMask());
-//        requestRepaint();
-//    }
-//
-//    public void setMargin(boolean topEnabled, boolean rightEnabled,
-//            boolean bottomEnabled, boolean leftEnabled) {
-//        margins.setMargins(topEnabled, rightEnabled, bottomEnabled, leftEnabled);
-//        getState().setMarginsBitmask(margins.getBitMask());
-//        requestRepaint();
-//    }
 }

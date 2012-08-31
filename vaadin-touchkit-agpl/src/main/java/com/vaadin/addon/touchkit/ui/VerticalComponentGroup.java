@@ -32,11 +32,4 @@ public class VerticalComponentGroup extends AbstractComponentGroup {
         super(caption);
         setWidth(null);
     }
-
-    @Override
-    public void setCaption(String caption) {
-        super.setCaption("");
-        getState().setVisibleCaption(caption);
-    }
-
 }

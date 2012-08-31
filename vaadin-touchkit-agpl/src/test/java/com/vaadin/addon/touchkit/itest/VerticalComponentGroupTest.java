@@ -1,15 +1,19 @@
 package com.vaadin.addon.touchkit.itest;
 
 import java.util.Iterator;
+import java.util.Locale;
 
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
 import com.vaadin.addon.touchkit.ui.HorizontalComponentGroup;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
+import com.vaadin.addon.touchkit.ui.NumberField;
+import com.vaadin.addon.touchkit.ui.Switch;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.OptionGroup;
 import com.vaadin.ui.TextField;
 
 public class VerticalComponentGroupTest extends AbstractTouchKitIntegrationTest {
@@ -18,9 +22,15 @@ public class VerticalComponentGroupTest extends AbstractTouchKitIntegrationTest 
         setDescription("This is VerticalComponentGroup test");
         VerticalComponentGroup verticalComponentGroup = new VerticalComponentGroup(
                 "Vertical component group");
-//        verticalComponentGroup.setMargin(true);
+
         verticalComponentGroup.addComponent(new Button("Button"));
-        verticalComponentGroup.addComponent(new TextField("TextField"));
+        TextField tf = new TextField(
+                "TextField wit long caption text 100% width");
+        tf.setWidth("100%");
+        verticalComponentGroup.addComponent(tf);
+
+        verticalComponentGroup.addComponent(new Switch("Switch"));
+        verticalComponentGroup.addComponent(new NumberField("numberfield"));
 
         NavigationButton one = new NavigationButton("Navigation button");
         NavigationButton too = new NavigationButton(
@@ -32,13 +42,14 @@ public class VerticalComponentGroupTest extends AbstractTouchKitIntegrationTest 
                 "FIXME: Label, between buttons bugs"));
         verticalComponentGroup.addComponent(new Button("Button too"));
 
+        verticalComponentGroup.addComponent(getOptiongroup());
+
         addComponent(verticalComponentGroup);
 
         verticalComponentGroup = new VerticalComponentGroup();
-//        verticalComponentGroup.setMargin(false);
         verticalComponentGroup.setCaption("Horizontal in vertical");
+
         HorizontalComponentGroup horizontalGroup = getHorizontalGroup();
-        horizontalGroup.setCaption("Caption");
         verticalComponentGroup.addComponent(horizontalGroup);
 
         horizontalGroup = getHorizontalGroup();
@@ -61,6 +72,19 @@ public class VerticalComponentGroupTest extends AbstractTouchKitIntegrationTest 
         addComponent(verticalComponentGroup);
     }
 
+    private OptionGroup getOptiongroup() {
+        OptionGroup languageSelect = new OptionGroup();
+        Locale[] availableLocales = new Locale[] { Locale.CANADA,
+                Locale.ENGLISH, Locale.GERMAN };
+        for (Locale locale : availableLocales) {
+            languageSelect.addItem(locale);
+            languageSelect.setItemCaption(locale,
+                    locale.getDisplayLanguage(locale));
+        }
+        languageSelect.setValue(Locale.ENGLISH);
+        return languageSelect;
+    }
+
     private HorizontalComponentGroup getHorizontalGroup() {
         HorizontalComponentGroup horizontalComponentGroup = new HorizontalComponentGroup();
         horizontalComponentGroup.addComponent(new Button("First"));
@@ -68,4 +92,5 @@ public class VerticalComponentGroupTest extends AbstractTouchKitIntegrationTest 
 
         return horizontalComponentGroup;
     }
+
 }

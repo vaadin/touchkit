@@ -241,22 +241,15 @@
 
 .v-button-wrap,
 .v-button:focus .v-button-wrap {
-	/*display: block;
-	border-radius: 7px;
-	background: buttonGradient;
-	-webkit-box-shadow: buttonBoxShadow;
-	padding: 0 listLayoutMargin;
-	height: 39px;
-	line-height: 37px;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;*/
+	background: buttonGradient !important;
+	-webkit-box-shadow: buttonBoxShadow !important;
 	}
 
 .v-button:active .v-button-wrap,
 .v-button.v-pressed .v-button-wrap {
-	background-image: buttonActiveGradient;
+	background-image: buttonActiveGradient !important;
 	}
+	
 
 .v-button-caption {
 	line-height: 37px;
@@ -466,7 +459,7 @@
 	display: inline-block;
 	}
 
-.v-touchkit-toolbar .v-button .v-button-wrap {
+.v-touchkit-toolbar .v-button:active .v-button-wrap {
 	background: transparent;
 	}
 
@@ -799,16 +792,6 @@
 
 .v-touchkit-navview-notoolbar .v-touchkit-navview-toolbar {
 	display: none;
-}
-
-.v-touchkit-verticalcomponentgroup-caption
-{
-	font-size: 16px;
-	font-weight: bold;
-	color: #44698b;
-	text-shadow: 0 1px 0 rgba(255,255,255,.7);
-	margin: listLayoutMargin listLayoutMargin 0;
-	text-indent: listLayoutMargin;
 }
 
 .v-slider:focus {
@@ -1920,4 +1903,14 @@ span.v-datefield-calendarpanel-month {
 }
 .v-formlayout-lastrow > td {
 	border-bottom: none;
+}
+
+.v-captiontext
+{
+	font-size: 16px !important;
+	font-weight: bold !important;
+	color: #44698b !important;
+	text-shadow: 0 1px 0 rgba(255,255,255,.7) !important;
+	margin: listLayoutMargin listLayoutMargin 0 !important;
+	text-indent: listLayoutMargin !important;
 }
