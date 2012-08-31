@@ -241,13 +241,13 @@
 
 .v-button-wrap,
 .v-button:focus .v-button-wrap {
-	background: buttonGradient !important;
-	-webkit-box-shadow: buttonBoxShadow !important;
+	background: buttonGradient;
+	-webkit-box-shadow: buttonBoxShadow;
 	}
 
 .v-button:active .v-button-wrap,
 .v-button.v-pressed .v-button-wrap {
-	background-image: buttonActiveGradient !important;
+	background-image: buttonActiveGradient;
 	}
 	
 
@@ -320,9 +320,14 @@
 	border-radius: 4px;
 	padding: 0 13px;
 	}
+
+.v-touchkit-horizontalcomponentgroup .v-button-wrap {
+	background: none;
+}
+
 .v-touchkit-navbar .v-button .v-button-wrap,
 .v-touchkit-horizontalcomponentgroup .v-button-wrap {
-	line-height: 24px;
+	line-height: 27px;
 }
 
 .v-touchkit-navbar .v-button .v-button-wrap .v-button-caption,
@@ -1907,10 +1912,10 @@ span.v-datefield-calendarpanel-month {
 
 .v-captiontext
 {
-	font-size: 16px !important;
-	font-weight: bold !important;
-	color: #44698b !important;
-	text-shadow: 0 1px 0 rgba(255,255,255,.7) !important;
-	margin: listLayoutMargin listLayoutMargin 0 !important;
-	text-indent: listLayoutMargin !important;
+	font-size: 16px;
+	font-weight: bold;
+	color: #44698b;
+	text-shadow: 0 1px 0 rgba(255,255,255,.7);
+	margin: listLayoutMargin listLayoutMargin 0;
+	text-indent: listLayoutMargin;
 }
