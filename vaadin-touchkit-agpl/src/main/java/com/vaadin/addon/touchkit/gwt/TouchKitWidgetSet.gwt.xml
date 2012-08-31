@@ -1,6 +1,6 @@
 <module>
 	<!-- WS Compiler: manually edited -->
-	<inherits name="com.vaadin.server.gwt.DefaultWidgetSet" />
+	<inherits name="com.vaadin.DefaultWidgetSet" />
 	<inherits name="com.google.gwt.resources.Resources" />
 
 	<!-- Development time setting to speed up compilation -->
