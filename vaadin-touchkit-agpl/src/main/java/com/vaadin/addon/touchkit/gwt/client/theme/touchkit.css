@@ -241,15 +241,22 @@
 
 .v-button-wrap,
 .v-button:focus .v-button-wrap {
+	/*display: block;
+	border-radius: 7px;
 	background: buttonGradient;
 	-webkit-box-shadow: buttonBoxShadow;
+	padding: 0 listLayoutMargin;
+	height: 39px;
+	line-height: 37px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;*/
 	}
 
 .v-button:active .v-button-wrap,
 .v-button.v-pressed .v-button-wrap {
 	background-image: buttonActiveGradient;
 	}
-	
 
 .v-button-caption {
 	line-height: 37px;
@@ -320,14 +327,9 @@
 	border-radius: 4px;
 	padding: 0 13px;
 	}
-
-.v-touchkit-horizontalcomponentgroup .v-button-wrap {
-	background: none;
-}
-
 .v-touchkit-navbar .v-button .v-button-wrap,
 .v-touchkit-horizontalcomponentgroup .v-button-wrap {
-	line-height: 27px;
+	line-height: 24px;
 }
 
 .v-touchkit-navbar .v-button .v-button-wrap .v-button-caption,
@@ -464,7 +466,7 @@
 	display: inline-block;
 	}
 
-.v-touchkit-toolbar .v-button:active .v-button-wrap {
+.v-touchkit-toolbar .v-button .v-button-wrap {
 	background: transparent;
 	}
 
