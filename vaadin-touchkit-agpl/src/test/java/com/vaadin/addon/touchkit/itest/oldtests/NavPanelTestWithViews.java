@@ -270,7 +270,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
             Button button = new Button(null, this);
             button.setIcon(new ThemeResource("../runo/icons/64/email.png"));
 
-            button.setIcon(new ClassResource("mail.png", app));
+            button.setIcon(new ClassResource("mail.png"));
             return button;
         }
 
