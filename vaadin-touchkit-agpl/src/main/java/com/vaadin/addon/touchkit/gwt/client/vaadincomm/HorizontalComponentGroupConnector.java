@@ -28,8 +28,8 @@ public class HorizontalComponentGroupConnector extends
     public void onStateChanged(StateChangeEvent stateChangeEvent) {
         super.onStateChanged(stateChangeEvent);
 
-//        ((HorizontalComponentGroupWidget) getWidget())
-//                .setMarginStyles(new VMarginInfo(getState().getMarginsBitmask()));
+        // ((HorizontalComponentGroupWidget) getWidget())
+        // .setMarginStyles(new VMarginInfo(getState().getMarginsBitmask()));
     }
 
     @Override
@@ -38,7 +38,9 @@ public class HorizontalComponentGroupConnector extends
         HorizontalComponentGroupWidget widget = (HorizontalComponentGroupWidget) getWidget();
         widget.clear();
         for (ComponentConnector connector : children) {
-            URLReference urlRef = connector.getState().getIcon();
+            // FIXME
+            // URLReference urlRef = connector.getState().getIcon();
+            URLReference urlRef = null;
             String caption = connector.getState().getCaption();
             String url = "";
             if (urlRef != null) {

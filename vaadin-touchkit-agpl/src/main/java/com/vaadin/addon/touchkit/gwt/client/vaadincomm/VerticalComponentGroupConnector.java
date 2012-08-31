@@ -38,7 +38,9 @@ public class VerticalComponentGroupConnector extends
         widget.setCaption(this.getState().getVisibleCaption());
         widget.clear();
         for (ComponentConnector connector : children) {
-            URLReference urlRef = connector.getState().getIcon();
+            // FIXME
+            // URLReference urlRef = connector.getState().getIcon();
+            URLReference urlRef = null;
             String caption = connector.getState().getCaption();
             String url = "";
             if (urlRef != null) {
