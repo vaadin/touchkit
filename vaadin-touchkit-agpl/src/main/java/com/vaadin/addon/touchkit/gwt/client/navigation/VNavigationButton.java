@@ -6,7 +6,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
-import com.vaadin.terminal.gwt.client.ui.Icon;
+import com.vaadin.client.ui.Icon;
 
 public class VNavigationButton extends HTML {
     private static final String NAVBUTTON_CLASSNAME = "v-touchkit-navbutton";

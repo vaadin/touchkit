@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import com.vaadin.terminal.Resource;
+import com.vaadin.server.Resource;
 import com.vaadin.tools.ReflectTools;
 import com.vaadin.ui.AbstractComponentContainer;
 import com.vaadin.ui.Button;

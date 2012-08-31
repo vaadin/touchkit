@@ -1,6 +1,6 @@
 package com.vaadin.addon.touchkit.gwt.client;
 
-import com.vaadin.terminal.gwt.client.ui.textfield.VTextField;
+import com.vaadin.client.ui.textfield.VTextField;
 
 public class UrlFieldWidget extends VTextField {
 

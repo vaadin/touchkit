@@ -15,7 +15,7 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.vaadin.terminal.gwt.client.VConsole;
+import com.vaadin.client.VConsole;
 
 public class VNavigationManager extends ComplexPanel {
 

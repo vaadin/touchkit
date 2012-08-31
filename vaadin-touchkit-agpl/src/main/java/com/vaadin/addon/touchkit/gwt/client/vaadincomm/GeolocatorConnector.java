@@ -3,9 +3,9 @@ package com.vaadin.addon.touchkit.gwt.client.vaadincomm;
 import com.vaadin.addon.touchkit.gwt.client.VPosition;
 import com.vaadin.addon.touchkit.rootextensions.Geolocator;
 import com.vaadin.shared.ui.Connect;
-import com.vaadin.terminal.gwt.client.VConsole;
-import com.vaadin.terminal.gwt.client.communication.RpcProxy;
-import com.vaadin.terminal.gwt.client.extensions.AbstractExtensionConnector;
+import com.vaadin.client.VConsole;
+import com.vaadin.client.communication.RpcProxy;
+import com.vaadin.client.extensions.AbstractExtensionConnector;
 
 @SuppressWarnings("serial")
 @Connect(Geolocator.class)

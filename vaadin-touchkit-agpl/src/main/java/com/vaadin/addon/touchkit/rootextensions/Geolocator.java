@@ -4,8 +4,8 @@ import com.vaadin.addon.touchkit.gwt.client.vaadincomm.GeolocatorClientRpc;
 import com.vaadin.addon.touchkit.gwt.client.vaadincomm.GeolocatorServerRpc;
 import com.vaadin.addon.touchkit.gwt.client.vaadincomm.Position;
 import com.vaadin.addon.touchkit.service.PositionCallback;
-import com.vaadin.terminal.AbstractExtension;
-import com.vaadin.terminal.Extension;
+import com.vaadin.server.AbstractExtension;
+import com.vaadin.server.Extension;
 import com.vaadin.ui.UI;
 
 @SuppressWarnings("serial")

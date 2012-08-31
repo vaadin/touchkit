@@ -3,8 +3,8 @@ package com.vaadin.addon.touchkit.gwt.client;
 import java.util.Date;
 
 import com.google.gwt.user.client.Cookies;
-import com.vaadin.terminal.gwt.client.ApplicationConnection;
-import com.vaadin.terminal.gwt.client.ui.UI.VUI;
+import com.vaadin.client.ApplicationConnection;
+import com.vaadin.client.ui.UI.VUI;
 
 public class VTouchKitView extends VUI {
 

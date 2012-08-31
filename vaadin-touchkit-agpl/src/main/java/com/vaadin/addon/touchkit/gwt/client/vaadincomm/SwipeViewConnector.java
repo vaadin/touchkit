@@ -8,8 +8,8 @@ import com.vaadin.addon.touchkit.gwt.client.VSwipeView;
 import com.vaadin.addon.touchkit.gwt.client.VSwipeView.SwipeListener;
 import com.vaadin.addon.touchkit.ui.SwipeView;
 import com.vaadin.shared.ui.Connect;
-import com.vaadin.terminal.gwt.client.communication.RpcProxy;
-import com.vaadin.terminal.gwt.client.ui.csslayout.CssLayoutConnector;
+import com.vaadin.client.communication.RpcProxy;
+import com.vaadin.client.ui.csslayout.CssLayoutConnector;
 
 @Connect(SwipeView.class)
 public class SwipeViewConnector extends CssLayoutConnector implements

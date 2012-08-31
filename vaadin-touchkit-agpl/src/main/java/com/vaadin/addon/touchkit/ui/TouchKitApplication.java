@@ -2,9 +2,9 @@ package com.vaadin.addon.touchkit.ui;
 
 import com.vaadin.Application;
 import com.vaadin.UIRequiresMoreInformationException;
-import com.vaadin.terminal.WrappedRequest;
-import com.vaadin.terminal.WrappedRequest.BrowserDetails;
-import com.vaadin.terminal.gwt.server.WebBrowser;
+import com.vaadin.server.WrappedRequest;
+import com.vaadin.server.WrappedRequest.BrowserDetails;
+import com.vaadin.server.WebBrowser;
 import com.vaadin.ui.UI;
 
 /**

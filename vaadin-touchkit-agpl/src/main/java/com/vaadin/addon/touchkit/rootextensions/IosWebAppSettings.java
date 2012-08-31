@@ -3,11 +3,11 @@ package com.vaadin.addon.touchkit.rootextensions;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import com.vaadin.terminal.AbstractExtension;
-import com.vaadin.terminal.gwt.server.BootstrapFragmentResponse;
-import com.vaadin.terminal.gwt.server.BootstrapListener;
-import com.vaadin.terminal.gwt.server.BootstrapPageResponse;
-import com.vaadin.terminal.gwt.server.BootstrapResponse;
+import com.vaadin.server.AbstractExtension;
+import com.vaadin.server.BootstrapFragmentResponse;
+import com.vaadin.server.BootstrapListener;
+import com.vaadin.server.BootstrapPageResponse;
+import com.vaadin.server.BootstrapResponse;
 
 public class IosWebAppSettings extends AbstractToucKitRootExtension implements
         BootstrapListener {

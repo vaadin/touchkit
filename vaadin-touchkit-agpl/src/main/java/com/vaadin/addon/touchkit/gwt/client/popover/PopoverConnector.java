@@ -11,12 +11,12 @@ import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.Event.NativePreviewHandler;
 import com.vaadin.shared.ui.Connect;
-import com.vaadin.terminal.gwt.client.ComponentConnector;
-import com.vaadin.terminal.gwt.client.communication.RpcProxy;
-import com.vaadin.terminal.gwt.client.communication.StateChangeEvent;
-import com.vaadin.terminal.gwt.client.ui.layout.ElementResizeEvent;
-import com.vaadin.terminal.gwt.client.ui.layout.ElementResizeListener;
-import com.vaadin.terminal.gwt.client.ui.window.WindowConnector;
+import com.vaadin.client.ComponentConnector;
+import com.vaadin.client.communication.RpcProxy;
+import com.vaadin.client.communication.StateChangeEvent;
+import com.vaadin.client.ui.layout.ElementResizeEvent;
+import com.vaadin.client.ui.layout.ElementResizeListener;
+import com.vaadin.client.ui.window.WindowConnector;
 
 @SuppressWarnings("serial")
 @Connect(com.vaadin.addon.touchkit.ui.Popover.class)

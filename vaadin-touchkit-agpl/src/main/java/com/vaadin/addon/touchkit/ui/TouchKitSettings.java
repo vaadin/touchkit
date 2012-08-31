@@ -8,13 +8,13 @@ import com.vaadin.addon.touchkit.rootextensions.ApplicationIcons;
 import com.vaadin.addon.touchkit.rootextensions.IosWebAppSettings;
 import com.vaadin.addon.touchkit.rootextensions.OfflineModeSettings;
 import com.vaadin.addon.touchkit.rootextensions.ViewPortSettings;
-import com.vaadin.terminal.Extension;
-import com.vaadin.terminal.RequestHandler;
-import com.vaadin.terminal.WrappedRequest;
-import com.vaadin.terminal.WrappedResponse;
-import com.vaadin.terminal.gwt.server.BootstrapFragmentResponse;
-import com.vaadin.terminal.gwt.server.BootstrapListener;
-import com.vaadin.terminal.gwt.server.BootstrapPageResponse;
+import com.vaadin.server.Extension;
+import com.vaadin.server.RequestHandler;
+import com.vaadin.server.WrappedRequest;
+import com.vaadin.server.WrappedResponse;
+import com.vaadin.server.BootstrapFragmentResponse;
+import com.vaadin.server.BootstrapListener;
+import com.vaadin.server.BootstrapPageResponse;
 import com.vaadin.ui.UI;
 
 public class TouchKitSettings implements RequestHandler, BootstrapListener {

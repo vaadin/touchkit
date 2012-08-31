@@ -1,7 +1,7 @@
 package com.vaadin.addon.touchkit.gwt.client;
 
 import com.google.gwt.core.client.GWT;
-import com.vaadin.terminal.gwt.client.VDebugConsole;
+import com.vaadin.client.VDebugConsole;
 
 /**
  * Use this instead of VDebugConsole with deferred binding, if "remote console"

@@ -4,9 +4,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.DocumentType;
 import org.jsoup.nodes.Element;
 
-import com.vaadin.terminal.gwt.server.BootstrapFragmentResponse;
-import com.vaadin.terminal.gwt.server.BootstrapListener;
-import com.vaadin.terminal.gwt.server.BootstrapPageResponse;
+import com.vaadin.server.BootstrapFragmentResponse;
+import com.vaadin.server.BootstrapListener;
+import com.vaadin.server.BootstrapPageResponse;
 
 public class ViewPortSettings extends AbstractToucKitRootExtension implements BootstrapListener {
     

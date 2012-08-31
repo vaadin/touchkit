@@ -32,12 +32,12 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.HasValue;
-import com.vaadin.terminal.gwt.client.ApplicationConnection;
-import com.vaadin.terminal.gwt.client.ui.Field;
+import com.vaadin.client.ApplicationConnection;
+import com.vaadin.client.ui.Field;
 
 /**
  * VSwitch is the client-side implementation of import
- * com.vaadin.terminal.gwt.client.ui.Field; the Switch component.
+ * com.vaadin.client.ui.Field; the Switch component.
  * 
  * Derived from implementations by Teemu Pöntelin Vaadin Ltd.
  * 

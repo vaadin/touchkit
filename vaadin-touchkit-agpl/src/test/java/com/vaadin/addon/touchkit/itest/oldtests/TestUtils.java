@@ -3,8 +3,8 @@ package com.vaadin.addon.touchkit.itest.oldtests;
 import org.junit.Ignore;
 
 import com.vaadin.annotations.JavaScript;
-import com.vaadin.terminal.Page;
-import com.vaadin.terminal.Sizeable;
+import com.vaadin.server.Page;
+import com.vaadin.server.Sizeable;
 import com.vaadin.ui.ComponentContainer;
 
 @Ignore

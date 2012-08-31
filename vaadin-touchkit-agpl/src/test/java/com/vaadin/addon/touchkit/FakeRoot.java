@@ -1,6 +1,6 @@
 package com.vaadin.addon.touchkit;
 
-import com.vaadin.terminal.WrappedRequest;
+import com.vaadin.server.WrappedRequest;
 import com.vaadin.ui.UI;
 
 public class FakeRoot extends UI {

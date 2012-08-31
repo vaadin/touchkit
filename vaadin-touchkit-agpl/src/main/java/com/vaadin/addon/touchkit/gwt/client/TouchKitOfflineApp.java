@@ -9,8 +9,8 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
-import com.vaadin.terminal.gwt.client.ui.VOverlay;
-import com.vaadin.terminal.gwt.client.ui.nativebutton.VNativeButton;
+import com.vaadin.client.ui.VOverlay;
+import com.vaadin.client.ui.nativebutton.VNativeButton;
 
 /**
  * This class is the "default offline mode" used by Vaadin TouchKit. It is

@@ -4,7 +4,7 @@ import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
 import com.vaadin.addon.touchkit.itest.oldtests.TestUtils;
 import com.vaadin.addon.touchkit.ui.TabBarView;
 import com.vaadin.shared.ui.label.ContentMode;
-import com.vaadin.terminal.ThemeResource;
+import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Label;

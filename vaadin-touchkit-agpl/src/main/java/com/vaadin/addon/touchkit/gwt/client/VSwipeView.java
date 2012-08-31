@@ -25,13 +25,13 @@ import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.addon.touchkit.gwt.client.navigation.VNavigationManager;
-import com.vaadin.terminal.gwt.client.BrowserInfo;
-import com.vaadin.terminal.gwt.client.Util;
-import com.vaadin.terminal.gwt.client.VConsole;
-import com.vaadin.terminal.gwt.client.ui.TouchScrollDelegate;
+import com.vaadin.client.BrowserInfo;
+import com.vaadin.client.Util;
+import com.vaadin.client.VConsole;
+import com.vaadin.client.ui.TouchScrollDelegate;
 
 public class VSwipeView extends
-        com.vaadin.terminal.gwt.client.ui.csslayout.VCssLayout {
+        com.vaadin.client.ui.csslayout.VCssLayout {
     
     public interface SwipeListener {
         void onSwipeBack();

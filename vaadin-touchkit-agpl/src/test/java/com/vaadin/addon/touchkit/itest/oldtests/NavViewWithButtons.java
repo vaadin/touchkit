@@ -4,7 +4,7 @@ import com.vaadin.addon.touchkit.ui.AbstractComponentGroup;
 import com.vaadin.addon.touchkit.ui.HorizontalComponentGroup;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.Toolbar;
-import com.vaadin.terminal.ThemeResource;
+import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Button.ClickEvent;

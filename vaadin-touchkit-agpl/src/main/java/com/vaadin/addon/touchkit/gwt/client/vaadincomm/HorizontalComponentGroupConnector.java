@@ -8,10 +8,10 @@ import com.vaadin.addon.touchkit.gwt.client.HorizontalComponentGroupWidget;
 import com.vaadin.addon.touchkit.ui.HorizontalComponentGroup;
 import com.vaadin.shared.communication.URLReference;
 import com.vaadin.shared.ui.Connect;
-import com.vaadin.terminal.gwt.client.ComponentConnector;
-import com.vaadin.terminal.gwt.client.ConnectorHierarchyChangeEvent;
-import com.vaadin.terminal.gwt.client.communication.StateChangeEvent;
-import com.vaadin.terminal.gwt.client.ui.AbstractComponentContainerConnector;
+import com.vaadin.client.ComponentConnector;
+import com.vaadin.client.ConnectorHierarchyChangeEvent;
+import com.vaadin.client.communication.StateChangeEvent;
+import com.vaadin.client.ui.AbstractComponentContainerConnector;
 
 @Connect(HorizontalComponentGroup.class)
 public class HorizontalComponentGroupConnector extends

@@ -2,7 +2,7 @@ package com.vaadin.addon.touchkit.itest.oldtests;
 
 import com.vaadin.data.Item;
 import com.vaadin.data.util.HierarchicalContainer;
-import com.vaadin.terminal.ThemeResource;
+import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.DateField;

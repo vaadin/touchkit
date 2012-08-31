@@ -5,8 +5,8 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.addon.touchkit.gwt.client.navigation.VNavigationButton;
-import com.vaadin.terminal.gwt.client.StyleConstants;
-import com.vaadin.terminal.gwt.client.ui.button.VButton;
+import com.vaadin.client.StyleConstants;
+import com.vaadin.client.ui.button.VButton;
 
 public class VerticalComponentGroupWidget extends FlowPanel {
 

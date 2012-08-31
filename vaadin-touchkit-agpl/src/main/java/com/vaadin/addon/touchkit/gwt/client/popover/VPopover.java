@@ -14,7 +14,7 @@ import com.google.gwt.user.client.ui.Widget;
  * 'fullscreen' (actionsheet) windows.
  * 
  */
-public class VPopover extends com.vaadin.terminal.gwt.client.ui.window.VWindow {
+public class VPopover extends com.vaadin.client.ui.window.VWindow {
 
     private static final int SMALL_SCREEN_WIDTH_THRESHOLD = 500;
     private static final int MIN_EDGE_DISTANCE = 10;

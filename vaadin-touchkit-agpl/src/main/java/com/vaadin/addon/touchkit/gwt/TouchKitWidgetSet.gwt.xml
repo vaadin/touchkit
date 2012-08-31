@@ -1,6 +1,6 @@
 <module>
 	<!-- WS Compiler: manually edited -->
-	<inherits name="com.vaadin.terminal.gwt.DefaultWidgetSet" />
+	<inherits name="com.vaadin.server.gwt.DefaultWidgetSet" />
 	<inherits name="com.google.gwt.resources.Resources" />
 
 	<!-- Development time setting to speed up compilation -->
@@ -19,7 +19,7 @@
 
 	<replace-with
 		class="com.vaadin.addon.touchkit.gwt.client.VCustomNativeSelect">
-		<when-type-is class="com.vaadin.terminal.gwt.client.ui.VNativeSelect" />
+		<when-type-is class="com.vaadin.server.gwt.client.ui.VNativeSelect" />
 	</replace-with>
 
 	<!-- <replace-with class="com.vaadin.addon.touchkit.gwt.client.VRemoteDebugConsole"> 

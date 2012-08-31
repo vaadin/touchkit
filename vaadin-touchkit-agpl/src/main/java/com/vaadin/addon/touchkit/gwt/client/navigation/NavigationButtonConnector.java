@@ -8,13 +8,13 @@ import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.shared.ComponentState;
 import com.vaadin.shared.Connector;
 import com.vaadin.shared.ui.Connect;
-import com.vaadin.terminal.gwt.client.ServerConnector;
-import com.vaadin.terminal.gwt.client.VConsole;
-import com.vaadin.terminal.gwt.client.communication.RpcProxy;
-import com.vaadin.terminal.gwt.client.communication.StateChangeEvent;
-import com.vaadin.terminal.gwt.client.ui.AbstractComponentConnector;
-import com.vaadin.terminal.gwt.client.ui.Icon;
-import com.vaadin.terminal.gwt.server.ClientConnector;
+import com.vaadin.client.ServerConnector;
+import com.vaadin.client.VConsole;
+import com.vaadin.client.communication.RpcProxy;
+import com.vaadin.client.communication.StateChangeEvent;
+import com.vaadin.client.ui.AbstractComponentConnector;
+import com.vaadin.client.ui.Icon;
+import com.vaadin.server.ClientConnector;
 
 @Connect(NavigationButton.class)
 public class NavigationButtonConnector extends AbstractComponentConnector {

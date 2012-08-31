@@ -2,7 +2,7 @@ package com.vaadin.addon.touchkit.gwt.client;
 
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.vaadin.shared.ui.MarginInfo;
-import com.vaadin.terminal.gwt.client.StyleConstants;
+import com.vaadin.client.StyleConstants;
 
 public class HorizontalComponentGroupWidget extends FlowPanel {
 

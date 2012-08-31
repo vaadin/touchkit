@@ -10,7 +10,7 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.junit.Ignore;
 
-import com.vaadin.terminal.gwt.server.ApplicationServlet;
+import com.vaadin.server.ApplicationServlet;
 
 @Ignore
 public class TestServer {

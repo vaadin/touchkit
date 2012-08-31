@@ -2,9 +2,9 @@ package com.vaadin.addon.touchkit.rootextensions;
 
 import org.jsoup.nodes.Document;
 
-import com.vaadin.terminal.gwt.server.BootstrapFragmentResponse;
-import com.vaadin.terminal.gwt.server.BootstrapListener;
-import com.vaadin.terminal.gwt.server.BootstrapPageResponse;
+import com.vaadin.server.BootstrapFragmentResponse;
+import com.vaadin.server.BootstrapListener;
+import com.vaadin.server.BootstrapPageResponse;
 
 /**
  * TODO

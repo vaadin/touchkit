@@ -10,10 +10,10 @@ import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.Location;
-import com.vaadin.terminal.gwt.client.ApplicationConfiguration;
-import com.vaadin.terminal.gwt.client.ApplicationConnection;
-import com.vaadin.terminal.gwt.client.VConsole;
-import com.vaadin.terminal.gwt.client.ValueMap;
+import com.vaadin.client.ApplicationConfiguration;
+import com.vaadin.client.ApplicationConnection;
+import com.vaadin.client.VConsole;
+import com.vaadin.client.ValueMap;
 
 /**
  * Adds support for suspending and removing UIDL handling. Helps to implement

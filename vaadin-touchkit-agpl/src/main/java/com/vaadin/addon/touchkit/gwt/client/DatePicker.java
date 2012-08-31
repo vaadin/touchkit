@@ -17,8 +17,8 @@ import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.i18n.client.DateTimeFormat;
-import com.vaadin.terminal.gwt.client.BrowserInfo;
-import com.vaadin.terminal.gwt.client.VConsole;
+import com.vaadin.client.BrowserInfo;
+import com.vaadin.client.VConsole;
 
 /**
  * DatePicker widget. Uses HTML5 date input fields to ask time values from user.

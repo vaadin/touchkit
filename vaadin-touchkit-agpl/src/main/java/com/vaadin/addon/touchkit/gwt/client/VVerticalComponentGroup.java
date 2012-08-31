@@ -8,13 +8,13 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
-import com.vaadin.terminal.gwt.client.ApplicationConnection;
-import com.vaadin.terminal.gwt.client.Paintable;
-import com.vaadin.terminal.gwt.client.RenderSpace;
-import com.vaadin.terminal.gwt.client.UIDL;
-import com.vaadin.terminal.gwt.client.VCaption;
-import com.vaadin.terminal.gwt.client.ui.csslayout.VCssLayout;
-import com.vaadin.terminal.gwt.client.ui.csslayout.VCssLayout.FlowPane;
+import com.vaadin.client.ApplicationConnection;
+import com.vaadin.client.Paintable;
+import com.vaadin.client.RenderSpace;
+import com.vaadin.client.UIDL;
+import com.vaadin.client.VCaption;
+import com.vaadin.client.ui.csslayout.VCssLayout;
+import com.vaadin.client.ui.csslayout.VCssLayout.FlowPane;
 
 public class VVerticalComponentGroup extends VCssLayout {
 
