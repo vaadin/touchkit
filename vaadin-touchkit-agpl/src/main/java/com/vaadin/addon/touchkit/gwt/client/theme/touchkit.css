@@ -1858,13 +1858,13 @@ span.v-datefield-calendarpanel-month {
 	margin-top: 10px;
 }
 .verticalcomponentgroup-margin-right {
-	margin-right: 10px;
+	padding-right: 10px;
 }
 .verticalcomponentgroup-margin-bottom {
 	margin-bottom: 10px;
 }
 .verticalcomponentgroup-margin-left {
-	margin-left: 10px;
+	padding-left: 10px;
 }
 
 /* Need to explicitly round the first and last components corners, otherwise they will stick out from the component group */
