@@ -6,12 +6,12 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.addon.touchkit.gwt.client.HorizontalComponentGroupWidget;
 import com.vaadin.addon.touchkit.ui.HorizontalComponentGroup;
-import com.vaadin.shared.communication.URLReference;
-import com.vaadin.shared.ui.Connect;
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.ConnectorHierarchyChangeEvent;
 import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.AbstractComponentContainerConnector;
+import com.vaadin.shared.communication.URLReference;
+import com.vaadin.shared.ui.Connect;
 
 @Connect(HorizontalComponentGroup.class)
 public class HorizontalComponentGroupConnector extends
@@ -41,7 +41,7 @@ public class HorizontalComponentGroupConnector extends
             // FIXME
             // URLReference urlRef = connector.getState().getIcon();
             URLReference urlRef = null;
-            String caption = connector.getState().getCaption();
+            String caption = connector.getState().caption;
             String url = "";
             if (urlRef != null) {
                 url = urlRef.getURL();

@@ -2,14 +2,14 @@ package com.vaadin.addon.touchkit.gwt.client.navigation;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.Widget;
-import com.vaadin.shared.ui.Connect;
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.AbstractComponentContainerConnector;
+import com.vaadin.shared.ui.Connect;
 
 @Connect(com.vaadin.addon.touchkit.ui.NavigationBar.class)
 public class NavigationBarConnector extends AbstractComponentContainerConnector {
-    
+
     @Override
     public boolean delegateCaptionHandling() {
         return false;
@@ -39,7 +39,7 @@ public class NavigationBarConnector extends AbstractComponentContainerConnector 
     public void onStateChanged(StateChangeEvent stateChangeEvent) {
         super.onStateChanged(stateChangeEvent);
 
-        getWidget().setCaption(getState().getCaption());
+        getWidget().setCaption(getState().caption);
 
         if (getState().getLeftComponent() != null) {
             getWidget().setLeftWidget(

@@ -5,10 +5,6 @@ import java.lang.reflect.Method;
 
 import com.vaadin.addon.touchkit.gwt.client.navigation.NavigationButtonRpc;
 import com.vaadin.addon.touchkit.gwt.client.navigation.NavigationButtonSharedState;
-import com.vaadin.client.ServerConnector;
-import com.vaadin.client.ui.AbstractComponentConnector;
-import com.vaadin.server.ClientConnector;
-import com.vaadin.shared.ComponentState;
 import com.vaadin.shared.Connector;
 import com.vaadin.shared.MouseEventDetails;
 import com.vaadin.tools.ReflectTools;
@@ -31,7 +27,7 @@ import com.vaadin.ui.ComponentContainer.ComponentAttachListener;
  * {@link NavigationManager}, otherwise it will work as a regular {@link Button}.
  */
 public class NavigationButton extends AbstractComponent {
-    
+
     private ComponentAttachListener componentAttachListener;
 
     /**
@@ -82,18 +78,18 @@ public class NavigationButton extends AbstractComponent {
             }
         });
     }
-    
+
     @Override
     public NavigationButtonSharedState getState() {
         return (NavigationButtonSharedState) super.getState();
     }
-    
+
     @Override
     public void beforeClientResponse(boolean initial) {
         super.beforeClientResponse(initial);
-        
+
         // Steal caption from target view if not explicitly defined
-        String caption = getState().getCaption();
+        String caption = getState().caption;
         AbstractComponent targetView = (AbstractComponent) getState()
                 .getTargetView();
         String targetViewCaption = getState().getTargetViewCaption();
@@ -103,16 +99,16 @@ public class NavigationButton extends AbstractComponent {
                 caption = targetView.getCaption();
             }
         }
-        getState().setCaption(caption);
-        
-        if(getState().getTargetViewCaption() == null) {
+        getState().caption = caption;
+
+        if (getState().getTargetViewCaption() == null) {
             if (targetView == null) {
                 getState().setTargetViewCaption(caption);
             }
         }
-        
+
     }
-    
+
     /**
      * Gets the @link {@link NavigationManager} in which this button is
      * contained.
@@ -140,31 +136,32 @@ public class NavigationButton extends AbstractComponent {
         getState().setTargetView(targetView);
         requestRepaint();
     }
-    
+
     @Override
     public void attach() {
         super.attach();
         NavigationManager navigationManager = getNavigationManager();
-        if(navigationManager != null) {
+        if (navigationManager != null) {
             navigationManager.addListener(getComponentAttachListener());
         }
     }
-    
+
     @Override
     public void detach() {
-        if(componentAttachListener != null) {
+        if (componentAttachListener != null) {
             getNavigationManager().removeListener(componentAttachListener);
         }
         super.detach();
     }
-    
+
     private ComponentAttachListener getComponentAttachListener() {
-        if(componentAttachListener == null) {
+        if (componentAttachListener == null) {
             componentAttachListener = new ComponentAttachListener() {
                 @Override
-                public void componentAttachedToContainer(ComponentAttachEvent event) {
+                public void componentAttachedToContainer(
+                        ComponentAttachEvent event) {
                     Component attachedComponent = event.getAttachedComponent();
-                    if(getTargetView() == attachedComponent) {
+                    if (getTargetView() == attachedComponent) {
                         requestRepaint();
                     }
                 }
@@ -224,7 +221,7 @@ public class NavigationButton extends AbstractComponent {
         getState().setTargetViewCaption(targetViewCaption);
         requestRepaint();
     }
-    
+
     /**
      * Click event. This event is thrown, when the button is clicked.
      */
@@ -243,8 +240,8 @@ public class NavigationButton extends AbstractComponent {
     }
 
     /**
-     * Interface for listening for a {@link NavigationButtonClickEvent} fired by a
-     * {@link Component}.
+     * Interface for listening for a {@link NavigationButtonClickEvent} fired by
+     * a {@link Component}.
      */
     public interface NavigationButtonClickListener extends Serializable {
 
@@ -293,7 +290,7 @@ public class NavigationButton extends AbstractComponent {
     public void click() {
         if (isEnabled() && !isReadOnly()) {
             Connector targetView = getState().getTargetView();
-            
+
             if (targetView != null) {
                 getNavigationManager().navigateTo((Component) targetView);
             }

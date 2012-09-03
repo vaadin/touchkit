@@ -38,8 +38,8 @@ public class VerticalComponentGroupConnector extends
             // FIXME
             // URLReference urlRef = connector.getState().getIcon();
             URLReference urlRef = null;
-            String caption = connector.getState().getCaption();
-            String width = connector.getState().getWidth();
+            String caption = connector.getState().caption;
+            String width = connector.getState().width;
             String url = "";
             if (urlRef != null) {
                 url = urlRef.getURL();

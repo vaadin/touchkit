@@ -9,8 +9,6 @@ import com.vaadin.client.ServerConnector;
 import com.vaadin.client.communication.RpcProxy;
 import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.AbstractComponentConnector;
-import com.vaadin.client.ui.Icon;
-import com.vaadin.shared.ComponentState;
 import com.vaadin.shared.ui.Connect;
 
 @Connect(NavigationButton.class)
@@ -44,7 +42,7 @@ public class NavigationButtonConnector extends AbstractComponentConnector {
     public void onStateChanged(StateChangeEvent stateChangeEvent) {
         super.onStateChanged(stateChangeEvent);
 
-        String caption = getState().getCaption();
+        String caption = getState().caption;
         getWidget().setText(caption);
 
         ServerConnector targetView = (ServerConnector) getState()
@@ -58,7 +56,7 @@ public class NavigationButtonConnector extends AbstractComponentConnector {
             getWidget().setTargetWidget(
                     ((AbstractComponentConnector) targetView).getWidget());
         }
-        
+
         // FIXME
         // if (getState().getIcon() != null) {
         // Icon newIcon = new Icon(getConnection());
@@ -67,7 +65,7 @@ public class NavigationButtonConnector extends AbstractComponentConnector {
         // getWidget().setIcon(newIcon);
         // }
 
-        String description = getState().getDescription();
+        String description = getState().description;
         getWidget().setDescription(description);
 
     }

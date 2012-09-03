@@ -10,13 +10,13 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.Event.NativePreviewHandler;
-import com.vaadin.shared.ui.Connect;
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.communication.RpcProxy;
 import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.layout.ElementResizeEvent;
 import com.vaadin.client.ui.layout.ElementResizeListener;
 import com.vaadin.client.ui.window.WindowConnector;
+import com.vaadin.shared.ui.Connect;
 
 @SuppressWarnings("serial")
 @Connect(com.vaadin.addon.touchkit.ui.Popover.class)
@@ -34,10 +34,10 @@ public class PopoverConnector extends WindowConnector implements
         super.onStateChanged(stateChangeEvent);
 
         // Related component can be null
-        ComponentConnector relatedConnector =
-            (ComponentConnector) getState().getRelatedComponent();
-        getWidget().setRelatedComponent(relatedConnector == null ? null :
-            relatedConnector.getWidget());
+        ComponentConnector relatedConnector = (ComponentConnector) getState()
+                .getRelatedComponent();
+        getWidget().setRelatedComponent(
+                relatedConnector == null ? null : relatedConnector.getWidget());
     }
 
     @Override
@@ -61,7 +61,7 @@ public class PopoverConnector extends WindowConnector implements
         }
 
         if (getWidget().getModalityCurtain().isOrHasChild(targetElement)
-                && getWidget().isClosable() && getState().isVisible()
+                && getWidget().isClosable() && getState().visible
                 && (event.getTypeInt() & ACCEPTEDEVENTS) == 0) {
             /*
              * Close on events outside window. Special handling for mousemove

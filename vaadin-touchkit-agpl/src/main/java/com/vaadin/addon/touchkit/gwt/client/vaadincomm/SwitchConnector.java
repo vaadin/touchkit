@@ -13,15 +13,15 @@ import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.addon.touchkit.gwt.client.VSwitch;
 import com.vaadin.addon.touchkit.ui.Switch;
-import com.vaadin.shared.communication.FieldRpc.FocusAndBlurServerRpc;
-import com.vaadin.shared.ui.Connect;
-import com.vaadin.shared.ui.checkbox.CheckBoxServerRpc;
-import com.vaadin.shared.ui.checkbox.CheckBoxState;
 import com.vaadin.client.EventHelper;
 import com.vaadin.client.VTooltip;
 import com.vaadin.client.communication.RpcProxy;
 import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.AbstractFieldConnector;
+import com.vaadin.shared.communication.FieldRpc.FocusAndBlurServerRpc;
+import com.vaadin.shared.ui.Connect;
+import com.vaadin.shared.ui.checkbox.CheckBoxServerRpc;
+import com.vaadin.shared.ui.checkbox.CheckBoxState;
 
 @Connect(Switch.class)
 public class SwitchConnector extends AbstractFieldConnector implements
@@ -74,7 +74,7 @@ public class SwitchConnector extends AbstractFieldConnector implements
         blurHandlerRegistration = EventHelper.updateBlurHandler(this,
                 blurHandlerRegistration);
 
-        if (null != getState().getErrorMessage()) {
+        if (null != getState().errorMessage) {
             if (getWidget().getErrorIndicator() == null) {
                 com.google.gwt.user.client.Element errorIndicatorElement = DOM
                         .createSpan();
@@ -98,7 +98,7 @@ public class SwitchConnector extends AbstractFieldConnector implements
             getWidget().setEnabled(false);
         }
 
-        getWidget().setValue(getState().isChecked());
+        getWidget().setValue(getState().checked);
 
         // TODO: How to handle immediate in Vaadin 7?
         // getState().isImmediate();
