@@ -1,10 +1,9 @@
 package com.vaadin.addon.touchkit.ui;
 
 import com.vaadin.Application;
-import com.vaadin.UIRequiresMoreInformationException;
+import com.vaadin.server.WebBrowser;
 import com.vaadin.server.WrappedRequest;
 import com.vaadin.server.WrappedRequest.BrowserDetails;
-import com.vaadin.server.WebBrowser;
 import com.vaadin.ui.UI;
 
 /**
@@ -43,13 +42,12 @@ public abstract class TouchKitApplication extends Application {
     }
 
     @Override
-    protected UI getUI(WrappedRequest request)
-            throws UIRequiresMoreInformationException {
+    public UI getUIForRequest(WrappedRequest request) {
         BrowserDetails browserDetails = request.getBrowserDetails();
         // This is a limitation of 7.0.0.alpha1 that there is no better way to
         // check if WebBrowser has been fully initialized
         if (!browserDetailsReady && browserDetails.getUriFragment() == null) {
-            throw new UIRequiresMoreInformationException();
+            throw new IllegalStateException("Browser is not ready");
         }
         browserDetailsReady = true;
 
