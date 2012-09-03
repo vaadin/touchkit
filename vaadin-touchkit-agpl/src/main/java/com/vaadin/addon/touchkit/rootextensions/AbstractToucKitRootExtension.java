@@ -1,6 +1,6 @@
 package com.vaadin.addon.touchkit.rootextensions;
 
-import com.vaadin.addon.touchkit.ui.TouchKitApplication;
+import com.vaadin.addon.touchkit.ui.TouchKitUI;
 import com.vaadin.server.AbstractExtension;
 import com.vaadin.ui.UI;
 
@@ -12,7 +12,7 @@ public class AbstractToucKitRootExtension extends AbstractExtension implements C
 
     /**
      * Creates a clone of this extension and adds it to given Root. This method
-     * is typically called by {@link TouchKitApplication} when it configures new
+     * is typically called by {@link TouchKitUI} when it configures new
      * roots with application level settings.
      * 
      * @param root

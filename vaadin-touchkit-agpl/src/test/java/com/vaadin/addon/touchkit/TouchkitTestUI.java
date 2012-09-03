@@ -20,6 +20,10 @@ import com.vaadin.ui.UI;
 @Theme("base")
 public class TouchkitTestUI extends UI {
 
+    public TouchkitTestUI() {
+
+    }
+
     public TouchkitTestUI(WrappedRequest request) {
         init(request);
     }
