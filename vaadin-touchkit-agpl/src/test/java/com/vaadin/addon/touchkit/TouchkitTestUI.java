@@ -37,6 +37,7 @@ public class TouchkitTestUI extends TouchKitUI {
                 Class<?> forName = Class.forName(className);
                 if (forName != null) {
                     CssLayout newInstance = (CssLayout) forName.newInstance();
+                    newInstance.setDescription(null);
                     setContent(newInstance);
                     System.out.println("Initialized " + className);
                 }
