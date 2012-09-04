@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.vaadin.addon.touchkit.ui.TouchKitUI;
 import com.vaadin.annotations.Theme;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.event.ItemClickEvent;
@@ -15,18 +16,9 @@ import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.Table.ColumnGenerator;
-import com.vaadin.ui.UI;
 
 @Theme("base")
-public class TouchkitTestUI extends UI {
-
-    public TouchkitTestUI() {
-
-    }
-
-    public TouchkitTestUI(WrappedRequest request) {
-        init(request);
-    }
+public class TouchkitTestUI extends TouchKitUI {
 
     @Override
     protected void init(WrappedRequest request) {
@@ -127,10 +119,8 @@ public class TouchkitTestUI extends UI {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-
             }
-
         }
-
     }
+
 }

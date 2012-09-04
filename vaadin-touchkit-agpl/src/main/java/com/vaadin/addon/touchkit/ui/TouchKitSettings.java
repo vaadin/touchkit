@@ -69,7 +69,7 @@ public class TouchKitSettings implements RequestHandler, BootstrapListener {
         }
     }
 
-    static TouchKitSettings init(Application app) {
+    public static TouchKitSettings init(Application app) {
         TouchKitSettings touchKitSettings = get(app);
         if (touchKitSettings == null) {
             return new TouchKitSettings(app);
@@ -78,7 +78,7 @@ public class TouchKitSettings implements RequestHandler, BootstrapListener {
     }
     
     public static TouchKitSettings init(UI root) {
-        return null;
+        return init(Application.getCurrent());
     }
 
     public static TouchKitSettings get(Application app) {
