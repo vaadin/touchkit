@@ -332,6 +332,10 @@
 	line-height: 24px;
 }
 
+.v-touchkit-navbar .v-button .v-button-wrap {
+	display: inline-block;
+}
+
 .v-touchkit-navbar .v-button .v-button-wrap .v-button-caption,
 .v-touchkit-horizontalcomponentgroup .v-button-wrap .v-button-caption {
 	padding: 4px;
@@ -738,8 +742,8 @@
 
 .v-touchkit-navbar .v-button .v-icon {
 	height: 20px;
-	margin: 3px 0 0;
-	}
+	margin: 0;
+}
 
 
 .v-touchkit-navview-notoolbar .v-touchkit-navview-toolbar {
