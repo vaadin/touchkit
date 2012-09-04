@@ -10,7 +10,7 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.junit.Ignore;
 
-import com.vaadin.server.ApplicationServlet;
+import com.vaadin.server.VaadinServlet;
 
 @Ignore
 public class TestServer {
@@ -33,7 +33,7 @@ public class TestServer {
         WebAppContext context = new WebAppContext();
 
         ServletHolder servletHolder = new ServletHolder(
-                ApplicationServlet.class);
+                VaadinServlet.class);
         servletHolder.setInitParameter("UI", TouchkitTestUI.class.getName());
         servletHolder.setInitParameter("widgetset",
                 "com.vaadin.addon.touchkit.gwt.TouchKitWidgetSet");

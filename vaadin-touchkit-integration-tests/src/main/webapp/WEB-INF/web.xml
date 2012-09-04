@@ -9,7 +9,7 @@
 	</context-param>
 	<servlet>
 		<servlet-name>TouchTest</servlet-name>
-		<servlet-class>com.vaadin.server.ApplicationServlet</servlet-class>
+		<servlet-class>com.vaadin.server.VaadinServlet</servlet-class>
 		<init-param>
 			<description>
 			Vaadin application class to start</description>
