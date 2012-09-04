@@ -70,7 +70,7 @@ public class TouchkitTestUI extends TouchKitUI {
         BeanItemContainer<Class<? extends AbstractTouchKitIntegrationTest>> beanItemContainer = new BeanItemContainer<Class<? extends AbstractTouchKitIntegrationTest>>(
                 tests);
         table.setContainerDataSource(beanItemContainer);
-        table.setVisibleColumns(new Object[] { "canonicalName" });
+        table.setVisibleColumns(new Object[] { "simpleName" });
         table.addGeneratedColumn("description", new ColumnGenerator() {
             public Object generateCell(Table source, Object itemId,
                     Object columnId) {
