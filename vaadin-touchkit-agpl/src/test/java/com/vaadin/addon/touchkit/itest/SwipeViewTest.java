@@ -227,8 +227,7 @@ public class SwipeViewTest extends AbstractTouchKitIntegrationTest {
                         " "));
                 button = new NavigationButton(">");
                 navigationBar.setRightComponent(button);
-                // FIXME (add back when NavigationBar works.
-//                addComponent(navigationBar);
+                addComponent(navigationBar);
                 button.setStyleName("forward");
                 embedded.setWidth("100%");
                 addComponent(embedded);
