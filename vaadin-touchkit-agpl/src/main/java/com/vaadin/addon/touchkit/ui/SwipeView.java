@@ -24,7 +24,7 @@ public class SwipeView extends CssLayout {
         registerRpc(new SwipeViewRpc() {
             @Override
             public void setScrollTop(int scrollTop) {
-                getState().setScrollTop(scrollTop);
+                getState().scrollTop = scrollTop;
             }
 
             @Override
@@ -57,12 +57,12 @@ public class SwipeView extends CssLayout {
     }
 
     public void setScrollPosition(int scrollPosition) {
-        getState().setScrollTop(scrollPosition);
+        getState().scrollTop = scrollPosition;
         requestRepaint();
     }
 
     public int getScrollPosition() {
-        return getState().getScrollTop();
+        return getState().scrollTop;
     }
 
     /**

@@ -205,7 +205,7 @@ public class VSwipeView extends
         }
     }
 
-    private void setScrollOffset(int scrolloffset) {
+    public void setScrollTop(final int scrolloffset) {
         scrollElement.setScrollTop(scrolloffset);
     }
 

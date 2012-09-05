@@ -7,9 +7,11 @@ import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.addon.touchkit.gwt.client.VSwipeView;
 import com.vaadin.addon.touchkit.gwt.client.VSwipeView.SwipeListener;
 import com.vaadin.addon.touchkit.ui.SwipeView;
-import com.vaadin.shared.ui.Connect;
+import com.vaadin.client.VConsole;
 import com.vaadin.client.communication.RpcProxy;
+import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.csslayout.CssLayoutConnector;
+import com.vaadin.shared.ui.Connect;
 
 @Connect(SwipeView.class)
 public class SwipeViewConnector extends CssLayoutConnector implements
@@ -24,6 +26,18 @@ public class SwipeViewConnector extends CssLayoutConnector implements
         // TODO needs system to disable swipes when there is ongoing
         // communication with server.
     }
+    
+    @Override
+    public SwipeViewSharedState getState() {
+        return (SwipeViewSharedState) super.getState();
+    }
+    
+    @Override
+    public void onStateChanged(StateChangeEvent stateChangeEvent) {
+        super.onStateChanged(stateChangeEvent);
+        VConsole.error("onStateChanged for " + getState().id);
+        getWidget().setScrollTop(getState().scrollTop);
+    }
 
     @Override
     public VSwipeView getWidget() {
@@ -37,10 +51,7 @@ public class SwipeViewConnector extends CssLayoutConnector implements
 
     @Override
     public void onScroll(ScrollEvent event) {
-        // FIXME don't know how to do this properly in Vaadin 7.
-        // MethodInvocation? Should be
-        // updated lazily to avoid disturbing stalls. Now disabled.
-        // rpc.setScrollTop(getWidget().getScrollTop());
+         rpc.setScrollTop(getWidget().getScrollTop());
     }
 
     @Override
