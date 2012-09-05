@@ -721,7 +721,6 @@
 	color: #52555a;
 	display: block;
 	height: 43px;
-	line-height: 43px;
 	font-size: 20px;
 	font-weight: bold;
 	text-decoration: none;
@@ -729,6 +728,12 @@
 	border-bottom: divider;
 	text-align: center;
 	position: relative;
+}
+
+.v-touchkit-navbar .v-touchkit-navbar-caption, 
+.v-touchkit-navpanel-placeholder > div,
+.v-touchkit-popover.v-touchkit-fullscreen .v-touchkit-navpanel-placeholder > div {
+    line-height: 43px;
 }
 
 .v-touchkit-navbar-caption {
