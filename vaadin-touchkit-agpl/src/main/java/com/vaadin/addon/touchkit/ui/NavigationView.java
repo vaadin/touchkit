@@ -290,11 +290,11 @@ public class NavigationView extends AbstractComponentContainer {
     }
 
     public void setScrollPosition(int scrollPosition) {
-        getState().setScrollPosition(scrollPosition);
+        getState().scrollPosition = scrollPosition;
     }
 
     public int getScrollPosition() {
-        return getState().getScrollPosition();
+        return getState().scrollPosition;
     }
 
     /**

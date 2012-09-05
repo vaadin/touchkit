@@ -70,17 +70,14 @@ public class NavigationViewConnector extends
 
     public void onScroll(ScrollEvent event) {
         if (getWidget().isAttached()) {
-            // Disabled until Vaadin 7 supports delayed rpc. Sending this while
-            // kinectic scrolling will cause new scroll value update back from
-            // server --> earthquake effect
-            //rpc.updateScrollPosition(getWidget().getScrollTop());
+            rpc.updateScrollPosition(getWidget().getScrollTop());
         }
     }
 
     @Override
     public void onStateChanged(StateChangeEvent stateChangeEvent) {
         super.onStateChanged(stateChangeEvent);
-        getWidget().setScrollTop(getState().getScrollPosition());
+        getWidget().setScrollTop(getState().scrollPosition);
     }
 
 }
