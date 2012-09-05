@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.google.gwt.user.client.Cookies;
 import com.vaadin.client.ApplicationConnection;
-import com.vaadin.client.ui.UI.VUI;
+import com.vaadin.client.ui.ui.VUI;
 
 public class VTouchKitView extends VUI {
 

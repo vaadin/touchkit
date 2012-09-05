@@ -6,12 +6,12 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 import com.vaadin.server.Resource;
-import com.vaadin.tools.ReflectTools;
 import com.vaadin.ui.AbstractComponentContainer;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.TabSheet.Tab;
+import com.vaadin.util.ReflectTools;
 
 /**
  * A tabsheet implementation that mimics the native tabsheet (TabBarView) in e.g

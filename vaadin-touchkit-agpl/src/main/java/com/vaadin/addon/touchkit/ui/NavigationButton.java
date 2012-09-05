@@ -7,12 +7,12 @@ import com.vaadin.addon.touchkit.gwt.client.navigation.NavigationButtonRpc;
 import com.vaadin.addon.touchkit.gwt.client.navigation.NavigationButtonSharedState;
 import com.vaadin.shared.Connector;
 import com.vaadin.shared.MouseEventDetails;
-import com.vaadin.tools.ReflectTools;
 import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer.ComponentAttachEvent;
 import com.vaadin.ui.ComponentContainer.ComponentAttachListener;
+import com.vaadin.util.ReflectTools;
 
 /**
  * A Button implementation optimized to be used inside a

@@ -8,9 +8,9 @@ import java.util.Stack;
 import com.vaadin.addon.touchkit.gwt.client.navigation.NavigationManagerSharedState;
 import com.vaadin.addon.touchkit.ui.NavigationManager.NavigationEvent.Direction;
 import com.vaadin.event.ComponentEventListener;
-import com.vaadin.tools.ReflectTools;
 import com.vaadin.ui.AbstractComponentContainer;
 import com.vaadin.ui.Component;
+import com.vaadin.util.ReflectTools;
 
 /**
  * A non-visible component container that allows for smooth navigation between
