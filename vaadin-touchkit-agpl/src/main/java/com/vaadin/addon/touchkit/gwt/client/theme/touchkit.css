@@ -1212,15 +1212,15 @@
 .v-touchkit-navbar .v-button-red .v-button-wrap,
 .v-touchkit-navbar .v-button-blue .v-button-wrap,
 .v-touchkit-navbar .v-button-green .v-button-wrap {
-	color: buttonColor;
-	text-shadow: buttonTextShadow;
 	background-color: transparent;
 }
 
-
-
-
-
+.v-touchkit-navbar .v-button-red .v-button-wrap .v-button-caption,
+.v-touchkit-navbar .v-button-blue .v-button-wrap .v-button-caption,
+.v-touchkit-navbar .v-button-green .v-button-wrap .v-button-caption {
+    color: buttonColor;
+    text-shadow: buttonTextShadow;
+}
 
 /* Layout margins */
 .v-orderedlayout-margin-top,
