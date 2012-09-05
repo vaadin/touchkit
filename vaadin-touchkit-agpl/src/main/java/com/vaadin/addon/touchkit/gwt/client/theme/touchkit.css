@@ -1955,8 +1955,15 @@ span.v-datefield-calendarpanel-month {
 	padding-right: 5px;
 	width: 15%;
 }
-.v-touchkit-componentgroup-cell-left {
+
+.v-touchkit-componentgroup-cell-wrapper {
 	float: right;
 	display: table-cell;
+	padding: 7px;
 	width: 85%;
+	vertical-align: middle;
+}
+
+.v-touchkit-componentgroup-cell-wrapper > * {
+	float:right;	
 }

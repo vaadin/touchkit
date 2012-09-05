@@ -2,6 +2,7 @@ package com.vaadin.addon.touchkit.gwt.client;
 
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.addon.touchkit.gwt.client.navigation.VNavigationButton;
@@ -51,26 +52,24 @@ public class VerticalComponentGroupWidget extends FlowPanel {
         }
         if (captionText != null
                 && !captionText.isEmpty()
-                && !(widget instanceof VButton
-                        || widget instanceof VNavigationButton || widget instanceof VSwitch)) {
+                && !(widget instanceof VButton || widget instanceof VNavigationButton)) {
 
             FlowPanel table = new FlowPanel();
+            SimplePanel widgetWrapper = new SimplePanel();
+
             table.addStyleName("v-touchkit-componentgroup-table");
+            widgetWrapper
+                    .addStyleName("v-touchkit-componentgroup-cell-wrapper");
 
             HTML caption = new HTML(captionText);
             caption.setStyleName(CAPTION_CLASSNAME);
             caption.addStyleName("v-touchkit-componentgroup-cell-caption");
-            widget.addStyleName("v-touchkit-componentgroup-cell-left");
+
+            widgetWrapper.add(widget);
 
             table.add(caption);
-            table.add(widget);
+            table.add(widgetWrapper);
             content.add(table);
-        } else if (widget instanceof VSwitch) {
-            HTML caption = new HTML(captionText);
-            caption.setStyleName(CAPTION_CLASSNAME);
-            widget.addStyleName("v-touchkit-has-caption");
-            content.add(caption);
-            content.add(widget);
         } else {
             content.add(widget);
         }
