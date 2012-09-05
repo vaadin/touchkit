@@ -260,10 +260,10 @@
 
 .v-button-caption {
 	line-height: 37px;
-	/*color: buttonColor;
+	color: buttonColor;
 	text-shadow: buttonTextShadow;
 	font-size: buttonFontSize;
-	font-weight: bold;*/
+	font-weight: bold;
 	}
 
 .v-button-wrap {
@@ -290,6 +290,7 @@
 /* Link style buttons */
 .v-button-link,
 .v-button-link .v-button-wrap,
+.v-button-link .v-button-caption,
 .v-nativebutton-link {
 	display: inline-block;
 	border-radius: 0;
@@ -1695,7 +1696,7 @@ span.v-datefield-calendarpanel-month {
 /** Component group stylings must be as last as they override default styles */
 
 /* Borders backgrounds etc. for the margin element.*/
-.v-touchkit-verticalcomponentgroup {
+.v-touchkit-verticalcomponentgroup > .v-touchkit-verticalcomponentgroup {
 	margin-top: listLayoutMargin;
 	margin-bottom: listLayoutMargin;
 	border: listBorder;
@@ -1704,7 +1705,6 @@ span.v-datefield-calendarpanel-month {
 	padding: 0 listLayoutMargin;
 	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.5);
 	overflow: hidden;
-	position: relative;
 	}
 
 .v-touchkit-verticalcomponentgroup>* {
@@ -1932,7 +1932,8 @@ span.v-datefield-calendarpanel-month {
 	border-bottom: none;
 }
 
-.v-captiontext
+.v-label-grey-title, 
+.v-caption-v-touchkit-verticalcomponentgroup .v-captiontext
 {
 	font-size: 16px;
 	font-weight: bold;
