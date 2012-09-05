@@ -43,7 +43,6 @@ public class VerticalComponentGroupWidget extends FlowPanel {
             firstElement = false;
             add(content);
         }
-
         if (iconUrl != null
                 && !iconUrl.isEmpty()
                 && !(widget instanceof VButton || widget instanceof VNavigationButton)) {
@@ -52,18 +51,28 @@ public class VerticalComponentGroupWidget extends FlowPanel {
         }
         if (captionText != null
                 && !captionText.isEmpty()
-                && !(widget instanceof VButton || widget instanceof VNavigationButton)) {
+                && !(widget instanceof VButton
+                        || widget instanceof VNavigationButton || widget instanceof VSwitch)) {
+
+            FlowPanel table = new FlowPanel();
+            table.addStyleName("v-touchkit-componentgroup-table");
+
+            HTML caption = new HTML(captionText);
+            caption.setStyleName(CAPTION_CLASSNAME);
+            caption.addStyleName("v-touchkit-componentgroup-cell-caption");
+            widget.addStyleName("v-touchkit-componentgroup-cell-left");
+
+            table.add(caption);
+            table.add(widget);
+            content.add(table);
+        } else if (widget instanceof VSwitch) {
             HTML caption = new HTML(captionText);
             caption.setStyleName(CAPTION_CLASSNAME);
             widget.addStyleName("v-touchkit-has-caption");
             content.add(caption);
+            content.add(widget);
+        } else {
+            content.add(widget);
         }
-        /*
-         * if (widget instanceof VTextField) { widget.setWidth(null);
-         * widget.getElement().setPropertyString("style",
-         * "max-width:100%;min-width:50%"); }
-         */
-
-        content.add(widget);
     }
 }

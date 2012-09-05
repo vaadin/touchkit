@@ -1941,3 +1941,21 @@ span.v-datefield-calendarpanel-month {
 	margin: listLayoutMargin listLayoutMargin 0;
 	text-indent: listLayoutMargin;
 }
+.v-touchkit-componentgroup-table {
+	display: table;
+	width: 100%;
+}
+.v-touchkit-componentgroup-cell-caption {
+	display: table-cell;
+	font-size: 17px;
+	font-weight: bold;	
+	vertical-align: middle;
+	height: 43px;
+	padding-right: 5px;
+	width: 15%;
+}
+.v-touchkit-componentgroup-cell-left {
+	float: right;
+	display: table-cell;
+	width: 85%;
+}
