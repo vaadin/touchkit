@@ -441,19 +441,19 @@
 	}
 
 @url navbarArrowDown navbarArrowDownImage;
-.v-touchkit-navbar .icon-arrow-down .v-button-caption {
+.v-touchkit-navbar .icon-arrow-down .v-button-wrap .v-button-caption {
 	background-image: navbarArrowDown;
 	background-position: 0 60%;
 	}
 
 @url navbarArrowLeft navbarArrowLeftImage;
-.v-touchkit-navbar .icon-arrow-left .v-button-caption {
+.v-touchkit-navbar .icon-arrow-left .v-button-wrap .v-button-caption {
 	background-image: navbarArrowLeft;
 	margin-left: -2px;
 	}
 
 @url navbarArrowRight navbarArrowRightImage;
-.v-touchkit-navbar .icon-arrow-right .v-button-caption {
+.v-touchkit-navbar .icon-arrow-right .v-button-wrap .v-button-caption {
 	background-image: navbarArrowRight;
 	margin-right: -2px;
 	}
