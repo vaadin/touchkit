@@ -1177,13 +1177,14 @@
 	border: none;
 	background: transparent;
 	overflow: visible;
-	}
+	-webkit-box-shadow: none;
+}
 
 .v-button-white .v-button-wrap {
 	background-color: #fff;
 	color: #222;
 	text-shadow: navbarButtonTextShadow;
-	}
+}
 
 .v-button-red .v-button-wrap,
 .v-touchkit-navbar .v-button-red {
@@ -1206,7 +1207,7 @@
 	color: buttonColor;
 	text-shadow: buttonTextShadow;
 	background-color: transparent;
-	}
+}
 
 
 
