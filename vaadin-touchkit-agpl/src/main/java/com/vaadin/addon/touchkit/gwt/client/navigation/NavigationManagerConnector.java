@@ -4,43 +4,48 @@ import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.Widget;
+import com.vaadin.addon.touchkit.gwt.client.navigation.VNavigationManager.AnimationListener;
 import com.vaadin.addon.touchkit.ui.NavigationManager;
-import com.vaadin.shared.ui.Connect;
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.ConnectorHierarchyChangeEvent;
+import com.vaadin.client.VConsole;
 import com.vaadin.client.ui.AbstractComponentContainerConnector;
 import com.vaadin.client.ui.layout.ElementResizeEvent;
 import com.vaadin.client.ui.layout.ElementResizeListener;
+import com.vaadin.shared.ui.Connect;
 
 @Connect(NavigationManager.class)
 public class NavigationManagerConnector extends
-        AbstractComponentContainerConnector {
+        AbstractComponentContainerConnector implements AnimationListener {
 
     @Override
     protected Widget createWidget() {
-        return GWT.create(VNavigationManager.class);
+        VNavigationManager widget = GWT.create(VNavigationManager.class);
+        widget.addListener(this);
+        VConsole.log("Adding listener");
+        return widget;
     }
 
     @Override
     public void onConnectorHierarchyChange(ConnectorHierarchyChangeEvent event) {
         super.onConnectorHierarchyChange(event);
-        
+
         Widget current = ((ComponentConnector) getState().getCurrentComponent())
                 .getWidget();
         getWidget().setCurrentWidget(current);
-        
+
         Widget previous = null;
         if (getState().getPreviousComponent() != null) {
             previous = ((ComponentConnector) getState().getPreviousComponent())
                     .getWidget();
         }
         Widget next = null;
-        if(getState().getNextComponent() != null) {
-            next = ((ComponentConnector) getState().getNextComponent()).getWidget();
+        if (getState().getNextComponent() != null) {
+            next = ((ComponentConnector) getState().getNextComponent())
+                    .getWidget();
         }
         getWidget().setPreviousWidget(previous);
         getWidget().setNextWidget(next);
-
     }
 
     @Override
@@ -84,13 +89,6 @@ public class NavigationManagerConnector extends
                 getWidget().getElement(), listener);
     }
 
-    // private VTouchKitApplicationConnection ac;
-    //
-    //
-    // public void onTransitionEnd() {
-    // ac.resumeRendering(this);
-    //
-    // }
     //
     // public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
     // // ac = (VTouchKitApplicationConnection) client;
@@ -209,5 +207,15 @@ public class NavigationManagerConnector extends
     // // rendering = false;
     //
     // }
+
+    @Override
+    public void animationWillStart() {
+        // getConnection().suspendRendering(this);
+    }
+
+    @Override
+    public void animationDidEnd() {
+        // getConnection().resumeRendering(this);
+    }
 
 }

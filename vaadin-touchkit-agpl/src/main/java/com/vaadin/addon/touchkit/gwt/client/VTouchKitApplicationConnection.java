@@ -1,7 +1,5 @@
 package com.vaadin.addon.touchkit.gwt.client;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 
 import com.google.gwt.core.client.GWT;
@@ -9,10 +7,8 @@ import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.Window.Location;
 import com.vaadin.client.ApplicationConfiguration;
 import com.vaadin.client.ApplicationConnection;
-import com.vaadin.client.VConsole;
 import com.vaadin.client.ValueMap;
 
 /**
@@ -27,15 +23,6 @@ import com.vaadin.client.ValueMap;
  */
 public class VTouchKitApplicationConnection extends ApplicationConnection {
 
-    /**
-     * The max timeout the application connection may be suspended (postponing
-     * rendering phase)
-     */
-    private static final int MAX_SUSPENDED_TIMEOUT = 5000;
-    private Collection<Object> locks = new ArrayList<Object>();
-    private Date start;
-    private String jsonText;
-    private ValueMap json;
     boolean online = false;
     private Timer requestTimeoutTracker = new Timer() {
         @Override
@@ -44,17 +31,6 @@ public class VTouchKitApplicationConnection extends ApplicationConnection {
                     "Response from server seems to take very long time. "
                             + "Server is either down or there is an issue with network.",
                     -1);
-        }
-    };
-
-    /**
-     * TODO remove this before release.
-     */
-    Timer forceHandleMessage = new Timer() {
-        @Override
-        public void run() {
-            VConsole.log("WARNING: rendering was never resumed, forcing reload...");
-            Location.reload();
         }
     };
 
@@ -91,24 +67,12 @@ public class VTouchKitApplicationConnection extends ApplicationConnection {
             // resuming will repaint the screen anyways.
             getOfflineApp().deactivate();
         } else {
-
-            if (locks.isEmpty()) {
-                super.handleUIDLMessage(start, jsonText, json);
-            } else {
-                VConsole.log("Postponing UIDL handling due to lock...");
-                this.start = start;
-                this.jsonText = jsonText;
-                this.json = json;
-                forceHandleMessage.schedule(MAX_SUSPENDED_TIMEOUT);
-            }
-//            if (getView() instanceof VTouchKitView) {
-//                ((VTouchKitView) getView()).updateSessionCookieExpiration();
-//            }
+            super.handleUIDLMessage(start, jsonText, json);
         }
     }
 
     @Override
-    protected void endRequest() {
+    public void endRequest() {
         super.endRequest();
         if (applicationRunning && online && !onlineAppStarted) {
             onlineApplicationStarted();
@@ -118,33 +82,6 @@ public class VTouchKitApplicationConnection extends ApplicationConnection {
     private void onlineApplicationStarted() {
         onlineAppStarted = true;
         getOfflineApp().onlineApplicationStarted();
-    }
-
-    /**
-     * This method can be used to postpone rendering of a response for a short
-     * period of time (e.g. to avoid rendering process during animation).
-     * 
-     * @param lock
-     */
-    public void suspendRendering(Object lock) {
-        locks.add(lock);
-    }
-
-    public void resumeRendering(Object lock) {
-        VConsole.log("...resuming UIDL handling.");
-        locks.remove(lock);
-        if (locks.isEmpty()) {
-            VConsole.log("locks empty, resuming really");
-            forceHandleMessage.cancel();
-            handlePendingMessage();
-        }
-    }
-
-    private void handlePendingMessage() {
-        if (json != null) {
-            super.handleUIDLMessage(start, jsonText, json);
-            json = null;
-        }
     }
 
     @Override
@@ -187,8 +124,8 @@ public class VTouchKitApplicationConnection extends ApplicationConnection {
     public void resume() {
         ApplicationConfiguration.getRunningApplications().remove(this);
         resetInitializedFlag(getConfiguration().getRootPanelId());
-//        ApplicationConfiguration.initConfigurations();
-//        ApplicationConfiguration.startNextApplication();
+        // ApplicationConfiguration.initConfigurations();
+        // ApplicationConfiguration.startNextApplication();
     }
 
     private static native void resetInitializedFlag(String rootPanelId)

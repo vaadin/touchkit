@@ -2,6 +2,7 @@ package com.vaadin.addon.touchkit.gwt.client.navigation;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.RepeatingCommand;
@@ -19,6 +20,12 @@ import com.vaadin.client.VConsole;
 
 public class VNavigationManager extends ComplexPanel {
 
+    interface AnimationListener {
+        public void animationWillStart();
+
+        public void animationDidEnd();
+    }
+
     private static final String CONTAINER_CLASSNAME = "v-touchkit-navpanel-container";
     private static final String WRAPPER_CLASSNAME = "v-touchkit-navpanel-wrapper";
     private static final String CLASSNAME = "v-touchkit-navpanel";
@@ -26,6 +33,7 @@ public class VNavigationManager extends ComplexPanel {
     private Widget prevView;
     private Widget nextView;
     private DivElement wrapper = Document.get().createDivElement();
+    private List<AnimationListener> animationListeners = new ArrayList<AnimationListener>();
 
     public VNavigationManager() {
         setElement(Document.get().createDivElement());
@@ -58,6 +66,7 @@ public class VNavigationManager extends ComplexPanel {
             }
         }.schedule(160);
 
+        fireAnimationDidEnd();
         transitionPending = false;
         if (pendingWidth != null) {
             setWidth(pendingWidth);
@@ -134,7 +143,7 @@ public class VNavigationManager extends ComplexPanel {
         if (lockClient) {
             VConsole.log("Locking client until transition has finished");
             transitionPending = true;
-            // ac.suspendRendering(this);
+            fireAnimationWillStart();
         }
         currentWrapperPos += views;
         lastSizeUsedForWrapper = getPixelWidth();
@@ -143,7 +152,6 @@ public class VNavigationManager extends ComplexPanel {
         // setHorizontalOffset
         style.setProperty("webkitTransition", "");
         setLeftUsingTranslate3d(style, currentWrapperPos);
-
     }
 
     /**
@@ -442,4 +450,23 @@ public class VNavigationManager extends ComplexPanel {
         currentView = null;
     }
 
+    public void addListener(AnimationListener animationListener) {
+        animationListeners.add(animationListener);
+    }
+
+    public void removeListener(AnimationListener animationListener) {
+        animationListeners.remove(animationListener);
+    }
+
+    private void fireAnimationWillStart() {
+        for (AnimationListener l : animationListeners) {
+            l.animationWillStart();
+        }
+    }
+
+    private void fireAnimationDidEnd() {
+        for (AnimationListener l : animationListeners) {
+            l.animationDidEnd();
+        }
+    }
 }
