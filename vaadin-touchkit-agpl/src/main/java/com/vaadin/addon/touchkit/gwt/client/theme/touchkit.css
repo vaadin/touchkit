@@ -291,6 +291,9 @@
 .v-button-link,
 .v-button-link .v-button-wrap,
 .v-button-link .v-button-caption,
+.v-button-link:active,
+.v-button-link:focus,
+.v-button-link.v-pressed,
 .v-nativebutton-link {
 	display: inline-block;
 	border-radius: 0;
