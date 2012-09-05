@@ -1750,14 +1750,11 @@ span.v-datefield-calendarpanel-month {
 	margin-top: 6px;
 }
 
-.v-touchkit-verticalcomponentgroup > .v-textfield {
-	-webkit-appearance: none;
+.v-touchkit-verticalcomponentgroup .v-textfield {
 	border:0;
-	padding:0 4px;
 	background: transparent;
 	color: #4e64a1;
 	font-size:17px;
-	margin-top:10px;
 }
 
 /* Display readonly inputs without special color */
