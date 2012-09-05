@@ -260,13 +260,28 @@
 
 .v-button-caption {
 	line-height: 37px;
-	color: buttonColor;
+	/*color: buttonColor;
 	text-shadow: buttonTextShadow;
 	font-size: buttonFontSize;
-	font-weight: bold;
+	font-weight: bold;*/
 	}
 
-
+.v-button-wrap {
+	display: block;
+	border-radius: 7px;
+	background: buttonGradient;
+	-webkit-box-shadow: buttonBoxShadow;
+	padding: 0 listLayoutMargin;
+	height: 39px;
+	line-height: 37px;
+	font-size: buttonFontSize;
+	font-weight: bold;
+	color: buttonColor;
+	text-shadow: buttonTextShadow;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	}
 
 
 
