@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.addon.touchkit.gwt.client.navigation.VNavigationButton;
 import com.vaadin.client.StyleConstants;
 import com.vaadin.client.ui.button.VButton;
+import com.vaadin.client.ui.link.VLink;
 
 public class VerticalComponentGroupWidget extends FlowPanel {
 
@@ -52,7 +53,8 @@ public class VerticalComponentGroupWidget extends FlowPanel {
         }
         if (captionText != null
                 && !captionText.isEmpty()
-                && !(widget instanceof VButton || widget instanceof VNavigationButton)) {
+                && !(widget instanceof VButton
+                        || widget instanceof VNavigationButton || widget instanceof VLink)) {
 
             FlowPanel table = new FlowPanel();
             SimplePanel widgetWrapper = new SimplePanel();
