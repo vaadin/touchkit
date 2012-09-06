@@ -69,6 +69,7 @@
         <module>vaadin-touchkit-agpl</module>
 <!--         Disabled temporary as cis has no testbench 3.0 installed. ITests must be run manually until that. -->
 <!--         <module>vaadin-touchkit-integration-tests</module> -->
+<!--         <module>vaadin-touchkit-offline-tests</modules> -->
     </modules>
     
     <build>

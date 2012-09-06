@@ -9,6 +9,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
+import com.vaadin.addon.touchkit.gwt.client.vaadincomm.OfflineModeConnector;
 import com.vaadin.client.ui.VOverlay;
 import com.vaadin.client.ui.nativebutton.VNativeButton;
 
@@ -36,7 +37,7 @@ import com.vaadin.client.ui.nativebutton.VNativeButton;
 public class TouchKitOfflineApp {
 
     protected static final int Z_INDEX = 30001;
-    private VTouchKitApplicationConnection ac;
+    private OfflineModeConnector offlineConnector;
     private FlowPanel flowPanel;
     private VOverlay overlay;
     private String activationMessage;
@@ -127,7 +128,7 @@ public class TouchKitOfflineApp {
 
         fp.add(new HTML(sb.toString()));
 
-        if (!VTouchKitApplicationConnection.isNetworkOnline()) {
+        if (!OfflineModeConnector.isNetworkOnline()) {
             fp.add(new Label(msg.offlineDueToNetworkMsg()));
         } else {
             VNativeButton vButton = new VNativeButton();
@@ -135,19 +136,19 @@ public class TouchKitOfflineApp {
             vButton.addClickHandler(new ClickHandler() {
                 public void onClick(ClickEvent event) {
                     overlay.hide();
-                    ac.reload();
+                    offlineConnector.reload();
                 }
             });
             fp.add(vButton);
         }
     }
 
-    public void init(VTouchKitApplicationConnection mainApp) {
-        ac = mainApp;
+    public void init(OfflineModeConnector offlineModeConnector) {
+        offlineConnector = offlineModeConnector;
     }
 
-    public VTouchKitApplicationConnection getApplicationConnection() {
-        return ac;
+    public OfflineModeConnector getOfflineModeConnector() {
+        return offlineConnector;
     }
 
     /**
@@ -161,7 +162,7 @@ public class TouchKitOfflineApp {
         overlay.hide();
         active = false;
         // tell application it can resume its operations
-        ac.resume();
+        offlineConnector.resume();
     }
 
     /**

@@ -9,7 +9,7 @@ import com.vaadin.server.BootstrapListener;
 import com.vaadin.server.BootstrapPageResponse;
 import com.vaadin.server.BootstrapResponse;
 
-public class IosWebAppSettings extends AbstractToucKitRootExtension implements
+public class IosWebAppSettings extends AbstractTouchKitRootExtension implements
         BootstrapListener {
 
     private boolean webAppCapable = true;

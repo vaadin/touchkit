@@ -7,7 +7,7 @@ import com.vaadin.server.BootstrapFragmentResponse;
 import com.vaadin.server.BootstrapListener;
 import com.vaadin.server.BootstrapPageResponse;
 
-public class ApplicationIcons extends AbstractToucKitRootExtension implements BootstrapListener {
+public class ApplicationIcons extends AbstractTouchKitRootExtension implements BootstrapListener {
     
     private LinkedList<ApplicationIcon> applicationIcon = new LinkedList<ApplicationIcon>();
     

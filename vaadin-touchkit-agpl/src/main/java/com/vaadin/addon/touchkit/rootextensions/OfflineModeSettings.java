@@ -2,35 +2,33 @@ package com.vaadin.addon.touchkit.rootextensions;
 
 import org.jsoup.nodes.Document;
 
+import com.vaadin.addon.touchkit.gwt.client.vaadincomm.OfflineModeClientRpc;
 import com.vaadin.server.BootstrapFragmentResponse;
 import com.vaadin.server.BootstrapListener;
 import com.vaadin.server.BootstrapPageResponse;
 
 /**
- * TODO
- * Needs a client side extension as well
- *  - go offline
- *  - persisten session cookie
- *  
+ * TODO Needs a client side extension as well - go offline - persisten session
+ * cookie
+ * 
  * @author mattitahvonen
- *
+ * 
  */
-public class OfflineModeSettings extends AbstractToucKitRootExtension implements
-        BootstrapListener {
-    
-//    WebApplicationContext context = (WebApplicationContext) getApplication()
-//            .getContext();
-//    int maxInactiveInterval = context.getHttpSession()
-//            .getMaxInactiveInterval();
-//    target.addAttribute("persistSession", maxInactiveInterval);
+public class OfflineModeSettings extends AbstractTouchKitRootExtension
+        implements BootstrapListener {
 
+    // WebApplicationContext context = (WebApplicationContext) getApplication()
+    // .getContext();
+    // int maxInactiveInterval = context.getHttpSession()
+    // .getMaxInactiveInterval();
+    // target.addAttribute("persistSession", maxInactiveInterval);
 
     private static final int DEFAULT_OFFLINE_MODE_DELAY = 5;
 
     private boolean cacheManifestEnabled = true;
 
     private int offlineModeTimeout = DEFAULT_OFFLINE_MODE_DELAY;
-    
+
     private boolean persistentSessionCookie;
 
     @Override
@@ -42,8 +40,8 @@ public class OfflineModeSettings extends AbstractToucKitRootExtension implements
     public void modifyBootstrapPage(BootstrapPageResponse response) {
         Document document = response.getDocument();
         if (isCacheManifestEnabled()) {
-//            document.getElementsByTag("html").attr("manifest",
-//                    getCacheManifestLocation(response));
+            // document.getElementsByTag("html").attr("manifest",
+            // getCacheManifestLocation(response));
         }
     }
 
@@ -88,7 +86,7 @@ public class OfflineModeSettings extends AbstractToucKitRootExtension implements
     public int getOfflineModeTimeout() {
         return offlineModeTimeout;
     }
-    
+
     /**
      * Sets the timeout (in seconds) how long the client side waits for server
      * to respond before falling back to "offline mode". If the value is set for
@@ -100,7 +98,6 @@ public class OfflineModeSettings extends AbstractToucKitRootExtension implements
     public void setOfflineModeTimeout(int offlineModeDelay) {
         this.offlineModeTimeout = offlineModeDelay;
     }
-
 
     /**
      * Vaadin uses the servlet's session mechanism to track users. With its
@@ -134,15 +131,14 @@ public class OfflineModeSettings extends AbstractToucKitRootExtension implements
     public void setPersistentSessionCookie(boolean persistentSessionCookie) {
         this.persistentSessionCookie = persistentSessionCookie;
     }
-    
+
     /**
      * Instructs the client side to get into offline mode. Can be used
      * beforehand if e.g. the user knows he is about to lose his network
      * connection.
      */
     public void goOffline() {
-        // FIXME
+        getRpcProxy(OfflineModeClientRpc.class).goOffline();
     }
-
 
 }

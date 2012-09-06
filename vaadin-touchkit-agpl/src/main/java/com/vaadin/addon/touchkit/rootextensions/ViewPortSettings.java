@@ -8,7 +8,7 @@ import com.vaadin.server.BootstrapFragmentResponse;
 import com.vaadin.server.BootstrapListener;
 import com.vaadin.server.BootstrapPageResponse;
 
-public class ViewPortSettings extends AbstractToucKitRootExtension implements BootstrapListener {
+public class ViewPortSettings extends AbstractTouchKitRootExtension implements BootstrapListener {
     
     private static final String DEVICE_WIDTH = "device-width";
     private Boolean viewPortUserScalable = false;
