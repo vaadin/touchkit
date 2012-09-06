@@ -9,10 +9,12 @@ import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.addon.touchkit.ui.NumberField;
 import com.vaadin.addon.touchkit.ui.Switch;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
+import com.vaadin.server.ExternalResource;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Link;
 import com.vaadin.ui.OptionGroup;
 import com.vaadin.ui.TextField;
 
@@ -25,17 +27,24 @@ public class VerticalComponentGroupTest extends AbstractTouchKitIntegrationTest 
 
         verticalComponentGroup.addComponent(new Button("Button"));
         TextField tf = new TextField(
-                "TextField wit long caption text 100% width");
+                "A TextField with long caption text and 100% width textfield component");
         tf.setWidth("100%");
         verticalComponentGroup.addComponent(tf);
 
+        Link link = new Link("link caption", new ExternalResource(
+                "http://www.gizmag.com/"));
+        link.setDescription("link description text");
+
+        verticalComponentGroup.addComponent(link);
         verticalComponentGroup.addComponent(new Switch("Switch"));
         verticalComponentGroup.addComponent(new NumberField("numberfield"));
 
         NavigationButton one = new NavigationButton("Navigation button");
+        one.setDescription("nav button description");
         NavigationButton too = new NavigationButton(
                 "Navigation button with icon");
         too.setIcon(new ThemeResource("../runo/icons/32/ok.png"));
+        too.setDescription("nav button description");
         verticalComponentGroup.addComponent(one);
         verticalComponentGroup.addComponent(too);
         verticalComponentGroup.addComponent(new Label(

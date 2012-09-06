@@ -6,6 +6,7 @@ import com.vaadin.shared.Connector;
 @SuppressWarnings("serial")
 public class NavigationButtonSharedState extends ComponentState {
 
+    public static final String MY_ICON_RESOURCE = "navbutton_icon_resource_key";
     private String targetViewCaption;
     private Connector targetView;
 

@@ -6,7 +6,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
-import com.vaadin.client.ui.Icon;
+import com.vaadin.addon.touchkit.gwt.client.IconWidget;
 
 public class VNavigationButton extends HTML {
     private static final String NAVBUTTON_CLASSNAME = "v-touchkit-navbutton";
@@ -14,7 +14,7 @@ public class VNavigationButton extends HTML {
     private Widget targetWidget;
     private String placeHolderCaption;
     private String caption;
-    private Icon icon;
+    private IconWidget icon;
 
     public VNavigationButton() {
         setStyleName(NAVBUTTON_CLASSNAME);
@@ -36,7 +36,7 @@ public class VNavigationButton extends HTML {
         VNavigationManager panel = findNavigationPanel(this);
         if (panel != null) {
             if (getTargetWidget() != null) {
-                if(getTargetWidget().getParent() == panel) {
+                if (getTargetWidget().getParent() == panel) {
                     panel.setCurrentWidget(getTargetWidget());
                 } else {
                     panel.setNextWidget(getTargetWidget());
@@ -58,7 +58,7 @@ public class VNavigationButton extends HTML {
 
     @Override
     public void setText(String text) {
-        this.caption = text;
+        caption = text;
         super.setText(text);
     }
 
@@ -67,11 +67,11 @@ public class VNavigationButton extends HTML {
     }
 
     public void setTargetWidget(Widget widget) {
-        this.targetWidget = widget;
+        targetWidget = widget;
     }
 
     public void setPlaceHolderCaption(String targetViewCaption) {
-        this.placeHolderCaption = targetViewCaption;
+        placeHolderCaption = targetViewCaption;
     }
 
     public String getPlaceHolderCaption() {
@@ -81,12 +81,12 @@ public class VNavigationButton extends HTML {
         return getCaption();
     }
 
-    public void setIcon(Icon newIcon) {
-        getElement().insertFirst(newIcon.getElement());
-        this.icon = newIcon;
+    public void setIcon(String iconUrl) {
+        icon = new IconWidget(iconUrl);
+        getElement().insertFirst(icon.getElement());
     }
 
-    public Icon getIcon() {
+    public IconWidget getIcon() {
         return icon;
     }
 

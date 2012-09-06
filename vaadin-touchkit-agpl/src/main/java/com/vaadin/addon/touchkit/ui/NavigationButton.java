@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 
 import com.vaadin.addon.touchkit.gwt.client.navigation.NavigationButtonRpc;
 import com.vaadin.addon.touchkit.gwt.client.navigation.NavigationButtonSharedState;
+import com.vaadin.server.Resource;
 import com.vaadin.shared.Connector;
 import com.vaadin.shared.MouseEventDetails;
 import com.vaadin.ui.AbstractComponent;
@@ -220,6 +221,14 @@ public class NavigationButton extends AbstractComponent {
     public void setTargetViewCaption(String targetViewCaption) {
         getState().setTargetViewCaption(targetViewCaption);
         requestRepaint();
+    }
+
+    public void setIcon(Resource icon) {
+        setResource(getState().MY_ICON_RESOURCE, icon);
+    }
+
+    public Resource getIcon() {
+        return getResource(getState().MY_ICON_RESOURCE);
     }
 
     /**

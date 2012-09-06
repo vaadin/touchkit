@@ -57,13 +57,11 @@ public class NavigationButtonConnector extends AbstractComponentConnector {
                     ((AbstractComponentConnector) targetView).getWidget());
         }
 
-        // FIXME
-        // if (getState().getIcon() != null) {
-        // Icon newIcon = new Icon(getConnection());
-        // newIcon.setUri(getConnection().translateVaadinUri(
-        // getState().getIcon().getURL()));
-        // getWidget().setIcon(newIcon);
-        // }
+        if (getResourceUrl(NavigationButtonSharedState.MY_ICON_RESOURCE) != null) {
+            getWidget()
+                    .setIcon(
+                            getResourceUrl(NavigationButtonSharedState.MY_ICON_RESOURCE));
+        }
 
         String description = getState().description;
         getWidget().setDescription(description);
