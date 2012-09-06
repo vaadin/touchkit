@@ -5,7 +5,6 @@ import java.io.InputStream;
 
 import org.junit.Ignore;
 
-import com.vaadin.Application;
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
 import com.vaadin.addon.touchkit.ui.NavigationBar;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
@@ -18,6 +17,7 @@ import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.external.org.apache.commons.io.IOUtils;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.server.RequestHandler;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.server.WrappedRequest;
 import com.vaadin.server.WrappedResponse;
 import com.vaadin.ui.CheckBox;
@@ -27,6 +27,7 @@ import com.vaadin.ui.Form;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.NativeSelect;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.UI;
 
 @SuppressWarnings("serial")
 @Ignore
@@ -39,11 +40,11 @@ public class SwipeViewTest extends AbstractTouchKitIntegrationTest {
     @Override
     public void attach() {
         super.attach();
-
-        getApplication().addRequestHandler(new RequestHandler() {
+        VaadinSession session = getUI().getSession();
+        session.addRequestHandler(new RequestHandler() {
 
             @Override
-            public boolean handleRequest(Application application,
+            public boolean handleRequest(VaadinSession application,
                     WrappedRequest request, WrappedResponse response)
                     throws IOException {
                 String requestPathInfo = request.getRequestPathInfo();
@@ -165,7 +166,7 @@ public class SwipeViewTest extends AbstractTouchKitIntegrationTest {
                 CheckBox cb = new CheckBox();
 
                 cb.setCaption("Loop views");
-                cb.addListener(new Property.ValueChangeListener() {
+                cb.addValueChangeListener(new Property.ValueChangeListener() {
                     public void valueChange(ValueChangeEvent event) {
                         loop = !loop;
                         if (loop) {
@@ -246,12 +247,12 @@ public class SwipeViewTest extends AbstractTouchKitIntegrationTest {
             public void attach() {
                 super.attach();
 
-                Application application = getApplication();
-                if (application == null) {
+                UI ui = getUI();
+                if (ui == null) {
                     throw new RuntimeException("WTF!!");
                 }
-                ExternalResource source = new ExternalResource(getApplication()
-                        .getURL() +"winterphotos/"+ ss);
+                ExternalResource source = new ExternalResource(getUI()
+                        .getSession().getURL() + "winterphotos/" + ss);
                 embedded.setSource(source);
             }
 

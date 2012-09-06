@@ -3,8 +3,6 @@ package com.vaadin.addon.touchkit.ui;
 import com.vaadin.Application;
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.WebBrowser;
-import com.vaadin.server.WrappedRequest;
-import com.vaadin.server.WrappedRequest.BrowserDetails;
 import com.vaadin.ui.UI;
 
 /**
@@ -38,8 +36,7 @@ import com.vaadin.ui.UI;
 public abstract class TouchKitUI extends UI {
 
     public TouchKitUI() {
-        TouchKitSettings.init(this);
+        TouchKitSettings.init();
     }
-
 
 }
