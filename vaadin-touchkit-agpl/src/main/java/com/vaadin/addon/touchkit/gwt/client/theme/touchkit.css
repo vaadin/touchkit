@@ -1716,6 +1716,7 @@ span.v-datefield-calendarpanel-month {
 	padding: 0 listLayoutMargin;
 	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.5);
 	overflow: hidden;
+	position: relative;
 	}
 
 .v-touchkit-verticalcomponentgroup>* {
