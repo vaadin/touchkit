@@ -14,7 +14,7 @@ import com.vaadin.addon.touchkit.ui.SwipeView;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
-import com.vaadin.external.org.apache.commons.io.IOUtils;
+import org.apache.commons.io.IOUtils;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.server.RequestHandler;
 import com.vaadin.server.VaadinSession;

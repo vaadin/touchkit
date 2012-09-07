@@ -11,7 +11,6 @@ import org.eclipse.jetty.webapp.WebAppContext;
 import org.junit.Ignore;
 
 import com.vaadin.addon.touchkit.server.TouchKitServlet;
-import com.vaadin.server.VaadinServlet;
 
 @Ignore
 public class TestServer {
