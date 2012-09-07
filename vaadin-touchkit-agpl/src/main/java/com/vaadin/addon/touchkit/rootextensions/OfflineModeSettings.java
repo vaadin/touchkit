@@ -47,10 +47,10 @@ public class OfflineModeSettings extends AbstractTouchKitRootExtension
 
     private String getCacheManifestLocation(BootstrapPageResponse response) {
         String staticFileLocation = response.getRequest()
-                .getDeploymentConfiguration()
+                .getVaadinService()                
                 .getStaticFileLocation(response.getRequest());
         String configuredWidgetset = response.getRequest()
-                .getDeploymentConfiguration()
+                .getVaadinService()
                 .getConfiguredWidgetset(response.getRequest());
         return staticFileLocation + "/VAADIN/widgetsets/" + configuredWidgetset
                 + "/cache.manifest";

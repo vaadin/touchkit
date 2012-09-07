@@ -115,7 +115,7 @@ public class TouchKitSettings implements RequestHandler, BootstrapListener {
 
     @Override
     public void modifyBootstrapPage(BootstrapPageResponse response) {
-        UI root = response.getApplication().getUIForRequest(
+        UI root = response.getVaadinSession().getUIForRequest(
                 response.getRequest());
         if (root != null) {
             ensureInitialized(root);
