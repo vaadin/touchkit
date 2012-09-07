@@ -1706,6 +1706,10 @@ span.v-datefield-calendarpanel-month {
 
 /** Component group stylings must be as last as they override default styles */
 
+.v-touchkit-verticalcomponentgroup {
+	display: block;
+}
+
 /* Borders backgrounds etc. for the margin element.*/
 .v-touchkit-verticalcomponentgroup > .v-touchkit-verticalcomponentgroup {
 	margin-top: listLayoutMargin;
