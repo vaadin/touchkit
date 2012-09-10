@@ -15,6 +15,7 @@ public class VNavigationButton extends HTML {
     private String placeHolderCaption;
     private String caption;
     private IconWidget icon;
+    private SpanElement descriptionElement;
 
     public VNavigationButton() {
         setStyleName(NAVBUTTON_CLASSNAME);
@@ -91,11 +92,13 @@ public class VNavigationButton extends HTML {
     }
 
     public void setDescription(String description) {
-        if (description != null) {
-            SpanElement desc = Document.get().createSpanElement();
-            desc.setClassName(NAVBUTTON_CLASSNAME + "-desc");
-            desc.setInnerHTML(description);
-            getElement().insertFirst(desc);
+        if (description != null && !description.trim().isEmpty()) {
+            descriptionElement = Document.get().createSpanElement();
+            descriptionElement.setClassName(NAVBUTTON_CLASSNAME + "-desc");
+            descriptionElement.setInnerHTML(description);
+            getElement().insertFirst(descriptionElement);
+        } else if (descriptionElement != null) {
+            descriptionElement.removeFromParent();
         }
     }
 
