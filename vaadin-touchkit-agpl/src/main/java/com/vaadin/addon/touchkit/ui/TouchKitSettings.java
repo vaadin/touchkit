@@ -12,7 +12,6 @@ import com.vaadin.server.BootstrapListener;
 import com.vaadin.server.BootstrapPageResponse;
 import com.vaadin.server.Extension;
 import com.vaadin.server.RequestHandler;
-import com.vaadin.server.VaadinServletSession;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.server.WrappedRequest;
 import com.vaadin.server.WrappedResponse;
@@ -41,7 +40,7 @@ public class TouchKitSettings implements RequestHandler, BootstrapListener {
         return offlineModeSettings;
     }
 
-    private TouchKitSettings(VaadinServletSession app) {
+    private TouchKitSettings(VaadinSession app) {
         viewPortSettings = new ViewPortSettings();
         iosWebAppSettings = new IosWebAppSettings();
         applicationIcons = new ApplicationIcons();
@@ -70,7 +69,7 @@ public class TouchKitSettings implements RequestHandler, BootstrapListener {
         }
     }
 
-    public static TouchKitSettings init(VaadinServletSession app) {
+    public static TouchKitSettings init(VaadinSession app) {
         TouchKitSettings touchKitSettings = get(app);
         if (touchKitSettings == null) {
             return new TouchKitSettings(app);
@@ -78,11 +77,7 @@ public class TouchKitSettings implements RequestHandler, BootstrapListener {
         return touchKitSettings;
     }
 
-    public static TouchKitSettings init() {
-        return init((VaadinServletSession) VaadinServletSession.getCurrent());
-    }
-
-    public static TouchKitSettings get(VaadinServletSession app) {
+    public static TouchKitSettings get(VaadinSession app) {
         Collection<RequestHandler> requestHandlers = app.getRequestHandlers();
         for (RequestHandler requestHandler : requestHandlers) {
             if (requestHandler instanceof TouchKitSettings) {

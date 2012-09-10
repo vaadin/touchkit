@@ -1,6 +1,5 @@
 package com.vaadin.addon.touchkit.ui;
 
-import com.vaadin.Application;
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.WebBrowser;
 import com.vaadin.ui.UI;
@@ -34,9 +33,5 @@ import com.vaadin.ui.UI;
 @SuppressWarnings("serial")
 @Theme("base")
 public abstract class TouchKitUI extends UI {
-
-    public TouchKitUI() {
-        TouchKitSettings.init();
-    }
 
 }
