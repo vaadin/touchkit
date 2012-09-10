@@ -3,7 +3,6 @@ package com.vaadin.addon.touchkit.itest.oldtests;
 import java.util.Date;
 import java.util.logging.Logger;
 
-import com.vaadin.Application;
 import com.vaadin.addon.touchkit.ui.EmailField;
 import com.vaadin.addon.touchkit.ui.HorizontalComponentGroup;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
@@ -37,6 +36,7 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.Slider;
 import com.vaadin.ui.TabSheet.Tab;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.BaseTheme;
 
@@ -45,7 +45,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
 
     private SimpleNavView[] views;
     private Button fullScreen;
-    static Application app;
+    static UI app;
     private Button notRelative;
 
     public NavPanelTestWithViews() {
@@ -296,7 +296,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
         private void generateLeafContent() {
             CssLayout cssLayout = new CssLayout();
             cssLayout.setWidth("100%");
-//            cssLayout.setMargin(true);
+            // cssLayout.setMargin(true);
             Component label = new Label("Foobar");
             label.setStyleName("grey-title");
             cssLayout.addComponent(label);
@@ -439,7 +439,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
 
         private void generateSubViews() {
             VerticalComponentGroup components = new VerticalComponentGroup();
-//            components.setMargin(true);
+            // components.setMargin(true);
             int amount = getDepth() % 2 == 1 ? 25 : 3;
             for (int i = 0; i < amount; i++) {
                 SimpleNavView simpleNavView = new SimpleNavView(this, i);
