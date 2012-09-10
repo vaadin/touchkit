@@ -13,7 +13,9 @@ public class TouchKitServlet extends VaadinServlet {
     protected VaadinSession getApplicationContext(HttpSession session) {
         // TODO Auto-generated method stub
         VaadinSession app = super.getApplicationContext(session);
-        TouchKitSettings.init(app);
+        if(app != null) {
+            TouchKitSettings.init(app);
+        }
         return app;
     }
 
