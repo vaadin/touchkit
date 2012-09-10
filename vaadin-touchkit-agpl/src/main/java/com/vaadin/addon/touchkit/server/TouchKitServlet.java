@@ -1,22 +1,19 @@
 package com.vaadin.addon.touchkit.server;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.ServletException;
 
 import com.vaadin.addon.touchkit.ui.TouchKitSettings;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.server.VaadinSession;
+import com.vaadin.server.VaadinServletSession;
+import com.vaadin.server.WrappedHttpServletRequest;
 
 public class TouchKitServlet extends VaadinServlet {
-    
+        
     @Override
-    @Deprecated
-    protected VaadinSession getApplicationContext(HttpSession session) {
-        // TODO Auto-generated method stub
-        VaadinSession app = super.getApplicationContext(session);
-        if(app != null) {
-            TouchKitSettings.init(app);
-        }
-        return app;
+    protected void onVaadinSessionStarted(WrappedHttpServletRequest request,
+            VaadinServletSession session) throws ServletException {
+        TouchKitSettings.init(session);
+        super.onVaadinSessionStarted(request, session);
     }
 
 }
