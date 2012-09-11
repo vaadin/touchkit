@@ -1192,8 +1192,11 @@
 
 .v-button-white .v-button-wrap {
 	background-color: #fff;
-	color: #222;
-	text-shadow: navbarButtonTextShadow;
+}
+
+.v-button-white .v-button-wrap .v-button-caption {
+    color: #222;
+    text-shadow: navbarButtonTextShadow;	
 }
 
 .v-button-red .v-button-wrap,
