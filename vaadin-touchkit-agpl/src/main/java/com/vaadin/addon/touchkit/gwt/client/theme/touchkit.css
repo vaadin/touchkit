@@ -226,7 +226,7 @@
 /* Default view buttons */
 .v-button,
 .v-button:focus {
-	display: block;
+	display: inline-block;
 	border-radius: listLayoutMargin;
 	background: buttonInsetBackground;
 	-webkit-box-shadow: buttonInsetBoxShadow;
@@ -515,7 +515,6 @@
 .v-touchkit-toolbar .v-button .v-button-wrap:before,
 .v-touchkit-navbar .v-button-no-decoration .v-button-wrap:before {
 	content: "";
-	display: block;
 	position: absolute;
 	-webkit-transition: .3s linear all;
 	border-radius: 10px;
@@ -524,6 +523,10 @@
 	margin: 7px 0 0 2px;
 	opacity: 0;
 	}
+
+.v-touchkit-navbar .v-button-no-decoration .v-button-wrap:before {
+    display: block;
+}
 
 .v-touchkit-toolbar .v-button:active .v-button-wrap:before,
 .v-touchkit-navbar .v-button-no-decoration:active .v-button-wrap:before {
