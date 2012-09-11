@@ -89,12 +89,12 @@ public class TouchkitTestUI extends TouchKitUI {
                 return null;
             }
         });
-        table.addListener(new ItemClickListener() {
+        table.addItemClickListener(new ItemClickListener() {
 
             public void itemClick(ItemClickEvent event) {
                 Class<?> itemId = (Class<?>) event.getItemId();
                 String canonicalName = itemId.getCanonicalName();
-                Page.getCurrent().open(new ExternalResource(canonicalName));
+                Page.getCurrent().open(canonicalName, null);
             }
         });
         addComponent(table);
