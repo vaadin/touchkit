@@ -1,8 +1,11 @@
 package com.vaadin.addon.touchkit.gwt.client.vaadincomm;
 
+import java.util.Date;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.RepeatingCommand;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.vaadin.addon.touchkit.gwt.client.TouchKitOfflineApp;
@@ -43,6 +46,11 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
                 OfflineModeConnector.this.goOffline("Going offline", 0);
             }
         });
+    }
+
+    @Override
+    public OfflineModeState getState() {
+        return (OfflineModeState) super.getState();
     }
 
     protected void init() {
@@ -158,6 +166,17 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
             // Possibly a very sluggish xhr finally arrived. Skip paint phase as
             // resuming will repaint the screen anyways.
             getOfflineApp().deactivate();
+        }
+        updateSessionCookieExpiration();
+    }
+
+    private void updateSessionCookieExpiration() {
+        if (getState().persistentSessionTimeout != null) {
+            String cookie = Cookies.getCookie("JSESSIONID");
+            Date date = new Date();
+            date = new Date(date.getTime()
+                    + getState().persistentSessionTimeout * 1000L);
+            Cookies.setCookie("JSESSIONID", cookie, date);
         }
     }
 }

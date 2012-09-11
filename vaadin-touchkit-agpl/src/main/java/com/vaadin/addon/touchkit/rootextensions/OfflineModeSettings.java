@@ -3,9 +3,11 @@ package com.vaadin.addon.touchkit.rootextensions;
 import org.jsoup.nodes.Document;
 
 import com.vaadin.addon.touchkit.gwt.client.vaadincomm.OfflineModeClientRpc;
+import com.vaadin.addon.touchkit.gwt.client.vaadincomm.OfflineModeState;
 import com.vaadin.server.BootstrapFragmentResponse;
 import com.vaadin.server.BootstrapListener;
 import com.vaadin.server.BootstrapPageResponse;
+import com.vaadin.server.VaadinSession;
 
 /**
  * TODO Needs a client side extension as well - go offline - persisten session
@@ -29,7 +31,10 @@ public class OfflineModeSettings extends AbstractTouchKitRootExtension
 
     private int offlineModeTimeout = DEFAULT_OFFLINE_MODE_DELAY;
 
-    private boolean persistentSessionCookie;
+    @Override
+    protected OfflineModeState getState() {
+        return (OfflineModeState) super.getState();
+    }
 
     @Override
     public void modifyBootstrapFragment(BootstrapFragmentResponse response) {
@@ -39,6 +44,7 @@ public class OfflineModeSettings extends AbstractTouchKitRootExtension
     @Override
     public void modifyBootstrapPage(BootstrapPageResponse response) {
         Document document = response.getDocument();
+
         if (isCacheManifestEnabled()) {
             // document.getElementsByTag("html").attr("manifest",
             // getCacheManifestLocation(response));
@@ -46,11 +52,9 @@ public class OfflineModeSettings extends AbstractTouchKitRootExtension
     }
 
     private String getCacheManifestLocation(BootstrapPageResponse response) {
-        String staticFileLocation = response.getRequest()
-                .getVaadinService()                
+        String staticFileLocation = response.getRequest().getVaadinService()
                 .getStaticFileLocation(response.getRequest());
-        String configuredWidgetset = response.getRequest()
-                .getVaadinService()
+        String configuredWidgetset = response.getRequest().getVaadinService()
                 .getConfiguredWidgetset(response.getRequest());
         return staticFileLocation + "/VAADIN/widgetsets/" + configuredWidgetset
                 + "/cache.manifest";
@@ -110,7 +114,7 @@ public class OfflineModeSettings extends AbstractTouchKitRootExtension
      *         browser application
      */
     public boolean isPersistentSessionCookie() {
-        return persistentSessionCookie;
+        return getState().persistentSessionTimeout != null;
     }
 
     /**
@@ -129,7 +133,12 @@ public class OfflineModeSettings extends AbstractTouchKitRootExtension
      *            true if persistent session cookies should be used
      */
     public void setPersistentSessionCookie(boolean persistentSessionCookie) {
-        this.persistentSessionCookie = persistentSessionCookie;
+        if (persistentSessionCookie) {
+            getState().persistentSessionTimeout = VaadinSession.getCurrent()
+                    .getSession().getMaxInactiveInterval();
+        } else {
+            getState().persistentSessionTimeout = null;
+        }
     }
 
     /**
