@@ -94,7 +94,7 @@ public class TouchkitTestUI extends TouchKitUI {
             public void itemClick(ItemClickEvent event) {
                 Class<?> itemId = (Class<?>) event.getItemId();
                 String canonicalName = itemId.getCanonicalName();
-                Page.getCurrent().open(canonicalName, null);
+                Page.getCurrent().open(new ExternalResource(canonicalName), null);
             }
         });
         addComponent(table);
