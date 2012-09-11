@@ -9,7 +9,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.vaadin.addon.touchkit.gwt.client.TouchKitOfflineApp;
-import com.vaadin.addon.touchkit.gwt.client.VVerticalComponentGroup;
+import com.vaadin.addon.touchkit.gwt.client.VerticalComponentGroupWidget;
 import com.vaadin.addon.touchkit.gwt.client.navigation.VNavigationBar;
 import com.vaadin.addon.touchkit.gwt.client.navigation.VNavigationView;
 import com.vaadin.addon.touchkit.gwt.client.vaadincomm.OfflineModeConnector;
@@ -59,10 +59,10 @@ public class OfflineTestApp extends TouchKitOfflineApp implements
         Label label = new Label("Connetion status");
         label.setStyleName("v-label-grey-title");
         panel.add(label);
-        VVerticalComponentGroup vVerticalComponentGroup = new VVerticalComponentGroup();
+        VerticalComponentGroupWidget vVerticalComponentGroup = new VerticalComponentGroupWidget();
         vVerticalComponentGroup
                 .addStyleName("v-touchkit-verticalcomponentgroup");
-        Panel p = (Panel) vVerticalComponentGroup.getWidget();
+        Panel p = (Panel) vVerticalComponentGroup;
 
         goOnlineButton = new VButton();
         goOnlineButton.setText("Go online");
