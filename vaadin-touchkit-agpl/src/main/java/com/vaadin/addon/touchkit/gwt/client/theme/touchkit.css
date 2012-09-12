@@ -1476,6 +1476,8 @@ input.v-datefield-textfield {
 	}
 
 .v-filterselect-button {
+	position: absolute;
+	right: 0px;
 	height: 25px;
 	background-position-y: -6px;
 	background-position-x: -2px;
@@ -1497,9 +1499,17 @@ input.v-datefield-textfield {
 	-webkit-box-shadow: 0 0 3px 1px #5d81ab;
 	}
 
-/* .v-filterselect-prompt .v-filterselect-input { */
-/* 	font-style: normal; */
-/* 	} */
+.v-filterselect-prompt {
+	position: relative;
+}
+
+
+.v-filterselect-prompt .v-filterselect-input {
+	position: absolute;
+	left: 0px;
+	right: 25px;
+	/*font-style: normal;*/
+}
 
 .v-filterselect .v-icon {
 	height: 23px;
@@ -1786,7 +1796,7 @@ span.v-datefield-calendarpanel-month {
 }
 
 .v-touchkit-verticalcomponentgroup .v-filterselect {
-	padding-top: 10px;
+	/*padding-top: 10px;*/
 }
 
 .v-touchkit-verticalcomponentgroup>.v-label.v-touchkit-has-caption {
