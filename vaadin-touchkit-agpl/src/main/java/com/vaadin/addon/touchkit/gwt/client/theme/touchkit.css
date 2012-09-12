@@ -1852,14 +1852,6 @@ span.v-datefield-calendarpanel-month {
 	margin-bottom: 20px;
 }
 
-.v-touchkit-verticalcomponentgroup>.v-button .v-button-wrap {
-	height: 32px;
-}
-.v-touchkit-verticalcomponentgroup>.v-button .v-button-caption {
-	font-size: 16px;
-}
-
-
 /* Grey lines between component,
  * also set then for selects inside component group.
  */
