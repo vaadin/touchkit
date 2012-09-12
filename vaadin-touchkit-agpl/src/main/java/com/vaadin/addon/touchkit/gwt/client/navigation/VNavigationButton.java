@@ -93,12 +93,18 @@ public class VNavigationButton extends HTML {
 
     public void setDescription(String description) {
         if (description != null && !description.trim().isEmpty()) {
-            descriptionElement = Document.get().createSpanElement();
-            descriptionElement.setClassName(NAVBUTTON_CLASSNAME + "-desc");
+          
+            if (descriptionElement == null) {
+                descriptionElement = Document.get().createSpanElement();
+                descriptionElement.setClassName(NAVBUTTON_CLASSNAME + "-desc");
+                getElement().insertFirst(descriptionElement);
+            }
             descriptionElement.setInnerHTML(description);
-            getElement().insertFirst(descriptionElement);
+        
         } else if (descriptionElement != null) {
+        
             descriptionElement.removeFromParent();
+            descriptionElement = null;
         }
     }
 
