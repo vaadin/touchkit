@@ -48,7 +48,8 @@ public class ButtonsInComponentGroups extends AbstractTouchKitIntegrationTest {
         Iterator<Component> componentIterator = horizontalGroup.getComponentIterator();
         while(componentIterator.hasNext()) {
             Component next = componentIterator.next();
-            next.setWidth(100/horizontalGroup.getComponentCount() + "%");
+            next.setWidth(""
+                + 100.0/((double)horizontalGroup.getComponentCount()) + "%");
         }
         verticalComponentGroup.addComponent(horizontalGroup);
         
