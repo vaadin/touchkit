@@ -2,6 +2,9 @@ package com.vaadin.addon.touchkit.rootextensions;
 
 import java.util.LinkedList;
 
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
 import com.vaadin.addon.touchkit.service.ApplicationIcon;
 import com.vaadin.server.BootstrapFragmentResponse;
 import com.vaadin.server.BootstrapListener;
@@ -86,7 +89,20 @@ public class ApplicationIcons extends AbstractTouchKitRootExtension implements B
 
     @Override
     public void modifyBootstrapPage(BootstrapPageResponse response) {
-        // FIXME change this part to use variables in this object
+        Document document = response.getDocument();
+        Element head = document.getElementsByTag("head").get(0);
+        
+        for (ApplicationIcon icon : applicationIcon) {
+            // <link rel="apple-touch-icon" sizes="114x114" href="touch-icon-iphone4.png" />
+            Element iconEl = document.createElement("link");
+            iconEl.attr("rel", "apple-touch-icon");
+            String sizes = icon.getSizes();
+            if(sizes != null) {
+                iconEl.attr("sizes", sizes);
+            }
+            iconEl.attr("href", icon.getHref());
+            head.appendChild(iconEl);
+        }
         
     }
 
