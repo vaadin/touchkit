@@ -1,12 +1,8 @@
-package com.vaadin.addon.touchkit.ui;
+package com.vaadin.addon.touchkit.rootextensions;
 
 import java.io.IOException;
 import java.util.Collection;
 
-import com.vaadin.addon.touchkit.rootextensions.ApplicationIcons;
-import com.vaadin.addon.touchkit.rootextensions.IosWebAppSettings;
-import com.vaadin.addon.touchkit.rootextensions.OfflineModeSettings;
-import com.vaadin.addon.touchkit.rootextensions.ViewPortSettings;
 import com.vaadin.server.BootstrapFragmentResponse;
 import com.vaadin.server.BootstrapListener;
 import com.vaadin.server.BootstrapPageResponse;
