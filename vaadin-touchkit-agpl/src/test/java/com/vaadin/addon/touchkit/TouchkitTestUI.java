@@ -9,7 +9,6 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
-import com.vaadin.server.ExternalResource;
 import com.vaadin.server.Page;
 import com.vaadin.server.WrappedRequest;
 import com.vaadin.ui.CssLayout;
@@ -94,7 +93,7 @@ public class TouchkitTestUI extends TouchKitUI {
             public void itemClick(ItemClickEvent event) {
                 Class<?> itemId = (Class<?>) event.getItemId();
                 String canonicalName = itemId.getCanonicalName();
-                Page.getCurrent().open(new ExternalResource(canonicalName), null);
+                Page.getCurrent().open(canonicalName, null);
             }
         });
         addComponent(table);
