@@ -4,7 +4,7 @@ import com.vaadin.client.ui.textfield.VTextField;
 
 public class NumberFieldWidget extends VTextField {
 
-    public static final String CLASSNAME = "numberfield";
+    public static final String CLASSNAME = "v-touchkit-numberfield";
 
     public NumberFieldWidget() {
         setStyleName(CLASSNAME);

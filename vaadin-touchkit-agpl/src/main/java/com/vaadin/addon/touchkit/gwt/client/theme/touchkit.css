@@ -1771,7 +1771,8 @@ span.v-datefield-calendarpanel-month {
 	margin-top: 6px;
 }
 
-.v-touchkit-verticalcomponentgroup .v-textfield {
+.v-touchkit-verticalcomponentgroup .v-textfield,
+.v-touchkit-verticalcomponentgroup .v-touchkit-numberfield {
 	border:0;
 	background: transparent;
 	color: #4e64a1;
