@@ -5,10 +5,20 @@ import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.AbstractComponentContainerConnector;
+import com.vaadin.client.ui.layout.ElementResizeEvent;
+import com.vaadin.client.ui.layout.ElementResizeListener;
 import com.vaadin.shared.ui.Connect;
 
 @Connect(com.vaadin.addon.touchkit.ui.NavigationBar.class)
 public class NavigationBarConnector extends AbstractComponentContainerConnector {
+
+    private ElementResizeListener resizeListener = new ElementResizeListener() {
+
+        @Override
+        public void onElementResize(ElementResizeEvent e) {
+            NavigationBarConnector.this.getWidget().avoidCaptionOverlap();
+        }
+    };
 
     @Override
     public boolean delegateCaptionHandling() {
@@ -42,15 +52,20 @@ public class NavigationBarConnector extends AbstractComponentContainerConnector 
         getWidget().setCaption(getState().caption);
 
         if (getState().getLeftComponent() != null) {
-            getWidget().setLeftWidget(
-                    ((ComponentConnector) getState().getLeftComponent())
-                            .getWidget());
+            Widget leftWidget = ((ComponentConnector) getState()
+                    .getLeftComponent()).getWidget();
+            getWidget().setLeftWidget(leftWidget);
+            getLayoutManager().addElementResizeListener(
+                    leftWidget.getElement(), resizeListener);
         }
         if (getState().getRightComponent() != null) {
-            getWidget().setRightWidget(
-                    ((ComponentConnector) getState().getRightComponent())
-                            .getWidget());
+            Widget rightWidget = ((ComponentConnector) getState()
+                    .getRightComponent()).getWidget();
+            getWidget().setRightWidget(rightWidget);
+            getLayoutManager().addElementResizeListener(
+                    rightWidget.getElement(), resizeListener);
         }
         getWidget().avoidCaptionOverlap();
     }
+
 }
