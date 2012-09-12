@@ -1791,7 +1791,7 @@ span.v-datefield-calendarpanel-month {
 
 .v-touchkit-verticalcomponentgroup .v-filterselect>input {
 	color: #4e64a1;
-	padding-top: 10px;
+	/*padding-top: 10px;*/
 	font-size:17px;
 }
 
