@@ -1797,7 +1797,10 @@ span.v-datefield-calendarpanel-month {
 
 .v-touchkit-verticalcomponentgroup .v-link {
 	font-size: 17px;
-	padding-top:12px;
+}
+
+.v-touchkit-verticalcomponentgroup .v-link, .v-touchkit-verticalcomponentgroup .v-label {
+    line-height: 33px;
 }
 
 .v-touchkit-verticalcomponentgroup .v-datefield-button {
