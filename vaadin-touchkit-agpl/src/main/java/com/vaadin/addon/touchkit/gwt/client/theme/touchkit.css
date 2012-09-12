@@ -1986,3 +1986,7 @@ span.v-datefield-calendarpanel-month {
 .v-touchkit-componentgroup-cell-wrapper > * {
 	float:right;	
 }
+
+.v-touchkit-verticalcomponentgroup .v-select-optiongroup {
+	width: 100%;
+}
