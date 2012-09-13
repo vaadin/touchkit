@@ -306,6 +306,7 @@
 	font-weight: normal;
 	text-shadow: none;
 	color: #1b699f;
+	line-height: inherit;
 	}
 
 .v-button-link:active .v-button-wrap {
