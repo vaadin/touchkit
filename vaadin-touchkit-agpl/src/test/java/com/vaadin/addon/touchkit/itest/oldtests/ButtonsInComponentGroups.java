@@ -21,16 +21,29 @@ public class ButtonsInComponentGroups extends AbstractTouchKitIntegrationTest {
         CssLayout l = new CssLayout();
 //        l.setMargin(true);
         
-        l.addComponent(new Button("Button not in a component group"));
+        Button button = new Button("Button not in a component group");
+        button.setWidth("100%");
+        l.addComponent(button);
 
         VerticalComponentGroup verticalComponentGroup = new VerticalComponentGroup(
                 "Vertical component group");
 //        verticalComponentGroup.setMargin(false);
-        verticalComponentGroup.addComponent(new Button("Button"));
+        
+        button = new Button("Button");
+        button.setWidth("100%");
+        verticalComponentGroup.addComponent(button);
+        
         verticalComponentGroup.addComponent(new TextField("TextField"));
-        verticalComponentGroup.addComponent(new Button("Button too"));
+        
+        button = new Button("Button too");
+        button.setWidth("100%");
+        verticalComponentGroup.addComponent(button);
+        
         verticalComponentGroup.addComponent(new Label("FIXME: Label, between buttons bugs"));
-        verticalComponentGroup.addComponent(new Button("Button too"));
+        
+        button = new Button("Button too");
+        button.setWidth("100%");
+        verticalComponentGroup.addComponent(button);
 
         l.addComponent(verticalComponentGroup);
         
