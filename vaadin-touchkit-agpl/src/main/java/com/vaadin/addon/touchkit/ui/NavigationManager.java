@@ -66,6 +66,11 @@ public class NavigationManager extends AbstractComponentContainer {
         this();
         navigateTo(c);
     }
+    
+    @Override
+    public NavigationManagerSharedState createState() {
+        return new NavigationManagerSharedState();
+    }
 
     @Override
     public NavigationManagerSharedState getState() {
