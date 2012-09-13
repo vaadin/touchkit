@@ -349,7 +349,8 @@
 	}
 
 .v-touchkit-navbar .v-button .v-button-wrap {
-    line-height: 24px;	
+    line-height: 24px;
+    height: 28px;
 }
 
 .v-touchkit-horizontalcomponentgroup .v-button-wrap {
@@ -368,6 +369,7 @@
 	font-size: 12px;
 	line-height: 27px;
 	-webkit-box-shadow: none;
+    vertical-align: middle;	
 }
 
 .v-touchkit-navbar .v-button:active .v-button-wrap {
