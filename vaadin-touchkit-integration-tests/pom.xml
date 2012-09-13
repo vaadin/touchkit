@@ -14,18 +14,67 @@
 		<!-- Which TouchKit package to use for testing -->
 		<license.short.name>agpl</license.short.name>
 		<touchkit.version>3.0.0-SNAPSHOT</touchkit.version>
+		<gpg.passphrase.file>empty.properties</gpg.passphrase.file>
+		<gpg.skip>true</gpg.skip>
 	</properties>
+
+	<repositories>
+		<repository>
+			<id>vaadin-addons</id>
+			<url>http://maven.vaadin.com/vaadin-addons</url>
+		</repository>
+		<repository>
+			<id>vaadin-snapshots</id>
+			<url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	
+	<pluginRepositories>
+		<pluginRepository>
+			<id>vaadin-snapshots</id>
+			<url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<artifactId>vaadin-touchkit-integration-tests</artifactId>
 	<packaging>war</packaging>
 	<name>Integration tests for vaadin-touchkit</name>
+	
 	<dependencies>
 		<dependency>
 			<groupId>com.vaadin.addon</groupId>
 			<artifactId>vaadin-touchkit-agpl</artifactId>
 			<version>${touchkit.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-client</artifactId>
+			<version>7.0-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-themes-compiled</artifactId>
+			<version>7.0-SNAPSHOT</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -38,23 +87,24 @@
 			<version>7.2.2.v20101205</version>
 			<scope>compile</scope>
 		</dependency>
-
-	<!-- Note that test bench snapshot is installad with custom name, TODO change 
-		this to real dependency when version is released. -->
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-testbench</artifactId>
-			<version>3.0.0-SNAPSHOT</version>
+			<version>3.0.0</version>
 			<scope>test</scope>
 		</dependency>
-		
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.10</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>com.ibm.icu</groupId>
+			<artifactId>icu4j</artifactId>
+			<version>49.1</version>
+		</dependency>
 	</dependencies>
+	
 	<build>
 		<resources>
 			<resource>
@@ -73,10 +123,9 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
 				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
+					<source>1.6</source>
+					<target>1.6</target>
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
@@ -123,9 +172,9 @@
 			</plugin>
 
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>gwt-maven-plugin</artifactId>
-				<version>2.5.0-rc1</version>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-maven-plugin</artifactId>
+				<version>7.0-SNAPSHOT</version>
 				<configuration>
 					<extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
 					<!-- We are doing "inplace" but into subdir VAADIN/widgetsets. This 
@@ -136,6 +185,9 @@
 					</hostedWebapp>
 					<noServer>true</noServer>
 					<runTarget>http://localhost:5678/</runTarget>
+					<draftCompile>true</draftCompile>
+					<style>DETAILED</style>
+					<force>true</force>
 				</configuration>
 				<executions>
 					<execution>
@@ -195,5 +247,5 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
-	</build>
+	</build>	
 </project>
