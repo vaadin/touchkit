@@ -1976,9 +1976,11 @@ span.v-datefield-calendarpanel-month {
 	margin: listLayoutMargin listLayoutMargin 0;
 	text-indent: listLayoutMargin;
 }
+
 .v-touchkit-componentgroup-table {
 	display: table;
 	width: 100%;
+	table-layout:fixed;
 }
 .v-touchkit-componentgroup-cell-caption {
 	display: table-cell;
@@ -1988,6 +1990,10 @@ span.v-datefield-calendarpanel-month {
 	height: 43px;
 	padding-right: 5px;
 	width: 30%;
+	box-sizing: border-box;
+	white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
 }
 
 .v-touchkit-componentgroup-cell-wrapper {
