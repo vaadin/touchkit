@@ -1884,6 +1884,11 @@ span.v-datefield-calendarpanel-month {
 	right: 0;
 	border-top: listBorder;
 	}
+	
+.v-touchkit-verticalcomponentgroup .v-select-optiongroup>.v-select-option:before {
+    left: negativeListLayoutMargin;
+    right: negativeListLayoutMargin;
+}
 
 /* ...hide from the first */
 .v-touchkit-verticalcomponentgroup > *:first-child:before,
