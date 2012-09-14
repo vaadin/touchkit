@@ -1998,8 +1998,18 @@ span.v-datefield-calendarpanel-month {
 	box-sizing: border-box;
 }
 
+.v-touchkit-componentgroup-cell-fullwrapper {
+    width: 100%;
+    padding-left: 0px;
+}
+
 .v-touchkit-componentgroup-cell-wrapper > * {
 	float:right;	
+}
+
+.v-touchkit-componentgroup-cell-fullwrapper > * {
+	float: none;
+    width: 100%;
 }
 
 .v-touchkit-verticalcomponentgroup .v-select-optiongroup {

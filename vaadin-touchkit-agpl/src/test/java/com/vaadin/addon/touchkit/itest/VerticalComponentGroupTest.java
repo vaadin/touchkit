@@ -37,7 +37,9 @@ public class VerticalComponentGroupTest extends AbstractTouchKitIntegrationTest 
 
         verticalComponentGroup.addComponent(link);
         verticalComponentGroup.addComponent(new Switch("Switch"));
-        verticalComponentGroup.addComponent(new NumberField("numberfield"));
+        NumberField numberField = new NumberField("numberfield");
+        numberField.setWidth("100%");
+        verticalComponentGroup.addComponent(numberField);
 
         NavigationButton one = new NavigationButton("Navigation button");
         one.setDescription("nav button description");

@@ -53,8 +53,7 @@ public class VerticalComponentGroupWidget extends FlowPanel {
         }
         if (captionText != null
                 && !captionText.isEmpty()
-                && !(widget instanceof VButton
-                        || widget instanceof VNavigationButton || widget instanceof VLink)) {
+                && !(widget instanceof VNavigationButton)) {
 
             FlowPanel table = new FlowPanel();
             SimplePanel widgetWrapper = new SimplePanel();
@@ -63,13 +62,18 @@ public class VerticalComponentGroupWidget extends FlowPanel {
             widgetWrapper
                     .addStyleName("v-touchkit-componentgroup-cell-wrapper");
 
-            HTML caption = new HTML(captionText);
-            caption.setStyleName(CAPTION_CLASSNAME);
-            caption.addStyleName("v-touchkit-componentgroup-cell-caption");
+            if (widget instanceof VButton || widget instanceof VLink) {
+              widgetWrapper
+              .addStyleName("v-touchkit-componentgroup-cell-fullwrapper");
+            } else {
+                HTML caption = new HTML(captionText);
+                caption.setStyleName(CAPTION_CLASSNAME);
+                caption.addStyleName("v-touchkit-componentgroup-cell-caption");
+                table.add(caption);
+            }
 
             widgetWrapper.add(widget);
 
-            table.add(caption);
             table.add(widgetWrapper);
             content.add(table);
         } else {
