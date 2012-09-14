@@ -1930,18 +1930,12 @@ span.v-datefield-calendarpanel-month {
 .v-touchkit-verticalcomponentgroup > .v-touchkit-navbutton:last-child {
 	border-bottom-left-radius: 9px; /* listLayoutMargin - 1px */
 	border-bottom-right-radius: 9px;
-	}
-
-
-.v-touchkit-verticalcomponentgroup .v-formlayout > table {
-	margin-left: negativeListLayoutMargin;
-	margin-right: negativeListLayoutMargin;
-	}
+}
 
 .v-touchkit-verticalcomponentgroup .v-formlayout-captioncell {
 	padding-left: listLayoutMargin;
 	text-align: left;
-	}
+}
 
 .v-formlayout-captioncell > .v-caption {
 	font-weight: bold;
