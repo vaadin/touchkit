@@ -1731,6 +1731,7 @@ span.v-datefield-calendarpanel-month {
 
 .v-touchkit-verticalcomponentgroup {
 	display: block;
+	position: relative;
 }
 
 /* Borders backgrounds etc. for the margin element.*/
@@ -1879,8 +1880,8 @@ span.v-datefield-calendarpanel-month {
 	position: absolute;
 	margin:0;
 	padding:0;
-	left: negativeListLayoutMargin;
-	right: negativeListLayoutMargin;
+	left: 0;
+	right: 0;
 	border-top: listBorder;
 	}
 
