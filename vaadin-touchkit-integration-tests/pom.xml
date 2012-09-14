@@ -104,13 +104,13 @@
 			<version>49.1</version>
 		</dependency>
 		<dependency>
-			<groupId>org.seleniumhq.webdriver</groupId>
-			<artifactId>webdriver-chrome</artifactId>
-			<version>0.9.7376</version>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-api</artifactId>
+			<version>2.25.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-api</artifactId>
+			<artifactId>selenium-chrome-driver</artifactId>
 			<version>2.25.0</version>
 		</dependency>
 	</dependencies>
