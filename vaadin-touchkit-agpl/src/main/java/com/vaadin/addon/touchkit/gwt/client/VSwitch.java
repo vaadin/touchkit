@@ -65,6 +65,7 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
     /** Reference to the server connection object. */
     ApplicationConnection client;
 
+    private Element mainElement;
     private Element slider;
     private boolean value;
     private com.google.gwt.user.client.Element errorIndicatorElement;
@@ -84,15 +85,19 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
     public VSwitch() {
         // Change to proper element or remove if extending another widget
         setElement(Document.get().createDivElement());
-
+        
+        setStyleName(CLASSNAME + "-wrapper");
+        
+        mainElement = Document.get().createDivElement();
         // This method call of the Paintable interface sets the component
         // style name in DOM tree
-        setStyleName(CLASSNAME);
+        mainElement.setClassName(CLASSNAME);
+        getElement().appendChild(mainElement);
 
         // build the DOM
         slider = Document.get().createDivElement();
         slider.setClassName(CLASSNAME + "-slider");
-        getElement().appendChild(slider);
+        mainElement.appendChild(slider);
         updateVisibleState(true); // Set the initial position without animation.
 
         addHandlers();
@@ -136,7 +141,7 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
         if (unvisiblePartWidth == 0) {
             // Calculate the width of the part that is not currently visible
             // and init the state on the first rendering.
-            int width = getElement().getClientWidth();
+            int width = mainElement.getClientWidth();
             int sliderWidth = slider.getClientWidth();
             unvisiblePartWidth = sliderWidth - width;
             if (unvisiblePartWidth < 3) {
@@ -154,7 +159,7 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
                 final int targetLeft = (value ? 0 : -getUnvisiblePartWidth());
 
                 if (skipAnimation) {
-                    getElement().getStyle().setProperty("backgroundPositionX",
+                    mainElement.getStyle().setProperty("backgroundPositionX",
                             targetLeft + BACKGROUND_POSITION_X_OFFSET + "px");
                 } else {
                     Animation a = new Animation() {
@@ -163,7 +168,7 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
                         protected void onUpdate(double progress) {
                             int currentLeft = getCurrentPosition();
                             int newLeft = (int) (currentLeft + (progress * (targetLeft - currentLeft)));
-                            getElement().getStyle().setProperty(
+                            mainElement.getStyle().setProperty(
                                     "backgroundPositionX",
                                     newLeft + BACKGROUND_POSITION_X_OFFSET
                                             + "px");
@@ -182,7 +187,7 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
     }
 
     private int getCurrentPosition() {
-        String currentLeftString = getElement().getStyle().getProperty(
+        String currentLeftString = mainElement.getStyle().getProperty(
                 "backgroundPositionX");
         if (currentLeftString == null || currentLeftString.length() == 0) {
             currentLeftString = "0px";
@@ -228,7 +233,7 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
                 setValue(true, true);
             }
             updateVisibleState();
-            DOM.releaseCapture(getElement());
+            DOM.releaseCapture((com.google.gwt.user.client.Element) mainElement);
         }
 
         mouseDown = false;
@@ -249,7 +254,7 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
                 dragging = true;
                 // Use capture to catch mouse events even if user
                 // drags the mouse cursor out of the widget area.
-                DOM.setCapture(getElement());
+                DOM.setCapture((com.google.gwt.user.client.Element)mainElement);
             }
 
             if (dragging) {
@@ -263,7 +268,7 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
                 }
 
                 // set the CSS left
-                getElement().getStyle().setProperty("backgroundPositionX",
+                mainElement.getStyle().setProperty("backgroundPositionX",
                         left + BACKGROUND_POSITION_X_OFFSET + "px");
             }
         }

@@ -1981,15 +1981,15 @@ span.v-datefield-calendarpanel-month {
 	vertical-align: middle;
 	height: 43px;
 	padding-right: 5px;
-	width: 15%;
+	width: 30%;
 }
 
 .v-touchkit-componentgroup-cell-wrapper {
-	float: right;
 	display: table-cell;
 	padding: 7px;
-	width: 85%;
+	width: 70%;
 	vertical-align: middle;
+	box-sizing: border-box;
 }
 
 .v-touchkit-componentgroup-cell-wrapper > * {
