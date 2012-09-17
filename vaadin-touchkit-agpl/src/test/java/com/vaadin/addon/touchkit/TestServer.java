@@ -60,7 +60,12 @@ public class TestServer {
         }
         context.setContextPath("/");
         context.addServlet(servletHolder, "/*");
-
+        
+        
+        servletHolder = new ServletHolder(
+                RemoteLogger.class);
+        context.addServlet(servletHolder, "/remotelog");
+        
         server.setHandler(context);
 
         server.start();

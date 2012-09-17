@@ -1,6 +1,6 @@
 package com.vaadin.addon.touchkit.gwt.client;
 
-import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window.Location;
 import com.vaadin.client.VDebugConsole;
 
 /**
@@ -17,9 +17,7 @@ public class VRemoteDebugConsole extends VDebugConsole {
 
     @Override
     protected String getRemoteLogUrl() {
-        String host = GWT.getHostPageBaseURL().replaceFirst("http://", "")
-                .replaceFirst(":.*", "");
-        return "http://" + host + ":8080/remotelog";
+        return "http://" + Location.getHost() +"/remotelog";
     }
 
 }
