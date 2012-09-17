@@ -45,11 +45,6 @@ public class DatePicker extends AbstractField<Date> {
   }
   
   @Override
-  protected DatePickerState createState() {
-    return new DatePickerState();
-  }
-  
-  @Override
   protected DatePickerState getState() {
     return (DatePickerState) super.getState();
   }
