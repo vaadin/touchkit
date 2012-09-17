@@ -14,8 +14,6 @@
 		<!-- Which TouchKit package to use for testing -->
 		<license.short.name>agpl</license.short.name>
 		<touchkit.version>3.0.0-SNAPSHOT</touchkit.version>
-		<gpg.passphrase.file>empty.properties</gpg.passphrase.file>
-		<gpg.skip>true</gpg.skip>
 	</properties>
 
 	<repositories>
@@ -62,13 +60,11 @@
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-client</artifactId>
 			<version>7.0-SNAPSHOT</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-themes-compiled</artifactId>
 			<version>7.0-SNAPSHOT</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -187,25 +183,15 @@
 				<version>7.0-SNAPSHOT</version>
 				<configuration>
 					<extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
-					<!-- We are doing "inplace" but into subdir VAADIN/widgetsets. This 
-						way compatible with e.g. . -->
-					<webappDirectory>${basedir}/src/main/webapp/VAADIN/widgetsets
-					</webappDirectory>
-					<hostedWebapp>${basedir}/src/main/webapp/VAADIN/widgetsets
-					</hostedWebapp>
+					<runTarget>xsite</runTarget>
+					<webappDirectory>${basedir}/src/main/webapp/VAADIN/widgetsets</webappDirectory>
+					<hostedWebapp>${basedir}/src/main/webapp</hostedWebapp>
 					<noServer>true</noServer>
 					<runTarget>http://localhost:5678/</runTarget>
 					<draftCompile>true</draftCompile>
 					<style>DETAILED</style>
 					<force>true</force>
 				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>compile</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			
 			<plugin>
