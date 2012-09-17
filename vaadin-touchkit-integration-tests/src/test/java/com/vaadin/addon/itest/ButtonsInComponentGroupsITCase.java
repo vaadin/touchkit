@@ -11,7 +11,7 @@ import com.vaadin.addon.touchkit.itest.oldtests.ButtonsInComponentGroups;
 public class ButtonsInComponentGroupsITCase extends AbstractTestBenchTest {
 
     @Test
-    public void testSwipeView() throws IOException, AssertionError {
+    public void test() throws IOException, AssertionError {
         startBrowser();
         try {
             driver.navigate().to(BASEURL + ButtonsInComponentGroups.class.getName());
