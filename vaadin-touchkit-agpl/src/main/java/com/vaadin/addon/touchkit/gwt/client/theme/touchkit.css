@@ -372,11 +372,12 @@
 	font-size: 12px;
 	line-height: inherit;
 	-webkit-box-shadow: none;
-    vertical-align: top;	
+    vertical-align: middle;	
 }
 
 .v-touchkit-navbar .v-button .v-button-wrap .v-button-caption  {
 	padding: 2px 4px 2px 4px;
+	vertical-align: top;
 }
 
 .v-touchkit-navbar .v-button:active .v-button-wrap {
@@ -1983,17 +1984,19 @@ span.v-datefield-calendarpanel-month {
 }
 
 .v-touchkit-componentgroup-table {
-	display: table;
+	/* display: table;
+	table-layout:fixed; */
 	width: 100%;
-    /* crashes iOS6??:
-    table-layout:fixed; */
+	display: -webkit-box;
 }
 .v-touchkit-componentgroup-cell-caption {
-	display: table-cell;
+	/* display: table-cell; */
+	-webkit-box-flex: 0;
 	font-size: 17px;
 	font-weight: bold;	
 	vertical-align: middle;
 	height: 36px;
+	line-height: 36px;
 	padding-right: 5px;
 	width: 30%;
 	box-sizing: border-box;
@@ -2003,13 +2006,16 @@ span.v-datefield-calendarpanel-month {
 }
 
 .v-touchkit-componentgroup-cell-wrapper {
-	display: table-cell;
+	/* display: table-cell;
 	width: 70%;
+	*/
+	-webkit-box-flex: 1;
 	vertical-align: middle;
 	box-sizing: border-box;
 }
 
 .v-touchkit-componentgroup-cell-fullwrapper {
+	-webkit-box-flex: 0;
     width: 100%;
     padding-left: 0px;
 }
