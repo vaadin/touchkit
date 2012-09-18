@@ -37,7 +37,7 @@ public class VerticalComponentGroupConnector extends
         	ComponentConnector connector = children.get(i);
         	Widget widget = connector.getWidget();
         	getWidget().addOrMove(widget, i);
-        	getWidget().setCaption(widget, connector.getState().caption);
+        	updateCaption(connector);
         	//FIXME
         	//getWidget().setIcon(widget, connector.getState().icon);
         }
@@ -57,7 +57,12 @@ public class VerticalComponentGroupConnector extends
 
     @Override
     public void updateCaption(ComponentConnector connector) {
-    	getWidget().setCaption(connector.getWidget(),
-    			connector.getState().caption);
+    	String caption = null;
+    	
+    	if (connector.delegateCaptionHandling()) {
+	    	caption = connector.getState().caption;
+    	}
+    	
+    	getWidget().setCaption(connector.getWidget(), caption);
     }
 }
