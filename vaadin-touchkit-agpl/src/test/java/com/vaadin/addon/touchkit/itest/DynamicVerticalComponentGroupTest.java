@@ -29,7 +29,7 @@ public class DynamicVerticalComponentGroupTest extends AbstractTouchKitIntegrati
 				
 				@Override
 				public void buttonClick(ClickEvent event) {
-					if (layout.getCaption() == null) {
+					if (layout.getCaption() == null || layout.getCaption().isEmpty()) {
 						layout.setCaption("Caption");
 						hideCaption.setCaption("Hide caption");
 					} else {

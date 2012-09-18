@@ -373,16 +373,17 @@
 	-webkit-box-shadow: none;
 }
 
+.v-touchkit-navbar .v-button .v-button-wrap .v-button-caption  {
+    padding: 2px 4px 2px 4px;
+    line-height: 24px;
+    vertical-align: top;
+}
+
 .v-touchkit-horizontalbuttongroup .v-button-wrap .v-button-caption {
 	line-height: 27px;
 	vertical-align: middle;
 }
 
-.v-touchkit-navbar .v-button .v-button-wrap .v-button-caption  {
-	padding: 2px 4px 2px 4px;
-	line-height: inherit;
-	vertical-align: top;
-}
 
 .v-touchkit-navbar .v-button:active .v-button-wrap {
 	background-image: none;
@@ -620,6 +621,8 @@
 
 .v-touchkit-verticalcomponentgroup .v-button-caption {
 	font-size: 16px;
+	vertical-align: top;
+	line-height: 35px;
 }	
 
 .v-touchkit-verticalcomponentgroup .v-touchkit-navbutton:focus,
