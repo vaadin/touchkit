@@ -370,9 +370,9 @@
 	color: navbarButtonColor;
 	text-shadow: navbarButtonTextShadow;
 	font-size: 12px;
-	line-height: 27px;
+	line-height: inherit;
 	-webkit-box-shadow: none;
-    vertical-align: middle;	
+    vertical-align: top;	
 }
 
 .v-touchkit-navbar .v-button .v-button-wrap .v-button-caption  {
