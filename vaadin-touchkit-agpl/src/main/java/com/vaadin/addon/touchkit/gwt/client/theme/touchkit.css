@@ -1898,7 +1898,7 @@ span.v-datefield-calendarpanel-month {
     height: 42px;
 }
 
-.v-touchkit-componentgroup-row .v-caption {
+.v-touchkit-componentgroup-row > .v-caption {
 	-webkit-box-flex: 0;
 	font-size: 17px;
 	font-weight: bold;
