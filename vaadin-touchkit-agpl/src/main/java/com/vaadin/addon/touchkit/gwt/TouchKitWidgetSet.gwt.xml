@@ -23,7 +23,7 @@
     </replace-with>
 
 	<!-- <replace-with class="com.vaadin.addon.touchkit.gwt.client.VRemoteDebugConsole"> 
-		<when-type-is class="com.vaadin.terminal.gwt.client.VDebugConsole" /> </replace-with> -->
+		<when-type-is class="com.vaadin.client.Console" /> </replace-with> -->
 
 	<!-- Use annotation based widget loading strategy instead of the eager method. 
 		Makes initial loading time smaller on a slow network -->
