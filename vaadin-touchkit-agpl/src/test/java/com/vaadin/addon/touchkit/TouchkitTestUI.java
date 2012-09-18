@@ -4,13 +4,17 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.vaadin.addon.touchkit.itest.oldtests.NavPanelTestWithViews;
 import com.vaadin.addon.touchkit.ui.TouchKitUI;
 import com.vaadin.annotations.Theme;
+import com.vaadin.client.ui.AbstractComponentConnector;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.server.Page;
 import com.vaadin.server.WrappedRequest;
+import com.vaadin.ui.AbstractComponentContainer;
+import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Table;
@@ -35,7 +39,7 @@ public class TouchkitTestUI extends TouchKitUI {
                 }
                 Class<?> forName = Class.forName(className);
                 if (forName != null) {
-                    CssLayout newInstance = (CssLayout) forName.newInstance();
+                    AbstractComponentContainer newInstance = (AbstractComponentContainer) forName.newInstance();
                     newInstance.setDescription(null);
                     setContent(newInstance);
                     System.out.println("Initialized " + className);
@@ -62,11 +66,11 @@ public class TouchkitTestUI extends TouchKitUI {
                 + getClass().getPackage().getName().replace(".", "/")
                 + "/itest");
 
-        Collection<Class<? extends AbstractTouchKitIntegrationTest>> tests = new ArrayList<Class<? extends AbstractTouchKitIntegrationTest>>();
+        Collection<Class<? extends ComponentContainer>> tests = new ArrayList<Class<? extends ComponentContainer>>();
         addTests(getClass().getPackage().getName() + ".itest", itestroot, tests);
 
         Table table = new Table();
-        BeanItemContainer<Class<? extends AbstractTouchKitIntegrationTest>> beanItemContainer = new BeanItemContainer<Class<? extends AbstractTouchKitIntegrationTest>>(
+        BeanItemContainer<Class<? extends ComponentContainer>> beanItemContainer = new BeanItemContainer<Class<? extends ComponentContainer>>(
                 tests);
         table.setContainerDataSource(beanItemContainer);
         table.setVisibleColumns(new Object[] { "simpleName" });
@@ -100,7 +104,7 @@ public class TouchkitTestUI extends TouchKitUI {
     }
 
     private void addTests(String base, File itestroot,
-            Collection<Class<? extends AbstractTouchKitIntegrationTest>> tests) {
+            Collection<Class<? extends ComponentContainer>> tests) {
         File[] listFiles = itestroot.listFiles();
         for (File file : listFiles) {
             if (file.isDirectory()) {
@@ -114,6 +118,9 @@ public class TouchkitTestUI extends TouchKitUI {
                     if (AbstractTouchKitIntegrationTest.class
                             .isAssignableFrom(forName)) {
                         tests.add((Class<? extends AbstractTouchKitIntegrationTest>) forName);
+                    }
+                    else if (forName == NavPanelTestWithViews.class) {
+                        tests.add((Class<? extends ComponentContainer>) forName);
                     }
                 } catch (ClassNotFoundException e) {
                     // TODO Auto-generated catch block
