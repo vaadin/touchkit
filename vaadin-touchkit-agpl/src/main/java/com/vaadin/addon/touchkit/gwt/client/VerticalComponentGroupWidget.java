@@ -22,6 +22,7 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
     
     protected List<Widget> widgets = new ArrayList<Widget>();
     
+    protected DivElement mainElement;
     protected Map<Widget,DivElement> widgetElements =
     		new HashMap<Widget,DivElement>();
     protected Map<Widget,ImageElement> iconElements =
@@ -32,8 +33,13 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
     		new HashMap<Widget,DivElement>();
 
     public VerticalComponentGroupWidget() {
-    	setElement(Document.get().createDivElement());
-    	setStyleName(CLASSNAME);
+    	DivElement wrapper = Document.get().createDivElement();
+    	wrapper.setClassName(CLASSNAME + "-wrapper");
+    	setElement(wrapper);
+    	
+    	mainElement = Document.get().createDivElement();
+    	mainElement.setClassName(CLASSNAME);
+    	wrapper.appendChild(mainElement);
     }
     
     public void setCaption(final Widget widget, String caption) {
@@ -107,11 +113,11 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
     			return;
     		} else {
 	    		DivElement element = widgetElements.get(widget);
-	    		getElement().removeChild(element);
+	    		mainElement.removeChild(element);
 	    		if (index < 0 || index + 1 >= widgets.size()) {
-	    			getElement().appendChild(element);
+	    			mainElement.appendChild(element);
 	    		} else {
-	    			getElement().insertBefore(element, 
+	    			mainElement.insertBefore(element, 
 	    				widgetElements.get(widgets.get(index)));
 	    		}
     		}
@@ -133,9 +139,9 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
     	DivElement div = Document.get().createDivElement();   	
     	div.addClassName("v-touchkit-componentgroup-row");    	
     	if (index < 0 || index >= widgets.size()) {
-    		getElement().appendChild(div);
+    		mainElement.appendChild(div);
     	} else {
-    		getElement().insertBefore(div,
+    		mainElement.insertBefore(div,
     				widgetElements.get(widgets.get(index)));
     	}
     	widgets.add(widget);

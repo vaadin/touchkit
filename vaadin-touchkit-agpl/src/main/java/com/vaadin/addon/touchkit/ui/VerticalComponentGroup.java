@@ -15,7 +15,6 @@ package com.vaadin.addon.touchkit.ui;
  * components.
  */
 public class VerticalComponentGroup extends AbstractComponentGroup {
-    private static final String STYLE_NAME = "v-touchkit-verticalcomponentgroup";
     
     /**
      * Creates a vertical component group.
@@ -32,6 +31,5 @@ public class VerticalComponentGroup extends AbstractComponentGroup {
     public VerticalComponentGroup(String caption) {
         super(caption);
         setWidth(null);
-        setStyleName(STYLE_NAME);
     }
 }

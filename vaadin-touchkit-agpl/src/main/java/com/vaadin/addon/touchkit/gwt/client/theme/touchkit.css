@@ -1736,19 +1736,22 @@ span.v-datefield-calendarpanel-month {
 
 /** Component group stylings must be as last as they override default styles */
 
+.v-touchkit-verticalcomponentgroup-wrapper {
+    padding: listLayoutMargin;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .v-touchkit-verticalcomponentgroup {
 	display: block;
 	position: relative;
-}
-
-/* Borders backgrounds etc. for the margin element.*/
-.v-touchkit-verticalcomponentgroup {
-	margin-top: listLayoutMargin;
-	margin-bottom: listLayoutMargin;
+	width: 100%;
+	margin: 0;
 	border: listBorder;
 	border-radius: listLayoutMargin;
 	background: white;
 	padding: 0 listLayoutMargin;
+	box-sizing: border-box;
 	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.5);
 	overflow: hidden;
 	position: relative;
