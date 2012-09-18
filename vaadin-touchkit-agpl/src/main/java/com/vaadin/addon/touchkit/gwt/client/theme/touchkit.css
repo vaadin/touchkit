@@ -272,7 +272,7 @@
 	background: buttonGradient;
 	-webkit-box-shadow: buttonBoxShadow;
 	padding: 0 listLayoutMargin;
-	height: 39px;
+	height: 35px;
 	line-height: 37px;
 	font-size: buttonFontSize;
 	font-weight: bold;
@@ -363,13 +363,16 @@
 
 .v-touchkit-navbar .v-button .v-button-wrap .v-button-caption,
 .v-touchkit-horizontalcomponentgroup .v-button-wrap .v-button-caption {
-	padding: 2px 4px 2px 4px;
 	color: navbarButtonColor;
 	text-shadow: navbarButtonTextShadow;
 	font-size: 12px;
 	line-height: 27px;
 	-webkit-box-shadow: none;
     vertical-align: middle;	
+}
+
+.v-touchkit-navbar .v-button .v-button-wrap .v-button-caption  {
+	padding: 2px 4px 2px 4px;
 }
 
 .v-touchkit-navbar .v-button:active .v-button-wrap {
@@ -605,6 +608,10 @@
 	padding: 0 listLayoutMargin;
 	outline: none;
 }
+
+.v-touchkit-verticalcomponentgroup .v-button-caption {
+	font-size: 18px;
+}	
 
 .v-touchkit-verticalcomponentgroup .v-touchkit-navbutton:focus,
 .v-touchkit-verticalcomponentgroup .v-touchkit-navbutton:active {
@@ -1909,16 +1916,16 @@ span.v-datefield-calendarpanel-month {
 }
 
 .verticalcomponentgroup-margin-top {
-	margin-top: 10px;
+	margin-top: 2px;
 }
 .verticalcomponentgroup-margin-right {
-	padding-right: 10px;
+	padding-right: 0px;
 }
 .verticalcomponentgroup-margin-bottom {
-	margin-bottom: 10px;
+	margin-bottom: 2px;
 }
 .verticalcomponentgroup-margin-left {
-	padding-left: 10px;
+	padding-left: 2px;
 }
 
 /* Need to explicitly round the first and last components corners, otherwise they will stick out from the component group */
@@ -1945,12 +1952,12 @@ span.v-datefield-calendarpanel-month {
 	}
 	
 .v-touchkit-verticalcomponentgroup > .v-touchkit-horizontalcomponentgroup:before {
-	margin-top:-17px; 
+	margin-top:-12px; 
 }
 
 .v-touchkit-verticalcomponentgroup .v-touchkit-horizontalcomponentgroup {
-	margin-bottom: 15px;
-	margin-top: 15px; 
+	margin-bottom: 12px;
+	margin-top: 10px; 
 }
 
 .v-formlayout-row > td {
@@ -1981,7 +1988,7 @@ span.v-datefield-calendarpanel-month {
 	font-size: 17px;
 	font-weight: bold;	
 	vertical-align: middle;
-	height: 43px;
+	height: 36px;
 	padding-right: 5px;
 	width: 30%;
 	box-sizing: border-box;
@@ -1992,7 +1999,6 @@ span.v-datefield-calendarpanel-month {
 
 .v-touchkit-componentgroup-cell-wrapper {
 	display: table-cell;
-	padding: 7px;
 	width: 70%;
 	vertical-align: middle;
 	box-sizing: border-box;
