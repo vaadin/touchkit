@@ -6,7 +6,6 @@ import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
 import com.vaadin.addon.touchkit.ui.HorizontalButtonGroup;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
-import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Label;
@@ -21,7 +20,6 @@ public class ButtonsInComponentGroups extends AbstractTouchKitIntegrationTest {
 
         VerticalLayout l = new VerticalLayout();
         l.setMargin(true);
-        l.setMargin(new MarginInfo(false, false, false, true));
 
         Button button = new Button("Button not in a component group");
         button.setWidth("100%");

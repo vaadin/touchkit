@@ -619,7 +619,7 @@
 }
 
 .v-touchkit-verticalcomponentgroup .v-button-caption {
-	font-size: 18px;
+	font-size: 16px;
 }	
 
 .v-touchkit-verticalcomponentgroup .v-touchkit-navbutton:focus,
@@ -1923,20 +1923,6 @@ span.v-datefield-calendarpanel-month {
 .v-touchkit-verticalcomponentgroup > .v-button:first-child {
 	
 }
-
-.verticalcomponentgroup-margin-top {
-	margin-top: 2px;
-}
-.verticalcomponentgroup-margin-right {
-	padding-right: 0px;
-}
-.verticalcomponentgroup-margin-bottom {
-	margin-bottom: 2px;
-}
-.verticalcomponentgroup-margin-left {
-	padding-left: 2px;
-}
-
 /* Need to explicitly round the first and last components corners, otherwise they will stick out from the component group */
 .v-touchkit-verticalcomponentgroup > .v-touchkit-navbutton:first-child {
 	border-top-left-radius: 9px; /* listLayoutMargin - 1px */
@@ -2035,4 +2021,33 @@ span.v-datefield-calendarpanel-month {
 
 .v-touchkit-verticalcomponentgroup .v-select-optiongroup {
 	width: 100%;
+}
+
+.v-vertical.v-margin-left, .v-horizontal.v-margin-left {
+	padding-left: 10px;
+}
+.v-vertical.v-margin-bottom, .v-horizontal.v-margin-bottom {
+	padding-bottom: 0px;
+}
+.v-vertical.v-margin-right, .v-horizontal.v-margin-right {
+	padding-right: 0px;
+}
+.v-vertical.v-margin-top, .v-horizontal.v-margin-top {
+	padding-top: 0px;
+}
+.verticalcomponentgroup-margin-top {
+	margin-top: 0px;
+}
+.verticalcomponentgroup-margin-right {
+	padding-right: 0px;
+}
+.verticalcomponentgroup-margin-bottom {
+	margin-bottom: 0px;
+}
+.verticalcomponentgroup-margin-left {
+	padding-left: 10px;
+}
+.v-horizontallayout .verticalcomponentgroup-margin-left,
+.v-verticallayout .verticalcomponentgroup-margin-left {
+	padding-left: 0px;
 }
