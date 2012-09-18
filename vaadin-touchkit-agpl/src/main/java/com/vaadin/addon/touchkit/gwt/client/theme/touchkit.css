@@ -1895,7 +1895,7 @@ span.v-datefield-calendarpanel-month {
 }
 .v-touchkit-componentgroup-rowcap {
     -webkit-box-align: center;
-    height: 42px;
+    min-height: 42px;
 }
 
 .v-touchkit-componentgroup-row > .v-caption {
