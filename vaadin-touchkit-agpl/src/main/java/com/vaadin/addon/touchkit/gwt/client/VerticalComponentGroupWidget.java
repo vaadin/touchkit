@@ -16,20 +16,9 @@ public class VerticalComponentGroupWidget extends FlowPanel {
     private static final String CLASSNAME = "v-touchkit-" + TAGNAME;
     public static final String CAPTION_CLASSNAME = "v-caption";
 
-    private boolean firstElement = true;
-    private FlowPanel content = new FlowPanel();
-
     public VerticalComponentGroupWidget() {
-        content.addStyleName(CLASSNAME);
-
-        UIObject.setStyleName(getElement(), TAGNAME + "-"
-                + StyleConstants.MARGIN_TOP, true);
-        UIObject.setStyleName(getElement(), TAGNAME + "-"
-                + StyleConstants.MARGIN_RIGHT, true);
-        UIObject.setStyleName(getElement(), TAGNAME + "-"
-                + StyleConstants.MARGIN_BOTTOM, true);
-        UIObject.setStyleName(getElement(), TAGNAME + "-"
-                + StyleConstants.MARGIN_LEFT, true);
+    	
+    	setStyleName(CLASSNAME);
     }
 
     /**
@@ -41,43 +30,33 @@ public class VerticalComponentGroupWidget extends FlowPanel {
      */
     public void add(final Widget widget, final String iconUrl,
             final String captionText, String widgetWidth) {
-        if (firstElement) {
-            firstElement = false;
-            add(content);
-        }
         if (iconUrl != null
                 && !iconUrl.isEmpty()
                 && !(widget instanceof VButton || widget instanceof VNavigationButton)) {
             IconWidget newIcon = new IconWidget(iconUrl);
             getElement().insertFirst(newIcon.getElement());
         }
-        if (captionText != null
-                && !captionText.isEmpty()
-                && !(widget instanceof VNavigationButton)) {
 
-            FlowPanel table = new FlowPanel();
-            SimplePanel widgetWrapper = new SimplePanel();
+        FlowPanel row = new FlowPanel();
+        SimplePanel widgetWrapper = new SimplePanel();
 
-            table.addStyleName("v-touchkit-componentgroup-table");
-            widgetWrapper
-                    .addStyleName("v-touchkit-componentgroup-cell-wrapper");
+        row.addStyleName("v-touchkit-componentgroup-row");
+        widgetWrapper
+                .addStyleName("v-touchkit-componentgroup-cell-wrapper");
 
-            if (widget instanceof VButton || widget instanceof VLink) {
-              widgetWrapper
-              .addStyleName("v-touchkit-componentgroup-cell-fullwrapper");
-            } else {
-                HTML caption = new HTML(captionText);
-                caption.setStyleName(CAPTION_CLASSNAME);
-                caption.addStyleName("v-touchkit-componentgroup-cell-caption");
-                table.add(caption);
-            }
-
-            widgetWrapper.add(widget);
-
-            table.add(widgetWrapper);
-            content.add(table);
+        if (captionText == null || captionText.isEmpty()) {
+        	widgetWrapper.addStyleName("v-touchkit-componentgroup-cell-fullwrapper");
         } else {
-            content.add(widget);
+        	row.addStyleName("v-touchkit-componentgroup-rowcap");
+            HTML caption = new HTML(captionText);
+            caption.setStyleName(CAPTION_CLASSNAME);
+            caption.addStyleName("v-touchkit-componentgroup-cell-caption");
+            row.add(caption);
         }
+
+        widgetWrapper.add(widget);
+
+        row.add(widgetWrapper);
+        add(row);
     }
 }

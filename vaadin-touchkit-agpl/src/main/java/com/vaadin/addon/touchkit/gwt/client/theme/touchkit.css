@@ -1085,24 +1085,12 @@
 	outline: none;
 	}
 
-.v-touchkit-verticalcomponentgroup > .v-touchkit-switch:before {
-	display: none;
-	}
-
 .v-slider-feedback {
 	font-size: 20px;
 	line-height: 1;
 	padding: 4px 7px;
 	-webkit-box-shadow: 0 1px 5px rgba(0,0,0,.5);
 	margin-top: -14px !important;
-	}
-
-/*
- * Nav buttons are 43px height, make switch/checkbox as high in option layouts
- */
-.v-touchkit-verticalcomponentgroup .v-touchkit-switch {
-	margin-top: 8px;
-	margin-bottom: 7px;
 	}
 
 .v-touchkit-verticalcomponentgroup .v-checkbox {
@@ -1751,7 +1739,7 @@ span.v-datefield-calendarpanel-month {
 }
 
 /* Borders backgrounds etc. for the margin element.*/
-.v-touchkit-verticalcomponentgroup > .v-touchkit-verticalcomponentgroup {
+.v-touchkit-verticalcomponentgroup {
 	margin-top: listLayoutMargin;
 	margin-bottom: listLayoutMargin;
 	border: listBorder;
@@ -1761,39 +1749,11 @@ span.v-datefield-calendarpanel-month {
 	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.5);
 	overflow: hidden;
 	position: relative;
-	}
+}
 
 .v-touchkit-verticalcomponentgroup>* {
 	clear:both;
 	}
-
-.v-touchkit-verticalcomponentgroup>.v-touchkit-has-caption {
-	clear: right;
-	float: right;
-}
-
-.v-touchkit-verticalcomponentgroup>.v-touchkit-fitwidth {
-	width: 80%;
-	padding-left: 200px;
-	padding-right: 20px;
-}
-
-.v-touchkit-verticalcomponentgroup>.v-caption {
-	float: left;
-	font-weight: bold;
-	font-size: 17px;
-	line-height: 43px;
-	height: 43px;
-	width: 20%;
-	margin-left: negativeListLayoutMargin;
-	padding-left: listLayoutMargin;
-	text-overflow: ellipsis;
-}
-
-.v-touchkit-verticalcomponentgroup>.v-icon {
-	height:30px;
-	margin-top: 6px;
-}
 
 .v-touchkit-verticalcomponentgroup .v-textfield,
 .v-touchkit-verticalcomponentgroup .v-touchkit-numberfield {
@@ -1824,13 +1784,7 @@ span.v-datefield-calendarpanel-month {
 	/*padding-top: 10px;*/
 }
 
-.v-touchkit-verticalcomponentgroup>.v-label.v-touchkit-has-caption {
-	font-size: 17px;
-	text-align:right;
-	padding-top: 12px;
-}
-
-.v-touchkit-componentgroup-table .v-link, .v-touchkit-componentgroup-table .v-label {
+.v-touchkit-componentgroup-row .v-link, .v-touchkit-componentgroup-table .v-label {
     line-height: 33px;
 }
 
@@ -1879,13 +1833,6 @@ span.v-datefield-calendarpanel-month {
 	height:30px;
 }
 
-.v-touchkit-verticalcomponentgroup>.v-button {
-	margin-top:0;
-	position:relative;
-	top: listLayoutMargin;
-	margin-bottom: 20px;
-}
-
 /* Grey lines between component,
  * also set then for selects inside component group.
  */
@@ -1908,30 +1855,8 @@ span.v-datefield-calendarpanel-month {
 
 /* ...hide from the first */
 .v-touchkit-verticalcomponentgroup > *:first-child:before,
-.v-touchkit-verticalcomponentgroup >.v-touchkit-has-caption:before,
 .v-touchkit-verticalcomponentgroup .v-select-optiongroup :first-child:before {
 	display: none;
-}
-
-.v-touchkit-verticalcomponentgroup > .v-button:before {
-	margin-top:-13px; /* negative listLayoutMargin + 3pixels for the border?) */
-}
-
-.v-touchkit-verticalcomponentgroup > .v-button {
-	
-}
-.v-touchkit-verticalcomponentgroup > .v-button:first-child {
-	
-}
-/* Need to explicitly round the first and last components corners, otherwise they will stick out from the component group */
-.v-touchkit-verticalcomponentgroup > .v-touchkit-navbutton:first-child {
-	border-top-left-radius: 9px; /* listLayoutMargin - 1px */
-	border-top-right-radius: 9px;
-	}
-
-.v-touchkit-verticalcomponentgroup > .v-touchkit-navbutton:last-child {
-	border-bottom-left-radius: 9px; /* listLayoutMargin - 1px */
-	border-bottom-right-radius: 9px;
 }
 
 .v-touchkit-verticalcomponentgroup .v-formlayout-captioncell {
@@ -1944,15 +1869,6 @@ span.v-datefield-calendarpanel-month {
 	font-size: 17px;
 	line-height: 43px;
 	height: 43px;
-	}
-	
-.v-touchkit-verticalcomponentgroup > .v-touchkit-horizontalbuttongroup:before {
-	margin-top:-12px; 
-}
-
-.v-touchkit-verticalcomponentgroup .v-touchkit-horizontalbuttongroup {
-	margin-bottom: 12px;
-	margin-top: 10px; 
 }
 
 .v-formlayout-row > td {
@@ -1973,20 +1889,19 @@ span.v-datefield-calendarpanel-month {
 	text-indent: listLayoutMargin;
 }
 
-.v-touchkit-componentgroup-table {
-	/* display: table;
-	table-layout:fixed; */
+.v-touchkit-componentgroup-row {
 	width: 100%;
 	display: -webkit-box;
 }
-.v-touchkit-componentgroup-cell-caption {
-	/* display: table-cell; */
+.v-touchkit-componentgroup-rowcap {
+    -webkit-box-align: center;
+    height: 42px;
+}
+
+.v-touchkit-componentgroup-row .v-caption {
 	-webkit-box-flex: 0;
 	font-size: 17px;
-	font-weight: bold;	
-	vertical-align: middle;
-	height: 36px;
-	line-height: 36px;
+	font-weight: bold;
 	padding-right: 5px;
 	width: 30%;
 	box-sizing: border-box;
@@ -1996,12 +1911,11 @@ span.v-datefield-calendarpanel-month {
 }
 
 .v-touchkit-componentgroup-cell-wrapper {
-	/* display: table-cell;
-	width: 70%;
-	*/
-	-webkit-box-flex: 1;
-	vertical-align: middle;
-	box-sizing: border-box;
+	-webkit-box-flex: 1;	
+}
+
+.v-touchkit-componentgroup-rowcap .v-touchkit-componentgroup-cell-wrapper > * {
+	float: right;
 }
 
 .v-touchkit-componentgroup-cell-fullwrapper {
@@ -2010,44 +1924,25 @@ span.v-datefield-calendarpanel-month {
     padding-left: 0px;
 }
 
-.v-touchkit-componentgroup-cell-wrapper > * {
-	float:right;	
-}
-
-.v-touchkit-componentgroup-cell-fullwrapper > * {
-	float: none;
-    width: 100%;
-}
-
-.v-touchkit-verticalcomponentgroup .v-select-optiongroup {
+.v-touchkit-verticalcomponentgroup .v-select-optiongroup,
+.v-touchkit-verticalcomponentgroup .v-button {
 	width: 100%;
 }
 
+.v-touchkit-componentgroup-cell-fullwrapper .v-touchkit-horizontalbuttongroup {
+	margin-top: listLayoutMargin;
+	margin-bottom: listLayoutMargin;
+}
+
 .v-vertical.v-margin-left, .v-horizontal.v-margin-left {
-	padding-left: 10px;
+	padding-left: listLayoutMargin;
 }
 .v-vertical.v-margin-bottom, .v-horizontal.v-margin-bottom {
-	padding-bottom: 0px;
+	padding-bottom: listLayoutMargin;
 }
 .v-vertical.v-margin-right, .v-horizontal.v-margin-right {
-	padding-right: 0px;
+	padding-right: listLayoutMargin;
 }
 .v-vertical.v-margin-top, .v-horizontal.v-margin-top {
-	padding-top: 0px;
-}
-.verticalcomponentgroup-margin-top {
-	margin-top: 0px;
-}
-.verticalcomponentgroup-margin-right {
-	padding-right: 0px;
-}
-.verticalcomponentgroup-margin-bottom {
-	margin-bottom: 0px;
-}
-.verticalcomponentgroup-margin-left {
-	padding-left: 10px;
-}
-.v-horizontallayout .verticalcomponentgroup-margin-left,
-.v-verticallayout .verticalcomponentgroup-margin-left {
-	padding-left: 0px;
+	padding-top: listLayoutMargin;
 }
