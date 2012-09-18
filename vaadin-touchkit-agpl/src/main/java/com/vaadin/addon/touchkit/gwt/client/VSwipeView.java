@@ -49,8 +49,6 @@ public class VSwipeView extends
     private long lastTs;
     private int lastX;
     private double lastSpeed;
-    private int lastY;
-    private int scrollStart;
     private boolean touchDrag;
     private VNavigationManager np;
     private Element scrollElement;
@@ -138,7 +136,6 @@ public class VSwipeView extends
             touchDrag = Event.as(ne).getTypeInt() == Event.ONTOUCHSTART;
             dragstartX = Util.getTouchOrMouseClientX(ne);
             dragstartY = Util.getTouchOrMouseClientY(ne);
-            scrollStart = scrollElement.getScrollTop();
             if (!BrowserInfo.get().isTouchDevice()) {
                 // avoid drag start on images
                 // FIXME shouln't be this way, but disables dragstart on images
@@ -175,7 +172,6 @@ public class VSwipeView extends
             double seconds = (time - lastTs) / 100d;
             lastSpeed = screenwidths / seconds;
             lastX = x;
-            lastY = y;
             lastTs = time;
             int deltaX = x - dragstartX;
             if (swiping) {
