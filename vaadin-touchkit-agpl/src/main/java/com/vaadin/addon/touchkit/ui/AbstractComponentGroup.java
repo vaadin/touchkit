@@ -10,7 +10,7 @@ import com.vaadin.ui.Component;
 
 /**
  * Parent class that encapsulates similarities between
- * {@link HorizontalComponentGroup} and {@link VerticalComponentGroup}. Does not
+ * {@link HorizontalButtonGroup} and {@link VerticalComponentGroup}. Does not
  * support changing orientation on the fly.
  */
 public abstract class AbstractComponentGroup extends AbstractComponentContainer {

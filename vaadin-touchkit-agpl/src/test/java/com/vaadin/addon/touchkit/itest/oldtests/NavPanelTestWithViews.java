@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.logging.Logger;
 
 import com.vaadin.addon.touchkit.ui.EmailField;
-import com.vaadin.addon.touchkit.ui.HorizontalComponentGroup;
+import com.vaadin.addon.touchkit.ui.HorizontalButtonGroup;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.addon.touchkit.ui.NavigationManager;
 import com.vaadin.addon.touchkit.ui.NavigationView;
@@ -187,7 +187,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
         button2.setStyleName(BaseTheme.BUTTON_LINK);
         cssLayout.addComponent(button2);
 
-        HorizontalComponentGroup group = new HorizontalComponentGroup();
+        HorizontalButtonGroup group = new HorizontalButtonGroup();
         testView.setRightComponent(group);
         Component metoo = new Button("T", listener);
         metoo.addStyleName("blue");

@@ -11,7 +11,7 @@ package com.vaadin.addon.touchkit.ui;
  * available space.
  * <p>
  * Due to the styling, {@link VerticalComponentGroup} is by default more
- * flexible than {@link HorizontalComponentGroup} and it can accommodate many
+ * flexible than {@link HorizontalButtonGroup} and it can accommodate many
  * components.
  */
 public class VerticalComponentGroup extends AbstractComponentGroup {

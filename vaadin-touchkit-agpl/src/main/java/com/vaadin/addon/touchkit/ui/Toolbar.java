@@ -9,7 +9,7 @@ import com.vaadin.ui.CssLayout;
 /**
  * A native looking toolbar for showing buttons.
  * <p>
- * Typically {@link Button}s with icons or a {@link HorizontalComponentGroup}
+ * Typically {@link Button}s with icons or a {@link HorizontalButtonGroup}
  * containing Buttons are added to the Toolbar. All components will be rendered
  * as equally sized and centered vertically in the toolbar.
  * <p>

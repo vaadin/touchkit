@@ -3,7 +3,7 @@ package com.vaadin.addon.touchkit.itest.oldtests;
 import java.util.Iterator;
 
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.ui.HorizontalComponentGroup;
+import com.vaadin.addon.touchkit.ui.HorizontalButtonGroup;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.shared.ui.MarginInfo;
@@ -53,7 +53,7 @@ public class ButtonsInComponentGroups extends AbstractTouchKitIntegrationTest {
         verticalComponentGroup = new VerticalComponentGroup();
         verticalComponentGroup.setWidth("100%");
         verticalComponentGroup.setCaption("Horizontal in vertical");
-        HorizontalComponentGroup horizontalGroup = getHorizontalGroup();
+        HorizontalButtonGroup horizontalGroup = getHorizontalGroup();
         horizontalGroup.setCaption("Caption");
         verticalComponentGroup.addComponent(horizontalGroup);
 
@@ -81,7 +81,7 @@ public class ButtonsInComponentGroups extends AbstractTouchKitIntegrationTest {
 
         navigationView.setContent(l);
 
-        HorizontalComponentGroup horizontalComponentGroup = new HorizontalComponentGroup();
+        HorizontalButtonGroup horizontalComponentGroup = new HorizontalButtonGroup();
         horizontalComponentGroup.addComponent(new Button("Up"));
         horizontalComponentGroup.addComponent(new Button("Down"));
         navigationView.setRightComponent(horizontalComponentGroup);
@@ -94,8 +94,8 @@ public class ButtonsInComponentGroups extends AbstractTouchKitIntegrationTest {
 
     }
 
-    private HorizontalComponentGroup getHorizontalGroup() {
-        HorizontalComponentGroup horizontalComponentGroup = new HorizontalComponentGroup();
+    private HorizontalButtonGroup getHorizontalGroup() {
+        HorizontalButtonGroup horizontalComponentGroup = new HorizontalButtonGroup();
         horizontalComponentGroup.addComponent(new Button("First"));
         horizontalComponentGroup.addComponent(new Button("Another"));
 

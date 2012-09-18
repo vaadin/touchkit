@@ -5,19 +5,19 @@ package com.vaadin.addon.touchkit.ui;
  * into a "button group".
  * <p>
  * Relative sizes are relative to the size of the
- * {@link HorizontalComponentGroup}.
+ * {@link HorizontalButtonGroup}.
  * <p>
  */
-public class HorizontalComponentGroup extends AbstractComponentGroup {
+public class HorizontalButtonGroup extends AbstractComponentGroup {
 
     /**
      * Creates a horizontal component group
      */
-    public HorizontalComponentGroup() {
+    public HorizontalButtonGroup() {
         this(null);
     }
 
-    public HorizontalComponentGroup(String caption) {
+    public HorizontalButtonGroup(String caption) {
         super(caption);
         setWidth(null);
     }

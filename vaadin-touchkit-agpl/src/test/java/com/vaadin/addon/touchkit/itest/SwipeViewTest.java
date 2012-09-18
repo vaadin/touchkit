@@ -153,6 +153,7 @@ public class SwipeViewTest extends AbstractTouchKitIntegrationTest {
             for (int i = 0; i < filenames.length; i++) {
                 final String f = filenames[i];
                 ss[i] = new ImageView(f);
+                ss[i].setId("l" + i);
             }
             ss[ss.length - 1] = new SwipeViewWithTabsheet();
 

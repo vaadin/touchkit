@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.Locale;
 
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.ui.HorizontalComponentGroup;
+import com.vaadin.addon.touchkit.ui.HorizontalButtonGroup;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.addon.touchkit.ui.NumberField;
 import com.vaadin.addon.touchkit.ui.Switch;
@@ -60,7 +60,7 @@ public class VerticalComponentGroupTest extends AbstractTouchKitIntegrationTest 
         verticalComponentGroup = new VerticalComponentGroup();
         verticalComponentGroup.setCaption("Horizontal in vertical");
 
-        HorizontalComponentGroup horizontalGroup = getHorizontalGroup();
+        HorizontalButtonGroup horizontalGroup = getHorizontalGroup();
         verticalComponentGroup.addComponent(horizontalGroup);
 
         horizontalGroup = getHorizontalGroup();
@@ -96,8 +96,8 @@ public class VerticalComponentGroupTest extends AbstractTouchKitIntegrationTest 
         return languageSelect;
     }
 
-    private HorizontalComponentGroup getHorizontalGroup() {
-        HorizontalComponentGroup horizontalComponentGroup = new HorizontalComponentGroup();
+    private HorizontalButtonGroup getHorizontalGroup() {
+        HorizontalButtonGroup horizontalComponentGroup = new HorizontalButtonGroup();
         horizontalComponentGroup.addComponent(new Button("First"));
         horizontalComponentGroup.addComponent(new Button("Another"));
 

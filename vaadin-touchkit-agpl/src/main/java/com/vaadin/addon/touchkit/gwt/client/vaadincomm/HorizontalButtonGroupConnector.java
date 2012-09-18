@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Widget;
-import com.vaadin.addon.touchkit.gwt.client.HorizontalComponentGroupWidget;
-import com.vaadin.addon.touchkit.ui.HorizontalComponentGroup;
+import com.vaadin.addon.touchkit.gwt.client.HorizontalButtonGroupWidget;
+import com.vaadin.addon.touchkit.ui.HorizontalButtonGroup;
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.ConnectorHierarchyChangeEvent;
 import com.vaadin.client.communication.StateChangeEvent;
@@ -13,11 +13,11 @@ import com.vaadin.client.ui.AbstractComponentContainerConnector;
 import com.vaadin.shared.communication.URLReference;
 import com.vaadin.shared.ui.Connect;
 
-@Connect(HorizontalComponentGroup.class)
-public class HorizontalComponentGroupConnector extends
+@Connect(HorizontalButtonGroup.class)
+public class HorizontalButtonGroupConnector extends
         AbstractComponentContainerConnector {
 
-    private HorizontalComponentGroupWidget theWidget;
+    private HorizontalButtonGroupWidget theWidget;
 
     @Override
     public AbstractComponentGroupState getState() {
@@ -35,7 +35,7 @@ public class HorizontalComponentGroupConnector extends
     @Override
     public void onConnectorHierarchyChange(ConnectorHierarchyChangeEvent event) {
         List<ComponentConnector> children = getChildComponents();
-        HorizontalComponentGroupWidget widget = (HorizontalComponentGroupWidget) getWidget();
+        HorizontalButtonGroupWidget widget = (HorizontalButtonGroupWidget) getWidget();
         widget.clear();
         for (ComponentConnector connector : children) {
             // FIXME
@@ -47,7 +47,7 @@ public class HorizontalComponentGroupConnector extends
                 url = urlRef.getURL();
             }
 
-            ((HorizontalComponentGroupWidget) getWidget()).add(connector
+            ((HorizontalButtonGroupWidget) getWidget()).add(connector
                     .getWidget());
         }
         super.onConnectorHierarchyChange(event);
@@ -55,7 +55,7 @@ public class HorizontalComponentGroupConnector extends
 
     @Override
     protected Widget createWidget() {
-        theWidget = GWT.create(HorizontalComponentGroupWidget.class);
+        theWidget = GWT.create(HorizontalButtonGroupWidget.class);
         return theWidget;
     }
 
