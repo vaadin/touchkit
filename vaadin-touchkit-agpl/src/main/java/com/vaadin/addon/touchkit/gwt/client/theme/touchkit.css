@@ -1985,7 +1985,8 @@ span.v-datefield-calendarpanel-month {
 .v-touchkit-componentgroup-table {
 	display: table;
 	width: 100%;
-	table-layout:fixed;
+    /* crashes iOS6??:
+    table-layout:fixed; */
 }
 .v-touchkit-componentgroup-cell-caption {
 	display: table-cell;
