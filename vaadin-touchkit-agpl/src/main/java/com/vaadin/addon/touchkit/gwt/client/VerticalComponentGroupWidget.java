@@ -1,62 +1,193 @@
 package com.vaadin.addon.touchkit.gwt.client;
 
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.SimplePanel;
-import com.google.gwt.user.client.ui.UIObject;
-import com.google.gwt.user.client.ui.Widget;
-import com.vaadin.addon.touchkit.gwt.client.navigation.VNavigationButton;
-import com.vaadin.client.StyleConstants;
-import com.vaadin.client.ui.button.VButton;
-import com.vaadin.client.ui.link.VLink;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class VerticalComponentGroupWidget extends FlowPanel {
+import com.google.gwt.dom.client.DivElement;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.ImageElement;
+import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.ui.ComplexPanel;
+import com.google.gwt.user.client.ui.Widget;
+
+public class VerticalComponentGroupWidget extends ComplexPanel {
 
     public static final String TAGNAME = "verticalcomponentgroup";
     private static final String CLASSNAME = "v-touchkit-" + TAGNAME;
     public static final String CAPTION_CLASSNAME = "v-caption";
+    public static final String ROW_WITH_CAPTION_STYLENAME =
+    		"v-touchkit-componentgroup-rowcap";
+    
+    protected List<Widget> widgets = new ArrayList<Widget>();
+    
+    protected Map<Widget,DivElement> widgetElements =
+    		new HashMap<Widget,DivElement>();
+    protected Map<Widget,ImageElement> iconElements =
+    		new HashMap<Widget,ImageElement>();
+    protected Map<Widget,DivElement> captionElements =
+    		new HashMap<Widget,DivElement>();
+    protected Map<Widget,DivElement> wrapperElements =
+    		new HashMap<Widget,DivElement>();
 
     public VerticalComponentGroupWidget() {
-    	
+    	setElement(Document.get().createDivElement());
     	setStyleName(CLASSNAME);
+    }
+    
+    public void setCaption(final Widget widget, String caption) {
+    	if (!widgets.contains(widget)) {
+    		return;
+    	}
+    	
+    	DivElement captionElement = captionElements.get(widget);
+    	
+    	if (caption != null && !caption.isEmpty()) {
+    		
+        	DivElement widgetElement = widgetElements.get(widget);
+    		
+    		if (captionElement == null) {
+        		captionElement = Document.get().createDivElement();
+                captionElement.addClassName(CAPTION_CLASSNAME);
+                captionElements.put(widget, captionElement);
+                if (iconElements.containsKey(widget)) {
+                    widgetElement.insertAfter(captionElement,
+                    		iconElements.get(widget));	
+                } else {
+                	widgetElement.insertFirst(captionElement);
+                }
+    		}
+    		
+    		captionElement.setInnerText(caption);
+    		widgetElement.addClassName(ROW_WITH_CAPTION_STYLENAME);
+    		wrapperElements.get(widget).removeClassName(
+    				"v-touchkit-componentgroup-cell-fullwrapper");
+    		captionElement.setInnerText(caption);
+    	} else if ((caption == null || caption.isEmpty()) && captionElement != null) {
+    		captionElement.removeFromParent();
+    		captionElements.remove(widget);
+    		widgetElements.get(widget).removeClassName(
+    				ROW_WITH_CAPTION_STYLENAME);
+    		wrapperElements.get(widget).addClassName(
+    				"v-touchkit-componentgroup-cell-fullwrapper");
+    	}
+    }
+    
+    public void setIcon(final Widget widget, String iconUrl) {
+    	if (!widgets.contains(widget)) {
+    		return;
+    	}
+    	
+    	ImageElement iconElement = iconElements.get(widget);
+    	
+    	if (iconUrl == null || iconUrl.isEmpty()) {
+    		if (iconElement == null) {
+    			iconElement = Document.get().createImageElement();
+    			iconElement.setClassName(IconWidget.CLASSNAME);
+    			widgetElements.get(widget).insertFirst(iconElement);
+    		}
+    		iconElement.setSrc(iconUrl);
+    		iconElement.setAlt("");
+    		
+    	} else if (iconElement != null) {
+    		iconElement.removeFromParent();
+    		iconElements.remove(widget);
+    	}
+    }
+    
+    /**
+     * Add or move widget to given position
+     * @param widget
+     * @param index
+     */
+    public void addOrMove (final Widget widget, int index) {
+    	if (widgets.contains(widget)) {
+    		if (widgets.indexOf(widget) == index) {
+    			return;
+    		} else {
+	    		DivElement element = widgetElements.get(widget);
+	    		getElement().removeChild(element);
+	    		if (index < 0 || index + 1 >= widgets.size()) {
+	    			getElement().appendChild(element);
+	    		} else {
+	    			getElement().insertBefore(element, 
+	    				widgetElements.get(widgets.get(index)));
+	    		}
+    		}
+    	} else {
+    		addWidget (widget, index);
+    	}
+    }
+    
+    /**
+     * Add widget to given position
+     * @param widget
+     * @param index
+     */
+    public void addWidget (final Widget widget, int index) {
+    	if (widgets.contains(widget)) {
+    		return;
+    	}
+    	
+    	DivElement div = Document.get().createDivElement();   	
+    	div.addClassName("v-touchkit-componentgroup-row");    	
+    	if (index < 0 || index >= widgets.size()) {
+    		getElement().appendChild(div);
+    	} else {
+    		getElement().insertBefore(div,
+    				widgetElements.get(widgets.get(index)));
+    	}
+    	widgets.add(widget);
+    	widgetElements.put(widget, div);
+    	
+    	DivElement wrapper = Document.get().createDivElement();
+    	wrapper.addClassName("v-touchkit-componentgroup-cell-wrapper");
+    	wrapperElements.put(widget, wrapper);
+    	div.appendChild(wrapper);
+    	
+    	add(widget, (Element)Element.as(wrapper));
     }
 
     /**
-     * Adds Widget with icon url and caption text
+     * Adds Widget to group
      * 
      * @param widget
-     * @param icon
-     * @param caption
      */
-    public void add(final Widget widget, final String iconUrl,
-            final String captionText, String widgetWidth) {
-        if (iconUrl != null
-                && !iconUrl.isEmpty()
-                && !(widget instanceof VButton || widget instanceof VNavigationButton)) {
-            IconWidget newIcon = new IconWidget(iconUrl);
-            getElement().insertFirst(newIcon.getElement());
-        }
-
-        FlowPanel row = new FlowPanel();
-        SimplePanel widgetWrapper = new SimplePanel();
-
-        row.addStyleName("v-touchkit-componentgroup-row");
-        widgetWrapper
-                .addStyleName("v-touchkit-componentgroup-cell-wrapper");
-
-        if (captionText == null || captionText.isEmpty()) {
-        	widgetWrapper.addStyleName("v-touchkit-componentgroup-cell-fullwrapper");
-        } else {
-        	row.addStyleName("v-touchkit-componentgroup-rowcap");
-            HTML caption = new HTML(captionText);
-            caption.setStyleName(CAPTION_CLASSNAME);
-            caption.addStyleName("v-touchkit-componentgroup-cell-caption");
-            row.add(caption);
-        }
-
-        widgetWrapper.add(widget);
-
-        row.add(widgetWrapper);
-        add(row);
+    public void add(final Widget widget) {
+    	addWidget(widget, -1);
     }
+    
+    public boolean remove(Widget widget) {   
+    	if (!widgets.contains(widget)) {
+    		return false;
+    	}
+    	
+    	boolean ret = super.remove(widget);
+    	
+    	if (ret) {
+    		setIcon (widget, null);
+    		setCaption (widget, null);
+    		
+    		DivElement wrapper = wrapperElements.get(widget);
+    		wrapper.removeFromParent();
+	    	wrapperElements.remove(widget);
+	    	
+	    	DivElement element = widgetElements.get(widget);
+	    	element.removeFromParent();
+	    	widgetElements.remove(widget);
+	    	
+	    	widgets.remove(widget);
+    	}
+    	
+    	return ret;
+    }
+    
+    @Override
+    public void clear() {
+    	for (Widget child : widgets) {
+    		remove(child);
+    	}
+    }
+    
 }

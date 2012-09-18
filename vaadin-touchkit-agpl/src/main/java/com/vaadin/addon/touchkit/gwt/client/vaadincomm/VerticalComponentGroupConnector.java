@@ -17,8 +17,6 @@ import com.vaadin.shared.ui.Connect;
 public class VerticalComponentGroupConnector extends
         AbstractComponentContainerConnector {
 
-    private VerticalComponentGroupWidget theWidget;
-
     @Override
     public AbstractComponentGroupState getState() {
         return (AbstractComponentGroupState) super.getState();
@@ -32,35 +30,34 @@ public class VerticalComponentGroupConnector extends
     @Override
     public void onConnectorHierarchyChange(ConnectorHierarchyChangeEvent event) {
         List<ComponentConnector> children = getChildComponents();
-        VerticalComponentGroupWidget widget = (VerticalComponentGroupWidget) getWidget();
-        widget.clear();
-        for (ComponentConnector connector : children) {
-            // FIXME
-            //URLReference urlRef = connector.getState().getIcon();
-            URLReference urlRef = null;
-            String caption = null;
-            if (connector.delegateCaptionHandling()) {
-            	caption = connector.getState().caption;
-            }
-            String width = connector.getState().width;
-            String url = "";
-            if (urlRef != null) {
-                url = urlRef.getURL();
-            }
-
-            ((VerticalComponentGroupWidget) getWidget()).add(
-                    connector.getWidget(), url, caption, width);
+        
+        getWidget().clear();
+        
+        for (int i = 0; i < children.size(); ++i) {
+        	ComponentConnector connector = children.get(i);
+        	Widget widget = connector.getWidget();
+        	getWidget().addOrMove(widget, i);
+        	getWidget().setCaption(widget, connector.getState().caption);
+        	//FIXME
+        	//getWidget().setIcon(widget, connector.getState().icon);
         }
+        
         super.onConnectorHierarchyChange(event);
     }
 
     @Override
-    protected Widget createWidget() {
-        theWidget = GWT.create(VerticalComponentGroupWidget.class);
-        return theWidget;
+    protected VerticalComponentGroupWidget createWidget() {
+        return GWT.create(VerticalComponentGroupWidget.class);
+    }
+    
+    @Override
+    public VerticalComponentGroupWidget getWidget() {
+    	return (VerticalComponentGroupWidget)super.getWidget();
     }
 
     @Override
     public void updateCaption(ComponentConnector connector) {
+    	getWidget().setCaption(connector.getWidget(),
+    			connector.getState().caption);
     }
 }
