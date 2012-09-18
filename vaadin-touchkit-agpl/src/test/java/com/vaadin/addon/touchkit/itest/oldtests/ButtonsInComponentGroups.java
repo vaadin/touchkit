@@ -8,9 +8,9 @@ import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
-import com.vaadin.ui.VerticalLayout;
 
 public class ButtonsInComponentGroups extends AbstractTouchKitIntegrationTest {
 
@@ -18,8 +18,7 @@ public class ButtonsInComponentGroups extends AbstractTouchKitIntegrationTest {
         NavigationView navigationView = new NavigationView();
         navigationView.setCaption("Buttons in various places");
 
-        VerticalLayout l = new VerticalLayout();
-        l.setMargin(true);
+        CssLayout l = new CssLayout();
 
         Button button = new Button("Button not in a component group");
         button.setWidth("100%");

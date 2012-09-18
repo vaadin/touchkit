@@ -1736,12 +1736,6 @@ span.v-datefield-calendarpanel-month {
 
 /** Component group stylings must be as last as they override default styles */
 
-.v-touchkit-verticalcomponentgroup-wrapper {
-    padding: listLayoutMargin;
-    width: 100%;
-    box-sizing: border-box;
-}
-
 .v-touchkit-verticalcomponentgroup {
 	display: block;
 	position: relative;
@@ -1865,10 +1859,29 @@ span.v-datefield-calendarpanel-month {
 	display: none;
 }
 
-.v-touchkit-verticalcomponentgroup .v-formlayout-captioncell {
+
+/* Strets forms inside componeng groups so that its separator lines end at correct places */
+.v-touchkit-componentgroup-cell-wrapper .v-formlayout {
+	margin: 0 negativeListLayoutMargin;
+	width: auto !important;
+	display:block; /* ~ 100% width inline-block */
+}
+
+.v-form>fieldset>div:last-child>.v-layout {
+	display:block; /* V7 has inlineblock by default, causes odd extra space although empty footer */
+}
+
+.v-touchkit-verticalcomponentgroup .v-formlayout-row .v-formlayout-captioncell, 
+.v-touchkit-verticalcomponentgroup .v-formlayout-row .v-formlayout-contentcell, 
+.v-touchkit-verticalcomponentgroup .v-formlayout-row .v-formlayout-errorcell {
+	padding:0;
+}
+
+.v-touchkit-verticalcomponentgroup .v-formlayout-row .v-formlayout-captioncell {
 	padding-left: listLayoutMargin;
 	text-align: left;
 }
+
 
 .v-formlayout-captioncell > .v-caption {
 	font-weight: bold;
@@ -1885,14 +1898,13 @@ span.v-datefield-calendarpanel-month {
 }
 
 .v-label-grey-title, 
-.v-caption-v-touchkit-verticalcomponentgroup .v-captiontext
+.v-layout > .v-caption>div
 {
 	font-size: 16px;
 	font-weight: bold;
 	color: #44698b;
 	text-shadow: 0 1px 0 rgba(255,255,255,.7);
-	margin: listLayoutMargin listLayoutMargin 0;
-	text-indent: listLayoutMargin;
+	margin: listLayoutMargin;
 }
 
 .v-touchkit-componentgroup-row {
@@ -1952,3 +1964,19 @@ span.v-datefield-calendarpanel-month {
 .v-vertical.v-margin-top, .v-horizontal.v-margin-top {
 	padding-top: listLayoutMargin;
 }
+
+/* Csslayout directly under navigationview, tabbarview or similar has margin by default */
+.v-touchkit-navview-wrapper>.v-csslayout,
+.v-touchkit-tabbar-wrapper>.v-csslayout,
+.v-touchkit-swipeview>.v-csslayout {
+	padding: listLayoutMargin;
+}
+
+/* ComponentGroup directly under navigationview or tabbarview has margin by default */
+.v-touchkit-navview-wrapper>.v-touchkit-verticalcomponentgroup,
+.v-touchkit-tabbar-wrapper>.v-touchkit-verticalcomponentgroup,
+.v-touchkit-swipeview>.v-touchkit-verticalcomponentgroup {
+	margin: listLayoutMargin;
+	width:auto;
+}
+

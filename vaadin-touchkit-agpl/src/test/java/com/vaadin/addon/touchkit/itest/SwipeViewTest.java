@@ -22,6 +22,7 @@ import com.vaadin.server.WrappedRequest;
 import com.vaadin.server.WrappedResponse;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Embedded;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.Label;
@@ -155,13 +156,14 @@ public class SwipeViewTest extends AbstractTouchKitIntegrationTest {
                 ss[i] = new ImageView(f);
                 ss[i].setId("l" + i);
             }
-            ss[ss.length - 1] = new SwipeViewWithTabsheet();
+            ss[ss.length - 1] = new SwipeViewWithNormalContent();
 
             return ss;
         }
 
-        class SwipeViewWithTabsheet extends SwipeView {
-            public SwipeViewWithTabsheet() {
+        class SwipeViewWithNormalContent extends SwipeView {
+            public SwipeViewWithNormalContent() {
+                CssLayout cssLayout = new CssLayout();
                 Form form = new Form();
 
                 CheckBox cb = new CheckBox();
@@ -196,7 +198,7 @@ public class SwipeViewTest extends AbstractTouchKitIntegrationTest {
                 VerticalComponentGroup fg = new VerticalComponentGroup();
                 fg.setCaption("Form");
                 fg.addComponent(form);
-                addComponent(fg);
+                cssLayout.addComponent(fg);
 
                 VerticalComponentGroup verticalComponentGroup = new VerticalComponentGroup();
                 verticalComponentGroup
@@ -207,7 +209,9 @@ public class SwipeViewTest extends AbstractTouchKitIntegrationTest {
                             .addComponent(new Label("Label " + i));
                 }
 
-                addComponent(verticalComponentGroup);
+                cssLayout.addComponent(verticalComponentGroup);
+                
+                addComponent(cssLayout);
 
             }
         }
