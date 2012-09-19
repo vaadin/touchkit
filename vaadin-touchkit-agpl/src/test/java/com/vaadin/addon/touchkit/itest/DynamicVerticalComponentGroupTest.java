@@ -10,27 +10,54 @@ import com.vaadin.ui.Label;
 @SuppressWarnings("serial")
 public class DynamicVerticalComponentGroupTest extends AbstractTouchKitIntegrationTest {
 	
+	final VerticalComponentGroup group = new VerticalComponentGroup();
+	int counter = 0;
+	
 	public DynamicVerticalComponentGroupTest() {
 		setDescription("This is dynamic VerticalComponentGroup test");
 		
-		Label hello = new Label("Hello World");
-		addComponent(hello);
+		CssLayout buttonLayout = new CssLayout();
+		addComponent(buttonLayout);
 		
-		final VerticalComponentGroup group = new VerticalComponentGroup();
+		Button addToTop = new Button("AddToTop");
+		addToTop.setImmediate(true);
+		buttonLayout.addComponent(addToTop);
+		addToTop.addClickListener(new Button.ClickListener() {
+			
+			@Override
+			public void buttonClick(ClickEvent event) {
+				group.addComponent(new Label("First generated " + (++counter)),
+						0);
+			}
+		});
+		
+		Button addToSecond = new Button("AddToSecond");
+		addToSecond.setImmediate(true);
+		buttonLayout.addComponent(addToSecond);
+		addToSecond.addClickListener(new Button.ClickListener() {
+			
+			@Override
+			public void buttonClick(ClickEvent event) {
+				group.addComponent(new Label("Second generated " + (++counter)),
+						1);
+			}
+		});
+		
 		group.setWidth("100%");
 		
 		for (int i = 0; i < 3; ++i) {
 			final CssLayout layout = new CssLayout();
+			layout.setData(new Integer(++counter));
 			layout.setWidth("100%");
 			final Button hideCaption = new Button("Show caption");
-			hideCaption.setWidth("100%");
+			hideCaption.setWidth("30%");
 			layout.addComponent(hideCaption);
 			hideCaption.addClickListener(new Button.ClickListener() {
 				
 				@Override
 				public void buttonClick(ClickEvent event) {
 					if (layout.getCaption() == null || layout.getCaption().isEmpty()) {
-						layout.setCaption("Caption");
+						layout.setCaption("Caption #" + layout.getData().toString());
 						hideCaption.setCaption("Hide caption");
 					} else {
 						layout.setCaption(null);
@@ -39,6 +66,31 @@ public class DynamicVerticalComponentGroupTest extends AbstractTouchKitIntegrati
 					
 				}
 			});
+			
+			Button remove = new Button("Remove");
+			remove.setWidth("30%");
+			layout.addComponent(remove);
+			remove.addClickListener(new Button.ClickListener() {
+				
+				@Override
+				public void buttonClick(ClickEvent event) {
+					group.removeComponent(layout);	
+				}
+			});
+			
+			Button first = new Button("First");
+			first.setWidth("30%");
+			layout.addComponent(first);
+			first.addClickListener(new Button.ClickListener() {
+				
+				@Override
+				public void buttonClick(ClickEvent event) {
+					group.addComponent(layout, 0);	
+				}
+			});
+			
+			
+			
 			group.addComponent(layout);
 		}
 		

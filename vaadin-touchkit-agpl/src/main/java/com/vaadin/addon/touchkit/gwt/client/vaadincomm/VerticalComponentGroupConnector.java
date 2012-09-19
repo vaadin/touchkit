@@ -10,16 +10,18 @@ import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.ConnectorHierarchyChangeEvent;
 import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.AbstractComponentContainerConnector;
+import com.vaadin.client.ui.AbstractLayoutConnector;
 import com.vaadin.shared.communication.URLReference;
 import com.vaadin.shared.ui.Connect;
 
+@SuppressWarnings("serial")
 @Connect(VerticalComponentGroup.class)
 public class VerticalComponentGroupConnector extends
-        AbstractComponentContainerConnector {
+        AbstractLayoutConnector {
 
     @Override
-    public AbstractComponentGroupState getState() {
-        return (AbstractComponentGroupState) super.getState();
+    public VerticalComponentGroupState getState() {
+        return (VerticalComponentGroupState) super.getState();
     }
 
     @Override
@@ -29,9 +31,14 @@ public class VerticalComponentGroupConnector extends
 
     @Override
     public void onConnectorHierarchyChange(ConnectorHierarchyChangeEvent event) {
-        List<ComponentConnector> children = getChildComponents();
         
-        getWidget().clear();
+        for (ComponentConnector oldChild : event.getOldChildren()) {
+        	if (oldChild.getParent() != this) {
+        		getWidget().remove(oldChild.getWidget());
+        	}
+        }
+        
+        List<ComponentConnector> children = getChildComponents();
         
         for (int i = 0; i < children.size(); ++i) {
         	ComponentConnector connector = children.get(i);
