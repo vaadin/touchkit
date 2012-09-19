@@ -1911,35 +1911,56 @@ span.v-datefield-calendarpanel-month {
 	width: 100%;
 	display: -webkit-box;
 }
-.v-touchkit-componentgroup-rowcap {
+.v-touchkit-componentgroup-row-cap {
     -webkit-box-align: center;
     min-height: 42px;
 }
 
 .v-touchkit-componentgroup-row > .v-caption {
-	-webkit-box-flex: 0;
 	font-size: 17px;
 	font-weight: bold;
 	padding-right: 5px;
-	width: 30%;
 	box-sizing: border-box;
 	white-space: nowrap;
     overflow-x: hidden;
     text-overflow: ellipsis;
 }
 
-.v-touchkit-componentgroup-cell-wrapper {
-	-webkit-box-flex: 1;	
+.v-touchkit-componentgroup-row-nocap > .v-caption {
+	display: none;
+	-webkit-box-flex: 0;
 }
 
-.v-touchkit-componentgroup-rowcap .v-touchkit-componentgroup-cell-wrapper > * {
+.v-touchkit-componentgroup-row-nocap > .v-touchkit-componentgroup-cell {
+    -webkit-box-flex: 1;
+    width: 100%;
+    padding-left: 0px;
+}
+
+.v-touchkit-componentgroup-row-cap > .v-caption {
+	-webkit-box-flex: 1;
+}
+
+.v-touchkit-componentgroup-row-cap > .v-touchkit-componentgroup-cell {
+    -webkit-box-flex: 0;
+}
+
+.v-touchkit-componentgroup-row-cap > .v-touchkit-componentgroup-cell > * {
 	float: right;
 }
 
-.v-touchkit-componentgroup-cell-fullwrapper {
-	-webkit-box-flex: 0;
-    width: 100%;
-    padding-left: 0px;
+.v-touchkit-componentgroup-row-full > .v-caption {
+    -webkit-box-flex: 1;
+    width: 35%;
+}
+
+.v-touchkit-componentgroup-row-full > .v-touchkit-componentgroup-cell {
+    -webkit-box-flex: 1;
+    width: 75%;
+}
+
+.v-touchkit-componentgroup-row-full > .v-touchkit-componentgroup-cell > * {
+	float: none;
 }
 
 .v-touchkit-verticalcomponentgroup .v-select-optiongroup,

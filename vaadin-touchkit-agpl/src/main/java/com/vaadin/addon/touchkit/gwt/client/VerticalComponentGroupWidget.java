@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ImageElement;
@@ -16,9 +18,16 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
 
     public static final String TAGNAME = "verticalcomponentgroup";
     private static final String CLASSNAME = "v-touchkit-" + TAGNAME;
+    private static final String SHORT_CLASSNAME = "v-touchkit-componentgroup";
     public static final String CAPTION_CLASSNAME = "v-caption";
-    public static final String ROW_WITH_CAPTION_STYLENAME =
-    		"v-touchkit-componentgroup-rowcap";
+    public static final String ROW_CLASSNAME = SHORT_CLASSNAME + "-row";
+    public static final String ROW_WITH_CAPTION_STYLENAME = ROW_CLASSNAME
+    		+ "-cap";
+    public static final String ROW_WITHOUT_CAPTION_STYLENAME = ROW_CLASSNAME
+    		+ "-nocap";
+    public static final String ROW_WITH_FULLSIZE_WIDGET_STYLENAME =
+    		ROW_CLASSNAME + "-full";
+    public static final String CELL_CLASSNAME = SHORT_CLASSNAME + "-cell";
     
     protected List<Widget> widgets = new ArrayList<Widget>();
     
@@ -42,10 +51,9 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
     	}
     	
     	DivElement captionElement = captionElements.get(widget);
+    	DivElement widgetElement = widgetElements.get(widget);
     	
     	if (caption != null && !caption.isEmpty()) {
-    		
-        	DivElement widgetElement = widgetElements.get(widget);
     		
     		if (captionElement == null) {
         		captionElement = Document.get().createDivElement();
@@ -60,18 +68,22 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
     		}
     		
     		captionElement.setInnerText(caption);
+    		widgetElement.removeClassName(ROW_WITHOUT_CAPTION_STYLENAME);
     		widgetElement.addClassName(ROW_WITH_CAPTION_STYLENAME);
-    		wrapperElements.get(widget).removeClassName(
-    				"v-touchkit-componentgroup-cell-fullwrapper");
     		captionElement.setInnerText(caption);
-    	} else if ((caption == null || caption.isEmpty()) && captionElement != null) {
+    	} else if ((caption == null || caption.isEmpty()) 
+    			&& captionElement != null) {
+    		
     		captionElement.removeFromParent();
     		captionElements.remove(widget);
-    		widgetElements.get(widget).removeClassName(
-    				ROW_WITH_CAPTION_STYLENAME);
-    		wrapperElements.get(widget).addClassName(
-    				"v-touchkit-componentgroup-cell-fullwrapper");
+    		
+    		widgetElement.removeClassName(ROW_WITH_CAPTION_STYLENAME);
+    		widgetElement.addClassName(ROW_WITHOUT_CAPTION_STYLENAME);
+    	} else {
+    		widgetElement.addClassName(ROW_WITHOUT_CAPTION_STYLENAME);
     	}
+    	
+    	checkWidgetWidth(widget);
     }
     
     public void setIcon(final Widget widget, String iconUrl) {
@@ -125,7 +137,7 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
     	}
     	
     	DivElement div = Document.get().createDivElement();   	
-    	div.addClassName("v-touchkit-componentgroup-row");   
+    	div.addClassName(ROW_CLASSNAME);   
     	
     	if (index < 0 || index >= widgets.size()) {
     		getElement().appendChild(div);
@@ -138,11 +150,12 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
     	widgetElements.put(widget, div);
     	
     	DivElement wrapper = Document.get().createDivElement();
-    	wrapper.addClassName("v-touchkit-componentgroup-cell-wrapper");
+    	wrapper.addClassName(CELL_CLASSNAME);
     	wrapperElements.put(widget, wrapper);
     	div.appendChild(wrapper);
     	
     	add(widget, (Element)Element.as(wrapper));
+    	checkWidgetWidth(widget);
     }
 
     /**
@@ -184,6 +197,34 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
     	for (Widget child : widgets) {
     		remove(child);
     	}
+    }
+    
+    public void checkWidgetWidth(final Widget widget) {
+    	
+    	Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+
+			@Override
+			public void execute() {
+		    	DivElement widgetElement = widgetElements.get(widget);
+		    	
+		    	if (widgetElement == null) {
+		    		return;
+		    	}
+		    	
+		    	if (!captionElements.containsKey(widget)) {
+		    		widgetElement.removeClassName(
+		    				ROW_WITH_FULLSIZE_WIDGET_STYLENAME);
+		    	} else if ("100%".equals(widget.getElement().getStyle().getWidth())) {
+		    		widgetElement.addClassName(
+		    				ROW_WITH_FULLSIZE_WIDGET_STYLENAME);
+		    	} else {
+		    		widgetElement.removeClassName(
+		    				ROW_WITH_FULLSIZE_WIDGET_STYLENAME);	
+		    	}
+			}
+    		
+    	});
+				
     }
     
 }
