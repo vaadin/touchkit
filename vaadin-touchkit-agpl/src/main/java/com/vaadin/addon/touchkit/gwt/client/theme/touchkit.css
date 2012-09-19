@@ -523,7 +523,7 @@
 
 .v-touchkit-toolbar .v-button .v-icon {
 	height: 25px;
-	margin-top: 7px;
+	margin-top: 10px;
 	}
 
 
@@ -1979,4 +1979,10 @@ span.v-datefield-calendarpanel-month {
 	margin: listLayoutMargin;
 	width:auto;
 }
+
+
+/* This gludge is ONLY for testbench testing in Windows machine where there will most likely be scrollbars */
+/*.v-scrollable {
+	overflow: hidden !important;	
+}*/
 
