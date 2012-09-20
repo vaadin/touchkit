@@ -27,10 +27,10 @@
 
 	<!-- Use annotation based widget loading strategy instead of the eager method. 
 		Makes initial loading time smaller on a slow network -->
-<!-- 	<generate-with -->
-<!-- 		class="com.vaadin.addon.touchkit.gwt.TouchKitWidgetMapGenerator"> -->
-<!-- 		<when-type-is class="com.vaadin.terminal.gwt.client.WidgetMap" /> -->
-<!-- 	</generate-with> -->
+ 	<generate-with
+           class="com.vaadin.addon.touchkit.gwt.TouchKitWidgetMapGenerator">
+ 		<when-type-is class="com.vaadin.terminal.gwt.client.WidgetMap" />
+ 	</generate-with>
 
 	<!-- Load css etc eagerly to avoid calc errors -->
 	<entry-point
