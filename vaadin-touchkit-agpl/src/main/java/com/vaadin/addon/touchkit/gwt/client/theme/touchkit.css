@@ -632,6 +632,7 @@
 	text-shadow: 0 1px 1px #396897;
 }
 
+.v-touchkit-componentgroup-row>.v-icon,
 .v-touchkit-navbutton .v-icon {
 	height: 30px;
 	margin: 0 6px 0 -3px;
@@ -1861,12 +1862,14 @@ span.v-datefield-calendarpanel-month {
 
 
 /* Strets forms inside componeng groups so that its separator lines end at correct places */
-.v-touchkit-componentgroup-cell-wrapper .v-formlayout {
+.v-touchkit-componentgroup-cell>.v-formlayout {
 	margin: 0 negativeListLayoutMargin;
 	width: auto !important;
 	display:block; /* ~ 100% width inline-block */
 }
-
+.v-touchkit-componentgroup-cell>.v-formlayout>table {
+	padding-right: listLayoutMargin;
+}
 .v-form>fieldset>div:last-child>.v-layout {
 	display:block; /* V7 has inlineblock by default, causes odd extra space although empty footer */
 }
