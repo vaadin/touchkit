@@ -18,13 +18,13 @@ public class SwitchTest extends AbstractTouchKitIntegrationTest {
         // Label to display the value of the Switch.
         final Label statusLabel = new Label(Boolean.toString(initialState));
         statusLabel.setCaption("Current Switch value:");
-        statusLabel.setDebugId("statusLabel");
+        statusLabel.setId("statusLabel");
 
         // Normal Switch that can be toggled.
         final Switch switchComponent = new Switch("Switch", initialState);
-        switchComponent.setDebugId("switchComponent");
+        switchComponent.setId("switchComponent");
         switchComponent.setImmediate(true);
-        switchComponent.addListener(new ValueChangeListener() {
+        switchComponent.addValueChangeListener(new ValueChangeListener() {
 
             @Override
             public void valueChange(ValueChangeEvent event) {
@@ -44,7 +44,7 @@ public class SwitchTest extends AbstractTouchKitIntegrationTest {
                         switchComponent.setValue(!switchComponent.getValue());
                     }
                 });
-        toggleButton.setDebugId("toggleButton");
+        toggleButton.setId("toggleButton");
 
         addComponent(switchComponent);
         addComponent(disabledSwitch);

@@ -18,7 +18,7 @@ public class ToolbarTest extends AbstractTouchKitIntegrationTest {
             Button button = new Button();
             button.setIcon(new ThemeResource("../runo/icons/32/folder.png"));
             final int identifier = loop;
-            button.addListener(new Button.ClickListener() {
+            button.addClickListener(new Button.ClickListener() {
 
                 @Override
                 public void buttonClick(ClickEvent event) {

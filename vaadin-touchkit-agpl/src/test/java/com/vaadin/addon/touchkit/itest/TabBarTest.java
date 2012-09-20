@@ -22,7 +22,7 @@ public class TabBarTest extends AbstractTouchKitIntegrationTest {
         Button removeTab = new Button("Remove selected tab");
         Button setSelected = new Button("Set selected");
 
-        removeTab.addListener(new Button.ClickListener() {
+        removeTab.addClickListener(new Button.ClickListener() {
 
             @Override
             public void buttonClick(ClickEvent event) {
@@ -31,7 +31,7 @@ public class TabBarTest extends AbstractTouchKitIntegrationTest {
             }
         });
 
-        setSelected.addListener(new Button.ClickListener() {
+        setSelected.addClickListener(new Button.ClickListener() {
 
             @Override
             public void buttonClick(ClickEvent event) {

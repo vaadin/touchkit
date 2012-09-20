@@ -14,7 +14,7 @@ public class NumberFieldTest extends AbstractTouchKitIntegrationTest {
 
         final NumberField nf = new NumberField("NumberField");
         nf.setImmediate(true);
-        nf.addListener(new TextChangeListener() {
+        nf.addTextChangeListener(new TextChangeListener() {
             public void textChange(TextChangeEvent event) {
                 Notification.show("New numberfield value: " + event.getText());
             }
@@ -22,7 +22,7 @@ public class NumberFieldTest extends AbstractTouchKitIntegrationTest {
 
         final TextField tf = new TextField("TextField");
         tf.setImmediate(true);
-        tf.addListener(new TextChangeListener() {
+        tf.addTextChangeListener(new TextChangeListener() {
             public void textChange(TextChangeEvent event) {
                 nf.setValue(event.getText());
             }

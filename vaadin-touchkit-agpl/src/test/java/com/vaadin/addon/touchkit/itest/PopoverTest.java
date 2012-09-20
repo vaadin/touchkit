@@ -13,7 +13,7 @@ public class PopoverTest extends AbstractTouchKitIntegrationTest {
         setDescription("Popover test");
 
         Button button = new Button("Contains buttons");
-        button.addListener(new ClickListener() {
+        button.addClickListener(new ClickListener() {
             public void buttonClick(ClickEvent event) {
                 Popover popover = new Popover();
                 popover.setWidth("360px");
@@ -35,7 +35,7 @@ public class PopoverTest extends AbstractTouchKitIntegrationTest {
         addComponent(button);
 
         button = new Button("Contains a NavigationView");
-        button.addListener(new ClickListener() {
+        button.addClickListener(new ClickListener() {
             public void buttonClick(ClickEvent event) {
                 Popover popover = new Popover();
                 popover.setWidth("360px");
@@ -50,7 +50,7 @@ public class PopoverTest extends AbstractTouchKitIntegrationTest {
         addComponent(button);
 
         button = new Button("Contains a NavigationManager");
-        button.addListener(new ClickListener() {
+        button.addClickListener(new ClickListener() {
             public void buttonClick(ClickEvent event) {
                 Popover popover = new Popover();
                 popover.setWidth("360px");

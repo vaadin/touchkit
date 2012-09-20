@@ -16,24 +16,24 @@ public class UrlFieldTest extends AbstractTouchKitIntegrationTest {
 
         final UrlField nf = new UrlField("UrlField");
         nf.setImmediate(true);
-        nf.addListener(new TextChangeListener() {
+        nf.addTextChangeListener(new TextChangeListener() {
             public void textChange(TextChangeEvent event) {
                 try {
                     Notification.show("New urlfield value: " + nf.getUrl());
                 } catch (MalformedURLException e) {
-                    Notification.show("Not valid: "+e.getMessage());
+                    Notification.show("Not valid: " + e.getMessage());
                 }
             }
         });
 
         final TextField tf = new TextField("TextField");
         tf.setImmediate(true);
-        tf.addListener(new TextChangeListener() {
+        tf.addTextChangeListener(new TextChangeListener() {
             public void textChange(TextChangeEvent event) {
                 try {
                     nf.setUrl(new URL(event.getText()));
                 } catch (MalformedURLException e) {
-                    Notification.show("Not valid: "+e.getMessage());
+                    Notification.show("Not valid: " + e.getMessage());
                 }
             }
         });

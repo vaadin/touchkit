@@ -21,7 +21,7 @@ public class NavigationManagerConnector extends
     @Override
     protected Widget createWidget() {
         VNavigationManager widget = GWT.create(VNavigationManager.class);
-        widget.addListener(this);
+        widget.addAnimationListener(this);
         VConsole.log("Adding listener");
         return widget;
     }

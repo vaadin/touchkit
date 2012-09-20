@@ -433,11 +433,11 @@ public class VNavigationManager extends ComplexPanel {
         currentView = null;
     }
 
-    public void addListener(AnimationListener animationListener) {
+    public void addAnimationListener(AnimationListener animationListener) {
         animationListeners.add(animationListener);
     }
 
-    public void removeListener(AnimationListener animationListener) {
+    public void removeAnimationListener(AnimationListener animationListener) {
         animationListeners.remove(animationListener);
     }
 

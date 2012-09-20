@@ -50,7 +50,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
 
     public NavPanelTestWithViews() {
 
-        addListener(new NavigationListener() {
+        addNavigationListener(new NavigationListener() {
             @Override
             public void navigate(NavigationEvent event) {
                 Logger.getAnonymousLogger().info(
@@ -231,7 +231,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
         static int counter = 0;
 
         public SimpleNavView(SimpleNavView parent, int index) {
-            setDebugId("SNV" + counter++);
+            setId("SNV" + counter++);
 
             String caption2;
             if (parent == null) {

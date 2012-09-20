@@ -23,7 +23,7 @@ public class NavPanelTest extends NavigationManager implements
         for (int i = 0; i < views.length; i++) {
             views[i] = getView();
             views[i].addComponent(new Label("View " + i));
-            views[i].setDebugId("V" + i);
+            views[i].setId("V" + i);
         }
 
         navigateTo(views[0]);
@@ -34,10 +34,10 @@ public class NavPanelTest extends NavigationManager implements
     private CssLayout getView() {
         CssLayout cssLayout = new CssLayout();
         Button back = new Button("Back");
-        back.addListener(this);
+        back.addClickListener(this);
         cssLayout.addComponent(back);
         Button forward = new Button("Forward");
-        forward.addListener(this);
+        forward.addClickListener(this);
         cssLayout.addComponent(forward);
         cssLayout.setSizeFull();
         return cssLayout;

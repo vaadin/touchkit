@@ -8,7 +8,6 @@ import com.vaadin.addon.touchkit.ui.NavigationButton.NavigationButtonClickListen
 import com.vaadin.addon.touchkit.ui.NavigationManager;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.TabBarView;
-import com.vaadin.addon.touchkit.ui.TouchKitUI;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
@@ -42,7 +41,7 @@ public class TabsheetTest extends TabBarView implements
         CssLayout tab2 = new CssLayout();
         tab2.setSizeFull();
         tab2.setCaption("Artists");
-//        tab2.setIcon(TouchKitUI.getRndRunoIconResource());
+        // tab2.setIcon(TouchKitUI.getRndRunoIconResource());
         tab2.addComponent(new Label("Some content for tabsheet"));
 
         CssLayout tab3 = new CssLayout();
@@ -56,12 +55,12 @@ public class TabsheetTest extends TabBarView implements
         tab4.addComponent(new Label("Some content for tabsheet"));
 
         Tab tab = addTab(tab1);
-//        tab.setIcon(TouchKitUI.getRndRunoIconResource());
+        // tab.setIcon(TouchKitUI.getRndRunoIconResource());
         tab.setCaption("Playlists");
 
         tab = addTab(tab2);
 
-//        tab = addTab(tab3, "Vaadin", TouchKitUI.getRndRunoIconResource());
+        // tab = addTab(tab3, "Vaadin", TouchKitUI.getRndRunoIconResource());
 
         tab = addTab(tab4, "IT Mill");
 
@@ -87,7 +86,7 @@ public class TabsheetTest extends TabBarView implements
 
         Tab addTab = addTab(navigationManager);
         addTab.setCaption("Option");
-//        addTab.setIcon(TouchKitUI.getRndRunoIconResource());
+        // addTab.setIcon(TouchKitUI.getRndRunoIconResource());
 
         setSelectedTab(tab2);
 
@@ -118,5 +117,4 @@ public class TabsheetTest extends TabBarView implements
         ((NavigationManager) view.getParent()).navigateTo(navigationView);
 
     }
-
 }

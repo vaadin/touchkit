@@ -3,6 +3,7 @@ package com.vaadin.addon.touchkit.itest;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Ignore;
 
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
@@ -14,7 +15,6 @@ import com.vaadin.addon.touchkit.ui.SwipeView;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
-import org.apache.commons.io.IOUtils;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.server.RequestHandler;
 import com.vaadin.server.VaadinSession;
@@ -86,7 +86,7 @@ public class SwipeViewTest extends AbstractTouchKitIntegrationTest {
             setNextComponent(next);
             updateNextPreviousInCurrentCompoenent();
 
-            addListener(new NavigationListener() {
+            addNavigationListener(new NavigationListener() {
                 public void navigate(NavigationEvent event) {
                     if (event.getDirection() == Direction.FORWARD) {
                         index++;
@@ -210,7 +210,7 @@ public class SwipeViewTest extends AbstractTouchKitIntegrationTest {
                 }
 
                 cssLayout.addComponent(verticalComponentGroup);
-                
+
                 addComponent(cssLayout);
 
             }

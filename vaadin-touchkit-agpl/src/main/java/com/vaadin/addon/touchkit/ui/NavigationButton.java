@@ -143,14 +143,16 @@ public class NavigationButton extends AbstractComponent {
         super.attach();
         NavigationManager navigationManager = getNavigationManager();
         if (navigationManager != null) {
-            navigationManager.addListener(getComponentAttachListener());
+            navigationManager
+                    .addComponentAttachListener(getComponentAttachListener());
         }
     }
 
     @Override
     public void detach() {
         if (componentAttachListener != null) {
-            getNavigationManager().removeListener(componentAttachListener);
+            getNavigationManager().removeComponentAttachListener(
+                    componentAttachListener);
         }
         super.detach();
     }

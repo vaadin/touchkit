@@ -5,18 +5,20 @@ import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.addon.touchkit.ui.NavigationButton.NavigationButtonClickListener;
 import com.vaadin.ui.Notification;
 
-public class NavigationButtonStandaloneTest extends AbstractTouchKitIntegrationTest {
-    
+public class NavigationButtonStandaloneTest extends
+        AbstractTouchKitIntegrationTest {
+
     @Override
     public String getDescription() {
         return "NavigationManager without navigation button, just server side calls.";
     }
-    
+
     public NavigationButtonStandaloneTest() {
-      
-        NavigationButton navigationButton = new NavigationButton("Buttoncaption");
+
+        NavigationButton navigationButton = new NavigationButton(
+                "Buttoncaption");
         navigationButton.addClickListener(new NavigationButtonClickListener() {
-            
+
             @Override
             public void buttonClick(
                     com.vaadin.addon.touchkit.ui.NavigationButton.NavigationButtonClickEvent event) {
@@ -25,7 +27,7 @@ public class NavigationButtonStandaloneTest extends AbstractTouchKitIntegrationT
         });
         navigationButton.setDescription("Dippadai");
         addComponent(navigationButton);
-        
+
     }
 
 }

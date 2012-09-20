@@ -32,7 +32,7 @@ public class NavigationViewBarTest extends AbstractTouchKitIntegrationTest {
         addNextButton(navman, two, three);
         addNextButton(navman, three, four);
 
-        navman.addListener(new NavigationListener() {
+        navman.addNavigationListener(new NavigationListener() {
             @Override
             public void navigate(NavigationEvent event) {
                 if (navman.getCurrentComponent() == one) {
@@ -50,7 +50,7 @@ public class NavigationViewBarTest extends AbstractTouchKitIntegrationTest {
     private static void addNextButton(final NavigationManager navman,
             final NavigationView view, final NavigationView next) {
         ((Button) view.getRightComponent())
-                .addListener(new Button.ClickListener() {
+                .addClickListener(new Button.ClickListener() {
                     @Override
                     public void buttonClick(ClickEvent event) {
                         navman.navigateTo(next);
@@ -61,7 +61,7 @@ public class NavigationViewBarTest extends AbstractTouchKitIntegrationTest {
     static NavigationView createView(String caption, String debugId,
             boolean hasNext) {
         final CssLayout layout = new CssLayout();
-        layout.setDebugId(debugId);
+        layout.setId(debugId);
         int max = (int) (Math.random() * 100);
         for (int i = 0; i < max; i++) {
             Label l = new Label("Foo " + i);

@@ -196,7 +196,7 @@ public class NavigationManager extends AbstractComponentContainer {
     public void setCurrentComponent(Component newcurrentComponent) {
         if (getCurrentComponent() != newcurrentComponent) {
             if (getCurrentComponent() != null) {
-                removeComponent((Component) getCurrentComponent());
+                removeComponent(getCurrentComponent());
             }
             getState().setCurrentComponent(newcurrentComponent);
             addComponent(newcurrentComponent);
@@ -208,7 +208,7 @@ public class NavigationManager extends AbstractComponentContainer {
             if (getNextComponent() != null
                     && getNextComponent() instanceof NavigationView) {
                 NavigationView view = (NavigationView) getNextComponent();
-                view.setPreviousComponent((Component) getCurrentComponent());
+                view.setPreviousComponent(getCurrentComponent());
 
             }
             requestRepaint();
@@ -373,7 +373,7 @@ public class NavigationManager extends AbstractComponentContainer {
         public void navigate(NavigationEvent event);
     }
 
-    public void addListener(NavigationListener listener) {
+    public void addNavigationListener(NavigationListener listener) {
         addListener(NavigationEvent.class, listener, NavigationListener.METHOD);
     }
 

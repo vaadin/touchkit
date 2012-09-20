@@ -240,7 +240,7 @@ public class TabBarView extends AbstractComponentContainer {
             relatedComponent = tab1;
             setCaption(tab1.getCaption());
 
-            addListener(new Button.ClickListener() {
+            addClickListener(new ClickListener() {
 
                 @Override
                 public void buttonClick(ClickEvent event) {
