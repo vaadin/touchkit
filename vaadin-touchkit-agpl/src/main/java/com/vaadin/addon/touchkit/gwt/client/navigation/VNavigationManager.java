@@ -118,7 +118,6 @@ public class VNavigationManager extends ComplexPanel {
     int currentWrapperPos = 0;
     private PlaceHolder _placeHolder;
     private boolean transitionPending;
-    private boolean rendering;
     private int lastSizeUsedForWrapper;
     private int lastPixelWidthForPaintable;
 
@@ -360,9 +359,6 @@ public class VNavigationManager extends ComplexPanel {
         if (this.width == null || !this.width.equals(width)) {
             this.width = width;
             super.setWidth(width);
-            if (!rendering) {
-                resetPositionsAndChildSizes();
-            }
         }
     }
 
