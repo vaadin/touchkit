@@ -115,19 +115,6 @@ public class VNavigationManager extends ComplexPanel {
         animateHorizontally(1);
     }
 
-    public void slideFromRight(final Widget newView) {
-        Window.alert("FIXME!?");
-        if (nextView != null) {
-            moveAside(nextView);
-        }
-        /*
-         * Ensure the position of next component is on the right side of
-         * previeous
-         */
-        setPosition(newView, -currentWrapperPos + 1);
-        animateHorizontally(-1);
-    }
-
     int currentWrapperPos = 0;
     private PlaceHolder _placeHolder;
     private boolean transitionPending;
