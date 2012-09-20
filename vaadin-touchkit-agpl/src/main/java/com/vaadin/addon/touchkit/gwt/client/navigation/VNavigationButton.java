@@ -1,6 +1,7 @@
 package com.vaadin.addon.touchkit.gwt.client.navigation;
 
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -14,7 +15,7 @@ public class VNavigationButton extends HTML {
     private Widget targetWidget;
     private String placeHolderCaption;
     private String caption;
-    private IconWidget icon;
+    private ImageElement icon;
     private SpanElement descriptionElement;
 
     public VNavigationButton() {
@@ -83,12 +84,12 @@ public class VNavigationButton extends HTML {
     }
 
     public void setIcon(String iconUrl) {
-        icon = new IconWidget(iconUrl);
-        getElement().insertFirst(icon.getElement());
-    }
-
-    public IconWidget getIcon() {
-        return icon;
+        if(icon == null) {
+            icon = Document.get().createImageElement();
+            icon.setClassName(IconWidget.CLASSNAME);
+        }
+        icon.setSrc(iconUrl);
+        getElement().insertFirst(icon);
     }
 
     public void setDescription(String description) {
