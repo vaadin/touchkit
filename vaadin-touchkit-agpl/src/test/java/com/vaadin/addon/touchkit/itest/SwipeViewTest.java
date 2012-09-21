@@ -17,9 +17,9 @@ import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.server.RequestHandler;
+import com.vaadin.server.VaadinRequest;
+import com.vaadin.server.VaadinResponse;
 import com.vaadin.server.VaadinSession;
-import com.vaadin.server.WrappedRequest;
-import com.vaadin.server.WrappedResponse;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
@@ -45,8 +45,8 @@ public class SwipeViewTest extends AbstractTouchKitIntegrationTest {
         session.addRequestHandler(new RequestHandler() {
 
             @Override
-            public boolean handleRequest(VaadinSession application,
-                    WrappedRequest request, WrappedResponse response)
+            public boolean handleRequest(VaadinSession session,
+                    VaadinRequest request, VaadinResponse response)
                     throws IOException {
                 String requestPathInfo = request.getRequestPathInfo();
                 if (requestPathInfo.contains("winterphotos/")) {

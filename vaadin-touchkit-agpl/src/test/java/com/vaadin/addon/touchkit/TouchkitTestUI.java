@@ -7,15 +7,13 @@ import java.util.Collection;
 import com.vaadin.addon.touchkit.itest.oldtests.NavPanelTestWithViews;
 import com.vaadin.addon.touchkit.ui.TouchKitUI;
 import com.vaadin.annotations.Theme;
-import com.vaadin.client.ui.AbstractComponentConnector;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.server.Page;
-import com.vaadin.server.WrappedRequest;
+import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.AbstractComponentContainer;
 import com.vaadin.ui.ComponentContainer;
-import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.Table.ColumnGenerator;
@@ -24,7 +22,7 @@ import com.vaadin.ui.Table.ColumnGenerator;
 public class TouchkitTestUI extends TouchKitUI {
 
     @Override
-    protected void init(WrappedRequest request) {
+    protected void init(VaadinRequest request) {
 
         String requestPathInfo = request.getRequestPathInfo();
         if (requestPathInfo.length() > 3) {
@@ -39,7 +37,8 @@ public class TouchkitTestUI extends TouchKitUI {
                 }
                 Class<?> forName = Class.forName(className);
                 if (forName != null) {
-                    AbstractComponentContainer newInstance = (AbstractComponentContainer) forName.newInstance();
+                    AbstractComponentContainer newInstance = (AbstractComponentContainer) forName
+                            .newInstance();
                     newInstance.setDescription(null);
                     setContent(newInstance);
                     System.out.println("Initialized " + className);
@@ -118,8 +117,7 @@ public class TouchkitTestUI extends TouchKitUI {
                     if (AbstractTouchKitIntegrationTest.class
                             .isAssignableFrom(forName)) {
                         tests.add((Class<? extends AbstractTouchKitIntegrationTest>) forName);
-                    }
-                    else if (forName == NavPanelTestWithViews.class) {
+                    } else if (forName == NavPanelTestWithViews.class) {
                         tests.add((Class<? extends ComponentContainer>) forName);
                     }
                 } catch (ClassNotFoundException e) {
@@ -129,5 +127,4 @@ public class TouchkitTestUI extends TouchKitUI {
             }
         }
     }
-
 }

@@ -8,9 +8,9 @@ import com.vaadin.server.BootstrapListener;
 import com.vaadin.server.BootstrapPageResponse;
 import com.vaadin.server.Extension;
 import com.vaadin.server.RequestHandler;
+import com.vaadin.server.VaadinRequest;
+import com.vaadin.server.VaadinResponse;
 import com.vaadin.server.VaadinSession;
-import com.vaadin.server.WrappedRequest;
-import com.vaadin.server.WrappedResponse;
 import com.vaadin.ui.UI;
 
 public class TouchKitSettings implements RequestHandler, BootstrapListener {
@@ -92,9 +92,8 @@ public class TouchKitSettings implements RequestHandler, BootstrapListener {
     }
 
     @Override
-    public boolean handleRequest(VaadinSession application,
-            WrappedRequest request, WrappedResponse response)
-            throws IOException {
+    public boolean handleRequest(VaadinSession session, VaadinRequest request,
+            VaadinResponse response) throws IOException {
         // TODO Auto-generated method stub
         return false;
     }

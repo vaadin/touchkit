@@ -61,7 +61,7 @@ public class PopoverConnector extends WindowConnector implements
         }
 
         if (getWidget().getModalityCurtain().isOrHasChild(targetElement)
-                && getWidget().isClosable() && getState().visible
+                && getWidget().isClosable()
                 && (event.getTypeInt() & ACCEPTEDEVENTS) == 0) {
             /*
              * Close on events outside window. Special handling for mousemove
