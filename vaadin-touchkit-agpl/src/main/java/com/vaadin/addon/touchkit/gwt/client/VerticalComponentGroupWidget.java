@@ -161,7 +161,7 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
         
         if (!captionElements.containsKey(widget)) {
             row.removeClassName(ROW_WITH_FULLSIZE_WIDGET_STYLENAME);
-        } else if ("100%".equals(componentWidth)) {
+        } else if ("100.0%".equals(componentWidth)) {
             row.addClassName(ROW_WITH_FULLSIZE_WIDGET_STYLENAME);
         } else {
             row.removeClassName(ROW_WITH_FULLSIZE_WIDGET_STYLENAME);
