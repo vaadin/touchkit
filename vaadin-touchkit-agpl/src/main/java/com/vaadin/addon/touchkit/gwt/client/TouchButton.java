@@ -10,7 +10,6 @@ public class TouchButton extends VButton {
 	public TouchButton() {
         sinkEvents(Event.ONCLICK | Event.MOUSEEVENTS | Event.FOCUSEVENTS
                 | Event.KEYEVENTS | Event.TOUCHEVENTS);
-        setStyleName("v-touchkit-button");
 	}
 	
 	@Override
