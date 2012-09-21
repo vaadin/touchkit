@@ -20,6 +20,7 @@ public class DynamicVerticalComponentGroupTest extends AbstractTouchKitIntegrati
 		addComponent(buttonLayout);
 		
 		Button addToTop = new Button("AddToTop");
+		addToTop.setId("add-top");
 		addToTop.setImmediate(true);
 		buttonLayout.addComponent(addToTop);
 		addToTop.addClickListener(new Button.ClickListener() {
@@ -32,6 +33,7 @@ public class DynamicVerticalComponentGroupTest extends AbstractTouchKitIntegrati
 		});
 		
 		Button addToSecond = new Button("AddToSecond");
+		addToSecond.setId("add-second");
 		addToSecond.setImmediate(true);
 		buttonLayout.addComponent(addToSecond);
 		addToSecond.addClickListener(new Button.ClickListener() {
@@ -48,8 +50,10 @@ public class DynamicVerticalComponentGroupTest extends AbstractTouchKitIntegrati
 		for (int i = 0; i < 3; ++i) {
 			final CssLayout layout = new CssLayout();
 			layout.setData(new Integer(++counter));
+			layout.setId("layout-" + counter);
 			layout.setWidth("100%");
 			final Button hideCaption = new Button("Show caption");
+			hideCaption.setId("hide-" + counter);
 			hideCaption.setWidth("30%");
 			layout.addComponent(hideCaption);
 			hideCaption.addClickListener(new Button.ClickListener() {
@@ -68,6 +72,7 @@ public class DynamicVerticalComponentGroupTest extends AbstractTouchKitIntegrati
 			});
 			
 			Button remove = new Button("Remove");
+			remove.setId("remove-" + counter);
 			remove.setWidth("30%");
 			layout.addComponent(remove);
 			remove.addClickListener(new Button.ClickListener() {
@@ -79,6 +84,7 @@ public class DynamicVerticalComponentGroupTest extends AbstractTouchKitIntegrati
 			});
 			
 			Button first = new Button("First");
+			first.setId("first-" + counter);
 			first.setWidth("30%");
 			layout.addComponent(first);
 			first.addClickListener(new Button.ClickListener() {
