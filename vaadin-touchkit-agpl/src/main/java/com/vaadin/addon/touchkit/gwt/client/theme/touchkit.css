@@ -1946,6 +1946,7 @@ span.v-datefield-calendarpanel-month {
 
 .v-touchkit-componentgroup-row-cap > .v-caption {
 	-webkit-box-flex: 1;
+	min-width: 35%;
 }
 
 .v-touchkit-componentgroup-row-cap > .v-touchkit-componentgroup-cell {
