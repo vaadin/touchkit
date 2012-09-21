@@ -295,7 +295,7 @@ public class NavPanelTestWithViews extends NavigationManager implements
 
         private void generateLeafContent() {
             CssLayout cssLayout = new CssLayout();
-            cssLayout.setWidth("100%");
+//            cssLayout.setWidth("100%");
             // cssLayout.setMargin(true);
             Component label = new Label("Foobar");
             label.setStyleName("grey-title");
