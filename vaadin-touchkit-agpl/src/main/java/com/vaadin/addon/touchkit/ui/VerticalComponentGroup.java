@@ -56,7 +56,7 @@ public class VerticalComponentGroup extends AbstractLayout {
     	if (components.contains(component)) {
     		if (components.indexOf(component) != index) {
     			components.remove(component);
-    			if (index < components.size()) {
+    			if (index >= 0 && index < components.size()) {
     				components.add(index, component);
     			} else {
     				components.add(component);
