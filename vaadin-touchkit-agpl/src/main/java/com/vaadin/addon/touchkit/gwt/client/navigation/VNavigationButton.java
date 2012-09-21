@@ -5,6 +5,7 @@ import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.addon.touchkit.gwt.client.IconWidget;
@@ -17,17 +18,45 @@ public class VNavigationButton extends HTML {
     private String caption;
     private ImageElement icon;
     private SpanElement descriptionElement;
+    private boolean touchStarted = false;
 
     public VNavigationButton() {
         setStyleName(NAVBUTTON_CLASSNAME);
-        addClickHandler(new ClickHandler() {
-            public void onClick(ClickEvent event) {
-                if (enabled) {
-                    getElement().focus();
-                    navigate();
-                }
-            }
-        });
+        sinkEvents(Event.ONCLICK | Event.TOUCHEVENTS);
+    }
+    
+    protected void onClick() {
+        if (enabled) {
+            getElement().focus();
+            navigate();
+        }
+    }
+    
+    @Override
+    public void onBrowserEvent(Event event) {
+		switch (event.getTypeInt()) {
+		case Event.ONTOUCHSTART:
+			touchStarted = true;
+			break;
+		case Event.ONTOUCHMOVE:
+		case Event.ONTOUCHCANCEL:
+			touchStarted = false;
+			break;
+		case Event.ONTOUCHEND:
+			if (touchStarted) {
+				event.preventDefault();
+				event.stopPropagation();
+				onClick();
+			}
+			touchStarted = false;
+			break;
+		case Event.ONCLICK:
+			onClick();
+			super.onBrowserEvent(event);
+			break;
+		default:
+			super.onBrowserEvent(event);
+		}
     }
 
     public Widget getTargetWidget() {
