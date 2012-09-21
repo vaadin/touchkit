@@ -1806,20 +1806,24 @@ span.v-datefield-calendarpanel-month {
 	margin-left: 5px;
 }
 
-.v-touchkit-verticalcomponentgroup .v-select-optiongroup .v-select-option {
+.v-touchkit-componentgroup-cell > .v-select-optiongroup {
+    width: 100%;
+}
+
+.v-touchkit-componentgroup-cell > .v-select-optiongroup .v-select-option {
 	height: 40px;
 	position:relative;
 }
 
-.v-touchkit-verticalcomponentgroup .v-select-optiongroup .v-select-option input {
+.v-touchkit-componentgroup-cell > .v-select-optiongroup .v-select-option input {
 	font-size: large;
 }
 
-.v-touchkit-verticalcomponentgroup .v-select-optiongroup .v-select-option>* {
+.v-touchkit-componentgroup-cell > .v-select-optiongroup .v-select-option > * {
 	margin: 14px 0px;
 }
 
-.v-touchkit-verticalcomponentgroup .v-select-optiongroup .v-select-option>label {
+.v-touchkit-componentgroup-cell > .v-select-optiongroup .v-select-option>label {
 	display: block;
 	position:absolute;
 	top:0;left:0; right:0;
@@ -1838,7 +1842,7 @@ span.v-datefield-calendarpanel-month {
  * also set then for selects inside component group.
  */
 .v-touchkit-verticalcomponentgroup > *:before,
-.v-touchkit-verticalcomponentgroup .v-select-optiongroup>.v-select-option:before {
+.v-touchkit-componentgroup-cell > .v-select-optiongroup > .v-select-option:before {
 	content: "";
 	display: block;
 	position: absolute;
@@ -1849,14 +1853,14 @@ span.v-datefield-calendarpanel-month {
 	border-top: listBorder;
 	}
 	
-.v-touchkit-verticalcomponentgroup .v-select-optiongroup>.v-select-option:before {
+.v-touchkit-componentgroup-cell > .v-select-optiongroup >.v-select-option:before {
     left: negativeListLayoutMargin;
     right: negativeListLayoutMargin;
 }
 
 /* ...hide from the first */
 .v-touchkit-verticalcomponentgroup > *:first-child:before,
-.v-touchkit-verticalcomponentgroup .v-select-optiongroup :first-child:before {
+.v-touchkit-componentgroup-cell > .v-select-optiongroup :first-child:before {
 	display: none;
 }
 
@@ -1964,11 +1968,6 @@ span.v-datefield-calendarpanel-month {
 
 .v-touchkit-componentgroup-row-full > .v-touchkit-componentgroup-cell > * {
 	float: none;
-}
-
-.v-touchkit-verticalcomponentgroup .v-select-optiongroup,
-.v-touchkit-verticalcomponentgroup .v-button {
-	width: 100%;
 }
 
 .v-touchkit-componentgroup-cell-fullwrapper .v-touchkit-horizontalbuttongroup {
