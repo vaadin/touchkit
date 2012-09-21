@@ -2,6 +2,7 @@ package com.vaadin.addon.touchkit.gwt.client.navigation;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ImageElement;
+import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -22,7 +23,7 @@ public class VNavigationButton extends HTML {
 
     public VNavigationButton() {
         setStyleName(NAVBUTTON_CLASSNAME);
-        sinkEvents(Event.ONCLICK | Event.TOUCHEVENTS);
+        sinkEvents(Event.TOUCHEVENTS | Event.ONCLICK);
     }
     
     protected void onClick() {
@@ -46,14 +47,17 @@ public class VNavigationButton extends HTML {
 			if (touchStarted) {
 				event.preventDefault();
 				event.stopPropagation();
-				onClick();
+		        NativeEvent evt = Document.get().createClickEvent(1, 
+		        		event.getScreenX(), event.getScreenY(),
+		        		event.getClientX(), event.getClientY(), false,
+		                false, false, false);
+		        getElement().dispatchEvent(evt);
 			}
 			touchStarted = false;
 			break;
 		case Event.ONCLICK:
 			onClick();
 			super.onBrowserEvent(event);
-			break;
 		default:
 			super.onBrowserEvent(event);
 		}
