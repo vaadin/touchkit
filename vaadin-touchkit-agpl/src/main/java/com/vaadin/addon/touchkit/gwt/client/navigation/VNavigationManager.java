@@ -65,8 +65,8 @@ public class VNavigationManager extends ComplexPanel {
             }
         }.schedule(160);
 
-        fireAnimationDidEnd();
         transitionPending = false;
+        fireAnimationDidEnd();
         if (pendingWidth != null) {
             setWidth(pendingWidth);
             pendingWidth = null;
