@@ -632,10 +632,10 @@
 	text-shadow: 0 1px 1px #396897;
 }
 
-.v-touchkit-componentgroup-row>.v-icon,
+.v-touchkit-componentgroup-row>.v-caption>.v-icon,
 .v-touchkit-navbutton .v-icon {
 	height: 30px;
-	margin: 0 6px 0 -3px;
+	margin-right:6px;
 	vertical-align: -9px;
 }
 
@@ -1946,7 +1946,8 @@ span.v-datefield-calendarpanel-month {
 
 .v-touchkit-componentgroup-row-cap > .v-caption {
 	-webkit-box-flex: 1;
-	min-width: 35%;
+	/* Caption overflows and flexbox streches, this is just a kind of min width */
+	width: 0px;
 }
 
 .v-touchkit-componentgroup-row-cap > .v-touchkit-componentgroup-cell {
@@ -1959,12 +1960,12 @@ span.v-datefield-calendarpanel-month {
 
 .v-touchkit-componentgroup-row-full > .v-caption {
     -webkit-box-flex: 1;
-    width: 35%;
+    width: 40%;
 }
 
 .v-touchkit-componentgroup-row-full > .v-touchkit-componentgroup-cell {
     -webkit-box-flex: 1;
-    width: 75%;
+    width: 60%;
 }
 
 .v-touchkit-componentgroup-row-full > .v-touchkit-componentgroup-cell > * {

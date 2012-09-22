@@ -89,13 +89,14 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
             return;
         }
 
+        DivElement divElement = captionElements.get(widget);
         ImageElement iconElement = iconElements.get(widget);
 
         if (iconUrl != null) {
             if (iconElement == null) {
                 iconElement = Document.get().createImageElement();
                 iconElement.setClassName(IconWidget.CLASSNAME);
-                getRowElement(widget).insertFirst(iconElement);
+                divElement.insertFirst(iconElement);
             }
             iconElement.setSrc(iconUrl);
             iconElement.setAlt("");

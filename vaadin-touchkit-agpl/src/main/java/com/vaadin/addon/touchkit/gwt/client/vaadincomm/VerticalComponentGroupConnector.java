@@ -49,7 +49,6 @@ public class VerticalComponentGroupConnector extends AbstractLayoutConnector {
                             connector.getState().width,
                             connector.delegateCaptionHandling() ? connector
                                     .getState().caption : null);
-            // FIXME
             URLReference urlReference = connector.getState().resources
                     .get(ComponentConstants.ICON_RESOURCE);
             String url = urlReference == null ? null : urlReference.getURL();
