@@ -7,22 +7,16 @@ import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.vaadin.client.ApplicationConnection;
-import com.vaadin.client.RenderSpace;
-import com.vaadin.client.Util;
 import com.vaadin.client.ui.TouchScrollDelegate;
 
 public class VTabBar extends ComplexPanel {
 
     private static final String CLASSNAME = "v-touchkit-tabbar";
-    private static final int TOOLBARHEIGHT = 46;
     private Element wrapper = Document.get().createDivElement().cast();
     private Element toolbarDiv = Document.get().createDivElement().cast();
 
     private Widget content;
     private Widget toolbar;
-    private ApplicationConnection client;
-    private boolean rendering;
 
     public VTabBar() {
         setElement(Document.get().createDivElement());
@@ -46,76 +40,26 @@ public class VTabBar extends ComplexPanel {
         }, TouchStartEvent.getType());
     }
 
-    public void setContent(Widget paintable2, Widget paintable) {
-        rendering = true;
-
-        if (toolbar != null && toolbar != paintable2) {
-            // forgetComponent(client, toolbar);
+    public void setToolbar(Widget widget) {
+        if (toolbar == widget) {
+            return;
         }
-
-        toolbar = paintable2;
-        if (!toolbar.isAttached()) {
-            add(toolbar, toolbarDiv);
+        if (toolbar != null) {
+            toolbar.removeFromParent();
         }
-
-        // and we always have content in second slot
-        if (content != null && content != paintable) {
-            // forgetComponent(client, content);
-        }
-
-        content = paintable;
-        if (!content.isAttached()) {
-            add(content, wrapper);
-        }
-
-        Util.runWebkitOverflowAutoFix(wrapper);
-        rendering = false;
+        add(widget, toolbarDiv);
+        toolbar = widget;
     }
 
-    private void forgetComponent(ApplicationConnection client, Widget content2) {
-        content2.removeFromParent();
-        // client.unregisterPaintable(content2);
-        if (content == content2) {
-            content = null;
-        } else {
-            toolbar = null;
+    public void setContent(Widget widget) {
+        if (content == widget) {
+            return;
         }
-    }
-
-    public void replaceChildComponent(Widget oldComponent, Widget newComponent) {
-        throw new UnsupportedOperationException();
-    }
-
-    public boolean hasChildComponent(Widget component) {
-        if (component == content || component == toolbar) {
-            return true;
+        if (content != null) {
+            content.removeFromParent();
         }
-        return false;
-    }
-
-    public RenderSpace getAllocatedSpace(Widget child) {
-        if (child == content) {
-            return new RenderSpace(getOffsetWidth(), getOffsetHeight()
-                    - toolbarDiv.getFirstChildElement().getOffsetHeight(), true);
-        } else if (child == toolbar) {
-            return new RenderSpace(getOffsetWidth(), TOOLBARHEIGHT, false);
-        } else {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    @Override
-    public void setWidth(String width) {
-        super.setWidth(width);
-
-        if (!rendering) {
-            if (content != null) {
-                // client.handleComponentRelativeSize(content);
-            }
-            if (toolbar != null) {
-                // client.handleComponentRelativeSize(toolbar);
-            }
-        }
+        add(widget, wrapper);
+        content = widget;
     }
 
 }

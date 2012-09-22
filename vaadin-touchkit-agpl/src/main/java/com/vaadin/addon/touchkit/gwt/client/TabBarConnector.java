@@ -29,19 +29,11 @@ public class TabBarConnector extends AbstractComponentContainerConnector {
     @Override
     public void onConnectorHierarchyChange(ConnectorHierarchyChangeEvent event) {
         List<ComponentConnector> children = getChildComponents();
-        VTabBar widget = getWidget();
+        
+        getWidget().setToolbar(children.get(0).getWidget());
 
-        if (children.size() > 0) {
-            widget.clear();
-            Widget toolbar = children.get(0).getWidget();
-            Widget content = null;
-
-            if (children.size() > 1) {
-                content = children.get(1).getWidget();
-            }
-
-            widget.setContent(toolbar, content);
-        }
+        getWidget().setContent(
+                children.size() > 1 ? children.get(1).getWidget() : null);
 
         super.onConnectorHierarchyChange(event);
     }
