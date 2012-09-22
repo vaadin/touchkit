@@ -31,8 +31,7 @@ public class TabBarView extends AbstractComponentContainer {
     public TabBarView() {
         super();
         setSizeFull();
-        toolbar.setHeight("46px");
-        super.addComponent(toolbar);
+       super.addComponent(toolbar);
     }
 
     /**
