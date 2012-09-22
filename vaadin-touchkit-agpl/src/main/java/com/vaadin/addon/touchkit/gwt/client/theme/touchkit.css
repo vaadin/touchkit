@@ -239,20 +239,6 @@
 	background: buttonInsetBackground;
 	}
 
-.v-button-wrap,
-.v-button:focus .v-button-wrap {
-	/*display: block;
-	border-radius: 7px;
-	background: buttonGradient;
-	-webkit-box-shadow: buttonBoxShadow;
-	padding: 0 listLayoutMargin;
-	height: 39px;
-	line-height: 37px;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;*/
-	}
-
 .v-button:active .v-button-wrap,
 .v-button.v-pressed .v-button-wrap {
 	background-image: buttonActiveGradient;
@@ -335,7 +321,7 @@
 	color: navbarButtonColor;
 	text-shadow: navbarButtonTextShadow;
 	-webkit-box-shadow: navbarButtonBoxShadow;
-	height: 29px;
+	height: 30px;
 	padding: 0;
 	overflow: hidden;
 	box-sizing: border-box;
@@ -352,17 +338,8 @@
 }
 
 .v-touchkit-navbar .v-button .v-button-wrap {
-    line-height: 24px;
     height: 28px;
-    padding: 0 6px;
-}
-
-.v-touchkit-horizontalbuttongroup .v-button-wrap {
-	line-height: 20px;
-}
-
-.v-touchkit-navbar .v-button .v-button-wrap {
-	display: inline-block;
+    padding: 0 listLayoutMargin;
 }
 
 .v-touchkit-navbar .v-button .v-button-wrap .v-button-caption,
@@ -371,19 +348,11 @@
 	text-shadow: navbarButtonTextShadow;
 	font-size: 12px;
 	-webkit-box-shadow: none;
+	/* These buttons are 28px height, make text centered */
+	line-height:28px;
+	vertical-align:top;
+	margin: 0;
 }
-
-.v-touchkit-navbar .v-button .v-button-wrap .v-button-caption  {
-    padding: 2px 4px 2px 4px;
-    line-height: 24px;
-    vertical-align: top;
-}
-
-.v-touchkit-horizontalbuttongroup .v-button-wrap .v-button-caption {
-	line-height: 27px;
-	vertical-align: middle;
-}
-
 
 .v-touchkit-navbar .v-button:active .v-button-wrap {
 	background-image: none;
@@ -396,11 +365,14 @@
 .v-touchkit-horizontalbuttongroup {
 	padding:0;
 	display:block;
-}
-.v-touchkit-horizontalbuttongroup {
 	/* Float left to "sqeeze" non used space, inline-block cannot be used to keep sizes working */
 	float:left;
 }
+
+.v-touchkit-componentgroup-cell>.v-touchkit-horizontalbuttongroup {
+	margin: listLayoutMargin 0;
+}
+
 .v-touchkit-navbar .v-touchkit-horizontalbuttongroup {
 	float:none;
 	display:inline-block
@@ -418,8 +390,9 @@
 	border-top-left-radius: 0px;
 	border-bottom-left-radius: 0px;
 }
-.v-touchkit-horizontalbuttongroup .v-button-wrap {
+.v-touchkit-horizontalbuttongroup .v-button .v-button-wrap {
 	background:none;
+	border-radius:0;
 }
 
 .v-touchkit-horizontalbuttongroup .v-button:first-child {
@@ -444,7 +417,7 @@
 	padding-top: 0px;
 	padding-bottom: 0px;
 	width: 18px;
-	height: 27px;
+	height: 28px;
 	text-indent: -999px;
 	overflow: hidden;
 	background: navbarArrowUp no-repeat 50%;
@@ -796,9 +769,12 @@
 	display:block;
 }
 
+/*FIXME should be for horizontal component group as well*/
 .v-touchkit-navbar .v-button .v-icon {
 	height: 20px;
-	margin: 0;
+	/* 28px height button conten, center */
+	margin: 4px 0 0 0;
+	vertical-align:top;
 }
 
 
@@ -1132,6 +1108,7 @@
 	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.2);
 	color: buttonColor;
 	text-shadow: buttonTextShadow;
+	padding-top:2px;
 }
 
 .v-touchkit-toolbar {
