@@ -469,6 +469,11 @@ public class NavPanelTestWithViews extends NavigationManager implements
             switch1.setCaption("ios wannabe checkbox with very long caption that will easily be clipped");
             switch1.setIcon(getNextIcon());
             components.addComponent(switch1);
+            
+            Switch switch2 = new Switch();
+            switch2.setCaption("ios wannabe checkbox with so long caption that nobody is sure where it starts and where it ends. Caption's length is infinite, just like the universe.");
+            switch2.setIcon(getNextIcon());
+            components.addComponent(switch2);
 
             NavigationButton navigationButton = new NavigationButton(
                     "NavigationButton with rather long caption in it, which shouldn't cause the caption to pop on next line.");
