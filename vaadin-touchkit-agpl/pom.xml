@@ -57,6 +57,7 @@
 		<Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
 		<Vaadin-Addon>vaadin-touchkit-${license.short.name}-${project.version}.jar</Vaadin-Addon>
 
+		<jetty.version>8.1.7.v20120910</jetty.version>
 	</properties>
 
 	<distributionManagement>
@@ -154,10 +155,6 @@
 				</configuration>
 			</plugin>
 			<!-- Compiles your custom GWT components with the GWT compiler -->
-			<!-- A hosted mode browser for client-side widget debugging can be run 
-				with the goal gwt:run after uncommenting the correct line below. A remote 
-				debugger can then be connected to port 8998. Note that e.g. a Jetty server 
-				should be running with the server side parts - use the goal jetty:run . -->
 			<plugin>
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-maven-plugin</artifactId>
@@ -167,7 +164,7 @@
 					<modules>
 						<module>com.vaadin.addon.touchkit.gwt.TouchKitWidgetSet</module>
 					</modules>
-					<extraJvmArgs>-Xmx512M -Xss4024k</extraJvmArgs>
+					<extraJvmArgs>-Xmx1024M -Xss4024k</extraJvmArgs>
 					<runTarget>xsite</runTarget>
 					<hostedWebapp>${project.build.directory}/${project.build.finalName}</hostedWebapp>
 					<noServer>true</noServer>
@@ -292,11 +289,13 @@
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-client</artifactId>
 			<version>${vaadin.version.maven}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-client-compiler</artifactId>
 			<version>${vaadin.version.maven}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
@@ -307,7 +306,7 @@
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-webapp</artifactId>
-			<version>LATEST</version>
+			<version>${jetty.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
