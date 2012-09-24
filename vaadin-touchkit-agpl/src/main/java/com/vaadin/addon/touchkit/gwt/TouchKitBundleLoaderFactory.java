@@ -3,6 +3,7 @@ package com.vaadin.addon.touchkit.gwt;
 import java.util.Collection;
 import java.util.HashSet;
 
+import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.vaadin.client.ServerConnector;
 import com.vaadin.client.ui.absolutelayout.AbsoluteLayoutConnector;
 import com.vaadin.client.ui.accordion.AccordionConnector;
@@ -19,9 +20,8 @@ import com.vaadin.client.ui.splitpanel.HorizontalSplitPanelConnector;
 import com.vaadin.client.ui.splitpanel.VerticalSplitPanelConnector;
 import com.vaadin.client.ui.tabsheet.TabsheetConnector;
 import com.vaadin.client.ui.twincolselect.TwinColSelectConnector;
-import com.vaadin.client.ui.upload.UploadConnector;
 import com.vaadin.client.ui.window.WindowConnector;
-import com.vaadin.server.widgetsetutils.WidgetMapGenerator;
+import com.vaadin.server.widgetsetutils.ConnectorBundleLoaderFactory;
 import com.vaadin.shared.ui.Connect.LoadStyle;
 
 /**
@@ -29,12 +29,11 @@ import com.vaadin.shared.ui.Connect.LoadStyle;
  * mobile devices loaded lazily. This way saving bandwidth and making the
  * initial loading time smaller.
  */
-public class TouchKitWidgetMapGenerator extends WidgetMapGenerator {
+public class TouchKitBundleLoaderFactory extends ConnectorBundleLoaderFactory {
 
-    HashSet<Class<? extends ServerConnector>> lazyComponents = new HashSet<Class<? extends ServerConnector>>();
+    Collection<Class<? extends ServerConnector>> lazyComponents = new HashSet<Class<? extends ServerConnector>>();
 
-    public TouchKitWidgetMapGenerator() {
-        lazyComponents.add(UploadConnector.class);
+    public TouchKitBundleLoaderFactory() {
         lazyComponents.add(VerticalLayoutConnector.class);
         lazyComponents.add(HorizontalLayoutConnector.class);
         lazyComponents.add(GridLayoutConnector.class);
@@ -53,34 +52,17 @@ public class TouchKitWidgetMapGenerator extends WidgetMapGenerator {
         lazyComponents.add(PopupViewConnector.class);
     }
 
-    /**
-     * @return the components made explicitly lazy by
-     *         {@link TouchKitWidgetMapGenerator}. Modifiable collection for
-     *         tuning in the project.
-     */
-    protected Collection<Class<? extends ServerConnector>> getLazyComponents() {
-        return lazyComponents;
-    }
-
     @Override
-    protected LoadStyle getLoadStyle(
-            Class<? extends ServerConnector> paintableType) {
-        if (lazyComponents.contains(paintableType)) {
+    protected LoadStyle getLoadStyle(JClassType connectorType) {
+        if (lazyComponents.contains(connectorType)) {
             return LoadStyle.LAZY;
         }
-        LoadStyle loadStyle = super.getLoadStyle(paintableType);
-        if (isUseCacheManifest()) {
-            if (loadStyle == LoadStyle.DEFERRED) {
-                // with cache manifest everything is
-                // cached automatically anyways
-                loadStyle = LoadStyle.LAZY;
-            }
+        LoadStyle loadStyle = super.getLoadStyle(connectorType);
+        if (loadStyle == LoadStyle.DEFERRED) {
+            // with cache manifest everything is
+            // cached automatically anyways
+            loadStyle = LoadStyle.LAZY;
         }
         return loadStyle;
     }
-
-    protected boolean isUseCacheManifest() {
-        return true;
-    }
-
 }
