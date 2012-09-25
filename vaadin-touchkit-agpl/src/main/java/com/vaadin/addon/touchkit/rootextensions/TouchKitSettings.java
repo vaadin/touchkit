@@ -111,7 +111,13 @@ public class TouchKitSettings implements RequestHandler, BootstrapListener {
     public void modifyBootstrapPage(BootstrapPageResponse response) {
         UI root = null;
         if (vaadinServletService != null) {
-            root = vaadinServletService.findUI(response.getRequest());
+            // FIXME: remove try-catch when findUI, will return null, instead of
+            // exception
+            try {
+                root = vaadinServletService.findUI(response.getRequest());
+            } catch (Exception e) {
+                root = null;
+            }
         }
         if (root != null) {
             ensureInitialized(root);
