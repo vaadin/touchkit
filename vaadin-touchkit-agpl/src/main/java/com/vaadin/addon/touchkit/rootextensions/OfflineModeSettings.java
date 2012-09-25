@@ -52,9 +52,9 @@ public class OfflineModeSettings extends AbstractTouchKitRootExtension
     }
 
     private String getCacheManifestLocation(BootstrapPageResponse response) {
-        String staticFileLocation = response.getRequest().getVaadinService()
+        String staticFileLocation = response.getRequest().getService()
                 .getStaticFileLocation(response.getRequest());
-        String configuredWidgetset = response.getRequest().getVaadinService()
+        String configuredWidgetset = response.getRequest().getService()
                 .getConfiguredWidgetset(response.getRequest());
         return staticFileLocation + "/VAADIN/widgetsets/" + configuredWidgetset
                 + "/cache.manifest";
@@ -100,7 +100,7 @@ public class OfflineModeSettings extends AbstractTouchKitRootExtension
      *            timeout in seconds
      */
     public void setOfflineModeTimeout(int offlineModeDelay) {
-        this.offlineModeTimeout = offlineModeDelay;
+        offlineModeTimeout = offlineModeDelay;
     }
 
     /**

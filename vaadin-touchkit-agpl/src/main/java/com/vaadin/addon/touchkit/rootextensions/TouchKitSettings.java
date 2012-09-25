@@ -10,6 +10,7 @@ import com.vaadin.server.Extension;
 import com.vaadin.server.RequestHandler;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinResponse;
+import com.vaadin.server.VaadinServletService;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.UI;
 
@@ -19,6 +20,7 @@ public class TouchKitSettings implements RequestHandler, BootstrapListener {
     private IosWebAppSettings iosWebAppSettings;
     private ApplicationIcons applicationIcons;
     private OfflineModeSettings offlineModeSettings;
+    private VaadinServletService vaadinServletService;
 
     public ViewPortSettings getViewPortSettings() {
         return viewPortSettings;
@@ -36,11 +38,12 @@ public class TouchKitSettings implements RequestHandler, BootstrapListener {
         return offlineModeSettings;
     }
 
-    private TouchKitSettings(VaadinSession app) {
+    private TouchKitSettings(VaadinSession app, VaadinServletService service) {
         viewPortSettings = new ViewPortSettings();
         iosWebAppSettings = new IosWebAppSettings();
         applicationIcons = new ApplicationIcons();
         offlineModeSettings = new OfflineModeSettings();
+        vaadinServletService = service;
 
         app.addBootstrapListener(this);
         // no getter for bootstraplisteners so implementing requesthandler to
@@ -65,10 +68,11 @@ public class TouchKitSettings implements RequestHandler, BootstrapListener {
         }
     }
 
-    public static TouchKitSettings init(VaadinSession app) {
+    public static TouchKitSettings init(VaadinSession app,
+            VaadinServletService vaadinServletService) {
         TouchKitSettings touchKitSettings = get(app);
         if (touchKitSettings == null) {
-            return new TouchKitSettings(app);
+            return new TouchKitSettings(app, vaadinServletService);
         }
         return touchKitSettings;
     }
@@ -105,8 +109,7 @@ public class TouchKitSettings implements RequestHandler, BootstrapListener {
 
     @Override
     public void modifyBootstrapPage(BootstrapPageResponse response) {
-        UI root = response.getVaadinSession().getUIForRequest(
-                response.getRequest());
+        UI root = vaadinServletService.findUI(response.getRequest());
         if (root != null) {
             ensureInitialized(root);
             TouchKitSettings rootsettings = get(root);

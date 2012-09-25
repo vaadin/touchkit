@@ -2,7 +2,6 @@ package com.vaadin.addon.touchkit.ui;
 
 import com.vaadin.addon.touchkit.rootextensions.TouchKitSettings;
 import com.vaadin.annotations.Theme;
-import com.vaadin.server.AddonContext;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.server.WebBrowser;
 import com.vaadin.ui.UI;
@@ -38,8 +37,8 @@ import com.vaadin.ui.UI;
 public abstract class TouchKitUI extends UI {
     static {
         VaadinSession current = VaadinSession.getCurrent();
-        
-        TouchKitSettings.init(current);
+
+        TouchKitSettings.init(current, null);
     }
 
 }
