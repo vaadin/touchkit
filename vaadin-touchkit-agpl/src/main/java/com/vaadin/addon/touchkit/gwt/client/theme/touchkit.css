@@ -1987,3 +1987,41 @@ span.v-datefield-calendarpanel-month {
 	overflow: hidden !important;	
 }*/
 
+.v-touchkit-combobox-drop-down {
+	height: 25px;
+	border: 1px solid #999;
+	padding: 2px;
+	cursor: pointer;
+	background-color: white;
+	
+	}
+
+.v-touchkit-combobox .drop {
+	width: 25px;
+	height: 25px;
+	position: relative;
+	top: -27px;
+	background: url("VAADIN/themes/base/common/img/sprites.png") no-repeat scroll -5px -5px transparent;
+	}
+
+.v-touchkit-combobox-select-item {
+	width: 100%;
+	height: 25px;
+	cursor: pointer;
+	border-bottom: 1px solid gray;
+	background: white;
+	}
+
+.v-touchkit-combobox-select-item:hover {
+	background: blue;
+	}
+
+.v-touchkit-combobox.v-touchkit-popover{
+	overflow: visible;
+	background: popoverGradient;
+	position: relative;
+	-webkit-box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+	border-radius: 10px;
+	border: 1px solid rgba(25, 33, 40, 0.5);
+	padding: 10px;
+	}
