@@ -109,7 +109,10 @@ public class TouchKitSettings implements RequestHandler, BootstrapListener {
 
     @Override
     public void modifyBootstrapPage(BootstrapPageResponse response) {
-        UI root = vaadinServletService.findUI(response.getRequest());
+        UI root = null;
+        if (vaadinServletService != null) {
+            root = vaadinServletService.findUI(response.getRequest());
+        }
         if (root != null) {
             ensureInitialized(root);
             TouchKitSettings rootsettings = get(root);
