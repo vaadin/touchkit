@@ -1992,7 +1992,8 @@ span.v-datefield-calendarpanel-month {
 
 .v-touchkit-combobox-drop-down {
 	height: 25px;
-	border: 1px solid #999;
+	line-height: 25px;
+	border: 1px solid #c1c1c1;
 	padding: 2px;
 	cursor: pointer;
 	background-color: white;
@@ -2014,7 +2015,9 @@ span.v-datefield-calendarpanel-month {
 	border-bottom: 1px solid #c1c1c1;
 	background: touchComboBoxItemButton;
 	}
-
+.v-touchkit-combobox-select-item.empty {
+	cursor: default;
+	}
 .v-touchkit-combobox-popup-filter {
 	height: 24px;
 	line-height: 24px;
@@ -2027,7 +2030,7 @@ span.v-datefield-calendarpanel-month {
 	width: 30px; 
 	}
 
-.v-touchkit-combobox.v-touchkit-popover{
+.v-touchkit-combobox.v-touchkit-popover {
 	overflow: visible;
 	background: popoverGradient;
 	position: relative;

@@ -40,7 +40,7 @@ public class TouchComboBoxConnector extends AbstractFieldConnector implements
 
         getWidget().setCurrentSuggestions(getState().getFilteredOptions());
         getWidget().setSelection(getState().getSelectedKey());
-        getWidget().setPageLength(getState().getFilteredOptions().size());
+        getWidget().setPageLength(getState().getPageLength());
         getWidget().setHasNext(getState().isHasMore());
         getWidget().setHasPrev(getState().getPage() > 0);
         getWidget().setWidth(getState().width);

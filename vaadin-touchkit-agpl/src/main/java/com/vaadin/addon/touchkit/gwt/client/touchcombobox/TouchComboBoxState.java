@@ -24,6 +24,7 @@ public class TouchComboBoxState extends AbstractFieldState {
     private boolean nullSelectionAllowed;
     private List<TouchComboBoxOptionState> filteredOptions = new LinkedList<TouchComboBoxOptionState>();;
     private int page;
+    private int pageLength;
     private boolean hasMore;
 
     private TouchComboBoxOptionState nullSelectionItemId;
@@ -99,6 +100,14 @@ public class TouchComboBoxState extends AbstractFieldState {
 
     public void setPage(int page) {
         this.page = page;
+    }
+
+    public int getPageLength() {
+        return pageLength;
+    }
+
+    public void setPageLength(int pageLength) {
+        this.pageLength = pageLength;
     }
 
     public boolean optionsHasKey(String value) {

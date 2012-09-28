@@ -134,18 +134,42 @@ public class VTouchComboBox extends Widget implements
 
         int itemHeight = getItemHeight();
         for (TouchComboBoxOptionState option : currentSuggestions) {
-            Label itemLabel = new Label(option.caption);
-            itemLabel.setStyleName(CLASSNAME + "-select-item");
-
-            itemLabel.setHeight(itemHeight + "px");
-            itemLabel.getElement().getStyle()
-                    .setPropertyPx("line-height", itemHeight);
+            Label itemLabel = createItemLabel(option.caption, itemHeight);// new
+                                                              // Label(option.caption);
+            // itemLabel.setStyleName(CLASSNAME + "-select-item");
+            //
+            // itemLabel.setHeight(itemHeight + "px");
+            // itemLabel.getElement().getStyle()
+            // .setPropertyPx("lineHeight", itemHeight);
 
             itemLabel.addClickHandler(new SelectionClickListener(option));
             DOM.sinkEvents(itemLabel.getElement(), Event.ONCLICK);
 
             popup.addItem(itemLabel);
         }
+        if (currentSuggestions.size() < PAGE_LENGTH) {
+            for (int i = currentSuggestions.size(); i < PAGE_LENGTH; i++) {
+                Label itemLabel = createItemLabel("", itemHeight);// new
+                                                                  // Label();
+                itemLabel.addStyleName("empty");
+                // itemLabel.setStyleName(CLASSNAME + "-select-item empty");
+                //
+                // itemLabel.setHeight(itemHeight + "px");
+                // itemLabel.getElement().getStyle()
+                // .setPropertyPx("lineHeight", itemHeight);
+                popup.addItem(itemLabel);
+            }
+        }
+    }
+
+    private Label createItemLabel(String caption, int itemHeight) {
+        Label itemLabel = new Label(caption);
+        itemLabel.setStyleName(CLASSNAME + "-select-item");
+
+        itemLabel.setHeight(itemHeight + "px");
+        itemLabel.getElement().getStyle()
+                .setPropertyPx("lineHeight", itemHeight);
+        return itemLabel;
     }
 
     private int getItemHeight() {
@@ -186,12 +210,14 @@ public class VTouchComboBox extends Widget implements
 
         @Override
         public void onBrowserEvent(Event event) {
-            popup = new SelectionPopup();
-            if (Window.getClientWidth() > SMALL_SCREEN_WIDTH_THRESHOLD) {
-                popup.showNextTo(VTouchComboBox.this);
-            }
+            if (popup == null) {
+                popup = new SelectionPopup();
+                if (Window.getClientWidth() > SMALL_SCREEN_WIDTH_THRESHOLD) {
+                    popup.showNextTo(VTouchComboBox.this);
+                }
 
-            populateOptions();
+                populateOptions();
+            }
         }
     };
 
@@ -234,8 +260,6 @@ public class VTouchComboBox extends Widget implements
         }
 
         private void init() {
-            setAutoHideEnabled(false);
-
             int itemHeight = getItemHeight();
             if (itemHeight == DEFAULT_ITEM_HEIGHT) {
                 // as items have a border-bottom of 1px
@@ -304,6 +328,8 @@ public class VTouchComboBox extends Widget implements
             if (Window.getClientWidth() < SMALL_SCREEN_WIDTH_THRESHOLD) {
                 super.slideIn();
                 setPopupPosition(0, 0);
+            } else {
+                setAutoHideEnabled(true);
             }
             show();
         }

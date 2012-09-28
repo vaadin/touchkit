@@ -486,6 +486,7 @@ public class TouchComboBox extends AbstractField<Object> implements
         }
         getState().setFilteredOptions(items);
         getState().setPage(currentPage);
+        getState().setPageLength(pageLength);
     }
 
     private List<?> getFilteredOptions(boolean nullOptionVisible) {
