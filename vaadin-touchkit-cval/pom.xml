@@ -42,11 +42,10 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <!-- May be overridden by the build system -->
-        <touchkit.version>2.1.1</touchkit.version>
-        <license.short.name>cval</license.short.name>
-        <vaadin.version.maven>6.7.7</vaadin.version.maven>
-        <gwt.version>2.3.0</gwt.version>
+		<license.short.name>agpl</license.short.name>
+		<touchkit.version>3.0.0-SNAPSHOT</touchkit.version>
+		<vaadin.version.maven>7.0-SNAPSHOT</vaadin.version.maven>
+		<gwt.version>2.5.0-rc1</gwt.version>
         
         <Implementation-Version>${project.version}</Implementation-Version>
         <!-- Must not change this because of the Directory -->
@@ -88,8 +87,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
+                    <source>1.6</source>
+                    <target>1.6</target>
                     <optimize>false</optimize>
                 </configuration>
             </plugin>
@@ -174,22 +173,22 @@
         </snapshotRepository>
     </distributionManagement>
     <dependencies>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin</artifactId>
-            <version>${vaadin.version.maven}</version>
-        </dependency>
-        <!-- This is also used by gwt-maven-plugin to deduce GWT version number. -->
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-user</artifactId>
-            <version>${gwt.version}</version>
-            <scope>provided</scope>
-        </dependency>
 		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-dev</artifactId>
-			<version>${gwt.version}</version>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-server</artifactId>
+			<version>${vaadin.version.maven}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-client</artifactId>
+			<version>${vaadin.version.maven}</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-client-compiler</artifactId>
+			<version>${vaadin.version.maven}</version>
 			<scope>provided</scope>
 		</dependency>
         <dependency>
