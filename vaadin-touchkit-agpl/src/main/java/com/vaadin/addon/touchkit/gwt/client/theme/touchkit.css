@@ -71,6 +71,9 @@
 /* Table */
 @def tableSelectionGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4d8cb9), to(#3e6fa8))');
 
+/* TouchComboBox */
+@def touchComboBoxItemButton literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#fcfcfc), to(#eaeaea))');
+
 
 /* CssLayouts don't need to be overflow: hidden in webkit */
 .v-csslayout {
@@ -2006,14 +2009,22 @@ span.v-datefield-calendarpanel-month {
 
 .v-touchkit-combobox-select-item {
 	width: 100%;
-	height: 25px;
 	cursor: pointer;
-	border-bottom: 1px solid gray;
-	background: white;
+	font-weight: bold;
+	border-bottom: 1px solid #c1c1c1;
+	background: touchComboBoxItemButton;
 	}
 
-.v-touchkit-combobox-select-item:hover {
-	background: blue;
+.v-touchkit-combobox-popup-filter {
+	height: 24px;
+	line-height: 24px;
+	}
+	
+.v-touchkit-combobox-close-button {
+	position: absolute;
+	top: 7px;
+	height: 30px;
+	width: 30px; 
 	}
 
 .v-touchkit-combobox.v-touchkit-popover{
