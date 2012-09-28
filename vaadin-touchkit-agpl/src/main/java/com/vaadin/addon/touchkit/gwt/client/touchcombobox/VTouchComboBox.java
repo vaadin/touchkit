@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.CloseEvent;
@@ -45,7 +46,6 @@ public class VTouchComboBox extends Widget implements
     private int PAGE_LENGTH = 6;
 
     private Label comboBoxDropDown;
-    private Element drop;
     private SelectionPopup popup;
     private boolean hasNext, hasPrev;
 
@@ -75,11 +75,7 @@ public class VTouchComboBox extends Widget implements
         DOM.sinkEvents(comboBoxDropDown.getElement(), Event.ONCLICK);
         DOM.setEventListener(comboBoxDropDown.getElement(), elementListener);
 
-        // drop = DOM.createDiv();
-        // drop.setClassName("drop");
-
         wrapper.appendChild(comboBoxDropDown.getElement());
-        // wrapper.appendChild(drop);
 
         Window.addResizeHandler(this);
 
@@ -119,12 +115,16 @@ public class VTouchComboBox extends Widget implements
 
     public void setWidth(String width) {
         comboBoxDropDown.setWidth(width);
-        // drop.getStyle().setProperty("left",
-        // (comboBoxDropDown.getOffsetWidth() - 30) + "px");
+
+        int leftOffset = comboBoxDropDown.getOffsetWidth() - 30;
+        Style style = comboBoxDropDown.getElement().getStyle();
+        style.setProperty("background-position", leftOffset + "px -6px ");
     }
 
     /**
      * Update popup options
+     * 
+     * Always show buttons for full page length
      */
     private void populateOptions() {
         if (popup == null) {
@@ -134,13 +134,7 @@ public class VTouchComboBox extends Widget implements
 
         int itemHeight = getItemHeight();
         for (TouchComboBoxOptionState option : currentSuggestions) {
-            Label itemLabel = createItemLabel(option.caption, itemHeight);// new
-                                                              // Label(option.caption);
-            // itemLabel.setStyleName(CLASSNAME + "-select-item");
-            //
-            // itemLabel.setHeight(itemHeight + "px");
-            // itemLabel.getElement().getStyle()
-            // .setPropertyPx("lineHeight", itemHeight);
+            Label itemLabel = createItemLabel(option.caption, itemHeight);
 
             itemLabel.addClickHandler(new SelectionClickListener(option));
             DOM.sinkEvents(itemLabel.getElement(), Event.ONCLICK);
@@ -149,14 +143,9 @@ public class VTouchComboBox extends Widget implements
         }
         if (currentSuggestions.size() < PAGE_LENGTH) {
             for (int i = currentSuggestions.size(); i < PAGE_LENGTH; i++) {
-                Label itemLabel = createItemLabel("", itemHeight);// new
-                                                                  // Label();
+                Label itemLabel = createItemLabel("", itemHeight);
                 itemLabel.addStyleName("empty");
-                // itemLabel.setStyleName(CLASSNAME + "-select-item empty");
-                //
-                // itemLabel.setHeight(itemHeight + "px");
-                // itemLabel.getElement().getStyle()
-                // .setPropertyPx("lineHeight", itemHeight);
+
                 popup.addItem(itemLabel);
             }
         }
@@ -360,6 +349,7 @@ public class VTouchComboBox extends Widget implements
         @Override
         public void onClose(CloseEvent<PopupPanel> event) {
             clearItems();
+            hide();
             popup = null;
         };
 

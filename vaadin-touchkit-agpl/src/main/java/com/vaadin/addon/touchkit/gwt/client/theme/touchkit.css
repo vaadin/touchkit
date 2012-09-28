@@ -1996,18 +1996,8 @@ span.v-datefield-calendarpanel-month {
 	border: 1px solid #c1c1c1;
 	padding: 2px;
 	cursor: pointer;
-	background-color: white;
-	
+	background: url("VAADIN/themes/base/common/img/sprites.png") no-repeat scroll right -6px white;
 	}
-
-.v-touchkit-combobox .drop {
-	width: 25px;
-	height: 25px;
-	position: relative;
-	top: -27px;
-	background: url("VAADIN/themes/base/common/img/sprites.png") no-repeat scroll -5px -5px transparent;
-	}
-
 .v-touchkit-combobox-select-item {
 	width: 100%;
 	cursor: pointer;
