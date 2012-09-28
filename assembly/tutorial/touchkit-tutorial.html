@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html><head>
+
 <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8"><title></title>
 
-<link href="styles.css" rel="stylesheet" type="text/css"></head>
-<body style="direction: ltr; color: rgb(0, 0, 0);" alink="#ee0000" lang="en-US" link="#0000ee" vlink="#551a8b">
+<link href="styles.css" rel="stylesheet" type="text/css"></head><body style="direction: ltr; color: rgb(0, 0, 0);" alink="#ee0000" lang="en-US" link="#0000ee" vlink="#551a8b">
 <div style="background-color: white;" id="content" dir="ltr">
 <h1 style="font-style: normal; font-weight: normal; text-decoration: none;">Vaadin
 TouchKit in Action</h1>
@@ -27,7 +27,7 @@ browsers. With the demo app, birdwatchers can keep log of their
 observations and share interesting data with each other. Believe it or
 not, it is a fairly popular hobby in Finland. Although the example may
 not seem exactly business-centric, it contains many of characteristics
-common to most business apps.<font color="#000000"><span style="text-decoration: none;"><font face="Arial"><font size="3"><span style="font-style: normal;"><span style="font-weight: normal;"><span style="background: transparent none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;"><br>
+common to most business apps.<font color="#000000"><span style="text-decoration: none;"><font face="Arial"><font size="3"><span style="font-style: normal;"><span style="font-weight: normal;"><span style="background: transparent none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><br>
 </span></span></span></font></font></span></font></p>
 <p style="font-style: normal; font-weight: normal; text-decoration: none;">The
 tutorial will go through the following tasks:</p>
@@ -111,11 +111,14 @@ virtual folder.</p>
 <p>If you do not wish to import the Vornitologist project, you
 can inspect the source code on-line at <a href="http://dev.vaadin.com/browser/demo/vornitologist">http://dev.vaadin.com/browser/demo/vornitologist</a>.</p>
 <h3 class="western">Creating Your Own Project</h3>
+<p style="background-color: rgb(255, 102, 0);">Note, the archetype is not yet converted to Vaadin 7 support!<br>
+</p>
 <p>Creating your own project from scratch is a simple. You can
 choose to create it as a regular Vaadin project in Eclipse or as a
 Maven project using a TouchKit-specific archetype. The latter makes the
 most essential configuration for you automatically.<br>
 </p>
+
 <p>To create it as a Maven project in Eclipse:</p>
 <ol>
 <li>
@@ -190,26 +193,36 @@ widget set definition file for you.<br>
 widget set later, you need to update the project widget set with “<tt class="western">mvn vaadin:update-widgetset</tt>” and
 recompile it with “<tt class="western">mvn vaadin:compile</tt>”.</p>
 <h2 class="western">The UI Class (former Application class)</h2>
+<p style="background-color: rgb(255, 102, 0);">Note, this part of the tutorial is still outdate. Also the API's that
+will be used are likely to be changed. Currently these settings are
+accessed via TouchKitSettings in your own servlet. <a href="http://dev.vaadin.com/browser/svn/branches/vornitologist3/src/main/java/com/vornitologist/VornitologistServlet.java?rev=24587">See example here.</a><br>
+
+
+</p>
+
+
+
 <p>An ui (application) using TouchKit must extend <b>TouchKitUI</b>
 instead of the regular UIclass in Vaadin. In Vornitologist, this is
 defined in the <tt class="western">com.vornitologist.VornitologistUI.java</tt>
 file.</p>
-<pre class="western" style="margin-bottom: 0.5cm;"><font color="#7f0055"><b>public</b></font><font color="#000000"> </font><font color="#7f0055"><b>class</b></font><font color="#000000"> </font><font style="font-weight: bold;" color="#000000">Vornitologist<span style="font-family: monospace;">UI</span></font><font color="#000000"> </font><font color="#7f0055"><b>extends</b></font><font color="#000000"> TouchKitUI {<br><br><span style="font-weight: bold;">****** BADLY OUTDATED CONTENT BELOW:</span></font></pre>
-<p style="background-color: rgb(255, 102, 102);"> The
-initialization of the ui is done in the <span style="font-style: italic;">init()</span> method, as
-usual. However, you must use the special <b>TouchKitWindow</b>
-for the main window, instead of the regular <b>Window</b>.
-In Vornitologist, we configure the window in a dedicated method.</p>
-<pre style="background-color: rgb(255, 102, 102);" class="western"><font color="#7f0055"><b>private</b></font><font color="#000000"> TouchKitWindow </font><font color="#0000c0">mainWindow</font><font color="#000000">;</font>
-<br>@Override<br><font color="#7f0055"><b>public</b></font><font color="#000000"> </font><font color="#7f0055"><b>void</b></font><font color="#000000"> init() {</font><br><font color="#000000"> </font>// Custom configurations (<u>app</u> icons etc) for main window need<br><font color="#000000"> </font>// to be set eagerly as they are written on the "host page".<br><font color="#000000"> </font>ConfigureMainWindow();<br><br> <font color="#000000">setTheme(</font><font color="#2a00ff">"vornitologist"</font><font color="#000000">);</font><br><font color="#000000"> </font>// Set a nice default for user for demo purposes<br> <font color="#000000">setUser(</font><font color="#2a00ff">"Eräjorma"</font><font color="#000000">);</font> // Willy Wilderness, Skogsbörje<br>}</pre>
-<p style="background-color: rgb(255, 102, 102);"> The
-configuration of the main window is described a bit later.</p>
-<h3 style="background-color: rgb(255, 102, 102);" class="western">Configuring the Touch Device Experience</h3>
-<p style="background-color: rgb(255, 102, 102);">TouchKit
+
+<h3 style="background-color: white;" class="western">Configuring the Touch Device Experience</h3>
+<p style="background-color: rgb(255, 102, 0);">Note, this part of the tutorial is still outdate. Also the API's that
+will be used are likely to be changed. Currently these settings are
+accessed via TouchKitSettings in your own servlet. <a href="http://dev.vaadin.com/browser/svn/branches/vornitologist3/src/main/java/com/vornitologist/VornitologistServlet.java?rev=24587">See example here.</a><br>
+
+
+</p>
+
+
+
+<p style="background-color: white; text-decoration: line-through;">TouchKit
 makes it possible to integrate the Vaadin web application with the
 mobile user interface in iOS and to some extent also in Android. You
 can do the following settings:</p>
-<ul style="background-color: rgb(255, 102, 102);">
+
+<ul style="background-color: white; text-decoration: line-through;">
 <li>
 <p>Set an <i>application icon</i>, which is
 shown in the home screen</p>
@@ -231,19 +244,27 @@ application in the device</p>
 <p>Disable session expiration message (auto reload)</p>
 </li>
 </ul>
-<p style="background-color: rgb(255, 102, 102);">These
+<p style="background-color: white; text-decoration: line-through;">These
 features should be set up before window is first loaded by client like
 in the <i>init()</i> method. In Vornitologist, they are
 done in the constructor of the VornitologistWindow as follows:</p>
-<pre style="background-color: rgb(255, 102, 102);" class="western"> addApplicationIcon(VornitologistApplication.get().getURL()<br> + "VAADIN/themes/vornitologist/icon.png");<br> setStartupImage(VornitologistApplication.get().getURL()<br> + "VAADIN/themes/vornitologist/startup.png");<br> setWebAppCapable(true);<br> setPersistentSessionCookie(true);<br></pre>
-<p style="background-color: rgb(255, 102, 102);"> The
+<pre style="background-color: white; text-decoration: line-through;" class="western"> addApplicationIcon(VornitologistApplication.get().getURL()<br> + "VAADIN/themes/vornitologist/icon.png");<br> setStartupImage(VornitologistApplication.get().getURL()<br> + "VAADIN/themes/vornitologist/startup.png");<br> setWebAppCapable(true);<br> setPersistentSessionCookie(true);<br></pre>
+<p style="background-color: white; text-decoration: line-through;"> The
 normal session expiration message is not as suitable for mobile devices
 as it is for desktop browsers, so it is better to simply reload the
 application automatically. This is done in the application class of
 Vornitologist as follows:</p>
-<pre style="background-color: rgb(255, 102, 102);" class="western">/**<br> * Make application reload itself when the session has expired. Our demo <u>app</u><br>* gains nothing for showing session expired message.<br>* <font color="#3f5fbf"> * </font><font color="#7f9fbf"><b>@see</b></font><font color="#3f5fbf"> TouchKitApplication#getSystemMessages()</font><br>*/<br><font color="#7f0055"><b>public</b></font><font color="#000000"> </font><font color="#7f0055"><b>static</b></font><font color="#000000"> SystemMessages getSystemMessages() {</font><br><font color="#000000"> </font><font color="#7f0055"><b>return</b></font><font color="#000000"> </font><font color="#0000c0"><i>customizedSystemMessages</i></font><font color="#000000">;</font><br>}<br><font color="#7f0055"><b>static</b></font><font color="#000000"> CustomizedSystemMessages </font><font color="#0000c0"><i>customizedSystemMessages</i></font><font color="#000000"> =</font><br><font color="#000000"> </font><font color="#7f0055"><b>new</b></font><font color="#000000"> CustomizedSystemMessages();</font><br><font color="#7f0055"><b>static</b></font><font color="#000000"> {</font><br><font color="#000000"> </font><font color="#0000c0"><i>customizedSystemMessages</i></font><font color="#000000">.setSessionExpiredNotificationEnabled(</font><font color="#7f0055"><b>false</b></font><font color="#000000">);</font><br>}</pre>
-<h3 style="background-color: rgb(255, 102, 102);" class="western"> Global Access to Session Data</h3>
-<p style="background-color: rgb(255, 102, 102);">TouchKit
+<pre style="background-color: white; text-decoration: line-through;" class="western">/**<br> * Make application reload itself when the session has expired. Our demo <u>app</u><br>* gains nothing for showing session expired message.<br>* <font color="#3f5fbf"> * </font><font color="#7f9fbf"><b>@see</b></font><font color="#3f5fbf"> TouchKitApplication#getSystemMessages()</font><br>*/<br><font color="#7f0055"><b>public</b></font><font color="#000000"> </font><font color="#7f0055"><b>static</b></font><font color="#000000"> SystemMessages getSystemMessages() {</font><br><font color="#000000"> </font><font color="#7f0055"><b>return</b></font><font color="#000000"> </font><font color="#0000c0"><i>customizedSystemMessages</i></font><font color="#000000">;</font><br>}<br><font color="#7f0055"><b>static</b></font><font color="#000000"> CustomizedSystemMessages </font><font color="#0000c0"><i>customizedSystemMessages</i></font><font color="#000000"> =</font><br><font color="#000000"> </font><font color="#7f0055"><b>new</b></font><font color="#000000"> CustomizedSystemMessages();</font><br><font color="#7f0055"><b>static</b></font><font color="#000000"> {</font><br><font color="#000000"> </font><font color="#0000c0"><i>customizedSystemMessages</i></font><font color="#000000">.setSessionExpiredNotificationEnabled(</font><font color="#7f0055"><b>false</b></font><font color="#000000">);</font><br>}</pre>
+<h3 style="background-color: white;" class="western"> Global Access to Session Data</h3>
+<p style="background-color: rgb(255, 102, 0);">Note, this part of the tutorial is still outdate. Also the API's that
+will be used are likely to be changed. Currently these settings are
+accessed via TouchKitSettings in your own servlet. <a href="http://dev.vaadin.com/browser/svn/branches/vornitologist3/src/main/java/com/vornitologist/VornitologistServlet.java?rev=24587">See example here.</a><br>
+
+
+</p>
+
+
+<p style="background-color: white; text-decoration: line-through;">TouchKit
 includes an implementation of the <i>ThreadLocal Pattern</i>
 to make it easier to access data global in a user session, such as
 locale data. The <i>getApplication()</i>, <i>getWindow()</i>,
@@ -256,12 +277,12 @@ instance of the application object with the static <i>get()</i>
 method defined in <b>TouchKitApplication</b>. The method
 can then be used anywhere, such as in the <b>MainTabsheet</b>
 as follows:</p>
-<pre class="western" style="margin-bottom: 0.5cm; background-color: rgb(255, 102, 102);">ResourceBundle tr = Translations.<i>get</i>(VornitologistUI.<i>getApp</i>().getLocale());</pre>
-<p style="background-color: rgb(255, 102, 102);"> To avoid
+<pre class="western" style="margin-bottom: 0.5cm; background-color: white; text-decoration: line-through;">ResourceBundle tr = Translations.<i>get</i>(VornitologistUI.<i>getApp</i>().getLocale());</pre>
+<p style="background-color: white; text-decoration: line-through;"> To avoid
 casting to your application class, you can define a cast method such as
 the following in Vornitologist:</p>
-<pre style="background-color: rgb(255, 102, 102);" class="western"><font color="#7f0055"><b>public</b></font><font color="#000000"> </font><font color="#7f0055"><b>static</b></font><font color="#000000"> VornitologistUI getApp() {</font><br><font color="#7f0055"> </font><font color="#7f0055"><b>return</b></font><font color="#000000"> (VornitologistUI) </font><font color="#000000"><i>get</i></font><font color="#000000">();</font><br>}</pre>
-<p style="background-color: rgb(255, 102, 102);"> The
+<pre style="background-color: white; text-decoration: line-through;" class="western"><font color="#7f0055"><b>public</b></font><font color="#000000"> </font><font color="#7f0055"><b>static</b></font><font color="#000000"> VornitologistUI getApp() {</font><br><font color="#7f0055"> </font><font color="#7f0055"><b>return</b></font><font color="#000000"> (VornitologistUI) </font><font color="#000000"><i>get</i></font><font color="#000000">();</font><br>}</pre>
+<p style="background-color: white; text-decoration: line-through;"> The
 ThreadLocal Pattern is explained
 in detail in the Section: <a href="https://vaadin.com/book/-/page/advanced.global.html#advanced.global.threadlocal"><i><span style="font-weight: normal;">ThreadLocal Pattern</span></i></a>
 <span style="font-weight: normal;">in Book of Vaadin.</span></p>
@@ -269,7 +290,7 @@ in detail in the Section: <a href="https://vaadin.com/book/-/page/advanced.globa
 Top-Level Navigation for the Vaadin UI</h2>
 <span style="color: black; background-color: white;"> The
 user interface is initialized in the ui class when the Vaadin calls its
-<span style="font-style: italic;">init(WrappedRequest
+<span style="font-style: italic;">init(VaadinRequest
 request)</span> method. In the ui initialization you might want
 an access to screen dimensions of your device. That is possible with
 the Vaadin Page class like below.<br> </span>
@@ -301,7 +322,7 @@ different sized devices.&nbsp;
 TouchKit <b>TabBarView</b> component that has a tab bar at
 the bottom of the screen.<br>
 </p>
-<p style="text-decoration: none;" align="center"><font color="#000000"><span style="background: transparent none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;"><img src="vornitologist-maintabsheet.png" name="grafiikka6" align="bottom" border="0" height="311" width="803"></span></font></p>
+<p style="text-decoration: none;" align="center"><font color="#000000"><span style="background: transparent none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><img src="vornitologist-maintabsheet.png" name="grafiikka6" align="bottom" border="0" height="311" width="803"></span></font></p>
 <p>The <span style="font-weight: bold;">MainTabsheet</span>
 provides navigation between applications main views. The main views are:</p>
 <ul>
@@ -483,7 +504,7 @@ goal. The add-on can be used with the simple Java API. The <b>MapView</b>
 populates a vector layer containing markers of the latest observations.</p>
 <pre class="western"><font color="#7f0055"><b>public</b></font><font color="#000000"> </font><font color="#7f0055"><b>class</b></font><font color="#000000"> </font><font color="#000000"><u>MapView</u></font><font color="#000000"> </font><font color="#7f0055"><b>extends</b></font><font color="#000000"> NavigationView </font><font color="#7f0055"><b>implements</b></font><font color="#000000"> PositionCallback,</font><br>     VectorSelectedListener {<br><br><font color="#000000"> </font><font color="#7f0055"><b>  public</b></font><font color="#000000"> </font><font color="#7f0055"><b>static</b></font><font color="#000000"> StyleMap </font><font color="#0000c0"><i>STYLEMAP_BIRD_MARKER</i></font><font color="#000000">;</font><br><font color="#000000"> </font><font color="#7f0055"><b>  private</b></font><font color="#000000"> OpenLayersMap </font><font color="#0000c0">openLayersMap</font><font color="#000000">;</font><br><font color="#000000">   </font><font color="#7f0055"><b>private</b></font><font color="#000000"> </font><font color="#7f0055"><b>double</b></font><font color="#000000"> </font><font color="#0000c0">latestLongitude</font><font color="#000000">;</font><br><font color="#000000">   </font><font color="#7f0055"><b>private</b></font><font color="#000000"> </font><font color="#7f0055"><b>double</b></font><font color="#000000"> </font><font color="#0000c0">latestLatitude</font><font color="#000000">;</font><br><font color="#000000">   </font><font color="#7f0055"><b>private</b></font><font color="#000000"> VectorLayer </font><font color="#0000c0">markerLayer</font><font color="#000000"> = </font><font color="#7f0055"><b>new</b></font><font color="#000000"> VectorLayer();</font></pre>
 <h2 class="western"> Using Geolocation</h2>
-<p>Vornitologist uses the geolocation feature in TouchKit to
+<p>Geolocation is in important role in several mobile applications. Vornitologist uses the geolocation feature in TouchKit to
 display a map of the area where the user is currently located. The map
 is overlaid with observations. Observation data becomes much more
 interesting once you can see observations that are close to you. There
@@ -523,9 +544,18 @@ main view. For an example of the full-screen usage, see how the <span style="fon
 </p>
 <h2 class="western">Displaying an Alternate User Interface
 for Unsupported Browsers</h2>
-<span style="font-weight: bold;"><br>
-*** CONTENT BELOW IS TO BE CHANGED:</span>
-<p style="background-color: rgb(255, 102, 102);">TouchKit
+<span style="font-weight: bold;"><br></span>
+<p style="background-color: rgb(255, 102, 0);">Note, this part of the
+tutorial is still outdated. Vaadin 7&nbsp; has a built in support for
+displaying different ui versions for different kind of devices.<a href="http://dev.vaadin.com/browser/svn/branches/vornitologist3/src/main/java/com/vornitologist/VornitologistServlet.java?rev=24587"></a><br>
+
+
+</p>
+
+
+
+<span style="font-weight: bold;">
+</span><p style="background-color: white; text-decoration: line-through;">TouchKit
 is designed for mobile browsers and supports currently only
 WebKit-based browsers at the moment. WebKit-based desktop browsers,
 such as Safari and Chrome, can be used for testing. <br>
@@ -533,11 +563,19 @@ such as Safari and Chrome, can be used for testing. <br>
 A TouchKit user interface will not work in non-WebKit browsers. To make
 the application working for such users, you can define a <i>fallback
 ui </i>and widget set. These are defined with the <tt class="western">fallbackApplication</tt> and <tt class="western">fallbackWidgetset</tt> parameters in <tt class="western">web.xml</tt>.</p>
-<pre style="background-color: rgb(255, 102, 102);" class="western"><font color="#008080"> ...</font><br><font color="#008080"> </font><font color="#3f5fbf">&lt;!-- Also configure </font><font color="#3f5fbf"><u>fallback</u></font><font color="#3f5fbf"> </font><font color="#3f5fbf"><u>app</u></font><font color="#3f5fbf"> + </font><font color="#3f5fbf"><u>widgetset</u></font><font color="#3f5fbf"> for non </font><font color="#3f5fbf"><u>webkit</u></font><font color="#3f5fbf"> browsers --&gt;</font><br><font color="#008080"> &lt;</font><font color="#3f7f7f">init-param</font><font color="#008080">&gt;</font><br><font color="#008080"> &lt;</font><font color="#3f7f7f">description</font><font color="#008080">&gt;</font><font color="#000000"><u>Vaadin</u></font><font color="#000000"> </font><font color="#000000"><u>fallback</u></font><font color="#000000"> application class to start</font><font color="#008080">&lt;/</font><font color="#3f7f7f">description</font><font color="#008080">&gt;</font><br><font color="#008080"> &lt;</font><font color="#3f7f7f">param-name</font><font color="#008080">&gt;</font><font color="#000000">fallbackApplication</font><font color="#008080">&lt;/</font><font color="#3f7f7f">param-name</font><font color="#008080">&gt;</font><br><font color="#008080"> &lt;</font><font color="#3f7f7f">param-value</font><font color="#008080">&gt;</font><font color="#000000">com.vornitologist.VornitologistFallbackApplication</font><font color="#008080">&lt;/</font><font color="#3f7f7f">param-value</font><font color="#008080">&gt;</font><br><font color="#008080"> &lt;/</font><font color="#3f7f7f">init-param</font><font color="#008080">&gt;</font><br><font color="#008080"> </font><br><font color="#008080"> &lt;</font><font color="#3f7f7f">init-param</font><font color="#008080">&gt;</font><br><font color="#008080"> </font><font color="#000000"> </font><font color="#008080">&lt;</font><font color="#3f7f7f">description</font><font color="#008080">&gt;</font><font color="#000000">Application </font><font color="#000000"><u>widgetset</u></font><font color="#008080">&lt;/</font><font color="#3f7f7f">description</font><font color="#008080">&gt;</font><br><font color="#008080"> </font><font color="#000000"> </font><font color="#008080">&lt;</font><font color="#3f7f7f">param-name</font><font color="#008080">&gt;</font><font color="#000000">fallbackWidgetset</font><font color="#008080">&lt;/</font><font color="#3f7f7f">param-name</font><font color="#008080">&gt;</font><br><font color="#008080"> </font><font color="#000000"> </font><font color="#008080">&lt;</font><font color="#3f7f7f">param-value</font><font color="#008080">&gt;</font><font color="#000000">com.vaadin.terminal.gwt.DefaultWidgetSet</font><font color="#008080">&lt;/</font><font color="#3f7f7f">param-value</font><font color="#008080">&gt;</font><br><font color="#008080"> &lt;/</font><font color="#3f7f7f">init-param</font><font color="#008080">&gt;</font><br><font color="#008080">&lt;/</font><font color="#3f7f7f">servlet</font><font color="#008080">&gt;</font></pre>
-<p style="background-color: rgb(255, 102, 102);"> The
+<pre style="background-color: white; text-decoration: line-through;" class="western"><font color="#008080"> ...</font><br><font color="#008080"> </font><font color="#3f5fbf">&lt;!-- Also configure </font><font color="#3f5fbf"><u>fallback</u></font><font color="#3f5fbf"> </font><font color="#3f5fbf"><u>app</u></font><font color="#3f5fbf"> + </font><font color="#3f5fbf"><u>widgetset</u></font><font color="#3f5fbf"> for non </font><font color="#3f5fbf"><u>webkit</u></font><font color="#3f5fbf"> browsers --&gt;</font><br><font color="#008080"> &lt;</font><font color="#3f7f7f">init-param</font><font color="#008080">&gt;</font><br><font color="#008080"> &lt;</font><font color="#3f7f7f">description</font><font color="#008080">&gt;</font><font color="#000000"><u>Vaadin</u></font><font color="#000000"> </font><font color="#000000"><u>fallback</u></font><font color="#000000"> application class to start</font><font color="#008080">&lt;/</font><font color="#3f7f7f">description</font><font color="#008080">&gt;</font><br><font color="#008080"> &lt;</font><font color="#3f7f7f">param-name</font><font color="#008080">&gt;</font><font color="#000000">fallbackApplication</font><font color="#008080">&lt;/</font><font color="#3f7f7f">param-name</font><font color="#008080">&gt;</font><br><font color="#008080"> &lt;</font><font color="#3f7f7f">param-value</font><font color="#008080">&gt;</font><font color="#000000">com.vornitologist.VornitologistFallbackApplication</font><font color="#008080">&lt;/</font><font color="#3f7f7f">param-value</font><font color="#008080">&gt;</font><br><font color="#008080"> &lt;/</font><font color="#3f7f7f">init-param</font><font color="#008080">&gt;</font><br><font color="#008080"> </font><br><font color="#008080"> &lt;</font><font color="#3f7f7f">init-param</font><font color="#008080">&gt;</font><br><font color="#008080"> </font><font color="#000000"> </font><font color="#008080">&lt;</font><font color="#3f7f7f">description</font><font color="#008080">&gt;</font><font color="#000000">Application </font><font color="#000000"><u>widgetset</u></font><font color="#008080">&lt;/</font><font color="#3f7f7f">description</font><font color="#008080">&gt;</font><br><font color="#008080"> </font><font color="#000000"> </font><font color="#008080">&lt;</font><font color="#3f7f7f">param-name</font><font color="#008080">&gt;</font><font color="#000000">fallbackWidgetset</font><font color="#008080">&lt;/</font><font color="#3f7f7f">param-name</font><font color="#008080">&gt;</font><br><font color="#008080"> </font><font color="#000000"> </font><font color="#008080">&lt;</font><font color="#3f7f7f">param-value</font><font color="#008080">&gt;</font><font color="#000000">com.vaadin.terminal.gwt.DefaultWidgetSet</font><font color="#008080">&lt;/</font><font color="#3f7f7f">param-value</font><font color="#008080">&gt;</font><br><font color="#008080"> &lt;/</font><font color="#3f7f7f">init-param</font><font color="#008080">&gt;</font><br><font color="#008080">&lt;/</font><font color="#3f7f7f">servlet</font><font color="#008080">&gt;</font></pre>
+<p style="background-color: white; text-decoration: line-through;"> The
 fallback application can be a regular Vaadin application, a “Sorry!”
 message, or a redirection to an alternative user interface.</p>
 <h2 class="western">Building an Optimized Widget Set</h2>
+<p style="background-color: rgb(255, 102, 0);">Note, this part of the tutorial is still outdated. Also the API's that
+will be used are likely to be changed as Vaadin API on this area is still unstable<a href="http://dev.vaadin.com/browser/svn/branches/vornitologist3/src/main/java/com/vornitologist/VornitologistServlet.java?rev=24587">.</a><br>
+
+
+</p>
+
+
+
 <p>Mobile networks are generally somewhat slower than DSL
 Internet connections. When starting a Vaadin application, the widget
 set is the biggest resource that needs to be loaded in the browser. As
@@ -582,6 +620,13 @@ the amount of transferred data. The best method for doing this highly
 depends on your hosting setup so we do not cover this in this tutorial.<br>
 <span style="font-weight: bold;"></span></p>
 <h2>Creating an Offline Mode for "Outback Access"</h2>
+<p style="background-color: rgb(255, 102, 0);">Note, this part of the tutorial is still outdate. Offline mode setup still don't work propertly on Vaadin 7.<a href="http://dev.vaadin.com/browser/svn/branches/vornitologist3/src/main/java/com/vornitologist/VornitologistServlet.java?rev=24587"></a><br>
+
+
+</p>
+
+
+
 <p>Consider that you are a typical end user of Vornitologist, an
 ornitologist yourself, and you travel to the middle of Australia for a
 bird watching trip. Although modern mobile networks cover most places
@@ -589,7 +634,8 @@ nowadays, the network still is not always reachable. The "Java only on
 the server-side" architecture of Vaadin is great for improving the
 productivity of developers, but it has a problem if the server-side is
 not there.</p>
-<p style="background-color: rgb(255, 102, 102);">Despite
+
+<p style="background-color: white;">Despite
 the server-centric approach of Vaadin and TouchKit, there is a method
 to build parts of the user interface so that it can work offline.
 TouchKit creates a so-called <i>HTML5 cache manifest</i>
@@ -598,7 +644,7 @@ these resources, an application can start up without any connection to
 network. By default, if the connection is down, only a dialog stating
 the situation is displayed. This "off-line application" can easily be
 overridden with a custom offline mode written with plain GWT code.</p>
-<p style="background-color: rgb(255, 102, 102);">Let us
+<p style="background-color: white;">Let us
 consider a simple offline mode for Vornitologist that you can use to
 add observations of birds. Observations are stored temporarily in the
 HTML5 local storage until the server connection is up again. At that
