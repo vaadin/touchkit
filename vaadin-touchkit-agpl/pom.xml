@@ -299,7 +299,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-themes-compiled</artifactId>
+			<artifactId>vaadin-themes</artifactId>
 			<version>${vaadin.version.maven}</version>
 			<scope>test</scope>
 		</dependency>
