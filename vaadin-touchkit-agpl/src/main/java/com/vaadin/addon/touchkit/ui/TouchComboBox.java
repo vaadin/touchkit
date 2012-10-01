@@ -31,7 +31,6 @@ import com.vaadin.server.Resource;
 import com.vaadin.shared.ui.combobox.FilteringMode;
 import com.vaadin.ui.AbstractField;
 import com.vaadin.ui.AbstractSelect;
-import com.vaadin.ui.AbstractSelect.NewItemHandler;
 
 public class TouchComboBox extends AbstractField<Object> implements
         AbstractSelect.Filtering, FieldEvents.BlurNotifier,
@@ -160,7 +159,6 @@ public class TouchComboBox extends AbstractField<Object> implements
 
     // Null (empty) selection is enabled by default
     private boolean nullSelectionAllowed = true;
-    private NewItemHandler newItemHandler;
 
     // Caption (Item / Property) change listeners
     CaptionChangeListener captionChangeListener;
@@ -179,15 +177,11 @@ public class TouchComboBox extends AbstractField<Object> implements
         @Override
         public void selectionEvent(String key) {
             if (itemIdMapper.get(key) != null) {
-                currentPage = 0;
-                prevfilterstring = filterstring;
-                filterstring = "";
+                clearPageAndFilter();
                 updateOptions();
                 setValue(itemIdMapper.get(key));
             } else if (isNullSelectionAllowed()) {
-                currentPage = 0;
-                prevfilterstring = filterstring;
-                filterstring = "";
+                clearPageAndFilter();
                 updateOptions();
                 setValue(null);
             }
@@ -207,8 +201,14 @@ public class TouchComboBox extends AbstractField<Object> implements
 
         @Override
         public void clearPageNumber() {
-            currentPage = 0;
+            clearPageAndFilter();
             updateOptions();
+        }
+
+        private void clearPageAndFilter() {
+            currentPage = 0;
+            prevfilterstring = filterstring;
+            filterstring = "";
         }
     };
 

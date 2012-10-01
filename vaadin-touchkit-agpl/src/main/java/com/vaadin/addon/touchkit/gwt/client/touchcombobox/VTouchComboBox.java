@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -37,8 +38,7 @@ public class VTouchComboBox extends Widget implements
 
     private static final String CLASSNAME = "v-touchkit-combobox";
 
-    private static final int DEFAULT_ITEM_HEIGHT = 25;
-    private static final int TEXT_FIELD_DECORATION = 6;
+    private static final int DEFAULT_ITEM_HEIGHT = 30;
     private static final int SMALL_SCREEN_WIDTH_THRESHOLD = 500;
 
     private int PAGE_LENGTH = 6;
@@ -230,6 +230,7 @@ public class VTouchComboBox extends Widget implements
     @Override
     public void onResize(ResizeEvent event) {
         if (popup != null) {
+            popup.updateHeight();
             populateOptions();
         }
     };
@@ -238,10 +239,18 @@ public class VTouchComboBox extends Widget implements
 
         final FlowPanel select = new FlowPanel();
         final HorizontalPanel header = new HorizontalPanel();
-        final TextBox filter = new TextBox();
+        final TextBox filter = TextBox.wrap(createInputElement(Document.get(),
+                "search"));
         final FlowPanel content = new FlowPanel();
 
         Button next, prev;
+
+        public native InputElement createInputElement(Document doc, String type)
+        /*-{
+            var e = doc.createElement("INPUT");
+            e.type = type;
+            return e;
+        }-*/;
 
         public SelectionPopup() {
             init();
@@ -249,16 +258,11 @@ public class VTouchComboBox extends Widget implements
         }
 
         private void init() {
-            int itemHeight = getItemHeight();
-            if (itemHeight == DEFAULT_ITEM_HEIGHT) {
-                // as items have a border-bottom of 1px
-                itemHeight++;
-            }
 
             int boxWidth = getBoxWidth();
 
-            select.setHeight((HEADER_HEIGHT + SEARCH_FIELD_HEIGHT + (itemHeight * PAGE_LENGTH))
-                    + "px");
+            updateHeight();
+
             select.setWidth(boxWidth + "px");
             select.getElement().getStyle().setBackgroundColor("white");
             select.setStyleName("v-touchkit-popover");
@@ -266,11 +270,12 @@ public class VTouchComboBox extends Widget implements
                 select.addStyleName(VTouchComboBox.CLASSNAME);
             }
 
-            filter.setWidth(boxWidth - TEXT_FIELD_DECORATION + "px");
+            filter.setWidth(boxWidth + "px");
             filter.setStyleName("v-touchkit-combobox-popup-filter");
             filter.setValue(comboBoxDropDown.getText());
+            filter.getElement().getStyle()
+                    .setProperty("-webkit-appearance", "textfield");
 
-            content.setHeight((itemHeight * PAGE_LENGTH) + "px");
             content.setWidth(boxWidth + "px");
 
             header.setHeight(HEADER_HEIGHT + "px");
@@ -298,8 +303,6 @@ public class VTouchComboBox extends Widget implements
                 close.addClickHandler(new ClickHandler() {
 
                     public void onClick(ClickEvent event) {
-                        VTouchComboBox.this.fireEvent(new PageEvent(
-                                PageEventType.CLOSE));
                         hide();
                     }
                 });
@@ -350,10 +353,23 @@ public class VTouchComboBox extends Widget implements
             content.clear();
         }
 
+        public void updateHeight() {
+            int itemHeight = getItemHeight();
+            if (itemHeight == DEFAULT_ITEM_HEIGHT) {
+                // as items have a border-bottom of 1px
+                itemHeight++;
+            }
+
+            select.setHeight((HEADER_HEIGHT + SEARCH_FIELD_HEIGHT + (itemHeight * PAGE_LENGTH))
+                    + "px");
+            content.setHeight((itemHeight * PAGE_LENGTH) + "px");
+        }
+
         @Override
         public void onClose(CloseEvent<PopupPanel> event) {
             clearItems();
             hide();
+            VTouchComboBox.this.fireEvent(new PageEvent(PageEventType.CLOSE));
             popup = null;
         };
 
