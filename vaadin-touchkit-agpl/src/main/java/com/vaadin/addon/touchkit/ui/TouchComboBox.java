@@ -108,11 +108,6 @@ public class TouchComboBox extends AbstractField<Object> implements
     protected Container items;
 
     /**
-     * Is the user allowed to add new options?
-     */
-    private boolean allowNewOptions;
-
-    /**
      * Keymapper used to map key values.
      */
     protected KeyMapper<Object> itemIdMapper = new KeyMapper<Object>();
@@ -178,7 +173,7 @@ public class TouchComboBox extends AbstractField<Object> implements
             currentPage = 0;
             prevfilterstring = filterstring;
             filterstring = filter.toLowerCase();
-            updateOptions(false);
+            updateOptions();
         }
 
         @Override
@@ -187,27 +182,33 @@ public class TouchComboBox extends AbstractField<Object> implements
                 currentPage = 0;
                 prevfilterstring = filterstring;
                 filterstring = "";
-                updateOptions(false);
+                updateOptions();
                 setValue(itemIdMapper.get(key));
+            } else if (isNullSelectionAllowed()) {
+                currentPage = 0;
+                prevfilterstring = filterstring;
+                filterstring = "";
+                updateOptions();
+                setValue(null);
             }
         }
 
         @Override
         public void next() {
             currentPage++;
-            updateOptions(false);
+            updateOptions();
         }
 
         @Override
         public void previous() {
             currentPage--;
-            updateOptions(false);
+            updateOptions();
         }
 
         @Override
         public void clearPageNumber() {
             currentPage = 0;
-            updateOptions(false);
+            updateOptions();
         }
     };
 
@@ -283,7 +284,7 @@ public class TouchComboBox extends AbstractField<Object> implements
      * {@link #canUseContainerFilter()}).
      * 
      * Use {@link #getFilteredOptions()} and
-     * {@link #sanitetizeList(List, boolean)} if this is not the case.
+     * {@link #handleNullSelection(List, boolean)} if this is not the case.
      * 
      * @param needNullSelectOption
      * @return filtered list of options (may be empty) or null if cannot use
@@ -310,7 +311,9 @@ public class TouchComboBox extends AbstractField<Object> implements
             filterable.addContainerFilter(filter);
         }
         try {
-            return new ArrayList<Object>(container.getItemIds());
+            List<Object> options = new ArrayList<Object>(container.getItemIds());
+            handleNullSelection(options, needNullSelectOption);
+            return options;
         } finally {
             // to the outside, filtering should not be visible
             if (filter != null) {
@@ -353,23 +356,17 @@ public class TouchComboBox extends AbstractField<Object> implements
         return filter;
     }
 
-    /**
-     * Makes correct sublist of given list of options.
-     * 
-     * If paint is not an option request (affected by page or filter change),
-     * page will be the one where possible selection exists.
-     * 
-     * Detects proper first and last item in list to return right page of
-     * options. Also, if the current page is beyond the end of the list, it will
-     * be adjusted.
-     * 
-     * @param options
-     * @param needNullSelectOption
-     *            flag to indicate if nullselect option needs to be taken into
-     *            consideration
-     */
-    private List<?> sanitetizeList(List<?> options, boolean needNullSelectOption) {
-        return options;
+    private void handleNullSelection(List<Object> options,
+            boolean needNullSelectOption) {
+        if (needNullSelectOption) {
+            if (getNullSelectionItemId() == null) {
+                options.add(0, null);
+            }
+        } else if (options.contains(getNullSelectionItemId())
+                && options.indexOf(getNullSelectionItemId()) != 0) {
+            options.remove(getNullSelectionItemId());
+            options.add(0, getNullSelectionItemId());
+        }
     }
 
     /**
@@ -461,7 +458,7 @@ public class TouchComboBox extends AbstractField<Object> implements
         getState().width = width;
     }
 
-    private void updateOptions(boolean addNotifier) {
+    private void updateOptions() {
         boolean nullFilteredOut = isNullFilteredOut();
         boolean nullOptionVisible = isNullOptionVisible(nullFilteredOut);
         List<?> options = getFilteredOptions(nullOptionVisible);
@@ -495,8 +492,9 @@ public class TouchComboBox extends AbstractField<Object> implements
             // not able to use container filters, perform explicit in-memory
             // filtering
             options = getFilteredOptions();
-            options = sanitetizeList(options, nullOptionVisible);
+            handleNullSelection((List<Object>) options, nullOptionVisible);
         }
+
         if (!options.isEmpty()) {
             int startIndex = currentPage * pageLength;
             int endIndex = startIndex + pageLength;
@@ -519,7 +517,7 @@ public class TouchComboBox extends AbstractField<Object> implements
         TouchComboBoxOptionState itemState = new TouchComboBoxOptionState();
         itemState.setKey(itemIdMapper.key(id));
         itemState.caption = getItemCaption(id);
-        // itemState.setResource(getItemIcon(id));
+        // setIcon(getItemIcon(id));
 
         return itemState;
     }
@@ -889,7 +887,7 @@ public class TouchComboBox extends AbstractField<Object> implements
              */
             setValue(null);
 
-            updateOptions(true);
+            updateOptions();
         }
     }
 
@@ -930,34 +928,6 @@ public class TouchComboBox extends AbstractField<Object> implements
     }
 
     /**
-     * Does the select allow adding new options by the user. If true, the new
-     * options can be added to the Container. The text entered by the user is
-     * used as id. Note that data-source must allow adding new items.
-     * 
-     * @return True if additions are allowed.
-     */
-    public boolean isNewItemsAllowed() {
-        return allowNewOptions;
-    }
-
-    /**
-     * Enables or disables possibility to add new options by the user.
-     * 
-     * @param allowNewOptions
-     *            the New value of property allowNewOptions.
-     */
-    public void setNewItemsAllowed(boolean allowNewOptions) {
-
-        // Only handle change requests
-        if (this.allowNewOptions != allowNewOptions) {
-
-            this.allowNewOptions = allowNewOptions;
-
-            getState().setNewItemsAllowed(allowNewOptions);
-        }
-    }
-
-    /**
      * Override the caption of an item. Setting caption explicitly overrides id,
      * item and index captions.
      * 
@@ -969,7 +939,7 @@ public class TouchComboBox extends AbstractField<Object> implements
     public void setItemCaption(Object itemId, String caption) {
         if (itemId != null) {
             itemCaptions.put(itemId, caption);
-            updateOptions(true);
+            updateOptions();
         }
     }
 
@@ -1055,7 +1025,7 @@ public class TouchComboBox extends AbstractField<Object> implements
             } else {
                 itemIcons.put(itemId, icon);
             }
-            updateOptions(true);
+            updateOptions();
         }
     }
 
@@ -1121,7 +1091,7 @@ public class TouchComboBox extends AbstractField<Object> implements
     public void setItemCaptionMode(ItemCaptionMode mode) {
         if (mode != null) {
             itemCaptionMode = mode;
-            updateOptions(true);
+            updateOptions();
         }
     }
 
@@ -1184,13 +1154,13 @@ public class TouchComboBox extends AbstractField<Object> implements
         if (propertyId != null) {
             itemCaptionPropertyId = propertyId;
             setItemCaptionMode(ItemCaptionMode.PROPERTY);
-            updateOptions(true);
+            updateOptions();
         } else {
             itemCaptionPropertyId = null;
             if (getItemCaptionMode() == ItemCaptionMode.PROPERTY) {
                 setItemCaptionMode(ItemCaptionMode.EXPLICIT_DEFAULTS_ID);
             }
-            updateOptions(true);
+            updateOptions();
         }
     }
 
@@ -1242,7 +1212,7 @@ public class TouchComboBox extends AbstractField<Object> implements
             throw new IllegalArgumentException(
                     "Property type must be assignable to Resource");
         }
-        updateOptions(true);
+        updateOptions();
     }
 
     /**
@@ -1390,7 +1360,7 @@ public class TouchComboBox extends AbstractField<Object> implements
                         .containerPropertySetChange(event);
             }
         }
-        updateOptions(true);
+        updateOptions();
     }
 
     /**
@@ -1406,7 +1376,7 @@ public class TouchComboBox extends AbstractField<Object> implements
                         .containerItemSetChange(event);
             }
         }
-        updateOptions(true);
+        updateOptions();
     }
 
     /**
@@ -1527,6 +1497,7 @@ public class TouchComboBox extends AbstractField<Object> implements
     public void setNullSelectionItemId(Object nullSelectionItemId) {
         this.nullSelectionItemId = nullSelectionItemId;
         getState().setNullSelectionItemId(createItemState(nullSelectionItemId));
+        updateOptions();
     }
 
     /**
@@ -1633,13 +1604,13 @@ public class TouchComboBox extends AbstractField<Object> implements
 
         @Override
         public void valueChange(com.vaadin.data.Property.ValueChangeEvent event) {
-            updateOptions(true);
+            updateOptions();
         }
 
         @Override
         public void itemPropertySetChange(
                 com.vaadin.data.Item.PropertySetChangeEvent event) {
-            updateOptions(true);
+            updateOptions();
         }
 
     }

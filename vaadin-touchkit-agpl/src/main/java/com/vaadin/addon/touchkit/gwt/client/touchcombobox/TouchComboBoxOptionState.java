@@ -6,7 +6,6 @@ public class TouchComboBoxOptionState extends ComponentState {
 
     private static final long serialVersionUID = 6321196555049250896L;
 
-    // private Resource icon;
     private String key;
 
     public String getKey() {

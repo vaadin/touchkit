@@ -39,10 +39,16 @@ public class TouchComboBoxConnector extends AbstractFieldConnector implements
         super.onStateChanged(stateChangeEvent);
 
         getWidget().setCurrentSuggestions(getState().getFilteredOptions());
-        getWidget().setSelection(getState().getSelectedKey());
+        if (getState().getSelectedKey() == null
+                && getState().getNullSelectionItemId() != null) {
+            getWidget().setSelection(
+                    getState().getNullSelectionItemId().caption);
+        } else {
+            getWidget().setSelection(getState().getSelectedKey());
+        }
         getWidget().setPageLength(getState().getPageLength());
-        getWidget().setHasNext(getState().isHasMore());
         getWidget().setHasPrev(getState().getPage() > 0);
+        getWidget().setHasNext(getState().isHasMore());
         getWidget().setWidth(getState().width);
     }
 
@@ -58,7 +64,9 @@ public class TouchComboBoxConnector extends AbstractFieldConnector implements
 
     @Override
     public void onValueChange(ValueChangeEvent<String> event) {
-        if (getState().optionsHasKey(event.getValue())) {
+        if (getState().optionsHasKey(event.getValue())
+                || (event.getValue() == null && getState()
+                        .isNullSelectionAllowed())) {
             rpc.selectionEvent(event.getValue());
         } else {
             rpc.textValueChanged(event.getValue());

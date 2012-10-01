@@ -37,16 +37,16 @@ public class VTouchComboBox extends Widget implements
 
     private static final String CLASSNAME = "v-touchkit-combobox";
 
-    private static final int SMALL_SCREEN_WIDTH_THRESHOLD = 500;
     private static final int DEFAULT_ITEM_HEIGHT = 25;
     private static final int TEXT_FIELD_DECORATION = 6;
+    private static final int SMALL_SCREEN_WIDTH_THRESHOLD = 500;
 
+    private int PAGE_LENGTH = 6;
     private int HEADER_HEIGHT = 35;
     private int SEARCH_FIELD_HEIGHT = 30;
-    private int PAGE_LENGTH = 6;
 
-    private Label comboBoxDropDown;
     private SelectionPopup popup;
+    private Label comboBoxDropDown;
     private boolean hasNext, hasPrev;
 
     /**
@@ -55,11 +55,11 @@ public class VTouchComboBox extends Widget implements
      */
     protected final List<TouchComboBoxOptionState> currentSuggestions = new ArrayList<TouchComboBoxOptionState>();
 
-    protected boolean allowNewItem;
-    protected boolean nullSelectionAllowed;
-    protected boolean nullSelectItem;
     protected boolean enabled;
     protected boolean readonly;
+    protected boolean allowNewItem;
+    protected boolean nullSelectionAllowed;
+    protected TouchComboBoxOptionState nullSelectionItemId;
 
     /**
      * Create new TouchKit ComboBox
@@ -73,7 +73,7 @@ public class VTouchComboBox extends Widget implements
         comboBoxDropDown.setStyleName(CLASSNAME + "-drop-down");
 
         DOM.sinkEvents(comboBoxDropDown.getElement(), Event.ONCLICK);
-        DOM.setEventListener(comboBoxDropDown.getElement(), elementListener);
+        DOM.setEventListener(comboBoxDropDown.getElement(), dropDownListener);
 
         wrapper.appendChild(comboBoxDropDown.getElement());
 
@@ -195,7 +195,7 @@ public class VTouchComboBox extends Widget implements
         }
     };
 
-    private EventListener elementListener = new EventListener() {
+    private EventListener dropDownListener = new EventListener() {
 
         @Override
         public void onBrowserEvent(Event event) {
@@ -276,19 +276,6 @@ public class VTouchComboBox extends Widget implements
             header.setHeight(HEADER_HEIGHT + "px");
             header.setWidth("100%");
 
-            final Button close = new Button("x");
-            close.setStyleName("v-touchkit-combobox-close-button");
-            close.getElement().getStyle()
-                    .setProperty("left", (boxWidth / 2 - 12) + "px");
-            close.addClickHandler(new ClickHandler() {
-
-                public void onClick(ClickEvent event) {
-                    VTouchComboBox.this.fireEvent(new PageEvent(
-                            PageEventType.CLOSE));
-                    hide();
-                }
-            });
-
             next = new Button("next");
             next.setStyleName("v-touchkit-navbar-right v-touchkit-navbutton-forward");
             next.addClickHandler(new NavigationClickListener(PageEventType.NEXT));
@@ -302,7 +289,24 @@ public class VTouchComboBox extends Widget implements
             updateNextButton();
 
             header.add(prev);
-            header.add(close);
+
+            if (Window.getClientWidth() < SMALL_SCREEN_WIDTH_THRESHOLD) {
+                final Button close = new Button("x");
+                close.setStyleName("v-touchkit-combobox-close-button");
+                close.getElement().getStyle()
+                        .setProperty("left", (boxWidth / 2 - 12) + "px");
+                close.addClickHandler(new ClickHandler() {
+
+                    public void onClick(ClickEvent event) {
+                        VTouchComboBox.this.fireEvent(new PageEvent(
+                                PageEventType.CLOSE));
+                        hide();
+                    }
+                });
+
+                header.add(close);
+            }
+
             header.add(next);
 
             select.add(header);

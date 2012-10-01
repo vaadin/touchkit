@@ -20,7 +20,6 @@ public class TouchComboBoxState extends AbstractFieldState {
     private boolean textInputAllowed;
 
     private String selectedKey;
-    private boolean newItemsAllowed;
     private boolean nullSelectionAllowed;
     private List<TouchComboBoxOptionState> filteredOptions = new LinkedList<TouchComboBoxOptionState>();;
     private int page;
@@ -67,14 +66,6 @@ public class TouchComboBoxState extends AbstractFieldState {
 
     public void setSelectedKey(String selectedKey) {
         this.selectedKey = selectedKey;
-    }
-
-    public boolean isNewItemsAllowed() {
-        return newItemsAllowed;
-    }
-
-    public void setNewItemsAllowed(boolean newItemsAllowed) {
-        this.newItemsAllowed = newItemsAllowed;
     }
 
     public boolean isNullSelectionAllowed() {
