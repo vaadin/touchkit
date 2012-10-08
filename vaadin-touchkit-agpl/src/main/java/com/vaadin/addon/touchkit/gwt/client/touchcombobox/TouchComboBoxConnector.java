@@ -46,6 +46,10 @@ public class TouchComboBoxConnector extends AbstractFieldConnector implements
         } else {
             getWidget().setSelection(getState().getSelectedKey());
         }
+        getWidget().clearIcons();
+        for(TouchComboBoxOptionState state : getState().getFilteredOptions()){
+            getWidget().putIcon(state.getKey(), getResourceUrl(state.getKey()));
+        }
         getWidget().setPageLength(getState().getPageLength());
         getWidget().setHasPrev(getState().getPage() > 0);
         getWidget().setHasNext(getState().isHasMore());

@@ -1,7 +1,9 @@
 package com.vaadin.addon.touchkit.gwt.client.touchcombobox;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
@@ -9,6 +11,8 @@ import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.event.logical.shared.ResizeEvent;
@@ -19,6 +23,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -29,21 +34,22 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.addon.touchkit.gwt.client.popover.VPopover;
 import com.vaadin.addon.touchkit.gwt.client.touchcombobox.PageEvent.PageEventType;
+import com.vaadin.client.VConsole;
 
 /**
- * 
+ * TouchComboBox client side implementation.
  */
 public class VTouchComboBox extends Widget implements
         HasValueChangeHandlers<String>, ResizeHandler {
 
     private static final String CLASSNAME = "v-touchkit-combobox";
 
-    private static final int DEFAULT_ITEM_HEIGHT = 30;
+    private static final int DEFAULT_ITEM_HEIGHT = 40;
     private static final int SMALL_SCREEN_WIDTH_THRESHOLD = 500;
 
     private int PAGE_LENGTH = 6;
-    private int HEADER_HEIGHT = 35;
-    private int SEARCH_FIELD_HEIGHT = 30;
+    private int HEADER_HEIGHT = 45;
+    private int SEARCH_FIELD_HEIGHT = 40;
 
     private SelectionPopup popup;
     private Label comboBoxDropDown;
@@ -54,6 +60,7 @@ public class VTouchComboBox extends Widget implements
      * server.
      */
     protected final List<TouchComboBoxOptionState> currentSuggestions = new ArrayList<TouchComboBoxOptionState>();
+    protected Map<String, String> itemIcons = new HashMap<String, String>();
 
     protected boolean enabled;
     protected boolean readonly;
@@ -79,8 +86,8 @@ public class VTouchComboBox extends Widget implements
 
         Window.addResizeHandler(this);
 
-        if (Window.getClientWidth() < SMALL_SCREEN_WIDTH_THRESHOLD) {
-            HEADER_HEIGHT = 42;
+        if (isSmallScreen()) {
+            HEADER_HEIGHT = 52;
         }
 
         setStyleName(CLASSNAME);
@@ -95,6 +102,14 @@ public class VTouchComboBox extends Widget implements
 
     public void setSelection(String selection) {
         comboBoxDropDown.setText(selection);
+    }
+
+    public void clearIcons() {
+        itemIcons.clear();
+    }
+
+    public void putIcon(String key, String icon) {
+        itemIcons.put(key, icon);
     }
 
     public void setPageLength(int length) {
@@ -132,9 +147,14 @@ public class VTouchComboBox extends Widget implements
         }
         popup.clearItems();
 
-        int itemHeight = getItemHeight();
+        int itemHeight = DEFAULT_ITEM_HEIGHT;
         for (TouchComboBoxOptionState option : currentSuggestions) {
             Label itemLabel = createItemLabel(option.caption, itemHeight);
+
+            if (itemIcons.containsKey(option.getKey())) {
+                itemLabel.getElement().getStyle()
+                        .setBackgroundImage(itemIcons.get(option.getKey()));
+            }
 
             itemLabel.addClickHandler(new SelectionClickListener(option));
             DOM.sinkEvents(itemLabel.getElement(), Event.ONCLICK);
@@ -158,20 +178,19 @@ public class VTouchComboBox extends Widget implements
         itemLabel.setHeight(itemHeight + "px");
         itemLabel.getElement().getStyle()
                 .setPropertyPx("lineHeight", itemHeight);
+
         return itemLabel;
     }
 
-    private int getItemHeight() {
-        int clientHeight = Window.getClientHeight();
-        int itemHeight;
-        if (clientHeight > (PAGE_LENGTH * DEFAULT_ITEM_HEIGHT)
-                && Window.getClientWidth() < SMALL_SCREEN_WIDTH_THRESHOLD) {
-            itemHeight = (clientHeight - HEADER_HEIGHT - SEARCH_FIELD_HEIGHT)
-                    / PAGE_LENGTH;
-        } else {
-            itemHeight = DEFAULT_ITEM_HEIGHT;
+    private boolean isPortrait() {
+        return Window.getClientHeight() > Window.getClientWidth();
+    }
+
+    private boolean isSmallScreen() {
+        if (isPortrait()) {
+            return Window.getClientWidth() < SMALL_SCREEN_WIDTH_THRESHOLD;
         }
-        return itemHeight;
+        return Window.getClientHeight() < SMALL_SCREEN_WIDTH_THRESHOLD;
     }
 
     /**
@@ -201,7 +220,7 @@ public class VTouchComboBox extends Widget implements
         public void onBrowserEvent(Event event) {
             if (popup == null) {
                 popup = new SelectionPopup();
-                if (Window.getClientWidth() > SMALL_SCREEN_WIDTH_THRESHOLD) {
+                if (!isSmallScreen()) {
                     popup.showNextTo(VTouchComboBox.this);
                 }
 
@@ -230,7 +249,7 @@ public class VTouchComboBox extends Widget implements
     @Override
     public void onResize(ResizeEvent event) {
         if (popup != null) {
-            popup.updateHeight();
+            popup.updateSize();
             populateOptions();
         }
     };
@@ -243,7 +262,9 @@ public class VTouchComboBox extends Widget implements
                 "search"));
         final FlowPanel content = new FlowPanel();
 
-        Button next, prev;
+        Timer refresh = null;
+
+        Button next, prev, close;
 
         public native InputElement createInputElement(Document doc, String type)
         /*-{
@@ -261,12 +282,12 @@ public class VTouchComboBox extends Widget implements
 
             int boxWidth = getBoxWidth();
 
-            updateHeight();
+            updateSize();
 
             select.setWidth(boxWidth + "px");
             select.getElement().getStyle().setBackgroundColor("white");
             select.setStyleName("v-touchkit-popover");
-            if (Window.getClientWidth() > SMALL_SCREEN_WIDTH_THRESHOLD) {
+            if (!isSmallScreen()) {
                 select.addStyleName(VTouchComboBox.CLASSNAME);
             }
 
@@ -275,6 +296,29 @@ public class VTouchComboBox extends Widget implements
             filter.setValue(comboBoxDropDown.getText());
             filter.getElement().getStyle()
                     .setProperty("-webkit-appearance", "textfield");
+            filter.addKeyUpHandler(new KeyUpHandler() {
+
+                @Override
+                public void onKeyUp(KeyUpEvent event) {
+                    if (refresh != null) {
+                        refresh.cancel();
+                    }
+                    try {
+                        refresh = new Timer() {
+
+                            @Override
+                            public void run() {
+                                ValueChangeEvent.fire(VTouchComboBox.this,
+                                        filter.getValue());
+                                refresh = null;
+                            }
+                        };
+                        refresh.schedule(1500);
+                    } catch (Throwable alert) {
+                        VConsole.error(alert.getMessage());
+                    }
+                }
+            });
 
             content.setWidth(boxWidth + "px");
 
@@ -295,8 +339,8 @@ public class VTouchComboBox extends Widget implements
 
             header.add(prev);
 
-            if (Window.getClientWidth() < SMALL_SCREEN_WIDTH_THRESHOLD) {
-                final Button close = new Button("x");
+            if (isSmallScreen()) {
+                close = new Button("x");
                 close.setStyleName("v-touchkit-combobox-close-button");
                 close.getElement().getStyle()
                         .setProperty("left", (boxWidth / 2 - 12) + "px");
@@ -321,7 +365,7 @@ public class VTouchComboBox extends Widget implements
             select.add(content);
             setWidget(select);
 
-            if (Window.getClientWidth() < SMALL_SCREEN_WIDTH_THRESHOLD) {
+            if (isSmallScreen()) {
                 super.slideIn();
                 setPopupPosition(0, 0);
             } else {
@@ -331,8 +375,11 @@ public class VTouchComboBox extends Widget implements
         }
 
         private int getBoxWidth() {
-            if (Window.getClientWidth() < SMALL_SCREEN_WIDTH_THRESHOLD) {
+            if (isSmallScreen()) {
+                // if (isPortrait()) {
                 return Window.getClientWidth();
+                // }
+                // return Window.getClientHeight();
             }
             return comboBoxDropDown.getOffsetWidth();
         }
@@ -353,16 +400,19 @@ public class VTouchComboBox extends Widget implements
             content.clear();
         }
 
-        public void updateHeight() {
-            int itemHeight = getItemHeight();
-            if (itemHeight == DEFAULT_ITEM_HEIGHT) {
-                // as items have a border-bottom of 1px
-                itemHeight++;
-            }
+        public void updateSize() {
+            int newWidth = getBoxWidth();
 
-            select.setHeight((HEADER_HEIGHT + SEARCH_FIELD_HEIGHT + (itemHeight * PAGE_LENGTH))
-                    + "px");
-            content.setHeight((itemHeight * PAGE_LENGTH) + "px");
+            if (close != null) {
+                close.getElement().getStyle()
+                        .setProperty("left", (newWidth / 2 - 12) + "px");
+            }
+            header.setWidth(newWidth + "px");
+            select.setWidth(newWidth + "px");
+            filter.setWidth(newWidth + "px");
+            content.setWidth(newWidth + "px");
+            setWidth(newWidth + "px");
+            // Window.getClientHeight()
         }
 
         @Override

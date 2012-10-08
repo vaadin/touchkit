@@ -517,7 +517,7 @@ public class TouchComboBox extends AbstractField<Object> implements
         TouchComboBoxOptionState itemState = new TouchComboBoxOptionState();
         itemState.setKey(itemIdMapper.key(id));
         itemState.caption = getItemCaption(id);
-        // setIcon(getItemIcon(id));
+        setResource(itemIdMapper.key(id), getItemIcon(id));
 
         return itemState;
     }
