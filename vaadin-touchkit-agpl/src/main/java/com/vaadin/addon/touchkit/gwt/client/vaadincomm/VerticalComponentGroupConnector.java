@@ -55,7 +55,6 @@ public class VerticalComponentGroupConnector extends AbstractLayoutConnector {
             getWidget().setIcon(widget, url);
         }
 
-        super.onConnectorHierarchyChange(event);
     }
 
     @Override

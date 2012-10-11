@@ -21,19 +21,9 @@
         class="com.vaadin.addon.touchkit.gwt.client.TouchButton">
         <when-type-is class="com.vaadin.client.ui.button.VButton" />
     </replace-with>
-    
-    <replace-with
-        class="com.vaadin.addon.touchkit.gwt.client.vaadincomm.TouchButtonConnector">
-        <when-type-is class="com.vaadin.client.ui.button.ButtonConnector" />
-    </replace-with>
-	
-	<replace-with
-        class="com.vaadin.addon.touchkit.gwt.client.vaadincomm.CheckBoxConnector">
-        <when-type-is class="com.vaadin.client.ui.checkbox.CheckBoxConnector" />
-    </replace-with>
 
-	<!-- <replace-with class="com.vaadin.addon.touchkit.gwt.client.VRemoteDebugConsole"> 
-		<when-type-is class="com.vaadin.client.Console" /> </replace-with> -->
+	 <replace-with class="com.vaadin.addon.touchkit.gwt.client.VRemoteDebugConsole"> 
+		<when-type-is class="com.vaadin.client.Console" /> </replace-with>
 
 	<!-- Use annotation based widget loading strategy instead of the eager method. 
 		Makes initial loading time smaller on a slow network -->

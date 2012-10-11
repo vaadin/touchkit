@@ -3,6 +3,7 @@ package com.vaadin.addon.touchkit.gwt.client.navigation;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.client.ComponentConnector;
+import com.vaadin.client.ConnectorHierarchyChangeEvent;
 import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.AbstractComponentContainerConnector;
 import com.vaadin.client.ui.layout.ElementResizeEvent;
@@ -66,6 +67,13 @@ public class NavigationBarConnector extends AbstractComponentContainerConnector 
                     rightWidget.getElement(), resizeListener);
         }
         getWidget().avoidCaptionOverlap();
+    }
+
+    @Override
+    public void onConnectorHierarchyChange(
+            ConnectorHierarchyChangeEvent connectorHierarchyChangeEvent) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

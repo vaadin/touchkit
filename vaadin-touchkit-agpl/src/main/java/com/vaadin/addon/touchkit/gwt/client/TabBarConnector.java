@@ -35,6 +35,5 @@ public class TabBarConnector extends AbstractComponentContainerConnector {
         getWidget().setContent(
                 children.size() > 1 ? children.get(1).getWidget() : null);
 
-        super.onConnectorHierarchyChange(event);
     }
 }

@@ -16,6 +16,7 @@ import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.server.ExternalResource;
+import com.vaadin.server.Page;
 import com.vaadin.server.RequestHandler;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinResponse;
@@ -256,8 +257,7 @@ public class SwipeViewTest extends AbstractTouchKitIntegrationTest {
                 if (ui == null) {
                     throw new RuntimeException("WTF!!");
                 }
-                ExternalResource source = new ExternalResource(getUI()
-                        .getSession().getURL() + "winterphotos/" + ss);
+                ExternalResource source = new ExternalResource(Page.getCurrent().getLocation() + "winterphotos/" + ss);
                 embedded.setSource(source);
             }
 

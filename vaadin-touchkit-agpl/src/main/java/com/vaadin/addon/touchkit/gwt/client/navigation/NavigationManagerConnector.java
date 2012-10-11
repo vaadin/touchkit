@@ -28,7 +28,6 @@ public class NavigationManagerConnector extends
 
     @Override
     public void onConnectorHierarchyChange(ConnectorHierarchyChangeEvent event) {
-        super.onConnectorHierarchyChange(event);
 
         Widget current = ((ComponentConnector) getState().getCurrentComponent())
                 .getWidget();

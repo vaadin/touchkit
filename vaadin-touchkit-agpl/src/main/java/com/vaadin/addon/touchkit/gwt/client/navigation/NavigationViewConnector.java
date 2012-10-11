@@ -47,7 +47,6 @@ public class NavigationViewConnector extends
 
     @Override
     public void onConnectorHierarchyChange(ConnectorHierarchyChangeEvent event) {
-        super.onConnectorHierarchyChange(event);
 
         List<ComponentConnector> children = getChildComponents();
         navigationBar = (NavigationBarConnector) children.get(0);

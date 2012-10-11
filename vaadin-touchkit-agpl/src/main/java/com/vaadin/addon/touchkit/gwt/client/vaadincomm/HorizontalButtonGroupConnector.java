@@ -50,7 +50,6 @@ public class HorizontalButtonGroupConnector extends
             ((HorizontalButtonGroupWidget) getWidget()).add(connector
                     .getWidget());
         }
-        super.onConnectorHierarchyChange(event);
     }
 
     @Override
