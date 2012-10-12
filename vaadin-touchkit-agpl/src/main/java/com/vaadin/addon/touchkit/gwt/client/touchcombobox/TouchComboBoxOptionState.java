@@ -16,4 +16,11 @@ public class TouchComboBoxOptionState extends ComponentState {
         this.key = key;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof TouchComboBoxOptionState) {
+            return key.equals(((TouchComboBoxOptionState) obj).getKey());
+        }
+        return false;
+    }
 }

@@ -11,9 +11,11 @@ public interface TouchComboBoxServerRpc extends ServerRpc {
 
     public void selectionEvent(String key);
 
-    public void next();
+    public void next(String key);
 
-    public void previous();
+    public void previous(String key);
 
     public void clearPageNumber();
+
+    public void pageLengthChange(int itemAmount, String key);
 }

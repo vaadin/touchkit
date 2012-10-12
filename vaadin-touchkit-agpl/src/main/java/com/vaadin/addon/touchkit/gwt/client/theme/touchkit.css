@@ -2021,11 +2021,11 @@ span.v-datefield-calendarpanel-month {
 	}
 
 .v-touchkit-combobox.v-touchkit-popover {
-	overflow: visible;
-	background: popoverGradient;
-	position: relative;
-	-webkit-box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
-	border-radius: 10px;
+/* 	overflow: visible; */
+/* 	background: popoverGradient; */
+/* 	position: relative; */
+/* 	-webkit-box-shadow: 0 0 40px rgba(0, 0, 0, 0.6); */
+/* 	border-radius: 10px; */
 	border: 1px solid rgba(25, 33, 40, 0.5);
-	padding: 10px;
+/* 	padding: 10px; */
 	}

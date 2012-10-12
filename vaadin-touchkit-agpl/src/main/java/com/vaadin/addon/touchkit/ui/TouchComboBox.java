@@ -47,6 +47,7 @@ public class TouchComboBox extends AbstractField<Object> implements
 
     private String filterstring;
     private String prevfilterstring;
+    private Object clientVisible = null;
 
     /**
      * Cache of filtered options, used only by the in-memory filtering system.
@@ -60,6 +61,7 @@ public class TouchComboBox extends AbstractField<Object> implements
     private boolean filteringContainer;
 
     private int pageLength = 6;
+    private int oldPageLength = 6;
     private int currentPage = 0;
 
     /* From AbstractSelect */
@@ -171,6 +173,7 @@ public class TouchComboBox extends AbstractField<Object> implements
             currentPage = 0;
             prevfilterstring = filterstring;
             filterstring = filter.toLowerCase();
+            clientVisible = null;
             updateOptions();
         }
 
@@ -188,14 +191,18 @@ public class TouchComboBox extends AbstractField<Object> implements
         }
 
         @Override
-        public void next() {
+        public void next(String key) {
             currentPage++;
+            clientVisible = itemIdMapper.get(key);
             updateOptions();
         }
 
         @Override
-        public void previous() {
+        public void previous(String key) {
             currentPage--;
+            if (currentPage < 0)
+                currentPage = 0;
+            clientVisible = itemIdMapper.get(key);
             updateOptions();
         }
 
@@ -209,6 +216,14 @@ public class TouchComboBox extends AbstractField<Object> implements
             currentPage = 0;
             prevfilterstring = filterstring;
             filterstring = "";
+            clientVisible = null;
+        }
+
+        @Override
+        public void pageLengthChange(int itemAmount, String key) {
+            clientVisible = itemIdMapper.get(key);
+            setPageLength(itemAmount);
+            updateOptions();
         }
     };
 
@@ -449,6 +464,7 @@ public class TouchComboBox extends AbstractField<Object> implements
     }
 
     public void setPageLength(int pageLength) {
+        oldPageLength = this.pageLength;
         this.pageLength = pageLength;
     }
 
@@ -496,14 +512,35 @@ public class TouchComboBox extends AbstractField<Object> implements
         }
 
         if (!options.isEmpty()) {
-            int startIndex = currentPage * pageLength;
-            int endIndex = startIndex + pageLength;
-            getState().setHasMore(endIndex < options.size());
-            options = options.subList(startIndex,
-                    endIndex < options.size() ? endIndex : options.size());
+            options = getOptionsSublist(options);
         }
         return options;
     }
+
+    private List<?> getOptionsSublist(List<?> options) {
+        int startIndex = currentPage * pageLength;
+        if (currentPage >= 1) {
+            startIndex -= pageLength;
+        }
+
+        int endIndex = startIndex + pageLength * 3;
+
+        List<?> optionsList = options.subList(startIndex,
+                endIndex < options.size() ? endIndex : options.size());
+
+        if (clientVisible != null
+                && (!optionsList.contains(clientVisible) || optionsList
+                        .indexOf(clientVisible) > optionsList.size() / 2)) {
+            if (oldPageLength > pageLength) {
+                currentPage++;
+            } else {
+                currentPage--;
+            }
+            return getOptionsSublist(options);
+        }
+        return optionsList;
+    }
+
 
     private void addItemNotifier(Object id) {
         // add listener for each item, to cause repaint if an item changes

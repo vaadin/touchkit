@@ -6,7 +6,6 @@ import java.util.List;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.vaadin.addon.touchkit.gwt.client.touchcombobox.PageEvent.PageEventType;
 import com.vaadin.addon.touchkit.ui.TouchComboBox;
 import com.vaadin.client.communication.RpcProxy;
 import com.vaadin.client.communication.StateChangeEvent;
@@ -38,6 +37,7 @@ public class TouchComboBoxConnector extends AbstractFieldConnector implements
     public void onStateChanged(StateChangeEvent stateChangeEvent) {
         super.onStateChanged(stateChangeEvent);
 
+        // getWidget().setPageLength(getState().getPageLength());
         getWidget().setCurrentSuggestions(getState().getFilteredOptions());
         if (getState().getSelectedKey() == null
                 && getState().getNullSelectionItemId() != null) {
@@ -47,12 +47,12 @@ public class TouchComboBoxConnector extends AbstractFieldConnector implements
             getWidget().setSelection(getState().getSelectedKey());
         }
         getWidget().clearIcons();
-        for(TouchComboBoxOptionState state : getState().getFilteredOptions()){
-            getWidget().putIcon(state.getKey(), getResourceUrl(state.getKey()));
-        }
-        getWidget().setPageLength(getState().getPageLength());
-        getWidget().setHasPrev(getState().getPage() > 0);
-        getWidget().setHasNext(getState().isHasMore());
+        // for(TouchComboBoxOptionState state :
+        // getState().getFilteredOptions()){
+        // getWidget().putIcon(state.getKey(), getResourceUrl(state.getKey()));
+        // }
+        // getWidget().setHasPrev(getState().getPage() > 0);
+        // getWidget().setHasNext(getState().isHasMore());
         getWidget().setWidth(getState().width);
     }
 
@@ -79,11 +79,18 @@ public class TouchComboBoxConnector extends AbstractFieldConnector implements
 
     @Override
     public void onPageEvent(PageEvent event) {
-        if (event.getEventType().equals(PageEventType.NEXT)) {
-            rpc.next();
-        } else if (event.getEventType().equals(PageEventType.PREVIOUS)) {
-            rpc.previous();
-        } else {
+        switch(event.getEventType()) {
+        case NEXT:
+            rpc.next(event.getKey());
+            break;
+        case PREVIOUS:
+            rpc.previous(event.getKey());
+            break;
+        case ITEM_AMOUNT:
+            rpc.pageLengthChange(event.getValue(), event.getKey());
+            break;
+        case CLOSE:
+        default:
             rpc.clearPageNumber();
         }
     }

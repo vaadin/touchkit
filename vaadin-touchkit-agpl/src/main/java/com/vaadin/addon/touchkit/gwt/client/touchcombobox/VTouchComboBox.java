@@ -1,7 +1,7 @@
 package com.vaadin.addon.touchkit.gwt.client.touchcombobox;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -59,7 +59,7 @@ public class VTouchComboBox extends Widget implements
      * A collection of available suggestions (options) as received from the
      * server.
      */
-    protected final List<TouchComboBoxOptionState> currentSuggestions = new ArrayList<TouchComboBoxOptionState>();
+    protected final LinkedList<TouchComboBoxOptionState> currentSuggestions = new LinkedList<TouchComboBoxOptionState>();
     protected Map<String, String> itemIcons = new HashMap<String, String>();
 
     protected boolean enabled;
@@ -67,6 +67,14 @@ public class VTouchComboBox extends Widget implements
     protected boolean allowNewItem;
     protected boolean nullSelectionAllowed;
     protected TouchComboBoxOptionState nullSelectionItemId;
+    protected TouchComboBoxOptionState firstVisibleItem, nextItem, prevItem;
+
+    public native InputElement createInputElementWithType(Document doc, String type)
+    /*-{
+        var e = doc.createElement("INPUT");
+        e.type = type;
+        return e;
+    }-*/;
 
     /**
      * Create new TouchKit ComboBox
@@ -97,6 +105,9 @@ public class VTouchComboBox extends Widget implements
             List<TouchComboBoxOptionState> currentSuggestions) {
         this.currentSuggestions.clear();
         this.currentSuggestions.addAll(currentSuggestions);
+        if (!currentSuggestions.isEmpty() && firstVisibleItem == null) {
+            firstVisibleItem = currentSuggestions.iterator().next();
+        }
         populateOptions();
     }
 
@@ -147,9 +158,33 @@ public class VTouchComboBox extends Widget implements
         }
         popup.clearItems();
 
-        int itemHeight = DEFAULT_ITEM_HEIGHT;
-        for (TouchComboBoxOptionState option : currentSuggestions) {
-            Label itemLabel = createItemLabel(option.caption, itemHeight);
+        int from = currentSuggestions.indexOf(firstVisibleItem);
+        if (from < 0) {
+            from = 0;
+            VConsole.error("Item not found");
+        }
+
+        int to = from + PAGE_LENGTH > currentSuggestions.size() ? currentSuggestions
+                .size() - 1 : from + PAGE_LENGTH;
+
+        List<TouchComboBoxOptionState> visible = new LinkedList<TouchComboBoxOptionState>();
+        visible.addAll(currentSuggestions.subList(from, to));
+
+        if (to + 1 == currentSuggestions.size()) {
+            visible.add(currentSuggestions.getLast());
+        }
+
+        nextItem = to + 1 >= currentSuggestions.size() ? currentSuggestions
+                .getLast() : currentSuggestions.get(to);
+        prevItem = from - PAGE_LENGTH < 0 ? currentSuggestions.getFirst()
+                : currentSuggestions.get(from - PAGE_LENGTH);
+
+        setHasNext(to + 1 < currentSuggestions.size());
+        setHasPrev(from > 0);
+
+        for (TouchComboBoxOptionState option : visible) {
+            Label itemLabel = createItemLabel(option.caption,
+                    DEFAULT_ITEM_HEIGHT);
 
             if (itemIcons.containsKey(option.getKey())) {
                 itemLabel.getElement().getStyle()
@@ -161,9 +196,9 @@ public class VTouchComboBox extends Widget implements
 
             popup.addItem(itemLabel);
         }
-        if (currentSuggestions.size() < PAGE_LENGTH) {
-            for (int i = currentSuggestions.size(); i < PAGE_LENGTH; i++) {
-                Label itemLabel = createItemLabel("", itemHeight);
+        if (visible.size() < PAGE_LENGTH) {
+            for (int i = visible.size(); i < PAGE_LENGTH; i++) {
+                Label itemLabel = createItemLabel("", DEFAULT_ITEM_HEIGHT);
                 itemLabel.addStyleName("empty");
 
                 popup.addItem(itemLabel);
@@ -193,9 +228,34 @@ public class VTouchComboBox extends Widget implements
         return Window.getClientHeight() < SMALL_SCREEN_WIDTH_THRESHOLD;
     }
 
-    /**
-     * Input element listener //
-     */
+    private void setRelativePosition(SelectionPopup popup) {
+        popup.setPopupPosition(getAbsoluteLeft(), getAbsoluteTop()
+                + getOffsetHeight());
+    }
+
+    /* Event Listeners */
+
+    private EventListener dropDownListener = new EventListener() {
+
+        @Override
+        public void onBrowserEvent(Event event) {
+            if (popup == null) {
+                popup = new SelectionPopup();
+
+                populateOptions();
+            }
+        }
+    };
+
+    @Override
+    public void onResize(ResizeEvent event) {
+        if (popup != null) {
+            popup.updateSize();
+            populateOptions();
+        }
+    };
+
+    /* Handlers */
     private class SelectionClickListener implements ClickHandler {
 
         private TouchComboBoxOptionState object;
@@ -210,21 +270,6 @@ public class VTouchComboBox extends Widget implements
             ValueChangeEvent.fire(VTouchComboBox.this, object.getKey());
             if (popup != null) {
                 popup.hide();
-            }
-        }
-    };
-
-    private EventListener dropDownListener = new EventListener() {
-
-        @Override
-        public void onBrowserEvent(Event event) {
-            if (popup == null) {
-                popup = new SelectionPopup();
-                if (!isSmallScreen()) {
-                    popup.showNextTo(VTouchComboBox.this);
-                }
-
-                populateOptions();
             }
         }
     };
@@ -246,19 +291,11 @@ public class VTouchComboBox extends Widget implements
         return addHandler(pageEventHandler, PageEvent.getType());
     }
 
-    @Override
-    public void onResize(ResizeEvent event) {
-        if (popup != null) {
-            popup.updateSize();
-            populateOptions();
-        }
-    };
-
     protected class SelectionPopup extends VPopover {
 
         final FlowPanel select = new FlowPanel();
         final HorizontalPanel header = new HorizontalPanel();
-        final TextBox filter = TextBox.wrap(createInputElement(Document.get(),
+        final TextBox filter = TextBox.wrap(createInputElementWithType(Document.get(),
                 "search"));
         final FlowPanel content = new FlowPanel();
 
@@ -266,61 +303,23 @@ public class VTouchComboBox extends Widget implements
 
         Button next, prev, close;
 
-        public native InputElement createInputElement(Document doc, String type)
-        /*-{
-            var e = doc.createElement("INPUT");
-            e.type = type;
-            return e;
-        }-*/;
-
         public SelectionPopup() {
             init();
             setStyleName("v-touchkit-popover");
         }
 
         private void init() {
-
-            int boxWidth = getBoxWidth();
-
-            updateSize();
-
-            select.setWidth(boxWidth + "px");
             select.getElement().getStyle().setBackgroundColor("white");
             select.setStyleName("v-touchkit-popover");
             if (!isSmallScreen()) {
                 select.addStyleName(VTouchComboBox.CLASSNAME);
             }
 
-            filter.setWidth(boxWidth + "px");
             filter.setStyleName("v-touchkit-combobox-popup-filter");
             filter.setValue(comboBoxDropDown.getText());
             filter.getElement().getStyle()
                     .setProperty("-webkit-appearance", "textfield");
-            filter.addKeyUpHandler(new KeyUpHandler() {
-
-                @Override
-                public void onKeyUp(KeyUpEvent event) {
-                    if (refresh != null) {
-                        refresh.cancel();
-                    }
-                    try {
-                        refresh = new Timer() {
-
-                            @Override
-                            public void run() {
-                                ValueChangeEvent.fire(VTouchComboBox.this,
-                                        filter.getValue());
-                                refresh = null;
-                            }
-                        };
-                        refresh.schedule(1500);
-                    } catch (Throwable alert) {
-                        VConsole.error(alert.getMessage());
-                    }
-                }
-            });
-
-            content.setWidth(boxWidth + "px");
+            filter.addKeyUpHandler(filterKeyHandler);
 
             header.setHeight(HEADER_HEIGHT + "px");
             header.setWidth("100%");
@@ -340,46 +339,47 @@ public class VTouchComboBox extends Widget implements
             header.add(prev);
 
             if (isSmallScreen()) {
-                close = new Button("x");
-                close.setStyleName("v-touchkit-combobox-close-button");
-                close.getElement().getStyle()
-                        .setProperty("left", (boxWidth / 2 - 12) + "px");
-                close.addClickHandler(new ClickHandler() {
-
-                    public void onClick(ClickEvent event) {
-                        hide();
-                    }
-                });
-
-                header.add(close);
+                addCloseButton();
             }
 
             header.add(next);
-
-            select.add(header);
-
             filter.addValueChangeHandler(new ValueChange());
 
+            select.add(header);
             select.add(filter);
-
             select.add(content);
+
             setWidget(select);
+            updateSize();
 
             if (isSmallScreen()) {
                 super.slideIn();
                 setPopupPosition(0, 0);
             } else {
+                setRelativePosition(this);
                 setAutoHideEnabled(true);
             }
             show();
         }
 
+        private void addCloseButton() {
+            close = new Button("x");
+            close.setStyleName("v-touchkit-combobox-close-button");
+            close.getElement().getStyle()
+                    .setProperty("left", (getBoxWidth() / 2 - 12) + "px");
+            close.addClickHandler(new ClickHandler() {
+
+                public void onClick(ClickEvent event) {
+                    hide();
+                }
+            });
+
+            header.add(close);
+        }
+
         private int getBoxWidth() {
             if (isSmallScreen()) {
-                // if (isPortrait()) {
                 return Window.getClientWidth();
-                // }
-                // return Window.getClientHeight();
             }
             return comboBoxDropDown.getOffsetWidth();
         }
@@ -412,15 +412,42 @@ public class VTouchComboBox extends Widget implements
             filter.setWidth(newWidth + "px");
             content.setWidth(newWidth + "px");
             setWidth(newWidth + "px");
-            // Window.getClientHeight()
+
+            if (isSmallScreen()) {
+                handleSmallScreenItemAmount();
+            }
+        }
+
+        private void handleSmallScreenItemAmount() {
+            int availableHeight = Window.getClientHeight() - HEADER_HEIGHT
+                    - filter.getOffsetHeight();
+
+            int maxItems = (int) Math.floor(availableHeight
+                    / DEFAULT_ITEM_HEIGHT);
+            if (maxItems == 0) {
+                maxItems = 1;
+            }
+
+            PAGE_LENGTH = maxItems;
+            populateOptions();
+            if (firstVisibleItem == null)
+                VTouchComboBox.this.fireEvent(new PageEvent(
+                        PageEventType.ITEM_AMOUNT, maxItems, null));
+            else
+                VTouchComboBox.this.fireEvent(new PageEvent(
+                        PageEventType.ITEM_AMOUNT, maxItems, firstVisibleItem
+                                .getKey()));
         }
 
         @Override
         public void onClose(CloseEvent<PopupPanel> event) {
             clearItems();
             hide();
-            VTouchComboBox.this.fireEvent(new PageEvent(PageEventType.CLOSE));
             popup = null;
+            nextItem = null;
+            prevItem = null;
+            firstVisibleItem = null;
+            VTouchComboBox.this.fireEvent(new PageEvent(PageEventType.CLOSE));
         };
 
         private class NavigationClickListener implements ClickHandler {
@@ -434,7 +461,41 @@ public class VTouchComboBox extends Widget implements
 
             @Override
             public void onClick(ClickEvent event) {
-                VTouchComboBox.this.fireEvent(new PageEvent(eventType));
+                switch (eventType) {
+                case NEXT:
+                    firstVisibleItem = nextItem;
+                    break;
+                case PREVIOUS:
+                    firstVisibleItem = prevItem;
+                    break;
+                }
+                VTouchComboBox.this.fireEvent(new PageEvent(eventType,
+                        firstVisibleItem.getKey()));
+            }
+        };
+
+        private KeyUpHandler filterKeyHandler = new KeyUpHandler() {
+
+            @Override
+            public void onKeyUp(KeyUpEvent event) {
+                if (refresh != null) {
+                    refresh.cancel();
+                }
+                try {
+                    refresh = new Timer() {
+
+                        @Override
+                        public void run() {
+                            ValueChangeEvent.fire(VTouchComboBox.this,
+                                    filter.getValue());
+                            refresh = null;
+                            firstVisibleItem = null;
+                        }
+                    };
+                    refresh.schedule(1500);
+                } catch (Throwable alert) {
+                    VConsole.error(alert.getMessage());
+                }
             }
         };
     }

@@ -33,8 +33,10 @@ public class TouchComboBoxTest extends AbstractTouchKitIntegrationTest {
     }
 
     private void addItems(TouchComboBox comboBox) {
-        for (int i = 1; i <= 20; i++) {
+        for (int i = 1; i <= 2000; i++) {
             comboBox.addItem("Item " + i);
+            // comboBox.setItemIcon("Item " + i, new ThemeResource(
+            // "runo/icons/16/arrow-down.png"));
         }
     }
 }
