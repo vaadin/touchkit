@@ -241,6 +241,7 @@ public class VTouchComboBox extends Widget implements
         public void onBrowserEvent(Event event) {
             if (popup == null) {
                 popup = new SelectionPopup();
+                popup.updateSize();
 
                 populateOptions();
             }
@@ -249,9 +250,8 @@ public class VTouchComboBox extends Widget implements
 
     @Override
     public void onResize(ResizeEvent event) {
-        if (popup != null) {
+        if (popup != null && isSmallScreen()) {
             popup.updateSize();
-            populateOptions();
         }
     };
 
@@ -350,7 +350,6 @@ public class VTouchComboBox extends Widget implements
             select.add(content);
 
             setWidget(select);
-            updateSize();
 
             if (isSmallScreen()) {
                 super.slideIn();
@@ -430,6 +429,7 @@ public class VTouchComboBox extends Widget implements
 
             PAGE_LENGTH = maxItems;
             populateOptions();
+
             if (firstVisibleItem == null)
                 VTouchComboBox.this.fireEvent(new PageEvent(
                         PageEventType.ITEM_AMOUNT, maxItems, null));
