@@ -11,8 +11,8 @@ import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.event.dom.client.KeyDownEvent;
+import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.event.logical.shared.ResizeEvent;
@@ -157,6 +157,7 @@ public class VTouchComboBox extends Widget implements
             return;
         }
         popup.clearItems();
+        List<TouchComboBoxOptionState> visible = new LinkedList<TouchComboBoxOptionState>();
 
         int from = currentSuggestions.indexOf(firstVisibleItem);
         if (from < 0) {
@@ -167,7 +168,11 @@ public class VTouchComboBox extends Widget implements
         int to = from + PAGE_LENGTH > currentSuggestions.size() ? currentSuggestions
                 .size() - 1 : from + PAGE_LENGTH;
 
-        List<TouchComboBoxOptionState> visible = new LinkedList<TouchComboBoxOptionState>();
+        if (to < 0) {
+            fillWithEmptySelects(visible);
+            return;
+        }
+
         visible.addAll(currentSuggestions.subList(from, to));
 
         if (to + 1 == currentSuggestions.size()) {
@@ -196,6 +201,10 @@ public class VTouchComboBox extends Widget implements
 
             popup.addItem(itemLabel);
         }
+        fillWithEmptySelects(visible);
+    }
+
+    private void fillWithEmptySelects(List<TouchComboBoxOptionState> visible) {
         if (visible.size() < PAGE_LENGTH) {
             for (int i = visible.size(); i < PAGE_LENGTH; i++) {
                 Label itemLabel = createItemLabel("", DEFAULT_ITEM_HEIGHT);
@@ -278,6 +287,7 @@ public class VTouchComboBox extends Widget implements
 
         public void onValueChange(ValueChangeEvent<String> event) {
             ValueChangeEvent.fire(VTouchComboBox.this, event.getValue());
+            popup.clearTimer();
         }
     }
 
@@ -319,7 +329,7 @@ public class VTouchComboBox extends Widget implements
             filter.setValue(comboBoxDropDown.getText());
             filter.getElement().getStyle()
                     .setProperty("-webkit-appearance", "textfield");
-            filter.addKeyUpHandler(filterKeyHandler);
+            filter.addKeyDownHandler(filterKeyHandler);
 
             header.setHeight(HEADER_HEIGHT + "px");
             header.setWidth("100%");
@@ -399,6 +409,13 @@ public class VTouchComboBox extends Widget implements
             content.clear();
         }
 
+        public void clearTimer() {
+            if (refresh != null) {
+                refresh.cancel();
+                refresh = null;
+            }
+        }
+
         public void updateSize() {
             int newWidth = getBoxWidth();
 
@@ -474,10 +491,10 @@ public class VTouchComboBox extends Widget implements
             }
         };
 
-        private KeyUpHandler filterKeyHandler = new KeyUpHandler() {
+        private KeyDownHandler filterKeyHandler = new KeyDownHandler() {
 
             @Override
-            public void onKeyUp(KeyUpEvent event) {
+            public void onKeyDown(KeyDownEvent event) {
                 if (refresh != null) {
                     refresh.cancel();
                 }

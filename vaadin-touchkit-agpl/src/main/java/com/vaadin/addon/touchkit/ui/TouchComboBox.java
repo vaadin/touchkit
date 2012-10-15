@@ -522,15 +522,18 @@ public class TouchComboBox extends AbstractField<Object> implements
         if (currentPage >= 1) {
             startIndex -= pageLength;
         }
+        if (startIndex < 0) {
+            startIndex = 0;
+        }
 
         int endIndex = startIndex + pageLength * 3;
 
         List<?> optionsList = options.subList(startIndex,
                 endIndex < options.size() ? endIndex : options.size());
 
-        if (clientVisible != null
-                && (!optionsList.contains(clientVisible) || optionsList
-                        .indexOf(clientVisible) > optionsList.size() / 2)) {
+        if (clientVisible != null && !optionsList.contains(clientVisible)) {
+            // || optionsList.indexOf(clientVisible) > optionsList.size() / 2))
+            // {
             if (oldPageLength > pageLength) {
                 currentPage++;
             } else {
@@ -540,7 +543,6 @@ public class TouchComboBox extends AbstractField<Object> implements
         }
         return optionsList;
     }
-
 
     private void addItemNotifier(Object id) {
         // add listener for each item, to cause repaint if an item changes
