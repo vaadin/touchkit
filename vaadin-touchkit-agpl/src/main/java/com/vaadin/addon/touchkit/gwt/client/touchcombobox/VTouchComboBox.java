@@ -47,9 +47,8 @@ public class VTouchComboBox extends Widget implements
     private static final int DEFAULT_ITEM_HEIGHT = 40;
     private static final int SMALL_SCREEN_WIDTH_THRESHOLD = 500;
 
-    private int PAGE_LENGTH = 6;
+    private int clientPageLength = 6;
     private int HEADER_HEIGHT = 45;
-    private int SEARCH_FIELD_HEIGHT = 40;
 
     private SelectionPopup popup;
     private Label comboBoxDropDown;
@@ -124,7 +123,7 @@ public class VTouchComboBox extends Widget implements
     }
 
     public void setPageLength(int length) {
-        PAGE_LENGTH = length;
+        clientPageLength = length;
     }
 
     public void setHasNext(boolean hasNext) {
@@ -165,8 +164,8 @@ public class VTouchComboBox extends Widget implements
             VConsole.error("Item not found");
         }
 
-        int to = from + PAGE_LENGTH > currentSuggestions.size() ? currentSuggestions
-                .size() - 1 : from + PAGE_LENGTH;
+        int to = from + clientPageLength > currentSuggestions.size() ? currentSuggestions
+                .size() - 1 : from + clientPageLength;
 
         if (to < 0) {
             fillWithEmptySelects(visible);
@@ -181,8 +180,8 @@ public class VTouchComboBox extends Widget implements
 
         nextItem = to + 1 >= currentSuggestions.size() ? currentSuggestions
                 .getLast() : currentSuggestions.get(to);
-        prevItem = from - PAGE_LENGTH < 0 ? currentSuggestions.getFirst()
-                : currentSuggestions.get(from - PAGE_LENGTH);
+        prevItem = from - clientPageLength < 0 ? currentSuggestions.getFirst()
+                : currentSuggestions.get(from - clientPageLength);
 
         setHasNext(to + 1 < currentSuggestions.size());
         setHasPrev(from > 0);
@@ -205,8 +204,8 @@ public class VTouchComboBox extends Widget implements
     }
 
     private void fillWithEmptySelects(List<TouchComboBoxOptionState> visible) {
-        if (visible.size() < PAGE_LENGTH) {
-            for (int i = visible.size(); i < PAGE_LENGTH; i++) {
+        if (visible.size() < clientPageLength) {
+            for (int i = visible.size(); i < clientPageLength; i++) {
                 Label itemLabel = createItemLabel("", DEFAULT_ITEM_HEIGHT);
                 itemLabel.addStyleName("empty");
 
@@ -444,7 +443,7 @@ public class VTouchComboBox extends Widget implements
                 maxItems = 1;
             }
 
-            PAGE_LENGTH = maxItems;
+            clientPageLength = maxItems;
             populateOptions();
 
             if (firstVisibleItem == null)

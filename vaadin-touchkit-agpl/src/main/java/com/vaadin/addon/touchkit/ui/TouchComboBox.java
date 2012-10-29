@@ -47,7 +47,7 @@ public class TouchComboBox extends AbstractField<Object> implements
 
     private String filterstring;
     private String prevfilterstring;
-    private Object clientVisible = null;
+    private Object firstVisibleObjectOnClient = null;
 
     /**
      * Cache of filtered options, used only by the in-memory filtering system.
@@ -169,11 +169,11 @@ public class TouchComboBox extends AbstractField<Object> implements
         private static final long serialVersionUID = 8400073918577914053L;
 
         @Override
-        public void textValueChanged(String filter) {
+        public void filterTextValueChanged(String filter) {
             currentPage = 0;
             prevfilterstring = filterstring;
             filterstring = filter.toLowerCase();
-            clientVisible = null;
+            firstVisibleObjectOnClient = null;
             updateOptions();
         }
 
@@ -191,18 +191,18 @@ public class TouchComboBox extends AbstractField<Object> implements
         }
 
         @Override
-        public void next(String key) {
+        public void nextPage(String key) {
             currentPage++;
-            clientVisible = itemIdMapper.get(key);
+            firstVisibleObjectOnClient = itemIdMapper.get(key);
             updateOptions();
         }
 
         @Override
-        public void previous(String key) {
+        public void previousPage(String key) {
             currentPage--;
             if (currentPage < 0)
                 currentPage = 0;
-            clientVisible = itemIdMapper.get(key);
+            firstVisibleObjectOnClient = itemIdMapper.get(key);
             updateOptions();
         }
 
@@ -216,12 +216,12 @@ public class TouchComboBox extends AbstractField<Object> implements
             currentPage = 0;
             prevfilterstring = filterstring;
             filterstring = "";
-            clientVisible = null;
+            firstVisibleObjectOnClient = null;
         }
 
         @Override
         public void pageLengthChange(int itemAmount, String key) {
-            clientVisible = itemIdMapper.get(key);
+            firstVisibleObjectOnClient = itemIdMapper.get(key);
             setPageLength(itemAmount);
             updateOptions();
         }
@@ -298,7 +298,7 @@ public class TouchComboBox extends AbstractField<Object> implements
      * the filtering mode must be suitable for container filtering (tested with
      * {@link #canUseContainerFilter()}).
      * 
-     * Use {@link #getFilteredOptions()} and
+     * Use {@link #getManuallyFilteredOptions()} and
      * {@link #handleNullSelection(List, boolean)} if this is not the case.
      * 
      * @param needNullSelectOption
@@ -393,7 +393,7 @@ public class TouchComboBox extends AbstractField<Object> implements
      * 
      * @return
      */
-    protected List<?> getFilteredOptions() {
+    protected List<?> getManuallyFilteredOptions() {
         if (null == filterstring || "".equals(filterstring)
                 || FilteringMode.OFF == filteringMode) {
             prevfilterstring = null;
@@ -474,13 +474,16 @@ public class TouchComboBox extends AbstractField<Object> implements
         getState().width = width;
     }
 
+    /**
+     * Get filtered options
+     */
     private void updateOptions() {
-        boolean nullFilteredOut = isNullFilteredOut();
-        boolean nullOptionVisible = isNullOptionVisible(nullFilteredOut);
-        List<?> options = getFilteredOptions(nullOptionVisible);
+        List<?> options = getFilteredOptions();
 
         final Iterator<?> i = options.iterator();
         List<TouchComboBoxOptionState> items = new LinkedList<TouchComboBoxOptionState>();
+        getCaptionChangeListener().clear();
+
         // Paints the available selection options from data source
         while (i.hasNext()) {
             // Gets the option attribute values
@@ -492,8 +495,11 @@ public class TouchComboBox extends AbstractField<Object> implements
                 continue;
             }
 
-            getCaptionChangeListener().clear();
-            addItemNotifier(id);
+            // add listener for each item, to cause repaint if an item changes
+            getCaptionChangeListener().addNotifierForItem(id);
+            if (isSelected(id)) {
+                getState().setSelectedKey(getItemCaption(id));
+            }
 
             items.add(createItemState(id));
         }
@@ -502,22 +508,31 @@ public class TouchComboBox extends AbstractField<Object> implements
         getState().setPageLength(pageLength);
     }
 
-    private List<?> getFilteredOptions(boolean nullOptionVisible) {
+    private List<?> getFilteredOptions() {
+        boolean nullOptionVisible = isNullOptionVisible(isNullFilteredOut());
         List<?> options = getOptionsWithFilter(nullOptionVisible);
         if (null == options) {
             // not able to use container filters, perform explicit in-memory
             // filtering
-            options = getFilteredOptions();
+            options = getManuallyFilteredOptions();
             handleNullSelection((List<Object>) options, nullOptionVisible);
         }
 
         if (!options.isEmpty()) {
-            options = getOptionsSublist(options);
+            options = getOptionsVisibleInClient(options);
         }
         return options;
     }
 
-    private List<?> getOptionsSublist(List<?> options) {
+    /**
+     * Gets options visible in client and adds a buffer of 2 page lengths. 1
+     * page before and 1 after if not at start of list.
+     * 
+     * @param options
+     *            List of options to get subset from
+     * @return
+     */
+    private List<?> getOptionsVisibleInClient(List<?> options) {
         int startIndex = currentPage * pageLength;
         if (currentPage >= 1) {
             startIndex -= pageLength;
@@ -531,25 +546,15 @@ public class TouchComboBox extends AbstractField<Object> implements
         List<?> optionsList = options.subList(startIndex,
                 endIndex < options.size() ? endIndex : options.size());
 
-        if (clientVisible != null && !optionsList.contains(clientVisible)) {
-            // || optionsList.indexOf(clientVisible) > optionsList.size() / 2))
-            // {
+        if (firstVisibleObjectOnClient != null && !optionsList.contains(firstVisibleObjectOnClient)) {
             if (oldPageLength > pageLength) {
                 currentPage++;
             } else {
                 currentPage--;
             }
-            return getOptionsSublist(options);
+            return getOptionsVisibleInClient(options);
         }
         return optionsList;
-    }
-
-    private void addItemNotifier(Object id) {
-        // add listener for each item, to cause repaint if an item changes
-        getCaptionChangeListener().addNotifierForItem(id);
-        if (isSelected(id)) {
-            getState().setSelectedKey(getItemCaption(id));
-        }
     }
 
     private TouchComboBoxOptionState createItemState(Object id) {
@@ -627,7 +632,6 @@ public class TouchComboBox extends AbstractField<Object> implements
         }
 
         setValue(newValue, false);
-        getState().setSelectedKey(getItemCaption(newValue));
     }
 
     /**
@@ -651,6 +655,7 @@ public class TouchComboBox extends AbstractField<Object> implements
         if (newValue == null || items.containsId(newValue)) {
             super.setValue(newValue, repaintIsNotNeeded);
         }
+        getState().setSelectedKey(getItemCaption(newValue));
     }
 
     /* Container methods */

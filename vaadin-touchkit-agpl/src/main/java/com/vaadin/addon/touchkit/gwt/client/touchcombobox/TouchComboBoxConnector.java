@@ -73,7 +73,7 @@ public class TouchComboBoxConnector extends AbstractFieldConnector implements
                         .isNullSelectionAllowed())) {
             rpc.selectionEvent(event.getValue());
         } else {
-            rpc.textValueChanged(event.getValue());
+            rpc.filterTextValueChanged(event.getValue());
         }
     }
 
@@ -81,10 +81,10 @@ public class TouchComboBoxConnector extends AbstractFieldConnector implements
     public void onPageEvent(PageEvent event) {
         switch(event.getEventType()) {
         case NEXT:
-            rpc.next(event.getKey());
+            rpc.nextPage(event.getKey());
             break;
         case PREVIOUS:
-            rpc.previous(event.getKey());
+            rpc.previousPage(event.getKey());
             break;
         case ITEM_AMOUNT:
             rpc.pageLengthChange(event.getValue(), event.getKey());

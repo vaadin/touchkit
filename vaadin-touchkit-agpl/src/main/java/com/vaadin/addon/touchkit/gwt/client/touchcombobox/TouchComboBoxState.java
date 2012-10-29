@@ -15,7 +15,7 @@ public class TouchComboBoxState extends AbstractFieldState {
 
     private FilteringMode filteringMode;
     private String filterstring;
-    private String prevfilterstring;
+    private String prevFilterstring;
 
     private boolean textInputAllowed;
 
@@ -44,12 +44,12 @@ public class TouchComboBoxState extends AbstractFieldState {
         this.filterstring = filterstring;
     }
 
-    public String getPrevfilterstring() {
-        return prevfilterstring;
+    public String getPrevFilterstring() {
+        return prevFilterstring;
     }
 
-    public void setPrevfilterstring(String prevfilterstring) {
-        this.prevfilterstring = prevfilterstring;
+    public void setPrevFilterstring(String prevFilterstring) {
+        this.prevFilterstring = prevFilterstring;
     }
 
     public boolean isTextInputAllowed() {
@@ -109,7 +109,7 @@ public class TouchComboBoxState extends AbstractFieldState {
         return false;
     }
 
-    public boolean isHasMore() {
+    public boolean hasMore() {
         return hasMore;
     }
 
