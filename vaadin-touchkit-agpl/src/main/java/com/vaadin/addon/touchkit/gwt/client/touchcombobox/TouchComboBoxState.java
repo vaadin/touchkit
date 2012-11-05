@@ -109,7 +109,7 @@ public class TouchComboBoxState extends AbstractFieldState {
         return false;
     }
 
-    public boolean hasMore() {
+    public boolean isHasMore() {
         return hasMore;
     }
 
