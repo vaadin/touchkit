@@ -67,4 +67,9 @@ public abstract class AbstractComponentGroup extends AbstractComponentContainer 
     public Iterator<Component> getComponentIterator() {
         return children.iterator();
     }
+    
+    @Override
+    public Iterator<Component> iterator() {
+        return getComponentIterator();
+    }
 }

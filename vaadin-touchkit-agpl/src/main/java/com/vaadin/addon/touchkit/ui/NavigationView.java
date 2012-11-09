@@ -313,5 +313,10 @@ public class NavigationView extends AbstractComponentContainer {
     public int getComponentCount() {
         return toolbar != null ? 3 : 2;
     }
+    
+    @Override
+    public Iterator<Component> iterator() {
+        return getComponentIterator();
+    }
 
 }

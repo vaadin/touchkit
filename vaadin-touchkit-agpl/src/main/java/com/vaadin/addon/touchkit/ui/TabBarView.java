@@ -367,5 +367,10 @@ public class TabBarView extends AbstractComponentContainer {
     public int getComponentCount() {
         return 1 + (currentComponent != null ? 1 : 0);
     }
+    
+    @Override
+    public Iterator<Component> iterator() {
+        return getComponentIterator();
+    }
 
 }

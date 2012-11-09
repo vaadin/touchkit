@@ -149,6 +149,11 @@ public class NavigationBar extends AbstractComponentContainer {
         }
         return components.iterator();
     }
+    
+    @Override
+    public Iterator<Component> iterator() {
+        return getComponentIterator();
+    }
 
     public int getComponentCount() {
         int count = 0;

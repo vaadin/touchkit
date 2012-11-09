@@ -406,5 +406,10 @@ public class NavigationManager extends AbstractComponentContainer {
     public int getComponentCount() {
         return getComponents().size();
     }
+    
+    @Override
+    public Iterator<Component> iterator() {
+        return getComponentIterator();
+    }
 
 }
