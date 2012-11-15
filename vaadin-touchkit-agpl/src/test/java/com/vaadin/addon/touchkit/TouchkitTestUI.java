@@ -13,7 +13,9 @@ import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.AbstractComponentContainer;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;
+import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.Table.ColumnGenerator;
@@ -100,6 +102,15 @@ public class TouchkitTestUI extends TouchKitUI {
             }
         });
         addComponent(table);
+    }
+
+    CssLayout content = new CssLayout();
+    private void addComponent(Component component) {
+        content.setSizeFull();
+        if(content.getParent() == null) {
+            setContent(content);
+        }
+        content.addComponent(component);
     }
 
     private void addTests(String base, File itestroot,

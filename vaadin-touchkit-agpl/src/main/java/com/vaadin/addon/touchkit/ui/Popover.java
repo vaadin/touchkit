@@ -2,8 +2,11 @@ package com.vaadin.addon.touchkit.ui;
 
 import com.vaadin.addon.touchkit.gwt.client.popover.PopoverRpc;
 import com.vaadin.addon.touchkit.gwt.client.popover.PopoverState;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;
+import com.vaadin.ui.CssLayout;
+import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
 /**
@@ -42,6 +45,7 @@ public class Popover extends Window {
      * is usually the most sensible approach on devices.
      */
     public Popover() {
+        setContent(new VerticalLayout());
         setModal(true);
         registerRpc(rpc);
     }
@@ -112,6 +116,16 @@ public class Popover extends Window {
     public void removeFromParent() {
         if (getParent() != null) {
             getUI().removeWindow(this);
+        }
+    }
+
+    public void addComponent(Button b) {
+        Component content2 = getContent();
+        if (content2 instanceof ComponentContainer) {
+            ComponentContainer contentPanel = (ComponentContainer) content2;
+            contentPanel.addComponent(b);
+        } else {
+            throw new RuntimeException("Content component is not of type ComponentContainer");
         }
     }
 

@@ -11,8 +11,8 @@ import com.vaadin.shared.MouseEventDetails;
 import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.ComponentContainer.ComponentAttachEvent;
-import com.vaadin.ui.ComponentContainer.ComponentAttachListener;
+import com.vaadin.ui.HasComponents.ComponentAttachEvent;
+import com.vaadin.ui.HasComponents.ComponentAttachListener;
 import com.vaadin.util.ReflectTools;
 
 /**

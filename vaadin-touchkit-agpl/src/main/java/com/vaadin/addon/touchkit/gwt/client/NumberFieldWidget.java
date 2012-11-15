@@ -1,6 +1,6 @@
 package com.vaadin.addon.touchkit.gwt.client;
 
-import com.vaadin.client.ui.textfield.VTextField;
+import com.vaadin.client.ui.VTextField;
 
 public class NumberFieldWidget extends VTextField {
 

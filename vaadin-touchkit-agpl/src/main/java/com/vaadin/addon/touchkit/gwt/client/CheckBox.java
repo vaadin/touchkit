@@ -1,6 +1,6 @@
 package com.vaadin.addon.touchkit.gwt.client;
 
-import com.vaadin.client.ui.checkbox.VCheckBox;
+import com.vaadin.client.ui.VCheckBox;
 
 /**
  * Overrides default implementation of client side CheckBox. Ignores setText

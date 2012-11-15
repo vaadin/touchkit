@@ -1,7 +1,7 @@
 package com.vaadin.addon.touchkit.gwt.client;
 
 import com.google.gwt.user.client.Event;
-import com.vaadin.client.ui.button.VButton;
+import com.vaadin.client.ui.VButton;
 
 public class TouchButton extends VButton {
 	

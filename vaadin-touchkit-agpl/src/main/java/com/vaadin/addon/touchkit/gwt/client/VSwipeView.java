@@ -29,9 +29,10 @@ import com.vaadin.client.BrowserInfo;
 import com.vaadin.client.Util;
 import com.vaadin.client.VConsole;
 import com.vaadin.client.ui.TouchScrollDelegate;
+import com.vaadin.client.ui.VCssLayout;
 
 public class VSwipeView extends
-        com.vaadin.client.ui.csslayout.VCssLayout {
+        VCssLayout {
     
     public interface SwipeListener {
         void onSwipeBack();

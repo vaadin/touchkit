@@ -8,7 +8,7 @@ public class FallbackUI extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
-        addComponent(new Label(
+        setContent(new Label(
                 "Your browser is not supported by this application. You'll instead be shown this fallback application. Use webkit based application to test TouchKit"));
     }
 

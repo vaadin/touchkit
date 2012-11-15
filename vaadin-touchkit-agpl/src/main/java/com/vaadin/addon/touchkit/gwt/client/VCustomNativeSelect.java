@@ -5,7 +5,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.addon.touchkit.gwt.client.navigation.VNavigationManager;
 import com.vaadin.client.ApplicationConnection;
 import com.vaadin.client.UIDL;
-import com.vaadin.client.ui.nativeselect.VNativeSelect;
+import com.vaadin.client.ui.VNativeSelect;
 
 public class VCustomNativeSelect extends VNativeSelect {
 
