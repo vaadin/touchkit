@@ -49,6 +49,10 @@ public class NavigationViewConnector extends
     public void onConnectorHierarchyChange(ConnectorHierarchyChangeEvent event) {
 
         List<ComponentConnector> children = getChildComponents();
+        if(children.isEmpty()) {
+            // TODO investigate why this can happen, happens in PopoverTest
+            return;
+        }
         navigationBar = (NavigationBarConnector) children.get(0);
         getWidget().setNavigationBar(navigationBar.getWidget());
         getWidget().updateContent(children.get(1).getWidget());
