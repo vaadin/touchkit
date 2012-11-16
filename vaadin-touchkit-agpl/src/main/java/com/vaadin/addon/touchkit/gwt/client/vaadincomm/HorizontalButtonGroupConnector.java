@@ -34,6 +34,12 @@ public class HorizontalButtonGroupConnector extends
 
     @Override
     public void onConnectorHierarchyChange(ConnectorHierarchyChangeEvent event) {
+        if (getParent() == null) {
+            // Component is removed, skip stuff to save user from JS exceptions
+            // and some milliseconds of lost life
+            return;
+        }
+
         List<ComponentConnector> children = getChildComponents();
         HorizontalButtonGroupWidget widget = (HorizontalButtonGroupWidget) getWidget();
         widget.clear();

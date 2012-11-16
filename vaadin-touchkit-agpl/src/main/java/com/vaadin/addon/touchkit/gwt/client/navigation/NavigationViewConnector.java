@@ -47,12 +47,13 @@ public class NavigationViewConnector extends
 
     @Override
     public void onConnectorHierarchyChange(ConnectorHierarchyChangeEvent event) {
-
-        List<ComponentConnector> children = getChildComponents();
-        if(children.isEmpty()) {
-            // TODO investigate why this can happen, happens in PopoverTest
+        if (getParent() == null) {
+            // Component is removed, skip stuff to save user from JS exceptions
+            // and some milliseconds of lost life
             return;
         }
+
+        List<ComponentConnector> children = getChildComponents();
         navigationBar = (NavigationBarConnector) children.get(0);
         getWidget().setNavigationBar(navigationBar.getWidget());
         getWidget().updateContent(children.get(1).getWidget());

@@ -30,6 +30,11 @@ public class VerticalComponentGroupConnector extends AbstractLayoutConnector {
 
     @Override
     public void onConnectorHierarchyChange(ConnectorHierarchyChangeEvent event) {
+        if (getParent() == null) {
+            // Component is removed, skip stuff to save user from JS exceptions
+            // and some milliseconds of lost life
+            return;
+        }
 
         for (ComponentConnector oldChild : event.getOldChildren()) {
             if (oldChild.getParent() != this) {
@@ -54,7 +59,6 @@ public class VerticalComponentGroupConnector extends AbstractLayoutConnector {
             String url = urlReference == null ? null : urlReference.getURL();
             getWidget().setIcon(widget, url);
         }
-
     }
 
     @Override

@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ImageElement;
@@ -70,7 +68,9 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
                 captionElement = null;
                 captionElements.remove(widget);
 
-                widgetElement.removeClassName(ROW_WITH_CAPTION_STYLENAME);
+                if(widgetElement != null) {
+                    widgetElement.removeClassName(ROW_WITH_CAPTION_STYLENAME);
+                }
             }
             widgetElement.addClassName(ROW_WITHOUT_CAPTION_STYLENAME);
         }

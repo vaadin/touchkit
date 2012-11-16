@@ -28,6 +28,11 @@ public class NavigationManagerConnector extends
 
     @Override
     public void onConnectorHierarchyChange(ConnectorHierarchyChangeEvent event) {
+        if (getParent() == null) {
+            // Component is removed, skip stuff to save user from JS exceptions
+            // and some milliseconds of lost life
+            return;
+        }
 
         Widget current = ((ComponentConnector) getState().getCurrentComponent())
                 .getWidget();

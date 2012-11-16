@@ -72,8 +72,6 @@ public class NavigationBarConnector extends AbstractComponentContainerConnector 
     @Override
     public void onConnectorHierarchyChange(
             ConnectorHierarchyChangeEvent connectorHierarchyChangeEvent) {
-        // TODO Auto-generated method stub
-        
     }
 
 }
