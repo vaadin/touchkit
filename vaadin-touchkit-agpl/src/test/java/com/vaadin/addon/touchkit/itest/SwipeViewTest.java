@@ -20,7 +20,7 @@ import com.vaadin.server.Page;
 import com.vaadin.server.RequestHandler;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinResponse;
-import com.vaadin.server.VaadinServiceSession;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
@@ -42,11 +42,11 @@ public class SwipeViewTest extends AbstractTouchKitIntegrationTest {
     @Override
     public void attach() {
         super.attach();
-        VaadinServiceSession session = getUI().getSession();
+        VaadinSession session = getUI().getSession();
         session.addRequestHandler(new RequestHandler() {
 
             @Override
-            public boolean handleRequest(VaadinServiceSession session,
+            public boolean handleRequest(VaadinSession session,
                     VaadinRequest request, VaadinResponse response)
                     throws IOException {
                 String requestPathInfo = request.getRequestPathInfo();
@@ -257,7 +257,8 @@ public class SwipeViewTest extends AbstractTouchKitIntegrationTest {
                 if (ui == null) {
                     throw new RuntimeException("WTF!!");
                 }
-                ExternalResource source = new ExternalResource(Page.getCurrent().getLocation() + "winterphotos/" + ss);
+                ExternalResource source = new ExternalResource(Page
+                        .getCurrent().getLocation() + "winterphotos/" + ss);
                 embedded.setSource(source);
             }
 

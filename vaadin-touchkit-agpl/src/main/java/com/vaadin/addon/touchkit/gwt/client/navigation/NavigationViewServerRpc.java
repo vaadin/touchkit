@@ -5,7 +5,7 @@ import com.vaadin.shared.communication.ServerRpc;
 
 public interface NavigationViewServerRpc extends ServerRpc {
 
-    @Delayed(lastonly=true)
+    @Delayed(lastOnly = true)
     public void updateScrollPosition(int position);
 
 }

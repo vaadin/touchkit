@@ -7,7 +7,7 @@ import com.vaadin.addon.touchkit.gwt.client.vaadincomm.OfflineModeState;
 import com.vaadin.server.BootstrapFragmentResponse;
 import com.vaadin.server.BootstrapListener;
 import com.vaadin.server.BootstrapPageResponse;
-import com.vaadin.server.VaadinServiceSession;
+import com.vaadin.server.VaadinSession;
 
 /**
  * TODO Needs a client side extension as well - go offline - persisten session
@@ -134,8 +134,8 @@ public class OfflineModeSettings extends AbstractTouchKitRootExtension
      */
     public void setPersistentSessionCookie(boolean persistentSessionCookie) {
         if (persistentSessionCookie) {
-            getState().persistentSessionTimeout = VaadinServiceSession
-                    .getCurrent().getSession().getMaxInactiveInterval();
+            getState().persistentSessionTimeout = VaadinSession.getCurrent()
+                    .getSession().getMaxInactiveInterval();
         } else {
             getState().persistentSessionTimeout = null;
         }

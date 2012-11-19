@@ -10,8 +10,8 @@ import com.vaadin.server.Extension;
 import com.vaadin.server.RequestHandler;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinResponse;
-import com.vaadin.server.VaadinServiceSession;
 import com.vaadin.server.VaadinServletService;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.UI;
 
 public class TouchKitSettings implements RequestHandler, BootstrapListener {
@@ -38,8 +38,7 @@ public class TouchKitSettings implements RequestHandler, BootstrapListener {
         return offlineModeSettings;
     }
 
-    private TouchKitSettings(VaadinServiceSession app,
-            VaadinServletService service) {
+    private TouchKitSettings(VaadinSession app, VaadinServletService service) {
         viewPortSettings = new ViewPortSettings();
         iosWebAppSettings = new IosWebAppSettings();
         applicationIcons = new ApplicationIcons();
@@ -69,7 +68,7 @@ public class TouchKitSettings implements RequestHandler, BootstrapListener {
         }
     }
 
-    public static TouchKitSettings init(VaadinServiceSession app,
+    public static TouchKitSettings init(VaadinSession app,
             VaadinServletService vaadinServletService) {
         TouchKitSettings touchKitSettings = get(app);
         if (touchKitSettings == null) {
@@ -78,7 +77,7 @@ public class TouchKitSettings implements RequestHandler, BootstrapListener {
         return touchKitSettings;
     }
 
-    public static TouchKitSettings get(VaadinServiceSession app) {
+    public static TouchKitSettings get(VaadinSession app) {
         Collection<RequestHandler> requestHandlers = app.getRequestHandlers();
         for (RequestHandler requestHandler : requestHandlers) {
             if (requestHandler instanceof TouchKitSettings) {
@@ -97,8 +96,8 @@ public class TouchKitSettings implements RequestHandler, BootstrapListener {
     }
 
     @Override
-    public boolean handleRequest(VaadinServiceSession session,
-            VaadinRequest request, VaadinResponse response) throws IOException {
+    public boolean handleRequest(VaadinSession session, VaadinRequest request,
+            VaadinResponse response) throws IOException {
         // TODO Auto-generated method stub
         return false;
     }

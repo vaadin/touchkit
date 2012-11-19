@@ -5,11 +5,11 @@ import com.vaadin.shared.communication.ServerRpc;
 
 public interface SwipeViewRpc extends ServerRpc {
 
-    @Delayed(lastonly = true)
+    @Delayed(lastOnly = true)
     void setScrollTop(int scrollTop);
-    
+
     void navigateForward();
-    
+
     void navigateBackward();
 
 }
