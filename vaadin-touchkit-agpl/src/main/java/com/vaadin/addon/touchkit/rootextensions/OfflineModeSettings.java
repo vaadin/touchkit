@@ -1,71 +1,36 @@
 package com.vaadin.addon.touchkit.rootextensions;
 
-import org.jsoup.nodes.Document;
-
 import com.vaadin.addon.touchkit.gwt.client.vaadincomm.OfflineModeClientRpc;
 import com.vaadin.addon.touchkit.gwt.client.vaadincomm.OfflineModeState;
-import com.vaadin.server.BootstrapFragmentResponse;
-import com.vaadin.server.BootstrapListener;
-import com.vaadin.server.BootstrapPageResponse;
+import com.vaadin.server.AbstractExtension;
 import com.vaadin.server.VaadinSession;
 
 /**
- * TODO Needs a client side extension as well - go offline - persisten session
- * cookie
+ * TODO Needs a client side extension as well
+ * 
+ * 
+ * - go offline
+ * 
+ * - persistent session cookie
+ * 
+ * In TK2 offline mode delay is in app config but it could just as well be
+ * written to offline storage or cookie. This way these settings could survive
+ * without bootstrap listener which are problematic
+ * 
+ * TODO rename or split to different features
  * 
  * @author mattitahvonen
  * 
  */
-public class OfflineModeSettings extends AbstractTouchKitRootExtension
-        implements BootstrapListener {
-
-    // WebApplicationContext context = (WebApplicationContext) getApplication()
-    // .getContext();
-    // int maxInactiveInterval = context.getHttpSession()
-    // .getMaxInactiveInterval();
-    // target.addAttribute("persistSession", maxInactiveInterval);
+public class OfflineModeSettings extends AbstractExtension {
 
     private static final int DEFAULT_OFFLINE_MODE_DELAY = 5;
-
-    private boolean cacheManifestEnabled = true;
 
     private int offlineModeTimeout = DEFAULT_OFFLINE_MODE_DELAY;
 
     @Override
     protected OfflineModeState getState() {
         return (OfflineModeState) super.getState();
-    }
-
-    @Override
-    public void modifyBootstrapFragment(BootstrapFragmentResponse response) {
-        // NOP
-    }
-
-    @Override
-    public void modifyBootstrapPage(BootstrapPageResponse response) {
-        Document document = response.getDocument();
-
-        if (isCacheManifestEnabled()) {
-            // document.getElementsByTag("html").attr("manifest",
-            // getCacheManifestLocation(response));
-        }
-    }
-
-    private String getCacheManifestLocation(BootstrapPageResponse response) {
-        String staticFileLocation = response.getRequest().getService()
-                .getStaticFileLocation(response.getRequest());
-        String configuredWidgetset = response.getRequest().getService()
-                .getConfiguredWidgetset(response.getRequest());
-        return staticFileLocation + "/VAADIN/widgetsets/" + configuredWidgetset
-                + "/cache.manifest";
-    }
-
-    public boolean isCacheManifestEnabled() {
-        return cacheManifestEnabled;
-    }
-
-    public void setCacheManifestEnabled(boolean cacheManifestEnabled) {
-        this.cacheManifestEnabled = cacheManifestEnabled;
     }
 
     public boolean isOfflineModeEnabled() {

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import com.vaadin.addon.touchkit.itest.oldtests.NavPanelTestWithViews;
-import com.vaadin.addon.touchkit.ui.TouchKitUI;
 import com.vaadin.annotations.Theme;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.event.ItemClickEvent;
@@ -19,9 +18,10 @@ import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.Table.ColumnGenerator;
+import com.vaadin.ui.UI;
 
 @Theme("base")
-public class TouchkitTestUI extends TouchKitUI {
+public class TouchkitTestUI extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
