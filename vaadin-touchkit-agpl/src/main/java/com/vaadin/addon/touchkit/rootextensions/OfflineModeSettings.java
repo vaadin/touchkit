@@ -4,6 +4,7 @@ import com.vaadin.addon.touchkit.gwt.client.vaadincomm.OfflineModeClientRpc;
 import com.vaadin.addon.touchkit.gwt.client.vaadincomm.OfflineModeState;
 import com.vaadin.server.AbstractExtension;
 import com.vaadin.server.VaadinSession;
+import com.vaadin.ui.UI;
 
 /**
  * TODO Needs a client side extension as well
@@ -115,4 +116,7 @@ public class OfflineModeSettings extends AbstractExtension {
         getRpcProxy(OfflineModeClientRpc.class).goOffline();
     }
 
+    public void extend(UI ui) {
+        super.extend(ui);
+    }
 }
