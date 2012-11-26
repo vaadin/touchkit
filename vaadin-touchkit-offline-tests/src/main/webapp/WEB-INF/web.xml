@@ -9,7 +9,7 @@
 	</context-param>
 	<servlet>
 		<servlet-name>OfflineTest</servlet-name>
-		<servlet-class>com.vaadin.server.VaadinServlet</servlet-class>
+		<servlet-class>com.vaadin.addon.touchkit.server.TouchKitServlet</servlet-class>
 		<init-param>
 			<param-name>UI</param-name>
 			<param-value>com.vaadin.addon.touchkit.offlinetest.OfflineTest</param-value>
@@ -24,6 +24,11 @@
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
   
+  	<mime-mapping>
+		<extension>manifest</extension>
+		<mime-type>text/cache-manifest</mime-type>
+	</mime-mapping>
+	
 <!--     <session-config> -->
 <!--       <session-timeout>1</session-timeout>  -->
 <!--     </session-config> -->
