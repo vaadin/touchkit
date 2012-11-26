@@ -24,6 +24,26 @@
 	<artifactId>vaadin-touchkit-offline-tests</artifactId>
 	<packaging>war</packaging>
 	<name>Offline tests for vaadin-touchkit</name>
+
+	<repositories>
+		<repository>
+			<id>vaadin-snapshots</id>
+			<url>${snapshot.repository.url}</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>vaadin-snapshots</id>
+			<url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.vaadin</groupId>
@@ -31,6 +51,13 @@
 			<version>${vaadin.version.maven}</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-themes</artifactId>
+			<version>${vaadin.version.maven}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -58,7 +85,7 @@
 			<version>LATEST</version>
 			<scope>test</scope>
 		</dependency>
-	
+
 		<dependency>
 			<groupId>com.vaadin.addon</groupId>
 			<artifactId>vaadin-touchkit-agpl</artifactId>
@@ -77,21 +104,21 @@
 			<scope>compile</scope>
 		</dependency>
 
-	<!-- Note that test bench snapshot is installad with custom name, TODO change 
-		this to real dependency when version is released. -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.vaadin</groupId> -->
-<!-- 			<artifactId>vaadin-testbench</artifactId> -->
-<!-- 			<version>3.0.0-SNAPSHOT</version> -->
-<!-- 			<scope>test</scope> -->
-<!-- 		</dependency> -->
-		
-<!-- 		<dependency> -->
-<!-- 			<groupId>junit</groupId> -->
-<!-- 			<artifactId>junit</artifactId> -->
-<!-- 			<version>4.10</version> -->
-<!-- 		</dependency> -->
-		
+		<!-- Note that test bench snapshot is installad with custom name, TODO 
+			change this to real dependency when version is released. -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.vaadin</groupId> -->
+		<!-- <artifactId>vaadin-testbench</artifactId> -->
+		<!-- <version>3.0.0-SNAPSHOT</version> -->
+		<!-- <scope>test</scope> -->
+		<!-- </dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>junit</groupId> -->
+		<!-- <artifactId>junit</artifactId> -->
+		<!-- <version>4.10</version> -->
+		<!-- </dependency> -->
+
 	</dependencies>
 	<build>
 		<resources>
@@ -174,7 +201,7 @@
 					<force>true</force>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
