@@ -22,7 +22,8 @@ import com.vaadin.shared.ui.Connect;
 public class OfflineModeConnector extends AbstractExtensionConnector implements
         CommunicationHandler, CommunicationErrorHandler {
     private static final int MAX_SUSPENDED_TIMEOUT = 5000;
-    boolean online = false;
+    boolean online = isNetworkOnline();
+    boolean forcedOffline = false;
     private Timer requestTimeoutTracker = new Timer() {
         @Override
         public void run() {
@@ -43,6 +44,7 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
         registerRpc(OfflineModeClientRpc.class, new OfflineModeClientRpc() {
             @Override
             public void goOffline() {
+                forcedOffline = true;
                 OfflineModeConnector.this.goOffline("Going offline", 0);
             }
         });
@@ -119,6 +121,7 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
             boolean networkOnline = isNetworkOnline();
 
             if (networkOnline) {
+                VConsole.log("The network connection returned, going back online.");
                 getOfflineApp().deactivate();
             }
             return !networkOnline;
@@ -156,18 +159,26 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
                 && !onlineAppStarted) {
             onlineApplicationStarted();
         }
+        if (forcedOffline && !getOfflineApp().isActive()) {
+            forcedOffline = false;
+        }
+        deactivateOfflineAppIfOnline();
     }
 
     @Override
     public void onResponseHandlingEnded(ResponseHandlingEndedEvent e) {
         requestTimeoutTracker.cancel();
-        if (!online) {
+        updateSessionCookieExpiration();
+    }
+
+    private void deactivateOfflineAppIfOnline() {
+        if (!online && !forcedOffline) {
             // We got a response although we were supposed to be offline.
             // Possibly a very sluggish xhr finally arrived. Skip paint phase as
             // resuming will repaint the screen anyways.
+            VConsole.log("Recieved a response while offline, going back online");
             getOfflineApp().deactivate();
         }
-        updateSessionCookieExpiration();
     }
 
     private void updateSessionCookieExpiration() {

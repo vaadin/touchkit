@@ -19,8 +19,8 @@ public class OfflineTest extends UI {
     @Override
     protected void init(VaadinRequest request) {
         offline = new OfflineModeSettings();
-        offline.extend(this);
         offline.setPersistentSessionCookie(true);
+        offline.extend(this);
 
         buildUi();
     }
