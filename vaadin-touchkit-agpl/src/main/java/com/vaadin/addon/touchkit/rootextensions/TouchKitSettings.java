@@ -10,10 +10,12 @@ import com.vaadin.server.ServiceException;
 import com.vaadin.server.SessionInitEvent;
 import com.vaadin.server.SessionInitListener;
 import com.vaadin.server.SystemMessages;
+import com.vaadin.server.SystemMessagesInfo;
 import com.vaadin.server.SystemMessagesProvider;
 import com.vaadin.server.VaadinService;
 
-public class TouchKitSettings implements BootstrapListener, SessionInitListener, SystemMessagesProvider {
+public class TouchKitSettings implements BootstrapListener,
+        SessionInitListener, SystemMessagesProvider {
 
     private ViewPortSettings viewPortSettings;
     private IosWebAppSettings iosWebAppSettings;
@@ -42,7 +44,7 @@ public class TouchKitSettings implements BootstrapListener, SessionInitListener,
         applicationIcons = new ApplicationIcons();
         applicationCacheSettings = new ApplicationCacheSettings();
         vaadinService.addSessionInitListener(this);
-        
+
         vaadinService.setSystemMessagesProvider(this);
     }
 
@@ -86,9 +88,11 @@ public class TouchKitSettings implements BootstrapListener, SessionInitListener,
     }
 
     @Override
-    public SystemMessages getSystemMessages(Locale locale) {
+    public SystemMessages getSystemMessages(
+            SystemMessagesInfo systemMessagesInfo) {
         CustomizedSystemMessages customizedSystemMessages = new CustomizedSystemMessages();
-        customizedSystemMessages.setCommunicationErrorNotificationEnabled(false);
+        customizedSystemMessages
+                .setCommunicationErrorNotificationEnabled(false);
         customizedSystemMessages.setSessionExpiredNotificationEnabled(false);
         return customizedSystemMessages;
     }
