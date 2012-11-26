@@ -95,12 +95,12 @@ public class NavigationManagerConnector extends
 
     @Override
     public void animationWillStart() {
-        getConnection().suspendRendering(this);
+        getConnection().suspendReponseHandling(this);
     }
 
     @Override
     public void animationDidEnd() {
-        getConnection().resumeRendering(this);
+        getConnection().resumeResponseHandling(this);
     }
 
 }
