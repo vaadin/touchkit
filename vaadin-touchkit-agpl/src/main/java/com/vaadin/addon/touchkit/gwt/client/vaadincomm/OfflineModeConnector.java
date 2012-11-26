@@ -9,26 +9,26 @@ import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.vaadin.addon.touchkit.gwt.client.TouchKitOfflineApp;
-import com.vaadin.client.ApplicationConnection.CommunicationErrorDelegate;
+import com.vaadin.client.ApplicationConnection.CommunicationErrorHandler;
 import com.vaadin.client.ApplicationConnection.CommunicationHandler;
-import com.vaadin.client.ApplicationConnection.RequestEndedEvent;
-import com.vaadin.client.ApplicationConnection.RequestStartedEvent;
-import com.vaadin.client.ApplicationConnection.ResponseReceivedEvent;
+import com.vaadin.client.ApplicationConnection.RequestStartingEvent;
+import com.vaadin.client.ApplicationConnection.ResponseHandlingEndedEvent;
+import com.vaadin.client.ApplicationConnection.ResponseHandlingStartedEvent;
 import com.vaadin.client.VConsole;
 import com.vaadin.client.extensions.AbstractExtensionConnector;
 import com.vaadin.shared.ui.Connect;
 
 @Connect(com.vaadin.addon.touchkit.rootextensions.OfflineModeSettings.class)
 public class OfflineModeConnector extends AbstractExtensionConnector implements
-        CommunicationHandler, CommunicationErrorDelegate {
+        CommunicationHandler, CommunicationErrorHandler {
     private static final int MAX_SUSPENDED_TIMEOUT = 5000;
     boolean online = false;
     private Timer requestTimeoutTracker = new Timer() {
         @Override
         public void run() {
             goOffline(
-                    "Response from server seems to take very long time. "
-                            + "Server is either down or there is an issue with network.",
+                    "The response from the server seems to take a very long time. "
+                            + "Either the server is down or there's a network issue.",
                     -1);
         }
     };
@@ -55,9 +55,9 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
 
     protected void init() {
         offlineTimeoutMillis = readOfflineTimeout() * 1000;
-        getConnection().addHandler(RequestStartedEvent.TYPE, this);
-        getConnection().addHandler(RequestEndedEvent.TYPE, this);
-        getConnection().addHandler(ResponseReceivedEvent.TYPE, this);
+        getConnection().addHandler(RequestStartingEvent.TYPE, this);
+        getConnection().addHandler(ResponseHandlingStartedEvent.TYPE, this);
+        getConnection().addHandler(ResponseHandlingEndedEvent.TYPE, this);
         getConnection().setCommunicationErrorDelegate(this);
     }
 
@@ -134,7 +134,7 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
     }
 
     @Override
-    public void onRequestStarted(RequestStartedEvent e) {
+    public void onRequestStarting(RequestStartingEvent e) {
         if (!applicationStarted) {
             if (isNetworkOnline()) {
                 online = true;
@@ -150,7 +150,7 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
     }
 
     @Override
-    public void onRequestEnded(RequestEndedEvent e) {
+    public void onResponseHandlingStarted(ResponseHandlingStartedEvent e) {
         requestTimeoutTracker.cancel();
         if (getConnection().isApplicationRunning() && online
                 && !onlineAppStarted) {
@@ -159,7 +159,7 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
     }
 
     @Override
-    public void onResponseReceived(ResponseReceivedEvent e) {
+    public void onResponseHandlingEnded(ResponseHandlingEndedEvent e) {
         requestTimeoutTracker.cancel();
         if (!online) {
             // We got a response although we were supposed to be offline.
