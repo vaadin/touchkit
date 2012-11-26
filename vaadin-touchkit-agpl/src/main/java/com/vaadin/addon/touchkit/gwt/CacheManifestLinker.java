@@ -1,16 +1,19 @@
 package com.vaadin.addon.touchkit.gwt;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.security.CodeSource;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.SortedSet;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
+import java.util.regex.Pattern;
+
+import org.reflections.Reflections;
+import org.reflections.scanners.ResourcesScanner;
+import org.reflections.util.ClasspathHelper;
+import org.reflections.util.ConfigurationBuilder;
+import org.reflections.util.FilterBuilder;
 
 import com.google.gwt.core.ext.LinkerContext;
 import com.google.gwt.core.ext.TreeLogger;
@@ -22,7 +25,6 @@ import com.google.gwt.core.ext.linker.ConfigurationProperty;
 import com.google.gwt.core.ext.linker.LinkerOrder;
 import com.google.gwt.core.ext.linker.SelectionProperty;
 import com.google.gwt.core.ext.linker.SyntheticArtifact;
-import com.vaadin.ui.themes.BaseTheme;
 
 /**
  * TODO review and improve this impl
@@ -36,33 +38,27 @@ public class CacheManifestLinker extends AbstractLinker {
 
     public CacheManifestLinker() {
         addCachedResource("/");
+        addCachedResource("../../../VAADIN/vaadinBootstrap.js");
         addBaseTheme();
     }
 
     private void addBaseTheme() {
-        CodeSource codeSource = BaseTheme.class.getProtectionDomain()
-                .getCodeSource();
-        if (codeSource != null) {
-            URL jar = codeSource.getLocation();
-            try {
-                ZipInputStream zip = new ZipInputStream(jar.openStream());
-                ZipEntry nextEntry = zip.getNextEntry();
-                while (nextEntry != null) {
-                    String name = nextEntry.getName();
-                    if (name.contains("VAADIN/themes/base")) {
-                        if (name.endsWith("/")
-                                || (name.endsWith(".css") && !name
-                                        .endsWith("styles.css"))) {
-                            // ingrore "partial css files"
-                        } else {
-                            addCachedResource("../../../" + name);
-                        }
-                    }
-                    nextEntry = zip.getNextEntry();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        // Find resources using org.reflections
+        Reflections reflections = new Reflections(
+                new ConfigurationBuilder()
+                        .filterInputsBy(
+                                new FilterBuilder()
+                                        .include("VAADIN\\.themes\\.base.*"))
+                        .setUrls(
+                                ClasspathHelper
+                                        .forPackage("VAADIN.themes.base"))
+                        .setScanners(new ResourcesScanner()));
+
+        Set<String> themeFiles = reflections.getResources(Pattern
+                .compile("^.*\\.(css|gif|png|ico)$"));
+
+        for (String name : themeFiles) {
+            addCachedResource("../../../" + name);
         }
     }
 
@@ -170,15 +166,15 @@ public class CacheManifestLinker extends AbstractLinker {
         }
     }
 
-    List<String> acceptedFileEnds = Arrays.asList(".html", ".js", ".css",
+    List<String> acceptedFileExtensions = Arrays.asList(".html", ".js", ".css",
             ".png", ".jpg", ".gif", ".ico");
 
     protected boolean acceptCachedResource(String filename) {
         if (filename.startsWith("compile-report/")) {
             return false;
         }
-        for (String acceptedEnd : acceptedFileEnds) {
-            if (filename.endsWith(acceptedEnd)) {
+        for (String acceptedExtension : acceptedFileExtensions) {
+            if (filename.endsWith(acceptedExtension)) {
                 return true;
             }
         }
