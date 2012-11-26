@@ -1,10 +1,10 @@
 package com.vaadin.addon.touchkit.gwt.client.navigation;
 
-import com.vaadin.shared.ComponentState;
+import com.vaadin.shared.AbstractComponentState;
 import com.vaadin.shared.Connector;
 
 @SuppressWarnings("serial")
-public class NavigationButtonSharedState extends ComponentState {
+public class NavigationButtonSharedState extends AbstractComponentState {
 
     public static final String MY_ICON_RESOURCE = "navbutton_icon_resource_key";
     private String targetViewCaption;

@@ -1,9 +1,9 @@
 package com.vaadin.addon.touchkit.gwt.client.navigation;
 
-import com.vaadin.shared.ComponentState;
+import com.vaadin.shared.AbstractComponentState;
 import com.vaadin.shared.Connector;
 
-public class NavigationBarState extends ComponentState {
+public class NavigationBarState extends AbstractComponentState {
     private Connector leftComponent;
     private Connector rightComponent;
 

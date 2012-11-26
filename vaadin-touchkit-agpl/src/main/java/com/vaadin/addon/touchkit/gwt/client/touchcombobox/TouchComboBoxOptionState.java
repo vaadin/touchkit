@@ -1,8 +1,8 @@
 package com.vaadin.addon.touchkit.gwt.client.touchcombobox;
 
-import com.vaadin.shared.ComponentState;
+import com.vaadin.shared.AbstractComponentState;
 
-public class TouchComboBoxOptionState extends ComponentState {
+public class TouchComboBoxOptionState extends AbstractComponentState {
 
     private static final long serialVersionUID = 6321196555049250896L;
 
