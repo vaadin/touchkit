@@ -49,7 +49,7 @@ public class SwipeViewTest extends AbstractTouchKitIntegrationTest {
             public boolean handleRequest(VaadinSession session,
                     VaadinRequest request, VaadinResponse response)
                     throws IOException {
-                String requestPathInfo = request.getRequestPathInfo();
+                String requestPathInfo = request.getPathInfo();
                 if (requestPathInfo.contains("winterphotos/")) {
                     response.setCacheTime(60 * 60 * 1000);
                     response.setContentType("image/jpeg");

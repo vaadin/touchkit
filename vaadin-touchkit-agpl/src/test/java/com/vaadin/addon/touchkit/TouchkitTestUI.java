@@ -26,7 +26,7 @@ public class TouchkitTestUI extends UI {
     @Override
     protected void init(VaadinRequest request) {
 
-        String requestPathInfo = request.getRequestPathInfo();
+        String requestPathInfo = request.getPathInfo();
         if (requestPathInfo.length() > 3) {
             try {
 
@@ -105,9 +105,10 @@ public class TouchkitTestUI extends UI {
     }
 
     CssLayout content = new CssLayout();
+
     private void addComponent(Component component) {
         content.setSizeFull();
-        if(content.getParent() == null) {
+        if (content.getParent() == null) {
             setContent(content);
         }
         content.addComponent(component);
