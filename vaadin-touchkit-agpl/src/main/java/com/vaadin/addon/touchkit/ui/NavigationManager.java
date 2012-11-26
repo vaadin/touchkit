@@ -7,7 +7,7 @@ import java.util.Stack;
 
 import com.vaadin.addon.touchkit.gwt.client.navigation.NavigationManagerSharedState;
 import com.vaadin.addon.touchkit.ui.NavigationManager.NavigationEvent.Direction;
-import com.vaadin.event.ComponentEventListener;
+import com.vaadin.event.ConnectorEventListener;
 import com.vaadin.ui.AbstractComponentContainer;
 import com.vaadin.ui.Component;
 import com.vaadin.util.ReflectTools;
@@ -366,7 +366,7 @@ public class NavigationManager extends AbstractComponentContainer {
 
     }
 
-    public interface NavigationListener extends ComponentEventListener {
+    public interface NavigationListener extends ConnectorEventListener {
         Method METHOD = ReflectTools.findMethod(NavigationListener.class,
                 "navigate", NavigationEvent.class);
 
@@ -406,7 +406,7 @@ public class NavigationManager extends AbstractComponentContainer {
     public int getComponentCount() {
         return getComponents().size();
     }
-    
+
     @Override
     public Iterator<Component> iterator() {
         return getComponentIterator();
