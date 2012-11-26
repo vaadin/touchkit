@@ -13,7 +13,7 @@ import com.vaadin.addon.touchkit.gwt.client.VerticalComponentGroupWidget;
 import com.vaadin.addon.touchkit.gwt.client.navigation.VNavigationBar;
 import com.vaadin.addon.touchkit.gwt.client.navigation.VNavigationView;
 import com.vaadin.addon.touchkit.gwt.client.vaadincomm.OfflineModeConnector;
-import com.vaadin.client.ui.button.VButton;
+import com.vaadin.client.ui.VButton;
 
 public class OfflineTestApp extends TouchKitOfflineApp implements
         RepeatingCommand {

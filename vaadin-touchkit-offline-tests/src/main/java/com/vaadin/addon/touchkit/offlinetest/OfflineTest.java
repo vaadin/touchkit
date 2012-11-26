@@ -1,20 +1,23 @@
 package com.vaadin.addon.touchkit.offlinetest;
 
 import com.vaadin.addon.touchkit.rootextensions.OfflineModeSettings;
-import com.vaadin.addon.touchkit.ui.TouchKitUI;
 import com.vaadin.annotations.PreserveOnRefresh;
-import com.vaadin.server.WrappedRequest;
+import com.vaadin.annotations.Theme;
+import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.UI;
+import com.vaadin.ui.VerticalLayout;
 
 @PreserveOnRefresh
-public class OfflineTest extends TouchKitUI {
+@Theme("base")
+public class OfflineTest extends UI {
 
     private OfflineModeSettings offline;
     private int times = 0;
 
     @Override
-    protected void init(WrappedRequest request) {
+    protected void init(VaadinRequest request) {
         offline = new OfflineModeSettings();
         offline.extend(this);
         offline.setPersistentSessionCookie(true);
@@ -23,17 +26,22 @@ public class OfflineTest extends TouchKitUI {
     }
 
     private void buildUi() {
-        addComponent(new Button("Go offline", new Button.ClickListener() {
-            public void buttonClick(ClickEvent event) {
-                offline.goOffline();
-            }
-        }));
-        addComponent(new Button("Clicked 0 times", new Button.ClickListener() {
-            public void buttonClick(ClickEvent event) {
-                times++;
-                event.getButton().setCaption("Clicked " + times + " times");
-            }
-        }));
+        VerticalLayout layout = new VerticalLayout();
+        layout.addComponent(new Button("Go offline",
+                new Button.ClickListener() {
+                    public void buttonClick(ClickEvent event) {
+                        offline.goOffline();
+                    }
+                }));
+        layout.addComponent(new Button("Clicked 0 times",
+                new Button.ClickListener() {
+                    public void buttonClick(ClickEvent event) {
+                        times++;
+                        event.getButton().setCaption(
+                                "Clicked " + times + " times");
+                    }
+                }));
+        setContent(layout);
     }
 
 }
