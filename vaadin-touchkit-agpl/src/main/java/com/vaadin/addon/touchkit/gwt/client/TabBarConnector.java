@@ -28,6 +28,11 @@ public class TabBarConnector extends AbstractComponentContainerConnector {
 
     @Override
     public void onConnectorHierarchyChange(ConnectorHierarchyChangeEvent event) {
+        if (getParent() == null) {
+            // Component is removed, skip stuff to save user from JS exceptions
+            // and some milliseconds of lost life
+            return;
+        }
         List<ComponentConnector> children = getChildComponents();
         
         getWidget().setToolbar(children.get(0).getWidget());
