@@ -14,6 +14,7 @@ import com.vaadin.client.ApplicationConnection.CommunicationHandler;
 import com.vaadin.client.ApplicationConnection.RequestStartingEvent;
 import com.vaadin.client.ApplicationConnection.ResponseHandlingEndedEvent;
 import com.vaadin.client.ApplicationConnection.ResponseHandlingStartedEvent;
+import com.vaadin.client.ServerConnector;
 import com.vaadin.client.VConsole;
 import com.vaadin.client.extensions.AbstractExtensionConnector;
 import com.vaadin.shared.ui.Connect;
@@ -189,5 +190,11 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
                     + getState().persistentSessionTimeout * 1000L);
             Cookies.setCookie("JSESSIONID", cookie, date);
         }
+    }
+
+    @Override
+    protected void extend(ServerConnector target) {
+        // TODO WTF should be be done here?
+        
     }
 }

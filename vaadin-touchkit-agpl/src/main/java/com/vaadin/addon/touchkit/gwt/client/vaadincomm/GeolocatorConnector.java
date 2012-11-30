@@ -3,6 +3,7 @@ package com.vaadin.addon.touchkit.gwt.client.vaadincomm;
 import com.vaadin.addon.touchkit.gwt.client.VPosition;
 import com.vaadin.addon.touchkit.rootextensions.Geolocator;
 import com.vaadin.shared.ui.Connect;
+import com.vaadin.client.ServerConnector;
 import com.vaadin.client.VConsole;
 import com.vaadin.client.communication.RpcProxy;
 import com.vaadin.client.extensions.AbstractExtensionConnector;
@@ -56,6 +57,11 @@ public class GeolocatorConnector extends AbstractExtensionConnector {
     private void onGeolocationError(int errorCode) {
         VConsole.log("Error in geolocation " + errorCode);
         rpc.onGeolocationError(errorCode);
+    }
+
+    @Override
+    protected void extend(ServerConnector target) {
+        // TODO WTF should be done here??
     }
 
 }
