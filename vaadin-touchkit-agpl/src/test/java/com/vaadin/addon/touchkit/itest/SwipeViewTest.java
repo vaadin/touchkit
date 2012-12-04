@@ -258,7 +258,7 @@ public class SwipeViewTest extends AbstractTouchKitIntegrationTest {
                     throw new RuntimeException("WTF!!");
                 }
                 ExternalResource source = new ExternalResource(Page
-                        .getCurrent().getLocation() + "winterphotos/" + ss);
+                        .getCurrent().getLocation().getPath() + "/winterphotos/" + ss);
                 embedded.setSource(source);
             }
 
