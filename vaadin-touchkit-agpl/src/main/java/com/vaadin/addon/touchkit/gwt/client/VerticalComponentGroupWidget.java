@@ -68,11 +68,13 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
                 captionElement = null;
                 captionElements.remove(widget);
 
-                if(widgetElement != null) {
+                if (widgetElement != null) {
                     widgetElement.removeClassName(ROW_WITH_CAPTION_STYLENAME);
                 }
             }
-            widgetElement.addClassName(ROW_WITHOUT_CAPTION_STYLENAME);
+            if (widgetElement != null) {
+                widgetElement.addClassName(ROW_WITHOUT_CAPTION_STYLENAME);
+            }
         }
 
     }
@@ -159,7 +161,7 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
         row.appendChild(wrapper);
         add(widget, (Element) Element.as(wrapper));
         setCaption(widget, caption, componentWidth);
-        
+
         if (!captionElements.containsKey(widget)) {
             row.removeClassName(ROW_WITH_FULLSIZE_WIDGET_STYLENAME);
         } else if ("100.0%".equals(componentWidth)) {

@@ -2,12 +2,12 @@ package com.vaadin.addon.touchkit.gwt.client.vaadincomm;
 
 import java.util.Date;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
+import com.vaadin.addon.touchkit.gwt.client.OfflineModeEntrypoint;
 import com.vaadin.addon.touchkit.gwt.client.TouchKitOfflineApp;
 import com.vaadin.client.ApplicationConnection.CommunicationErrorHandler;
 import com.vaadin.client.ApplicationConnection.CommunicationHandler;
@@ -35,7 +35,6 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
         }
     };
 
-    private TouchKitOfflineApp offlineApp;
     private boolean onlineAppStarted = false;
     private int offlineTimeoutMillis;
     private boolean applicationStarted = false;
@@ -79,11 +78,11 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
     }
 
     public TouchKitOfflineApp getOfflineApp() {
-        if (offlineApp == null) {
-            offlineApp = GWT.create(TouchKitOfflineApp.class);
-            offlineApp.init(this);
+        TouchKitOfflineApp app = OfflineModeEntrypoint.getApp();
+        if(app.getOfflineModeConnector() == null) {
+            app.init(this);
         }
-        return offlineApp;
+        return app;
     }
 
     public void goOffline(String details, int statusCode) {

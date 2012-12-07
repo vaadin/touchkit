@@ -28,10 +28,17 @@ public class ApplicationCacheSettings extends AbstractTouchKitRootExtension
     public void modifyBootstrapPage(BootstrapPageResponse response) {
         Document document = response.getDocument();
         if (isCacheManifestEnabled()) {
-            document.getElementsByTag("html").attr("manifest",
-                    getCacheManifestLocation(response));
 
             // Add the widgetsetUrl parameter to the bootstrap parameters.
+            // This is overridden to avoid adding the naive random query
+            // parameter (used by core to avoid caching of js file).
+
+            // FIXME there must be a safer way to fetch these parameters, now
+            // another Bootstrap listener might break stuff here.
+            // Candidate: response.getBootstrapHandler().getWidgetsetForUI(context);
+            // How to get context??
+            
+            
             Element scriptTag = document.getElementsByTag("script").last();
             String script = scriptTag.html();
             String vaadinDir = getAppConfigParameter("vaadinDir", script);
@@ -44,6 +51,11 @@ public class ApplicationCacheSettings extends AbstractTouchKitRootExtension
             scriptTag.appendChild(new DataNode(script.replace("\n});", String
                     .format(",\n    \"widgetsetUrl\": \"%s\"\n});",
                             widgetsetUrl)), scriptTag.baseUri()));
+
+            // Add cache manifest attribute to html tag
+            document.getElementsByTag("html").attr("manifest",
+                    vaadinDir + "widgetsets/" + widgetset + "/cache.manifest");
+
         }
     }
 
@@ -64,15 +76,6 @@ public class ApplicationCacheSettings extends AbstractTouchKitRootExtension
             return m.group(1);
         }
         return null;
-    }
-
-    private String getCacheManifestLocation(BootstrapPageResponse response) {
-        String staticFileLocation = response.getRequest().getService()
-                .getStaticFileLocation(response.getRequest());
-        String configuredWidgetset = response.getRequest().getService()
-                .getConfiguredWidgetset(response.getRequest());
-        return staticFileLocation + "/VAADIN/widgetsets/" + configuredWidgetset
-                + "/cache.manifest";
     }
 
     public boolean isCacheManifestEnabled() {
