@@ -16,6 +16,7 @@ import com.vaadin.client.ApplicationConnection.ResponseHandlingEndedEvent;
 import com.vaadin.client.ApplicationConnection.ResponseHandlingStartedEvent;
 import com.vaadin.client.ServerConnector;
 import com.vaadin.client.VConsole;
+import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.extensions.AbstractExtensionConnector;
 import com.vaadin.shared.ui.Connect;
 
@@ -35,7 +36,6 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
         }
     };
 
-    private boolean onlineAppStarted = false;
     private int offlineTimeoutMillis;
     private boolean applicationStarted = false;
 
@@ -62,6 +62,11 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
         getConnection().addHandler(ResponseHandlingEndedEvent.TYPE, this);
         getConnection().setCommunicationErrorDelegate(this);
     }
+    
+    @Override
+    public void onStateChanged(StateChangeEvent stateChangeEvent) {
+        super.onStateChanged(stateChangeEvent);
+    }
 
     private static native final int readOfflineTimeout()
     /*-{
@@ -72,17 +77,8 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
         }
      }-*/;
 
-    private void onlineApplicationStarted() {
-        onlineAppStarted = true;
-        getOfflineApp().onlineApplicationStarted();
-    }
-
     public TouchKitOfflineApp getOfflineApp() {
-        TouchKitOfflineApp app = OfflineModeEntrypoint.getApp();
-        if(app.getOfflineModeConnector() == null) {
-            app.init(this);
-        }
-        return app;
+        return OfflineModeEntrypoint.getApp();
     }
 
     public void goOffline(String details, int statusCode) {
@@ -155,10 +151,6 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
     @Override
     public void onResponseHandlingStarted(ResponseHandlingStartedEvent e) {
         requestTimeoutTracker.cancel();
-        if (getConnection().isApplicationRunning() && online
-                && !onlineAppStarted) {
-            onlineApplicationStarted();
-        }
         if (forcedOffline && !getOfflineApp().isActive()) {
             forcedOffline = false;
         }

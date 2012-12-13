@@ -5,6 +5,10 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Timer;
 import com.vaadin.client.ApplicationConfiguration;
 
+/**
+ * This entry point checks if the actual Vaadin application starts. If not, the
+ * pure GWT (client side) OfflineMode application is started.
+ */
 public class OfflineModeEntrypoint implements EntryPoint {
 
     private static TouchKitOfflineApp app;
@@ -33,14 +37,8 @@ public class OfflineModeEntrypoint implements EntryPoint {
 
     public static TouchKitOfflineApp getApp() {
         if (app == null) {
-            app = createAndInitOfflineApp();
+            app = GWT.create(TouchKitOfflineApp.class);
         }
-        return app;
-    }
-
-    private static TouchKitOfflineApp createAndInitOfflineApp() {
-        TouchKitOfflineApp app = GWT.create(TouchKitOfflineApp.class);
-        app.init(null);
         return app;
     }
 

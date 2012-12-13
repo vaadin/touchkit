@@ -5,6 +5,7 @@ import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.Window.Location;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
@@ -37,7 +38,6 @@ import com.vaadin.client.ui.VOverlay;
 public class TouchKitOfflineApp {
 
     protected static final int Z_INDEX = 30001;
-    private OfflineModeConnector offlineConnector;
     private FlowPanel flowPanel;
     private VOverlay overlay;
     private String activationMessage;
@@ -75,6 +75,7 @@ public class TouchKitOfflineApp {
      * @param statusCode
      */
     public void activate(String details, int statusCode) {
+        active = true;
         activationMessage = details;
         this.statusCode = statusCode;
         overlay = new VOverlay();
@@ -89,7 +90,6 @@ public class TouchKitOfflineApp {
         overlay.show();
         overlay.setWidth(Window.getClientWidth() + "px");
         overlay.setHeight(Window.getClientHeight() + "px");
-        active = true;
     }
 
     public boolean isActive() {
@@ -136,19 +136,11 @@ public class TouchKitOfflineApp {
             vButton.addClickHandler(new ClickHandler() {
                 public void onClick(ClickEvent event) {
                     overlay.hide();
-                    offlineConnector.reload();
+                    Location.reload();
                 }
             });
             fp.add(vButton);
         }
-    }
-
-    public void init(OfflineModeConnector offlineModeConnector) {
-        offlineConnector = offlineModeConnector;
-    }
-
-    public OfflineModeConnector getOfflineModeConnector() {
-        return offlineConnector;
     }
 
     /**
@@ -158,19 +150,9 @@ public class TouchKitOfflineApp {
      * and gracefully return to normal operation.
      */
     public void deactivate() {
+        active = false;
         // Hide the floating overlay
         overlay.hide();
-        active = false;
-        // tell application it can resume its operations
-        offlineConnector.resume();
-    }
-
-    /**
-     * Called when the online app has successfully started. If the offline mode
-     * has something to synchronize with the server it can do it here.
-     */
-    public void onlineApplicationStarted() {
-
     }
 
 }
