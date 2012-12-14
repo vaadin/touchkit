@@ -1,7 +1,5 @@
 package com.vaadin.addon.touchkit.rootextensions;
 
-import java.util.Locale;
-
 import com.vaadin.server.BootstrapFragmentResponse;
 import com.vaadin.server.BootstrapListener;
 import com.vaadin.server.BootstrapPageResponse;
