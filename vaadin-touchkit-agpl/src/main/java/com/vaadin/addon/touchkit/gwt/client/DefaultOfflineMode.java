@@ -19,29 +19,17 @@ import com.vaadin.client.ui.VOverlay;
  * displayed when network connection is down or if the server cannot be reached
  * for some other reason.
  * <p>
- * Applications that need a to have offline mode connect their offline mode
- * written with pure GWT to an extended version of this class. This class can be
- * replaced by adding following GWT deferred binding rule to your widgetset:
- * <code><pre>
-        <replace-with
-                class="com.example.widgetset.client.MyOfflineMode">
-                <when-type-is
-                        class="com.vaadin.addon.touchkit.gwt.client.TouchKitOfflineApp" />
-        </replace-with>
- * </pre></code>
- * <p>
  * Messages displayed by the default "offline mode", the can replaced by adding
  * customized properties files for {@link OfflineModeMessages} bundle. See GWT
  * int18n docs for more details.
  * 
  */
-public class TouchKitOfflineApp {
+public class DefaultOfflineMode implements OfflineMode {
 
     protected static final int Z_INDEX = 30001;
     private FlowPanel flowPanel;
     private VOverlay overlay;
     private String activationMessage;
-    private int statusCode;
     private boolean active;
     private OfflineModeMessages msg;
 
@@ -60,24 +48,10 @@ public class TouchKitOfflineApp {
         return flowPanel;
     };
 
-    /**
-     * This method is called when the touchkit app desides to go offline.
-     * <p>
-     * By default it creates a simple overlay that is displayed over the
-     * existing content and displays offline status for user. The content of the
-     * overlay is built by {@link #buildDefaultContent()} method. Simplest
-     * method to build custom offline app is to override that method instead of
-     * this one. By overriding this method, developer can get full control on
-     * what happens when offline mode gets triggered by the
-     * ApplicationConnection.
-     * 
-     * @param details
-     * @param statusCode
-     */
-    public void activate(String details, int statusCode) {
+    @Override
+    public void activate(ActivationEvent event) {
         active = true;
-        activationMessage = details;
-        this.statusCode = statusCode;
+        activationMessage = event.getActivationMessage();
         overlay = new VOverlay();
         overlay.setStyleName("v-window v-touchkit-offlinemode");
         Style style = overlay.getElement().getStyle();
@@ -98,10 +72,6 @@ public class TouchKitOfflineApp {
 
     public String getActivationMessage() {
         return activationMessage;
-    }
-
-    public int getStatusCode() {
-        return statusCode;
     }
 
     /**
@@ -143,16 +113,15 @@ public class TouchKitOfflineApp {
         }
     }
 
-    /**
-     * This method is called when the touch kit detects that now it might be
-     * possible to get online again (e.g. network connection has returned). If
-     * you have implemented a more advanced offline mode, override this method
-     * and gracefully return to normal operation.
+    /* (non-Javadoc)
+     * @see com.vaadin.addon.touchkit.gwt.client.TouchKitOfflineMode#deactivate()
      */
-    public void deactivate() {
+    @Override
+    public boolean deactivate() {
         active = false;
         // Hide the floating overlay
         overlay.hide();
+        return true;
     }
 
 }

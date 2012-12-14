@@ -9,10 +9,6 @@
 		
 	<set-property name="user.agent" value="safari" />
 
-<!-- 	<replace-with class="com.vaadin.addon.touchkit.gwt.client.VTouchKitView"> -->
-<!-- 		<when-type-is class="com.vaadin.terminal.gwt.client.ui.VView" /> -->
-<!-- 	</replace-with> -->
-
 	<replace-with
 		class="com.vaadin.addon.touchkit.gwt.client.VCustomNativeSelect">
 		<when-type-is class="com.vaadin.server.gwt.client.ui.VNativeSelect" />
@@ -22,6 +18,13 @@
         class="com.vaadin.addon.touchkit.gwt.client.TouchButton">
         <when-type-is class="com.vaadin.client.ui.button.VButton" />
     </replace-with>
+    
+    <replace-with
+                class="com.vaadin.addon.touchkit.gwt.client.DefaultOfflineMode">
+                <when-type-is
+                        class="com.vaadin.addon.touchkit.gwt.client.OfflineMode" />
+    </replace-with>
+    
 
 <!-- 	 <replace-with class="com.vaadin.addon.touchkit.gwt.client.VRemoteDebugConsole">  -->
 <!-- 		<when-type-is class="com.vaadin.client.Console" /> </replace-with> -->

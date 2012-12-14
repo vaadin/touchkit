@@ -3,6 +3,7 @@ package com.vaadin.addon.touchkit.gwt.client;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Timer;
+import com.vaadin.addon.touchkit.gwt.client.OfflineMode.ActivationReason;
 import com.vaadin.client.ApplicationConfiguration;
 
 /**
@@ -11,13 +12,18 @@ import com.vaadin.client.ApplicationConfiguration;
  */
 public class OfflineModeEntrypoint implements EntryPoint {
 
-    private static TouchKitOfflineApp app;
+    private static OfflineMode app;
 
     @Override
     public void onModuleLoad() {
         if (!isNetworkOnline()) {
-            getApp().activate("No network connection", 0);
+            getOfflineMode().activate(
+                    new ActivationEventImpl("No network connection",
+                            ActivationReason.NO_NETWORK));
         } else {
+            // FIXME the core in V7 should get rid of its custom javascript
+            // kickstart, now we can't hook to listen for bad responses for
+            // initial requests :-(
             new Timer() {
                 @Override
                 public void run() {
@@ -26,18 +32,22 @@ public class OfflineModeEntrypoint implements EntryPoint {
                             || !ApplicationConfiguration
                                     .getRunningApplications().get(0)
                                     .isApplicationRunning()) {
-                        getApp().activate(
-                                "Online app didn't start properly, server down?",
-                                0);
+                        if(!getOfflineMode().isActive()) {
+                            getOfflineMode().activate(
+                                    new ActivationEventImpl(
+                                            "The application didn't start properly.",
+                                            ActivationReason.ONLINE_APP_NOT_STARTED));
+                        }
+
                     }
                 }
             }.schedule(5000);
         }
     }
 
-    public static TouchKitOfflineApp getApp() {
+    public static OfflineMode getOfflineMode() {
         if (app == null) {
-            app = GWT.create(TouchKitOfflineApp.class);
+            app = GWT.create(OfflineMode.class);
         }
         return app;
     }

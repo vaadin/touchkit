@@ -7,8 +7,11 @@ import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
+import com.vaadin.addon.touchkit.gwt.client.ActivationEventImpl;
+import com.vaadin.addon.touchkit.gwt.client.OfflineMode;
+import com.vaadin.addon.touchkit.gwt.client.OfflineMode.ActivationEvent;
+import com.vaadin.addon.touchkit.gwt.client.OfflineMode.ActivationReason;
 import com.vaadin.addon.touchkit.gwt.client.OfflineModeEntrypoint;
-import com.vaadin.addon.touchkit.gwt.client.TouchKitOfflineApp;
 import com.vaadin.client.ApplicationConnection.CommunicationErrorHandler;
 import com.vaadin.client.ApplicationConnection.CommunicationHandler;
 import com.vaadin.client.ApplicationConnection.RequestStartingEvent;
@@ -29,10 +32,10 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
     private Timer requestTimeoutTracker = new Timer() {
         @Override
         public void run() {
-            goOffline(
+            goOffline(new ActivationEventImpl(
                     "The response from the server seems to take a very long time. "
                             + "Either the server is down or there's a network issue.",
-                    -1);
+                    ActivationReason.BAD_RESPONSE));
         }
     };
 
@@ -45,7 +48,9 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
             @Override
             public void goOffline() {
                 forcedOffline = true;
-                OfflineModeConnector.this.goOffline("Going offline", 0);
+                OfflineModeConnector.this.goOffline(new ActivationEventImpl(
+                        "Offline mode started by a request",
+                        ActivationReason.ACTIVATED_BY_SERVER));
             }
         });
     }
@@ -62,7 +67,7 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
         getConnection().addHandler(ResponseHandlingEndedEvent.TYPE, this);
         getConnection().setCommunicationErrorDelegate(this);
     }
-    
+
     @Override
     public void onStateChanged(StateChangeEvent stateChangeEvent) {
         super.onStateChanged(stateChangeEvent);
@@ -77,15 +82,15 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
         }
      }-*/;
 
-    public TouchKitOfflineApp getOfflineApp() {
-        return OfflineModeEntrypoint.getApp();
+    public OfflineMode getOfflineApp() {
+        return OfflineModeEntrypoint.getOfflineMode();
     }
 
-    public void goOffline(String details, int statusCode) {
+    public void goOffline(ActivationEvent event) {
         online = false;
         getConnection().setApplicationRunning(false);
         if (!getOfflineApp().isActive()) {
-            getOfflineApp().activate(details, statusCode);
+            getOfflineApp().activate(event);
             if (!isNetworkOnline()) {
                 Scheduler.get()
                         .scheduleFixedPeriod(new CheckForNetwork(), 1000);
@@ -128,7 +133,9 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
     @Override
     public boolean onError(String details, int statusCode) {
         VConsole.log("Going offline due to communication error");
-        goOffline(details, statusCode);
+        goOffline(new ActivationEventImpl(
+                "Goind offline due to a communication error.",
+                ActivationReason.BAD_RESPONSE));
         return true;
     }
 
@@ -138,7 +145,8 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
             if (isNetworkOnline()) {
                 online = true;
             } else {
-                goOffline("No network connection", -1);
+                goOffline(new ActivationEventImpl("No network connection",
+                        ActivationReason.NO_NETWORK));
             }
             applicationStarted = true;
         }
@@ -186,6 +194,6 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
     @Override
     protected void extend(ServerConnector target) {
         // TODO WTF should be be done here?
-        
+
     }
 }
