@@ -4,6 +4,6 @@ import com.vaadin.shared.communication.ClientRpc;
 
 public interface GeolocatorClientRpc extends ClientRpc {
 
-    public void detectCurrentPosition();
+    public void detectCurrentPosition(int callbackid);
 
 }

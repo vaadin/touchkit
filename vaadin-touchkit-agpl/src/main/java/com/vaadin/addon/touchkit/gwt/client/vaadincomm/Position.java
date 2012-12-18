@@ -2,16 +2,32 @@ package com.vaadin.addon.touchkit.gwt.client.vaadincomm;
 
 import java.io.Serializable;
 
+import com.google.gwt.geolocation.client.Position.Coordinates;
+
 @SuppressWarnings("serial")
 public class Position implements Serializable {
 
     private double latitude;
     private double longitude;
     private double accuracy;
-    private double altitude;
-    private double altitudeAccuracy;
-    private double heading;
-    private double speed;
+    private Double altitude;
+    private Double altitudeAccuracy;
+    private Double heading;
+    private Double speed;
+
+    public Position() {
+    }
+    
+    public Position(com.google.gwt.geolocation.client.Position r) {
+        Coordinates c = r.getCoordinates();
+        latitude = c.getLatitude();
+        longitude = c.getLongitude();
+        accuracy = c.getAccuracy();
+        altitude = c.getAltitude();
+        altitudeAccuracy = c.getAltitudeAccuracy();
+        heading = c.getHeading();
+        speed  = c.getSpeed();
+    }
 
     public double getLatitude() {
         return latitude;
@@ -37,35 +53,35 @@ public class Position implements Serializable {
         this.accuracy = accuracy;
     }
 
-    public double getAltitude() {
+    public Double getAltitude() {
         return altitude;
     }
 
-    public void setAltitude(double altitude) {
+    public void setAltitude(Double altitude) {
         this.altitude = altitude;
     }
 
-    public double getAltitudeAccuracy() {
+    public Double getAltitudeAccuracy() {
         return altitudeAccuracy;
     }
 
-    public void setAltitudeAccuracy(double altitudeAccuracy) {
+    public void setAltitudeAccuracy(Double altitudeAccuracy) {
         this.altitudeAccuracy = altitudeAccuracy;
     }
 
-    public double getHeading() {
+    public Double getHeading() {
         return heading;
     }
 
-    public void setHeading(double heading) {
+    public void setHeading(Double heading) {
         this.heading = heading;
     }
 
-    public double getSpeed() {
+    public Double getSpeed() {
         return speed;
     }
 
-    public void setSpeed(double speed) {
+    public void setSpeed(Double speed) {
         this.speed = speed;
     }
 

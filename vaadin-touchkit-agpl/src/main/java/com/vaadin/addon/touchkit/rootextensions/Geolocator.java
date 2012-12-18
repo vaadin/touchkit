@@ -1,16 +1,26 @@
 package com.vaadin.addon.touchkit.rootextensions;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 import com.vaadin.addon.touchkit.gwt.client.vaadincomm.GeolocatorClientRpc;
 import com.vaadin.addon.touchkit.gwt.client.vaadincomm.GeolocatorServerRpc;
 import com.vaadin.addon.touchkit.gwt.client.vaadincomm.Position;
-import com.vaadin.addon.touchkit.service.PositionCallback;
 import com.vaadin.server.AbstractExtension;
 import com.vaadin.server.Extension;
 import com.vaadin.ui.UI;
 
+/**
+ * TODO class javadoc 
+ * 
+ * FIXME give callbacks ids, save to map -> better fuctioning
+ * with multiple simultanous requests.
+ * 
+ */
 @SuppressWarnings("serial")
 public class Geolocator extends AbstractExtension {
-    private PositionCallback callback;
+    private Map<Integer,PositionCallback> callbacks = new HashMap<Integer, PositionCallback>();
 
     /**
      * Detects the current geographic location of the client. The detection
@@ -39,13 +49,13 @@ public class Geolocator extends AbstractExtension {
     private Geolocator() {
         registerRpc(new GeolocatorServerRpc() {
             @Override
-            public void onGeolocationSuccess(Position position) {
-                callback.onSuccess(position);
+            public void onGeolocationSuccess(int callbackId, Position position) {
+                callbacks.remove(callbackId).onSuccess(position);
             }
 
             @Override
-            public void onGeolocationError(int errorCode) {
-                callback.onFailure(errorCode);
+            public void onGeolocationError(int callbackId, int errorCode) {
+                callbacks.remove(callbackId).onFailure(errorCode);
             }
         });
     }
@@ -56,8 +66,12 @@ public class Geolocator extends AbstractExtension {
      * @param callback
      */
     private void detectCurrentPosition(PositionCallback callback) {
-        this.callback = callback;
-        getRpcProxy(GeolocatorClientRpc.class).detectCurrentPosition();
+        int callbackid = 0;
+        while(callbacks.containsKey(callbackid)) {
+            callbackid = new Random().nextInt();
+        }
+        callbacks.put(callbackid, callback);
+        getRpcProxy(GeolocatorClientRpc.class).detectCurrentPosition(callbackid);
     }
 
 }

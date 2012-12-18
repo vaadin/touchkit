@@ -4,7 +4,7 @@ import com.vaadin.shared.communication.ServerRpc;
 
 public interface GeolocatorServerRpc extends ServerRpc {
 
-    public void onGeolocationSuccess(Position position);
+    public void onGeolocationSuccess(int callbackId, Position position);
 
-    public void onGeolocationError(int errorCode);
+    public void onGeolocationError(int callbackId, int errorCode);
 }
