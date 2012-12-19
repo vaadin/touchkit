@@ -3,8 +3,8 @@ package com.vaadin.addon.touchkit.rootextensions;
 import java.util.HashMap;
 
 import com.google.gwt.storage.client.Storage;
-import com.vaadin.addon.touchkit.gwt.client.vaadincomm.LocalStorageClientRpc;
-import com.vaadin.addon.touchkit.gwt.client.vaadincomm.LocalStorageServerRpc;
+import com.vaadin.addon.touchkit.gwt.client.vcom.LocalStorageClientRpc;
+import com.vaadin.addon.touchkit.gwt.client.vcom.LocalStorageServerRpc;
 import com.vaadin.server.AbstractExtension;
 import com.vaadin.server.Extension;
 import com.vaadin.ui.UI;

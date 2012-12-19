@@ -3,7 +3,7 @@ package com.vaadin.addon.touchkit.ui;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import com.vaadin.addon.touchkit.gwt.client.vaadincomm.VerticalComponentGroupState;
+import com.vaadin.addon.touchkit.gwt.client.vcom.VerticalComponentGroupState;
 import com.vaadin.ui.AbstractLayout;
 import com.vaadin.ui.Component;
 

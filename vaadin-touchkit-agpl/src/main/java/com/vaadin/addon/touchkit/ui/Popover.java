@@ -1,7 +1,7 @@
 package com.vaadin.addon.touchkit.ui;
 
-import com.vaadin.addon.touchkit.gwt.client.popover.PopoverRpc;
-import com.vaadin.addon.touchkit.gwt.client.popover.PopoverState;
+import com.vaadin.addon.touchkit.gwt.client.vcom.popover.PopoverRpc;
+import com.vaadin.addon.touchkit.gwt.client.vcom.popover.PopoverState;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;

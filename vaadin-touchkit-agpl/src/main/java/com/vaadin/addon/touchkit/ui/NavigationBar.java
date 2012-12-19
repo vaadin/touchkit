@@ -3,7 +3,7 @@ package com.vaadin.addon.touchkit.ui;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import com.vaadin.addon.touchkit.gwt.client.navigation.NavigationBarState;
+import com.vaadin.addon.touchkit.gwt.client.vcom.navigation.NavigationBarState;
 import com.vaadin.ui.AbstractComponentContainer;
 import com.vaadin.ui.Component;
 

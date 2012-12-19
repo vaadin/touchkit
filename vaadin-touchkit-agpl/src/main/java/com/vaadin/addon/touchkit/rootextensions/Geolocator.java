@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import com.vaadin.addon.touchkit.gwt.client.vaadincomm.GeolocatorClientRpc;
-import com.vaadin.addon.touchkit.gwt.client.vaadincomm.GeolocatorServerRpc;
-import com.vaadin.addon.touchkit.gwt.client.vaadincomm.Position;
+import com.vaadin.addon.touchkit.gwt.client.vcom.GeolocatorClientRpc;
+import com.vaadin.addon.touchkit.gwt.client.vcom.GeolocatorServerRpc;
+import com.vaadin.addon.touchkit.gwt.client.vcom.Position;
 import com.vaadin.server.AbstractExtension;
 import com.vaadin.server.Extension;
 import com.vaadin.ui.UI;

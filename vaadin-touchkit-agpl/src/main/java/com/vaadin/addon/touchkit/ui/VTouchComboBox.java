@@ -32,11 +32,11 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
-import com.vaadin.addon.touchkit.gwt.client.touchcombobox.PageEvent;
-import com.vaadin.addon.touchkit.gwt.client.touchcombobox.PageEventHandler;
-import com.vaadin.addon.touchkit.gwt.client.touchcombobox.TouchComboBoxOptionState;
-import com.vaadin.addon.touchkit.gwt.client.touchcombobox.PageEvent.PageEventType;
 import com.vaadin.addon.touchkit.gwt.client.ui.VPopover;
+import com.vaadin.addon.touchkit.gwt.client.vcom.touchcombobox.PageEvent;
+import com.vaadin.addon.touchkit.gwt.client.vcom.touchcombobox.PageEventHandler;
+import com.vaadin.addon.touchkit.gwt.client.vcom.touchcombobox.TouchComboBoxOptionState;
+import com.vaadin.addon.touchkit.gwt.client.vcom.touchcombobox.PageEvent.PageEventType;
 import com.vaadin.client.VConsole;
 
 /**

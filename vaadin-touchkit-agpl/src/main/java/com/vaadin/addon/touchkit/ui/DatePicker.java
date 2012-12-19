@@ -2,9 +2,9 @@ package com.vaadin.addon.touchkit.ui;
 
 import java.util.Date;
 
-import com.vaadin.addon.touchkit.gwt.client.vaadincomm.DatePickerServerRpc;
-import com.vaadin.addon.touchkit.gwt.client.vaadincomm.DatePickerState;
-import com.vaadin.addon.touchkit.gwt.client.vaadincomm.DatePickerState.Resolution;
+import com.vaadin.addon.touchkit.gwt.client.vcom.DatePickerServerRpc;
+import com.vaadin.addon.touchkit.gwt.client.vcom.DatePickerState;
+import com.vaadin.addon.touchkit.gwt.client.vcom.DatePickerState.Resolution;
 import com.vaadin.ui.AbstractField;
 
 /**

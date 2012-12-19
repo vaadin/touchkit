@@ -1,7 +1,7 @@
 package com.vaadin.addon.touchkit.ui;
 
-import com.vaadin.addon.touchkit.gwt.client.vaadincomm.SwipeViewRpc;
-import com.vaadin.addon.touchkit.gwt.client.vaadincomm.SwipeViewSharedState;
+import com.vaadin.addon.touchkit.gwt.client.vcom.SwipeViewRpc;
+import com.vaadin.addon.touchkit.gwt.client.vcom.SwipeViewSharedState;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 

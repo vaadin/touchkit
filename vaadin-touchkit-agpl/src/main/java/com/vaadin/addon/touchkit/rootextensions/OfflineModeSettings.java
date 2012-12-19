@@ -1,7 +1,7 @@
 package com.vaadin.addon.touchkit.rootextensions;
 
-import com.vaadin.addon.touchkit.gwt.client.vaadincomm.OfflineModeClientRpc;
-import com.vaadin.addon.touchkit.gwt.client.vaadincomm.OfflineModeState;
+import com.vaadin.addon.touchkit.gwt.client.vcom.OfflineModeClientRpc;
+import com.vaadin.addon.touchkit.gwt.client.vcom.OfflineModeState;
 import com.vaadin.server.AbstractExtension;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.UI;

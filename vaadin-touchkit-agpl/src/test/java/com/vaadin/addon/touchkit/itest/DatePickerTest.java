@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.ibm.icu.util.Calendar;
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.gwt.client.vaadincomm.DatePickerState.Resolution;
+import com.vaadin.addon.touchkit.gwt.client.vcom.DatePickerState.Resolution;
 import com.vaadin.addon.touchkit.ui.DatePicker;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;

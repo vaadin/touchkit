@@ -1,7 +1,7 @@
 package com.vaadin.addon.touchkit.itest.extensions;
 
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.gwt.client.vaadincomm.Position;
+import com.vaadin.addon.touchkit.gwt.client.vcom.Position;
 import com.vaadin.addon.touchkit.rootextensions.Geolocator;
 import com.vaadin.addon.touchkit.rootextensions.PositionCallback;
 import com.vaadin.ui.Button;

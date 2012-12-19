@@ -3,8 +3,8 @@ package com.vaadin.addon.touchkit.ui;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 
-import com.vaadin.addon.touchkit.gwt.client.navigation.NavigationButtonRpc;
-import com.vaadin.addon.touchkit.gwt.client.navigation.NavigationButtonSharedState;
+import com.vaadin.addon.touchkit.gwt.client.vcom.navigation.NavigationButtonRpc;
+import com.vaadin.addon.touchkit.gwt.client.vcom.navigation.NavigationButtonSharedState;
 import com.vaadin.server.Resource;
 import com.vaadin.shared.Connector;
 import com.vaadin.shared.MouseEventDetails;

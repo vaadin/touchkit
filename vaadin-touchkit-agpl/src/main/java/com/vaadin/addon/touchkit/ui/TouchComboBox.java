@@ -13,9 +13,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import com.vaadin.addon.touchkit.gwt.client.touchcombobox.TouchComboBoxOptionState;
-import com.vaadin.addon.touchkit.gwt.client.touchcombobox.TouchComboBoxServerRpc;
-import com.vaadin.addon.touchkit.gwt.client.touchcombobox.TouchComboBoxState;
+import com.vaadin.addon.touchkit.gwt.client.vcom.touchcombobox.TouchComboBoxOptionState;
+import com.vaadin.addon.touchkit.gwt.client.vcom.touchcombobox.TouchComboBoxServerRpc;
+import com.vaadin.addon.touchkit.gwt.client.vcom.touchcombobox.TouchComboBoxState;
 import com.vaadin.data.Container;
 import com.vaadin.data.Item;
 import com.vaadin.data.Property;
