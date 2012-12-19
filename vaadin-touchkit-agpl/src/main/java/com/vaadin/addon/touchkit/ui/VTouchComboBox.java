@@ -1,4 +1,4 @@
-package com.vaadin.addon.touchkit.gwt.client.touchcombobox;
+package com.vaadin.addon.touchkit.ui;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -32,8 +32,11 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
-import com.vaadin.addon.touchkit.gwt.client.popover.VPopover;
+import com.vaadin.addon.touchkit.gwt.client.touchcombobox.PageEvent;
+import com.vaadin.addon.touchkit.gwt.client.touchcombobox.PageEventHandler;
+import com.vaadin.addon.touchkit.gwt.client.touchcombobox.TouchComboBoxOptionState;
 import com.vaadin.addon.touchkit.gwt.client.touchcombobox.PageEvent.PageEventType;
+import com.vaadin.addon.touchkit.gwt.client.ui.VPopover;
 import com.vaadin.client.VConsole;
 
 /**

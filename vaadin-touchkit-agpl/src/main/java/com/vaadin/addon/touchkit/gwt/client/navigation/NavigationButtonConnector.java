@@ -4,6 +4,7 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Widget;
+import com.vaadin.addon.touchkit.gwt.client.ui.VNavigationButton;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.client.ServerConnector;
 import com.vaadin.client.communication.RpcProxy;

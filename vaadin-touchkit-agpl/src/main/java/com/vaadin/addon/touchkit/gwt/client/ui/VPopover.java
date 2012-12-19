@@ -1,4 +1,4 @@
-package com.vaadin.addon.touchkit.gwt.client.popover;
+package com.vaadin.addon.touchkit.gwt.client.ui;
 
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
@@ -24,30 +24,18 @@ public class VPopover extends com.vaadin.client.ui.VWindow {
     protected int zIndex;
 
     public VPopover() {
+        setShadowEnabled(false);
     }
 
     public void setRelatedComponent(Widget relComponent) {
         this.relComponent = relComponent;
     }
 
-    // @Override
-    // public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
-    // if (!uidl.hasAttribute("cached")) {
-    // relComponentId = uidl.hasAttribute("rel") ? uidl
-    // .getStringAttribute("rel") : null;
-    // setFullscreen(uidl.hasAttribute("fc"));
-    // }
-    // super.updateFromUIDL(uidl, client);
-    // }
-
-    protected void slideIn() {
+    public void slideIn() {
         /*
          * Make full width.
          */
         setWidth((Window.getClientWidth() + "px"));
-        // DOM.setStyleAttribute(getWrapperElement(), "padding", "0");
-        // DOM.setStyleAttribute(getWrapperElement(), "borderRadius", "0");
-        // DOM.setStyleAttribute(getContainerElement(), "borderRadius", "0");
 
         int top = 0;
         if (relComponent != null) {
@@ -196,7 +184,7 @@ public class VPopover extends com.vaadin.client.ui.VWindow {
         return spaceBelow < requiredHeight;
     }
 
-    static boolean isSmallScreenDevice() {
+    public static boolean isSmallScreenDevice() {
         return Window.getClientWidth() < SMALL_SCREEN_WIDTH_THRESHOLD;
     }
 
@@ -225,12 +213,8 @@ public class VPopover extends com.vaadin.client.ui.VWindow {
     }
 
     @Override
-    protected Element getModalityCurtain() {
+    public Element getModalityCurtain() {
         return super.getModalityCurtain();
     }
 
-    @Override
-    protected void setShadowEnabled(boolean enabled) {
-        super.setShadowEnabled(enabled);
-    }
 }

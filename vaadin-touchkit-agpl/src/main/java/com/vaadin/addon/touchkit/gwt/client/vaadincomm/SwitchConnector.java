@@ -11,7 +11,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Widget;
-import com.vaadin.addon.touchkit.gwt.client.VSwitch;
+import com.vaadin.addon.touchkit.gwt.client.ui.VSwitch;
 import com.vaadin.addon.touchkit.ui.Switch;
 import com.vaadin.client.EventHelper;
 import com.vaadin.client.VTooltip;

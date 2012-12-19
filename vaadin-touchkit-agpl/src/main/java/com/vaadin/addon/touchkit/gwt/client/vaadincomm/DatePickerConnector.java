@@ -6,11 +6,11 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.vaadin.addon.touchkit.gwt.client.DatePicker;
-import com.vaadin.shared.ui.Connect;
+import com.vaadin.addon.touchkit.gwt.client.ui.DatePicker;
 import com.vaadin.client.communication.RpcProxy;
 import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.AbstractFieldConnector;
+import com.vaadin.shared.ui.Connect;
 
 /**
  * Connector of DatePicker

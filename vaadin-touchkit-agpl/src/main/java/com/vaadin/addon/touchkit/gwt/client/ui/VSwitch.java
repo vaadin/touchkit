@@ -1,4 +1,4 @@
-package com.vaadin.addon.touchkit.gwt.client;
+package com.vaadin.addon.touchkit.gwt.client.ui;
 
 import com.google.gwt.animation.client.Animation;
 import com.google.gwt.core.client.Scheduler;
@@ -32,6 +32,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.HasValue;
+import com.vaadin.addon.touchkit.gwt.client.VEagerResourceLoader;
 import com.vaadin.client.ApplicationConnection;
 import com.vaadin.client.ui.Field;
 

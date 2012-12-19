@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Widget;
-import com.vaadin.addon.touchkit.gwt.client.HorizontalButtonGroupWidget;
+import com.vaadin.addon.touchkit.gwt.client.ui.HorizontalButtonGroupWidget;
 import com.vaadin.addon.touchkit.ui.HorizontalButtonGroup;
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.ConnectorHierarchyChangeEvent;

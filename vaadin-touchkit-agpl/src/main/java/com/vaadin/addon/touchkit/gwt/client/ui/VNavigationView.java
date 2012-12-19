@@ -1,4 +1,4 @@
-package com.vaadin.addon.touchkit.gwt.client.navigation;
+package com.vaadin.addon.touchkit.gwt.client.ui;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.event.dom.client.TouchStartEvent;
@@ -13,7 +13,6 @@ import com.vaadin.client.ui.TouchScrollDelegate;
 public class VNavigationView extends ComplexPanel {
 
     private static final String CLASSNAME = "v-touchkit-navview";
-    private static final int NAVBARHEIGHT = 42;
     private Element wrapper = Document.get().createDivElement().cast();
     private Element toolbarDiv = Document.get().createDivElement().cast();
 
@@ -74,18 +73,14 @@ public class VNavigationView extends ComplexPanel {
         }
     }
 
-    public void updateContent(Widget widget) {
+    public void setContent(Widget widget) {
         if (content != null && content != widget) {
             forgetComponent(content);
         }
         content = widget;
         if (!content.isAttached()) {
-            addContent(content);
+            add(content, wrapper);
         }
-    }
-
-    public void addContent(Widget content) {
-        add(content, wrapper);
     }
 
     public void setNavigationBar(VNavigationBar newNavBar) {

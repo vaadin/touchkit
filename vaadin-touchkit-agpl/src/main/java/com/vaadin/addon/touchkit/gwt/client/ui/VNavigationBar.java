@@ -1,4 +1,4 @@
-package com.vaadin.addon.touchkit.gwt.client.navigation;
+package com.vaadin.addon.touchkit.gwt.client.ui;
 
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
@@ -40,7 +40,7 @@ public class VNavigationBar extends ComplexPanel {
      * components in case the caption is centered to the component. This happens
      * with long caption and big right/left component.
      */
-    void avoidCaptionOverlap() {
+    public void avoidCaptionOverlap() {
         int freeLeftCoordinate = leftComponent != null ? leftComponentElement
                 .getAbsoluteRight() - getAbsoluteLeft() : 0;
 

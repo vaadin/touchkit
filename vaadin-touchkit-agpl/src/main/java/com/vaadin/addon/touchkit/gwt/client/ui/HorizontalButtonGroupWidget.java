@@ -1,4 +1,4 @@
-package com.vaadin.addon.touchkit.gwt.client;
+package com.vaadin.addon.touchkit.gwt.client.ui;
 
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.vaadin.shared.ui.MarginInfo;

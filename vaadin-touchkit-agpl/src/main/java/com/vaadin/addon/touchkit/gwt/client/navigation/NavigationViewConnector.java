@@ -8,6 +8,7 @@ import com.google.gwt.event.dom.client.ScrollHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.shared.ui.Connect;
+import com.vaadin.addon.touchkit.gwt.client.ui.VNavigationView;
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.ConnectorHierarchyChangeEvent;
 import com.vaadin.client.communication.RpcProxy;
@@ -56,7 +57,7 @@ public class NavigationViewConnector extends
         List<ComponentConnector> children = getChildComponents();
         navigationBar = (NavigationBarConnector) children.get(0);
         getWidget().setNavigationBar(navigationBar.getWidget());
-        getWidget().updateContent(children.get(1).getWidget());
+        getWidget().setContent(children.get(1).getWidget());
         getWidget().setToolbar(
                 children.size() < 3 ? null : children.get(2).getWidget());
     }

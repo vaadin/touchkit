@@ -2,6 +2,7 @@ package com.vaadin.addon.touchkit.gwt.client.navigation;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.Widget;
+import com.vaadin.addon.touchkit.gwt.client.ui.VNavigationBar;
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.ConnectorHierarchyChangeEvent;
 import com.vaadin.client.communication.StateChangeEvent;

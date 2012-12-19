@@ -1,4 +1,4 @@
-package com.vaadin.addon.touchkit.gwt.client.navigation;
+package com.vaadin.addon.touchkit.gwt.client.ui;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,7 +19,7 @@ import com.vaadin.client.VConsole;
 
 public class VNavigationManager extends ComplexPanel {
 
-    interface AnimationListener {
+    public interface AnimationListener {
         public void animationWillStart();
 
         public void animationDidEnd();

@@ -10,6 +10,7 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.Event.NativePreviewHandler;
+import com.vaadin.addon.touchkit.gwt.client.ui.VPopover;
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.communication.RpcProxy;
 import com.vaadin.client.communication.StateChangeEvent;
@@ -137,7 +138,6 @@ public class PopoverConnector extends WindowConnector implements
 
     @Override
     protected void setWidgetStyleName(String styleName, boolean add) {
-        getWidget().setShadowEnabled(false);
         if (getState().isFullscreen()) {
             // fullscreen window
             super.setWidgetStyleName(

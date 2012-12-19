@@ -1,4 +1,4 @@
-package com.vaadin.addon.touchkit.gwt.client.navigation;
+package com.vaadin.addon.touchkit.gwt.client.ui;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ImageElement;
@@ -16,7 +16,6 @@ import com.google.gwt.event.dom.client.TouchStartEvent;
 import com.google.gwt.event.dom.client.TouchStartHandler;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
-import com.vaadin.addon.touchkit.gwt.client.IconWidget;
 
 public class VNavigationButton extends HTML implements TouchStartHandler, TouchCancelHandler, TouchEndHandler, TouchMoveHandler, ClickHandler {
     private static final String NAVBUTTON_CLASSNAME = "v-touchkit-navbutton";
