@@ -32,6 +32,18 @@ import com.vaadin.shared.ui.combobox.FilteringMode;
 import com.vaadin.ui.AbstractField;
 import com.vaadin.ui.AbstractSelect;
 
+/**
+ * EXPERIMENTAL
+ * <p>
+ * This component is experimental, don't expect it to be as stable as the rest
+ * of the library.
+ * <p>
+ * FIXME review code troughoutly
+ * <p>
+ * FIXME remove listener sets -> replace with EventRouter
+ * <p>
+ * FIXME Javadocs
+ */
 public class TouchComboBox extends AbstractField<Object> implements
         AbstractSelect.Filtering, FieldEvents.BlurNotifier,
         FieldEvents.FocusNotifier, Container, Container.Viewer,
@@ -546,7 +558,8 @@ public class TouchComboBox extends AbstractField<Object> implements
         List<?> optionsList = options.subList(startIndex,
                 endIndex < options.size() ? endIndex : options.size());
 
-        if (firstVisibleObjectOnClient != null && !optionsList.contains(firstVisibleObjectOnClient)) {
+        if (firstVisibleObjectOnClient != null
+                && !optionsList.contains(firstVisibleObjectOnClient)) {
             if (oldPageLength > pageLength) {
                 currentPage++;
             } else {

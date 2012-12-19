@@ -38,6 +38,21 @@ import com.vaadin.client.VConsole;
 
 /**
  * TouchComboBox client side implementation.
+ * 
+ * FIXME get rid of pixel positioning, should survive without on modern webkits
+ * 
+ * FIXME refactor API so that component can fluently be used in plain GWT app
+ * 
+ * FIXME type "search" in inputs does not cause X (clear button) into the field.
+ * It should be implemented with a image.
+ * 
+ * FIXME Clear button should set value to null ?
+ * 
+ * FIXME instead of (X) to close popup it should be ✔ ? Also add X for cancel
+ * 
+ * FIXME next/previous should have arrows instead of text -> less work for internalization
+ * 
+ * FIXME theme
  */
 public class VTouchComboBox extends Widget implements
         HasValueChangeHandlers<String>, ResizeHandler {
@@ -68,12 +83,12 @@ public class VTouchComboBox extends Widget implements
     protected TouchComboBoxOptionState nullSelectionItemId;
     protected TouchComboBoxOptionState firstVisibleItem, nextItem, prevItem;
 
-    public native InputElement createInputElementWithType(Document doc, String type)
-    /*-{
-        var e = doc.createElement("INPUT");
-        e.type = type;
-        return e;
-    }-*/;
+    private InputElement createInputElementWithType(Document doc,
+            String type) {
+        InputElement el = doc.createTextInputElement();
+        el.setAttribute("type", type);
+        return el;
+    }
 
     /**
      * Create new TouchKit ComboBox
@@ -304,8 +319,8 @@ public class VTouchComboBox extends Widget implements
 
         final FlowPanel select = new FlowPanel();
         final HorizontalPanel header = new HorizontalPanel();
-        final TextBox filter = TextBox.wrap(createInputElementWithType(Document.get(),
-                "search"));
+        final TextBox filter = TextBox.wrap(createInputElementWithType(
+                Document.get(), "search"));
         final FlowPanel content = new FlowPanel();
 
         Timer refresh = null;
