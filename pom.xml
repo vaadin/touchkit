@@ -51,7 +51,7 @@
     	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		
 		<!-- We are doing some unstandard staff to allow giving version via parameter. Assign a default for it.  -->
-        <touchkit.version>3.0.0-alpha1</touchkit.version>
+        <touchkit.version>3.0.0-alpha2</touchkit.version>
         <!-- May be overridden by the build system when creating CVAL licensed packages -->
         <license.short.name>agpl</license.short.name>
 
