@@ -204,6 +204,13 @@
 			<scope>test</scope>
 			<version>4.10</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.reflections</groupId>
+			<artifactId>reflections</artifactId>
+			<version>0.9.8</version>
+		</dependency>
+		
         
     </dependencies>
 
