@@ -1,4 +1,4 @@
-package com.vaadin.addon.touchkit.gwt.client.offlinemode;
+package com.vaadin.addon.touchkit.gwt.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;

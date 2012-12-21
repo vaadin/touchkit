@@ -48,7 +48,7 @@ public class VNavigationManager extends ComplexPanel {
         el.addEventListener("webkitTransitionEnd",function(event) {
         	if(event.target == el) {
         	    	$entry(
-        	        	me.@com.vaadin.addon.touchkit.gwt.client.navigation.VNavigationManager::onTransitionEnd()()
+        	        	me.@com.vaadin.addon.touchkit.gwt.client.ui.VNavigationManager::onTransitionEnd()()
         	        );
         	}
         },false);

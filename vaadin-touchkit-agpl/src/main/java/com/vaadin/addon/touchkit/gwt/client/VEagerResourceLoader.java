@@ -2,7 +2,6 @@ package com.vaadin.addon.touchkit.gwt.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.vaadin.addon.touchkit.gwt.client.offlinemode.VTouchKitResources;
 
 public class VEagerResourceLoader implements EntryPoint {
 
