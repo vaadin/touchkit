@@ -58,7 +58,7 @@ public class SwipeView extends CssLayout {
 
     public void setScrollPosition(int scrollPosition) {
         getState().scrollTop = scrollPosition;
-        requestRepaint();
+        markAsDirty();
     }
 
     public int getScrollPosition() {

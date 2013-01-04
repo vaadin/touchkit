@@ -12,7 +12,7 @@ import com.vaadin.ui.Component;
  * areas (most commonly for buttons) on the left and right. A back-button is
  * automatically shown if a <code>previousView</code> is available.
  * <p>
- * Ususally used in a {@link NavigationView}.
+ * Commonly used in a {@link NavigationView}.
  * </p>
  * 
  * @see NavigationView
@@ -54,7 +54,8 @@ public class NavigationBar extends AbstractComponentContainer {
         }
         getState().setLeftComponent(c);
         leftNavigationBarComponent = c;
-        requestRepaint();
+        markAsDirty();
+
     }
 
     /**
@@ -79,7 +80,7 @@ public class NavigationBar extends AbstractComponentContainer {
         }
         getState().setRightComponent(c);
         navigationBarComponent = c;
-        requestRepaint();
+        markAsDirty();
     }
 
     /**
@@ -149,7 +150,7 @@ public class NavigationBar extends AbstractComponentContainer {
         }
         return components.iterator();
     }
-    
+
     @Override
     public Iterator<Component> iterator() {
         return getComponentIterator();

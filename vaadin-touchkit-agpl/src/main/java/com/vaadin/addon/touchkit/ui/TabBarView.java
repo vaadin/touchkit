@@ -168,7 +168,7 @@ public class TabBarView extends AbstractComponentContainer {
         super.addComponent(tab);
         currentComponent = tab;
         getTabButton(currentComponent).setSelected(true);
-        requestRepaint();
+        markAsDirty();
         fireSelectedTabChange();
 
     }

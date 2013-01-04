@@ -1,7 +1,5 @@
 package com.vaadin.addon.touchkit.ui;
 
-import com.vaadin.server.PaintException;
-import com.vaadin.server.PaintTarget;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
@@ -33,7 +31,7 @@ public class Toolbar extends CssLayout {
      */
     public Toolbar() {
         setStyleName(STYLENAME);
-        setWidth(100, UNITS_PERCENTAGE);
+        setWidth(100, Unit.PERCENTAGE);
     }
 
     @Override
@@ -41,7 +39,7 @@ public class Toolbar extends CssLayout {
         super.addComponent(c);
         float width = 100 / getComponentCount();
         for (Component component : components) {
-            component.setWidth(width, UNITS_PERCENTAGE);
+            component.setWidth(width, Unit.PERCENTAGE);
         }
     }
 

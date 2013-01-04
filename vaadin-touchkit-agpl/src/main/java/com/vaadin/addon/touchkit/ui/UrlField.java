@@ -13,6 +13,8 @@ import com.vaadin.ui.TextField;
  * this field is used. This is especially important for touch devices that can
  * provide a on-screen keyboard customized for URL input.
  * </p>
+ * 
+ * TODO consider making the type of this field URL
  */
 public class UrlField extends TextField {
     /**

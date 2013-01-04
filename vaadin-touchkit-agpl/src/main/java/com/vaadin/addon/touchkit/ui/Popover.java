@@ -5,7 +5,6 @@ import com.vaadin.addon.touchkit.gwt.client.vcom.popover.PopoverState;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;
-import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
@@ -92,7 +91,7 @@ public class Popover extends Window {
         if (relatedComponent != null && getParent() == null) {
             relatedComponent.getUI().addWindow(this);
         }
-        requestRepaint();
+        markAsDirty();
     }
 
     /**

@@ -24,14 +24,14 @@ public class EmailField extends TextField {
     /**
      * @see TextField#TextField(Property)
      */
-    public EmailField(Property dataSource) {
+    public EmailField(Property<String> dataSource) {
         super(dataSource);
     }
 
     /**
      * @see TextField#TextField(String, Property)
      */
-    public EmailField(String caption, Property dataSource) {
+    public EmailField(String caption, Property<String> dataSource) {
         super(caption, dataSource);
     }
 

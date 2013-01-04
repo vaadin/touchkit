@@ -1,7 +1,6 @@
 package com.vaadin.addon.touchkit.gwt.client.vcom;
 
 import com.vaadin.addon.touchkit.gwt.client.CheckBox;
-import com.vaadin.shared.ui.Connect;
 
 /**
  * Overrides default implementation of Connector of CheckBox. Moves caption

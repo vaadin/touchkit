@@ -5,7 +5,6 @@ import java.util.Date;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.vaadin.addon.touchkit.gwt.client.ui.DatePicker;
 import com.vaadin.client.communication.RpcProxy;
 import com.vaadin.client.communication.StateChangeEvent;
@@ -23,13 +22,10 @@ public class DatePickerConnector extends AbstractFieldConnector
   private DatePickerServerRpc rpc = RpcProxy.create(DatePickerServerRpc.class,
       this);
   
-  private HandlerRegistration valueChangeReg = null;
-  
   @Override
   public void init() {
       super.init();
-      
-      valueChangeReg = getWidget().addValueChangeHandler(this);
+      getWidget().addValueChangeHandler(this);
   }
   
   @Override

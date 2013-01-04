@@ -57,7 +57,7 @@ public class NavigationButtonConnector extends AbstractComponentConnector {
             getWidget().setTargetWidget(
                     ((AbstractComponentConnector) targetView).getWidget());
         }
-
+        
         if (getResourceUrl(NavigationButtonSharedState.MY_ICON_RESOURCE) != null) {
             getWidget()
                     .setIcon(

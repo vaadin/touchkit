@@ -10,6 +10,8 @@ import com.vaadin.ui.TextField;
  * when this field is used. This is especially important for touch devices that
  * can provide a on-screen keyboard customized for numerical input.
  * </p>
+ * 
+ * TODO with typed properties in V7 this field should have Number as its type
  */
 public class NumberField extends TextField {
 
@@ -23,14 +25,14 @@ public class NumberField extends TextField {
     /**
      * @see TextField#TextField(Property)
      */
-    public NumberField(Property dataSource) {
+    public NumberField(Property<?> dataSource) {
         super(dataSource);
     }
 
     /**
      * @see TextField#TextField(String, Property)
      */
-    public NumberField(String caption, Property dataSource) {
+    public NumberField(String caption, Property<?> dataSource) {
         super(caption, dataSource);
     }
 

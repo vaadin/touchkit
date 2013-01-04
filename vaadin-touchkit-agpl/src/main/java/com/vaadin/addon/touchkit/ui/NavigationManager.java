@@ -140,7 +140,7 @@ public class NavigationManager extends AbstractComponentContainer {
         getState().setPreviousComponent(getCurrentComponent());
         getState().setCurrentComponent(c);
         notifyViewOfBecomingVisible();
-        requestRepaint();
+        markAsDirty();
         fireEvent(new NavigationEvent(this, Direction.FORWARD));
     }
 
@@ -180,7 +180,7 @@ public class NavigationManager extends AbstractComponentContainer {
             addComponent(getPreviousComponent());
         }
         notifyViewOfBecomingVisible();
-        requestRepaint();
+        markAsDirty();
         fireEvent(new NavigationEvent(this, Direction.BACK));
     }
 
@@ -211,7 +211,7 @@ public class NavigationManager extends AbstractComponentContainer {
                 view.setPreviousComponent(getCurrentComponent());
 
             }
-            requestRepaint();
+            markAsDirty();
         }
     }
 
@@ -243,7 +243,7 @@ public class NavigationManager extends AbstractComponentContainer {
             if (getPreviousComponent() != null) {
                 addComponent(newPreviousComponent);
             }
-            requestRepaint();
+            markAsDirty();
         }
     }
 
@@ -274,7 +274,7 @@ public class NavigationManager extends AbstractComponentContainer {
         if (nextComponent != null) {
             addComponent(nextComponent);
         }
-        requestRepaint();
+        markAsDirty();
     }
 
     /**
@@ -293,40 +293,6 @@ public class NavigationManager extends AbstractComponentContainer {
     public void replaceComponent(Component oldComponent, Component newComponent) {
         throw new UnsupportedOperationException();
     }
-
-    // FIXME
-    // @Override
-    // public void paintContent(PaintTarget target) throws PaintException {
-    // super.paintContent(target);
-    // if (currentComponent != null) {
-    // target.addAttribute("c", currentComponent);
-    // }
-    // if (nextComponent != null) {
-    // target.addAttribute("n", nextComponent);
-    // }
-    // if (previousComponent != null) {
-    // target.addAttribute("p", previousComponent);
-    // }
-    // Iterator<Component> componentIterator = getComponentIterator();
-    // while (componentIterator.hasNext()) {
-    // Component next = componentIterator.next();
-    // next.paint(target);
-    // }
-    // }
-    //
-    // @Override
-    // public void changeVariables(Object source, Map<String, Object> variables)
-    // {
-    // super.changeVariables(source, variables);
-    // Integer navigated = (Integer) variables.get("navigated");
-    // if (navigated != null) {
-    // if (navigated > 0) {
-    // navigateTo(nextComponent);
-    // } else {
-    // navigateBack();
-    // }
-    // }
-    // }
 
     public Iterator<Component> getComponentIterator() {
         ArrayList<Component> components = getComponents();

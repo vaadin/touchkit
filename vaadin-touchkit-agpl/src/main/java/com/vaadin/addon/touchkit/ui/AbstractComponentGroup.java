@@ -36,14 +36,14 @@ public abstract class AbstractComponentGroup extends AbstractComponentContainer 
     public void addComponent(Component c) {
         children.add(c);
         super.addComponent(c);
-        requestRepaint();
+        markAsDirty();
     }
 
     @Override
     public void removeComponent(Component c) {
         children.remove(c);
         super.removeComponent(c);
-        requestRepaint();
+        markAsDirty();
     }
 
     @Override
@@ -54,7 +54,7 @@ public abstract class AbstractComponentGroup extends AbstractComponentContainer 
             children.add(index, newComponent);
             fireComponentDetachEvent(oldComponent);
             fireComponentAttachEvent(newComponent);
-            requestRepaint();
+            markAsDirty();
         }
     }
 

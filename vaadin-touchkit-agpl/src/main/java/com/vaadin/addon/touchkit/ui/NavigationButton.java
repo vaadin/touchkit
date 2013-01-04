@@ -135,7 +135,8 @@ public class NavigationButton extends AbstractComponent {
      */
     public void setTargetView(Component targetView) {
         getState().setTargetView(targetView);
-        requestRepaint();
+        markAsDirty();
+
     }
 
     @Override
@@ -165,7 +166,7 @@ public class NavigationButton extends AbstractComponent {
                         ComponentAttachEvent event) {
                     Component attachedComponent = event.getAttachedComponent();
                     if (getTargetView() == attachedComponent) {
-                        requestRepaint();
+                        markAsDirty();
                     }
                 }
             };
@@ -222,15 +223,17 @@ public class NavigationButton extends AbstractComponent {
      */
     public void setTargetViewCaption(String targetViewCaption) {
         getState().setTargetViewCaption(targetViewCaption);
-        requestRepaint();
+        markAsDirty();
     }
 
     public void setIcon(Resource icon) {
-        setResource(getState().MY_ICON_RESOURCE, icon);
+        getState();
+        setResource(NavigationButtonSharedState.MY_ICON_RESOURCE, icon);
     }
 
     public Resource getIcon() {
-        return getResource(getState().MY_ICON_RESOURCE);
+        getState();
+        return getResource(NavigationButtonSharedState.MY_ICON_RESOURCE);
     }
 
     /**
