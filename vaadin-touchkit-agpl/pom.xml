@@ -44,9 +44,8 @@
 
 		<!-- May be overridden by the build system -->
 		<license.short.name>agpl</license.short.name>
-		<touchkit.version>3.0.0-alpha2</touchkit.version>
-		<vaadin.version.maven>7.0.0.beta11</vaadin.version.maven>
-		<gwt.version>2.5.0-rc1</gwt.version>
+		<touchkit.version>3.0.0-SNAPSHOT</touchkit.version>
+		<vaadin.version.maven>7.0-SNAPSHOT</vaadin.version.maven>
 		<gpg.passphrase.file>empty.properties</gpg.passphrase.file>
 		<gpg.skip>true</gpg.skip>
 		<snapshot.repository.url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</snapshot.repository.url>
