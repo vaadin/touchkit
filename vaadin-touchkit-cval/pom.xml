@@ -137,7 +137,7 @@
                 <configuration>
                     <appendAssemblyId>false</appendAssemblyId>
                     <descriptors>
-                        <descriptor>../assembly/assembly.xml</descriptor>
+                        <descriptor>../vaadin-touchkit-agpl/assembly/assembly.xml</descriptor>
                     </descriptors>
                 </configuration>
                 <executions>

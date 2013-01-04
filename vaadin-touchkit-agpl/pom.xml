@@ -181,7 +181,7 @@
 				<configuration>
 					<appendAssemblyId>false</appendAssemblyId>
 					<descriptors>
-						<descriptor>../assembly/assembly.xml</descriptor>
+						<descriptor>assembly/assembly.xml</descriptor>
 					</descriptors>
 				</configuration>
 				<executions>
