@@ -29,19 +29,20 @@
       </includes>
     </fileSet>
 	<fileSet>
-		<directory>../assembly/tutorial</directory>
+		<directory>../vaadin-touchkit-agpl/assembly/tutorial</directory>
 		<outputDirectory>tutorial</outputDirectory>
 	</fileSet>
   </fileSets>
 
   <files>
+	<!--   	This is vaadin.com/directory related manifest needed in the zip package -->
     <file>
-      <source>../assembly/MANIFEST.MF</source>
+      <source>../vaadin-touchkit-agpl/assembly/MANIFEST.MF</source>
       <outputDirectory>META-INF</outputDirectory>
       <filtered>true</filtered>
     </file>
     <file>
-      <source>../assembly/README.html</source>
+      <source>../vaadin-touchkit-agpl/assembly/README.html</source>
       <filtered>true</filtered>
     </file>
   </files>
