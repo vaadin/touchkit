@@ -3,11 +3,10 @@ package com.vaadin.addon.touchkit.rootextensions;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import com.vaadin.server.AbstractExtension;
+import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.server.BootstrapFragmentResponse;
 import com.vaadin.server.BootstrapListener;
 import com.vaadin.server.BootstrapPageResponse;
-import com.vaadin.server.BootstrapResponse;
 
 public class IosWebAppSettings extends AbstractTouchKitRootExtension implements
         BootstrapListener {
@@ -111,6 +110,21 @@ public class IosWebAppSettings extends AbstractTouchKitRootExtension implements
             element = document.createElement("link");
             element.attr("rel", "apple-touch-startup-image");
             element.attr("href", getStartupImage());
+            head.appendChild(element);
+        }
+
+        /*
+         * Ensure window has "stable name", in case PreserveOnRefresh is used.
+         * This is to fool vaadinBootstrap.js so that for example applications
+         * used as ios "home screen webapps", can preserve their state among app
+         * switches, like following links (with browser) and then returning back
+         * to app.
+         */
+        if (response.getUiClass().getAnnotation(PreserveOnRefresh.class) != null) {
+            element = document.createElement("script");
+            element.attr("type", "text/javascript");
+            element.appendText("\nwindow.name = '"
+                    + response.getUiClass().hashCode() + "';\n");
             head.appendChild(element);
         }
     }

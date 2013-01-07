@@ -2,6 +2,7 @@ package com.vaadin.addon.touchkit.rootextensions;
 
 import com.vaadin.addon.touchkit.gwt.client.vcom.OfflineModeClientRpc;
 import com.vaadin.addon.touchkit.gwt.client.vcom.OfflineModeState;
+import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.server.AbstractExtension;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.UI;
@@ -28,6 +29,8 @@ public class OfflineModeSettings extends AbstractExtension {
     private static final int DEFAULT_OFFLINE_MODE_DELAY = 5;
 
     private int offlineModeTimeout = DEFAULT_OFFLINE_MODE_DELAY;
+
+    private Boolean persistentSessionCookie;
 
     @Override
     protected OfflineModeState getState() {
@@ -75,12 +78,24 @@ public class OfflineModeSettings extends AbstractExtension {
      * application closes. For mobile web applications (such as web apps in iOS
      * devices that are added to home screen) this might not be the desired
      * solution.
+     * <p>
+     * Persistent session cookie is on by default if the UI uses
+     * {@link PreserveOnRefresh} annotation.
      * 
      * @return true if session cookie will be made persistent when closing the
      *         browser application
      */
     public boolean isPersistentSessionCookie() {
-        return getState().persistentSessionTimeout != null;
+        if (persistentSessionCookie != null) {
+            return persistentSessionCookie;
+        } else {
+            UI ui = getUI();
+            if (ui != null
+                    && ui.getClass().getAnnotation(PreserveOnRefresh.class) != null) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -91,6 +106,10 @@ public class OfflineModeSettings extends AbstractExtension {
      * solution. With this method the session cookie can be made persistent. A
      * returning user can then be shown his/her previous UI state.
      * <p>
+     * Persistent session cookie is on by default if the UI uses
+     * {@link PreserveOnRefresh} annotation. It is suggested to be used with
+     * TouchKit applications that might be used as home screen apps.
+     * <p>
      * 
      * Note, that the normal session lifetime is still respected although
      * persistent cookies are in use.
@@ -99,12 +118,19 @@ public class OfflineModeSettings extends AbstractExtension {
      *            true if persistent session cookies should be used
      */
     public void setPersistentSessionCookie(boolean persistentSessionCookie) {
-        if (persistentSessionCookie) {
+        this.persistentSessionCookie = persistentSessionCookie;
+    }
+
+    @Override
+    public void beforeClientResponse(boolean initial) {
+        super.beforeClientResponse(initial);
+        if (isPersistentSessionCookie()) {
             getState().persistentSessionTimeout = VaadinSession.getCurrent()
                     .getSession().getMaxInactiveInterval();
         } else {
             getState().persistentSessionTimeout = null;
         }
+
     }
 
     /**
