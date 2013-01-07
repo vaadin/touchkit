@@ -13,16 +13,11 @@ public class TouchKitServlet extends VaadinServlet {
     @Override
     protected void servletInitialized() throws ServletException {
         super.servletInitialized();
-        setTouchKitSettings(new TouchKitSettings());
-        
+        touchKitSettings = new TouchKitSettings(getService());
     }
 
     public TouchKitSettings getTouchKitSettings() {
         return touchKitSettings;
-    }
-
-    public void setTouchKitSettings(TouchKitSettings touchKitSettings) {
-        this.touchKitSettings = touchKitSettings;
     }
 
 }
