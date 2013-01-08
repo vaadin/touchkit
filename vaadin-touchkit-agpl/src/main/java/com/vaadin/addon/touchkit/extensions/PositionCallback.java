@@ -1,4 +1,4 @@
-package com.vaadin.addon.touchkit.rootextensions;
+package com.vaadin.addon.touchkit.extensions;
 
 import com.vaadin.addon.touchkit.gwt.client.vcom.Position;
 

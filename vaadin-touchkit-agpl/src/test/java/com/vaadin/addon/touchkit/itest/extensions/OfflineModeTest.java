@@ -1,7 +1,7 @@
 package com.vaadin.addon.touchkit.itest.extensions;
 
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.rootextensions.OfflineMode;
+import com.vaadin.addon.touchkit.extensions.OfflineMode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 

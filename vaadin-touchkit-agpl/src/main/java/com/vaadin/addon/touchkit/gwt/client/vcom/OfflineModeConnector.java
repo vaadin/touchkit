@@ -23,7 +23,7 @@ import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.extensions.AbstractExtensionConnector;
 import com.vaadin.shared.ui.Connect;
 
-@Connect(com.vaadin.addon.touchkit.rootextensions.OfflineMode.class)
+@Connect(com.vaadin.addon.touchkit.extensions.OfflineMode.class)
 public class OfflineModeConnector extends AbstractExtensionConnector implements
         CommunicationHandler, CommunicationErrorHandler {
     private static final int MAX_SUSPENDED_TIMEOUT = 5000;

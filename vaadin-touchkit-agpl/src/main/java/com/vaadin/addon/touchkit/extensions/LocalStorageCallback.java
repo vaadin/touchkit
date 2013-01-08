@@ -1,4 +1,4 @@
-package com.vaadin.addon.touchkit.rootextensions;
+package com.vaadin.addon.touchkit.extensions;
 
 import java.io.Serializable;
 

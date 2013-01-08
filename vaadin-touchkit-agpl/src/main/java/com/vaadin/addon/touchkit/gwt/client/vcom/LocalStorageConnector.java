@@ -1,7 +1,7 @@
 package com.vaadin.addon.touchkit.gwt.client.vcom;
 
 import com.google.gwt.storage.client.Storage;
-import com.vaadin.addon.touchkit.rootextensions.LocalStorage;
+import com.vaadin.addon.touchkit.extensions.LocalStorage;
 import com.vaadin.client.ServerConnector;
 import com.vaadin.client.communication.RpcProxy;
 import com.vaadin.client.extensions.AbstractExtensionConnector;

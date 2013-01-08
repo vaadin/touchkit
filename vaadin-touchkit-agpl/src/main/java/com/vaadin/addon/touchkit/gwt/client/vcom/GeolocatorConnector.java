@@ -4,7 +4,7 @@ import com.google.gwt.core.client.Callback;
 import com.google.gwt.geolocation.client.Geolocation;
 import com.google.gwt.geolocation.client.Position;
 import com.google.gwt.geolocation.client.PositionError;
-import com.vaadin.addon.touchkit.rootextensions.Geolocator;
+import com.vaadin.addon.touchkit.extensions.Geolocator;
 import com.vaadin.client.ServerConnector;
 import com.vaadin.client.communication.RpcProxy;
 import com.vaadin.client.extensions.AbstractExtensionConnector;
