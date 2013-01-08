@@ -9,7 +9,6 @@ import com.vaadin.addon.touchkit.gwt.client.ui.VNavigationManager.AnimationListe
 import com.vaadin.addon.touchkit.ui.NavigationManager;
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.ConnectorHierarchyChangeEvent;
-import com.vaadin.client.VConsole;
 import com.vaadin.client.ui.AbstractComponentContainerConnector;
 import com.vaadin.client.ui.layout.ElementResizeEvent;
 import com.vaadin.client.ui.layout.ElementResizeListener;
@@ -23,7 +22,6 @@ public class NavigationManagerConnector extends
     protected Widget createWidget() {
         VNavigationManager widget = GWT.create(VNavigationManager.class);
         widget.addAnimationListener(this);
-        VConsole.log("Adding listener");
         return widget;
     }
 
