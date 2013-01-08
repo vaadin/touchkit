@@ -10,12 +10,11 @@ import com.vaadin.server.BootstrapPageResponse;
 
 public class ViewPortSettings extends AbstractTouchKitRootExtension implements BootstrapListener {
     
-    private static final String DEVICE_WIDTH = "device-width";
     private Boolean viewPortUserScalable = false;
     private Float viewPortInitialScale = 1f;
-    private Float viewPortMinimumScale = 1f;
-    private Float viewPortMaximumScale = 1f;
-    private String viewPortWidth = DEVICE_WIDTH;
+    private Float viewPortMinimumScale = null;
+    private Float viewPortMaximumScale = null;
+    private String viewPortWidth = null;
     
     /**
      * Sets whether the user should be allowed to zoom the content. The default
