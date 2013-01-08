@@ -2,7 +2,7 @@ package com.vaadin.addon.touchkit.server;
 
 import javax.servlet.ServletException;
 
-import com.vaadin.addon.touchkit.rootextensions.TouchKitSettings;
+import com.vaadin.addon.touchkit.settings.TouchKitSettings;
 import com.vaadin.server.VaadinService;
 import com.vaadin.server.VaadinServlet;
 

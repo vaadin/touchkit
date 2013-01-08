@@ -1,4 +1,4 @@
-package com.vaadin.addon.touchkit.rootextensions;
+package com.vaadin.addon.touchkit.settings;
 
 import com.vaadin.addon.touchkit.server.TouchKitServlet;
 import com.vaadin.server.BootstrapFragmentResponse;

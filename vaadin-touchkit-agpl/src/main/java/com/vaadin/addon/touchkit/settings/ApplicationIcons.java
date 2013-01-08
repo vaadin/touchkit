@@ -1,4 +1,4 @@
-package com.vaadin.addon.touchkit.rootextensions;
+package com.vaadin.addon.touchkit.settings;
 
 import java.util.LinkedList;
 

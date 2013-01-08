@@ -1,7 +1,7 @@
 package com.vaadin.addon.touchkit.itest.extensions;
 
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.rootextensions.OfflineModeSettings;
+import com.vaadin.addon.touchkit.rootextensions.OfflineMode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 
@@ -13,7 +13,7 @@ public class OfflineModeTest extends AbstractTouchKitIntegrationTest {
     @Override
     public void attach() {
         super.attach();
-        final OfflineModeSettings offlineModeSettings = new OfflineModeSettings();
+        final OfflineMode offlineModeSettings = new OfflineMode();
         offlineModeSettings.extend(getUI());
 
         setDescription("Test Offline mode");

@@ -24,7 +24,7 @@ import com.vaadin.ui.UI;
  * @author mattitahvonen
  * 
  */
-public class OfflineModeSettings extends AbstractExtension {
+public class OfflineMode extends AbstractExtension {
 
     private static final int DEFAULT_OFFLINE_MODE_DELAY = 5;
 

@@ -1,4 +1,4 @@
-package com.vaadin.addon.touchkit.rootextensions;
+package com.vaadin.addon.touchkit.settings;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.DocumentType;
