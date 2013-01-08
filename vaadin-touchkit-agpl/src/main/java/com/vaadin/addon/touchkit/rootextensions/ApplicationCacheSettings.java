@@ -14,8 +14,7 @@ import com.vaadin.server.BootstrapPageResponse;
 /**
  * This class is used to control HTML5 application cache settings.
  */
-public class ApplicationCacheSettings extends AbstractTouchKitRootExtension
-        implements BootstrapListener {
+public class ApplicationCacheSettings implements BootstrapListener {
 
     private boolean cacheManifestEnabled = true;
 
@@ -35,10 +34,10 @@ public class ApplicationCacheSettings extends AbstractTouchKitRootExtension
 
             // FIXME there must be a safer way to fetch these parameters, now
             // another Bootstrap listener might break stuff here.
-            // Candidate: response.getBootstrapHandler().getWidgetsetForUI(context);
+            // Candidate:
+            // response.getBootstrapHandler().getWidgetsetForUI(context);
             // How to get context??
-            
-            
+
             Element scriptTag = document.getElementsByTag("script").last();
             String script = scriptTag.html();
             String vaadinDir = getAppConfigParameter("vaadinDir", script);

@@ -14,8 +14,7 @@ import com.vaadin.server.BootstrapPageResponse;
  * are platform specific, most introduced by Apple for their
  * "home screen web app" concept.
  */
-public class WebAppSettings extends AbstractTouchKitRootExtension implements
-        BootstrapListener {
+public class WebAppSettings implements BootstrapListener {
 
     private boolean webAppCapable = true;
     private String statusBarStyle;
