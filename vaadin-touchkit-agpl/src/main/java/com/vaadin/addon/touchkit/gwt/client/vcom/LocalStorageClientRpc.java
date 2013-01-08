@@ -4,8 +4,8 @@ import com.vaadin.shared.communication.ClientRpc;
 
 public interface LocalStorageClientRpc extends ClientRpc {
 
-    public void detectValue(int id, String key);
+    public void detectValue(int requestId, String key);
 
-    public void put(String key, String value);
+    public void put(int requestId, String key, String value);
 
 }

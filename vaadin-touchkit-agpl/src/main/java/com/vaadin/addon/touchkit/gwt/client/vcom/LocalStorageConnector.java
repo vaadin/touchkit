@@ -18,21 +18,34 @@ public class LocalStorageConnector extends AbstractExtensionConnector {
         registerRpc(LocalStorageClientRpc.class, new LocalStorageClientRpc() {
             @Override
             public void detectValue(int requestId, String key) {
-                String value = null;
-                Storage localStorageIfSupported = Storage.getLocalStorageIfSupported();
-                if(localStorageIfSupported != null) {
-                    value = localStorageIfSupported.getItem(key);
+                try {
+                    String value = null;
+                    Storage localStorageIfSupported = Storage
+                            .getLocalStorageIfSupported();
+                    if (localStorageIfSupported != null) {
+                        value = localStorageIfSupported.getItem(key);
+                        rpc.onValueDetected(requestId, value);
+                    } else {
+                        throw new Exception("Local storage not supported");
+                    }
+                } catch (Exception e) {
+                    rpc.onValueDetectionFailure(requestId, e.getMessage());
                 }
-                rpc.onValueDetected(requestId, value);
             }
 
             @Override
-            public void put(String key, String value) {
-                Storage localStorageIfSupported = Storage.getLocalStorageIfSupported();
-                if(localStorageIfSupported != null) {
-                    localStorageIfSupported.setItem(key, value);
-                } else {
-                    throw new RuntimeException("Local storage not supported!");
+            public void put(int requestId, String key, String value) {
+                try {
+                    Storage localStorageIfSupported = Storage
+                            .getLocalStorageIfSupported();
+                    if (localStorageIfSupported != null) {
+                        localStorageIfSupported.setItem(key, value);
+                        rpc.putSucceeded(requestId, value);
+                    } else {
+                        throw new Exception("Local storage not supported!");
+                    }
+                } catch (Exception e) {
+                    rpc.putFailed(requestId, e.getLocalizedMessage());
                 }
             }
         });

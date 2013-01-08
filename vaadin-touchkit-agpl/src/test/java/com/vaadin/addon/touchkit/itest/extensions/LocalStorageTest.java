@@ -2,7 +2,8 @@ package com.vaadin.addon.touchkit.itest.extensions;
 
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
 import com.vaadin.addon.touchkit.rootextensions.LocalStorage;
-import com.vaadin.addon.touchkit.rootextensions.LocalStorageValueCallback;
+import com.vaadin.addon.touchkit.rootextensions.LocalStorageCallback;
+import com.vaadin.addon.touchkit.rootextensions.LocalStorageCallback.FailureEvent;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Button.ClickEvent;
@@ -25,11 +26,16 @@ public class LocalStorageTest extends AbstractTouchKitIntegrationTest {
                     @Override
                     public void buttonClick(ClickEvent event) {
                         LocalStorage.detectValue(keyField.getValue(),
-                                new LocalStorageValueCallback() {
+                                new LocalStorageCallback() {
                                     @Override
                                     public void onSuccess(String value) {
                                         Notification.show("Value received:" + value);
                                         valueField.setValue(value);
+                                    }
+
+                                    @Override
+                                    public void onFailure(FailureEvent error) {
+                                        Notification.show("Value retrieval failed: " + error.getMessage());
                                     }
                                 });
                     }
@@ -44,5 +50,35 @@ public class LocalStorageTest extends AbstractTouchKitIntegrationTest {
                     }
                 });
         addComponent(saveButton);
+        
+        Button saveInsaneButton = new Button("Save huge value (should fail)",
+                new Button.ClickListener() {
+                    @Override
+                    public void buttonClick(ClickEvent event) {
+                        LocalStorage.get().put("huge",
+                                gethugeString(), new LocalStorageCallback() {
+                                    
+                                    @Override
+                                    public void onSuccess(String value) {
+                                        Notification.show("Succeeeded");
+                                    }
+                                    
+                                    @Override
+                                    public void onFailure(FailureEvent error) {
+                                        Notification.show("Failed as expected:" + error.getMessage());
+                                    }
+                                });
+                    }
+
+                    private String gethugeString() {
+                        StringBuilder stringBuilder = new StringBuilder();
+                        for (int i = 0; i < 8000000; i++) {
+                            stringBuilder.append("diipadaipa");
+                        }
+                        return stringBuilder.toString();
+                    }
+                });
+        addComponent(saveInsaneButton);
+
     }
 }
