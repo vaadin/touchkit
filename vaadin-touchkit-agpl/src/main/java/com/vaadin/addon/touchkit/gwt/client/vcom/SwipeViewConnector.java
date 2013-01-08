@@ -7,7 +7,6 @@ import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.addon.touchkit.gwt.client.ui.VSwipeView;
 import com.vaadin.addon.touchkit.gwt.client.ui.VSwipeView.SwipeListener;
 import com.vaadin.addon.touchkit.ui.SwipeView;
-import com.vaadin.client.VConsole;
 import com.vaadin.client.communication.RpcProxy;
 import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.csslayout.CssLayoutConnector;
@@ -35,7 +34,6 @@ public class SwipeViewConnector extends CssLayoutConnector implements
     @Override
     public void onStateChanged(StateChangeEvent stateChangeEvent) {
         super.onStateChanged(stateChangeEvent);
-        VConsole.error("onStateChanged for " + getState().id);
         getWidget().setScrollTop(getState().scrollTop);
     }
 

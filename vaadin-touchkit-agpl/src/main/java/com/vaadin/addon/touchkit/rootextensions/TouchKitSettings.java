@@ -1,5 +1,6 @@
 package com.vaadin.addon.touchkit.rootextensions;
 
+import com.vaadin.addon.touchkit.server.TouchKitServlet;
 import com.vaadin.server.BootstrapFragmentResponse;
 import com.vaadin.server.BootstrapListener;
 import com.vaadin.server.BootstrapPageResponse;
@@ -12,38 +13,56 @@ import com.vaadin.server.SystemMessagesInfo;
 import com.vaadin.server.SystemMessagesProvider;
 import com.vaadin.server.VaadinService;
 
+/**
+ * TouchKit settings is a collection of tools that help modifying various touch
+ * device related configurations on the html page. The class must be bound to
+ * VaadinService and configured early phase to be functional.
+ * <p>
+ * Most often an instance of this class is accessed via {@link TouchKitServlet}.
+ */
 public class TouchKitSettings implements BootstrapListener,
         SessionInitListener, SystemMessagesProvider {
 
     private ViewPortSettings viewPortSettings;
-    private IosWebAppSettings iosWebAppSettings;
+    private WebAppSettings webAppSettings;
     private ApplicationIcons applicationIcons;
     private ApplicationCacheSettings applicationCacheSettings;
 
-    public ViewPortSettings getViewPortSettings() {
-        return viewPortSettings;
-    }
-
-    public IosWebAppSettings getIosWebAppSettings() {
-        return iosWebAppSettings;
-    }
-
-    public ApplicationIcons getApplicationIcons() {
-        return applicationIcons;
-    }
-
+    /**
+     * Creates and bounds TouchKit settings to {@link VaadinService} instance
+     * looked up automatically from a thread local.
+     */
     public TouchKitSettings() {
         this(VaadinService.getCurrent());
     }
 
+    /**
+     * Creates a new instance of TouchKitSettings and bounds it to given
+     * {@link VaadinService}.
+     * 
+     * @param vaadinService
+     *            the vaadin service into the new instance should be bound to.
+     */
     public TouchKitSettings(VaadinService vaadinService) {
         viewPortSettings = new ViewPortSettings();
-        iosWebAppSettings = new IosWebAppSettings();
+        webAppSettings = new WebAppSettings();
         applicationIcons = new ApplicationIcons();
         applicationCacheSettings = new ApplicationCacheSettings();
         vaadinService.addSessionInitListener(this);
 
         vaadinService.setSystemMessagesProvider(this);
+    }
+
+    public ViewPortSettings getViewPortSettings() {
+        return viewPortSettings;
+    }
+
+    public WebAppSettings getWebAppSettings() {
+        return webAppSettings;
+    }
+
+    public ApplicationIcons getApplicationIcons() {
+        return applicationIcons;
     }
 
     @Override
@@ -53,10 +72,14 @@ public class TouchKitSettings implements BootstrapListener,
 
     @Override
     public void modifyBootstrapPage(BootstrapPageResponse response) {
-        getViewPortSettings().modifyBootstrapPage(response);
-        getIosWebAppSettings().modifyBootstrapPage(response);
-        getApplicationIcons().modifyBootstrapPage(response);
-        getApplicationCacheSettings().modifyBootstrapPage(response);
+        if (getViewPortSettings() != null)
+            getViewPortSettings().modifyBootstrapPage(response);
+        if (getWebAppSettings() != null)
+            getWebAppSettings().modifyBootstrapPage(response);
+        if (getApplicationIcons() != null)
+            getApplicationIcons().modifyBootstrapPage(response);
+        if (getApplicationCacheSettings() != null)
+            getApplicationCacheSettings().modifyBootstrapPage(response);
     }
 
     @Override
@@ -81,8 +104,8 @@ public class TouchKitSettings implements BootstrapListener,
         this.viewPortSettings = viewPortSettings;
     }
 
-    public void setIosWebAppSettings(IosWebAppSettings iosWebAppSettings) {
-        this.iosWebAppSettings = iosWebAppSettings;
+    public void setWebAppSettings(WebAppSettings iosWebAppSettings) {
+        this.webAppSettings = iosWebAppSettings;
     }
 
     @Override

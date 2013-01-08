@@ -8,7 +8,13 @@ import com.vaadin.server.BootstrapFragmentResponse;
 import com.vaadin.server.BootstrapListener;
 import com.vaadin.server.BootstrapPageResponse;
 
-public class IosWebAppSettings extends AbstractTouchKitRootExtension implements
+/**
+ * This class is used to configure various settings that control how this
+ * application behaves when linked from mobile devices. Some of these settings
+ * are platform specific, most introduced by Apple for their
+ * "home screen web app" concept.
+ */
+public class WebAppSettings extends AbstractTouchKitRootExtension implements
         BootstrapListener {
 
     private boolean webAppCapable = true;
