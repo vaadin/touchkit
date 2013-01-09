@@ -1,6 +1,11 @@
 package com.vaadin.addon.touchkit.server;
 
+import java.io.IOException;
+import java.net.URL;
+
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.vaadin.addon.touchkit.settings.TouchKitSettings;
 import com.vaadin.server.VaadinService;
@@ -35,6 +40,15 @@ public class TouchKitServlet extends VaadinServlet {
      */
     public TouchKitSettings getTouchKitSettings() {
         return touchKitSettings;
+    }
+
+    protected void writeStaticResourceResponse(HttpServletRequest request,
+            HttpServletResponse response, URL resourceUrl) throws IOException {
+        if (resourceUrl.getFile().endsWith(".manifest")) {
+            response.setContentType("text/cache-manifest");
+            response.setHeader("Cache-Control", "max-age=1, must-revalidate");
+        }
+        super.writeStaticResourceResponse(request, response, resourceUrl);
     }
 
 }
