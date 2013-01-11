@@ -86,9 +86,9 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
     public VSwitch() {
         // Change to proper element or remove if extending another widget
         setElement(Document.get().createDivElement());
-        
+
         setStyleName(CLASSNAME + "-wrapper");
-        
+
         mainElement = Document.get().createDivElement();
         // This method call of the Paintable interface sets the component
         // style name in DOM tree
@@ -255,7 +255,7 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
                 dragging = true;
                 // Use capture to catch mouse events even if user
                 // drags the mouse cursor out of the widget area.
-                DOM.setCapture((com.google.gwt.user.client.Element)mainElement);
+                DOM.setCapture((com.google.gwt.user.client.Element) mainElement);
             }
 
             if (dragging) {
