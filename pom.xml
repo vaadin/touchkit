@@ -5,7 +5,7 @@
     <groupId>com.vaadin.addon</groupId>
     <artifactId>vaadin-touchkit-root</artifactId>
     <packaging>pom</packaging>
-    <version>${touchkit.version}</version>
+    <version>3.0.0-SNAPSHOT</version>
     <name>Vaadin TouchKit</name>
     <description>Vaadin TouchKit Root Project</description>
     <organization>
@@ -50,8 +50,6 @@
        	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		
-		<!-- We are doing some unstandard staff to allow giving version via parameter. Assign a default for it.  -->
-        <touchkit.version>3.0.0-alpha2</touchkit.version>
         <!-- May be overridden by the build system when creating CVAL licensed packages -->
         <license.short.name>agpl</license.short.name>
 

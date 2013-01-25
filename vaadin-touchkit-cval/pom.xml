@@ -5,7 +5,7 @@
     <groupId>com.vaadin.addon</groupId>
     <artifactId>vaadin-touchkit-cval</artifactId>
     <packaging>jar</packaging>
-    <version>${touchkit.version}</version>
+    <version>3.0.0-SNAPSHOT</version>
     <name>Vaadin TouchKit</name>
 
     <organization>
@@ -43,9 +43,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<license.short.name>cval</license.short.name>
-		<touchkit.version>3.0.0-alpha2</touchkit.version>
 		<vaadin.version.maven>7.0.0.beta11</vaadin.version.maven>
-		<gwt.version>2.5.0-rc1</gwt.version>
         
         <Implementation-Version>${project.version}</Implementation-Version>
         <!-- Must not change this because of the Directory -->
