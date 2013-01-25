@@ -1,49 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
-  <id>addon</id>
+<assembly
+	xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+	<id>addon</id>
 
-  <!-- Note: the base directory for this assembly descriptor is one of the license specific subprojects -->
+	<!-- Note: the base directory for this assembly descriptor is one of the 
+		license specific subprojects -->
 
-  <formats>
-    <format>zip</format>
-  </formats>
+	<formats>
+		<format>zip</format>
+	</formats>
 
-  <!-- Do not use because we must put META-INF/MANIFEST.MF there. -->
-  <includeBaseDirectory>false</includeBaseDirectory>
+	<!-- Do not use because we must put META-INF/MANIFEST.MF there. -->
+	<includeBaseDirectory>false</includeBaseDirectory>
 
-  <fileSets>
-    <fileSet>
-      <directory>.</directory>
-      <includes>
-        <include>license-*.txt</include>
-        <include>licensing.txt</include>
-      </includes>
-    </fileSet>
-    <fileSet>
-      <directory>target</directory>
-      <outputDirectory></outputDirectory>
-      <includes>
-        <include>*.jar</include>
-      </includes>
-    </fileSet>
-	<fileSet>
-		<directory>../vaadin-touchkit-agpl/assembly/tutorial</directory>
-		<outputDirectory>tutorial</outputDirectory>
-	</fileSet>
-  </fileSets>
+	<fileSets>
+		<fileSet>
+			<directory>.</directory>
+			<includes>
+				<include>license-*.txt</include>
+				<include>licensing.txt</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>target</directory>
+			<outputDirectory></outputDirectory>
+			<includes>
+				<include>*.jar</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>../vaadin-touchkit-agpl/assembly/tutorial</directory>
+			<outputDirectory>tutorial</outputDirectory>
+		</fileSet>
+		<fileSet>
+			<directory>target/libs</directory>
+			<outputDirectory>lib</outputDirectory>
+			<includes>
+				<!-- TODO: Here we just include stuff that it not needed by tests and 
+					Vaadin. Currently this is just reflections that is needed by the cache manifest 
+					linker implementation. We should look into both splitting client side stuff 
+					to separate module and to getting rid of reflections library. Also to be 
+					safer, this should work so that we exclude stuff that should not be included 
+					in the zip package. -->
+				<include>reflections*.jar</include>
+				<include>guava*.jar</include>
+				<include>jsr305*.jar</include>
+				<include>javassist*.jar</include>
+				<include>dom4j*.jar</include>
+				<include>xml-apis*.jar</include>
+			</includes>
+		</fileSet>
+	</fileSets>
 
-  <files>
-	<!--   	This is vaadin.com/directory related manifest needed in the zip package -->
-    <file>
-      <source>../vaadin-touchkit-agpl/assembly/MANIFEST.MF</source>
-      <outputDirectory>META-INF</outputDirectory>
-      <filtered>true</filtered>
-    </file>
-    <file>
-      <source>../vaadin-touchkit-agpl/assembly/README.html</source>
-      <filtered>true</filtered>
-    </file>
-  </files>
+	<files>
+		<!-- This is vaadin.com/directory related manifest needed in the zip package -->
+		<file>
+			<source>../vaadin-touchkit-agpl/assembly/MANIFEST.MF</source>
+			<outputDirectory>META-INF</outputDirectory>
+			<filtered>true</filtered>
+		</file>
+		<file>
+			<source>../vaadin-touchkit-agpl/assembly/README.html</source>
+			<filtered>true</filtered>
+		</file>
+	</files>
 </assembly>

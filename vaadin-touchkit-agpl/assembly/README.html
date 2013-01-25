@@ -5,13 +5,12 @@
 <title>Vaadin TouchKit ${Implementation-Version}</title>
 </head>
 <body>
-
 	<h1>Vaadin TouchKit ${Implementation-Version}</h1>
 
 	<p>
 		<a href="https://vaadin.com/add-ons/touchkit">Vaadin TouchKit</a> is
-		an add-on component for Vaadin to aid creating applications for touch
-		based devices like smartphones and tablets.
+		an add-on component for Vaadin to aid creating mobile web applications
+		for touch based devices like smartphones and tablets.
 	</p>
 
 	<p>
@@ -20,9 +19,29 @@
 		final shape. See <a
 			href="http://dev.vaadin.com/svn/branches/vornitologist3/">vornitologist</a>
 		and <a href="http://dev.vaadin.com/svn/branches/mobilemail3/">mobilemail</a>
-		demos from SVN for up to date code examples.
+		demos from SVN for up to date code examples. We also still have
+		several bugs and performance issues to tackle. If you have tight
+		schedule in your project, consider using the Vaadin 6 compatible 2.X
+		branch at this point.
 	</p>
 
+	<p>Usage of modern build systems like Maven, that supports
+		transient dependencies, is highly encouraged. Things should work fine
+		with following dependency declaration and Vaadin Maven plugin:</p>
+
+	<pre>
+		
+&lt;dependency&gt;
+	&lt;groupId&gt;com.vaadin.addon&lt;/groupId&gt;
+	&lt;artifactId&gt;vaadin-touchkit-${license.short.name}&lt;/artifactId&gt;
+	&lt;version&gt;${Implementation-Version}&lt;/version&gt;
+	&lt;type&gt;jar&lt;/type&gt;
+&lt;/dependency&gt;
+			
+	</pre>
+
+
+	<h2>License</h2>
 	<p>
 		Vaadin TouchKit is a dual licensed product. See <a
 			href="licensing.txt">licensing.txt</a> file for licensing details
@@ -37,7 +56,7 @@
 			href="https://vaadin.com/book">https://vaadin.com/book</a>
 	</p>
 
-	<h2>Tutorial</h2>
+	<h2>Tutorial (deprecated)</h2>
 
 	<p>In addition to the reference manual there is a more tutorial
 		like article available how to create a full featured mobile
@@ -47,7 +66,15 @@
 		<a href="tutorial/touchkit-tutorial.html">Read the tutorial</a>
 	</p>
 
+	<h2>Dependencies</h2>
 
+	<p>This version of TouchKit is built against Vaadin
+		${vaadin.version.maven}, but is expected to be forward compatible with
+		minor versions. In addition to Vaadin, TouchKit depends some third
+		party Apache 2 licensed Java libraries. Currently these libraries are
+		only required during widgetset compilation. Those are automatically
+		resolved for Maven users and also (others but core vaadin jars and
+		their dependencies) are also collected to this packages lib directory.</p>
 
 </body>
 </html>
