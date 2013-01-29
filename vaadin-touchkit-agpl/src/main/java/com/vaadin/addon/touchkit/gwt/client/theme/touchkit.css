@@ -308,19 +308,24 @@
 
 /* Navbar buttons */
 .v-touchkit-navbar .v-button,
+.v-touchkit-navbar .v-button:focus,
 .v-touchkit-horizontalbuttongroup {
-	display: inline-block;
-	margin: 0;
+    display: inline-block;
+    margin: 0;
+    border: navbarButtonBorder;
+    border-radius: 5px;	
+    height: 30px;
+    padding: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+	
+.v-touchkit-navbar .v-button,
+.v-touchkit-horizontalbuttongroup {
 	background: transparent;
-	border: navbarButtonBorder;
-	border-radius: 5px;
 	color: navbarButtonColor;
 	text-shadow: navbarButtonTextShadow;
 	-webkit-box-shadow: navbarButtonBoxShadow;
-	height: 30px;
-	padding: 0;
-	overflow: hidden;
-	box-sizing: border-box;
 }
 
 .v-touchkit-navbar .v-button .v-button-wrap,
