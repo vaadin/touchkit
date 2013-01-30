@@ -260,17 +260,8 @@ public class CacheManifestLinker extends AbstractLinker {
         cm.append("*\n\n");
 
         String manifest = cm.toString();
+        String manifestName = userAgent + ".manifest";
 
-        // using cache.manifest for webkits as ancient android and ios versions
-        // might bug with other names
-        String prefix;
-        if (userAgent.equals("safari")) {
-            prefix = "";
-        } else {
-            prefix = userAgent + ".";
-        }
-
-        String manifestName = prefix + "cache.manifest";
         return emitString(logger, manifest, manifestName);
     }
 

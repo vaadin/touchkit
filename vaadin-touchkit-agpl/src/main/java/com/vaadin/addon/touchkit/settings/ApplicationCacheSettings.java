@@ -53,9 +53,23 @@ public class ApplicationCacheSettings implements BootstrapListener {
 
             // Add cache manifest attribute to html tag
             document.getElementsByTag("html").attr("manifest",
-                    vaadinDir + "widgetsets/" + widgetset + "/cache.manifest");
+                    vaadinDir + "widgetsets/" + widgetset + "/"
+                            + generateManifestFileName(response));
 
         }
+    }
+
+    /**
+     * Give manifest file name for given page response
+     * 
+     * @param response
+     *            Page response where manifest will be added.
+     * @return Manifest file name, eg. "safari.manifest".
+     */
+    protected String generateManifestFileName(BootstrapPageResponse response) {
+        // Default implementation of TouchKit only supports webkit (safari)
+        // browsers for now.
+        return "safari.manifest";
     }
 
     /**
