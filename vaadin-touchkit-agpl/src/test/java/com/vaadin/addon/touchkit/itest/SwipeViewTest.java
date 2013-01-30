@@ -121,11 +121,11 @@ public class SwipeViewTest extends AbstractTouchKitIntegrationTest {
             Component currentComponent2 = getCurrentComponent();
 
             if (currentComponent2 instanceof ImageView) {
-                ImageView new_name = (ImageView) currentComponent2;
-                NavigationButton leftComponent = (NavigationButton) new_name.navigationBar
+                ImageView imageView = (ImageView) currentComponent2;
+                NavigationButton leftComponent = (NavigationButton) imageView.navigationBar
                         .getLeftComponent();
                 leftComponent.setTargetView(getPreviousComponent());
-                NavigationButton rightComponent = (NavigationButton) new_name.navigationBar
+                NavigationButton rightComponent = (NavigationButton) imageView.navigationBar
                         .getRightComponent();
                 rightComponent.setTargetView(getNextComponent());
             }
@@ -212,19 +212,30 @@ public class SwipeViewTest extends AbstractTouchKitIntegrationTest {
 
                 cssLayout.addComponent(verticalComponentGroup);
 
-                addComponent(cssLayout);
+                setContent(cssLayout);
 
             }
         }
 
-        class ImageView extends SwipeView {
+        static class ImageView extends SwipeView {
 
             private String ss;
             private Embedded embedded = new Embedded();
             private NavigationBar navigationBar;
+            private CssLayout layout = new CssLayout() {
+                @Override
+                protected String getCss(Component c) {
+                    if (c == navigationBar) {
+                        // Make background of bar semitranparent over the image.
+                        return "background: rgba(255, 255, 255, 0.7); position:absolute;top:0;left:0;right:0;";
+                    }
+                    return super.getCss(c);
+                }
+            };
 
             public ImageView(String f) {
                 setWidth("100%");
+                setContent(layout);
                 ss = f;
                 navigationBar = new NavigationBar();
                 NavigationButton button = new NavigationButton("<");
@@ -234,19 +245,10 @@ public class SwipeViewTest extends AbstractTouchKitIntegrationTest {
                         " "));
                 button = new NavigationButton(">");
                 navigationBar.setRightComponent(button);
-                addComponent(navigationBar);
+                layout.addComponent(navigationBar);
                 button.setStyleName("forward");
                 embedded.setWidth("100%");
-                addComponent(embedded);
-            }
-
-            @Override
-            protected String getCss(Component c) {
-                if (c == navigationBar) {
-                    // Make background of bar semitranparent over the image.
-                    return "background: rgba(255, 255, 255, 0.7); position:absolute;top:0;left:0;right:0;";
-                }
-                return super.getCss(c);
+                layout.addComponent(embedded);
             }
 
             @Override
@@ -258,7 +260,8 @@ public class SwipeViewTest extends AbstractTouchKitIntegrationTest {
                     throw new RuntimeException("WTF!!");
                 }
                 ExternalResource source = new ExternalResource(Page
-                        .getCurrent().getLocation().getPath() + "/winterphotos/" + ss);
+                        .getCurrent().getLocation().getPath()
+                        + "/winterphotos/" + ss);
                 embedded.setSource(source);
             }
 

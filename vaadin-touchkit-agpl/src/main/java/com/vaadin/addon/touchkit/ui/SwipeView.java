@@ -2,6 +2,7 @@ package com.vaadin.addon.touchkit.ui;
 
 import com.vaadin.addon.touchkit.gwt.client.vcom.SwipeViewRpc;
 import com.vaadin.addon.touchkit.gwt.client.vcom.SwipeViewSharedState;
+import com.vaadin.ui.AbstractSingleComponentContainer;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 
@@ -14,7 +15,7 @@ import com.vaadin.ui.CssLayout;
  * To make the usage fluent, developer is suggested to fill both next and
  * previous component.
  */
-public class SwipeView extends CssLayout {
+public class SwipeView extends AbstractSingleComponentContainer {
 
     /**
      * Creates a {@link SwipeView}.
@@ -77,4 +78,5 @@ public class SwipeView extends CssLayout {
         }
         return null;
     }
+    
 }

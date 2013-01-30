@@ -23,21 +23,21 @@ import com.google.gwt.event.dom.client.TouchStartHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.client.BrowserInfo;
 import com.vaadin.client.Util;
 import com.vaadin.client.VConsole;
 import com.vaadin.client.ui.TouchScrollDelegate;
-import com.vaadin.client.ui.VCssLayout;
 
-public class VSwipeView extends
-        VCssLayout {
-    
+public class VSwipeView extends SimplePanel {
+
     public interface SwipeListener {
         void onSwipeBack();
+
         void onSwipeForward();
     }
-    
+
     private SwipeListener swipeListener;
 
     private static final double SPEED_THRESHOLD = 0.35;
@@ -73,7 +73,7 @@ public class VSwipeView extends
         sinkEvents(Event.MOUSEEVENTS);
         DOM.sinkEvents(scrollElement, Event.ONSCROLL);
         touchScrollDelegate = new TouchScrollDelegate(scrollElement);
-        
+
         addHandler(new TouchStartHandler() {
             public void onTouchStart(TouchStartEvent event) {
                 dragStartEvent = event;
@@ -118,12 +118,11 @@ public class VSwipeView extends
             }
         }, TouchEndEvent.getType());
     }
-    
-    
+
     public boolean isEnabled() {
         return enabled;
     }
-    
+
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
@@ -139,7 +138,8 @@ public class VSwipeView extends
             if (!BrowserInfo.get().isTouchDevice()) {
                 // avoid drag start on images
                 // FIXME shouln't be this way, but disables dragstart on images
-                // in demo with desktop browsers and this way makes development easier
+                // in demo with desktop browsers and this way makes development
+                // easier
                 Element el = ne.getEventTarget().cast();
                 String msg = el.getParentElement().getClassName();
                 if (msg.contains("embedded")) {
@@ -148,7 +148,7 @@ public class VSwipeView extends
             }
         }
     }
-    
+
     @Override
     protected void onAttach() {
         super.onAttach();
@@ -219,17 +219,17 @@ public class VSwipeView extends
                     if (np.getPreviousView() != null
                             && (deltaX > getOffsetWidth() / 2 || lastSpeed > SPEED_THRESHOLD)) {
                         // navigate backward
-                         np.navigateBackward();
-                         if(swipeListener != null) {
-                             swipeListener.onSwipeBack();
-                         }
+                        np.navigateBackward();
+                        if (swipeListener != null) {
+                            swipeListener.onSwipeBack();
+                        }
                     } else if (np.getNextView() != null
                             && (deltaX < -getOffsetWidth() / 2 || (lastSpeed < -SPEED_THRESHOLD))) {
                         // navigate forward
-                         np.navigateForward();
-                         if(swipeListener != null) {
-                             swipeListener.onSwipeForward();
-                         }
+                        np.navigateForward();
+                        if (swipeListener != null) {
+                            swipeListener.onSwipeForward();
+                        }
                     } else {
                         np.setHorizontalOffset(0, true);
                     }
@@ -238,8 +238,8 @@ public class VSwipeView extends
             }
         }
     }
-    
-    public int getScrollTop()  {
+
+    public int getScrollTop() {
         return scrollElement.getScrollTop();
     }
 

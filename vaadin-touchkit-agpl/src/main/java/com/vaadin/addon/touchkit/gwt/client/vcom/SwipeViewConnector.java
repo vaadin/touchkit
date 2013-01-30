@@ -7,13 +7,15 @@ import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.addon.touchkit.gwt.client.ui.VSwipeView;
 import com.vaadin.addon.touchkit.gwt.client.ui.VSwipeView.SwipeListener;
 import com.vaadin.addon.touchkit.ui.SwipeView;
+import com.vaadin.client.ComponentConnector;
+import com.vaadin.client.ConnectorHierarchyChangeEvent;
 import com.vaadin.client.communication.RpcProxy;
 import com.vaadin.client.communication.StateChangeEvent;
-import com.vaadin.client.ui.csslayout.CssLayoutConnector;
+import com.vaadin.client.ui.AbstractSingleComponentContainerConnector;
 import com.vaadin.shared.ui.Connect;
 
 @Connect(SwipeView.class)
-public class SwipeViewConnector extends CssLayoutConnector implements
+public class SwipeViewConnector extends AbstractSingleComponentContainerConnector implements
         ScrollHandler, SwipeListener {
 
     SwipeViewRpc rpc = RpcProxy.create(SwipeViewRpc.class, this);
@@ -60,6 +62,18 @@ public class SwipeViewConnector extends CssLayoutConnector implements
     @Override
     public void onSwipeForward() {
         rpc.navigateForward();
+    }
+
+    @Override
+    public void updateCaption(ComponentConnector connector) {
+        // NOP, not supported
+    }
+
+    @Override
+    public void onConnectorHierarchyChange(
+            ConnectorHierarchyChangeEvent connectorHierarchyChangeEvent) {
+        // We always have 1 child, unless the child is hidden
+        getWidget().setWidget(getContentWidget());
     }
 
 }
