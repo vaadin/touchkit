@@ -49,6 +49,7 @@ public class VerticalComponentGroupTest extends AbstractTouchKitIntegrationTest 
         too.setDescription("nav button description");
         verticalComponentGroup.addComponent(one);
         verticalComponentGroup.addComponent(too);
+        verticalComponentGroup.addComponent(new NavigationButton("Simple"));
         verticalComponentGroup.addComponent(new Label(
                 "FIXME: Label, between buttons bugs"));
         verticalComponentGroup.addComponent(new Button("Button too"));

@@ -569,7 +569,7 @@
 	-webkit-transition: none;
 	}
 
-.v-touchkit-navbutton {
+.v-tk .v-touchkit-navbutton {
 	-webkit-appearance: none;
 	display: block;
 	position: relative;
@@ -666,8 +666,8 @@
 
 @url backButtonUrl backButtonImage;
 
-.v-touchkit-navbutton-back,
-.v-touchkit-navbutton-forward {
+.v-tk .v-touchkit-navbutton-back,
+.v-tk .v-touchkit-navbutton-forward {
 	display:block;
 	-webkit-border-image: backButtonUrl 0 6 0 13 stretch stretch;
 	border-width: 0 6px 0 13px;
@@ -719,9 +719,9 @@
 	padding-right:4px;
 }
 
-.v-touchkit-navbar,
-.v-touchkit-navpanel-placeholder > div,
-.v-touchkit-popover.v-touchkit-fullscreen .v-touchkit-navpanel-placeholder > div {
+.v-tk  .v-touchkit-navbar,
+.v-tk  .v-touchkit-navpanel-placeholder > div,
+.v-tk .v-touchkit-popover.v-touchkit-fullscreen .v-touchkit-navpanel-placeholder > div {
 	background: navbarGradient;
 	color: #52555a;
 	display: block;
@@ -741,7 +741,7 @@
     line-height: 43px;
 }
 
-.v-touchkit-navbar-caption {
+.v-tk  .v-touchkit-navbar-caption {
 	display: block;
 	white-space: nowrap;
 	overflow: hidden;
@@ -1712,7 +1712,7 @@
 
 /** Component group stylings must be as last as they override default styles */
 
-.v-touchkit-verticalcomponentgroup {
+.v-tk .v-touchkit-verticalcomponentgroup {
 	display: block;
 	position: relative;
 	width: 100%;
