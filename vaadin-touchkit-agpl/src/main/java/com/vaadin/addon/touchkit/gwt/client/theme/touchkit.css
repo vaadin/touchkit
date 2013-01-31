@@ -216,7 +216,6 @@
 .v-tk .v-button,
 .v-tk .v-button:focus {
 	background: transparent;
-	padding: 0;
 	margin: 0;
 	border: none;
 	width: auto;
@@ -2026,3 +2025,86 @@
 	border: 1px solid rgba(25, 33, 40, 0.5);
 /* 	padding: 10px; */
 	}
+	
+.v-touchkit-datepopover {
+    background-color: white;
+    box-shadow: 1px 1px 3px 3px rgba(0,0,0,0.25);
+    cursor: default;
+    min-width: 290px;
+}
+
+.v-touchkit-datepopover > .popupContent {
+    padding: 5px;
+}
+
+.v-touchkit-datepopover .gwt-DatePicker {
+	width: 100%;
+}
+
+.v-touchkit-datepopover .datePickerMonthSelector {
+	width: 100%;
+}
+
+.v-touchkit-datepopover .datePickerMonth {
+	text-align: center;
+}
+
+.v-touchkit-datepopover .datePickerDay,
+.v-touchkit-datepopover .datePickerWeekdayLabel,
+.v-touchkit-datepopover .datePickerWeekendLabel,
+.v-touchkit-datepopover .datePickerPreviousButton,
+.v-touchkit-datepopover .datePickerNextButton {
+    min-width: 40px;
+    min-height: 40px;
+    line-height: 40px;
+    text-align: center;
+    outline: 0;
+}
+
+.v-touchkit-datepopover .datePickerPreviousButton > *,
+.v-touchkit-datepopover .datePickerNextButton > * {
+	outline: 0;
+}
+
+.v-touchkit-datepopover .datePickerPreviousButton,
+.v-touchkit-datepopover .datePickerNextButton {
+	color: buttonColor;
+    border-radius: listLayoutMargin;
+    background: buttonInsetBackground;
+    -webkit-box-shadow: buttonInsetBoxShadow;
+    padding: 3px;
+}
+
+.v-touchkit-datepopover .datePickerPreviousButton > .html-face,
+.v-touchkit-datepopover .datePickerNextButton > .html-face {
+    background: buttonGradient;
+    border-radius: listLayoutMargin;
+    -webkit-box-shadow: buttonBoxShadow;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.75);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.v-touchkit-datepopover .datePickerDay:focus {
+	border-width: 0px;
+}
+
+.v-touchkit-datepopover .datePickerWeekdayLabel,
+.v-touchkit-datepopover .datePickerWeekendLabel {
+	background-color: #DDD;
+}
+
+.v-touchkit-datepopover .datePickerDayIsValue {
+	background-color: #666;
+	color: white;
+	font-weight: bold;
+	border-radius: 10px;
+}
+.v-touchkit-datepopover .datePickerDayIsFiller {
+	opacity: 0.5;
+}
+
+.v-touchkit-datepopover-hidedays .datePickerDays {
+	display: none;
+}

@@ -8,15 +8,12 @@ import com.vaadin.addon.touchkit.gwt.client.vcom.DatePickerState.Resolution;
 import com.vaadin.ui.AbstractField;
 
 /**
- * EXPERIMENTAL! 
+ * EXPERIMENTAL!
  * 
  * This component is still experimental, don't expect it to by as high quality
  * as the library in general.
  * <p>
- * Field used to ask time values from users. Uses browser's own time input
- * handling. Currently not supported by all browsers.
- * 
- * TODO Study and document browser support
+ * Field used to ask time values from users.
  */
 @SuppressWarnings("serial")
 public class DatePicker extends AbstractField<Date> {
@@ -40,7 +37,7 @@ public class DatePicker extends AbstractField<Date> {
         setCaption(caption);
     }
 
-    private DatePickerServerRpc rpc = new DatePickerServerRpc() {
+    private final DatePickerServerRpc rpc = new DatePickerServerRpc() {
 
         @Override
         public void valueChanged(Date date) {
@@ -62,7 +59,7 @@ public class DatePicker extends AbstractField<Date> {
     public void beforeClientResponse(boolean initial) {
         super.beforeClientResponse(initial);
 
-        getState().setDate(getValue());
+        getState().date = getValue();
     }
 
     /**
@@ -71,16 +68,37 @@ public class DatePicker extends AbstractField<Date> {
      * @return Resolution
      */
     public Resolution getResolution() {
-        return getState().getResolution();
+        return getState().resolution;
     }
 
     /**
      * Set current resolution of this DatePicker
      * 
      * @param resolution
-     *            Resolution
+     *            Resolution of DatePicker. Not all resolutions are supported on
+     *            all devices.
      */
     public void setResolution(Resolution resolution) {
-        getState().setResolution(resolution);
+        getState().resolution = resolution;
+    }
+
+    /**
+     * Define if component should use native date field when possible. Eg. iOS
+     * Safari supports native date fields since iOS version 5.
+     * 
+     * @param useNative
+     *            If true native date field is used with browsers supporting it
+     */
+    public void setUseNative(boolean useNative) {
+        getState().useNative = useNative;
+    }
+
+    /**
+     * If native date field is used when supported.
+     * 
+     * @return true if native field is used when supported
+     */
+    public boolean isUseNative() {
+        return getState().useNative;
     }
 }
