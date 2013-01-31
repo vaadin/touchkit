@@ -2,6 +2,7 @@ package com.vaadin.addon.touchkit.itest;
 
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
 import com.vaadin.addon.touchkit.ui.Switch;
+import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.ui.Button;
@@ -50,6 +51,16 @@ public class SwitchTest extends AbstractTouchKitIntegrationTest {
         addComponent(disabledSwitch);
         addComponent(statusLabel);
         addComponent(toggleButton);
+        addComponent(createVerticalComponentGroup());
+    }
+
+    private VerticalComponentGroup createVerticalComponentGroup() {
+        VerticalComponentGroup vcg = new VerticalComponentGroup();
+        vcg.addComponent(new Switch("Switch", false));
+        Switch disabledSwitch = new Switch("Disabled", true);
+        disabledSwitch.setEnabled(false);
+        vcg.addComponent(disabledSwitch);
+        return vcg;
     }
 
 }

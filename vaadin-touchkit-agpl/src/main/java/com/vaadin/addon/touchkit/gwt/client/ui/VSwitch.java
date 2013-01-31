@@ -60,9 +60,6 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
     private static final int BACKGROUND_POSITION_X_OFFSET = VEagerResourceLoader
             .isHighDPI() ? -1 : 0;
 
-    /** The client side widget identifier */
-    protected String paintableId;
-
     /** Reference to the server connection object. */
     ApplicationConnection client;
 

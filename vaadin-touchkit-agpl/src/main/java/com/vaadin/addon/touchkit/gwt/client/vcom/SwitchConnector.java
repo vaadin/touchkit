@@ -27,8 +27,8 @@ import com.vaadin.shared.ui.checkbox.CheckBoxState;
 public class SwitchConnector extends AbstractFieldConnector implements
         FocusHandler, BlurHandler {
 
-    private HandlerRegistration focusHandlerRegistration;
-    private HandlerRegistration blurHandlerRegistration;
+    private transient HandlerRegistration focusHandlerRegistration;
+    private transient HandlerRegistration blurHandlerRegistration;
 
     private CheckBoxServerRpc rpc = RpcProxy.create(CheckBoxServerRpc.class,
             this);
