@@ -31,10 +31,6 @@
 			</includes>
 		</fileSet>
 		<fileSet>
-			<directory>../vaadin-touchkit-agpl/assembly/tutorial</directory>
-			<outputDirectory>tutorial</outputDirectory>
-		</fileSet>
-		<fileSet>
 			<directory>target/libs</directory>
 			<outputDirectory>lib</outputDirectory>
 			<includes>
