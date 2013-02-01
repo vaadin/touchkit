@@ -60,8 +60,9 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
         return (OfflineModeState) super.getState();
     }
 
+    @Override
     protected void init() {
-        offlineTimeoutMillis = readOfflineTimeout() * 1000;
+        offlineTimeoutMillis = getState().offlineModeTimeout * 1000;
         getConnection().addHandler(RequestStartingEvent.TYPE, this);
         getConnection().addHandler(ResponseHandlingStartedEvent.TYPE, this);
         getConnection().addHandler(ResponseHandlingEndedEvent.TYPE, this);
@@ -71,16 +72,8 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
     @Override
     public void onStateChanged(StateChangeEvent stateChangeEvent) {
         super.onStateChanged(stateChangeEvent);
+        offlineTimeoutMillis = getState().offlineModeTimeout * 1000;
     }
-
-    private static native final int readOfflineTimeout()
-    /*-{
-        try {
-            return $wnd.vaadin.touchkit.offlineTimeout;
-        } catch(e) {
-            return 10;
-        }
-     }-*/;
 
     public OfflineMode getOfflineApp() {
         return OfflineModeEntrypoint.getOfflineMode();
@@ -193,7 +186,6 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
 
     @Override
     protected void extend(ServerConnector target) {
-        // TODO WTF should be be done here?
-
+        // Empty implementation
     }
 }

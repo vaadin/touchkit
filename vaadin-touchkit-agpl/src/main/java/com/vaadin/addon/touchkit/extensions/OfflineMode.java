@@ -26,10 +26,6 @@ import com.vaadin.ui.UI;
  */
 public class OfflineMode extends AbstractExtension {
 
-    private static final int DEFAULT_OFFLINE_MODE_DELAY = 5;
-
-    private int offlineModeTimeout = DEFAULT_OFFLINE_MODE_DELAY;
-
     private Boolean persistentSessionCookie;
 
     @Override
@@ -38,15 +34,15 @@ public class OfflineMode extends AbstractExtension {
     }
 
     public boolean isOfflineModeEnabled() {
-        return offlineModeTimeout == -1;
+        return getState().offlineModeTimeout == -1;
     }
 
     public void setOfflineModeEnabled(boolean offlineModeEnabled) {
         if (isOfflineModeEnabled() != offlineModeEnabled) {
             if (offlineModeEnabled) {
-                setOfflineModeTimeout(DEFAULT_OFFLINE_MODE_DELAY);
+                getState().offlineModeTimeout = OfflineModeState.DEFAULT_OFFLINE_MODE_DELAY;
             } else {
-                setOfflineModeTimeout(-1);
+                getState().offlineModeTimeout = -1;
             }
         }
     }
@@ -57,7 +53,7 @@ public class OfflineMode extends AbstractExtension {
      * completely disabled on slow connection.
      */
     public int getOfflineModeTimeout() {
-        return offlineModeTimeout;
+        return getState().offlineModeTimeout;
     }
 
     /**
@@ -65,11 +61,11 @@ public class OfflineMode extends AbstractExtension {
      * to respond before falling back to "offline mode". If the value is set for
      * -1, the client side waits forever.
      * 
-     * @param offlineTimeout
+     * @param offlineModeDelay
      *            timeout in seconds
      */
     public void setOfflineModeTimeout(int offlineModeDelay) {
-        offlineModeTimeout = offlineModeDelay;
+        getState().offlineModeTimeout = offlineModeDelay;
     }
 
     /**
@@ -114,7 +110,7 @@ public class OfflineMode extends AbstractExtension {
      * Note, that the normal session lifetime is still respected although
      * persistent cookies are in use.
      * 
-     * @param persistentCookie
+     * @param persistentSessionCookie
      *            true if persistent session cookies should be used
      */
     public void setPersistentSessionCookie(boolean persistentSessionCookie) {
