@@ -1,6 +1,6 @@
 package com.vaadin.addon.touchkit.offlinetest;
 
-import com.vaadin.addon.touchkit.rootextensions.OfflineModeSettings;
+import com.vaadin.addon.touchkit.extensions.OfflineMode;
 import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.VaadinRequest;
@@ -13,13 +13,14 @@ import com.vaadin.ui.VerticalLayout;
 @Theme("base")
 public class OfflineTest extends UI {
 
-    private OfflineModeSettings offline;
+    private OfflineMode offline;
     private int times = 0;
 
     @Override
     protected void init(VaadinRequest request) {
-        offline = new OfflineModeSettings();
+        offline = new OfflineMode();
         offline.setPersistentSessionCookie(true);
+        offline.setOfflineModeEnabled(true);
         offline.extend(this);
 
         buildUi();

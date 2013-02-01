@@ -8,14 +8,14 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
-import com.vaadin.addon.touchkit.gwt.client.TouchKitOfflineApp;
-import com.vaadin.addon.touchkit.gwt.client.VerticalComponentGroupWidget;
-import com.vaadin.addon.touchkit.gwt.client.navigation.VNavigationBar;
-import com.vaadin.addon.touchkit.gwt.client.navigation.VNavigationView;
-import com.vaadin.addon.touchkit.gwt.client.vaadincomm.OfflineModeConnector;
+import com.vaadin.addon.touchkit.gwt.client.offlinemode.DefaultOfflineMode;
+import com.vaadin.addon.touchkit.gwt.client.ui.VNavigationBar;
+import com.vaadin.addon.touchkit.gwt.client.ui.VNavigationView;
+import com.vaadin.addon.touchkit.gwt.client.ui.VerticalComponentGroupWidget;
+import com.vaadin.addon.touchkit.gwt.client.vcom.OfflineModeConnector;
 import com.vaadin.client.ui.VButton;
 
-public class OfflineTestApp extends TouchKitOfflineApp implements
+public class OfflineTestApp extends DefaultOfflineMode implements
         RepeatingCommand {
     private VButton goOnlineButton;
     private Label networkStatus;
@@ -43,7 +43,7 @@ public class OfflineTestApp extends TouchKitOfflineApp implements
         navigationView.setNavigationBar(navigationBar);
 
         FlowPanel content = new FlowPanel();
-        navigationView.updateContent(content);
+        navigationView.setContent(content);
 
         Label label = new Label("Offline Mode");
         content.add(label);
@@ -62,7 +62,7 @@ public class OfflineTestApp extends TouchKitOfflineApp implements
         VerticalComponentGroupWidget vVerticalComponentGroup = new VerticalComponentGroupWidget();
         vVerticalComponentGroup
                 .addStyleName("v-touchkit-verticalcomponentgroup");
-        Panel p = (Panel) vVerticalComponentGroup;
+        Panel p = vVerticalComponentGroup;
 
         goOnlineButton = new VButton();
         goOnlineButton.setText("Go online");

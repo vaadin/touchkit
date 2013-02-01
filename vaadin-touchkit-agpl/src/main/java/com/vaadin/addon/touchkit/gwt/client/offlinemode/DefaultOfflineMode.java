@@ -53,7 +53,8 @@ public class DefaultOfflineMode implements OfflineMode {
         active = true;
         activationMessage = event.getActivationMessage();
         overlay = new VOverlay();
-        overlay.setStyleName("v-window v-touchkit-offlinemode");
+        overlay.addStyleName("v-window");
+        overlay.addStyleName("v-touchkit-offlinemode");
         Style style = overlay.getElement().getStyle();
         style.setZIndex(Z_INDEX); // Make sure this is over loading indicator
         flowPanel = new FlowPanel();
