@@ -205,7 +205,7 @@ public class CacheManifestLinker extends AbstractLinker {
         if (file2.isDirectory()) {
             String[] list = file2.list();
             for (String string : list) {
-                doAdd(file2, relativePath + "/" + string, relativeRoot);
+                doAdd(file2, string, relativeRoot + "/" + file2.getName());
             }
         } else {
             addCachedResource(relativeRoot + "/" + relativePath);
