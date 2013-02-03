@@ -4,6 +4,7 @@ import com.google.gwt.core.client.Callback;
 import com.google.gwt.geolocation.client.Geolocation;
 import com.google.gwt.geolocation.client.Position;
 import com.google.gwt.geolocation.client.PositionError;
+import com.google.gwt.geolocation.client.Position.Coordinates;
 import com.vaadin.addon.touchkit.extensions.Geolocator;
 import com.vaadin.client.ServerConnector;
 import com.vaadin.client.communication.RpcProxy;
@@ -24,9 +25,16 @@ public class GeolocatorConnector extends AbstractExtensionConnector {
                 Geolocation.getIfSupported().getCurrentPosition(
                         new Callback<Position, PositionError>() {
                             @Override
-                            public void onSuccess(Position result) {
-                                com.vaadin.addon.touchkit.gwt.client.vcom.Position position = new com.vaadin.addon.touchkit.gwt.client.vcom.Position(
-                                        result);
+                            public void onSuccess(Position r) {
+                                com.vaadin.addon.touchkit.gwt.client.vcom.Position position = new com.vaadin.addon.touchkit.gwt.client.vcom.Position();
+                                    Coordinates c = r.getCoordinates();
+                                    position.setLatitude(c.getLatitude());
+                                    position.setLongitude(c.getLongitude());
+                                    position.setAccuracy(c.getAccuracy());
+                                    position.setAltitude(c.getAltitude());
+                                    position.setAltitudeAccuracy(c.getAltitudeAccuracy());
+                                    position.setHeading(c.getHeading());
+                                    position.setSpeed(c.getSpeed());
                                 rpc.onGeolocationSuccess(callbackId, position);
                             }
 

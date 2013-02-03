@@ -18,17 +18,6 @@ public class Position implements Serializable {
     public Position() {
     }
     
-    public Position(com.google.gwt.geolocation.client.Position r) {
-        Coordinates c = r.getCoordinates();
-        latitude = c.getLatitude();
-        longitude = c.getLongitude();
-        accuracy = c.getAccuracy();
-        altitude = c.getAltitude();
-        altitudeAccuracy = c.getAltitudeAccuracy();
-        heading = c.getHeading();
-        speed  = c.getSpeed();
-    }
-
     public double getLatitude() {
         return latitude;
     }
