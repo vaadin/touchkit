@@ -72,10 +72,14 @@ public class TabBarTest extends AbstractTouchKitIntegrationTest {
 
             lastTab = tab;
         }
+        
+        bar.setHeight("400px");
+        bar.setWidth("320px");
 
         addComponent(removeTab);
         addComponent(setSelected);
         addComponent(bar);
+        
     }
 
 }
