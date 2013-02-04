@@ -1138,6 +1138,11 @@
 	padding: 0;
 }
 
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button:active .v-button-wrap,
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button:focus .v-button-wrap {
+    background-image:none;
+}
+
 .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-caption {
 	color: inherit;
 	font-size: 10px;
