@@ -391,6 +391,15 @@
 	border-radius:0;
 }
 
+.v-touchkit-horizontalbuttongroup .v-button:focus,
+.v-touchkit-horizontalbuttongroup .v-button:active,
+.v-touchkit-horizontalbuttongroup .v-button.v-pressed {
+    padding: 0px;
+}
+
+.v-touchkit-horizontalbuttongroup .v-button:focus:first-child,
+.v-touchkit-horizontalbuttongroup .v-button:active:first-child,
+.v-touchkit-horizontalbuttongroup .v-button.v-pressed:first-child,
 .v-touchkit-horizontalbuttongroup .v-button:first-child {
 	border-left: none;
 	border-top-left-radius: 4px;
