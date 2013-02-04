@@ -21,6 +21,7 @@ import com.google.gwt.i18n.client.DateTimeFormat.PredefinedFormat;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.vaadin.client.BrowserInfo;
@@ -33,8 +34,7 @@ import com.vaadin.client.ui.VOverlay;
  */
 public class DatePicker extends SimplePanel
 implements
-HasValueChangeHandlers<java.util.Date>, ValueChangeHandler<Date>,
-ClickHandler {
+HasValueChangeHandlers<java.util.Date>, ClickHandler {
 
     private static final String CLASSNAME = "v-touchkit-datepicker";
     private static final String POPOVER_CLASSNAME = "v-touchkit-datepopover";
@@ -318,16 +318,38 @@ ClickHandler {
     }
 
     protected class CalendarOverlay extends VOverlay implements
-    HasValueChangeHandlers<java.util.Date> {
+    HasValueChangeHandlers<java.util.Date>, ClickHandler {
 
         private com.google.gwt.user.datepicker.client.DatePicker calendarWidget = null;
+        private final VButton okButton;
+        private final VButton cancelButton;
+        private final Resolution resolution;
 
         public CalendarOverlay(Resolution resolution) {
 
+            this.resolution = resolution;
             setAutoHideEnabled(true);
 
+            FlowPanel panel = new FlowPanel();
+            add(panel);
+
             calendarWidget = new com.google.gwt.user.datepicker.client.DatePicker();
-            add(calendarWidget);
+            panel.add(calendarWidget);
+
+            okButton = new VButton();
+            okButton.addStyleName("v-touchkit-date-ok");
+            okButton.setHtml("<div class=\"v-touchkit-ok-image\">&nbsp;</div>");
+            panel.add(okButton);
+            okButton.setWidth("45%");
+            okButton.addClickHandler(CalendarOverlay.this);
+
+            cancelButton = new VButton();
+            cancelButton.addStyleName("v-touchkit-date-cancel");
+            cancelButton
+            .setHtml("<div class=\"v-touchkit-cancel-image\">&nbsp;</div>");
+            panel.add(cancelButton);
+            cancelButton.setWidth("45%");
+            cancelButton.addClickHandler(CalendarOverlay.this);
 
             addStyleName(POPOVER_CLASSNAME);
 
@@ -339,7 +361,7 @@ ClickHandler {
         @Override
         public HandlerRegistration addValueChangeHandler(
                 ValueChangeHandler<Date> handler) {
-            return calendarWidget.addValueChangeHandler(handler);
+            return addHandler(handler, ValueChangeEvent.getType());
         }
 
         public void setDate(Date date) {
@@ -347,8 +369,19 @@ ClickHandler {
             calendarWidget.setCurrentMonth(date);
         }
 
-        public Date getCurrentMonth() {
-            return calendarWidget.getCurrentMonth();
+        @Override
+        public void onClick(ClickEvent event) {
+            VButton button = (VButton) event.getSource();
+            if (button == okButton) {
+                Date value = calendarWidget.getValue();
+                if (resolution == Resolution.MONTH) {
+                    value = calendarWidget.getCurrentMonth();
+                }
+                ValueChangeEvent.fire(CalendarOverlay.this, value);
+                this.hide();
+            } else if (button == cancelButton) {
+                this.hide(false);
+            }
         }
 
     }
@@ -357,19 +390,24 @@ ClickHandler {
         closeCalendar();
 
         overlay = new CalendarOverlay(resolution);
-        overlay.addValueChangeHandler(this);
-        overlay.showRelativeTo(this);
+        // overlay.showRelativeTo(this);
+        overlay.center();
         if (date != null) {
             overlay.setDate(date);
         }
+
+        overlay.addValueChangeHandler(new ValueChangeHandler<Date>() {
+
+            @Override
+            public void onValueChange(ValueChangeEvent<Date> event) {
+                setDate(event.getValue(), true, true);
+            }
+        });
 
         overlay.addCloseHandler(new CloseHandler<PopupPanel>() {
 
             @Override
             public void onClose(CloseEvent<PopupPanel> event) {
-                if (resolution == Resolution.MONTH) {
-                    setDate(overlay.getCurrentMonth(), true, true);
-                }
                 overlayClosed = new Date().getTime();
                 overlay = null;
             }
@@ -379,17 +417,9 @@ ClickHandler {
 
     protected void closeCalendar() {
         if (overlay != null) {
-            overlay.hide();
+            overlay.hide(true);
             overlay = null;
         }
-    }
-
-    @Override
-    public void onValueChange(ValueChangeEvent<Date> event) {
-        if (backUpWidget != null && !event.getValue().equals(date)) {
-            setDate(event.getValue(), true, true);
-        }
-        closeCalendar();
     }
 
     @Override

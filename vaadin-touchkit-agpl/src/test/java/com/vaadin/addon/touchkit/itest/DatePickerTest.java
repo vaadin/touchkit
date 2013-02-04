@@ -51,10 +51,14 @@ public class DatePickerTest extends AbstractTouchKitIntegrationTest {
         pickerALabel.setCaption("Value sent by client");
         addComponent(pickerALabel);
 
+        HorizontalLayout optionsLayout = new HorizontalLayout();
+        optionsLayout.setCaption("Options");
+        addComponent(optionsLayout);
+
         CheckBox cbox = new CheckBox("Use native");
         cbox.setImmediate(true);
         cbox.setValue(pickerA.isUseNative());
-        addComponent(cbox);
+        optionsLayout.addComponent(cbox);
         cbox.addValueChangeListener(new ValueChangeListener() {
 
             @Override
@@ -65,6 +69,7 @@ public class DatePickerTest extends AbstractTouchKitIntegrationTest {
         });
 
         HorizontalLayout buttonLayout = new HorizontalLayout();
+        buttonLayout.setCaption("Set date value");
         addComponent(buttonLayout);
         buttonLayout.addComponent(new Button("1982-10-25", dateButtonListener));
         buttonLayout.addComponent(new Button("2011-02-11", dateButtonListener));

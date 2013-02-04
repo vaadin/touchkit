@@ -2038,6 +2038,7 @@
 
 .v-touchkit-datepopover .gwt-DatePicker {
 	width: 100%;
+	margin-bottom: 20px;
 }
 
 .v-touchkit-datepopover .datePickerMonthSelector {
@@ -2104,6 +2105,31 @@
 	opacity: 0.5;
 }
 
+.v-touchkit-date-ok .v-button-caption, .v-touchkit-date-cancel .v-button-caption {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+
+.v-touchkit-date-cancel {
+    float: right;
+}
+
 .v-touchkit-datepopover-hidedays .datePickerDays {
 	display: none;
+}
+
+.v-touchkit-ok-image, .v-touchkit-cancel-image {
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+}
+
+@sprite .v-touchkit-ok-image {
+	gwt-image: "dateOkSymbol";
+}
+
+@sprite .v-touchkit-cancel-image {
+	gwt-image: "dateCancelSymbol";
 }
