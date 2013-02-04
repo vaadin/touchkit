@@ -390,6 +390,7 @@ HasValueChangeHandlers<java.util.Date>, ClickHandler {
         closeCalendar();
 
         overlay = new CalendarOverlay(resolution);
+        overlay.setOwner(DatePicker.this);
         // overlay.showRelativeTo(this);
         overlay.center();
         if (date != null) {
