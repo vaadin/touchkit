@@ -1127,6 +1127,7 @@
 .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button {
 	padding: 3px;
 	height: 42px;
+    position: relative;
 }
 
 .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-wrap {
@@ -1149,8 +1150,10 @@
 	font-family: "Helvetica Neue", Helvetica, Arial, Tahoma, Verdana, sans-serif;
 	display: block;
 	margin: 3px 0 0 0;
-	position: static;
-	width: auto;
+	position: absolute;
+    bottom: 2px;
+    left: 0;
+	width: 100%;
 	height: auto;
 	border-radius: 0;
 	text-indent: 0;
@@ -1159,7 +1162,7 @@
 }
 
 .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button .v-icon {
-	margin: 0 0 -7px 0; /* Compensate the space consumed by icon as caption is positioned with margin */
+	margin: 0 0 -3px 0; /* Compensate the space consumed by icon as caption is positioned with margin */
 }
 
 .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-wrap:before {
