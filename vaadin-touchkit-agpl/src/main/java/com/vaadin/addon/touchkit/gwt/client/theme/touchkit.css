@@ -1762,6 +1762,22 @@
 	-webkit-box-shadow: none;
 }
 
+.v-touchkit-componentgroup-row .v-caption {
+    margin: listLayoutMargin 0;
+}
+
+.v-tk .v-ui .v-touchkit-componentgroup-row .v-touchkit-componentgroup-cell > * {
+    margin: listLayoutMargin 0;
+}
+
+.v-tk .v-ui .v-touchkit-componentgroup-row .v-touchkit-componentgroup-cell > .v-select-optiongroup {
+    margin: 0;
+}
+
+.v-touchkit-componentgroup-cell > .v-touchkit-navbutton {
+    padding: 0px;
+}
+
 .v-touchkit-verticalcomponentgroup .v-filterselect>input {
 	color: #4e64a1;
 	/*padding-top: 10px;*/
