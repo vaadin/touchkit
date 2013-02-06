@@ -6,21 +6,24 @@ import java.util.Collection;
 
 import com.vaadin.addon.touchkit.itest.oldtests.NavPanelTestWithViews;
 import com.vaadin.annotations.Theme;
+import com.vaadin.annotations.Title;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.AbstractComponentContainer;
+import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;
-import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.Table.ColumnGenerator;
 import com.vaadin.ui.UI;
+import com.vaadin.ui.VerticalLayout;
 
 @Theme("base")
+@Title("TouchKit test app")
 public class TouchkitTestUI extends UI {
 
     @Override
@@ -58,11 +61,6 @@ public class TouchkitTestUI extends UI {
             }
         }
 
-        Label label = new Label(
-                "TouchKit test server, get test by adding its name to url, eg: Selects or subpackage.FooBar");
-        addComponent(label);
-        addComponent(new Label("TODO add list of available tests here"));
-
         File itestroot = new File("../vaadin-touchkit-agpl/src/test/java/"
                 + getClass().getPackage().getName().replace(".", "/")
                 + "/itest");
@@ -98,13 +96,20 @@ public class TouchkitTestUI extends UI {
             public void itemClick(ItemClickEvent event) {
                 Class<?> itemId = (Class<?>) event.getItemId();
                 String canonicalName = itemId.getCanonicalName();
-                Page.getCurrent().open(canonicalName, null);
+                String debug = debugmode.getValue() ? "?debug" : "";
+                Page.getCurrent().open(canonicalName + debug, null);
             }
         });
-        addComponent(table);
+        table.setSizeFull();
+        addComponent(debugmode);
+        debugmode.setValue(true);
+        content.addComponent(table);
+        content.setExpandRatio(table, 1);
     }
+    
+    CheckBox debugmode = new CheckBox("Open in debug");
 
-    CssLayout content = new CssLayout();
+    VerticalLayout content = new VerticalLayout();
 
     private void addComponent(Component component) {
         content.setSizeFull();
