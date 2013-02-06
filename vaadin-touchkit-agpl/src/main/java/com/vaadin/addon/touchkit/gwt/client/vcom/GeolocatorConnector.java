@@ -7,6 +7,8 @@ import com.google.gwt.geolocation.client.PositionError;
 import com.google.gwt.geolocation.client.Position.Coordinates;
 import com.vaadin.addon.touchkit.extensions.Geolocator;
 import com.vaadin.client.ServerConnector;
+import com.vaadin.client.Util;
+import com.vaadin.client.VConsole;
 import com.vaadin.client.communication.RpcProxy;
 import com.vaadin.client.extensions.AbstractExtensionConnector;
 import com.vaadin.shared.ui.Connect;
@@ -27,14 +29,26 @@ public class GeolocatorConnector extends AbstractExtensionConnector {
                             @Override
                             public void onSuccess(Position r) {
                                 com.vaadin.addon.touchkit.gwt.client.vcom.Position position = new com.vaadin.addon.touchkit.gwt.client.vcom.Position();
-                                    Coordinates c = r.getCoordinates();
-                                    position.setLatitude(c.getLatitude());
-                                    position.setLongitude(c.getLongitude());
-                                    position.setAccuracy(c.getAccuracy());
-                                    position.setAltitude(c.getAltitude());
-                                    position.setAltitudeAccuracy(c.getAltitudeAccuracy());
-                                    position.setHeading(c.getHeading());
-                                    position.setSpeed(c.getSpeed());
+                                Coordinates c = r.getCoordinates();
+                                position.setLatitude(c.getLatitude());
+                                position.setLongitude(c.getLongitude());
+                                position.setAccuracy(c.getAccuracy());
+                                try {
+                                    position.setAltitude(safeget("altitude", c));
+                                } catch (Exception e) {
+                                }
+                                try {
+                                    position.setAltitude(safeget("altitudeAccuracy", c));
+                                } catch (Exception e) {
+                                }
+                                try {
+                                    position.setAltitude(safeget("heading", c));
+                                } catch (Exception e) {
+                                }
+                                try {
+                                    position.setAltitude(safeget("speed", c));
+                                } catch (Exception e) {
+                                }
                                 rpc.onGeolocationSuccess(callbackId, position);
                             }
 
@@ -52,5 +66,10 @@ public class GeolocatorConnector extends AbstractExtensionConnector {
     protected void extend(ServerConnector target) {
         // TODO WTF should be done here??
     }
+
+    private static native double safeget(String string, Coordinates c)
+    /*-{
+        return c[string]/1;
+    }-*/;
 
 }
