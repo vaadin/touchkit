@@ -61,7 +61,9 @@ public class MoreButtonsInComponentGroups extends AbstractTouchKitIntegrationTes
         verticalComponentGroup.addComponent(horizontalGroup);
 
         horizontalGroup = getHorizontalGroup();
-        horizontalGroup.addComponent(new Button("Third"));
+        Button c = new Button("Third");
+        c.setStyleName(GREEN);
+        horizontalGroup.addComponent(c);
         horizontalGroup.setWidth("300px");
         Iterator<Component> componentIterator = horizontalGroup
                 .getComponentIterator();
@@ -87,10 +89,8 @@ public class MoreButtonsInComponentGroups extends AbstractTouchKitIntegrationTes
         Resource mailImage = new ClassResource(getClass(),"mail.png");
         
         HorizontalButtonGroup horizontalComponentGroup = new HorizontalButtonGroup();
-        
-        
-        
-        Button c = new Button();
+                
+        c = new Button();
         c.setIcon(mailImage);
         horizontalComponentGroup.addComponent(c);
         
@@ -98,7 +98,7 @@ public class MoreButtonsInComponentGroups extends AbstractTouchKitIntegrationTes
         c.setIcon(mailImage);
         horizontalComponentGroup.addComponent(c);
         
-        c = new Button("Tggl");
+        c = new Button("T");
         c.addClickListener(new ClickListener() {
             @Override
             public void buttonClick(ClickEvent event) {
@@ -117,6 +117,7 @@ public class MoreButtonsInComponentGroups extends AbstractTouchKitIntegrationTes
 
         c = new Button();
         c.setIcon(mailImage);
+        c.setStyleName(GREEN);
 
         navigationView.setLeftComponent(c);
 
