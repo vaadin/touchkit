@@ -33,12 +33,17 @@ public class GeolocatorConnector extends AbstractExtensionConnector {
                                 position.setLatitude(c.getLatitude());
                                 position.setLongitude(c.getLongitude());
                                 position.setAccuracy(c.getAccuracy());
+                                // TODO This should be worked around in GWT,
+                                // without this hack we'll get some sort of
+                                // reference in ios that gets set to undefined at some
+                                // point.
                                 try {
                                     position.setAltitude(safeget("altitude", c));
                                 } catch (Exception e) {
                                 }
                                 try {
-                                    position.setAltitude(safeget("altitudeAccuracy", c));
+                                    position.setAltitude(safeget(
+                                            "altitudeAccuracy", c));
                                 } catch (Exception e) {
                                 }
                                 try {
