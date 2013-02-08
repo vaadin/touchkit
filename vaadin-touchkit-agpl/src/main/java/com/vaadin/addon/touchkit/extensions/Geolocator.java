@@ -12,15 +12,17 @@ import com.vaadin.server.Extension;
 import com.vaadin.ui.UI;
 
 /**
- * TODO class javadoc 
- * 
- * FIXME give callbacks ids, save to map -> better fuctioning
- * with multiple simultanous requests.
- * 
+ * Geolocator extension can be used to detect clients geographical location,
+ * direction, altitude etc.
+ * <p>
+ * Under the hood Geolocator is a UI extension and should be used via static
+ * {@link #detect(PositionCallback)} method. As the detection happens on the
+ * client side, detection is asynchronous and result is passed to given
+ * {@link PositionCallback}.
  */
 @SuppressWarnings("serial")
 public class Geolocator extends AbstractExtension {
-    private Map<Integer,PositionCallback> callbacks = new HashMap<Integer, PositionCallback>();
+    private Map<Integer, PositionCallback> callbacks = new HashMap<Integer, PositionCallback>();
 
     /**
      * Detects the current geographic location of the client. The detection
@@ -67,11 +69,12 @@ public class Geolocator extends AbstractExtension {
      */
     private void detectCurrentPosition(PositionCallback callback) {
         int callbackid = 0;
-        while(callbacks.containsKey(callbackid)) {
+        while (callbacks.containsKey(callbackid)) {
             callbackid = new Random().nextInt();
         }
         callbacks.put(callbackid, callback);
-        getRpcProxy(GeolocatorClientRpc.class).detectCurrentPosition(callbackid);
+        getRpcProxy(GeolocatorClientRpc.class)
+                .detectCurrentPosition(callbackid);
     }
 
 }
