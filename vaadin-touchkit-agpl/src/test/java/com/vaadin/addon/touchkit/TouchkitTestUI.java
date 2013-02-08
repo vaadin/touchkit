@@ -8,6 +8,8 @@ import com.vaadin.addon.touchkit.itest.oldtests.NavPanelTestWithViews;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.data.util.BeanItemContainer;
+import com.vaadin.event.FieldEvents.TextChangeEvent;
+import com.vaadin.event.FieldEvents.TextChangeListener;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.server.Page;
@@ -16,9 +18,11 @@ import com.vaadin.ui.AbstractComponentContainer;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.Table.ColumnGenerator;
+import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
@@ -69,7 +73,7 @@ public class TouchkitTestUI extends UI {
         addTests(getClass().getPackage().getName() + ".itest", itestroot, tests);
 
         Table table = new Table();
-        BeanItemContainer<Class<? extends ComponentContainer>> beanItemContainer = new BeanItemContainer<Class<? extends ComponentContainer>>(
+        final BeanItemContainer<Class<? extends ComponentContainer>> beanItemContainer = new BeanItemContainer<Class<? extends ComponentContainer>>(
                 tests);
         table.setContainerDataSource(beanItemContainer);
         table.setVisibleColumns(new Object[] { "simpleName" });
@@ -101,12 +105,26 @@ public class TouchkitTestUI extends UI {
             }
         });
         table.setSizeFull();
-        addComponent(debugmode);
         debugmode.setValue(true);
+        HorizontalLayout options = new HorizontalLayout();
+        options.addComponent(debugmode);
+        TextField textField = new TextField();
+        textField.setInputPrompt("Filter");
+        textField.addTextChangeListener(new TextChangeListener() {
+            
+            @Override
+            public void textChange(TextChangeEvent event) {
+                
+                beanItemContainer.removeAllContainerFilters();
+                beanItemContainer.addContainerFilter("simpleName", event.getText(), true, false);
+            }
+        });
+        options.addComponent(textField);
+        addComponent(options);
         content.addComponent(table);
         content.setExpandRatio(table, 1);
     }
-    
+
     CheckBox debugmode = new CheckBox("Open in debug");
 
     VerticalLayout content = new VerticalLayout();
