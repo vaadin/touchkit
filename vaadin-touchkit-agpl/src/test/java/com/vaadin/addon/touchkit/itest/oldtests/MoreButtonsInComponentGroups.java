@@ -9,6 +9,8 @@ import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.server.ClassResource;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
@@ -16,9 +18,11 @@ import com.vaadin.ui.TextField;
 
 public class MoreButtonsInComponentGroups extends AbstractTouchKitIntegrationTest {
 
+    private static final String GREEN = "green";
+
     public MoreButtonsInComponentGroups() {
         NavigationView navigationView = new NavigationView();
-        navigationView.setCaption("Buttons in various places");
+        navigationView.setCaption("Buttons buttons buttons");
 
         CssLayout l = new CssLayout();
 
@@ -83,6 +87,9 @@ public class MoreButtonsInComponentGroups extends AbstractTouchKitIntegrationTes
         Resource mailImage = new ClassResource(getClass(),"mail.png");
         
         HorizontalButtonGroup horizontalComponentGroup = new HorizontalButtonGroup();
+        
+        
+        
         Button c = new Button();
         c.setIcon(mailImage);
         horizontalComponentGroup.addComponent(c);
@@ -90,8 +97,23 @@ public class MoreButtonsInComponentGroups extends AbstractTouchKitIntegrationTes
         c = new Button("Up");
         c.setIcon(mailImage);
         horizontalComponentGroup.addComponent(c);
+        
+        c = new Button("Tggl");
+        c.addClickListener(new ClickListener() {
+            @Override
+            public void buttonClick(ClickEvent event) {
+                Button b = event.getButton();
+                if(GREEN.equals(b.getStyleName())) {
+                    b.setStyleName(null);
+                } else {
+                    b.setStyleName(GREEN);
+                }
+            }
+        });
+        c.addStyleName(GREEN);
+        horizontalComponentGroup.addComponent(c);
+        
         navigationView.setRightComponent(horizontalComponentGroup);
-        horizontalComponentGroup.setCaption("Horizontal straight to layout");
 
         c = new Button();
         c.setIcon(mailImage);
