@@ -2,8 +2,6 @@ package com.vaadin.addon.touchkit.gwt.client.vcom;
 
 import java.io.Serializable;
 
-import com.google.gwt.geolocation.client.Position.Coordinates;
-
 @SuppressWarnings("serial")
 public class Position implements Serializable {
 
