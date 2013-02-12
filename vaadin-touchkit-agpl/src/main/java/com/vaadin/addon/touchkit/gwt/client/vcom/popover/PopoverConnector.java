@@ -105,7 +105,7 @@ public class PopoverConnector extends WindowConnector implements
                         }
                     });
 
-                    if (getWidget().isSmallScreenDevice()) {
+                    if (VPopover.isSmallScreenDevice()) {
                         getWidget().slideIn();
                     } else if (getState().getRelatedComponent() != null) {
                         getWidget().showNextTo(
