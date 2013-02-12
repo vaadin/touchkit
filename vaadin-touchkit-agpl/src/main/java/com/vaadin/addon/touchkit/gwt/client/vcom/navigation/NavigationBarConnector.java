@@ -1,6 +1,9 @@
 package com.vaadin.addon.touchkit.gwt.client.vcom.navigation;
 
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.core.shared.GWT;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.addon.touchkit.gwt.client.ui.VNavigationBar;
 import com.vaadin.client.ComponentConnector;
@@ -14,13 +17,27 @@ import com.vaadin.shared.ui.Connect;
 @Connect(com.vaadin.addon.touchkit.ui.NavigationBar.class)
 public class NavigationBarConnector extends AbstractComponentContainerConnector {
 
-    private ElementResizeListener resizeListener = new ElementResizeListener() {
-
+    private final ElementResizeListener resizeListener = new ElementResizeListener() {
         @Override
         public void onElementResize(ElementResizeEvent e) {
-            NavigationBarConnector.this.getWidget().avoidCaptionOverlap();
+            if(!alreadyLayouted) {
+                NavigationBarConnector.this.getWidget().avoidCaptionOverlap();
+                Scheduler.get().scheduleFinally(doResetLayouting);
+                alreadyLayouted = true;
+            }
         }
     };
+
+    private boolean alreadyLayouted;
+    
+    private ScheduledCommand doResetLayouting = new ScheduledCommand() {
+        @Override
+        public void execute() {
+            alreadyLayouted = false;
+        }
+    };
+
+    Element[] listenedElements = new Element[3];
 
     @Override
     public boolean delegateCaptionHandling() {
@@ -48,6 +65,21 @@ public class NavigationBarConnector extends AbstractComponentContainerConnector 
     }
 
     @Override
+    protected void init() {
+        super.init();
+        listenedElements[0] = getWidget().getElement();
+        listenedElements[1] = (Element) listenedElements[0]
+                .getFirstChildElement().getNextSiblingElement();
+        listenedElements[2] = (Element) listenedElements[1]
+                .getNextSiblingElement();
+        for (Element element : listenedElements) {
+            getLayoutManager()
+                    .addElementResizeListener(element, resizeListener);
+        }
+
+    }
+
+    @Override
     public void onStateChanged(StateChangeEvent stateChangeEvent) {
         super.onStateChanged(stateChangeEvent);
 
@@ -57,17 +89,12 @@ public class NavigationBarConnector extends AbstractComponentContainerConnector 
             Widget leftWidget = ((ComponentConnector) getState()
                     .getLeftComponent()).getWidget();
             getWidget().setLeftWidget(leftWidget);
-            getLayoutManager().addElementResizeListener(
-                    leftWidget.getElement(), resizeListener);
         }
         if (getState().getRightComponent() != null) {
             Widget rightWidget = ((ComponentConnector) getState()
                     .getRightComponent()).getWidget();
             getWidget().setRightWidget(rightWidget);
-            getLayoutManager().addElementResizeListener(
-                    rightWidget.getElement(), resizeListener);
         }
-        getWidget().avoidCaptionOverlap();
     }
 
     @Override
@@ -75,4 +102,12 @@ public class NavigationBarConnector extends AbstractComponentContainerConnector 
             ConnectorHierarchyChangeEvent connectorHierarchyChangeEvent) {
     }
 
+    @Override
+    public void onUnregister() {
+        super.onUnregister();
+        for (Element element : listenedElements) {
+            getLayoutManager().removeElementResizeListener(element,
+                    resizeListener);
+        }
+    }
 }

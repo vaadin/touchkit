@@ -2,6 +2,7 @@ package com.vaadin.addon.touchkit.gwt.client.ui;
 
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.user.client.ui.ComplexPanel;
@@ -16,14 +17,15 @@ public class VNavigationBar extends ComplexPanel {
     private DivElement leftComponentElement = Document.get().createDivElement();
     private Widget leftComponent;
     private Widget rightComponent;
-    private boolean rendering;
-    private int captionWidth;
-
+    private SpanElement captionText;
+    
     public VNavigationBar() {
         setElement(Document.get().createDivElement());
         setStyleName(CLASSNAME);
         getElement().appendChild(caption);
         caption.setClassName(CLASSNAME + "-caption");
+        captionText = Document.get().createSpanElement();
+        caption.appendChild(captionText);
         rightComponentElement.setClassName(CLASSNAME + "-right");
         getElement().appendChild(rightComponentElement);
         leftComponentElement.setClassName(CLASSNAME + "-left");
@@ -31,8 +33,7 @@ public class VNavigationBar extends ComplexPanel {
     }
 
     public void setCaption(String stringAttribute) {
-        caption.setInnerText(stringAttribute);
-        captionWidth = caption.getOffsetWidth(); // cache the caption size
+        captionText.setInnerText(stringAttribute);
     }
 
     /**
@@ -41,6 +42,8 @@ public class VNavigationBar extends ComplexPanel {
      * with long caption and big right/left component.
      */
     public void avoidCaptionOverlap() {
+        final int captionWidth = captionText.getOffsetWidth(); // cache the caption size
+
         int freeLeftCoordinate = leftComponent != null ? leftComponentElement
                 .getAbsoluteRight() - getAbsoluteLeft() : 0;
 
@@ -99,10 +102,6 @@ public class VNavigationBar extends ComplexPanel {
     @Override
     public void setWidth(String width) {
         super.setWidth(width);
-        // This is just to make resizing to work for development purposes
-        if (!rendering) {
-            avoidCaptionOverlap();
-        }
     }
 
     private void makeCaptionAbsolutelyPositioned() {
