@@ -32,6 +32,22 @@ public class NavigationBarTest extends AbstractTouchKitIntegrationTest {
         });
         view.setRightComponent(update);
         view.setLeftComponent(leftButton);
+        
+        Button button = new Button("Long caption on big right");
+        button.addClickListener(new ClickListener() {
+            @Override
+            public void buttonClick(ClickEvent event) {
+                NavigationView navview = createView("Long caption with big right", "d", false);
+                makeSmallTabletSize(navview);
+                Button button2 = new Button("Me shifts caption");
+                navview.setLeftComponent(button2);
+                removeAllComponents();
+                addComponent(navview);
+            }
+        });
+        makeSmallTabletSize(view);
+        
+        view.setContent(button);
 
         return navman;
     }
