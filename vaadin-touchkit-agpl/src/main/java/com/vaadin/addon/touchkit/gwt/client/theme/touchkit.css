@@ -2118,6 +2118,11 @@
     font-weight: bold;
 }
 
+.v-touchkit-datepopover-noprev .datePickerPreviousButton,
+.v-touchkit-datepopover-nonext .datePickerNextButton {
+	opacity: 0.2;
+}
+
 .v-touchkit-datepopover .datePickerDay:focus {
 	border-width: 0px;
 }
@@ -2137,6 +2142,11 @@
 }
 .v-touchkit-datepopover .datePickerDayIsFiller {
 	opacity: 0.5;
+}
+
+.v-touchkit-datepopover .datePickerDayIsDisabled {
+    display: none;
+    text-decoration: line-through;
 }
 
 .v-touchkit-date-ok .v-button-caption, .v-touchkit-date-cancel .v-button-caption {

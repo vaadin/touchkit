@@ -71,6 +71,9 @@ implements ValueChangeHandler<java.util.Date> {
         getWidget().setUseNative(getState().useNative);
         getWidget().setResolution(convertResolution(getState().resolution));
         getWidget().setDate(getState().date);
+
+        getWidget().setMin(getState().min);
+        getWidget().setMax(getState().max);
     }
 
     @Override

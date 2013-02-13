@@ -21,13 +21,11 @@ import com.google.gwt.i18n.client.DateTimeFormat.PredefinedFormat;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.vaadin.client.BrowserInfo;
 import com.vaadin.client.VConsole;
 import com.vaadin.client.ui.VButton;
-import com.vaadin.client.ui.VOverlay;
 
 /**
  * DatePicker widget. Uses HTML5 date input fields to ask time values from user.
@@ -37,12 +35,13 @@ implements
 HasValueChangeHandlers<java.util.Date>, ClickHandler {
 
     private static final String CLASSNAME = "v-touchkit-datepicker";
-    private static final String POPOVER_CLASSNAME = "v-touchkit-datepopover";
     private final static String MONTH_FORMAT = "yyyy-MM";
     private final static String DAY_FORMAT = "yyyy-MM-dd";
     private final static String TIME_MINUTES_FORMAT = "yyyy-MM-dd'T'HH:mm'Z'";
     private final static String TIME_SECONDS_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'";
     private Date date;
+    private Date min;
+    private Date max;
     private InputElement input;
     private Resolution resolution;
 
@@ -118,7 +117,8 @@ HasValueChangeHandlers<java.util.Date>, ClickHandler {
 
         BrowserInfo info = BrowserInfo.get();
 
-        if (!info.isIOS() && !(info.isAndroid() && info.isChrome())) {
+        // if (!info.isIOS() && !(info.isAndroid() && info.isChrome())) {
+        if (!info.isIOS() && !info.isChrome()) {
             VConsole.log("DateField support undefined for: "
                     + BrowserInfo.getBrowserString());
             return false;
@@ -244,7 +244,6 @@ HasValueChangeHandlers<java.util.Date>, ClickHandler {
                 updateValue(date);
             }
             if (fire) {
-                VConsole.log("FIRE!");
                 ValueChangeEvent.fire(DatePicker.this, newDate);
             }
         } else {
@@ -288,6 +287,12 @@ HasValueChangeHandlers<java.util.Date>, ClickHandler {
             }
             if (input == null) {
                 input = Document.get().createTextInputElement();
+                if (min != null) {
+                    input.setAttribute("min", dateToString(min));
+                }
+                if (max != null) {
+                    input.setAttribute("max", dateToString(max));
+                }
                 getElement().appendChild(input);
                 com.google.gwt.user.client.Element userElement = (com.google.gwt.user.client.Element) Element
                         .as(input);
@@ -317,79 +322,10 @@ HasValueChangeHandlers<java.util.Date>, ClickHandler {
         }
     }
 
-    protected class CalendarOverlay extends VOverlay implements
-    HasValueChangeHandlers<java.util.Date>, ClickHandler {
-
-        private com.google.gwt.user.datepicker.client.DatePicker calendarWidget = null;
-        private final VButton okButton;
-        private final VButton cancelButton;
-        private final Resolution resolution;
-
-        public CalendarOverlay(Resolution resolution) {
-
-            this.resolution = resolution;
-            setAutoHideEnabled(true);
-
-            FlowPanel panel = new FlowPanel();
-            add(panel);
-
-            calendarWidget = new com.google.gwt.user.datepicker.client.DatePicker();
-            panel.add(calendarWidget);
-
-            okButton = new VButton();
-            okButton.addStyleName("v-touchkit-date-ok");
-            okButton.setHtml("<div class=\"v-touchkit-ok-image\">&nbsp;</div>");
-            panel.add(okButton);
-            okButton.setWidth("45%");
-            okButton.addClickHandler(CalendarOverlay.this);
-
-            cancelButton = new VButton();
-            cancelButton.addStyleName("v-touchkit-date-cancel");
-            cancelButton
-            .setHtml("<div class=\"v-touchkit-cancel-image\">&nbsp;</div>");
-            panel.add(cancelButton);
-            cancelButton.setWidth("45%");
-            cancelButton.addClickHandler(CalendarOverlay.this);
-
-            addStyleName(POPOVER_CLASSNAME);
-
-            if (resolution == Resolution.MONTH) {
-                addStyleName(POPOVER_CLASSNAME + "-hidedays");
-            }
-        }
-
-        @Override
-        public HandlerRegistration addValueChangeHandler(
-                ValueChangeHandler<Date> handler) {
-            return addHandler(handler, ValueChangeEvent.getType());
-        }
-
-        public void setDate(Date date) {
-            calendarWidget.setValue(date, false);
-            calendarWidget.setCurrentMonth(date);
-        }
-
-        @Override
-        public void onClick(ClickEvent event) {
-            VButton button = (VButton) event.getSource();
-            if (button == okButton) {
-                Date value = calendarWidget.getValue();
-                if (resolution == Resolution.MONTH) {
-                    value = calendarWidget.getCurrentMonth();
-                }
-                ValueChangeEvent.fire(CalendarOverlay.this, value);
-                this.hide();
-            } else if (button == cancelButton) {
-                this.hide(false);
-            }
-        }
-
-    }
-
     protected void openCalendar() {
         closeCalendar();
 
-        overlay = new CalendarOverlay(resolution);
+        overlay = new CalendarOverlay(resolution, min, max);
         overlay.setOwner(DatePicker.this);
         // overlay.showRelativeTo(this);
         overlay.center();
@@ -446,6 +382,44 @@ HasValueChangeHandlers<java.util.Date>, ClickHandler {
         if (this.useNative != useNative) {
             this.useNative = useNative;
             changeResolution(resolution);
+        }
+    }
+
+    /**
+     * Set minimal value accepted from user.
+     * 
+     * @param date
+     */
+    public void setMin(Date date) {
+        this.min = date;
+
+        if (input != null) {
+            if (min != null) {
+                String value = dateToString(min);
+                VConsole.log("Set min attribute to:" + value);
+                input.setAttribute("min", value);
+            } else {
+                input.removeAttribute("min");
+            }
+        }
+    }
+
+    /**
+     * Set maximal value accepted from user.
+     * 
+     * @param date
+     */
+    public void setMax(Date date) {
+        this.max = date;
+
+        if (input != null) {
+            if (max != null) {
+                String value = dateToString(max);
+                VConsole.log("Set max attribute to:" + value);
+                input.setAttribute("max", value);
+            } else {
+                input.removeAttribute("max");
+            }
         }
     }
 

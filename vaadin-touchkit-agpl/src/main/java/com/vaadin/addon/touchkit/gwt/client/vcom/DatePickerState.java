@@ -28,6 +28,8 @@ public class DatePickerState extends AbstractFieldState {
 
     public Resolution resolution;
     public Date date;
+    public Date min;
+    public Date max;
     public boolean useNative = true;
 
 }

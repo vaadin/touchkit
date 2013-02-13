@@ -101,4 +101,60 @@ public class DatePicker extends AbstractField<Date> {
     public boolean isUseNative() {
         return getState().useNative;
     }
+
+    /**
+     * Set minimal value accepted from user. Notice that this is supported only
+     * by some devices in native mode. This function is here for future use.
+     * 
+     * @param min
+     *            Minimal value accepted from user. Null to clear. Minimal value
+     *            must be before maximal value (if defined).
+     */
+    public void setMin(Date min) {
+        if (min != null && getState().max != null) {
+            if (min.after(getState().max)) {
+                throw new IllegalArgumentException("Given minimal value ("
+                        + min.toString() + "), is after maximal value ("
+                        + getState().max.toString() + ")");
+            }
+        }
+        getState().min = min;
+    }
+
+    /**
+     * Get minimal value accepted from user.
+     * 
+     * @return Minimal value accepted from user, null if not define.
+     */
+    public Date getMin() {
+        return getState().min;
+    }
+
+    /**
+     * Set maximal value accepted from user. Notice that this is supported only
+     * by some devices in native mode. This function is here for future use.
+     * 
+     * @param max
+     *            Maximal value accepted from user. Null to clear. Maximal value
+     *            must be after minimal value (if defined).
+     */
+    public void setMax(Date max) {
+        if (max != null && getState().min != null) {
+            if (max.before(getState().min)) {
+                throw new IllegalArgumentException("Given maximal value ("
+                        + max.toString() + "), is before minimal value ("
+                        + getState().min.toString() + ")");
+            }
+        }
+        getState().max = max;
+    }
+
+    /**
+     * Get maximal value accepted from user.
+     * 
+     * @return Maximal value accepted from user, null if not define.
+     */
+    public Date getMax() {
+        return getState().max;
+    }
 }
