@@ -213,14 +213,12 @@
 
 /* Clear Vaadin core theme styles from buttons */
 /* Default view buttons */
-.v-tk .v-button,
-.v-tk .v-button:focus {
+.v-tk .v-button {
 	background: transparent;
 	margin: 0;
 	border: none;
 	width: auto;
 	height: auto;
-	outline: none;
 	display: inline-block;
 	border-radius: listLayoutMargin;
 	background: buttonInsetBackground;
@@ -228,6 +226,9 @@
 	padding: 3px;
 }
 
+.v-tk .v-button:focus {
+	outline: none;
+}
 
 .v-tk .v-button:active,
 .v-tk .v-button.v-pressed {
@@ -273,7 +274,6 @@
 .v-tk .v-button-link .v-button-wrap,
 .v-tk .v-button-link .v-button-caption,
 .v-tk .v-button-link:active,
-.v-tk .v-button-link:focus,
 .v-tk .v-button-link.v-pressed,
 .v-tk .v-nativebutton-link {
 	display: inline-block;
@@ -289,6 +289,10 @@
 	color: #1b699f;
 	line-height: inherit;
 	}
+
+.v-tk .v-button-link:focus {
+	
+}
 
 .v-tk .v-button-link:active .v-button-wrap {
 	background: transparent;
@@ -307,7 +311,6 @@
 
 /* Navbar buttons */
 .v-touchkit-navbar .v-button,
-.v-touchkit-navbar .v-button:focus,
 .v-touchkit-horizontalbuttongroup {
     display: inline-block;
     margin: 0;
@@ -321,6 +324,10 @@
     color: navbarButtonColor;
     text-shadow: navbarButtonTextShadow;
     -webkit-box-shadow: navbarButtonBoxShadow;
+}
+
+.v-touchkit-navbar .v-button:focus {
+	
 }
 
 .v-touchkit-navbar .v-button .v-button-wrap,
@@ -375,7 +382,6 @@
 }
 
 /* Strip some styles from buttons inside a componentgroup */
-.v-touchkit-horizontalbuttongroup .v-button:focus,
 .v-touchkit-horizontalbuttongroup .v-button:active,
 .v-touchkit-horizontalbuttongroup .v-button.v-pressed,
 .v-touchkit-horizontalbuttongroup .v-button {
@@ -389,6 +395,11 @@
 	border-top-left-radius: 0px;
 	border-bottom-left-radius: 0px;
 }
+
+.v-touchkit-horizontalbuttongroup .v-button:focus {
+	
+}
+
 .v-touchkit-horizontalbuttongroup .v-button .v-button-wrap {
 	background:none;
 	border-radius:0;
@@ -600,7 +611,6 @@
 	line-height: 35px;
 }	
 
-.v-touchkit-verticalcomponentgroup .v-touchkit-navbutton:focus,
 .v-touchkit-verticalcomponentgroup .v-touchkit-navbutton:active {
 	background: navButtonGradient;
 	color: #fff;
@@ -626,10 +636,9 @@
 	color: #1b699f;
 	}
 
-.v-touchkit-navbutton:active .v-touchkit-navbutton-desc,
-.v-touchkit-navbutton:focus .v-touchkit-navbutton-desc {
+.v-touchkit-navbutton:active .v-touchkit-navbutton-desc {
 	color: #fff;
-	}
+}
 
 .v-touchkit-navbutton-pill .v-touchkit-navbutton-desc {
 	color: #fff;
@@ -643,7 +652,6 @@
 	-webkit-box-shadow: inset 0 1px 0 rgba(0,0,0,.15);
 	}
 
-.v-touchkit-navbutton-pill:focus .v-touchkit-navbutton-desc,
 .v-touchkit-navbutton-pill:active .v-touchkit-navbutton-desc {
 	background: #fff;
 	color: #5d81ab;
@@ -664,7 +672,6 @@
 	}
 
 @url navArrowWhiteUrl navArrowWhiteImage;
-.v-touchkit-navbutton:focus:after,
 .v-touchkit-navbutton:active:after {
 	background-image: navArrowWhiteUrl;
 	}
@@ -1136,8 +1143,7 @@
 	padding: 0;
 }
 
-.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button:active .v-button-wrap,
-.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button:focus .v-button-wrap {
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button:active .v-button-wrap {
     background-image:none;
 }
 
