@@ -14,7 +14,7 @@ public interface VTouchKitResources extends ClientBundle {
             .create(VTouchKitResources.class);
 
     @NotStrict
-    @Source("theme/touchkit.css")
+    @Source({"theme/base.css","theme/touchkit.css"})
     public CssResource css();
 
     @NotStrict

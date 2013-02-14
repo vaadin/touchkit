@@ -167,6 +167,7 @@
 					<noServer>true</noServer>
 					<soyc>false</soyc>
 					<draftCompile>true</draftCompile>
+					<strict>true</strict>
 					<style>OBF</style>
 					<force>true</force>
 				</configuration>
@@ -388,13 +389,6 @@
 			<artifactId>junit</artifactId>
 			<version>4.10</version>
 			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.reflections</groupId>
-			<artifactId>reflections</artifactId>
-			<version>0.9.8</version>
-			<!-- Used only during widgetset generation -->
 		</dependency>
 
 	</dependencies>

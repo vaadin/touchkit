@@ -213,8 +213,7 @@
 
 /* Clear Vaadin core theme styles from buttons */
 /* Default view buttons */
-.v-tk .v-button {
-	background: transparent;
+.v-button {
 	margin: 0;
 	border: none;
 	width: auto;
@@ -224,23 +223,24 @@
 	background: buttonInsetBackground;
 	-webkit-box-shadow: buttonInsetBoxShadow;
 	padding: 3px;
+	text-align: center;
 }
 
-.v-tk .v-button:focus {
+.v-button:focus {
 	outline: none;
 }
 
-.v-tk .v-button:active,
-.v-tk .v-button.v-pressed {
+.v-button:active,
+.v-button.v-pressed {
 	background: buttonInsetBackground;
 	}
 
-.v-tk .v-button:active .v-button-wrap,
-.v-tk .v-button.v-pressed .v-button-wrap {
+.v-button:active .v-button-wrap,
+.v-button.v-pressed .v-button-wrap {
 	background-image: buttonActiveGradient;
-	}
+}
 
-.v-tk .v-button-caption {
+.v-button-caption {
 	line-height: 37px;
 	color: buttonColor;
 	text-shadow: buttonTextShadow;
@@ -248,7 +248,7 @@
 	font-weight: bold;
 	}
 
-.v-tk .v-button-wrap {
+.v-button-wrap {
 	display: block;
 	border-radius: 7px;
 	background: buttonGradient;
@@ -265,17 +265,13 @@
 	overflow: hidden;
 	}
 
-
-
-
-
 /* Link style buttons */
-.v-tk .v-button-link,
-.v-tk .v-button-link .v-button-wrap,
-.v-tk .v-button-link .v-button-caption,
-.v-tk .v-button-link:active,
-.v-tk .v-button-link.v-pressed,
-.v-tk .v-nativebutton-link {
+.v-button-link,
+.v-button-link .v-button-wrap,
+.v-button-link .v-button-caption,
+.v-button-link:active,
+.v-button-link.v-pressed,
+.v-nativebutton-link {
 	display: inline-block;
 	border-radius: 0;
 	background: transparent;
@@ -290,24 +286,16 @@
 	line-height: inherit;
 	}
 
-.v-tk .v-button-link:focus {
-	
-}
 
-.v-tk .v-button-link:active .v-button-wrap {
+.v-button-link:active .v-button-wrap {
 	background: transparent;
 	}
 
-.v-tk .v-button-link .v-button-caption,
-.v-tk .v-nativebutton-link .v-button-caption {
+.v-button-link .v-button-caption,
+.v-nativebutton-link .v-button-caption {
 	text-decoration: none;
 	line-height: 1;
 	}
-
-
-
-
-
 
 /* Navbar buttons */
 .v-touchkit-navbar .v-button,

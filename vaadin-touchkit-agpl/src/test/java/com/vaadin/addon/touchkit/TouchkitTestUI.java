@@ -26,7 +26,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
-@Theme("base")
+@Theme("touchkit")
 @Title("TouchKit test app")
 public class TouchkitTestUI extends UI {
 

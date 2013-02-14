@@ -12,13 +12,6 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.regex.Pattern;
-
-import org.reflections.Reflections;
-import org.reflections.scanners.ResourcesScanner;
-import org.reflections.util.ClasspathHelper;
-import org.reflections.util.ConfigurationBuilder;
-import org.reflections.util.FilterBuilder;
 
 import com.google.gwt.core.ext.LinkerContext;
 import com.google.gwt.core.ext.TreeLogger;
@@ -52,27 +45,8 @@ public class CacheManifestLinker extends AbstractLinker {
     public CacheManifestLinker() {
         addCachedResource("/");
         addCachedResource("../../../VAADIN/vaadinBootstrap.js");
-        addBaseTheme();
-    }
-
-    private void addBaseTheme() {
-        // Find resources using org.reflections
-        Reflections reflections = new Reflections(
-                new ConfigurationBuilder()
-                .filterInputsBy(
-                        new FilterBuilder()
-                        .include("VAADIN\\.themes\\.base.*"))
-                        .setUrls(
-                                ClasspathHelper
-                                .forPackage("VAADIN.themes.base"))
-                                .setScanners(new ResourcesScanner()));
-
-        Set<String> themeFiles = reflections.getResources(Pattern
-                .compile("^.*\\.(css|gif|png|ico)$"));
-
-        for (String name : themeFiles) {
-            addCachedResource("../../../" + name);
-        }
+        // Add the empty fake file we need add to keep Vaadin happy
+        addCachedResource("../../../VAADIN/themes/touchkit/styles.css");
     }
 
     @Override
