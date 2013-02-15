@@ -37,7 +37,7 @@ public class VerticalComponentGroupConnector extends AbstractLayoutConnector {
         }
 
         List<ComponentConnector> oldChildren = event.getOldChildren();
-        
+
         List<ComponentConnector> children = getChildComponents();
         for (int i = 0; i < children.size(); ++i) {
             ComponentConnector connector = children.get(i);
@@ -45,23 +45,15 @@ public class VerticalComponentGroupConnector extends AbstractLayoutConnector {
             getWidget()
                     .addOrMove(
                             widget,
-                            i,
-                            connector.getState().width,
-                            connector.delegateCaptionHandling() ? connector
-                                    .getState().caption : null);
-            URLReference urlReference = connector.getState().resources
-                    .get(ComponentConstants.ICON_RESOURCE);
-            String url = urlReference == null ? null : urlReference.getURL();
-            getWidget().setIcon(widget, url);
+                            i);
             oldChildren.remove(connector);
         }
-        
+
         for (ComponentConnector oldChild : event.getOldChildren()) {
             if (oldChild.getParent() != this) {
                 getWidget().remove(oldChild.getWidget());
             }
         }
-
     }
 
     @Override
@@ -76,6 +68,11 @@ public class VerticalComponentGroupConnector extends AbstractLayoutConnector {
 
     @Override
     public void updateCaption(ComponentConnector connector) {
-        // NOP already updated?
+        URLReference urlReference = connector.getState().resources
+                .get(ComponentConstants.ICON_RESOURCE);
+        String url = urlReference == null ? null : urlReference.getURL();
+        Widget child = connector.getWidget();
+        getWidget().updateCaption(child, connector.getState().caption, url,
+                connector.getState().width);
     }
 }
