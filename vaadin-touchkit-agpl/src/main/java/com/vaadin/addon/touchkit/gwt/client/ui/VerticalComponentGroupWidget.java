@@ -185,16 +185,12 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
         if (!widgets.contains(widget)) {
             return false;
         }
+        DivElement element = getRowElement(widget);
 
         boolean ret = super.remove(widget);
 
         if (ret) {
-            setIcon(widget, null);
-            setCaption(widget, null, null);
-
-            DivElement element = getRowElement(widget);
             element.removeFromParent();
-
             widgets.remove(widget);
         }
 

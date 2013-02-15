@@ -36,14 +36,9 @@ public class VerticalComponentGroupConnector extends AbstractLayoutConnector {
             return;
         }
 
-        for (ComponentConnector oldChild : event.getOldChildren()) {
-            if (oldChild.getParent() != this) {
-                getWidget().remove(oldChild.getWidget());
-            }
-        }
-
+        List<ComponentConnector> oldChildren = event.getOldChildren();
+        
         List<ComponentConnector> children = getChildComponents();
-
         for (int i = 0; i < children.size(); ++i) {
             ComponentConnector connector = children.get(i);
             Widget widget = connector.getWidget();
@@ -58,7 +53,15 @@ public class VerticalComponentGroupConnector extends AbstractLayoutConnector {
                     .get(ComponentConstants.ICON_RESOURCE);
             String url = urlReference == null ? null : urlReference.getURL();
             getWidget().setIcon(widget, url);
+            oldChildren.remove(connector);
         }
+        
+        for (ComponentConnector oldChild : event.getOldChildren()) {
+            if (oldChild.getParent() != this) {
+                getWidget().remove(oldChild.getWidget());
+            }
+        }
+
     }
 
     @Override
