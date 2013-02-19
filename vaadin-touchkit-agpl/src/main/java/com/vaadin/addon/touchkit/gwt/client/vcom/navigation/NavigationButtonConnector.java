@@ -45,6 +45,7 @@ public class NavigationButtonConnector extends AbstractComponentConnector {
 
         String caption = getState().caption;
         getWidget().setText(caption);
+        getWidget().setEnabled(getState().enabled);
 
         ServerConnector targetView = (ServerConnector) getState()
                 .getTargetView();

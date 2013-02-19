@@ -25,6 +25,7 @@ public class VNavigationButton extends HTML implements TouchStartHandler, TouchC
     private ImageElement icon;
     private SpanElement descriptionElement;
     private boolean touchStarted = false;
+    private boolean enabled;
 
     public VNavigationButton() {
         setStyleName(NAVBUTTON_CLASSNAME);
@@ -146,8 +147,14 @@ public class VNavigationButton extends HTML implements TouchStartHandler, TouchC
 
     @Override
     public void onClick(ClickEvent event) {
-        getElement().focus();
-        navigate();
+        if(enabled) {
+            getElement().focus();
+            navigate();
+        }
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
 }
