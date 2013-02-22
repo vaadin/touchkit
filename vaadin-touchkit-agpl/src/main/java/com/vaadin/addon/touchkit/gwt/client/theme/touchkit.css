@@ -1436,10 +1436,14 @@ body e.v-app-loading {
 	border-right-color: #466c90;
 }
 
-@sprite .v-tk .v-table-column-selector {
+@sprite .v-table-column-selector {
 	gwt-image: "columnSelector";
 	margin-top: -30px;
 	width:15px;
+    float: right;
+    height: 1.2em;
+    position: relative;
+    cursor: pointer;
 }
 .v-tk .v-table-focus-slot-left {
 	border-left-color: #222;
@@ -2262,4 +2266,14 @@ span.v-datefield-calendarpanel-month {
     margin-top: -4px;
     margin-left: -6px;
     background: transparent dragSlotDotUrl;
+}
+
+.v-ddwrapper-over-top:before, .v-ddwrapper-over-bottom:after, .v-ddwrapper-over-left:before, .v-ddwrapper-over-right:before {
+    display: block;
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    margin-top: -4px;
+    margin-left: -2px;
+    background: transparent dragSlotDotUrl no-repeat;
 }

@@ -1228,6 +1228,7 @@ div.v-csslayout {
 	border-color: rgba(0, 109, 232, 0.6);
 }
 
+/* touchkit replaces image
 .v-ddwrapper-over-top:before, .v-ddwrapper-over-bottom:after, .v-ddwrapper-over-left:before, .v-ddwrapper-over-right:before {
 	display: block;
 	position: absolute;
@@ -1237,6 +1238,7 @@ div.v-csslayout {
 	margin-left: -2px;
 	background: transparent url(common/img/drag-slot-dot.png) no-repeat;
 }
+*/
 
 .v-ddwrapper-over-bottom:after {
 	margin-top: -2px;
@@ -2164,6 +2166,7 @@ div.v-progressindicator-indeterminate-disabled {
 	float: right;
 }
 
+/* also defined in touchkit
 .v-table-header-cell-asc .v-table-sort-indicator {
 	background: transparent url(common/img/sprites.png) no-repeat right 6px;
 }
@@ -2171,6 +2174,7 @@ div.v-progressindicator-indeterminate-disabled {
 .v-table-header-cell-desc .v-table-sort-indicator {
 	background: transparent url(common/img/sprites.png) no-repeat right -10px;
 }
+*/
 
 .v-table-caption-container-align-center {
 	text-align: center;
@@ -2234,6 +2238,7 @@ div.v-progressindicator-indeterminate-disabled {
 	text-align: right;
 }
 
+/* image replaced in touchkit
 .v-table-column-selector {
 	float: right;
 	background: transparent url(common/img/sprites.png) no-repeat 4px -37px;
@@ -2243,6 +2248,7 @@ div.v-progressindicator-indeterminate-disabled {
 	position: relative;
 	cursor: pointer;
 }
+*/
 
 .v-table.v-disabled .v-table-column-selector {
 	cursor: default;
