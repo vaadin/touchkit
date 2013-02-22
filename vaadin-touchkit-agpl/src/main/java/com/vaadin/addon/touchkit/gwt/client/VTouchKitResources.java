@@ -209,4 +209,7 @@ public interface VTouchKitResources extends ClientBundle {
     @ImageOptions(repeatStyle = RepeatStyle.Vertical)
     public ImageResource connector();
 
+    @Source("theme/img/tree/drag-slot-dot.png")
+    public DataResource dragSlotDotImage();
+
 }
