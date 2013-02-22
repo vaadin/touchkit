@@ -626,6 +626,7 @@ e.v-app select, .v-window select {
 	line-height: normal;
 }
 
+/* also defined in touchkit
 .v-loading-indicator, .v-loading-indicator-delay, .v-loading-indicator-wait {
 	position: absolute;
 	top: 0;
@@ -645,6 +646,7 @@ e.v-app select, .v-window select {
 .v-loading-indicator-wait {
 	background-image: url(common/img/loading-indicator-wait.gif);
 }
+*/
 
 e.v-app input[type="text"], e.v-app input[type="password"], e.v-app input[type="reset"], e.v-app select, e.v-app textarea, .v-window input[type="text"], .v-window input[type="password"], .v-window input[type="reset"], .v-window select, .v-window textarea {
 	padding: 2px;
