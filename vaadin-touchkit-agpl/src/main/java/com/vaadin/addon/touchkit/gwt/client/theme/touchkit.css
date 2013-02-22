@@ -1741,14 +1741,10 @@ span.v-datefield-calendarpanel-month {
 
 /* Tree styles */
 
-.v-tk .v-tree-node {
-	background-position: 6px -33px;
+.v-tree-node {
 	padding: 4px 0;
 }
-.v-tk .v-tree-node-expanded {
-	background-position: -6px -5px;
-}
-.v-tk .v-tree-node-caption {
+.v-tree-node-caption {
 	margin-left: 1.5em;
 }
 
@@ -2208,12 +2204,14 @@ span.v-datefield-calendarpanel-month {
 	gwt-image: "dateCancelSymbol";
 }
 
-@sprite .v-treetable-node-closed {
-    gwt-image: "arrowRight";
+@url arrowRightUrl arrowRightImage;
+.v-treetable-node-closed {
+    background: arrowRightUrl right top contain no-repeat;
 }
 
-@sprite .v-treetable-node-open {
-	gwt-image: "arrowDown";
+@url arrowDownUrl arrowDownImage;
+.v-treetable-node-open {
+	background: arrowDownUrl right top contain no-repeat;
 }
 
 @sprite .v-menubar-submenu .v-menubar-menuitem-checked .v-menubar-menuitem-caption {
@@ -2276,4 +2274,16 @@ span.v-datefield-calendarpanel-month {
     margin-top: -4px;
     margin-left: -2px;
     background: transparent dragSlotDotUrl no-repeat;
+}
+
+.v-tree-node {
+	background-position: 4px 4px;
+	background-size: auto 16px;
+	background-repeat: no-repeat;
+	background-image: arrowRightUrl;
+    padding: 1px 0;
+}
+
+.v-tree-node-expanded {
+	background-image: arrowDownUrl;
 }

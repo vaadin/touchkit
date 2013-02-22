@@ -162,12 +162,10 @@ public interface VTouchKitResources extends ClientBundle {
      * HiRes pictures based on base theme
      */
     @Source("theme/img/arrow-down.png")
-    @ImageOptions(repeatStyle = RepeatStyle.None)
-    public ImageResource arrowDown();
+    public DataResource arrowDownImage();
 
     @Source("theme/img/arrow-right.png")
-    @ImageOptions(repeatStyle = RepeatStyle.None)
-    public ImageResource arrowRight();
+    public DataResource arrowRightImage();
 
     @Source("theme/img/check.png")
     @ImageOptions(repeatStyle = RepeatStyle.None)
