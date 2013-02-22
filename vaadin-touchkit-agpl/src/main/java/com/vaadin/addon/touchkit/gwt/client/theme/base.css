@@ -580,9 +580,11 @@ e.v-app select, .v-window select {
 	overflow: auto;
 }
 
+/* also in touchkit
 .v-contextmenu {
 	background: #fff;
 }
+*/
 
 .v-contextmenu .gwt-MenuItem {
 	cursor: pointer;
@@ -678,6 +680,7 @@ e.v-app input[type="text"], e.v-app input[type="password"], e.v-app input[type="
 	height: 0;
 }
 
+/* defined in touchkit
 .v-vertical.v-margin-top, .v-horizontal.v-margin-top {
 	padding-top: 12px;
 }
@@ -693,6 +696,7 @@ e.v-app input[type="text"], e.v-app input[type="password"], e.v-app input[type="
 .v-vertical.v-margin-left, .v-horizontal.v-margin-left {
 	padding-left: 12px;
 }
+*/
 
 .v-gridlayout.v-layout-margin-top {
 	padding-top: 24px;
@@ -858,9 +862,11 @@ div.v-layout.v-horizontal.v-widget {
 	vertical-align: middle;
 }
 
+/* visible in touchkit
 .v-csslayout {
 	overflow: hidden;
 }
+*/
 
 div.v-csslayout {
 	display: block;
@@ -1509,9 +1515,11 @@ div.v-csslayout {
 	padding-left: 18px;
 }
 
+/* image replaced
 .v-menubar-submenu .v-menubar-menuitem-checked .v-menubar-menuitem-caption {
 	background: transparent url(menubar/img/check.gif) no-repeat left;
 }
+*/
 
 /* also in touchkit
 .v-Notification {
@@ -1954,6 +1962,7 @@ div.v-progressindicator-indeterminate-disabled {
 	margin: 5px 0;
 }
 
+/* also in touchkit
 .v-slider-base {
 	height: 2px;
 	border-top: 1px solid #ddd;
@@ -1969,6 +1978,7 @@ div.v-progressindicator-indeterminate-disabled {
 	margin-top: -5px;
 	font-size: 0;
 }
+*/
 
 .v-slider-vertical {
 	width: 2px;
@@ -2679,6 +2689,7 @@ div.v-tree-node-leaf {
 	padding-top: 1px;
 }
 
+/* remaped in touchkit
 .v-tree-connectors .v-tree-node {
 	background: transparent url(tree/img/connector-expand.png) no-repeat 2px -52px;
 }
@@ -2706,6 +2717,7 @@ div.v-tree-node-leaf {
 .v-tree-connectors .v-tree-node-children {
 	background: transparent url(tree/img/connector.png) repeat-y 2px 0;
 }
+*/
 
 .v-tree-connectors .v-tree-node-children-last {
 	background: transparent;
@@ -2729,6 +2741,7 @@ div.v-tree-node-leaf {
 	top: 5px;
 }
 
+/* replaced with hires version
 .v-treetable-node-closed {
 	background: url(treetable/img/arrow-right.png) right top no-repeat;
 }
@@ -2736,6 +2749,7 @@ div.v-tree-node-leaf {
 .v-treetable-node-open {
 	background: url(treetable/img/arrow-down.png) right top no-repeat;
 }
+*/
 
 .v-treetable .v-checkbox {
 	display: inline-block;

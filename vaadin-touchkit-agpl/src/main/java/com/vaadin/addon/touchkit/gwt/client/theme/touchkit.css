@@ -76,13 +76,12 @@
 
 
 /* CssLayouts don't need to be overflow: hidden in webkit */
-.v-tk .v-csslayout {
+.v-csslayout {
 	overflow: visible;
 	}
 
 /* Hide default shadow implementation, shadows should be created using -webkit-box-shadow on the actual element that requires the shadow. */
-.v-tk .v-shadow,
-.v-tk .v-shadow-window {
+.v-shadow, .v-shadow-window {
 	display: none;
 	}
 
@@ -116,7 +115,7 @@
 	-webkit-text-size-adjust: none;
 }
 
-.v-tk .v-contextmenu {
+.v-contextmenu {
 	background: #f8f8f9;
 	border: none;
 	border-radius: 3px;
@@ -127,7 +126,7 @@
 	padding: 4px 0;
 	-webkit-box-shadow: 0 0 40px rgba(0, 0, 0, .6);
 }
-.v-tk .v-contextmenu .gwt-MenuItem {
+.v-contextmenu .gwt-MenuItem {
 	padding: 1px 12px 1px 8px;
 	height: 30px;
 	user-select: none;
@@ -203,11 +202,11 @@
 	}
 }
 
-.v-tk .v-loading-indicator {
+.v-loading-indicator {
 	opacity: .5;
 	}
 
-.v-tk .v-loading-indicator-delay {
+.v-loading-indicator-delay {
 	opacity: .7;
 	}
 
@@ -575,7 +574,7 @@
 	-webkit-transition: none;
 	}
 
-.v-tk .v-touchkit-navbutton {
+.v-touchkit-navbutton {
 	-webkit-appearance: none;
 	display: block;
 	position: relative;
@@ -668,8 +667,8 @@
 
 @url backButtonUrl backButtonImage;
 
-.v-tk .v-touchkit-navbutton-back,
-.v-tk .v-touchkit-navbutton-forward {
+.v-touchkit-navbutton-back,
+.v-touchkit-navbutton-forward {
 	display:block;
 	-webkit-border-image: backButtonUrl 0 6 0 13 stretch stretch;
 	border-width: 0 6px 0 13px;
@@ -721,9 +720,9 @@
 	padding-right:4px;
 }
 
-.v-tk  .v-touchkit-navbar,
-.v-tk  .v-touchkit-navpanel-placeholder > div,
-.v-tk .v-touchkit-popover.v-touchkit-fullscreen .v-touchkit-navpanel-placeholder > div {
+.v-touchkit-navbar,
+.v-touchkit-navpanel-placeholder > div,
+.v-touchkit-popover.v-touchkit-fullscreen .v-touchkit-navpanel-placeholder > div {
 	background: navbarGradient;
 	color: #52555a;
 	display: block;
@@ -743,7 +742,7 @@
     line-height: 43px;
 }
 
-.v-tk  .v-touchkit-navbar-caption {
+.v-touchkit-navbar-caption {
 	display: block;
 	white-space: nowrap;
 	overflow: hidden;
@@ -838,11 +837,11 @@
 	display: none;
 }
 
-.v-tk .v-slider:focus {
+.v-slider:focus {
 	outline: none;
 	}
 
-.v-tk .v-slider-base {
+.v-slider-base {
 	height: 6px;
 	background: sliderBaseGradient;
 	border-radius: 4px;
@@ -850,7 +849,7 @@
 	border-bottom-color: rgba(0,0,0,0);
 	}
 
-.v-tk .v-slider-handle {
+.v-slider-handle {
 	background: sliderHandleGradient;
 	width: 20px;
 	height: 20px;
@@ -858,6 +857,7 @@
 	margin-top: -8px;
 	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 1px 2px rgba(0,0,0,.3);
 	border: 1px solid rgba(0,0,0,.3);
+	font-size: 0;
 	}
 
 .v-tk .v-slider-handle-active {
@@ -1604,7 +1604,7 @@
 
 
 /* DateField */
-.v-tk .v-datefield-popupcalendar {
+.v-datefield-popupcalendar {
 	clear: both;
 	float: none;
 	padding: 0 0 0 4px;
@@ -1613,19 +1613,19 @@
 	border-collapse: collapse;
 }
 
-.v-tk .v-datefield-textfield,
-.v-tk .v-datefield-button {
+.v-datefield-textfield,
+.v-datefield-button {
 	-webkit-box-sizing: border-box;
 	margin: 0;
 	}
 
-.v-tk .v-datefield-textfield {
+.v-datefield-textfield {
 	height: 27px;
 	line-height: 27px;
 	}
 
 @url calendar calendar2x;
-.v-tk .v-datefield-button {
+.v-datefield-button {
 	-webkit-appearance: none;
 	border: none;
 	background: transparent calendar no-repeat 0 50%;
@@ -1634,19 +1634,19 @@
 	height: 27px;
 	}
 
-.v-tk .v-datefield-error {
+.v-datefield-error {
 	border: 2px solid rgba(250,40,0,.6);
 	}
 
-.v-tk .v-datefield-calendarpanel {
+.v-datefield-calendarpanel {
 	background: #fff;
 }
 
-.v-tk .v-datefield-calendarpanel {
+.v-datefield-calendarpanel {
 	border: none;
 }
 
-.v-tk .v-datefield-calendarpanel button {
+.v-datefield-calendarpanel button {
 	-webkit-appearance: none;
 	background:transparent;
 	display: block;
@@ -1654,7 +1654,7 @@
 	margin: 0;
 	padding:0;
 }
-.v-tk .v-datefield-calendarpanel-header td {
+.v-datefield-calendarpanel-header td {
 	background: literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#e5e5e6), to(#b4b6b8))');
 	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3), inset 0 -1px 0 rgba(255,255,255,.15);
 	text-shadow: 0 1px 0 rgba(255,255,255,.7);
@@ -1664,7 +1664,7 @@
 	font-weight: bold;
 }
 
-.v-tk .v-datefield-calendarpanel button {
+.v-datefield-calendarpanel button {
 	/* Needed to make < and << look proper  */
 	font-family: arial;
 	font-size: 20px;
@@ -1672,38 +1672,38 @@
 }
 
 /* Fix the month width, otherwise jumpy when changing month */
-.v-tk .v-datefield-calendarpanel-header td {
+.v-datefield-calendarpanel-header td {
 	width: 1px;
 	border-right: 1px solid rgba(0,0,0,.25);
 	border-bottom: 1px solid rgba(0,0,0,.5);
 	padding: 0 6px 3px;
 }	
-.v-tk .v-datefield-calendarpanel-header td.v-datefield-calendarpanel-month {
+.v-datefield-calendarpanel-header td.v-datefield-calendarpanel-month {
 	width:auto;
 	min-width:140px;
 }
-.v-tk span.v-datefield-calendarpanel-month {
+span.v-datefield-calendarpanel-month {
 	line-height:26px;
 	font-size: 15px;
 }
 
-.v-tk .v-datefield-calendarpanel .v-button-nextyear {
+.v-datefield-calendarpanel .v-button-nextyear {
 	border-right: none;
 }
 
-.v-tk .v-datefield-calendarpanel table,
-.v-tk .v-datefield-time {
+.v-datefield-calendarpanel table,
+.v-datefield-time {
 	padding: 0 10px;
 }
-.v-tk .v-datefield-time {
+.v-datefield-time {
 	padding-bottom: 10px;
 }
 
-.v-tk .v-datefield-calendarpanel td {
+.v-datefield-calendarpanel td {
 	text-align: center;
 }
 
-.v-tk .v-datefield-popup {
+.v-datefield-popup {
 	overflow: hidden;
 }
 
@@ -1977,16 +1977,16 @@
 	margin-bottom: listLayoutMargin;
 }
 
-.v-tk .v-vertical.v-margin-left, .v-horizontal.v-margin-left {
+.v-vertical.v-margin-left, .v-horizontal.v-margin-left {
 	padding-left: listLayoutMargin;
 }
-.v-tk .v-vertical.v-margin-bottom, .v-horizontal.v-margin-bottom {
+.v-vertical.v-margin-bottom, .v-horizontal.v-margin-bottom {
 	padding-bottom: listLayoutMargin;
 }
-.v-tk .v-vertical.v-margin-right, .v-horizontal.v-margin-right {
+.v-vertical.v-margin-right, .v-horizontal.v-margin-right {
 	padding-right: listLayoutMargin;
 }
-.v-tk .v-vertical.v-margin-top, .v-horizontal.v-margin-top {
+.v-vertical.v-margin-top, .v-horizontal.v-margin-top {
 	padding-top: listLayoutMargin;
 }
 
@@ -2174,4 +2174,44 @@
 
 @sprite .v-touchkit-cancel-image {
 	gwt-image: "dateCancelSymbol";
+}
+
+@sprite .v-treetable-node-closed {
+    gwt-image: "arrowRight";
+}
+
+@sprite .v-treetable-node-open {
+	gwt-image: "arrowDown";
+}
+
+@sprite .v-menubar-submenu .v-menubar-menuitem-checked .v-menubar-menuitem-caption {
+	gwt-image: "check";
+}
+
+@sprite .v-tree-connectors .v-tree-node {
+	gwt-image: "connectorExpand";
+}
+
+@sprite .v-tree-connectors .v-tree-node-expanded {
+	gwt-image: "connectorCollapse";
+}
+
+@sprite .v-tree-connectors .v-tree-node-last {
+    gwt-image: "connectorExpandLast";
+}
+
+@sprite .v-tree-connectors .v-tree-node-expanded.v-tree-node-last {
+	gwt-image: "connectorCollapseLast";
+}
+
+@sprite .v-tree-connectors .v-tree-node-leaf {
+	gwt-image: "connectorLeaf";
+}
+
+@sprite .v-tree-connectors .v-tree-node-leaf-last {
+	gwt-image: "connectorLeafLast";
+}
+
+@sprite .v-tree-connectors .v-tree-node-children {
+	gwt-image: "connector";
 }

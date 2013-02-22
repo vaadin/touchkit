@@ -158,4 +158,55 @@ public interface VTouchKitResources extends ClientBundle {
     @Source("theme/img/calendar-2x.png")
     public DataResource calendar2x();
 
+    /*
+     * HiRes pictures based on base theme
+     */
+    @Source("theme/img/arrow-down.png")
+    @ImageOptions(repeatStyle = RepeatStyle.None)
+    public ImageResource arrowDown();
+
+    @Source("theme/img/arrow-right.png")
+    @ImageOptions(repeatStyle = RepeatStyle.None)
+    public ImageResource arrowRight();
+
+    @Source("theme/img/check.png")
+    @ImageOptions(repeatStyle = RepeatStyle.None)
+    public ImageResource check();
+
+    @Source("theme/img/tree/connector-collapse-last.png")
+    @ImageOptions(repeatStyle = RepeatStyle.None)
+    public ImageResource connectorCollapseLast();
+
+    @Source("theme/img/tree/connector-collapse.png")
+    @ImageOptions(repeatStyle = RepeatStyle.None)
+    public ImageResource connectorCollapse();
+
+    @Source("theme/img/tree/connector-expand-last.png")
+    @ImageOptions(repeatStyle = RepeatStyle.None)
+    public ImageResource connectorExpandLast();
+
+    @Source("theme/img/tree/connector-expand.png")
+    @ImageOptions(repeatStyle = RepeatStyle.None)
+    public ImageResource connectorExpand();
+
+    @Source("theme/img/tree/connector-item-last.png")
+    @ImageOptions(repeatStyle = RepeatStyle.None)
+    public ImageResource connectorItemLast();
+
+    @Source("theme/img/tree/connector-item.png")
+    @ImageOptions(repeatStyle = RepeatStyle.None)
+    public ImageResource connectorItem();
+
+    @Source("theme/img/tree/connector-leaf-last.png")
+    @ImageOptions(repeatStyle = RepeatStyle.Vertical)
+    public ImageResource connectorLeafLast();
+
+    @Source("theme/img/tree/connector-leaf.png")
+    @ImageOptions(repeatStyle = RepeatStyle.Vertical)
+    public ImageResource connectorLeaf();
+
+    @Source("theme/img/tree/connector.png")
+    @ImageOptions(repeatStyle = RepeatStyle.Vertical)
+    public ImageResource connector();
+
 }
