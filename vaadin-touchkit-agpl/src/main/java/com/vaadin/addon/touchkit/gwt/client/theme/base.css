@@ -878,6 +878,7 @@ div.v-csslayout {
 	height: 100%;
 }
 
+/* Also defined in touchkit.css
 .v-csslayout-margin-top {
 	padding-top: 12px;
 }
@@ -893,6 +894,7 @@ div.v-csslayout {
 .v-csslayout-margin-right {
 	padding-right: 12px;
 }
+*/
 
 .v-customcomponent {
 	overflow: hidden;
@@ -1509,6 +1511,7 @@ div.v-csslayout {
 	background: transparent url(menubar/img/check.gif) no-repeat left;
 }
 
+/* also in touchkit
 .v-Notification {
 	background: #999;
 	color: #fff;
@@ -1517,6 +1520,7 @@ div.v-csslayout {
 	padding: 1em;
 	max-width: 85%;
 }
+*/
 
 .v-Notification h1, .v-Notification p, .v-Notification-error h1, .v-Notification-error p, .v-Notification-warning h1, .v-Notification-warning p {
 	display: inline;
@@ -1553,6 +1557,7 @@ div.v-csslayout {
 	position: relative;
 }
 
+/* Also defined in touchkit
 .v-orderedlayout-margin-top, .v-horizontallayout-margin-top, .v-verticallayout-margin-top {
 	padding-top: 12px;
 }
@@ -1573,6 +1578,7 @@ div.v-csslayout {
 	padding-top: 6px;
 	padding-left: 6px;
 }
+*/
 
 .v-orderedlayout-spacing-off, .v-horizontallayout-spacing-off, .v-verticallayout-spacing-off {
 	padding-top: 0;
