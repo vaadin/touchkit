@@ -911,9 +911,11 @@ div.v-csslayout {
 	vertical-align: top;
 }
 
+/*
 .v-ie .v-datefield-button:after {
 	content: "\200B";
 }
+*/
 
 .v-datefield-button {
 	cursor: pointer;
@@ -1019,9 +1021,11 @@ div.v-csslayout {
 	vertical-align: top;
 }
 
+/*
 .v-ie .v-inline-datefield-button:after {
 	content: "\200B";
 }
+*/
 
 .v-inline-datefield-button {
 	cursor: pointer;
@@ -1133,6 +1137,7 @@ div.v-csslayout {
 	-webkit-user-select: none;
 }
 
+/*
 .v-ie .v-ddwrapper a.drag-start {
 	display: block;
 	position: absolute;
@@ -1145,6 +1150,7 @@ div.v-csslayout {
 	opacity: 0;
 	background-color: cyan;
 }
+*/
 
 .v-ddwrapper-over {
 	border: 2px solid #1d9dff;
@@ -1684,9 +1690,11 @@ div.v-progressindicator-indeterminate-disabled {
 	margin: 0 2px;
 }
 
+/*
 .v-ie .v-select-optiongroup .v-select-option {
 	zoom: 1;
 }
+*/
 
 .v-select-select {
 	display: block;
@@ -2310,9 +2318,12 @@ div.v-progressindicator-indeterminate-disabled {
 	background: transparent url(common/img/drag-slot-dot.png);
 }
 
-.v-ff .v-table-row-drag-bottom .v-table-cell-content:first-child:after, .v-ie .v-table-row-drag-bottom .v-table-cell-content:first-child:after {
+/*
+.v-ff .v-table-row-drag-bottom .v-table-cell-content:first-child:after,
+.v-ie .v-table-row-drag-bottom .v-table-cell-content:first-child:after {
 	margin-top: -2px;
 }
+*/
 
 .v-tabsheet, .v-tabsheet-content, .v-tabsheet-deco {
 	outline: none;
@@ -2624,9 +2635,12 @@ div.v-tree-node-leaf {
 	margin-left: 14px;
 }
 
-.v-ff .v-tree .v-tree-node-caption-drag-center:after, .v-ie .v-tree .v-tree-node-caption-drag-center:after {
+/*
+.v-ff .v-tree .v-tree-node-caption-drag-center:after,
+.v-ie .v-tree .v-tree-node-caption-drag-center:after {
 	margin-top: -2px;
 }
+*/
 
 .v-tree .v-tree-node-drag-top {
 	background-position: 5px -38px;
@@ -2767,9 +2781,11 @@ div table.v-treetable-animation-clone tr.v-table-row, div table.v-treetable-anim
 	overflow: hidden;
 }
 
+/*
 .v-ff .v-upload-immediate, .v-op .v-upload-immediate {
 	display: inline-block;
 }
+*/
 
 .v-upload-immediate input {
 	opacity: 0;
