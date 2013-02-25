@@ -1,10 +1,7 @@
 package com.vaadin.addon.touchkit.gwt.client.ui;
 
 import com.google.gwt.dom.client.Document;
-import com.google.gwt.event.dom.client.TouchStartEvent;
-import com.google.gwt.event.dom.client.TouchStartHandler;
 import com.google.gwt.user.client.Element;
-import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.client.ui.TouchScrollDelegate;
@@ -25,19 +22,8 @@ public class VTabBar extends ComplexPanel {
         getElement().appendChild(wrapper);
         toolbarDiv.setClassName(CLASSNAME + "-toolbar");
         getElement().appendChild(toolbarDiv);
-
-        /*
-         * Touch scrolling using one finger handled by TouchScrollDelegate.
-         */
-        sinkEvents(Event.TOUCHEVENTS);
-        final TouchScrollDelegate touchScrollDelegate = new TouchScrollDelegate(
-                wrapper);
-        addHandler(new TouchStartHandler() {
-            @Override
-            public void onTouchStart(TouchStartEvent event) {
-                touchScrollDelegate.onTouchStart(event);
-            }
-        }, TouchStartEvent.getType());
+        TouchScrollDelegate.enableTouchScrolling(this, wrapper);
+        
     }
 
     public void setToolbar(Widget widget) {
