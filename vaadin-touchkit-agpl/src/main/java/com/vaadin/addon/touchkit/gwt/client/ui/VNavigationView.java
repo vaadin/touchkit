@@ -1,14 +1,11 @@
 package com.vaadin.addon.touchkit.gwt.client.ui;
 
 import com.google.gwt.dom.client.Document;
-import com.google.gwt.event.dom.client.TouchStartEvent;
-import com.google.gwt.event.dom.client.TouchStartHandler;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
-import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.client.ui.TouchScrollDelegate;
+import com.vaadin.client.ui.TouchScrollDelegate.TouchScrollHandler;
 
 public class VNavigationView extends ComplexPanel {
 
@@ -29,19 +26,9 @@ public class VNavigationView extends ComplexPanel {
         toolbarDiv.setClassName(CLASSNAME + "-toolbar");
         getElement().appendChild(toolbarDiv);
 
-        /*
-         * Touch scrolling using one finger handled by TouchScrollDelegate.
-         */
-        sinkEvents(Event.TOUCHEVENTS);
-        final TouchScrollDelegate touchScrollDelegate = new TouchScrollDelegate(
-                wrapper);
-        addHandler(new TouchStartHandler() {
-            public void onTouchStart(TouchStartEvent event) {
-                touchScrollDelegate.onTouchStart(event);
-            }
-        }, TouchStartEvent.getType());
-
-        DOM.sinkEvents(wrapper, Event.ONSCROLL);
+        
+        TouchScrollHandler touchScrollHandler = TouchScrollDelegate.enableTouchScrolling(this);
+        touchScrollHandler.addElement(wrapper);
     }
 
     @Override
@@ -121,37 +108,5 @@ public class VNavigationView extends ComplexPanel {
     public void setScrollTop(int scrollTop) {
         wrapper.setScrollTop(scrollTop);
     }
-
-    // public boolean requestLayout(Set<Paintable> children) {
-    // return true;
-    // }
-    //
-    // public RenderSpace getAllocatedSpace(Widget child) {
-    // if (child == content) {
-    // return new RenderSpace(wrapper.getOffsetWidth(),
-    // wrapper.getOffsetHeight(), true);
-    // } else if (child == toolbar) {
-    // return new RenderSpace(getOffsetWidth(), NAVBARHEIGHT, false);
-    //
-    // } else if (child == navbar) {
-    // return new RenderSpace(getOffsetWidth(),
-    // toolbarDiv.getOffsetHeight(), false);
-    // } else {
-    // throw new IllegalArgumentException();
-    // }
-    // }
-    //
-    // @Override
-    // public void setWidth(String width) {
-    // super.setWidth(width);
-    // if (!rendering) {
-    // if (content != null) {
-    // client.handleComponentRelativeSize((Widget) content);
-    // }
-    // if (toolbar != null) {
-    // client.handleComponentRelativeSize((Widget) toolbar);
-    // }
-    // }
-    // }
 
 }
