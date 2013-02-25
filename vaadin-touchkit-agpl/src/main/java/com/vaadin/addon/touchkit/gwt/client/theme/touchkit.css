@@ -2215,16 +2215,31 @@ span.v-datefield-calendarpanel-month {
 }
 
 @url arrowRightUrl arrowRightImage;
-.v-treetable-node-closed {
+.v-treetable-node-closed,
+.v-tree-node {
     background-image: arrowRightUrl;
+}    
+
+.v-treetable-node-closed {
     background-position: right 10%;
     background-repeat: no-repeat;
     background-size: auto 80%;
 }
 
+.v-tree-node {
+    background-position: 4px 4px;
+    background-size: auto 16px;
+    background-repeat: no-repeat;
+    padding: 1px 0;
+}
+
 @url arrowDownUrl arrowDownImage;
+.v-treetable-node-open,
+.v-tree-node-expanded {
+    background-image: arrowDownUrl;
+}	
+
 .v-treetable-node-open {
-	background-image: arrowDownUrl;
 	background-position: right 10%;
 	background-repeat: no-repeat;
 	background-size: auto 80%;
@@ -2290,16 +2305,4 @@ span.v-datefield-calendarpanel-month {
     margin-top: -4px;
     margin-left: -2px;
     background: transparent dragSlotDotUrl no-repeat;
-}
-
-.v-tree-node {
-	background-position: 4px 4px;
-	background-size: auto 16px;
-	background-repeat: no-repeat;
-	background-image: arrowRightUrl;
-    padding: 1px 0;
-}
-
-.v-tree-node-expanded {
-	background-image: arrowDownUrl;
 }
