@@ -2249,34 +2249,6 @@ span.v-datefield-calendarpanel-month {
 	gwt-image: "check";
 }
 
-@sprite .v-tree-connectors .v-tree-node {
-	gwt-image: "connectorExpand";
-}
-
-@sprite .v-tree-connectors .v-tree-node-expanded {
-	gwt-image: "connectorCollapse";
-}
-
-@sprite .v-tree-connectors .v-tree-node-last {
-    gwt-image: "connectorExpandLast";
-}
-
-@sprite .v-tree-connectors .v-tree-node-expanded.v-tree-node-last {
-	gwt-image: "connectorCollapseLast";
-}
-
-@sprite .v-tree-connectors .v-tree-node-leaf {
-	gwt-image: "connectorLeaf";
-}
-
-@sprite .v-tree-connectors .v-tree-node-leaf-last {
-	gwt-image: "connectorLeafLast";
-}
-
-@sprite .v-tree-connectors .v-tree-node-children {
-	gwt-image: "connector";
-}
-
 @url dragSlotDotUrl dragSlotDotImage;
 .v-tree .v-tree-node-drag-top:before, .v-tree .v-tree-node-drag-bottom:after, .v-tree .v-tree-node-caption-drag-center:after {
     display: block;

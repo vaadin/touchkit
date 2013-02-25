@@ -18,6 +18,7 @@ public class TreeTest extends AbstractTouchKitIntegrationTest {
 
     public TreeTest() {
         Tree tree = new Tree();
+
         tree.addItem(ITEM_1);
         tree.setChildrenAllowed(ITEM_1, true);
         tree.addItem(ITEM_1_1);
