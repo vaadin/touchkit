@@ -2204,14 +2204,30 @@ span.v-datefield-calendarpanel-month {
 	gwt-image: "dateCancelSymbol";
 }
 
+.v-treetable-treespacer {
+    display: inline-block;
+    background: transparent;
+    height: 19px;
+    width: 18px;
+    position: absolute;
+    left: 0;
+    top: 5px;
+}
+
 @url arrowRightUrl arrowRightImage;
 .v-treetable-node-closed {
-    background: arrowRightUrl right top contain no-repeat;
+    background-image: arrowRightUrl;
+    background-position: right 10%;
+    background-repeat: no-repeat;
+    background-size: auto 80%;
 }
 
 @url arrowDownUrl arrowDownImage;
 .v-treetable-node-open {
-	background: arrowDownUrl right top contain no-repeat;
+	background-image: arrowDownUrl;
+	background-position: right 10%;
+	background-repeat: no-repeat;
+	background-size: auto 80%;
 }
 
 @sprite .v-menubar-submenu .v-menubar-menuitem-checked .v-menubar-menuitem-caption {

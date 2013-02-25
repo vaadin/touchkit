@@ -2751,6 +2751,7 @@ div.v-tree-node-leaf {
 	background-position: 2px 50%;
 }
 
+/* overridden by touchkit
 .v-treetable-treespacer {
 	display: inline-block;
 	background: transparent;
@@ -2760,6 +2761,7 @@ div.v-tree-node-leaf {
 	left: 0;
 	top: 5px;
 }
+*/
 
 /* replaced with hires version
 .v-treetable-node-closed {
