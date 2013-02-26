@@ -31,13 +31,19 @@
 @def buttonGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(246,246,246,.46)), to(rgba(145,149,159,.46)), color-stop(.49, rgba(160,162,167,.46)), color-stop(.51, rgba(130,133,142,.46)))');
 @def buttonActiveGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(200,200,200,.55)), to(rgba(128,131,141,.55)), color-stop(.49, rgba(132,134,138,.55)), color-stop(.51, rgba(101,104,113,.55)))');
 
-
+@def redButtonInsetBackground rgba(128,38,40,.6);
+@def redButtonWrapBgColor #ab0101; /* #e30101; */
+@def greenButtonInsetBackground rgba(37,92,40,.6);
+@def greenButtonWrapBgColor #1f9100; /* #29c100; */
+@def blueButtonInsetBackground rgba(37,38,128,.6);
+@def blueButtonWrapBgColor #0155ab; /* #0171e3; */
 
 /**
  * Navbar
  */
 @def navbarTextShadow 0 1px 1px rgba(255,255,255,.75);
 @def navbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#edeeef), to(#c9cccf))');
+@def greenNavbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#edeeef), to(#c9cccf))');
 
 /**
  * Navbar buttons
@@ -254,6 +260,15 @@ body e.v-app-loading {
 	padding: 3px;
 	text-align: center;
 }
+.v-button.red {
+	background: redButtonInsetBackground;
+}
+.v-button.green {
+    background: greenButtonInsetBackground;
+}
+.v-button.blue {
+    background: blueButtonInsetBackground;
+}
 
 .v-button:focus {
 	outline: none;
@@ -353,6 +368,25 @@ body e.v-app-loading {
 	border-radius: 4px;
 }
 
+.v-touchkit-horizontalbuttongroup .v-button.green {
+	background: rgba(0,92,0,0.6);
+}
+.v-touchkit-horizontalbuttongroup .v-button.green:active {
+    background: rgba(0,46,0,0.6);	
+}
+.v-touchkit-horizontalbuttongroup .v-button.red {
+    background: rgba(128,0,0,0.6);
+}
+.v-touchkit-horizontalbuttongroup .v-button.red:active {
+    background: rgba(64,0,0,0.6);
+}
+.v-touchkit-horizontalbuttongroup .v-button.blue {
+    background: rgba(0,0,128,0.6);
+}
+.v-touchkit-horizontalbuttongroup .v-button.blue:active {
+    background: rgba(0,0,64,0.6);
+}
+
 .v-touchkit-horizontalbuttongroup {
     padding: 0 13px;	
 }
@@ -375,12 +409,8 @@ body e.v-app-loading {
 }
 
 .v-touchkit-navbar .v-button:active .v-button-wrap {
-	background-image: none;
-	}
-
-.v-touchkit-navbar .v-button:active .v-button-wrap {
 	background: navbarButtonActiveGradient;
-	}
+}
 
 .v-touchkit-horizontalbuttongroup {
 	padding:0;
@@ -934,7 +964,7 @@ body e.v-app-loading {
 	background: linenBg;
 }
 
-.v-tk .v-window-contents {
+.v-window-contents {
 	background: transparent;
 }
 
@@ -1230,24 +1260,26 @@ body e.v-app-loading {
 
 .v-button-red .v-button-wrap,
 .v-touchkit-navbar .v-button-red {
-	background-color: #e30101;
-	}
+	background-color: redButtonWrapBgColor;
+}
 
 .v-button-blue .v-button-wrap,
 .v-touchkit-navbar .v-button-blue {
-	background-color: #0171e3;
-	}
+	background-color: blueButtonWrapBgColor;
+}
 
 .v-button-green .v-button-wrap,
 .v-touchkit-navbar .v-button-green {
-	background-color: #29c100;
-	}
+	background-color: greenButtonWrapBgColor;
+}
 
+/*
 .v-touchkit-navbar .v-button-red .v-button-wrap,
 .v-touchkit-navbar .v-button-blue .v-button-wrap,
 .v-touchkit-navbar .v-button-green .v-button-wrap {
 	background-color: transparent;
 }
+*/
 
 .v-touchkit-navbar .v-button-red .v-button-wrap .v-button-caption,
 .v-touchkit-navbar .v-button-blue .v-button-wrap .v-button-caption,
