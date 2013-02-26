@@ -14,8 +14,8 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.vaadin.addon.touchkit.gwt.client.ui.DatePicker.Resolution;
-import com.vaadin.client.VConsole;
 import com.vaadin.client.ui.VButton;
 import com.vaadin.client.ui.VOverlay;
 
@@ -23,7 +23,7 @@ import com.vaadin.client.ui.VOverlay;
  * Overlay with calendar, used by DatePicker.
  */
 public class CalendarOverlay extends VOverlay implements
-HasValueChangeHandlers<java.util.Date>, ClickHandler {
+        HasValueChangeHandlers<java.util.Date>, ClickHandler {
 
     private static final String CLASSNAME = "v-touchkit-datepopover";
 
@@ -60,7 +60,7 @@ HasValueChangeHandlers<java.util.Date>, ClickHandler {
         cancelButton = new VButton();
         cancelButton.addStyleName("v-touchkit-date-cancel");
         cancelButton
-        .setHtml("<div class=\"v-touchkit-cancel-image\">&nbsp;</div>");
+                .setHtml("<div class=\"v-touchkit-cancel-image\">&nbsp;</div>");
         panel.add(cancelButton);
         cancelButton.setWidth("45%");
         cancelButton.addClickHandler(CalendarOverlay.this);
@@ -78,64 +78,88 @@ HasValueChangeHandlers<java.util.Date>, ClickHandler {
         public void onShowRange(ShowRangeEvent<Date> event) {
 
             // Verify min and max values
-            long start = justDay(event.getStart()).getTime();
-            long end = justDay(event.getEnd()).getTime();
-            long min = 0;
-            if (CalendarOverlay.this.min != null) {
-                if (compareMonths(calendarWidget.getCurrentMonth(),
-                        CalendarOverlay.this.min) < 0) {
-                    calendarWidget.setCurrentMonth(CalendarOverlay.this.min);
+            Date startDay = justDay(event.getStart());
+            Date endDay = justDay(event.getEnd());
+            Date currentMonth = justMonth(calendarWidget.getCurrentMonth());
+            if (min != null) {
+                if (currentMonth.before(justMonth(min))) {
+                    calendarWidget.setCurrentMonth(min);
                     return;
                 }
-                min = justDay(CalendarOverlay.this.min).getTime();
-                if (min > end) {
-                    calendarWidget.setCurrentMonth(new Date(min));
+                Date minDay = justDay(min);
+                if (endDay.before(minDay)) {
+                    calendarWidget.setCurrentMonth(minDay);
                     return;
                 }
             }
-            long max = justDay(new Date(addDay(end))).getTime();
-            if (CalendarOverlay.this.max != null) {
-                if (compareMonths(calendarWidget.getCurrentMonth(),
-                        CalendarOverlay.this.max) > 0) {
-                    calendarWidget.setCurrentMonth(CalendarOverlay.this.max);
+            if (max != null) {
+                if (currentMonth.after(justMonth(max))) {
+                    calendarWidget.setCurrentMonth(max);
                     return;
                 }
-                max = justDay(CalendarOverlay.this.max).getTime();
-                if (max < start) {
-                    calendarWidget.setCurrentMonth(new Date(max));
+                Date maxDay = justDay(max);
+                if (startDay.after(maxDay)) {
+                    calendarWidget.setCurrentMonth(maxDay);
                     return;
                 }
             }
 
             // Disable all dates that are in current view but are out of scope
+            disableDaysNotInCurrentMonth(startDay, endDay);
+
+            // Now update browsing button enable state
+            updatePrevNextButtons();
+        }
+
+        private void disableDaysNotInCurrentMonth(Date startDay, Date endDay) {
             List<Date> disableDates = new LinkedList<Date>();
-            for (long at = start; at <= end; at = justDay(
-                    new Date(addDay(at))).getTime()) {
-                VConsole.log("at: " + new Date(at).toString());
-                if (at < min || at > max) {
-                    disableDates.add(new Date(at));
+            Date firstDayOfMonth = firstDayOfMonth(calendarWidget
+                    .getCurrentMonth());
+            Date lastDayOfMonth = lastDayOfMonth(calendarWidget
+                    .getCurrentMonth());
+            Date dayAfterEnd = (Date) endDay.clone();
+            CalendarUtil.addDaysToDate(dayAfterEnd, 1);
+            for (Date day = startDay; day.before(dayAfterEnd); CalendarUtil
+                    .addDaysToDate(day, 1)) {
+                if (day.before(firstDayOfMonth) || day.after(lastDayOfMonth)) {
+                    disableDates.add((Date) day.clone());
                 }
             }
             if (!disableDates.isEmpty()) {
-                calendarWidget.setTransientEnabledOnDates(false,
-                        disableDates);
+                calendarWidget.setTransientEnabledOnDates(false, disableDates);
             }
+        }
 
-            // Now update browsing button enable state
-            if (CalendarOverlay.this.min != null) {
-                setPrevButtonEnabled(compareMonths(CalendarOverlay.this.min,
-                        calendarWidget.getCurrentMonth()) < 0);
+        private void updatePrevNextButtons() {
+            Date currentMonth;
+            currentMonth = justMonth(calendarWidget.getCurrentMonth());
+            if (min != null) {
+                setPrevButtonEnabled(currentMonth.after(min));
             } else {
                 setPrevButtonEnabled(true);
             }
-            if (CalendarOverlay.this.max != null) {
-                setNextButtonEnabled(compareMonths(CalendarOverlay.this.max,
-                        calendarWidget.getCurrentMonth()) > 0);
+            if (max != null) {
+                setNextButtonEnabled(currentMonth.before(max));
             } else {
                 setNextButtonEnabled(true);
             }
         }
+
     };
+
+    private Date firstDayOfMonth(Date month) {
+        Date firstDay = (Date) month.clone();
+        CalendarUtil.setToFirstDayOfMonth(firstDay);
+        return justDay(firstDay);
+    }
+
+    private Date lastDayOfMonth(Date month) {
+        Date lastDay = (Date) month.clone();
+        CalendarUtil.addMonthsToDate(lastDay, 1);
+        CalendarUtil.setToFirstDayOfMonth(lastDay);
+        CalendarUtil.addDaysToDate(lastDay, -1);
+        return justDay(lastDay);
+    }
 
     @Override
     public HandlerRegistration addValueChangeHandler(
@@ -177,21 +201,7 @@ HasValueChangeHandlers<java.util.Date>, ClickHandler {
         return dropDayFormat.parse(dropDayFormat.format(date));
     }
 
-    protected long compareMonths(Date a, Date b) {
-        return justMonth(a).getTime() - justMonth(b).getTime();
-    }
-
-    /**
-     * Adds about ~day (actually 24h), so remember to use with justDay!
-     * 
-     * @param time
-     * @return
-     */
-    protected long addDay (long time) {
-        return time + 24 * 60 * 60 * 1000;
-    }
-
-    protected void setPrevButtonEnabled (boolean enabled) {
+    protected void setPrevButtonEnabled(boolean enabled) {
         if (!enabled) {
             addStyleName(CLASSNAME + "-noprev");
         } else {
@@ -199,7 +209,7 @@ HasValueChangeHandlers<java.util.Date>, ClickHandler {
         }
     }
 
-    protected void setNextButtonEnabled (boolean enabled) {
+    protected void setNextButtonEnabled(boolean enabled) {
         if (!enabled) {
             addStyleName(CLASSNAME + "-nonext");
         } else {
@@ -207,4 +217,3 @@ HasValueChangeHandlers<java.util.Date>, ClickHandler {
         }
     }
 }
-
