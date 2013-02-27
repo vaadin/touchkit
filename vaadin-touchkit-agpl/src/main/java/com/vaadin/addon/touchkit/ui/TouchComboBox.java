@@ -43,6 +43,9 @@ import com.vaadin.ui.AbstractSelect;
  * FIXME remove listener sets -> replace with EventRouter
  * <p>
  * FIXME Javadocs
+ * 
+ * @deprecated This component is still experimental and not yet official part of
+ *             TouchKit, API and functionality may still change dramatically
  */
 public class TouchComboBox extends AbstractField<Object> implements
         AbstractSelect.Filtering, FieldEvents.BlurNotifier,
