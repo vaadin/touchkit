@@ -285,6 +285,12 @@
 .v-errorindicator {
 	display: inline-block;
 }
+/* TouchKit uses red ! as error indicator, base theme apparently nothing. */
+.v-errorindicator:before {
+	position:absolute;
+	content: "!";
+	color: red;
+}
 
 .v-caption .v-icon {
 	display: inline-block;

@@ -512,6 +512,13 @@ body e.v-app-loading {
 	text-shadow: 0 1px 1px #396897;
 }
 
+.v-touchkit-verticalcomponentgroup .v-formlayout .v-formlayout-contentcell { 
+    padding-right: listLayoutMargin;         
+} 
+.v-touchkit-verticalcomponentgroup .v-formlayout .v-formlayout-contentcell > * { 
+    float:right; 
+} 
+
 .v-touchkit-componentgroup-row>.v-caption>.v-icon,
 .v-touchkit-navbutton .v-icon {
 	height: 30px;
@@ -1728,30 +1735,30 @@ span.v-datefield-calendarpanel-month {
 	width: auto !important;
 	display:block; /* ~ 100% width inline-block */
 }
-.v-touchkit-componentgroup-cell>.v-formlayout>table {
-	padding-right: listLayoutMargin;
-}
 .v-form>fieldset>div:last-child>.v-layout {
 	display:block; /* V7 has inlineblock by default, causes odd extra space although empty footer */
 }
 
-.v-touchkit-verticalcomponentgroup .v-formlayout-row .v-formlayout-captioncell, 
-.v-touchkit-verticalcomponentgroup .v-formlayout-row .v-formlayout-contentcell, 
-.v-touchkit-verticalcomponentgroup .v-formlayout-row .v-formlayout-errorcell {
+.v-tk .v-touchkit-verticalcomponentgroup .v-formlayout-row .v-formlayout-captioncell, 
+.v-tk .v-touchkit-verticalcomponentgroup .v-formlayout-row .v-formlayout-contentcell, 
+.v-tk .v-touchkit-verticalcomponentgroup .v-formlayout-row .v-formlayout-errorcell {
 	padding:0;
 }
 
-.v-touchkit-verticalcomponentgroup .v-formlayout-row .v-formlayout-captioncell {
+.v-tk .v-touchkit-verticalcomponentgroup .v-formlayout-row .v-formlayout-contentcell {
+	padding-right: listLayoutMargin;
+}
+.v-tk .v-touchkit-verticalcomponentgroup .v-formlayout-row .v-formlayout-captioncell {
 	padding-left: listLayoutMargin;
 	text-align: left;
 }
-
 
 .v-tk .v-formlayout-captioncell > .v-caption {
 	font-weight: bold;
 	font-size: 17px;
 	line-height: 43px;
 	height: 43px;
+	margin:0;
 }
 
 .v-tk .v-formlayout-row > td {
