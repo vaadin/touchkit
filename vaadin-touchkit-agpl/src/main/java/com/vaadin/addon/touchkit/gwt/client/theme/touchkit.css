@@ -29,14 +29,15 @@
 @def buttonColor #fff;
 @def buttonFontSize 20px;
 @def buttonGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(246,246,246,.46)), to(rgba(145,149,159,.46)), color-stop(.49, rgba(160,162,167,.46)), color-stop(.51, rgba(130,133,142,.46)))');
+@def buttonColorGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(246,246,246,.26)), to(rgba(145,149,159,.26)), color-stop(.49, rgba(160,162,167,.26)), color-stop(.51, rgba(130,133,142,.26)))');
 @def buttonActiveGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(200,200,200,.55)), to(rgba(128,131,141,.55)), color-stop(.49, rgba(132,134,138,.55)), color-stop(.51, rgba(101,104,113,.55)))');
 
-@def redButtonInsetBackground rgba(128,38,40,.6);
-@def redButtonWrapBgColor #ab0101; /* #e30101; */
-@def greenButtonInsetBackground rgba(37,92,40,.6);
-@def greenButtonWrapBgColor #1f9100; /* #29c100; */
-@def blueButtonInsetBackground rgba(37,38,128,.6);
-@def blueButtonWrapBgColor #0155ab; /* #0171e3; */
+@def redButtonInsetBackground rgb(170,0,0);
+@def redButtonWrapBgColor rgb(189,0,0);
+@def greenButtonInsetBackground rgb(0,150,0);
+@def greenButtonWrapBgColor rgb(0,170,0);
+@def blueButtonInsetBackground rgb(0,0,170);
+@def blueButtonWrapBgColor rgb(0,0,189);
 
 /**
  * Navbar
@@ -244,8 +245,6 @@ body e.v-app-loading {
 	opacity: .7;
 	}
 
-
-
 /* Clear Vaadin core theme styles from buttons */
 /* Default view buttons */
 .v-button {
@@ -259,25 +258,27 @@ body e.v-app-loading {
 	-webkit-box-shadow: buttonInsetBoxShadow;
 	padding: 3px;
 	text-align: center;
-}
-.v-button.red {
-	background: redButtonInsetBackground;
-}
-.v-button.green {
-    background: greenButtonInsetBackground;
-}
-.v-button.blue {
-    background: blueButtonInsetBackground;
+	position:relative;
 }
 
 .v-button:focus {
 	outline: none;
 }
 
-.v-button:active,
-.v-button.v-pressed {
-	background: buttonInsetBackground;
-	}
+.v-button:active .v-button-wrap:after,
+.v-button.v-pressed .v-button-wrap:after {
+	content:"";
+	position: absolute;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+	background-color: rgba(0,0,0,0.3);
+	border-radius: inherit;
+	pointer-events: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+}
 
 .v-button:active .v-button-wrap,
 .v-button.v-pressed .v-button-wrap {
@@ -295,7 +296,7 @@ body e.v-app-loading {
 .v-button-wrap {
 	display: block;
 	border-radius: 7px;
-	background: buttonGradient;
+	background-image: buttonGradient;
 	-webkit-box-shadow: buttonBoxShadow;
 	padding: 0 listLayoutMargin;
 	height: 35px;
@@ -341,138 +342,12 @@ body e.v-app-loading {
 	line-height: 1;
 	}
 
-/* Navbar buttons */
-.v-touchkit-navbar .v-button,
-.v-touchkit-horizontalbuttongroup {
-    display: inline-block;
-    margin: 0;
-    border: navbarButtonBorder;
-    border-radius: 5px;	
-    height: 30px;
-    padding: 0;
-    overflow: hidden;
-    box-sizing: border-box;
-    background: transparent;
-    color: navbarButtonColor;
-    text-shadow: navbarButtonTextShadow;
-    -webkit-box-shadow: navbarButtonBoxShadow;
-}
-
-.v-touchkit-navbar .v-button:focus {
-	
-}
-
-.v-touchkit-navbar .v-button .v-button-wrap,
-.v-touchkit-horizontalbuttongroup {
-	background: navbarButtonGradient;
-	border-radius: 4px;
-}
-
-.v-touchkit-horizontalbuttongroup .v-button.green {
-	background: rgba(0,92,0,0.6);
-}
-.v-touchkit-horizontalbuttongroup .v-button.green:active {
-    background: rgba(0,46,0,0.6);	
-}
-.v-touchkit-horizontalbuttongroup .v-button.red {
-    background: rgba(128,0,0,0.6);
-}
-.v-touchkit-horizontalbuttongroup .v-button.red:active {
-    background: rgba(64,0,0,0.6);
-}
-.v-touchkit-horizontalbuttongroup .v-button.blue {
-    background: rgba(0,0,128,0.6);
-}
-.v-touchkit-horizontalbuttongroup .v-button.blue:active {
-    background: rgba(0,0,64,0.6);
-}
-
-.v-touchkit-horizontalbuttongroup {
-    padding: 0 13px;	
-}
-
-.v-touchkit-navbar .v-button .v-button-wrap {
-    height: 28px;
-    padding: 0 listLayoutMargin;
-}
-
-.v-touchkit-navbar .v-button .v-button-wrap .v-button-caption,
-.v-touchkit-horizontalbuttongroup .v-button-wrap .v-button-caption {
-	color: navbarButtonColor;
-	text-shadow: navbarButtonTextShadow;
-	font-size: 12px;
-	-webkit-box-shadow: none;
-	/* These buttons are 28px height, make text centered */
-	line-height:28px;
-	vertical-align:top;
-	margin: 0;
-}
-
-.v-touchkit-navbar .v-button:active .v-button-wrap {
-	background: navbarButtonActiveGradient;
-}
-
-.v-touchkit-horizontalbuttongroup {
-	padding:0;
-	display:block;
-	/* Float left to "sqeeze" non used space, inline-block cannot be used to keep sizes working */
-	float:left;
-}
-
-.v-touchkit-componentgroup-cell>.v-touchkit-horizontalbuttongroup {
-	margin: listLayoutMargin 0;
-}
-
-.v-touchkit-navbar .v-touchkit-horizontalbuttongroup {
-	float:none;
-	display:inline-block
-}
-
-/* Strip some styles from buttons inside a componentgroup */
-.v-touchkit-horizontalbuttongroup .v-button:active,
-.v-touchkit-horizontalbuttongroup .v-button.v-pressed,
-.v-touchkit-horizontalbuttongroup .v-button {
-	border:0;
-	margin:0;
-	padding:0;
-	background: transparent;
-	-webkit-box-shadow: none;
-	display:inline-block;
-	border-left: navbarButtonBorder;
-	border-top-left-radius: 0px;
-	border-bottom-left-radius: 0px;
-}
-
-.v-touchkit-horizontalbuttongroup .v-button:focus {
-	
-}
-
-.v-touchkit-horizontalbuttongroup .v-button .v-button-wrap {
-	background:none;
-	border-radius:0;
-}
-
-.v-touchkit-horizontalbuttongroup .v-button:focus:first-child,
-.v-touchkit-horizontalbuttongroup .v-button:active:first-child,
-.v-touchkit-horizontalbuttongroup .v-button.v-pressed:first-child,
-.v-touchkit-horizontalbuttongroup .v-button:first-child {
-	border-left: none;
-	border-top-left-radius: 4px;
-	border-bottom-left-radius: 4px;
-}
-
-.v-touchkit-horizontalbuttongroup .v-button:last-child {
-	border-top-right-radius: 4px;
-	border-bottom-right-radius: 4px;
-}
-
-
 /* Navbar custom icon buttons */
 @url navbarArrowUp navbarArrowUpImage;
-.v-touchkit-navbar .icon-arrow-up .v-button-wrap .v-button-caption,
-.v-touchkit-navbar .icon-arrow-down .v-button-wrap .v-button-caption,
-.v-touchkit-navbar .icon-arrow-left .v-button-wrap .v-button-caption,
-.v-touchkit-navbar .icon-arrow-right .v-button-wrap .v-button-caption {
+.v-touchkit-navbar .icon-arrow-up .v-button-caption,
+.v-touchkit-navbar .icon-arrow-down .v-button-caption,
+.v-touchkit-navbar .icon-arrow-left .v-button-caption,
+.v-touchkit-navbar .icon-arrow-right .v-button-caption {
 	display: inline-block;
 	padding-top: 0px;
 	padding-bottom: 0px;
@@ -494,30 +369,22 @@ body e.v-app-loading {
 	}
 
 @url navbarArrowDown navbarArrowDownImage;
-.v-touchkit-navbar .icon-arrow-down .v-button-wrap .v-button-caption {
+.v-touchkit-navbar .icon-arrow-down .v-button-caption {
 	background-image: navbarArrowDown;
 	background-position: 0 60%;
 	}
 
 @url navbarArrowLeft navbarArrowLeftImage;
-.v-touchkit-navbar .icon-arrow-left .v-button-wrap .v-button-caption {
+.v-touchkit-navbar .icon-arrow-left .v-button-caption {
 	background-image: navbarArrowLeft;
 	margin-left: -2px;
 	}
 
 @url navbarArrowRight navbarArrowRightImage;
-.v-touchkit-navbar .icon-arrow-right .v-button-wrap .v-button-caption {
+.v-touchkit-navbar .icon-arrow-right .v-button-caption {
 	background-image: navbarArrowRight;
 	margin-right: -2px;
 	}
-
-
-
-
-
-
-
-
 
 
 /* Toolbar buttons (icons only by default) */
@@ -545,7 +412,7 @@ body e.v-app-loading {
 	display: inline-block;
 	}
 
-.v-touchkit-toolbar .v-button .v-button-wrap {
+.v-touchkit-toolbar .v-button-wrap {
 	background: transparent;
 	}
 
@@ -560,13 +427,10 @@ body e.v-app-loading {
 	}
 
 
-
-
-
-
 /* Touch highlight */
-.v-touchkit-toolbar .v-button .v-button-wrap:before,
-.v-touchkit-navbar .v-button-no-decoration .v-button-wrap:before {
+.v-touchkit-toolbar .v-button-wrap:before,
+.v-touchkit-navbar .v-button-wrap:before {
+    display: block;
 	content: "";
 	position: absolute;
 	-webkit-transition: .3s linear all;
@@ -576,23 +440,6 @@ body e.v-app-loading {
 	margin: 7px 0 0 2px;
 	opacity: 0;
 	}
-
-.v-touchkit-navbar .v-button-no-decoration .v-button-wrap:before {
-    display: block;
-}
-
-.v-touchkit-toolbar .v-button:active .v-button-wrap:before,
-.v-touchkit-navbar .v-button-no-decoration:active .v-button-wrap:before {
-	-webkit-box-shadow: 0 0 25px 13px #fff;
-	background: #fff;
-	opacity: .8;
-	}
-
-
-
-
-
-
 
 .v-touchkit-navpanel {
 	position: relative;
@@ -633,7 +480,8 @@ body e.v-app-loading {
 	}
 
 .v-touchkit-navbutton {
-	-webkit-appearance: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
 	display: block;
 	position: relative;
 	font-size: 17px;
@@ -844,6 +692,9 @@ body e.v-app-loading {
 
 .v-touchkit-navview {
 	position:relative;	
+	/* full size by default */
+	width: 100%;
+	height: 100%;
 }
 
 .v-touchkit-navview-wrapper {
@@ -1063,7 +914,7 @@ body e.v-app-loading {
 	border-color: rgba(0,0,0,.4);
 	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.1);
 }
-.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar .v-button .v-button-wrap .v-button-caption {
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar .v-button-caption {
 	color: buttonColor;
 	text-shadow: buttonTextShadow;
 }
@@ -1228,64 +1079,6 @@ body e.v-app-loading {
 
 .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-selected .v-button-wrap {
 	color: #fff;
-}
-
-
-
-/* Button customizations */
-
-.v-touchkit-navbar .v-button-no-decoration {
-	background: transparent;
-	border: none;
-	-webkit-box-shadow: none;
-	overflow: visible;
-}
-
-.v-touchkit-navbar .v-button-no-decoration .v-button-wrap,
-.v-touchkit-navbar .v-button-no-decoration:active .v-button-wrap {
-	border: none;
-	background: transparent;
-	overflow: visible;
-	-webkit-box-shadow: none;
-}
-
-.v-button-white .v-button-wrap {
-	background-color: #fff;
-}
-
-.v-button-white .v-button-wrap .v-button-caption {
-    color: #222;
-    text-shadow: navbarButtonTextShadow;	
-}
-
-.v-button-red .v-button-wrap,
-.v-touchkit-navbar .v-button-red {
-	background-color: redButtonWrapBgColor;
-}
-
-.v-button-blue .v-button-wrap,
-.v-touchkit-navbar .v-button-blue {
-	background-color: blueButtonWrapBgColor;
-}
-
-.v-button-green .v-button-wrap,
-.v-touchkit-navbar .v-button-green {
-	background-color: greenButtonWrapBgColor;
-}
-
-/*
-.v-touchkit-navbar .v-button-red .v-button-wrap,
-.v-touchkit-navbar .v-button-blue .v-button-wrap,
-.v-touchkit-navbar .v-button-green .v-button-wrap {
-	background-color: transparent;
-}
-*/
-
-.v-touchkit-navbar .v-button-red .v-button-wrap .v-button-caption,
-.v-touchkit-navbar .v-button-blue .v-button-wrap .v-button-caption,
-.v-touchkit-navbar .v-button-green .v-button-wrap .v-button-caption {
-    color: buttonColor;
-    text-shadow: buttonTextShadow;
 }
 
 /* Layout margins */
@@ -1824,16 +1617,19 @@ span.v-datefield-calendarpanel-month {
     margin: listLayoutMargin 0;
 }
 
-.v-tk .v-ui .v-touchkit-componentgroup-row .v-touchkit-componentgroup-cell > * {
+.v-touchkit-componentgroup-cell > * {
     margin: listLayoutMargin 0;
 }
 
-.v-tk .v-ui .v-touchkit-componentgroup-row .v-touchkit-componentgroup-cell > .v-select-optiongroup {
+.v-touchkit-componentgroup-cell > .v-select-optiongroup {
     margin: 0;
 }
 
 .v-touchkit-componentgroup-cell > .v-touchkit-navbutton {
-    padding: 0px;
+    padding-left: listLayoutMargin;
+    margin-left: negativelistLayoutMargin;
+    padding-right: listLayoutMargin;
+    margin-right: negativelistLayoutMargin;
 }
 
 .v-touchkit-verticalcomponentgroup .v-filterselect>input {
@@ -2235,6 +2031,198 @@ span.v-datefield-calendarpanel-month {
 @sprite .v-touchkit-cancel-image {
 	gwt-image: "dateCancelSymbol";
 }
+
+
+/* Navbar buttons and horizontal button group.
+ * Note that these must be after all other 
+ * button styles to get properly overridden border radius etc
+ */
+.v-touchkit-navbar .v-button,
+.v-touchkit-horizontalbuttongroup {
+    display: inline-block;
+    margin: 0;
+    border: navbarButtonBorder;
+    border-radius: 5px;	
+    height: 30px;
+    padding: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    background: transparent;
+    color: navbarButtonColor;
+    text-shadow: navbarButtonTextShadow;
+    -webkit-box-shadow: navbarButtonBoxShadow;
+}
+
+.v-touchkit-navbar .v-button-wrap,
+.v-touchkit-horizontalbuttongroup {
+	background: navbarButtonGradient;
+	border-radius: 4px;
+}
+
+.v-touchkit-horizontalbuttongroup {
+    padding: 0 13px;	
+}
+
+.v-touchkit-navbar .v-button-wrap {
+    height: 28px;
+    padding: 0 listLayoutMargin;
+}
+
+.v-touchkit-navbar .v-button-caption,
+.v-touchkit-horizontalbuttongroup .v-button-caption {
+	color: navbarButtonColor;
+	text-shadow: navbarButtonTextShadow;
+	font-size: 12px;
+	-webkit-box-shadow: none;
+	/* These buttons are 28px height, make text centered */
+	line-height:28px;
+	vertical-align:top;
+	margin: 0;
+}
+
+/* .v-touchkit-navbar .v-button:active .v-button-wrap { */
+/* 	background-image: navbarButtonActiveGradient; */
+/* } */
+
+.v-touchkit-horizontalbuttongroup {
+	padding:0;
+	display:block;
+	/* Float left to "sqeeze" non used space, inline-block cannot be used to keep sizes working */
+	float:left;
+}
+
+.v-touchkit-componentgroup-cell>.v-touchkit-horizontalbuttongroup {
+	margin: listLayoutMargin 0;
+}
+
+.v-touchkit-navbar .v-touchkit-horizontalbuttongroup {
+	float:none;
+	display:inline-block
+}
+
+/* Strip some styles from buttons inside a componentgroup */
+.v-touchkit-horizontalbuttongroup .v-button {
+	border:0;
+	margin:0;
+	padding:0;
+	background: transparent;
+	-webkit-box-shadow: none;
+	display:inline-block;
+	border-left: navbarButtonBorder;
+	border-radius: 0;
+}
+
+.v-touchkit-horizontalbuttongroup .v-button-wrap {
+	background:none;
+	border-radius:0;
+}
+
+.v-touchkit-horizontalbuttongroup .v-button:first-child {
+	border-left: none;
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+}
+
+.v-touchkit-horizontalbuttongroup .v-button:last-child {
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+/* This effect is quite weird, disabled by MT 13-02-27
+.v-touchkit-toolbar .v-button:active .v-button-wrap:before,
+.v-touchkit-navbar .v-button-no-decoration:active .v-button-wrap:before {
+	-webkit-box-shadow: 0 0 25px 13px #fff;
+	background: #fff;
+	opacity: .8;
+}
+*/
+
+/* no-decoration button in navbar */
+.v-touchkit-navbar .v-button-no-decoration {
+	background: transparent;
+	border: none;
+	-webkit-box-shadow: none;
+	overflow: visible;
+}
+
+.v-touchkit-navbar .v-button-no-decoration .v-button-wrap {
+	border: none;
+	background: transparent;
+	overflow: visible;
+	-webkit-box-shadow: none;
+}
+
+/* Button customizations */
+
+.v-button-white .v-button-wrap {
+	background-color: #fff;
+}
+
+.v-button-white .v-button-caption {
+    color: #222;
+    text-shadow: navbarButtonTextShadow;	
+}
+
+
+.v-button.red {
+	background-color: redButtonWrapBgColor;
+}
+.v-button.green {
+	background-color: greenButtonWrapBgColor;
+}
+.v-button.blue {
+	background-color: blueButtonWrapBgColor;
+}
+.v-button.red .v-button-wrap,
+.v-button.green .v-button-wrap,
+.v-button.blue .v-button-wrap {
+	background-image: buttonColorGradient;
+}
+.v-touchkit-navbar .v-button.red .v-button-wrap,
+.v-touchkit-navbar .v-button.green .v-button-wrap,
+.v-touchkit-navbar .v-button.blue .v-button-wrap,
+.v-touchkit-horizontalbuttongroup .v-button.red .v-button-wrap,
+.v-touchkit-horizontalbuttongroup .v-button.green .v-button-wrap,
+.v-touchkit-horizontalbuttongroup .v-button.blue .v-button-wrap {
+	background-image: navbarButtonGradient;
+}
+/*
+
+.v-button-red .v-button-wrap,
+.v-touchkit-navbar .v-button-red {
+	background-color: redButtonWrapBgColor;
+	background-image: buttonColorGradient;
+}
+
+.v-button-blue .v-button-wrap,
+.v-touchkit-navbar .v-button-blue {
+	background-color: blueButtonWrapBgColor;
+	background-image: buttonColorGradient;
+}
+
+.v-button-green .v-button-wrap,
+.v-touchkit-navbar .v-button-green {
+	background-color: greenButtonWrapBgColor;
+	background-image: buttonColorGradient;
+}
+
+.v-touchkit-navbar .v-button-red .v-button-wrap,
+.v-touchkit-navbar .v-button-blue .v-button-wrap,
+.v-touchkit-navbar .v-button-green .v-button-wrap {
+	background-color: transparent;
+}
+*/
+
+.v-touchkit-horizontalbuttongroup .v-button-red .v-button-caption,
+.v-touchkit-horizontalbuttongroup .v-button-blue .v-button-caption,
+.v-touchkit-horizontalbuttongroup .v-button-green .v-button-caption,
+.v-touchkit-navbar .v-button-red .v-button-caption,
+.v-touchkit-navbar .v-button-blue .v-button-caption,
+.v-touchkit-navbar .v-button-green .v-button-caption {
+    color: buttonColor;
+    text-shadow: buttonTextShadow;
+}
+
 
 .v-treetable-treespacer {
     display: inline-block;
