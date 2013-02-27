@@ -44,7 +44,7 @@
 
 		<!-- May be overridden by the build system -->
 		<license.short.name>agpl</license.short.name>
-		<vaadin.version.maven>7.0-SNAPSHOT</vaadin.version.maven>
+		<vaadin.version.maven>7.0.1</vaadin.version.maven>
 		<gpg.passphrase.file>empty.properties</gpg.passphrase.file>
 		<gpg.skip>true</gpg.skip>
 		<snapshot.repository.url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</snapshot.repository.url>
@@ -157,12 +157,12 @@
 				<artifactId>vaadin-maven-plugin</artifactId>
 				<version>7.0-SNAPSHOT</version>
 				<configuration>
-					<webappDirectory>${project.build.directory}/${project.build.finalName}/VAADIN/widgetsets</webappDirectory>
+					<webappDirectory>${project.build.directory}/testwebapp/VAADIN/widgetsets</webappDirectory>
 					<modules>
 						<module>com.vaadin.addon.touchkit.gwt.TouchKitWidgetSet</module>
 					</modules>
 					<extraJvmArgs>-Xmx1024M -Xss4024k</extraJvmArgs>
-					<runTarget>xsite</runTarget>
+					<runTarget>http://localhost:7777/</runTarget>
 					<hostedWebapp>${project.build.directory}/${project.build.finalName}</hostedWebapp>
 					<noServer>true</noServer>
 					<soyc>false</soyc>
@@ -178,7 +178,7 @@
 				<version>2.1.2</version>
 				<executions>
 					<execution>
-						<phase>package</phase>
+						<phase>assembly:single</phase>
 						<goals>
 							<goal>jar</goal>
 						</goals>
@@ -194,6 +194,7 @@
 						<goals>
 							<goal>jar</goal>
 						</goals>
+						<phase>assembly:single</phase>
 					</execution>
 				</executions>
 			</plugin>
@@ -204,7 +205,7 @@
 				<executions>
 					<execution>
 						<id>copy-dependencies</id>
-						<phase>package</phase>
+						<phase>assembly:single</phase>
 						<goals>
 							<goal>copy-dependencies</goal>
 						</goals>
@@ -226,15 +227,6 @@
 						<descriptor>assembly/assembly.xml</descriptor>
 					</descriptors>
 				</configuration>
-				<executions>
-					<execution>
-						<id>make-assembly</id>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 
 			<plugin>

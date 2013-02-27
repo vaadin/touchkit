@@ -49,15 +49,8 @@ public class TestServer {
         // servletHolder.setInitParameter("fallbackWidgetset",
         // Constants.DEFAULT_WIDGETSET);
 
-        File file = new File("./target");
-        File[] listFiles = file.listFiles();
-        for (File file2 : listFiles) {
-            if (file2.isDirectory()
-                    && file2.getName().startsWith("vaadin-touchkit-")) {
-                context.setWar(file2.getPath());
-                break;
-            }
-        }
+        File file = new File("./target/testwebapp");
+        context.setWar(file.getPath());
         context.setContextPath("/");
         context.addServlet(servletHolder, "/*");
         
