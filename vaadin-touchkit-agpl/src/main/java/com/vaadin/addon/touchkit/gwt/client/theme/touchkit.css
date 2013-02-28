@@ -259,14 +259,16 @@ body e.v-app-loading {
 	padding: 3px;
 	text-align: center;
 	position:relative;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 .v-button:focus {
 	outline: none;
 }
 
-.v-button:active .v-button-wrap:after,
-.v-button.v-pressed .v-button-wrap:after {
+.v-button:active .v-button-wrap:after {
 	content:"";
 	position: absolute;
 	top:0;
@@ -280,8 +282,7 @@ body e.v-app-loading {
 	-webkit-user-select: none;
 }
 
-.v-button:active .v-button-wrap,
-.v-button.v-pressed .v-button-wrap {
+.v-button:active .v-button-wrap {
 	background-image: buttonActiveGradient;
 }
 
