@@ -13,22 +13,18 @@
 		for touch based devices like smartphones and tablets.
 	</p>
 
-	<p>
-		Note, that this Vaadin 7 compatible version is still under active
-		development. Especially documentation and tutorial are not in their
-		final shape. See <a
-			href="http://dev.vaadin.com/svn/branches/vornitologist3/">vornitologist</a>
-		and <a href="http://dev.vaadin.com/svn/branches/mobilemail3/">mobilemail</a>
-		demos from SVN for up to date code examples. We also still have
-		several bugs and performance issues to tackle. If you have tight
-		schedule in your project, consider using the Vaadin 6 compatible 2.X
-		branch at this point.
-	</p>
+	<p>Note, that this Vaadin 7 compatible version is still at beta
+		level. We still have some bugs and performance issues to tackle. If
+		you have tight schedule in your project, consider using the Vaadin 6
+		compatible 2.X branch at this point.</p>
+		
+		<p> TouchKit 3 (and Vaadin 7) versions of our demo apps are availabels via SVN: <a
+			href="http://dev.vaadin.com/svn/branches/vornitologist3/">Vornitologist</a>
+		and <a href="http://dev.vaadin.com/svn/branches/mobilemail3/">Mobilemail</a>.</p>
 
 	<p>Usage of modern build systems like Maven, that supports
 		transient dependencies, is highly encouraged. Things should work fine
 		with following dependency declaration and Vaadin Maven plugin:</p>
-
 	<pre>
 		
 &lt;dependency&gt;
@@ -56,25 +52,11 @@
 			href="https://vaadin.com/book">https://vaadin.com/book</a>
 	</p>
 
-	<h2>Tutorial (deprecated)</h2>
-
-	<p>In addition to the reference manual there is a more tutorial
-		like article available how to create a full featured mobile
-		application with Vaadin TouchKit. The reader is expected to have basic
-		knowledge of Vaadin development.</p>
-	<p>
-		<a href="tutorial/touchkit-tutorial.html">Read the tutorial</a>
-	</p>
-
 	<h2>Dependencies</h2>
 
 	<p>This version of TouchKit is built against Vaadin
 		${vaadin.version.maven}, but is expected to be forward compatible with
-		minor versions. In addition to Vaadin, TouchKit depends some third
-		party Apache 2 licensed Java libraries. Currently these libraries are
-		only required during widgetset compilation. Those are automatically
-		resolved for Maven users and also (others but core vaadin jars and
-		their dependencies) are also collected to this packages lib directory.</p>
+		minor versions.</p>
 
 </body>
 </html>

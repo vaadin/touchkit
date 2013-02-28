@@ -30,24 +30,24 @@
 				<include>*.jar</include>
 			</includes>
 		</fileSet>
-		<fileSet>
-			<directory>target/libs</directory>
-			<outputDirectory>lib</outputDirectory>
-			<includes>
+<!-- 		<fileSet> -->
+<!-- 			<directory>target/libs</directory> -->
+<!-- 			<outputDirectory>lib</outputDirectory> -->
+<!-- 			<includes> -->
 				<!-- TODO: Here we just include stuff that it not needed by tests and 
 					Vaadin. Currently this is just reflections that is needed by the cache manifest 
 					linker implementation. We should look into both splitting client side stuff 
 					to separate module and to getting rid of reflections library. Also to be 
 					safer, this should work so that we exclude stuff that should not be included 
 					in the zip package. -->
-				<include>reflections*.jar</include>
-				<include>guava*.jar</include>
-				<include>jsr305*.jar</include>
-				<include>javassist*.jar</include>
-				<include>dom4j*.jar</include>
-				<include>xml-apis*.jar</include>
-			</includes>
-		</fileSet>
+<!-- 				<include>reflections*.jar</include> -->
+<!-- 				<include>guava*.jar</include> -->
+<!-- 				<include>jsr305*.jar</include> -->
+<!-- 				<include>javassist*.jar</include> -->
+<!-- 				<include>dom4j*.jar</include> -->
+<!-- 				<include>xml-apis*.jar</include> -->
+<!-- 			</includes> -->
+<!-- 		</fileSet> -->
 	</fileSets>
 
 	<files>
