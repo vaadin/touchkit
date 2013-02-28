@@ -6,6 +6,7 @@ import com.vaadin.addon.touchkit.gwt.client.vcom.DatePickerServerRpc;
 import com.vaadin.addon.touchkit.gwt.client.vcom.DatePickerState;
 import com.vaadin.addon.touchkit.gwt.client.vcom.DatePickerState.Resolution;
 import com.vaadin.ui.AbstractField;
+import com.vaadin.ui.DateField;
 
 /**
  * EXPERIMENTAL!
@@ -13,7 +14,10 @@ import com.vaadin.ui.AbstractField;
  * This component is still experimental, don't expect it to by as high quality
  * as the library in general.
  * <p>
- * Field used to ask time values from users.
+ * Field used to ask time values from users. Instead of std Vaadin
+ * {@link DateField} developers might want to use this to let browsers show
+ * their own native date picker. Native date pickers are supported on most
+ * recent devices only.
  */
 @SuppressWarnings("serial")
 public class DatePicker extends AbstractField<Date> {
