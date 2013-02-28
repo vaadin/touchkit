@@ -1,2333 +1,2322 @@
-    /**
-     * GWT's CssResource is unfortunately so limited that sharing def's across
-     * multiple stylesheets is near-impossible. Because of that, all styles are in
-     * this one huge file.
-     */
-
-        /**
-         * General borders
-         */
-    @def divider 1px solid #9f9f9f;
-    @def lightDivider 1px solid rgba(187,187,187,.5);
-    @def listBorder 1px solid #bbb;
-
-        /**
-         * Layout dimensions
-         */
-    @def listLayoutMargin 10px;
-    @def negativeListLayoutMargin -10px;
-
-        /**
-         * Default buttons (iPhone style, full-width)
-         */
-    @def buttonInsetBoxShadow inset 0 1px 2px rgba(0,0,0,.5);
-    @def buttonInsetBackground rgba(37,38,40,.6);
-    @def buttonBoxShadow 0 1px 2px rgba(0,0,0,.5);
-    @def buttonTextShadow 0 -1px 0 rgba(0,0,0,.75);
-    @def buttonColor #fff;
-    @def buttonFontSize 20px;
-    @def buttonGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(246,246,246,.46)), to(rgba(145,149,159,.46)), color-stop(.49, rgba(160,162,167,.46)), color-stop(.51, rgba(130,133,142,.46)))');
-    @def buttonActiveGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(200,200,200,.55)), to(rgba(128,131,141,.55)), color-stop(.49, rgba(132,134,138,.55)), color-stop(.51, rgba(101,104,113,.55)))');
-
-    @def redButtonInsetBackground rgba(128,38,40,.6);
-    @def redButtonWrapBgColor #ab0101;
-        /* #e30101; */
-    @def greenButtonInsetBackground rgba(37,92,40,.6);
-    @def greenButtonWrapBgColor #1f9100;
-        /* #29c100; */
-    @def blueButtonInsetBackground rgba(37,38,128,.6);
-    @def blueButtonWrapBgColor #0155ab;
-        /* #0171e3; */
-
-        /**
-         * Navbar
-         */
-    @def navbarTextShadow 0 1px 1px rgba(255,255,255,.75);
-    @def navbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#edeeef), to(#c9cccf))');
-    @def greenNavbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#edeeef), to(#c9cccf))');
-
-        /**
-         * Navbar buttons
-         */
-    @def navbarButtonColor #3d3f41;
-    @def navbarButtonTextShadow 0 1px 0 rgba(255,255,255,.5);
-    @def navbarButtonGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,.23)), to(rgba(73,73,73,.23)))');
-    @def navbarButtonActiveGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(180,180,180,.3)), to(rgba(30,30,30,.3)))');
-    @def navbarButtonBorder 1px solid rgba(142,147,152,.66);
-    @def navbarButtonBoxShadow 0 1px 0 rgba(255,255,255,.25), inset 0 1px 0 rgba(255,255,255,.3);
-
-        /* Tabbar */
-    @def tabbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#48494b), to(#222324), color-stop(0.49, #333435), color-stop(0.51, #2e2f30))');
-
-        /* Navbuttons */
-    @def navButtonGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4d8cb9), to(#3e6fa8))');
-
-        /* Slider */
-    @def sliderBaseGradient literal('-webkit-gradient(linear, 0% 0%, 0% 90%, from(#ccc), to(#fff))');
-    @def sliderHandleGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#ddd), to(#fff))');
-
-        /* Default popover */
-    @def popoverGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(93,101,109,.86)), to(rgba(24,25,26,.9)), color-stop(.25, rgba(40,45,51,.86)))');
-    @def popoverNavbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0)), to(rgba(0,0,0,0)), color-stop(.49, rgba(0,0,0,.2)), color-stop(.51, rgba(0,0,0,.45)))');
-    @def popoverToolbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0)), to(rgba(255,255,255,0)), color-stop(.2, rgba(255,255,255,.15)), color-stop(.55, rgba(255,255,255,.1)), color-stop(.56, rgba(255,255,255,.05)))');
-
-        /* Table */
-    @def tableSelectionGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4d8cb9), to(#3e6fa8))');
-
-        /* TouchComboBox */
-    @def touchComboBoxItemButton literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#fcfcfc), to(#eaeaea))');
-
-        /* CssLayouts don't need to be overflow: hidden in webkit */
-    .v-csslayout {
-        overflow: visible;
-    }
-
-        /* Hide default shadow implementation, shadows should be created using -webkit-box-shadow on the actual element that requires the shadow. */
-    .v-shadow, .v-shadow-window {
-        display: none;
-    }
-
-        /* Fonts */
-    .v-app,
-    .v-window,
-    .v-popupview-popup,
-    .v-tooltip,
-    .v-app input,
-    .v-app select,
-    .v-app button,
-    .v-app textarea,
-    .v-window input,
-    .v-window select,
-    .v-window button,
-    .v-window textarea,
-    .v-popupview-popup input,
-    .v-popupview-popup select,
-    .v-popupview-popup button,
-    .v-popupview-popup textarea,
-    .v-filterselect-suggestpopup,
-    .v-datefield-popup,
-    .v-contextmenu,
-    .v-Notification,
-    .v-menubar-submenu,
-    .v-drag-element {
-        font-family: "Helvetica Neue", Helvetica, Arial, Tahoma, Verdana, sans-serif;
-        font-size: 14px;
-        line-height: 19px;
-        color: #222;
-        -webkit-text-size-adjust: none;
-    }
-
-    .v-contextmenu {
-        background: #f8f8f9;
-        border: none;
-        border-radius: 3px;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        -o-border-radius: 3px;
-        overflow: hidden;
-        padding: 4px 0;
-        -webkit-box-shadow: 0 0 40px rgba(0, 0, 0, .6);
-    }
-
-    .v-contextmenu .gwt-MenuItem {
-        padding: 1px 12px 1px 8px;
-        height: 30px;
-        user-select: none;
-        -moz-user-select: none;
-        -webkit-user-select: none;
-        cursor: default;
-    }
-
-    .v-tk .v-contextmenu .gwt-MenuItem .v-icon {
-        margin-right: 3px;
-    }
-
-    .v-tk .v-contextmenu .gwt-MenuItem-selected div {
-        background: transparent;
-        color: black;
-    }
-
-    .v-touchkit-offlinemode-panel {
-        padding-top: 10%;
-        padding-left: 17%;
-        padding-right: 17%;
-        text-align: center;
-    }
-
-    .v-touchkit-sadface {
-        display: inline-block;
-        -webkit-transform: rotate(90deg);
-        font-size: 4em;
-        font-weight: bold;
-        height: 1em;
-        margin-left: -0.5em;
-    }
-
-        /* Default background for application */
-    @url linenBg linenBgImage ;
-    .v-app,
-    .v-touchkit-backgroundstripes,
-    .v-touchkit-offlinemode {
-        background: #e0e1e3 linenBg;
-        text-shadow: 0 1px 0 rgba(255, 255, 255, .3);
-    }
-
-        /* Loading indicator */
-    @url spinner spinnerImage ;
-    .v-loading-indicator,
-    .v-loading-indicator-delay,
-    .v-loading-indicator-wait {
-        position: absolute;
-        z-index: 30000;
-        background: spinner no-repeat 50%;
-        opacity: 1;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        margin: 0;
-        height: 100%;
-        width: 100%;
-        overflow: hidden;
-        -webkit-animation-name: spinnerRotate;
-        -webkit-animation-duration: 2s;
-        -webkit-animation-iteration-count: infinite;
-        -webkit-animation-timing-function: linear;
-    }
-
-    .v-popupview-loading {
-        width: 30px;
-        height: 30px;
-        background: spinner no-repeat 50%;
-        -webkit-animation-name: spinnerRotate;
-        -webkit-animation-duration: 2s;
-        -webkit-animation-iteration-count: infinite;
-        -webkit-animation-timing-function: linear;
-    }
-
-    div.v-progressindicator-indeterminate {
-        height: 20px;
-        width: 20px;
-        background: spinner no-repeat 50%;
-        -webkit-animation-name: spinnerRotate;
-        -webkit-animation-duration: 2s;
-        -webkit-animation-iteration-count: infinite;
-        -webkit-animation-timing-function: linear;
-    }
-
-    body e.v-app-loading {
-        background-image: spinner;
-        background-repeat: no-repeat;
-        background-position: 50%;
-        width: 100%;
-        height: 100%;
-    }
-
-    @-webkit-keyframes spinnerRotate {
-        from {
-            -webkit-transform: rotate(0deg);
-        }
-        to {
-            -webkit-transform: rotate(360deg);
-        }
-    }
-
-    .v-loading-indicator {
-        opacity: .5;
-    }
-
-    .v-loading-indicator-delay {
-        opacity: .7;
-    }
-
-        /* Clear Vaadin core theme styles from buttons */
-        /* Default view buttons */
-    .v-button {
-        margin: 0;
-        border: none;
-        width: auto;
-        height: auto;
-        display: inline-block;
-        border-radius: listLayoutMargin;
-        background: buttonInsetBackground;
-        -webkit-box-shadow: buttonInsetBoxShadow;
-        padding: 3px;
-        text-align: center;
-    }
-
-    .v-button.red {
-        background: redButtonInsetBackground;
-    }
-
-    .v-button.green {
-        background: greenButtonInsetBackground;
-    }
-
-    .v-button.blue {
-        background: blueButtonInsetBackground;
-    }
-
-    .v-button:focus {
-        outline: none;
-    }
-
-    .v-button:active,
-    .v-button.v-pressed {
-        background: buttonInsetBackground;
-    }
-
-    .v-button:active .v-button-wrap,
-    .v-button.v-pressed .v-button-wrap {
-        background-image: buttonActiveGradient;
-    }
-
-    .v-button-caption {
-        line-height: 37px;
-        color: buttonColor;
-        text-shadow: buttonTextShadow;
-        font-size: buttonFontSize;
-        font-weight: bold;
-    }
-
-    .v-button-wrap {
-        display: block;
-        border-radius: 7px;
-        background: buttonGradient;
-        -webkit-box-shadow: buttonBoxShadow;
-        padding: 0 listLayoutMargin;
-        height: 35px;
-        line-height: 37px;
-        font-size: buttonFontSize;
-        font-weight: bold;
-        color: buttonColor;
-        text-shadow: buttonTextShadow;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-    }
-
-        /* Link style buttons */
-    .v-button-link,
-    .v-button-link .v-button-wrap,
-    .v-button-link .v-button-caption,
-    .v-button-link:active,
-    .v-button-link.v-pressed,
-    .v-nativebutton-link {
-        display: inline-block;
-        border-radius: 0;
-        background: transparent;
-        -webkit-box-shadow: none;
-        padding: 0;
-        height: auto;
-        margin: 0;
-        font-size: 14px;
-        font-weight: normal;
-        text-shadow: none;
-        color: #1b699f;
-        line-height: inherit;
-    }
-
-    .v-button-link:active .v-button-wrap {
-        background: transparent;
-    }
-
-    .v-button-link .v-button-caption,
-    .v-nativebutton-link .v-button-caption {
-        text-decoration: none;
-        line-height: 1;
-    }
-
-        /* Navbar buttons */
-    .v-touchkit-navbar .v-button,
-    .v-touchkit-horizontalbuttongroup {
-        display: inline-block;
-        margin: 0;
-        border: navbarButtonBorder;
-        border-radius: 5px;
-        height: 30px;
-        padding: 0;
-        overflow: hidden;
-        box-sizing: border-box;
-        background: transparent;
-        color: navbarButtonColor;
-        text-shadow: navbarButtonTextShadow;
-        -webkit-box-shadow: navbarButtonBoxShadow;
-    }
-
-    .v-touchkit-navbar .v-button:focus {
-
-    }
-
-    .v-touchkit-navbar .v-button .v-button-wrap,
-    .v-touchkit-horizontalbuttongroup {
-        background: navbarButtonGradient;
-        border-radius: 4px;
-    }
-
-    .v-touchkit-horizontalbuttongroup .v-button.green {
-        background: rgba(0, 92, 0, 0.6);
-    }
-
-    .v-touchkit-horizontalbuttongroup .v-button.green:active {
-        background: rgba(0, 46, 0, 0.6);
-    }
-
-    .v-touchkit-horizontalbuttongroup .v-button.red {
-        background: rgba(128, 0, 0, 0.6);
-    }
-
-    .v-touchkit-horizontalbuttongroup .v-button.red:active {
-        background: rgba(64, 0, 0, 0.6);
-    }
-
-    .v-touchkit-horizontalbuttongroup .v-button.blue {
-        background: rgba(0, 0, 128, 0.6);
-    }
-
-    .v-touchkit-horizontalbuttongroup .v-button.blue:active {
-        background: rgba(0, 0, 64, 0.6);
-    }
-
-    .v-touchkit-horizontalbuttongroup {
-        padding: 0 13px;
-    }
-
-    .v-touchkit-navbar .v-button .v-button-wrap {
-        height: 28px;
-        padding: 0 listLayoutMargin;
-    }
-
-    .v-touchkit-navbar .v-button .v-button-wrap .v-button-caption,
-    .v-touchkit-horizontalbuttongroup .v-button-wrap .v-button-caption {
-        color: navbarButtonColor;
-        text-shadow: navbarButtonTextShadow;
-        font-size: 12px;
-        -webkit-box-shadow: none;
-        /* These buttons are 28px height, make text centered */
-        line-height: 28px;
-        vertical-align: top;
-        margin: 0;
-    }
-
-    .v-touchkit-navbar .v-button:active .v-button-wrap {
-        background: navbarButtonActiveGradient;
-    }
-
-    .v-touchkit-horizontalbuttongroup {
-        padding: 0;
-        display: block;
-        /* Float left to "sqeeze" non used space, inline-block cannot be used to keep sizes working */
-        float: left;
-    }
-
-    .v-touchkit-componentgroup-cell>.v-touchkit-horizontalbuttongroup {
-        margin: listLayoutMargin 0;
-    }
-
-    .v-touchkit-navbar .v-touchkit-horizontalbuttongroup {
-        float: none;
-        display: inline-block
-    }
-
-        /* Strip some styles from buttons inside a componentgroup */
-    .v-touchkit-horizontalbuttongroup .v-button:active,
-    .v-touchkit-horizontalbuttongroup .v-button.v-pressed,
-    .v-touchkit-horizontalbuttongroup .v-button {
-        border: 0;
-        margin: 0;
-        padding: 0;
-        background: transparent;
-        -webkit-box-shadow: none;
-        display: inline-block;
-        border-left: navbarButtonBorder;
-        border-top-left-radius: 0px;
-        border-bottom-left-radius: 0px;
-    }
-
-    .v-touchkit-horizontalbuttongroup .v-button:focus {
-
-    }
-
-    .v-touchkit-horizontalbuttongroup .v-button .v-button-wrap {
-        background: none;
-        border-radius: 0;
-    }
-
-    .v-touchkit-horizontalbuttongroup .v-button:focus:first-child,
-    .v-touchkit-horizontalbuttongroup .v-button:active:first-child,
-    .v-touchkit-horizontalbuttongroup .v-button.v-pressed:first-child,
-    .v-touchkit-horizontalbuttongroup .v-button:first-child {
-        border-left: none;
-        border-top-left-radius: 4px;
-        border-bottom-left-radius: 4px;
-    }
-
-    .v-touchkit-horizontalbuttongroup .v-button:last-child {
-        border-top-right-radius: 4px;
-        border-bottom-right-radius: 4px;
-    }
-
-        /* Navbar custom icon buttons */
-    @url navbarArrowUp navbarArrowUpImage;
-    .v-touchkit-navbar .icon-arrow-up .v-button-wrap .v-button-caption,
-    .v-touchkit-navbar .icon-arrow-down .v-button-wrap .v-button-caption,
-    .v-touchkit-navbar .icon-arrow-left .v-button-wrap .v-button-caption,
-    .v-touchkit-navbar .icon-arrow-right .v-button-wrap .v-button-caption {
-        display: inline-block;
-        padding-top: 0px;
-        padding-bottom: 0px;
-        width: 18px;
-        height: 28px;
-        text-indent: -999px;
-        overflow: hidden;
-        background: navbarArrowUp no-repeat 50%;
-    }
-
-    .v-touchkit-navbar .icon-arrow-left .v-button-wrap,
-    .v-touchkit-navbar .icon-arrow-right .v-button-wrap {
-        padding: 0 10px;
-    }
-
-    .v-touchkit-navbar .icon-arrow-left .v-button-caption,
-    .v-touchkit-navbar .icon-arrow-right .v-button-caption {
-        width: 19px;
-    }
-
-    @url navbarArrowDown navbarArrowDownImage;
-    .v-touchkit-navbar .icon-arrow-down .v-button-wrap .v-button-caption {
-        background-image: navbarArrowDown;
-        background-position: 0 60%;
-    }
-
-    @url navbarArrowLeft navbarArrowLeftImage;
-    .v-touchkit-navbar .icon-arrow-left .v-button-wrap .v-button-caption {
-        background-image: navbarArrowLeft;
-        margin-left: -2px;
-    }
-
-    @url navbarArrowRight navbarArrowRightImage;
-    .v-touchkit-navbar .icon-arrow-right .v-button-wrap .v-button-caption {
-        background-image: navbarArrowRight;
-        margin-right: -2px;
-    }
-
-        /* Toolbar buttons (icons only by default) */
-    .v-touchkit-toolbar .v-button,
-    .v-touchkit-toolbar .v-touchkit-horizontalbuttongroup {
-        display: inline-block;
-        margin: 0;
-        background: transparent;
-        border-radius: 4px;
-        -webkit-box-shadow: none;
-        height: auto;
-        padding: 0;
-    }
-
-    .v-touchkit-toolbar .v-button-wrap {
-        background: transparent;
-        height: auto;
-        padding: 0;
-        -webkit-box-shadow: none;
-        font-size: 10px;
-        line-height: 1;
-        color: navbarButtonColor;
-        text-shadow: navbarButtonTextShadow;
-        overflow: visible;
-        display: inline-block;
-    }
-
-    .v-touchkit-toolbar .v-button .v-button-wrap {
-        background: transparent;
-    }
-
-    .v-touchkit-toolbar .v-button-caption {
-        display: none;
-        line-height: 1;
-    }
-
-    .v-touchkit-toolbar .v-button .v-icon {
-        height: 25px;
-        margin-top: 10px;
-    }
-
-        /* Touch highlight */
-    .v-touchkit-toolbar .v-button .v-button-wrap:before,
-    .v-touchkit-navbar .v-button-no-decoration .v-button-wrap:before {
-        content: "";
-        position: absolute;
-        -webkit-transition: .3s linear all;
-        border-radius: 10px;
-        width: 20px;
-        height: 20px;
-        margin: 7px 0 0 2px;
-        opacity: 0;
-    }
-
-    .v-touchkit-navbar .v-button-no-decoration .v-button-wrap:before {
-        display: block;
-    }
-
-    .v-touchkit-toolbar .v-button:active .v-button-wrap:before,
-    .v-touchkit-navbar .v-button-no-decoration:active .v-button-wrap:before {
-        -webkit-box-shadow: 0 0 25px 13px #fff;
-        background: #fff;
-        opacity: .8;
-    }
-
-    .v-touchkit-navpanel {
-        position: relative;
-        overflow: hidden;
-    }
-
-    .v-touchkit-navpanel-wrapper {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        -webkit-transform: translate3d(0, 0, 0);
-        -webkit-transition: -webkit-transform 0.3s linear;
-    }
-
-    .v-touchkit-navpanel-container,
-    .v-touchkit-popover.v-touchkit-fullscreen .v-touchkit-navpanel-container {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: #e0e1e3 linenBg;
-        /* Not visible until positioned */
-        opacity: 0;
-        -webkit-transition: opacity 0.15s linear;
-    }
-
-    .v-touchkit-navpanel-placeholder,
-    .v-touchkit-popover.v-touchkit-fullscreen .v-touchkit-navpanel-placeholder {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: backgroundStripes;
-    }
-
-        /* TODO giallo for placeholder */
-    .v-touchkit-navpanel-notransit {
-        -webkit-transition: none;
-    }
-
-    .v-touchkit-navbutton {
-        -webkit-appearance: none;
-        display: block;
-        position: relative;
-        font-size: 17px;
-        font-weight: bold;
-        line-height: 43px;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    .v-touchkit-verticalcomponentgroup .v-touchkit-navbutton {
-        margin: 0 negativeListLayoutMargin;
-        padding: 0 listLayoutMargin;
-        outline: none;
-    }
-
-    .v-touchkit-verticalcomponentgroup .v-button-caption {
-        font-size: 16px;
-        vertical-align: top;
-        line-height: 35px;
-    }
-
-    .v-touchkit-verticalcomponentgroup .v-touchkit-navbutton:active {
-        background: navButtonGradient;
-        color: #fff;
-        text-shadow: 0 1px 1px #396897;
-    }
-
-    .v-touchkit-componentgroup-row>.v-caption>.v-icon,
-    .v-touchkit-navbutton .v-icon {
-        height: 30px;
-        margin-right: 6px;
-        vertical-align: -9px;
-    }
-
-    .v-touchkit-navbutton-desc {
-        color: #73787c;
-        font-weight: normal;
-        float: right;
-        margin-right: 22px;
-        margin-left: 10px;
-    }
-
-    .v-touchkit-navbutton-emphasis .v-touchkit-navbutton-desc {
-        color: #1b699f;
-    }
-
-    .v-touchkit-navbutton:active .v-touchkit-navbutton-desc {
-        color: #fff;
-    }
-
-    .v-touchkit-navbutton-pill .v-touchkit-navbutton-desc {
-        color: #fff;
-        padding: 1px 10px 2px;
-        background: #5d81ab;
-        border-radius: 1em;
-        line-height: 1;
-        margin-top: 12px;
-        font-weight: bold;
-        text-shadow: none;
-        -webkit-box-shadow: inset 0 1px 0 rgba(0, 0, 0, .15);
-    }
-
-    .v-touchkit-navbutton-pill:active .v-touchkit-navbutton-desc {
-        background: #fff;
-        color: #5d81ab;
-        text-shadow: none;
-        -webkit-box-shadow: none;
-    }
-
-    @url navArrowUrl navArrowImage;
-    .v-touchkit-navbutton:after {
-        content: "";
-        position: absolute;
-        right: listLayoutMargin;
-        top: 0;
-        bottom: 0;
-        background: navArrowUrl no-repeat 50%;
-        width: 10px;
-        margin-right: -1px;
-    }
-
-    @url navArrowWhiteUrl navArrowWhiteImage;
-    .v-touchkit-navbutton:active:after {
-        background-image: navArrowWhiteUrl;
-    }
-
-    @url backButtonUrl backButtonImage;
-
-    .v-touchkit-navbutton-back,
-    .v-touchkit-navbutton-forward {
-        display: block;
-        -webkit-border-image: backButtonUrl 0 6 0 13 stretch stretch;
-        border-width: 0 6px 0 13px;
-        width: auto;
-        height: 30px;
-        padding: 0 4px 0 3px;
-        background: transparent;
-        font-weight: bold;
-        text-align: left;
-        color: navbarButtonColor;
-        text-shadow: navbarButtonTextShadow;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        font-size: 12px;
-        line-height: 30px;
-        margin-right: auto;
-    }
-
-    .v-touchkit-navbutton.v-touchkit-navbutton-back .v-touchkit-navbutton-desc {
-        margin-left: 0;
-        margin-right: 0;
-    }
-
-    @url forwardButtonUrl forwardButtonImage;
-    .v-touchkit-navbutton-forward {
-        -webkit-border-image: forwardButtonUrl 0 13 0 6 stretch stretch;
-        border-width: 0 13px 0 6px;
-        width: auto;
-        height: 30px;
-        padding: 0 3px 0 4px;
-        color: navbarButtonColor;
-        text-shadow: navbarButtonTextShadow;
-        margin-left: auto;
-        margin-right: 0;
-    }
-
-    .v-touchkit-navbutton-back:after,
-    .v-touchkit-navbutton-forward:after {
-        display: none;
-    }
-
-    .v-touchkit-navbar-left {
-        position: absolute;
-        left: 6px;
-        top: 7px;
-        max-width: 35%;
-        z-index: 1;
-        padding-right: 4px;
-    }
-
-    .v-touchkit-navbar,
-    .v-touchkit-navpanel-placeholder > div,
-    .v-touchkit-popover.v-touchkit-fullscreen .v-touchkit-navpanel-placeholder > div {
-        background: navbarGradient;
-        color: #52555a;
-        display: block;
-        height: 43px;
-        font-size: 20px;
-        font-weight: bold;
-        text-decoration: none;
-        text-shadow: navbarTextShadow;
-        border-bottom: divider;
-        text-align: center;
-        position: relative;
-    }
-
-    .v-touchkit-navbar .v-touchkit-navbar-caption,
-    .v-touchkit-navpanel-placeholder > div,
-    .v-touchkit-popover.v-touchkit-fullscreen .v-touchkit-navpanel-placeholder > div {
-        line-height: 43px;
-    }
-
-    .v-touchkit-navbar-caption {
-        display: block;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        text-align: center;
-    }
-
-    .v-touchkit-navpanel-placeholder > div {
-        white-space: nowrap;
-        overflow: hidden;
-    }
-
-    .v-touchkit-navbar-right {
-        position: absolute;
-        right: 6px;
-        top: 7px;
-        max-width: 35%;
-        padding-left: 4px;
-    }
-
-    .v-touchkit-navbar-right>.v-button,
-    .v-touchkit-navbar-left>.v-button {
-        display: block;
-    }
-
-        /*FIXME should be for horizontal component group as well*/
-    .v-touchkit-navbar .v-button .v-icon {
-        height: 20px;
-        /* 28px height button conten, center */
-        margin: 4px 0 0 0;
-        vertical-align: top;
-    }
-
-    .v-touchkit-navview-notoolbar .v-touchkit-navview-toolbar {
-        display: none;
-    }
-
-        /* NavigationView */
-
-    .v-touchkit-navview {
-        position: relative;
-    }
-
-    .v-touchkit-navview-wrapper {
-        position: absolute;
-        top: 44px;
-        bottom: 44px;
-        left: 0;
-        right: 0;
-        overflow: auto;
-    }
-
-    .v-touchkit-navview-notoolbar .v-touchkit-navview-wrapper {
-        position: absolute;
-        top: 44px;
-        bottom: 0;
-        left: 0;
-        right: 0;
-    }
-
-    .v-touchkit-toolbar {
-        background: navbarGradient;
-        color: navbarButtonColor;
-        text-shadow: navbarButtonTextShadow;
-        height: 43px;
-    }
-
-    .v-touchkit-navview-toolbar .v-touchkit-navbar-caption {
-        font-size: 13px;
-    }
-
-    .v-touchkit-toolbar > .v-csslayout-margin {
-        padding: 2px;
-    }
-
-    .v-touchkit-navview-toolbar {
-        position: absolute;
-        height: 43px;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        border-top: divider;
-    }
-
-    .v-touchkit-navview-toolbar > .v-touchkit-toolbar {
-        overflow: visible;
-    }
-
-    .v-touchkit-navview-notoolbar .v-touchkit-navview-toolbar {
-        display: none;
-    }
-
-    .v-slider:focus {
-        outline: none;
-    }
-
-    .v-slider-base {
-        height: 6px;
-        background: sliderBaseGradient;
-        border-radius: 4px;
-        border: 1px solid rgba(0, 0, 0, .3);
-        border-bottom-color: rgba(0, 0, 0, 0);
-    }
-
-    .v-slider-handle {
-        background: sliderHandleGradient;
-        width: 20px;
-        height: 20px;
-        border-radius: 10px;
-        margin-top: -8px;
-        -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), 0 1px 2px rgba(0, 0, 0, .3);
-        border: 1px solid rgba(0, 0, 0, .3);
-        font-size: 0;
-    }
-
-    .v-tk .v-slider-handle-active {
-        background: #ccc;
-    }
-
-        /* touchkit sub window */
-    .v-touchkit-popover {
-        background: transparent;
-    }
-
-    .v-tk .v-window-modalitycurtain {
-        background: #3d3e40;
-        opacity: .7;
-    }
-
-    .v-tk .v-window-modalitycurtain.relative {
-        opacity: 0;
-    }
-
-    .v-touchkit-popover.v-touchkit-plain {
-        /* popover that is not relative to component, nor fullscreen */
-        -webkit-box-shadow: 0 0 40px rgba(0, 0, 0, .5);
-        background: #fff;
-        /* Disabled, too slow on 1st-gen iPad
-        -webkit-animation-name: popup;
-        -webkit-animation-duration: .2s;
-        -webkit-animation-iteration-count: 1;
-        -webkit-animation-timing-function: ease-out;
-        -webkit-animation-delay: .05s;
-        */
-    }
-
-        /*
-        @-webkit-keyframes popup {
-            from {
-                top: 100%;
-            }
-            to {
-                top: 0;
-            }
-        }
-        */
-
-    .v-touchkit-fullscreen {
-        background: linenBg;
-    }
-
-    .v-window-contents {
-        background: transparent;
-    }
-
-    .v-touchkit-popover.v-touchkit-relative .v-window-wrap {
-        overflow: visible;
-        background: transparent;
-        position: relative;
-        -webkit-box-shadow: 0 0 40px rgba(0, 0, 0, .6);
-        border-radius: listLayoutMargin;
-        border: 1px solid rgba(25, 33, 40, .5);
-        background: popoverGradient;
-    }
-
-    .v-touchkit-popover.v-touchkit-relative .v-window-contents {
-        border-radius: 11px;
-        position: relative;
-        -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), inset 0 0 1px rgba(255, 255, 255, .2);
-    }
-
-    .v-touchkit-popover.v-touchkit-relative.v-touchkit-smallscreen .v-window-wrap,
-    .v-touchkit-popover.v-touchkit-relative.v-touchkit-smallscreen .v-window-contents {
-        padding: 0;
-        border: none;
-        border-radius: 0;
-    }
-
-    .v-touchkit-popover.v-touchkit-relative .v-touchkit-navpanel-placeholder,
-    .v-touchkit-popover.v-touchkit-relative .v-touchkit-navpanel-placeholder > div {
-        background: transparent;
-        border-top: 0;
-        border-bottom: 0;
-    }
-
-    .v-touchkit-popover.v-touchkit-relative .v-window-contents > div > .v-verticallayout {
-        padding-top: 7px;
-        padding-bottom: 7px;
-        padding-left: 7px;
-        padding-right: 7px;
-    }
-
-    .v-touchkit-popover .v-window-closebox,
-    .v-touchkit-popover .v-window-outerheader,
-    .v-touchkit-popover .v-window-footer {
-        display: none;
-    }
-
-    .v-touchkit-opacity-transition {
-        -webkit-transition: opacity 0.1s linear;
-    }
-
-    @sprite .v-touchkit-popover-pointer {
-        gwt-image: "popoverArrowDownImage";
-        position: absolute;
-        margin-top: -1px;
-    }
-
-    @sprite .v-touchkit-popover-pointer-bottom {
-        gwt-image: "popoverArrowImage";
-        position: absolute;
-        margin-top: 3px;
-    }
-
-    .v-touchkit-popover.v-touchkit-relative .v-touchkit-navview-wrapper {
-        background: #f6f6f7;
-        margin: 0 5px;
-        -webkit-box-shadow: inset 0 3px 2px rgba(0, 0, 0, .4);
-        border-radius: 6px;
-        z-index: 1;
-    }
-
-    .v-touchkit-popover.v-touchkit-relative .v-touchkit-navview-notoolbar .v-touchkit-navview-wrapper {
-        bottom: 5px;
-    }
-
-    .v-touchkit-popover.v-touchkit-relative .v-touchkit-navpanel-container {
-        background: transparent;
-    }
-
-    .v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar,
-    .v-touchkit-popover.v-touchkit-relative .v-touchkit-navpanel-placeholder {
-        background: popoverNavbarGradient;
-        border: 0;
-    }
-
-    .v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar-caption,
-    .v-touchkit-popover.v-touchkit-relative .v-touchkit-navpanel-placeholder > div {
-        color: buttonColor;
-        text-shadow: buttonTextShadow;
-    }
-
-    .v-touchkit-popover.v-touchkit-relative .v-touchkit-navview-toolbar {
-        border: 0;
-        background: popoverToolbarGradient;
-        height: 43px;
-        padding-top: 8px;
-    }
-
-    .v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar .v-button,
-    .v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar .v-touchkit-horizontalbuttongroup {
-        border-color: rgba(0, 0, 0, .4);
-        -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, .1);
-    }
-
-    .v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar .v-button .v-button-wrap .v-button-caption {
-        color: buttonColor;
-        text-shadow: buttonTextShadow;
-    }
-
-    @url popoverBackButtonUrl popoverBackButtonImage;
-    .v-touchkit-popover.v-touchkit-relative .v-touchkit-navbutton-back {
-        color: buttonColor;
-        text-shadow: buttonTextShadow;
-        -webkit-border-image: popoverBackButtonUrl 0 6 0 13 stretch stretch;
-    }
-
-    @url popoverForwardButtonUrl popoverForwardButtonImage;
-    .v-touchkit-popover.v-touchkit-relative .v-touchkit-navbutton-forward {
-        color: buttonColor;
-        text-shadow: buttonTextShadow;
-        -webkit-border-image: popoverForwardButtonUrl 0 6 0 13 stretch stretch;
-    }
-
-    .v-touchkit-popover.v-touchkit-relative .v-touchkit-toolbar {
-        border: 0;
-        background: transparent;
-    }
-
-    .v-touchkit-popover.v-touchkit-relative .v-touchkit-toolbar .v-button-wrap {
-        color: buttonColor;
-        text-shadow: buttonTextShadow;
-    }
-
-        /* Switch style checkbox.
-         * TODO Consider styling with pure css:
-         * http://css3wizardry.com/2010/09/16/making-an-iphone-switch-control-without-images/
-         */
-
-    @url switch switchImage;
-    .v-touchkit-switch {
-        overflow: hidden;
-        position: relative;
-        width: 90px;
-        height: 26px;
-        overflow: hidden;
-        background: switch;
-        -webkit-background-origin: border-box;
-        border: 1px solid rgba(0, 0, 0, .2);
-        border-radius: 4px;
-    }
-
-    .v-touchkit-switch-slider {
-        /* Used only for measuring the slide amount. The dimensions of this element should match the dimensions of the switch image */
-        position: absolute;
-        width: 146px;
-        height: 25px;
-    }
-
-    .v-touchkit-switch-focus,
-    .v-touchkit-switch:focus {
-        outline: none;
-    }
-
-    .v-slider-feedback {
-        font-size: 20px;
-        line-height: 1;
-        padding: 4px 7px;
-        -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, .5);
-        margin-top: -14px !important;
-    }
-
-    .v-touchkit-verticalcomponentgroup .v-checkbox {
-        line-height: 43px;
-        font-size: 17px;
-        font-weight: bold;
-    }
-
-        /* Tabsheet tabs below */
-
-    .v-touchkit-tabbar {
-        overflow: hidden;
-        position: relative;
-        padding-bottom: 46px;
-    }
-
-    .v-touchkit-tabbar .v-csslayout-container,
-    .v-touchkit-tabbar .v-csslayout-margin {
-        height: 100%;
-        position: relative;
-    }
-
-    .v-touchkit-tabbar-wrapper {
-        overflow: auto;
-        height: 100%;
-    }
-
-    .v-touchkit-tabbar-toolbar .v-touchkit-toolbar {
-        position: absolute;
-        bottom: 0;
-        height: 48px;
-        background: tabbarGradient;
-        border-top: 1px solid #4c4c4c;
-        -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2);
-        color: buttonColor;
-        text-shadow: buttonTextShadow;
-        padding-top: 2px;
-    }
-
-    .v-touchkit-toolbar {
-        overflow: hidden;
-    }
-
-    .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-caption {
-        display: none;
-    }
-
-    .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button {
-        padding: 3px;
-        height: 42px;
-        position: relative;
-    }
-
-    .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-wrap {
-        color: #999;
-        text-shadow: none;
-        margin: 0;
-        height: auto;
-        width: auto;
-        padding: 0;
-    }
-
-    .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button:active .v-button-wrap {
-        background-image: none;
-    }
-
-    .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-caption {
-        color: inherit;
-        font-size: 10px;
-        font-family: "Helvetica Neue", Helvetica, Arial, Tahoma, Verdana, sans-serif;
-        display: block;
-        margin: 3px 0 0 0;
-        position: absolute;
-        bottom: 2px;
-        left: 0;
-        width: 100%;
-        height: auto;
-        border-radius: 0;
-        text-indent: 0;
-        vertical-align: middle;
-        margin: 7px 0 0 0; /* At the bottom of the button, even without icon */
-    }
-
-    .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button .v-icon {
-        margin: 0 0 -3px 0; /* Compensate the space consumed by icon as caption is positioned with margin */
-    }
-
-    .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-wrap:before {
-        display: none;
-    }
-
-    .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-selected {
-        background: rgba(255, 255, 255, .15);
-        border-radius: 4px;
-    }
-
-    .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-selected .v-button-wrap {
-        color: #fff;
-    }
-
-        /* Button customizations */
-
-    .v-touchkit-navbar .v-button-no-decoration {
-        background: transparent;
-        border: none;
-        -webkit-box-shadow: none;
-        overflow: visible;
-    }
-
-    .v-touchkit-navbar .v-button-no-decoration .v-button-wrap,
-    .v-touchkit-navbar .v-button-no-decoration:active .v-button-wrap {
-        border: none;
-        background: transparent;
-        overflow: visible;
-        -webkit-box-shadow: none;
-    }
-
-    .v-button-white .v-button-wrap {
-        background-color: #fff;
-    }
-
-    .v-button-white .v-button-wrap .v-button-caption {
-        color: #222;
-        text-shadow: navbarButtonTextShadow;
-    }
-
-    .v-button-red .v-button-wrap,
-    .v-touchkit-navbar .v-button-red {
-        background-color: redButtonWrapBgColor;
-    }
-
-    .v-button-blue .v-button-wrap,
-    .v-touchkit-navbar .v-button-blue {
-        background-color: blueButtonWrapBgColor;
-    }
-
-    .v-button-green .v-button-wrap,
-    .v-touchkit-navbar .v-button-green {
-        background-color: greenButtonWrapBgColor;
-    }
-
-        /*
-        .v-touchkit-navbar .v-button-red .v-button-wrap,
-        .v-touchkit-navbar .v-button-blue .v-button-wrap,
-        .v-touchkit-navbar .v-button-green .v-button-wrap {
-            background-color: transparent;
-        }
-        */
-
-    .v-touchkit-navbar .v-button-red .v-button-wrap .v-button-caption,
-    .v-touchkit-navbar .v-button-blue .v-button-wrap .v-button-caption,
-    .v-touchkit-navbar .v-button-green .v-button-wrap .v-button-caption {
-        color: buttonColor;
-        text-shadow: buttonTextShadow;
-    }
-
-        /* Layout margins */
-    .v-orderedlayout-margin-top,
-    .v-horizontallayout-margin-top,
-    .v-verticallayout-margin-top,
-    .v-gridlayout-margin-top,
-    .v-csslayout-margin-top {
-        padding-top: listLayoutMargin;
-    }
-
-    .v-orderedlayout-margin-right,
-    .v-horizontallayout-margin-right,
-    .v-verticallayout-margin-right,
-    .v-gridlayout-margin-right,
-    .v-csslayout-margin-right {
-        padding-right: listLayoutMargin;
-    }
-
-    .v-orderedlayout-margin-bottom,
-    .v-horizontallayout-margin-bottom,
-    .v-verticallayout-margin-bottom,
-    .v-gridlayout-margin-bottom,
-    .v-csslayout-margin-bottom {
-        padding-bottom: listLayoutMargin;
-    }
-
-    .v-orderedlayout-margin-left,
-    .v-horizontallayout-margin-left,
-    .v-verticallayout-margin-left,
-    .v-gridlayout-margin-left,
-    .v-csslayout-margin-left {
-        padding-left: listLayoutMargin;
-    }
-
-        /* CssLayout uses margins instead of padding */
-    .v-csslayout-margin-top {
-        margin-top: listLayoutMargin;
-        padding: 0;
-    }
-
-    .v-csslayout-margin-right {
-        margin-right: listLayoutMargin;
-        padding: 0;
-    }
-
-    .v-csslayout-margin-bottom {
-        margin-bottom: listLayoutMargin;
-        padding: 0;
-    }
-
-    .v-csslayout-margin-left {
-        margin-left: listLayoutMargin;
-        padding: 0;
-    }
-
-        /* Layout spacings */
-    .v-orderedlayout-spacing-on,
-    .v-horizontallayout-spacing-on,
-    .v-verticallayout-spacing-on,
-    .v-gridlayout-spacing-on {
-        padding-top: 8px;
-        padding-left: 8px;
-    }
-
-        /* Notifications */
-    .v-Notification {
-        background: popoverGradient;
-        border: 2px solid rgba(0, 0, 0, .3);
-        border-top-color: rgba(100, 100, 100, .4);
-        border-bottom-color: rgba(0, 0, 0, .7);
-        border-radius: listLayoutMargin;
-        padding: 30px 30px;
-        text-align: center;
-        color: #fff;
-        line-height: normal;
-        text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
-        -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .4), 0 2px 1px 1px rgba(0, 0, 0, .5), inset 0 0 1px rgba(255, 255, 255, .16);
-        overflow: hidden;
-        max-width: 85%;
-    }
-
-        /* Table
-         * TODO this is quicly copy pasted and modified from reindeer. Remove obsolete code, tune colors etc.
-         */
-
-    @def tableRowHeight 30px;
-
-    .v-tk .v-table-header-wrap,
-    .v-tk .v-table-footer-wrap {
-        border-color: #c2c3c4;
-        background: navbarGradient;
-        height: tableRowHeight;
-        font-weight: bold;
-        color: navbarButtonColor;
-    }
-
-    .v-tk .v-table-footer-wrap {
-        text-transform: none;
-        font-size: 12px;
-        font-weight: normal;
-    }
-
-    .v-tk .v-table-footer td {
-        border-color: #c2c3c4;
-    }
-
-    .v-tk .v-table-footer-container {
-        padding-right: 7px;
-    }
-
-    .v-tk .v-table-header,
-    .v-tk .v-table-footer,
-    .v-tk .v-table-footer table {
-        height: tableRowHeight;
-    }
-
-    .v-tk .v-table-caption-container {
-        heigth: 16px;
-        padding-top: 4px;
-        padding-right: 4px;
-    }
-
-    .v-tk .v-table-caption-container .v-icon {
-        height: 16px;
-        margin: -4px 3px 0 0;
-        vertical-align: middle;
-    }
-
-    .v-tk .v-ie .v-table-caption-container .v-icon {
-        margin-top: -3px;
-    }
-
-    .v-tk .v-table-footer-container {
-        heigth: 16px;
-    }
-
-    .v-tk .v-table-resizer {
-        height: tableRowHeight;
-        width: 2px;
-        background: transparent;
-        border-right: 1px solid #c2c3c4;
-    }
-
-    .v-tk .v-table-sort-indicator {
-        background: transparent;
-        width: 0px;
-        height: tableRowHeight;
-    }
-
-    @sprite .v-tk  .v-table-header-cell-asc .v-table-sort-indicator {
-        gwt-image: "columnAscending";
-        margin-top: 10px;
-    }
-
-    @sprite .v-tk .v-table-header-cell-desc .v-table-sort-indicator {
-        gwt-image: "columnDescending";
-        margin-top: 10px;
-    }
-
-    .v-tk .v-table-body {
-        border-color: #c2c3c4;
-        background: #fff;
-    }
-
-    .v-tk .v-table-cell-content {
-        padding-top: 0;
-        border-right-color: #d3d4d5;
-        vertical-align: top;
-    }
-
-    .v-tk .v-table-cell-wrapper {
-        padding-top: 5px;
-        padding-bottom: 5px;
-    }
-
-    .v-tk .v-table-row-odd {
-        background: #eff0f1;
-    }
-
-    .v-tk .v-table-cell-content:last-child {
-        border-right-color: transparent;
-    }
-
-    .v-tk .v-table .v-selected {
-        background: #4d749f;
-        color: #fff;
-        text-shadow: #3b5a7a 0 1px 0;
-    }
-
-    .v-tk .v-table .v-selected .v-table-cell-content {
-        border-right-color: #466c90;
-    }
-
-    @sprite .v-table-column-selector {
-        gwt-image: "columnSelector";
-        margin-top: -30px;
-        width: 15px;
-        float: right;
-        height: 1.2em;
-        position: relative;
-        cursor: pointer;
-    }
-
-    .v-tk .v-table-focus-slot-left {
-        border-left-color: #222;
-        margin-left: 0;
-    }
-
-    .v-tk .v-table-focus-slot-right {
-        border-right-color: #222;
-        margin-right: 0;
-    }
-
-    .v-tk .v-table-header-drag * {
-        vertical-align: middle;
-    }
-
-    .v-tk .v-table-header-drag img {
-        height: 16px;
-        margin: -3px 3px 0 0;
-    }
-
-    .v-tk .v-table-scrollposition {
-        width: auto;
-        background: transparent;
-        border: none;
-    }
-
-    .v-tk .v-table-scrollposition span {
-        background: navbarGradient;
-        border: 1px solid #939494;
-        border: none;
-        border-radius: 4px;
-        height: 13px;
-        padding: 4px 30px;
-        white-space: nowrap;
-        color: #222;
-        text-shadow: #fff 0 1px 0;
-        position: relative;
-        top: 1px;
-        -webkit-box-shadow: rgba(0, 0, 0, .5) 0 1px 2px;
-    }
-
-        /* ComboBox */
-    .v-tk .v-filterselect,
-    .v-tk .v-datefield-popupcalendar {
-        /* To contain the floats */
-        overflow: hidden;
-        border: 1px solid rgba(0, 0, 0, .35);
-        border-radius: 4px;
-        background: #fff;
-        -webkit-box-shadow: inset 0 1px rgba(0, 0, 0, .12);
-        height: 25px;
-        padding: 2px 0 2px 4px;
-    }
-
-    .v-app .v-filterselect-input,
-    .v-window .v-filterselect-input,
-    .v-popupview-popup .v-filterselect-input,
-    .v-tk input.v-datefield-textfield {
-        -webkit-appearance: none;
-        border: none;
-        background: transparent;
-        /* 	font-size: 17px; */
-        /* 	font-weight: bold; */
-        margin: 0;
-    }
-
-    .v-tk .v-filterselect-button {
-        position: absolute;
-        right: 0px;
-        height: 25px;
-        background-position-y: -6px;
-        background-position-x: -2px;
-        width: 25px;
-        opacity: .3;
-    }
-
-    .v-tk .v-filterselect-button:active {
-        opacity: 1;
-    }
-
-    .v-tk .v-filterselect-input:focus,
-    .v-tk .v-datefield-textfield:focus {
-        outline: none;
-    }
-
-    .v-tk .v-filterselect-focus,
-    .v-tk .v-datefield-focus {
-        -webkit-box-shadow: 0 0 3px 1px #5d81ab;
-    }
-
-    .v-tk .v-filterselect-prompt {
-        position: relative;
-    }
-
-    .v-tk .v-filterselect-prompt .v-filterselect-input {
-        position: absolute;
-        left: 0px;
-        right: 25px;
-        /*font-style: normal;*/
-    }
-
-    .v-tk .v-filterselect .v-icon {
-        height: 23px;
-        margin-top: 2px !important;
-    }
-
-    .v-tk .v-filterselect-suggestmenu {
-        min-width: 290px;
-    }
-
-    .v-tk .v-filterselect-suggestpopup,
-    .v-tk .v-datefield-calendarpanel {
-        -webkit-box-shadow: 0 1px 10px 1px rgba(0, 0, 0, .5);
-        border-radius: 4px;
-        margin-top: 4px !important;
-        overflow: hidden;
-        border: none;
-    }
-
-    .v-tk .v-filterselect-suggestpopup .v-icon {
-        height: 32px;
-        vertical-align: middle;
-    }
-
-    .v-tk .v-filterselect-suggestpopup .gwt-MenuItem {
-        height: 36px;
-        line-height: 36px;
-        padding: 2px 10px;
-        border-top: 1px solid #e0e0e0;
-    }
-
-    .v-tk .v-filterselect-suggestpopup tr:last-child .gwt-MenuItem {
-        border-bottom: 1px solid #e0e0e0;
-    }
-
-    .v-tk .v-filterselect-suggestpopup .gwt-MenuItem-selected,
-    .v-tk .v-filterselect-suggestpopup .gwt-MenuItem:active,
-    .v-tk .v-filterselect-suggestpopup .gwt-MenuItem:hover,
-    .v-tk .v-filterselect-suggestpopup .gwt-MenuItem:focus {
-        background: tableSelectionGradient;
-    }
-
-    .v-tk .v-filterselect-nextpage,
-    .v-tk .v-filterselect-nextpage-off,
-    .v-tk .v-filterselect-prevpage-off,
-    .v-tk .v-filterselect-prevpage {
-        width: 75px;
-        height: 32px;
-        border: 1px solid rgba(0, 0, 0, .25);
-        border-top-color: #d0d1d3;
-        border-bottom-color: rgba(0, 0, 0, .5);
-        background: literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#e5e5e6), to(#b4b6b8))');
-        -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .3), inset 0 -1px 0 rgba(255, 255, 255, .15);
-        overflow: hidden;
-        border-radius: 17px;
-        margin: 7px auto;
-    }
-
-    @url comboBoxArrowDown comboBoxArrowDown2x;
-    @url comboBoxArrowUp comboBoxArrowUp2x;
-
-    .v-tk .v-filterselect-nextpage span,
-    .v-tk .v-filterselect-prevpage span {
-        display: block;
-        height: 32px;
-        background: comboBoxArrowDown no-repeat 50%;
-        -webkit-background-size: 20px 11px;
-        text-indent: -9999px;
-    }
-
-    .v-tk .v-filterselect-prevpage span {
-        background-image: comboBoxArrowUp;
-    }
-
-    .v-tk .v-filterselect-nextpage-off,
-    .v-tk .v-filterselect-prevpage-off {
-        opacity: 0;
-    }
-
-    .v-tk .v-filterselect-status {
-        position: absolute;
-        right: 12px;
-        bottom: 15px;
-        color: #B7B9BB;
-        font-size: 14px;
-    }
-
-    .v-tk .v-filterselect-suggestmenu {
-        -webkit-tap-highlight-color: transparent;
-    }
-
-        /* DateField */
-    .v-datefield-popupcalendar {
-        clear: both;
-        float: none;
-        padding: 0 0 0 4px;
-        -webkit-box-sizing: border-box;
-        height: 31px;
-        border-collapse: collapse;
-    }
-
-    .v-datefield-textfield,
-    .v-datefield-button {
-        -webkit-box-sizing: border-box;
-        margin: 0;
-    }
-
-    .v-datefield-textfield {
-        height: 27px;
-        line-height: 27px;
-    }
-
-    @url calendar calendar2x;
-    .v-datefield-button {
-        -webkit-appearance: none;
-        border: none;
-        background: transparent calendar no-repeat 0 50%;
-        -webkit-background-size: 16px 16px;
-        width: 25px;
-        height: 27px;
-    }
-
-    .v-datefield-error {
-        border: 2px solid rgba(250, 40, 0, .6);
-    }
-
-    .v-datefield-calendarpanel {
-        background: #fff;
-    }
-
-    .v-datefield-calendarpanel {
-        border: none;
-    }
-
-    .v-datefield-calendarpanel button {
-        -webkit-appearance: none;
-        background: transparent;
-        display: block;
-        border: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    .v-datefield-calendarpanel-header td {
-        background: literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#e5e5e6), to(#b4b6b8))');
-        -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .3), inset 0 -1px 0 rgba(255, 255, 255, .15);
-        text-shadow: 0 1px 0 rgba(255, 255, 255, .7);
-        line-height: 19px;
-        height: 25px;
-        font-size: 20px;
-        font-weight: bold;
-    }
-
-    .v-datefield-calendarpanel button {
-        /* Needed to make < and << look proper  */
-        font-family: arial;
-        font-size: 20px;
-        font-weight: bold;
-    }
-
-        /* Fix the month width, otherwise jumpy when changing month */
-    .v-datefield-calendarpanel-header td {
-        width: 1px;
-        border-right: 1px solid rgba(0, 0, 0, .25);
-        border-bottom: 1px solid rgba(0, 0, 0, .5);
-        padding: 0 6px 3px;
-    }
-
-    .v-datefield-calendarpanel-header td.v-datefield-calendarpanel-month {
-        width: auto;
-        min-width: 140px;
-    }
-
-    span.v-datefield-calendarpanel-month {
-        line-height: 26px;
-        font-size: 15px;
-    }
-
-    .v-datefield-calendarpanel .v-button-nextyear {
-        border-right: none;
-    }
-
-    .v-datefield-calendarpanel table,
-    .v-datefield-time {
-        padding: 0 10px;
-    }
-
-    .v-datefield-time {
-        padding-bottom: 10px;
-    }
-
-    .v-datefield-calendarpanel td {
-        text-align: center;
-    }
-
-    .v-datefield-popup {
-        overflow: hidden;
-    }
-
-        /* Tree styles */
-
-    .v-tree-node {
-        padding: 4px 0;
-    }
-
-    .v-tree-node-caption {
-        margin-left: 1.5em;
-    }
-
-        /** Component group stylings must be as last as they override default styles */
-
-    .v-tk .v-touchkit-verticalcomponentgroup {
-        display: block;
-        position: relative;
-        width: 100%;
-        margin: 0;
-        border: listBorder;
-        border-radius: listLayoutMargin;
-        background: white;
-        padding: 0 listLayoutMargin;
-        box-sizing: border-box;
-        -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, .5);
-        overflow: hidden;
-        position: relative;
-    }
-
-    .v-touchkit-verticalcomponentgroup>* {
-        clear: both;
-    }
-
-    .v-touchkit-verticalcomponentgroup .v-textfield,
-    .v-touchkit-verticalcomponentgroup .v-touchkit-numberfield {
-        border: 0;
-        background: transparent;
-        color: #4e64a1;
-        font-size: 17px;
-    }
-
-        /* Display readonly inputs without special color */
-    .v-touchkit-verticalcomponentgroup input:read-only {
-        color: #000;
-    }
-
-    .v-touchkit-verticalcomponentgroup .v-datefield-popupcalendar,
-    .v-touchkit-verticalcomponentgroup .v-filterselect {
-        border: 0;
-        -webkit-box-shadow: none;
-    }
-
-    .v-touchkit-componentgroup-row .v-caption {
-        margin: listLayoutMargin 0;
-    }
-
-    .v-tk .v-ui .v-touchkit-componentgroup-row .v-touchkit-componentgroup-cell > * {
-        margin: listLayoutMargin 0;
-    }
-
-    .v-tk .v-ui .v-touchkit-componentgroup-row .v-touchkit-componentgroup-cell > .v-select-optiongroup {
-        margin: 0;
-    }
-
-    .v-touchkit-componentgroup-cell > .v-touchkit-navbutton {
-        padding: 0px;
-    }
-
-    .v-touchkit-verticalcomponentgroup .v-filterselect>input {
-        color: #4e64a1;
-        /*padding-top: 10px;*/
-        font-size: 17px;
-    }
-
-    .v-touchkit-verticalcomponentgroup .v-filterselect {
-        /*padding-top: 10px;*/
-    }
-
-    .v-touchkit-componentgroup-row .v-link, .v-touchkit-componentgroup-table .v-label {
-        line-height: 33px;
-    }
-
-    .v-touchkit-verticalcomponentgroup .v-datefield-button {
-        margin-top: 8px;
-        background-position: 6px;
-    }
-
-    .v-touchkit-verticalcomponentgroup .v-select-select {
-        margin-top: 5px;
-        height: 30px;
-    }
-
-    .v-touchkit-verticalcomponentgroup .v-slider {
-        margin-top: 20px;
-    }
-
-    .v-touchkit-verticalcomponentgroup .v-slider-base {
-        margin-left: 5px;
-    }
-
-    .v-touchkit-componentgroup-cell > .v-select-optiongroup {
-        width: 100%;
-    }
-
-    .v-touchkit-componentgroup-cell > .v-select-optiongroup .v-select-option {
-        height: 40px;
-        position: relative;
-    }
-
-    .v-touchkit-componentgroup-cell > .v-select-optiongroup .v-select-option input {
-        font-size: large;
-    }
-
-    .v-touchkit-componentgroup-cell > .v-select-optiongroup .v-select-option > * {
-        margin: 14px 0px;
-    }
-
-    .v-touchkit-componentgroup-cell > .v-select-optiongroup .v-select-option>label {
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        padding-left: 20px;
-        padding-top: 10px;
-        margin: 0;
-        font-weight: bold;
-        color: navbarButtonColor;
-        vertical-align: top;
-        line-height: normal;
-        font-size: 17px;
-        height: 30px;
-    }
-
-        /* Grey lines between component,
-         * also set then for selects inside component group.
-         */
-    .v-touchkit-verticalcomponentgroup > *:before,
-    .v-touchkit-componentgroup-cell > .v-select-optiongroup > .v-select-option:before {
-        content: "";
-        display: block;
-        position: absolute;
-        margin: 0;
-        padding: 0;
-        left: 0;
-        right: 0;
-        border-top: listBorder;
-    }
-
-    .v-touchkit-componentgroup-cell > .v-select-optiongroup >.v-select-option:before {
-        left: negativeListLayoutMargin;
-        right: negativeListLayoutMargin;
-    }
-
-        /* ...hide from the first */
-    .v-touchkit-verticalcomponentgroup > *:first-child:before,
-    .v-touchkit-componentgroup-cell > .v-select-optiongroup :first-child:before {
-        display: none;
-    }
-
-        /* Strets forms inside componeng groups so that its separator lines end at correct places */
-    .v-touchkit-componentgroup-cell>.v-formlayout {
-        margin: 0 negativeListLayoutMargin;
-        width: auto !important;
-        display: block; /* ~ 100% width inline-block */
-    }
-
-    .v-touchkit-componentgroup-cell>.v-formlayout>table {
-        padding-right: listLayoutMargin;
-    }
-
-    .v-form>fieldset>div:last-child>.v-layout {
-        display: block; /* V7 has inlineblock by default, causes odd extra space although empty footer */
-    }
-
-    .v-touchkit-verticalcomponentgroup .v-formlayout-row .v-formlayout-captioncell,
-    .v-touchkit-verticalcomponentgroup .v-formlayout-row .v-formlayout-contentcell,
-    .v-touchkit-verticalcomponentgroup .v-formlayout-row .v-formlayout-errorcell {
-        padding: 0;
-    }
-
-    .v-touchkit-verticalcomponentgroup .v-formlayout-row .v-formlayout-captioncell {
-        padding-left: listLayoutMargin;
-        text-align: left;
-    }
-
-    .v-tk .v-formlayout-captioncell > .v-caption {
-        font-weight: bold;
-        font-size: 17px;
-        line-height: 43px;
-        height: 43px;
-    }
-
-    .v-tk .v-formlayout-row > td {
-        border-bottom: listBorder;
-    }
-
-    .v-tk .v-formlayout-lastrow > td {
-        border-bottom: none;
-    }
-
-    .v-tk .v-label-grey-title,
-    .v-tk .v-layout > .v-caption>div {
-        font-size: 16px;
-        font-weight: bold;
-        color: #44698b;
-        text-shadow: 0 1px 0 rgba(255, 255, 255, .7);
-        margin: listLayoutMargin;
-    }
-
-    .v-touchkit-componentgroup-row {
-        width: 100%;
-        display: -webkit-box;
-    }
-
-    .v-touchkit-componentgroup-row-cap {
-        -webkit-box-align: center;
-        min-height: 42px;
-    }
-
-    .v-touchkit-componentgroup-row > .v-caption {
-        font-size: 17px;
-        font-weight: bold;
-        padding-right: 5px;
-        box-sizing: border-box;
-        white-space: nowrap;
-        overflow-x: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .v-touchkit-componentgroup-row-nocap > .v-caption {
-        display: none;
-        -webkit-box-flex: 0;
-    }
-
-    .v-touchkit-componentgroup-row-nocap > .v-touchkit-componentgroup-cell {
-        -webkit-box-flex: 1;
-        width: 100%;
-        padding-left: 0px;
-    }
-
-    .v-touchkit-componentgroup-row-cap > .v-caption {
-        -webkit-box-flex: 1;
-        width: 40%;
-    }
-
-    .v-touchkit-componentgroup-row-cap > .v-touchkit-componentgroup-cell {
-        -webkit-box-flex: 0;
-    }
-
-    .v-touchkit-componentgroup-row-cap > .v-touchkit-componentgroup-cell > * {
-        float: right;
-    }
-
-    .v-touchkit-componentgroup-row-full > .v-caption {
-        -webkit-box-flex: 1;
-        width: 40%;
-    }
-
-    .v-touchkit-componentgroup-row-full > .v-touchkit-componentgroup-cell {
-        -webkit-box-flex: 1;
-        width: 60%;
-    }
-
-    .v-touchkit-componentgroup-row-full > .v-touchkit-componentgroup-cell > * {
-        float: none;
-    }
-
-    .v-touchkit-componentgroup-cell-fullwrapper .v-touchkit-horizontalbuttongroup {
-        margin-top: listLayoutMargin;
-        margin-bottom: listLayoutMargin;
-    }
-
-    .v-vertical.v-margin-left, .v-horizontal.v-margin-left {
-        padding-left: listLayoutMargin;
-    }
-
-    .v-vertical.v-margin-bottom, .v-horizontal.v-margin-bottom {
-        padding-bottom: listLayoutMargin;
-    }
-
-    .v-vertical.v-margin-right, .v-horizontal.v-margin-right {
-        padding-right: listLayoutMargin;
-    }
-
-    .v-vertical.v-margin-top, .v-horizontal.v-margin-top {
-        padding-top: listLayoutMargin;
-    }
-
-        /* Csslayout directly under navigationview, tabbarview or similar has margin by default */
-    .v-touchkit-navview-wrapper>.v-csslayout,
-    .v-touchkit-tabbar-wrapper>.v-csslayout,
-    .v-touchkit-swipeview>.v-csslayout {
-        padding: listLayoutMargin;
-    }
-
-        /* ComponentGroup directly under navigationview or tabbarview has margin by default */
-    .v-touchkit-navview-wrapper>.v-touchkit-verticalcomponentgroup,
-    .v-touchkit-tabbar-wrapper>.v-touchkit-verticalcomponentgroup,
-    .v-touchkit-swipeview>.v-touchkit-verticalcomponentgroup {
-        margin: listLayoutMargin;
-        width: auto;
-    }
-
-        /* This gludge is ONLY for testbench testing in Windows machine where there will most likely be scrollbars */
-        /*.v-scrollable {
-            overflow: hidden !important;
-        }*/
-
-    .v-touchkit-combobox-drop-down {
-        height: 25px;
-        line-height: 25px;
-        border: 1px solid #c1c1c1;
-        padding: 2px;
-        cursor: pointer;
-        background: url("VAADIN/themes/base/common/img/sprites.png") no-repeat scroll right -6px white;
-        overflow: hidden;
-    }
-
-    .v-touchkit-combobox-select-item {
-        width: 100%;
-        cursor: pointer;
-        font-weight: bold;
-        border-bottom: 1px solid #c1c1c1;
-        background: touchComboBoxItemButton;
-        overflow: hidden;
-    }
-
-    .v-touchkit-combobox-select-item.empty {
-        cursor: default;
-    }
-
-    .v-touchkit-combobox-popup-filter {
-        height: 34px;
-        line-height: 34px;
-    }
-
-    .v-touchkit-combobox-close-button {
-        position: absolute;
-        top: 7px;
-        height: 30px;
-        width: 30px;
-    }
-
-    .v-touchkit-combobox.v-touchkit-popover {
-        /* 	overflow: visible; */
-        /* 	background: popoverGradient; */
-        /* 	position: relative; */
-        /* 	-webkit-box-shadow: 0 0 40px rgba(0, 0, 0, 0.6); */
-        /* 	border-radius: 10px; */
-        border: 1px solid rgba(25, 33, 40, 0.5);
-        /* 	padding: 10px; */
-    }
-
-    .v-touchkit-datepopover {
-        background-color: white;
-        box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
-        cursor: default;
-        min-width: 290px;
-        border-radius: 10px;
-    }
-
-    .v-touchkit-datepopover > .popupContent {
-        padding: 5px;
-    }
-
-    .v-touchkit-datepopover .gwt-DatePicker {
-        width: 100%;
-        margin-bottom: 20px;
-        -webkit-user-select: none;
-    }
-
-    .v-touchkit-datepopover .datePickerMonthSelector {
-        width: 100%;
-    }
-
-    .v-touchkit-datepopover .datePickerMonth {
-        text-align: center;
-    }
-
-    .v-touchkit-datepopover .datePickerDay,
-    .v-touchkit-datepopover .datePickerWeekdayLabel,
-    .v-touchkit-datepopover .datePickerWeekendLabel,
-    .v-touchkit-datepopover .datePickerPreviousButton,
-    .v-touchkit-datepopover .datePickerNextButton {
-        min-width: 40px;
-        min-height: 40px;
-        line-height: 40px;
-        text-align: center;
-        outline: 0;
-    }
-
-    .v-touchkit-datepopover .datePickerPreviousButton > *,
-    .v-touchkit-datepopover .datePickerNextButton > * {
-        outline: 0;
-    }
-
-    .v-touchkit-datepopover .datePickerPreviousButton,
-    .v-touchkit-datepopover .datePickerNextButton {
-        color: buttonColor;
-        border-radius: listLayoutMargin;
-        background: buttonInsetBackground;
-        -webkit-box-shadow: buttonInsetBoxShadow;
-        padding: 3px;
-    }
-
-    .v-touchkit-datepopover .datePickerPreviousButton > .html-face,
-    .v-touchkit-datepopover .datePickerNextButton > .html-face {
-        background: buttonGradient;
-        border-radius: listLayoutMargin;
-        -webkit-box-shadow: buttonBoxShadow;
-        color: #fff;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.75);
-        font-size: 20px;
-        font-weight: bold;
-    }
-
-    .v-touchkit-datepopover-noprev .datePickerPreviousButton,
-    .v-touchkit-datepopover-nonext .datePickerNextButton {
-        opacity: 0.2;
-    }
-
-    .v-touchkit-datepopover .datePickerDay:focus {
-        border-width: 0px;
-    }
-
-    .v-touchkit-datepopover .datePickerWeekdayLabel,
-    .v-touchkit-datepopover .datePickerWeekendLabel {
-        background-color: #DDD;
-    }
-
-    .v-touchkit-datepopover .datePickerDayIsValue {
-        background-color: #666;
-        color: white;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-        box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-        font-weight: bold;
-        border-radius: 10px;
-    }
-
-    .v-touchkit-datepopover .datePickerDayIsFiller {
-        opacity: 0.5;
-    }
-
-    .v-touchkit-datepopover .datePickerDayIsDisabled {
-        display: none;
-        text-decoration: line-through;
-    }
-
-    .v-touchkit-date-ok .v-button-caption, .v-touchkit-date-cancel .v-button-caption {
-        display: inline-block;
-        width: 100%;
-        height: 100%;
-        text-align: center;
-    }
-
-    .v-touchkit-date-cancel {
-        float: right;
-    }
-
-    .v-touchkit-datepopover-hidedays .datePickerDays {
-        display: none;
-    }
-
-    .v-touchkit-ok-image, .v-touchkit-cancel-image {
-        display: inline-block;
-        width: 32px;
-        height: 32px;
-    }
-
-    @sprite .v-touchkit-ok-image {
-        gwt-image: "dateOkSymbol";
-    }
-
-    @sprite .v-touchkit-cancel-image {
-        gwt-image: "dateCancelSymbol";
-    }
-
-    .v-treetable-treespacer {
-        display: inline-block;
-        background: transparent;
-        height: 19px;
-        width: 18px;
-        position: absolute;
-        left: 0;
-        top: 5px;
-    }
-
-    @url arrowRightUrl arrowRightImage;
-    .v-treetable-node-closed,
-    .v-tree-node {
-        background-image: arrowRightUrl;
-    }
-
-    .v-treetable-node-closed {
-        background-position: right 10%;
-        background-repeat: no-repeat;
-        background-size: auto 80%;
-    }
-
-    .v-tree-node {
-        background-position: 4px 4px;
-        background-size: auto 16px;
-        background-repeat: no-repeat;
-        padding: 1px 0;
-    }
-
-    @url arrowDownUrl arrowDownImage;
-    .v-treetable-node-open,
-    .v-tree-node-expanded {
-        background-image: arrowDownUrl;
-    }
-
-    .v-treetable-node-open {
-        background-position: right 10%;
-        background-repeat: no-repeat;
-        background-size: auto 80%;
-    }
-
-    @sprite .v-menubar-submenu .v-menubar-menuitem-checked .v-menubar-menuitem-caption {
-        gwt-image: "check";
-    }
-
-    @url dragSlotDotUrl dragSlotDotImage;
-    .v-tree .v-tree-node-drag-top:before, .v-tree .v-tree-node-drag-bottom:after, .v-tree .v-tree-node-caption-drag-center:after {
-        display: block;
-        position: absolute;
-        width: 6px;
-        height: 6px;
-        margin-top: -4px;
-        background: transparent dragSlotDotUrl;
-    }
-
-    .v-table-row-drag-top .v-table-cell-content:first-child:before, .v-table-row-drag-bottom .v-table-cell-content:first-child:after {
-        display: block;
-        position: absolute;
-        width: 6px;
-        height: 6px;
-        margin-top: -4px;
-        margin-left: -6px;
-        background: transparent dragSlotDotUrl;
-    }
-
-    .v-ddwrapper-over-top:before, .v-ddwrapper-over-bottom:after, .v-ddwrapper-over-left:before, .v-ddwrapper-over-right:before {
-        display: block;
-        position: absolute;
-        width: 6px;
-        height: 6px;
-        margin-top: -4px;
-        margin-left: -2px;
-        background: transparent dragSlotDotUrl no-repeat;
-    }
-
-    /* Styles for CacheManifestLoadingIndicator */
-    .v-cache-loading-indicator {
-        background: spinner no-repeat;
-        background-size: 10px 10px;
-        position: absolute;
-        right: 5px;
-        top: 5px;
-        width: 10px;
-        height: 10px;
-        -webkit-animation-name: spinnerRotate;
-        -webkit-animation-duration: 2s;
-        -webkit-animation-iteration-count: infinite;
-        -webkit-animation-timing-function: linear;
-    }
+/**
+ * GWT's CssResource is unfortunately so limited that sharing def's across 
+ * multiple stylesheets is near-impossible. Because of that, all styles are in 
+ * this one huge file.
+ */
+
+
+/**
+ * General borders
+ */
+@def divider 1px solid #9f9f9f;
+@def lightDivider 1px solid rgba(187,187,187,.5);
+@def listBorder 1px solid #bbb;
+
+
+/**
+ * Layout dimensions
+ */
+@def listLayoutMargin 10px;
+@def negativeListLayoutMargin -10px;
+
+/**
+ * Default buttons (iPhone style, full-width)
+ */
+@def buttonInsetBoxShadow inset 0 1px 2px rgba(0,0,0,.5);
+@def buttonInsetBackground rgba(37,38,40,.6);
+@def buttonBoxShadow 0 1px 2px rgba(0,0,0,.5);
+@def buttonTextShadow 0 -1px 0 rgba(0,0,0,.75);
+@def buttonColor #fff;
+@def buttonFontSize 20px;
+@def buttonGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(246,246,246,.46)), to(rgba(145,149,159,.46)), color-stop(.49, rgba(160,162,167,.46)), color-stop(.51, rgba(130,133,142,.46)))');
+@def buttonColorGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(246,246,246,.26)), to(rgba(145,149,159,.26)), color-stop(.49, rgba(160,162,167,.26)), color-stop(.51, rgba(130,133,142,.26)))');
+@def buttonActiveGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(200,200,200,.55)), to(rgba(128,131,141,.55)), color-stop(.49, rgba(132,134,138,.55)), color-stop(.51, rgba(101,104,113,.55)))');
+
+@def redButtonInsetBackground rgb(170,0,0);
+@def redButtonWrapBgColor rgb(189,0,0);
+@def greenButtonInsetBackground rgb(0,150,0);
+@def greenButtonWrapBgColor rgb(0,170,0);
+@def blueButtonInsetBackground rgb(0,0,170);
+@def blueButtonWrapBgColor rgb(0,0,189);
+
+/**
+ * Navbar
+ */
+@def navbarTextShadow 0 1px 1px rgba(255,255,255,.75);
+@def navbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#edeeef), to(#c9cccf))');
+@def greenNavbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#edeeef), to(#c9cccf))');
+
+/**
+ * Navbar buttons
+ */
+@def navbarButtonColor #3d3f41;
+@def navbarButtonTextShadow 0 1px 0 rgba(255,255,255,.5);
+@def navbarButtonGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,.23)), to(rgba(73,73,73,.23)))');
+@def navbarButtonActiveGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(180,180,180,.3)), to(rgba(30,30,30,.3)))');
+@def navbarButtonBorder 1px solid rgba(142,147,152,.66);
+@def navbarButtonBoxShadow 0 1px 0 rgba(255,255,255,.25), inset 0 1px 0 rgba(255,255,255,.3);
+
+
+/* Tabbar */
+@def tabbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#48494b), to(#222324), color-stop(0.49, #333435), color-stop(0.51, #2e2f30))');
+
+
+/* Navbuttons */
+@def navButtonGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4d8cb9), to(#3e6fa8))');
+
+/* Slider */
+@def sliderBaseGradient literal('-webkit-gradient(linear, 0% 0%, 0% 90%, from(#ccc), to(#fff))');
+@def sliderHandleGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#ddd), to(#fff))');
+
+
+/* Default popover */
+@def popoverGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(93,101,109,.86)), to(rgba(24,25,26,.9)), color-stop(.25, rgba(40,45,51,.86)))');
+@def popoverNavbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0)), to(rgba(0,0,0,0)), color-stop(.49, rgba(0,0,0,.2)), color-stop(.51, rgba(0,0,0,.45)))');
+@def popoverToolbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0)), to(rgba(255,255,255,0)), color-stop(.2, rgba(255,255,255,.15)), color-stop(.55, rgba(255,255,255,.1)), color-stop(.56, rgba(255,255,255,.05)))');
+
+
+/* Table */
+@def tableSelectionGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4d8cb9), to(#3e6fa8))');
+
+/* TouchComboBox */
+@def touchComboBoxItemButton literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#fcfcfc), to(#eaeaea))');
+
+
+/* CssLayouts don't need to be overflow: hidden in webkit */
+.v-csslayout {
+	overflow: visible;
+	}
+
+/* Hide default shadow implementation, shadows should be created using -webkit-box-shadow on the actual element that requires the shadow. */
+.v-shadow, .v-shadow-window {
+	display: none;
+	}
+
+/* Fonts */
+.v-app,
+.v-window,
+.v-popupview-popup,
+.v-tooltip,
+.v-app input,
+.v-app select,
+.v-app button,
+.v-app textarea,
+.v-window input,
+.v-window select,
+.v-window button,
+.v-window textarea,
+.v-popupview-popup input,
+.v-popupview-popup select,
+.v-popupview-popup button,
+.v-popupview-popup textarea,
+.v-filterselect-suggestpopup,
+.v-datefield-popup,
+.v-contextmenu,
+.v-Notification,
+.v-menubar-submenu,
+.v-drag-element {
+	font-family: "Helvetica Neue", Helvetica, Arial, Tahoma, Verdana, sans-serif;
+	font-size: 14px;
+	line-height: 19px;
+	color: #222;
+	-webkit-text-size-adjust: none;
+}
+
+.v-contextmenu {
+	background: #f8f8f9;
+	border: none;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-o-border-radius: 3px;
+	overflow: hidden;
+	padding: 4px 0;
+	-webkit-box-shadow: 0 0 40px rgba(0, 0, 0, .6);
+}
+.v-contextmenu .gwt-MenuItem {
+	padding: 1px 12px 1px 8px;
+	height: 30px;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	cursor: default;
+}
+
+.v-tk .v-contextmenu .gwt-MenuItem .v-icon {
+	margin-right: 3px;
+}
+
+.v-tk .v-contextmenu .gwt-MenuItem-selected div {
+	background: transparent;
+	color:black;
+}
+
+.v-touchkit-offlinemode-panel {
+	padding-top:10%;
+	padding-left: 17%;
+	padding-right: 17%;
+	text-align:center;
+}
+
+.v-touchkit-sadface {
+	display:inline-block;
+	-webkit-transform: rotate(90deg);
+	font-size: 4em;
+	font-weight: bold;
+	height:1em;
+	margin-left: -0.5em;
+}
+
+/* Default background for application */
+@url linenBg linenBgImage ;
+.v-app,
+.v-touchkit-backgroundstripes,
+.v-touchkit-offlinemode {
+	background: #e0e1e3 linenBg;
+	text-shadow: 0 1px 0 rgba(255,255,255,.3);
+	}
+
+
+/* Loading indicator */
+@url spinner spinnerImage ;
+.v-loading-indicator,
+.v-loading-indicator-delay,
+.v-loading-indicator-wait {
+	position: absolute;
+	z-index: 30000;
+	background: spinner no-repeat 50%;
+	opacity: 1;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: 0;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	-webkit-animation-name: spinnerRotate;
+	-webkit-animation-duration: 2s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+	}
+	
+.v-popupview-loading {
+    width: 30px;
+    height: 30px;
+    background: spinner no-repeat 50%;
+    -webkit-animation-name: spinnerRotate;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+div.v-progressindicator-indeterminate {
+    height: 20px;
+    width: 20px;
+    background: spinner no-repeat 50%;
+    -webkit-animation-name: spinnerRotate;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+body e.v-app-loading {
+    background-image: spinner;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+@-webkit-keyframes spinnerRotate {
+	from {
+		-webkit-transform:rotate(0deg);
+	}
+	to {
+		-webkit-transform:rotate(360deg);
+	}
+}
+
+.v-loading-indicator {
+	opacity: .5;
+	}
+
+.v-loading-indicator-delay {
+	opacity: .7;
+	}
+
+/* Clear Vaadin core theme styles from buttons */
+/* Default view buttons */
+.v-button {
+	margin: 0;
+	border: none;
+	width: auto;
+	height: auto;
+	display: inline-block;
+	border-radius: listLayoutMargin;
+	background: buttonInsetBackground;
+	-webkit-box-shadow: buttonInsetBoxShadow;
+	padding: 3px;
+	text-align: center;
+	position:relative;
+}
+
+.v-button:focus {
+	outline: none;
+}
+
+.v-button:active .v-button-wrap:after,
+.v-button.v-pressed .v-button-wrap:after {
+	content:"";
+	position: absolute;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+	background-color: rgba(0,0,0,0.3);
+	border-radius: inherit;
+	pointer-events: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+}
+
+.v-button:active .v-button-wrap,
+.v-button.v-pressed .v-button-wrap {
+	background-image: buttonActiveGradient;
+}
+
+.v-button-caption {
+	line-height: 37px;
+	color: buttonColor;
+	text-shadow: buttonTextShadow;
+	font-size: buttonFontSize;
+	font-weight: bold;
+	}
+
+.v-button-wrap {
+	display: block;
+	border-radius: 7px;
+	background-image: buttonGradient;
+	-webkit-box-shadow: buttonBoxShadow;
+	padding: 0 listLayoutMargin;
+	height: 35px;
+	line-height: 37px;
+	font-size: buttonFontSize;
+	font-weight: bold;
+	color: buttonColor;
+	text-shadow: buttonTextShadow;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	}
+
+/* Link style buttons */
+.v-button-link,
+.v-button-link .v-button-wrap,
+.v-button-link .v-button-caption,
+.v-button-link:active,
+.v-button-link.v-pressed,
+.v-nativebutton-link {
+	display: inline-block;
+	border-radius: 0;
+	background: transparent;
+	-webkit-box-shadow: none;
+	padding: 0;
+	height: auto;
+	margin: 0;
+	font-size: 14px;
+	font-weight: normal;
+	text-shadow: none;
+	color: #1b699f;
+	line-height: inherit;
+	}
+
+
+.v-button-link:active .v-button-wrap {
+	background: transparent;
+	}
+
+.v-button-link .v-button-caption,
+.v-nativebutton-link .v-button-caption {
+	text-decoration: none;
+	line-height: 1;
+	}
+
+/* Navbar custom icon buttons */
+@url navbarArrowUp navbarArrowUpImage;
+.v-touchkit-navbar .icon-arrow-up .v-button-caption,
+.v-touchkit-navbar .icon-arrow-down .v-button-caption,
+.v-touchkit-navbar .icon-arrow-left .v-button-caption,
+.v-touchkit-navbar .icon-arrow-right .v-button-caption {
+	display: inline-block;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	width: 18px;
+	height: 28px;
+	text-indent: -999px;
+	overflow: hidden;
+	background: navbarArrowUp no-repeat 50%;
+	}
+
+.v-touchkit-navbar .icon-arrow-left .v-button-wrap,
+.v-touchkit-navbar .icon-arrow-right .v-button-wrap {
+	padding: 0 10px;
+	}
+
+.v-touchkit-navbar .icon-arrow-left .v-button-caption,
+.v-touchkit-navbar .icon-arrow-right .v-button-caption {
+	width: 19px;
+	}
+
+@url navbarArrowDown navbarArrowDownImage;
+.v-touchkit-navbar .icon-arrow-down .v-button-caption {
+	background-image: navbarArrowDown;
+	background-position: 0 60%;
+	}
+
+@url navbarArrowLeft navbarArrowLeftImage;
+.v-touchkit-navbar .icon-arrow-left .v-button-caption {
+	background-image: navbarArrowLeft;
+	margin-left: -2px;
+	}
+
+@url navbarArrowRight navbarArrowRightImage;
+.v-touchkit-navbar .icon-arrow-right .v-button-caption {
+	background-image: navbarArrowRight;
+	margin-right: -2px;
+	}
+
+
+/* Toolbar buttons (icons only by default) */
+.v-touchkit-toolbar .v-button,
+.v-touchkit-toolbar .v-touchkit-horizontalbuttongroup {
+	display: inline-block;
+	margin: 0;
+	background: transparent;
+	border-radius: 4px;
+	-webkit-box-shadow: none;
+	height: auto;
+	padding: 0;
+	}
+
+.v-touchkit-toolbar .v-button-wrap {
+	background: transparent;
+	height: auto;
+	padding: 0;
+	-webkit-box-shadow: none;
+	font-size: 10px;
+	line-height: 1;
+	color: navbarButtonColor;
+	text-shadow: navbarButtonTextShadow;
+	overflow: visible;
+	display: inline-block;
+	}
+
+.v-touchkit-toolbar .v-button-wrap {
+	background: transparent;
+	}
+
+.v-touchkit-toolbar .v-button-caption {
+	display: none;
+	line-height: 1;
+	}
+
+.v-touchkit-toolbar .v-button .v-icon {
+	height: 25px;
+	margin-top: 10px;
+	}
+
+
+/* Touch highlight */
+.v-touchkit-toolbar .v-button-wrap:before,
+.v-touchkit-navbar .v-button-wrap:before {
+    display: block;
+	content: "";
+	position: absolute;
+	-webkit-transition: .3s linear all;
+	border-radius: 10px;
+	width: 20px;
+	height: 20px;
+	margin: 7px 0 0 2px;
+	opacity: 0;
+	}
+
+.v-touchkit-navpanel {
+	position: relative;
+	overflow: hidden;
+}
+
+.v-touchkit-navpanel-wrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	-webkit-transform: translate3d(0, 0, 0);
+	-webkit-transition: -webkit-transform 0.3s linear;
+}
+
+.v-touchkit-navpanel-container, 
+.v-touchkit-popover.v-touchkit-fullscreen .v-touchkit-navpanel-container {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: #e0e1e3 linenBg;
+	/* Not visible until positioned */
+	opacity: 0;
+	-webkit-transition: opacity 0.15s linear;
+}
+
+.v-touchkit-navpanel-placeholder, 
+.v-touchkit-popover.v-touchkit-fullscreen .v-touchkit-navpanel-placeholder  {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: backgroundStripes;
+}
+
+
+/* TODO giallo for placeholder */
+.v-touchkit-navpanel-notransit {
+	-webkit-transition: none;
+	}
+
+.v-touchkit-navbutton {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	display: block;
+	position: relative;
+	font-size: 17px;
+	font-weight: bold;
+	line-height: 43px;
+	margin: 0;
+	padding: 0;
+	overflow:hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.v-touchkit-verticalcomponentgroup .v-touchkit-navbutton {
+	margin: 0 negativeListLayoutMargin;
+	padding: 0 listLayoutMargin;
+	outline: none;
+}
+
+.v-touchkit-verticalcomponentgroup .v-button-caption {
+	font-size: 16px;
+	vertical-align: top;
+	line-height: 35px;
+}	
+
+.v-touchkit-verticalcomponentgroup .v-touchkit-navbutton:active {
+	background: navButtonGradient;
+	color: #fff;
+	text-shadow: 0 1px 1px #396897;
+}
+
+.v-touchkit-verticalcomponentgroup .v-formlayout .v-formlayout-contentcell { 
+    padding-right: listLayoutMargin;         
+} 
+.v-touchkit-verticalcomponentgroup .v-formlayout .v-formlayout-contentcell > * { 
+    float:right; 
+} 
+
+.v-touchkit-componentgroup-row>.v-caption>.v-icon,
+.v-touchkit-navbutton .v-icon {
+	height: 30px;
+	margin-right:6px;
+	vertical-align: -9px;
+}
+
+.v-touchkit-navbutton-desc {
+	color: #73787c;
+	font-weight: normal;
+	float:right;
+	margin-right: 22px;
+	margin-left: 10px;
+}
+
+.v-touchkit-navbutton-emphasis .v-touchkit-navbutton-desc {
+	color: #1b699f;
+	}
+
+.v-touchkit-navbutton:active .v-touchkit-navbutton-desc {
+	color: #fff;
+}
+
+.v-touchkit-navbutton-pill .v-touchkit-navbutton-desc {
+	color: #fff;
+	padding: 1px 10px 2px;
+	background: #5d81ab;
+	border-radius: 1em;
+	line-height: 1;
+	margin-top: 12px;
+	font-weight: bold;
+	text-shadow: none;
+	-webkit-box-shadow: inset 0 1px 0 rgba(0,0,0,.15);
+	}
+
+.v-touchkit-navbutton-pill:active .v-touchkit-navbutton-desc {
+	background: #fff;
+	color: #5d81ab;
+	text-shadow: none;
+	-webkit-box-shadow: none;
+	}
+
+@url navArrowUrl navArrowImage;
+.v-touchkit-navbutton:after {
+	content: "";
+	position: absolute;
+	right: listLayoutMargin;
+	top: 0;
+	bottom: 0;
+	background: navArrowUrl no-repeat 50%;
+	width: 10px;
+	margin-right: -1px;
+	}
+
+@url navArrowWhiteUrl navArrowWhiteImage;
+.v-touchkit-navbutton:active:after {
+	background-image: navArrowWhiteUrl;
+	}
+
+@url backButtonUrl backButtonImage;
+
+.v-touchkit-navbutton-back,
+.v-touchkit-navbutton-forward {
+	display:block;
+	-webkit-border-image: backButtonUrl 0 6 0 13 stretch stretch;
+	border-width: 0 6px 0 13px;
+	width: auto;
+	height: 30px;
+	padding: 0 4px 0 3px;
+	background: transparent;
+	font-weight: bold;
+	text-align: left;
+	color: navbarButtonColor;
+	text-shadow: navbarButtonTextShadow;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 12px;
+	line-height: 30px;
+	margin-right: auto;
+	}
+
+.v-touchkit-navbutton.v-touchkit-navbutton-back .v-touchkit-navbutton-desc {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+@url forwardButtonUrl forwardButtonImage;
+.v-touchkit-navbutton-forward {
+	-webkit-border-image: forwardButtonUrl 0 13 0 6 stretch stretch;
+	border-width: 0 13px 0 6px;
+	width: auto;
+	height: 30px;
+	padding: 0 3px 0 4px;
+	color: navbarButtonColor;
+	text-shadow: navbarButtonTextShadow;
+	margin-left: auto;
+	margin-right:0;
+}
+
+.v-touchkit-navbutton-back:after,
+.v-touchkit-navbutton-forward:after {
+	display:none;	
+}
+
+.v-touchkit-navbar-left {
+	position: absolute;
+	left: 6px;
+	top: 7px;
+	max-width: 35%;
+	z-index: 1;
+	padding-right:4px;
+}
+
+.v-touchkit-navbar,
+.v-touchkit-navpanel-placeholder > div,
+.v-touchkit-popover.v-touchkit-fullscreen .v-touchkit-navpanel-placeholder > div {
+	background: navbarGradient;
+	color: #52555a;
+	display: block;
+	height: 43px;
+	font-size: 20px;
+	font-weight: bold;
+	text-decoration: none;
+	text-shadow: navbarTextShadow;
+	border-bottom: divider;
+	text-align: center;
+	position: relative;
+}
+
+.v-touchkit-navbar .v-touchkit-navbar-caption, 
+.v-touchkit-navpanel-placeholder > div,
+.v-touchkit-popover.v-touchkit-fullscreen .v-touchkit-navpanel-placeholder > div {
+    line-height: 43px;
+}
+
+.v-touchkit-navbar-caption {
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align:center;
+}
+
+.v-touchkit-navpanel-placeholder > div {
+	white-space:nowrap;
+	overflow:hidden;
+}
+
+.v-touchkit-navbar-right {
+	position: absolute;
+	right: 6px;
+	top: 7px;
+	max-width: 35%;
+	padding-left:4px;
+}
+
+.v-touchkit-navbar-right>.v-button,
+.v-touchkit-navbar-left>.v-button {
+	display:block;
+}
+
+/*FIXME should be for horizontal component group as well*/
+.v-touchkit-navbar .v-button .v-icon {
+	height: 20px;
+	/* 28px height button conten, center */
+	margin: 4px 0 0 0;
+	vertical-align:top;
+}
+
+
+.v-touchkit-navview-notoolbar .v-touchkit-navview-toolbar {
+	display: none;
+}
+
+
+/* NavigationView */
+
+.v-touchkit-navview {
+	position:relative;	
+	/* full size by default */
+	width: 100%;
+	height: 100%;
+}
+
+.v-touchkit-navview-wrapper {
+	position: absolute;
+	top: 44px;
+	bottom: 44px;
+	left: 0;
+	right: 0;	
+	overflow: auto;
+}
+.v-touchkit-navview-notoolbar .v-touchkit-navview-wrapper {
+	position:absolute;
+	top: 44px;
+	bottom: 0;
+	left: 0;
+	right: 0;	
+}
+
+
+.v-touchkit-toolbar {
+	background: navbarGradient;
+	color: navbarButtonColor;
+	text-shadow: navbarButtonTextShadow;
+	height: 43px;
+	}
+
+.v-touchkit-navview-toolbar .v-touchkit-navbar-caption {
+	font-size: 13px;
+	}
+
+.v-touchkit-toolbar > .v-csslayout-margin {
+	padding: 2px;
+	}
+
+.v-touchkit-navview-toolbar {
+	position: absolute;
+	height: 43px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	border-top: divider;
+	}
+
+.v-touchkit-navview-toolbar > .v-touchkit-toolbar {
+	overflow: visible;
+	}
+
+.v-touchkit-navview-notoolbar .v-touchkit-navview-toolbar {
+	display: none;
+}
+
+.v-slider:focus {
+	outline: none;
+	}
+
+.v-slider-base {
+	height: 6px;
+	background: sliderBaseGradient;
+	border-radius: 4px;
+	border: 1px solid rgba(0,0,0,.3);
+	border-bottom-color: rgba(0,0,0,0);
+	}
+
+.v-slider-handle {
+	background: sliderHandleGradient;
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	margin-top: -8px;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 1px 2px rgba(0,0,0,.3);
+	border: 1px solid rgba(0,0,0,.3);
+	font-size: 0;
+	}
+
+.v-tk .v-slider-handle-active {
+	background: #ccc;
+	}
+
+/* touchkit sub window */
+.v-touchkit-popover {
+	background: transparent;
+	}
+
+.v-tk .v-window-modalitycurtain {
+	background: #3d3e40;
+	opacity: .7;
+	}
+
+.v-tk .v-window-modalitycurtain.relative {
+	opacity: 0;
+	}
+
+.v-touchkit-popover.v-touchkit-plain {
+	/* popover that is not relative to component, nor fullscreen */
+	-webkit-box-shadow: 0 0 40px rgba(0,0,0,.5);
+	background: #fff;
+	/* Disabled, too slow on 1st-gen iPad
+	-webkit-animation-name: popup;
+	-webkit-animation-duration: .2s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-out;
+	-webkit-animation-delay: .05s;
+	*/
+}
+
+/*
+@-webkit-keyframes popup {
+	from {
+		top: 100%;
+	}
+	to {
+		top: 0;
+	}
+}
+*/
+
+.v-touchkit-fullscreen {
+	background: linenBg;
+}
+
+.v-window-contents {
+	background: transparent;
+}
+
+.v-touchkit-popover.v-touchkit-relative .v-window-wrap {
+	overflow: visible;
+	background: transparent;
+	position: relative;
+	-webkit-box-shadow: 0 0 40px rgba(0,0,0,.6);
+	border-radius: listLayoutMargin;
+	border: 1px solid rgba(25,33,40,.5);
+	background: popoverGradient;
+}
+
+.v-touchkit-popover.v-touchkit-relative .v-window-contents {
+	border-radius: 11px;
+	position: relative;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.15), inset 0 0 1px rgba(255,255,255,.2);
+}
+
+.v-touchkit-popover.v-touchkit-relative.v-touchkit-smallscreen .v-window-wrap,
+.v-touchkit-popover.v-touchkit-relative.v-touchkit-smallscreen .v-window-contents {
+	padding: 0;
+	border: none;
+	border-radius: 0;
+}
+
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navpanel-placeholder,
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navpanel-placeholder > div {
+	background: transparent;
+	border-top: 0;
+	border-bottom: 0;
+}
+
+.v-touchkit-popover.v-touchkit-relative .v-window-contents > div > .v-verticallayout {
+	padding-top: 7px;
+	padding-bottom: 7px;
+	padding-left: 7px;
+	padding-right: 7px;
+}
+
+.v-touchkit-popover .v-window-closebox,
+.v-touchkit-popover .v-window-outerheader,
+.v-touchkit-popover .v-window-footer {
+	display: none;
+	}
+
+.v-touchkit-opacity-transition {
+	-webkit-transition: opacity 0.1s linear;
+	}
+
+@sprite .v-touchkit-popover-pointer {
+	gwt-image: "popoverArrowDownImage";
+	position: absolute;
+	margin-top: -1px;
+}
+
+@sprite .v-touchkit-popover-pointer-bottom {
+	gwt-image: "popoverArrowImage";
+	position: absolute;
+	margin-top: 3px;
+}
+
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navview-wrapper {
+	background: #f6f6f7;
+	margin: 0 5px;
+	-webkit-box-shadow: inset 0 3px 2px rgba(0,0,0,.4);
+	border-radius: 6px;
+	z-index: 1;
+}
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navview-notoolbar .v-touchkit-navview-wrapper {
+	bottom: 5px;
+}
+
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navpanel-container {
+	background: transparent;
+}
+
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar,
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navpanel-placeholder {
+	background: popoverNavbarGradient;
+	border: 0;
+}
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar-caption,
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navpanel-placeholder > div {
+	color: buttonColor;
+	text-shadow: buttonTextShadow;
+}
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navview-toolbar {
+	border: 0;
+	background: popoverToolbarGradient;
+	height: 43px;
+	padding-top: 8px;
+}
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar .v-button,
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar .v-touchkit-horizontalbuttongroup {
+	border-color: rgba(0,0,0,.4);
+	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.1);
+}
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar .v-button-caption {
+	color: buttonColor;
+	text-shadow: buttonTextShadow;
+}
+
+@url popoverBackButtonUrl popoverBackButtonImage;
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbutton-back {
+	color: buttonColor;
+	text-shadow: buttonTextShadow;
+	-webkit-border-image: popoverBackButtonUrl 0 6 0 13 stretch stretch;
+}
+
+@url popoverForwardButtonUrl popoverForwardButtonImage;
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbutton-forward {
+	color: buttonColor;
+	text-shadow: buttonTextShadow;
+	-webkit-border-image: popoverForwardButtonUrl 0 6 0 13 stretch stretch;
+}
+
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-toolbar {
+	border: 0;
+	background: transparent;
+	}
+
+.v-touchkit-popover.v-touchkit-relative .v-touchkit-toolbar .v-button-wrap {
+	color: buttonColor;
+	text-shadow: buttonTextShadow;
+	}
+
+
+/* Switch style checkbox.
+ * TODO Consider styling with pure css:
+ * http://css3wizardry.com/2010/09/16/making-an-iphone-switch-control-without-images/
+ */
+
+@url switch switchImage;
+.v-touchkit-switch {
+	overflow: hidden;
+	position: relative;
+	width: 90px;
+	height: 26px;
+	overflow: hidden;
+	background: switch;
+	-webkit-background-origin: border-box;
+	border: 1px solid rgba(0,0,0,.2);
+	border-radius: 4px;
+	}
+
+.v-touchkit-switch-slider {
+	/* Used only for measuring the slide amount. The dimensions of this element should match the dimensions of the switch image */
+	position: absolute;
+	width: 146px;
+	height: 25px;
+	}
+
+.v-touchkit-switch-focus,
+.v-touchkit-switch:focus {
+	outline: none;
+	}
+
+.v-slider-feedback {
+	font-size: 20px;
+	line-height: 1;
+	padding: 4px 7px;
+	-webkit-box-shadow: 0 1px 5px rgba(0,0,0,.5);
+	margin-top: -14px !important;
+	}
+
+.v-touchkit-verticalcomponentgroup .v-checkbox {
+	line-height: 43px;
+	font-size: 17px;
+	font-weight: bold;
+	}
+
+/* Tabsheet tabs below */
+
+.v-touchkit-tabbar {
+	overflow: hidden;
+	position:relative;
+	padding-bottom: 46px;
+}
+
+.v-touchkit-tabbar .v-csslayout-container,
+.v-touchkit-tabbar .v-csslayout-margin {
+	height:100%;
+	position:relative;	
+}
+
+.v-touchkit-tabbar-wrapper {
+	overflow: auto;
+	height: 100%;
+}
+
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar {
+	position: absolute;
+	bottom: 0;
+	height: 48px;
+	background: tabbarGradient;
+	border-top: 1px solid #4c4c4c;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.2);
+	color: buttonColor;
+	text-shadow: buttonTextShadow;
+	padding-top:2px;
+}
+
+.v-touchkit-toolbar {
+	overflow: hidden;
+}
+
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-caption {
+	display:none;
+}
+
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button {
+	padding: 3px;
+	height: 42px;
+    position: relative;
+}
+
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-wrap {
+	color: #999;
+	text-shadow: none;
+	margin: 0;
+	height: auto;
+	width: auto;
+	padding: 0;
+}
+
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button:active .v-button-wrap {
+    background-image:none;
+}
+
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-caption {
+	color: inherit;
+	font-size: 10px;
+	font-family: "Helvetica Neue", Helvetica, Arial, Tahoma, Verdana, sans-serif;
+	display: block;
+	margin: 3px 0 0 0;
+	position: absolute;
+    bottom: 2px;
+    left: 0;
+	width: 100%;
+	height: auto;
+	border-radius: 0;
+	text-indent: 0;
+	vertical-align: middle;
+	margin: 7px 0 0 0; /* At the bottom of the button, even without icon */
+}
+
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button .v-icon {
+	margin: 0 0 -3px 0; /* Compensate the space consumed by icon as caption is positioned with margin */
+}
+
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-wrap:before {
+	display: none;
+}
+
+
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-selected {
+	background: rgba(255,255,255,.15);	
+	border-radius: 4px;
+}
+
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-selected .v-button-wrap {
+	color: #fff;
+}
+
+/* Layout margins */
+.v-orderedlayout-margin-top,
+.v-horizontallayout-margin-top,
+.v-verticallayout-margin-top,
+.v-gridlayout-margin-top,
+.v-csslayout-margin-top {
+	padding-top: listLayoutMargin;
+}
+.v-orderedlayout-margin-right,
+.v-horizontallayout-margin-right,
+.v-verticallayout-margin-right,
+.v-gridlayout-margin-right,
+.v-csslayout-margin-right {
+	padding-right: listLayoutMargin;
+}
+.v-orderedlayout-margin-bottom,
+.v-horizontallayout-margin-bottom,
+.v-verticallayout-margin-bottom,
+.v-gridlayout-margin-bottom,
+.v-csslayout-margin-bottom {
+	padding-bottom: listLayoutMargin;
+}
+.v-orderedlayout-margin-left,
+.v-horizontallayout-margin-left,
+.v-verticallayout-margin-left,
+.v-gridlayout-margin-left,
+.v-csslayout-margin-left {
+	padding-left: listLayoutMargin;
+}
+
+/* CssLayout uses margins instead of padding */
+.v-csslayout-margin-top {
+	margin-top: listLayoutMargin;
+	padding: 0;
+}
+.v-csslayout-margin-right {
+	margin-right: listLayoutMargin;
+	padding: 0;
+}
+.v-csslayout-margin-bottom {
+	margin-bottom: listLayoutMargin;
+	padding: 0;
+}
+.v-csslayout-margin-left {
+	margin-left: listLayoutMargin;
+	padding: 0;
+}
+
+/* Layout spacings */
+.v-orderedlayout-spacing-on,
+.v-horizontallayout-spacing-on,
+.v-verticallayout-spacing-on,
+.v-gridlayout-spacing-on {
+	padding-top: 8px;
+	padding-left: 8px;
+}
+
+
+
+
+/* Notifications */
+.v-Notification {
+	background: popoverGradient;
+	border: 2px solid rgba(0,0,0,.3);
+	border-top-color: rgba(100,100,100,.4);
+	border-bottom-color: rgba(0,0,0,.7);
+	border-radius: listLayoutMargin;
+	padding: 30px 30px;
+	text-align: center;
+	color: #fff;
+	line-height: normal;
+	text-shadow: 0 1px 1px rgba(0,0,0,.2);
+	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.4), 0 2px 1px 1px rgba(0,0,0,.5), inset 0 0 1px rgba(255,255,255,.16);
+	overflow: hidden;
+	max-width: 85%; 
+	}
+	
+	
+/* Table
+ * TODO this is quicly copy pasted and modified from reindeer. Remove obsolete code, tune colors etc.
+ */
+
+
+@def tableRowHeight 30px;
+
+.v-tk .v-table-header-wrap,
+.v-tk .v-table-footer-wrap {
+	border-color: #c2c3c4;
+	background: navbarGradient;
+	height: tableRowHeight;
+	font-weight: bold;
+	color: navbarButtonColor;
+}
+
+.v-tk .v-table-footer-wrap {
+	text-transform: none;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+.v-tk .v-table-footer td {
+	border-color: #c2c3c4;
+}
+
+.v-tk .v-table-footer-container {
+	padding-right: 7px;
+}
+
+.v-tk .v-table-header,
+.v-tk .v-table-footer,
+.v-tk .v-table-footer table {
+	height: tableRowHeight;
+}
+
+.v-tk .v-table-caption-container {
+	heigth: 16px;
+	padding-top: 4px;
+	padding-right: 4px;
+}
+.v-tk .v-table-caption-container .v-icon {
+	height: 16px;
+	margin: -4px 3px 0 0;
+	vertical-align: middle;
+}
+.v-tk .v-ie .v-table-caption-container .v-icon {
+	margin-top: -3px;
+}
+.v-tk .v-table-footer-container {
+	heigth: 16px;	
+}
+.v-tk .v-table-resizer {
+	height: tableRowHeight;
+	width: 2px;
+	background: transparent;
+	border-right: 1px solid #c2c3c4;
+}
+
+.v-tk .v-table-sort-indicator {
+	background: transparent;
+	width: 0px;
+	height: tableRowHeight;
+}
+
+@sprite .v-tk  .v-table-header-cell-asc .v-table-sort-indicator {
+	gwt-image: "columnAscending";
+	margin-top: 10px;
+}
+
+@sprite .v-tk .v-table-header-cell-desc .v-table-sort-indicator {
+	gwt-image: "columnDescending";
+	margin-top: 10px;
+}
+.v-tk .v-table-body {
+	border-color: #c2c3c4;
+	background: #fff;
+}
+.v-tk .v-table-cell-content {
+	padding-top: 0;
+	border-right-color: #d3d4d5;
+	vertical-align: top;
+}
+.v-tk .v-table-cell-wrapper {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.v-tk .v-table-row-odd {
+	background: #eff0f1;
+}
+.v-tk .v-table-cell-content:last-child {
+	border-right-color: transparent;
+}
+.v-tk .v-table .v-selected {
+	background: #4d749f;
+	color: #fff;
+	text-shadow: #3b5a7a 0 1px 0;
+}
+.v-tk .v-table .v-selected .v-table-cell-content {
+	border-right-color: #466c90;
+}
+
+@sprite .v-table-column-selector {
+	gwt-image: "columnSelector";
+	margin-top: -30px;
+	width:15px;
+    float: right;
+    height: 1.2em;
+    position: relative;
+    cursor: pointer;
+}
+.v-tk .v-table-focus-slot-left {
+	border-left-color: #222;
+	margin-left: 0;
+}
+.v-tk .v-table-focus-slot-right {
+	border-right-color: #222;
+	margin-right: 0;
+}
+
+.v-tk .v-table-header-drag * {
+	vertical-align: middle;
+}
+.v-tk .v-table-header-drag img {
+	height: 16px;
+	margin: -3px 3px 0 0;
+}
+.v-tk .v-table-scrollposition {
+	width: auto;
+	background: transparent;
+	border: none;
+}
+.v-tk .v-table-scrollposition span {
+	background: navbarGradient;
+	border: 1px solid #939494;
+	border: none;
+	border-radius: 4px;
+	height: 13px;
+	padding: 4px 30px;
+	white-space: nowrap;
+	color: #222;
+	text-shadow: #fff 0 1px 0;
+	position: relative;
+	top: 1px;
+	-webkit-box-shadow: rgba(0,0,0,.5) 0 1px 2px;
+}
+
+
+/* ComboBox */
+.v-tk .v-filterselect,
+.v-tk .v-datefield-popupcalendar {
+	/* To contain the floats */
+	overflow: hidden;
+	border: 1px solid rgba(0,0,0,.35);
+	border-radius: 4px;
+	background: #fff;
+	-webkit-box-shadow: inset 0 1px rgba(0,0,0,.12);
+	height: 25px;
+	padding: 2px 0 2px 4px;
+	}
+
+.v-app .v-filterselect-input,
+.v-window .v-filterselect-input,
+.v-popupview-popup .v-filterselect-input,
+.v-tk input.v-datefield-textfield {
+	-webkit-appearance: none;
+	border: none;
+	background: transparent;
+/* 	font-size: 17px; */
+/* 	font-weight: bold; */
+	margin: 0;
+	}
+
+.v-tk .v-filterselect-button {
+	position: absolute;
+	right: 0px;
+	height: 25px;
+	background-position-y: -6px;
+	background-position-x: -2px;
+	width: 25px;
+	opacity: .3;
+	}
+
+.v-tk .v-filterselect-button:active {
+	opacity: 1;
+	}
+
+.v-tk .v-filterselect-input:focus,
+.v-tk .v-datefield-textfield:focus {
+	outline: none;
+	}
+
+.v-tk .v-filterselect-focus,
+.v-tk .v-datefield-focus {
+	-webkit-box-shadow: 0 0 3px 1px #5d81ab;
+	}
+
+.v-tk .v-filterselect-prompt {
+	position: relative;
+}
+
+
+.v-tk .v-filterselect-prompt .v-filterselect-input {
+	position: absolute;
+	left: 0px;
+	right: 25px;
+	/*font-style: normal;*/
+}
+
+.v-tk .v-filterselect .v-icon {
+	height: 23px;
+	margin-top: 2px !important;
+	}
+
+.v-tk .v-filterselect-suggestmenu {
+	min-width: 290px;
+	}
+
+.v-tk .v-filterselect-suggestpopup,
+.v-tk .v-datefield-calendarpanel {
+	-webkit-box-shadow: 0 1px 10px 1px rgba(0,0,0,.5);
+	border-radius: 4px;
+	margin-top: 4px !important;
+	overflow: hidden;
+	border: none;
+}
+
+.v-tk .v-filterselect-suggestpopup .v-icon {
+	height: 32px;
+	vertical-align: middle;
+	}
+
+.v-tk .v-filterselect-suggestpopup .gwt-MenuItem {
+	height: 36px;
+	line-height: 36px;
+	padding: 2px 10px;
+	border-top: 1px solid #e0e0e0;
+	}
+
+.v-tk .v-filterselect-suggestpopup tr:last-child .gwt-MenuItem {
+	border-bottom: 1px solid #e0e0e0;
+	}
+
+.v-tk .v-filterselect-suggestpopup .gwt-MenuItem-selected,
+.v-tk .v-filterselect-suggestpopup .gwt-MenuItem:active,
+.v-tk .v-filterselect-suggestpopup .gwt-MenuItem:hover,
+.v-tk .v-filterselect-suggestpopup .gwt-MenuItem:focus {
+	background: tableSelectionGradient;
+	}
+
+.v-tk .v-filterselect-nextpage,
+.v-tk .v-filterselect-nextpage-off,
+.v-tk .v-filterselect-prevpage-off,
+.v-tk .v-filterselect-prevpage {
+	width: 75px;
+	height: 32px;
+	border: 1px solid rgba(0,0,0,.25);
+	border-top-color: #d0d1d3;
+	border-bottom-color: rgba(0,0,0,.5);
+	background: literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#e5e5e6), to(#b4b6b8))');
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3), inset 0 -1px 0 rgba(255,255,255,.15);
+	overflow: hidden;
+	border-radius: 17px;
+	margin: 7px auto;
+	}
+
+
+@url comboBoxArrowDown comboBoxArrowDown2x;
+@url comboBoxArrowUp comboBoxArrowUp2x;
+
+.v-tk .v-filterselect-nextpage span,
+.v-tk .v-filterselect-prevpage span {
+	display: block;
+	height: 32px;
+	background: comboBoxArrowDown no-repeat 50%;
+	-webkit-background-size: 20px 11px;
+	text-indent: -9999px;
+	}
+
+.v-tk .v-filterselect-prevpage span {
+	background-image: comboBoxArrowUp;
+	}
+
+.v-tk .v-filterselect-nextpage-off,
+.v-tk .v-filterselect-prevpage-off {
+	opacity: 0;
+	}
+
+.v-tk .v-filterselect-status {
+	position: absolute;
+	right: 12px;
+	bottom: 15px;
+	color: #B7B9BB;
+	font-size: 14px;
+	}
+
+.v-tk .v-filterselect-suggestmenu {
+	-webkit-tap-highlight-color: transparent;
+	}
+
+
+/* DateField */
+.v-datefield-popupcalendar {
+	clear: both;
+	float: none;
+	padding: 0 0 0 4px;
+	-webkit-box-sizing: border-box;
+	height: 31px;
+	border-collapse: collapse;
+}
+
+.v-datefield-textfield,
+.v-datefield-button {
+	-webkit-box-sizing: border-box;
+	margin: 0;
+	}
+
+.v-datefield-textfield {
+	height: 27px;
+	line-height: 27px;
+	}
+
+@url calendar calendar2x;
+.v-datefield-button {
+	-webkit-appearance: none;
+	border: none;
+	background: transparent calendar no-repeat 0 50%;
+	-webkit-background-size: 16px 16px;
+	width: 25px;
+	height: 27px;
+	}
+
+.v-datefield-error {
+	border: 2px solid rgba(250,40,0,.6);
+	}
+
+.v-datefield-calendarpanel {
+	background: #fff;
+}
+
+.v-datefield-calendarpanel {
+	border: none;
+}
+
+.v-datefield-calendarpanel button {
+	-webkit-appearance: none;
+	background:transparent;
+	display: block;
+	border: none;
+	margin: 0;
+	padding:0;
+}
+.v-datefield-calendarpanel-header td {
+	background: literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#e5e5e6), to(#b4b6b8))');
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3), inset 0 -1px 0 rgba(255,255,255,.15);
+	text-shadow: 0 1px 0 rgba(255,255,255,.7);
+	line-height: 19px;
+	height: 25px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.v-datefield-calendarpanel button {
+	/* Needed to make < and << look proper  */
+	font-family: arial;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+/* Fix the month width, otherwise jumpy when changing month */
+.v-datefield-calendarpanel-header td {
+	width: 1px;
+	border-right: 1px solid rgba(0,0,0,.25);
+	border-bottom: 1px solid rgba(0,0,0,.5);
+	padding: 0 6px 3px;
+}	
+.v-datefield-calendarpanel-header td.v-datefield-calendarpanel-month {
+	width:auto;
+	min-width:140px;
+}
+span.v-datefield-calendarpanel-month {
+	line-height:26px;
+	font-size: 15px;
+}
+
+.v-datefield-calendarpanel .v-button-nextyear {
+	border-right: none;
+}
+
+.v-datefield-calendarpanel table,
+.v-datefield-time {
+	padding: 0 10px;
+}
+.v-datefield-time {
+	padding-bottom: 10px;
+}
+
+.v-datefield-calendarpanel td {
+	text-align: center;
+}
+
+.v-datefield-popup {
+	overflow: hidden;
+}
+
+/* Tree styles */
+
+.v-tree-node {
+	padding: 4px 0;
+}
+.v-tree-node-caption {
+	margin-left: 1.5em;
+}
+
+/** Component group stylings must be as last as they override default styles */
+
+.v-tk .v-touchkit-verticalcomponentgroup {
+	display: block;
+	position: relative;
+	width: 100%;
+	margin: 0;
+	border: listBorder;
+	border-radius: listLayoutMargin;
+	background: white;
+	padding: 0 listLayoutMargin;
+	box-sizing: border-box;
+	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.5);
+	overflow: hidden;
+	position: relative;
+}
+
+.v-touchkit-verticalcomponentgroup>* {
+	clear:both;
+	}
+
+.v-touchkit-verticalcomponentgroup .v-textfield,
+.v-touchkit-verticalcomponentgroup .v-touchkit-numberfield {
+	border:0;
+	background: transparent;
+	color: #4e64a1;
+	font-size:17px;
+}
+
+/* Display readonly inputs without special color */
+.v-touchkit-verticalcomponentgroup input:read-only {
+	color: #000;
+}
+
+.v-touchkit-verticalcomponentgroup .v-datefield-popupcalendar,
+.v-touchkit-verticalcomponentgroup .v-filterselect {
+	border: 0;
+	-webkit-box-shadow: none;
+}
+
+.v-touchkit-componentgroup-row .v-caption {
+    margin: listLayoutMargin 0;
+}
+
+.v-touchkit-componentgroup-cell > * {
+    margin: listLayoutMargin 0;
+}
+
+.v-touchkit-componentgroup-cell > .v-select-optiongroup {
+    margin: 0;
+}
+
+.v-touchkit-componentgroup-cell > .v-touchkit-navbutton {
+    padding-left: listLayoutMargin;
+    margin-left: negativelistLayoutMargin;
+    padding-right: listLayoutMargin;
+    margin-right: negativelistLayoutMargin;
+}
+
+.v-touchkit-verticalcomponentgroup .v-filterselect>input {
+	color: #4e64a1;
+	/*padding-top: 10px;*/
+	font-size:17px;
+}
+
+.v-touchkit-verticalcomponentgroup .v-filterselect {
+	/*padding-top: 10px;*/
+}
+
+.v-touchkit-componentgroup-row .v-link, .v-touchkit-componentgroup-table .v-label {
+    line-height: 33px;
+}
+
+.v-touchkit-verticalcomponentgroup .v-datefield-button {
+	margin-top:8px;
+	background-position: 6px;
+}
+
+.v-touchkit-verticalcomponentgroup .v-select-select {
+	margin-top: 5px;
+	height:30px;
+}
+
+.v-touchkit-verticalcomponentgroup .v-slider {
+	margin-top: 20px;
+}
+.v-touchkit-verticalcomponentgroup .v-slider-base {
+	margin-left: 5px;
+}
+
+.v-touchkit-componentgroup-cell > .v-select-optiongroup {
+    width: 100%;
+}
+
+.v-touchkit-componentgroup-cell > .v-select-optiongroup .v-select-option {
+	height: 40px;
+	position:relative;
+}
+
+.v-touchkit-componentgroup-cell > .v-select-optiongroup .v-select-option input {
+	font-size: large;
+}
+
+.v-touchkit-componentgroup-cell > .v-select-optiongroup .v-select-option > * {
+	margin: 14px 0px;
+}
+
+.v-touchkit-componentgroup-cell > .v-select-optiongroup .v-select-option>label {
+	display: block;
+	position:absolute;
+	top:0;left:0; right:0;
+	padding-left:20px;
+	padding-top:10px;
+	margin:0;
+	font-weight: bold;
+	color: navbarButtonColor;
+	vertical-align:top;
+	line-height:normal;
+	font-size:17px;
+	height:30px;
+}
+
+/* Grey lines between component,
+ * also set then for selects inside component group.
+ */
+.v-touchkit-verticalcomponentgroup > *:before,
+.v-touchkit-componentgroup-cell > .v-select-optiongroup > .v-select-option:before {
+	content: "";
+	display: block;
+	position: absolute;
+	margin:0;
+	padding:0;
+	left: 0;
+	right: 0;
+	border-top: listBorder;
+	}
+	
+.v-touchkit-componentgroup-cell > .v-select-optiongroup >.v-select-option:before {
+    left: negativeListLayoutMargin;
+    right: negativeListLayoutMargin;
+}
+
+/* ...hide from the first */
+.v-touchkit-verticalcomponentgroup > *:first-child:before,
+.v-touchkit-componentgroup-cell > .v-select-optiongroup :first-child:before {
+	display: none;
+}
+
+
+/* Strets forms inside componeng groups so that its separator lines end at correct places */
+.v-touchkit-componentgroup-cell>.v-formlayout {
+	margin: 0 negativeListLayoutMargin;
+	width: auto !important;
+	display:block; /* ~ 100% width inline-block */
+}
+.v-form>fieldset>div:last-child>.v-layout {
+	display:block; /* V7 has inlineblock by default, causes odd extra space although empty footer */
+}
+
+.v-tk .v-touchkit-verticalcomponentgroup .v-formlayout-row .v-formlayout-captioncell, 
+.v-tk .v-touchkit-verticalcomponentgroup .v-formlayout-row .v-formlayout-contentcell, 
+.v-tk .v-touchkit-verticalcomponentgroup .v-formlayout-row .v-formlayout-errorcell {
+	padding:0;
+}
+
+.v-tk .v-touchkit-verticalcomponentgroup .v-formlayout-row .v-formlayout-contentcell {
+	padding-right: listLayoutMargin;
+}
+.v-tk .v-touchkit-verticalcomponentgroup .v-formlayout-row .v-formlayout-captioncell {
+	padding-left: listLayoutMargin;
+	text-align: left;
+}
+
+.v-tk .v-formlayout-captioncell > .v-caption {
+	font-weight: bold;
+	font-size: 17px;
+	line-height: 43px;
+	height: 43px;
+	margin:0;
+}
+
+.v-tk .v-formlayout-row > td {
+	border-bottom: listBorder;
+}
+.v-tk .v-formlayout-lastrow > td {
+	border-bottom: none;
+}
+
+.v-tk .v-label-grey-title, 
+.v-tk .v-layout > .v-caption>div
+{
+	font-size: 16px;
+	font-weight: bold;
+	color: #44698b;
+	text-shadow: 0 1px 0 rgba(255,255,255,.7);
+	margin: listLayoutMargin;
+}
+
+.v-touchkit-componentgroup-row {
+	width: 100%;
+	display: -webkit-box;
+}
+.v-touchkit-componentgroup-row-cap {
+    -webkit-box-align: center;
+    min-height: 42px;
+}
+
+.v-touchkit-componentgroup-row > .v-caption {
+	font-size: 17px;
+	font-weight: bold;
+	padding-right: 5px;
+	box-sizing: border-box;
+	white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+
+.v-touchkit-componentgroup-row-nocap > .v-caption {
+	display: none;
+	-webkit-box-flex: 0;
+}
+
+.v-touchkit-componentgroup-row-nocap > .v-touchkit-componentgroup-cell {
+    -webkit-box-flex: 1;
+    width: 100%;
+    padding-left: 0px;
+}
+
+.v-touchkit-componentgroup-row-cap > .v-caption {
+	-webkit-box-flex: 1;
+	width: 40%;
+}
+
+.v-touchkit-componentgroup-row-cap > .v-touchkit-componentgroup-cell {
+    -webkit-box-flex: 0;
+}
+
+.v-touchkit-componentgroup-row-cap > .v-touchkit-componentgroup-cell > * {
+	float: right;
+}
+
+.v-touchkit-componentgroup-row-full > .v-caption {
+    -webkit-box-flex: 1;
+    width: 40%;
+}
+
+.v-touchkit-componentgroup-row-full > .v-touchkit-componentgroup-cell {
+    -webkit-box-flex: 1;
+    width: 60%;
+}
+
+.v-touchkit-componentgroup-row-full > .v-touchkit-componentgroup-cell > * {
+	float: none;
+}
+
+.v-touchkit-componentgroup-cell-fullwrapper .v-touchkit-horizontalbuttongroup {
+	margin-top: listLayoutMargin;
+	margin-bottom: listLayoutMargin;
+}
+
+.v-vertical.v-margin-left, .v-horizontal.v-margin-left {
+	padding-left: listLayoutMargin;
+}
+.v-vertical.v-margin-bottom, .v-horizontal.v-margin-bottom {
+	padding-bottom: listLayoutMargin;
+}
+.v-vertical.v-margin-right, .v-horizontal.v-margin-right {
+	padding-right: listLayoutMargin;
+}
+.v-vertical.v-margin-top, .v-horizontal.v-margin-top {
+	padding-top: listLayoutMargin;
+}
+
+/* Csslayout directly under navigationview, tabbarview or similar has margin by default */
+.v-touchkit-navview-wrapper>.v-csslayout,
+.v-touchkit-tabbar-wrapper>.v-csslayout,
+.v-touchkit-swipeview>.v-csslayout {
+	padding: listLayoutMargin;
+}
+
+/* ComponentGroup directly under navigationview or tabbarview has margin by default */
+.v-touchkit-navview-wrapper>.v-touchkit-verticalcomponentgroup,
+.v-touchkit-tabbar-wrapper>.v-touchkit-verticalcomponentgroup,
+.v-touchkit-swipeview>.v-touchkit-verticalcomponentgroup {
+	margin: listLayoutMargin;
+	width:auto;
+}
+
+
+/* This gludge is ONLY for testbench testing in Windows machine where there will most likely be scrollbars */
+/*.v-scrollable {
+	overflow: hidden !important;	
+}*/
+
+.v-touchkit-combobox-drop-down {
+	height: 25px;
+	line-height: 25px;
+	border: 1px solid #c1c1c1;
+	padding: 2px;
+	cursor: pointer;
+	background: url("VAADIN/themes/base/common/img/sprites.png") no-repeat scroll right -6px white;
+	overflow: hidden;
+	}
+.v-touchkit-combobox-select-item {
+	width: 100%;
+	cursor: pointer;
+	font-weight: bold;
+	border-bottom: 1px solid #c1c1c1;
+	background: touchComboBoxItemButton;
+	overflow: hidden;
+	}
+.v-touchkit-combobox-select-item.empty {
+	cursor: default;
+	}
+.v-touchkit-combobox-popup-filter {
+	height: 34px;
+	line-height: 34px;
+	}
+	
+.v-touchkit-combobox-close-button {
+	position: absolute;
+	top: 7px;
+	height: 30px;
+	width: 30px; 
+	}
+
+.v-touchkit-combobox.v-touchkit-popover {
+/* 	overflow: visible; */
+/* 	background: popoverGradient; */
+/* 	position: relative; */
+/* 	-webkit-box-shadow: 0 0 40px rgba(0, 0, 0, 0.6); */
+/* 	border-radius: 10px; */
+	border: 1px solid rgba(25, 33, 40, 0.5);
+/* 	padding: 10px; */
+	}
+	
+.v-touchkit-datepopover {
+    background-color: white;
+    box-shadow: 1px 1px 3px 3px rgba(0,0,0,0.25);
+    cursor: default;
+    min-width: 290px;
+    border-radius: 10px;
+}
+
+.v-touchkit-datepopover > .popupContent {
+    padding: 5px;
+}
+
+.v-touchkit-datepopover .gwt-DatePicker {
+	width: 100%;
+	margin-bottom: 20px;
+	-webkit-user-select: none;
+}
+
+.v-touchkit-datepopover .datePickerMonthSelector {
+	width: 100%;
+}
+
+.v-touchkit-datepopover .datePickerMonth {
+	text-align: center;
+}
+
+.v-touchkit-datepopover .datePickerDay,
+.v-touchkit-datepopover .datePickerWeekdayLabel,
+.v-touchkit-datepopover .datePickerWeekendLabel,
+.v-touchkit-datepopover .datePickerPreviousButton,
+.v-touchkit-datepopover .datePickerNextButton {
+    min-width: 40px;
+    min-height: 40px;
+    line-height: 40px;
+    text-align: center;
+    outline: 0;
+}
+
+.v-touchkit-datepopover .datePickerPreviousButton > *,
+.v-touchkit-datepopover .datePickerNextButton > * {
+	outline: 0;
+}
+
+.v-touchkit-datepopover .datePickerPreviousButton,
+.v-touchkit-datepopover .datePickerNextButton {
+	color: buttonColor;
+    border-radius: listLayoutMargin;
+    background: buttonInsetBackground;
+    -webkit-box-shadow: buttonInsetBoxShadow;
+    padding: 3px;
+}
+
+.v-touchkit-datepopover .datePickerPreviousButton > .html-face,
+.v-touchkit-datepopover .datePickerNextButton > .html-face {
+    background: buttonGradient;
+    border-radius: listLayoutMargin;
+    -webkit-box-shadow: buttonBoxShadow;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.75);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.v-touchkit-datepopover-noprev .datePickerPreviousButton,
+.v-touchkit-datepopover-nonext .datePickerNextButton {
+	opacity: 0.2;
+}
+
+.v-touchkit-datepopover .datePickerDay:focus {
+	border-width: 0px;
+}
+
+.v-touchkit-datepopover .datePickerWeekdayLabel,
+.v-touchkit-datepopover .datePickerWeekendLabel {
+	background-color: #DDD;
+}
+
+.v-touchkit-datepopover .datePickerDayIsValue {
+	background-color: #666;
+	color: white;
+	text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+	box-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+	font-weight: bold;
+	border-radius: 10px;
+}
+.v-touchkit-datepopover .datePickerDayIsFiller {
+	opacity: 0.5;
+}
+
+.v-touchkit-datepopover .datePickerDayIsDisabled {
+    display: none;
+    text-decoration: line-through;
+}
+
+.v-touchkit-date-ok .v-button-caption, .v-touchkit-date-cancel .v-button-caption {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+
+.v-touchkit-date-cancel {
+    float: right;
+}
+
+.v-touchkit-datepopover-hidedays .datePickerDays {
+	display: none;
+}
+
+.v-touchkit-ok-image, .v-touchkit-cancel-image {
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+}
+
+@sprite .v-touchkit-ok-image {
+	gwt-image: "dateOkSymbol";
+}
+
+@sprite .v-touchkit-cancel-image {
+	gwt-image: "dateCancelSymbol";
+}
+
+
+/* Navbar buttons and horizontal button group.
+ * Note that these must be after all other 
+ * button styles to get properly overridden border radius etc
+ */
+.v-touchkit-navbar .v-button,
+.v-touchkit-horizontalbuttongroup {
+    display: inline-block;
+    margin: 0;
+    border: navbarButtonBorder;
+    border-radius: 5px;	
+    height: 30px;
+    padding: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    background: transparent;
+    color: navbarButtonColor;
+    text-shadow: navbarButtonTextShadow;
+    -webkit-box-shadow: navbarButtonBoxShadow;
+}
+
+.v-touchkit-navbar .v-button-wrap,
+.v-touchkit-horizontalbuttongroup {
+	background: navbarButtonGradient;
+	border-radius: 4px;
+}
+
+.v-touchkit-horizontalbuttongroup {
+    padding: 0 13px;	
+}
+
+.v-touchkit-navbar .v-button-wrap {
+    height: 28px;
+    padding: 0 listLayoutMargin;
+}
+
+.v-touchkit-navbar .v-button-caption,
+.v-touchkit-horizontalbuttongroup .v-button-caption {
+	color: navbarButtonColor;
+	text-shadow: navbarButtonTextShadow;
+	font-size: 12px;
+	-webkit-box-shadow: none;
+	/* These buttons are 28px height, make text centered */
+	line-height:28px;
+	vertical-align:top;
+	margin: 0;
+}
+
+/* .v-touchkit-navbar .v-button:active .v-button-wrap { */
+/* 	background-image: navbarButtonActiveGradient; */
+/* } */
+
+.v-touchkit-horizontalbuttongroup {
+	padding:0;
+	display:block;
+	/* Float left to "sqeeze" non used space, inline-block cannot be used to keep sizes working */
+	float:left;
+}
+
+.v-touchkit-componentgroup-cell>.v-touchkit-horizontalbuttongroup {
+	margin: listLayoutMargin 0;
+}
+
+.v-touchkit-navbar .v-touchkit-horizontalbuttongroup {
+	float:none;
+	display:inline-block
+}
+
+/* Strip some styles from buttons inside a componentgroup */
+.v-touchkit-horizontalbuttongroup .v-button {
+	border:0;
+	margin:0;
+	padding:0;
+	background: transparent;
+	-webkit-box-shadow: none;
+	display:inline-block;
+	border-left: navbarButtonBorder;
+	border-radius: 0;
+}
+
+.v-touchkit-horizontalbuttongroup .v-button-wrap {
+	background:none;
+	border-radius:0;
+}
+
+.v-touchkit-horizontalbuttongroup .v-button:first-child {
+	border-left: none;
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+}
+
+.v-touchkit-horizontalbuttongroup .v-button:last-child {
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+/* This effect is quite weird, disabled by MT 13-02-27
+.v-touchkit-toolbar .v-button:active .v-button-wrap:before,
+.v-touchkit-navbar .v-button-no-decoration:active .v-button-wrap:before {
+	-webkit-box-shadow: 0 0 25px 13px #fff;
+	background: #fff;
+	opacity: .8;
+}
+*/
+
+/* no-decoration button in navbar */
+.v-touchkit-navbar .v-button-no-decoration {
+	background: transparent;
+	border: none;
+	-webkit-box-shadow: none;
+	overflow: visible;
+}
+
+.v-touchkit-navbar .v-button-no-decoration .v-button-wrap {
+	border: none;
+	background: transparent;
+	overflow: visible;
+	-webkit-box-shadow: none;
+}
+
+/* Button customizations */
+
+.v-button-white .v-button-wrap {
+	background-color: #fff;
+}
+
+.v-button-white .v-button-caption {
+    color: #222;
+    text-shadow: navbarButtonTextShadow;	
+}
+
+
+.v-button.red {
+	background-color: redButtonWrapBgColor;
+}
+.v-button.green {
+	background-color: greenButtonWrapBgColor;
+}
+.v-button.blue {
+	background-color: blueButtonWrapBgColor;
+}
+.v-button.red .v-button-wrap,
+.v-button.green .v-button-wrap,
+.v-button.blue .v-button-wrap {
+	background-image: buttonColorGradient;
+}
+.v-touchkit-navbar .v-button.red .v-button-wrap,
+.v-touchkit-navbar .v-button.green .v-button-wrap,
+.v-touchkit-navbar .v-button.blue .v-button-wrap,
+.v-touchkit-horizontalbuttongroup .v-button.red .v-button-wrap,
+.v-touchkit-horizontalbuttongroup .v-button.green .v-button-wrap,
+.v-touchkit-horizontalbuttongroup .v-button.blue .v-button-wrap {
+	background-image: navbarButtonGradient;
+}
+/*
+
+.v-button-red .v-button-wrap,
+.v-touchkit-navbar .v-button-red {
+	background-color: redButtonWrapBgColor;
+	background-image: buttonColorGradient;
+}
+
+.v-button-blue .v-button-wrap,
+.v-touchkit-navbar .v-button-blue {
+	background-color: blueButtonWrapBgColor;
+	background-image: buttonColorGradient;
+}
+
+.v-button-green .v-button-wrap,
+.v-touchkit-navbar .v-button-green {
+	background-color: greenButtonWrapBgColor;
+	background-image: buttonColorGradient;
+}
+
+.v-touchkit-navbar .v-button-red .v-button-wrap,
+.v-touchkit-navbar .v-button-blue .v-button-wrap,
+.v-touchkit-navbar .v-button-green .v-button-wrap {
+	background-color: transparent;
+}
+*/
+
+.v-touchkit-horizontalbuttongroup .v-button-red .v-button-caption,
+.v-touchkit-horizontalbuttongroup .v-button-blue .v-button-caption,
+.v-touchkit-horizontalbuttongroup .v-button-green .v-button-caption,
+.v-touchkit-navbar .v-button-red .v-button-caption,
+.v-touchkit-navbar .v-button-blue .v-button-caption,
+.v-touchkit-navbar .v-button-green .v-button-caption {
+    color: buttonColor;
+    text-shadow: buttonTextShadow;
+}
+
+
+.v-treetable-treespacer {
+    display: inline-block;
+    background: transparent;
+    height: 19px;
+    width: 18px;
+    position: absolute;
+    left: 0;
+    top: 5px;
+}
+
+@url arrowRightUrl arrowRightImage;
+.v-treetable-node-closed,
+.v-tree-node {
+    background-image: arrowRightUrl;
+}    
+
+.v-treetable-node-closed {
+    background-position: right 10%;
+    background-repeat: no-repeat;
+    background-size: auto 80%;
+}
+
+.v-tree-node {
+    background-position: 4px 4px;
+    background-size: auto 16px;
+    background-repeat: no-repeat;
+    padding: 1px 0;
+}
+
+@url arrowDownUrl arrowDownImage;
+.v-treetable-node-open,
+.v-tree-node-expanded {
+    background-image: arrowDownUrl;
+}	
+
+.v-treetable-node-open {
+	background-position: right 10%;
+	background-repeat: no-repeat;
+	background-size: auto 80%;
+}
+
+@sprite .v-menubar-submenu .v-menubar-menuitem-checked .v-menubar-menuitem-caption {
+	gwt-image: "check";
+}
+
+@url dragSlotDotUrl dragSlotDotImage;
+.v-tree .v-tree-node-drag-top:before, .v-tree .v-tree-node-drag-bottom:after, .v-tree .v-tree-node-caption-drag-center:after {
+    display: block;
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    margin-top: -4px;
+    background: transparent dragSlotDotUrl;
+}
+
+.v-table-row-drag-top .v-table-cell-content:first-child:before, .v-table-row-drag-bottom .v-table-cell-content:first-child:after {
+    display: block;
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    margin-top: -4px;
+    margin-left: -6px;
+    background: transparent dragSlotDotUrl;
+}
+
+.v-ddwrapper-over-top:before, .v-ddwrapper-over-bottom:after, .v-ddwrapper-over-left:before, .v-ddwrapper-over-right:before {
+    display: block;
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    margin-top: -4px;
+    margin-left: -2px;
+    background: transparent dragSlotDotUrl no-repeat;
+}
+
+/* Styles for CacheManifestLoadingIndicator */
+.v-cache-loading-indicator {
+    background: spinner no-repeat;
+    background-size: 10px 10px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    -webkit-animation-name: spinnerRotate;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
