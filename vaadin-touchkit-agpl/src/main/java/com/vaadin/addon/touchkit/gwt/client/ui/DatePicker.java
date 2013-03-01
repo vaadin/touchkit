@@ -30,9 +30,8 @@ import com.vaadin.client.ui.VButton;
 /**
  * DatePicker widget. Uses HTML5 date input fields to ask time values from user.
  */
-public class DatePicker extends SimplePanel
-implements
-HasValueChangeHandlers<java.util.Date>, ClickHandler {
+public class DatePicker extends SimplePanel implements
+        HasValueChangeHandlers<java.util.Date>, ClickHandler {
 
     private static final String CLASSNAME = "v-touchkit-datepicker";
     private final static String MONTH_FORMAT = "yyyy-MM";
@@ -77,6 +76,7 @@ HasValueChangeHandlers<java.util.Date>, ClickHandler {
 
         /**
          * Get type value used in input field
+         * 
          * @return Type value used in input field
          */
         public String getType() {
@@ -98,36 +98,6 @@ HasValueChangeHandlers<java.util.Date>, ClickHandler {
     }
 
     /**
-     * Check if input field can be used for current browser.
-     * 
-     * @return
-     */
-    public boolean checkInputTagSupport() {
-        return useNative && checkInputTagSupport(resolution);
-    }
-
-    /**
-     * Check if input field is supported for current browser.
-     * 
-     * @param resolution
-     *            Resolution used by DatePicker
-     * @return
-     */
-    public static boolean checkInputTagSupport(Resolution resolution) {
-
-        BrowserInfo info = BrowserInfo.get();
-
-        // if (!info.isIOS() && !(info.isAndroid() && info.isChrome())) {
-        if (!info.isIOS() && !info.isChrome()) {
-            VConsole.log("DateField support undefined for: "
-                    + BrowserInfo.getBrowserString());
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    /**
      * Input element listener
      */
     private final EventListener elementListener = new EventListener() {
@@ -139,13 +109,14 @@ HasValueChangeHandlers<java.util.Date>, ClickHandler {
             if (newDate == null) {
                 setDate(date, true, false);
             } else if (!newDate.equals(date)) {
-                setDate (newDate, false, true);
+                setDate(newDate, false, true);
             }
         }
     };
 
     /**
      * Get formats based on current resolution
+     * 
      * @return Formats used to parse String value
      */
     private List<DateTimeFormat> getCurrentFormats() {
@@ -159,14 +130,14 @@ HasValueChangeHandlers<java.util.Date>, ClickHandler {
             ret.add(DateTimeFormat.getFormat(MONTH_FORMAT));
             break;
         case TIME:
-            ret.add(DateTimeFormat.getFormat(
-                    DateTimeFormat.PredefinedFormat.ISO_8601));
+            ret.add(DateTimeFormat
+                    .getFormat(DateTimeFormat.PredefinedFormat.ISO_8601));
             ret.add(DateTimeFormat.getFormat(TIME_MINUTES_FORMAT));
             ret.add(DateTimeFormat.getFormat(TIME_SECONDS_FORMAT));
             break;
         default:
-            ret.add(DateTimeFormat.getFormat(
-                    DateTimeFormat.PredefinedFormat.ISO_8601));
+            ret.add(DateTimeFormat
+                    .getFormat(DateTimeFormat.PredefinedFormat.ISO_8601));
         }
 
         return ret;
@@ -174,7 +145,9 @@ HasValueChangeHandlers<java.util.Date>, ClickHandler {
 
     /**
      * Convert Date to string format understood by browsers
-     * @param date Date converted
+     * 
+     * @param date
+     *            Date converted
      * @return String version
      */
     private String dateToString(Date date) {
@@ -187,7 +160,9 @@ HasValueChangeHandlers<java.util.Date>, ClickHandler {
 
     /**
      * Convert string value from input field to Date
-     * @param string String value of input field
+     * 
+     * @param string
+     *            String value of input field
      * @return Date value or null if failure
      */
     private Date stringToDate(String string) {
@@ -210,7 +185,7 @@ HasValueChangeHandlers<java.util.Date>, ClickHandler {
                 break;
 
             } catch (Exception e) {
-                continue;
+                // Doesn't matter
             }
         }
 
@@ -224,34 +199,40 @@ HasValueChangeHandlers<java.util.Date>, ClickHandler {
     /**
      * Set date value of this DatePicker. Some parts of date will be ignored
      * based on current resolution.
-     * @param newDate New date value
+     * 
+     * @param newDate
+     *            New date value
      */
-    public void setDate (Date newDate) {
-        setDate (newDate, date == null || !date.equals(newDate), false);
+    public void setDate(Date newDate) {
+        setDate(newDate, date == null || !date.equals(newDate), false);
     }
 
     /**
      * Set date value of this DatePicker
-     * @param newDate New value set
-     * @param updateInput If input field should be updated
-     * @param fire If change event should be fired
+     * 
+     * @param newDate
+     *            New value set
+     * @param updateInput
+     *            If input field should be updated
+     * @param fire
+     *            If change event should be fired
      */
-    protected void setDate (Date newDate, boolean updateInput, boolean fire) {
+    protected void setDate(Date newDate, boolean updateInput, boolean fire) {
         if (date == null || !date.equals(newDate)) {
             closeCalendar();
             date = newDate;
             if (updateInput) {
-                updateValue(date);
+                updateValue();
             }
             if (fire) {
                 ValueChangeEvent.fire(DatePicker.this, newDate);
             }
         } else {
-            updateValue(date);
+            updateValue();
         }
     }
 
-    protected void updateValue(Date newDate) {
+    protected void updateValue() {
         if (input != null) {
             input.setValue(dateToString(date));
         } else if (backUpWidget != null) {
@@ -269,7 +250,9 @@ HasValueChangeHandlers<java.util.Date>, ClickHandler {
 
     /**
      * Set resolution of this DatePicker
-     * @param res Resolution
+     * 
+     * @param res
+     *            Resolution
      */
     public void setResolution(Resolution res) {
         if (resolution != res) {
@@ -278,47 +261,63 @@ HasValueChangeHandlers<java.util.Date>, ClickHandler {
     }
 
     protected void changeResolution(Resolution res) {
+        closeCalendar();
         resolution = res;
 
-        if (checkInputTagSupport()) {
-            if (backUpWidget != null) {
-                backUpWidget.removeFromParent();
-                backUpWidget = null;
-            }
-            if (input == null) {
-                input = Document.get().createTextInputElement();
-                if (min != null) {
-                    input.setAttribute("min", dateToString(min));
-                }
-                if (max != null) {
-                    input.setAttribute("max", dateToString(max));
-                }
-                getElement().appendChild(input);
-                com.google.gwt.user.client.Element userElement = (com.google.gwt.user.client.Element) Element
-                        .as(input);
-                DOM.sinkEvents(userElement, Event.ONCHANGE | Event.ONBLUR);
-                DOM.setEventListener(userElement, elementListener);
+        if (useNative) {
+            addHtml5Input();
+            input.setAttribute("type", res.getType());
+            if ("text".equals(input.getType())) {
+                // HTML5 is not supported, revert to backup.
+                removeHtml5Input();
+                addBackupWidget();
+            } else {
+                // HTML5 is supported, make sure the backup widget is removed
+                removeBackupWidget();
             }
         } else {
-            closeCalendar();
-
-            if (input != null) {
-                input.removeFromParent();
-                input = null;
-            }
-            if (backUpWidget == null) {
-                backUpWidget = new VButton();
-                add(backUpWidget);
-                backUpWidget.addClickHandler(this);
-            }
+            addBackupWidget();
         }
-
-        if (input != null) {
-            input.setAttribute("type", res.getType());
-        }
-
         if (date != null) {
-            updateValue(date);
+            updateValue();
+        }
+    }
+
+    private void addHtml5Input() {
+        if (input == null) {
+            input = Document.get().createTextInputElement();
+            if (min != null) {
+                input.setAttribute("min", dateToString(min));
+            }
+            if (max != null) {
+                input.setAttribute("max", dateToString(max));
+            }
+            getElement().appendChild(input);
+            com.google.gwt.user.client.Element userElement = (com.google.gwt.user.client.Element) Element
+                    .as(input);
+            DOM.sinkEvents(userElement, Event.ONCHANGE | Event.ONBLUR);
+            DOM.setEventListener(userElement, elementListener);
+        }
+    }
+
+    private void removeHtml5Input() {
+        if (input != null) {
+            input.removeFromParent();
+            input = null;
+        }
+    }
+
+    private void removeBackupWidget() {
+        if (backUpWidget != null && backUpWidget.isAttached()) {
+            backUpWidget.removeFromParent();
+        }
+    }
+
+    private void addBackupWidget() {
+        if (backUpWidget == null) {
+            backUpWidget = new VButton();
+            add(backUpWidget);
+            backUpWidget.addClickHandler(this);
         }
     }
 
@@ -389,6 +388,7 @@ HasValueChangeHandlers<java.util.Date>, ClickHandler {
      * Set minimal value accepted from user.
      * 
      * @param date
+     *            the first accepted date.
      */
     public void setMin(Date date) {
         this.min = date;
@@ -408,6 +408,7 @@ HasValueChangeHandlers<java.util.Date>, ClickHandler {
      * Set maximal value accepted from user.
      * 
      * @param date
+     *            the last accepted date.
      */
     public void setMax(Date date) {
         this.max = date;
