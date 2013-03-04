@@ -86,7 +86,7 @@ public class MoreButtonsInComponentGroups extends AbstractTouchKitIntegrationTes
 
         navigationView.setContent(l);
 
-        Resource mailImage = new ClassResource(getClass(),"mail.png");
+        Resource mailImage = new ClassResource(getClass(), "/mail.png");
         
         HorizontalButtonGroup horizontalComponentGroup = new HorizontalButtonGroup();
                 
