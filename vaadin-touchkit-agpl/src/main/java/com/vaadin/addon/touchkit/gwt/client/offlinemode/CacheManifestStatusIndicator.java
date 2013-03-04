@@ -14,10 +14,16 @@ import com.google.gwt.user.client.ui.RootPanel;
  * offline mode is ready to be used.
  */
 public class CacheManifestStatusIndicator implements EntryPoint {
+    
+    private static final int UNCACHED = 0;
+    private static final int IDLE = 1;
+    private static final int CHECKING = 2;
+    private static final int DOWNLOADING = 3;
+    private static final int UPDATEREADY = 4;
+    private static final int OBSOLETE = 5;
 
     private Element progressElement;
     private CacheManifestStatusMessages messages;
-    private boolean shouldRequestUpdate = false;
     private boolean updating;
 
     public void onModuleLoad() {
@@ -28,6 +34,9 @@ public class CacheManifestStatusIndicator implements EntryPoint {
         messages = GWT.create(CacheManifestStatusMessages.class);
         hookAllListeners(this);
         scheduleUpdateChecker();
+        if(getStatus() == CHECKING || getStatus() == DOWNLOADING)  {
+            showProgress();
+        }
     }
 
     /**
@@ -38,7 +47,6 @@ public class CacheManifestStatusIndicator implements EntryPoint {
             @Override
             public boolean execute() {
                 if (!updating) {
-                    shouldRequestUpdate = true;
                     updateCache();
                 }
                 return true;
@@ -59,10 +67,7 @@ public class CacheManifestStatusIndicator implements EntryPoint {
             hideProgress();
         } else if ("updateready".equals(event.getType())) {
             hideProgress();
-            if (shouldRequestUpdate) {
-                shouldRequestUpdate = false;
-                requestUpdate(false);
-            }
+            requestUpdate(false);
             updating = false;
         }
     }
