@@ -1,9 +1,5 @@
-/**
- * GWT's CssResource is unfortunately so limited that sharing def's across 
- * multiple stylesheets is near-impossible. Because of that, all styles are in 
- * this one huge file.
- */
 
+@external v-datefield-calendarpanel-day-disabled,blue,datePickerDay,datePickerDayIsDisabled,datePickerDayIsFiller,datePickerDayIsValue,datePickerDays,datePickerMonth,datePickerMonthSelector,datePickerNextButton,datePickerPreviousButton,datePickerWeekdayLabel,datePickerWeekendLabel,empty,focused,green,gwt-DatePicker,gwt-MenuItem,gwt-MenuItem-selected,html-face,icon-arrow-down,icon-arrow-left,icon-arrow-right,icon-arrow-up,invalidlayout,no-box-drag-hints,no-horizontal-drag-hints,no-vertical-drag-hints,popupContent,red,relative,v-absolutelayout,v-absolutelayout-canvas,v-absolutelayout-margin,v-absolutelayout-wrapper,v-accordion,v-accordion-item,v-accordion-item-caption,v-accordion-item-content,v-accordion-item-open,v-align-bottom,v-align-center,v-align-middle,v-align-right,v-app,v-app-loading,v-app-loginpage,v-button,v-button-blue,v-button-caption,v-button-green,v-button-link,v-button-nextyear,v-button-no-decoration,v-button-red,v-button-selected,v-button-white,v-button-wrap,v-cache-loading-indicator,v-caption,v-caption-on-bottom,v-caption-on-left,v-caption-on-right,v-caption-on-top,v-captiontext,v-captionwrapper,v-checkbox,v-clip,v-contextmenu,v-csslayout,v-csslayout-container,v-csslayout-margin,v-csslayout-margin-bottom,v-csslayout-margin-left,v-csslayout-margin-right,v-csslayout-margin-top,v-customcomponent,v-customlayout,v-datefield,v-datefield-button,v-datefield-button-readonly,v-datefield-calendarpanel,v-datefield-calendarpanel-day,v-datefield-calendarpanel-day-focused,v-datefield-calendarpanel-day-offmonth,v-datefield-calendarpanel-day-selected,v-datefield-calendarpanel-day-today,v-datefield-calendarpanel-header,v-datefield-calendarpanel-month,v-datefield-calendarpanel-weeknumber,v-datefield-error,v-datefield-focus,v-datefield-popup,v-datefield-popupcalendar,v-datefield-prompt,v-datefield-textfield,v-datefield-time,v-ddwrapper,v-ddwrapper-over,v-ddwrapper-over-bottom,v-ddwrapper-over-left,v-ddwrapper-over-right,v-ddwrapper-over-top,v-debug-console,v-debug-console-caption,v-debug-console-content,v-disabled,v-drag-element,v-embedded-image,v-errorindicator,v-errormessage,v-expand,v-filterselect,v-filterselect-button,v-filterselect-focus,v-filterselect-input,v-filterselect-nextpage,v-filterselect-nextpage-off,v-filterselect-no-input,v-filterselect-prevpage,v-filterselect-prevpage-off,v-filterselect-prompt,v-filterselect-status,v-filterselect-suggestmenu,v-filterselect-suggestpopup,v-form,v-form-content,v-formlayout,v-formlayout-captioncell,v-formlayout-cell,v-formlayout-contentcell,v-formlayout-error-indicator,v-formlayout-errorcell,v-formlayout-firstrow,v-formlayout-lastrow,v-formlayout-margin-bottom,v-formlayout-margin-left,v-formlayout-margin-right,v-formlayout-margin-top,v-formlayout-row,v-formlayout-spacing,v-generated-body,v-gridlayout,v-gridlayout-margin-bottom,v-gridlayout-margin-left,v-gridlayout-margin-right,v-gridlayout-margin-top,v-gridlayout-slot,v-gridlayout-spacing,v-gridlayout-spacing-off,v-gridlayout-spacing-on,v-has-caption,v-has-height,v-has-width,v-horizontal,v-horizontallayout,v-horizontallayout-margin-bottom,v-horizontallayout-margin-left,v-horizontallayout-margin-right,v-horizontallayout-margin-top,v-horizontallayout-slot,v-horizontallayout-spacing-off,v-horizontallayout-spacing-on,v-icon,v-inline-datefield,v-inline-datefield-button,v-inline-datefield-button-readonly,v-inline-datefield-calendarpanel,v-inline-datefield-calendarpanel-day,v-inline-datefield-calendarpanel-day-disabled,v-inline-datefield-calendarpanel-day-focused,v-inline-datefield-calendarpanel-day-offmonth,v-inline-datefield-calendarpanel-day-selected,v-inline-datefield-calendarpanel-day-today,v-inline-datefield-calendarpanel-header,v-inline-datefield-calendarpanel-month,v-inline-datefield-calendarpanel-weeknumber,v-inline-datefield-popup,v-inline-datefield-popupcalendar,v-inline-datefield-prompt,v-inline-datefield-textfield,v-inline-datefield-time,v-ios,v-label,v-label-grey-title,v-label-undef-w,v-layout,v-layout-margin-bottom,v-layout-margin-left,v-layout-margin-right,v-layout-margin-top,v-layout-spacing-on,v-link,v-loading-indicator,v-loading-indicator-delay,v-loading-indicator-wait,v-loginform,v-margin-bottom,v-margin-left,v-margin-right,v-margin-top,v-menubar,v-menubar-menuitem,v-menubar-menuitem-caption,v-menubar-menuitem-checked,v-menubar-menuitem-disabled,v-menubar-menuitem-selected,v-menubar-more-menuitem,v-menubar-popup,v-menubar-separator,v-menubar-submenu,v-menubar-submenu-check-column,v-menubar-submenu-indicator,v-nativebutton,v-nativebutton-caption,v-nativebutton-link,v-Notification,v-Notification-error,v-Notification-system,v-Notification-tray,v-Notification-warning,v-off,v-orderedlayout,v-orderedlayout-margin-bottom,v-orderedlayout-margin-left,v-orderedlayout-margin-right,v-orderedlayout-margin-top,v-orderedlayout-spacing-off,v-orderedlayout-spacing-on,v-overlay-container,v-panel,v-panel-caption,v-panel-caption-light,v-panel-content,v-panel-content-light,v-panel-deco,v-panel-deco-light,v-panel-light,v-panel-nocaption,v-popupview,v-popupview-loading,v-popupview-popup,v-pressed,v-progressindicator,v-progressindicator-indeterminate,v-progressindicator-indeterminate-disabled,v-progressindicator-indicator,v-progressindicator-wrapper,v-readonly,v-required-field-indicator,v-sa,v-sa6,v-scrollable,v-select,v-select-option,v-select-optiongroup,v-select-select,v-select-twincol,v-select-twincol-buttons,v-select-twincol-caption-left,v-select-twincol-caption-right,v-select-twincol-deco,v-select-twincol-options,v-select-twincol-selections,v-selected,v-shadow,v-shadow-window,v-slider,v-slider-base,v-slider-feedback,v-slider-handle,v-slider-handle-active,v-slider-vertical,v-slot,v-spacing,v-splitpanel-horizontal,v-splitpanel-hsplitter,v-splitpanel-vertical,v-splitpanel-vsplitter,v-table,v-table-body,v-table-body-noselection,v-table-body-wrapper,v-table-caption-container,v-table-caption-container-align-center,v-table-caption-container-align-right,v-table-cell-content,v-table-cell-wrapper,v-table-cell-wrapper-align-center,v-table-cell-wrapper-align-right,v-table-column-selector,v-table-drag,v-table-focus,v-table-focus-slot-left,v-table-focus-slot-right,v-table-footer,v-table-footer-cell,v-table-footer-container,v-table-footer-wrap,v-table-generated-row,v-table-header,v-table-header-cell,v-table-header-cell-asc,v-table-header-cell-desc,v-table-header-drag,v-table-header-wrap,v-table-resizer,v-table-row,v-table-row-animating,v-table-row-drag-bottom,v-table-row-drag-middle,v-table-row-drag-top,v-table-row-odd,v-table-row-spacer,v-table-scrollposition,v-table-sort-indicator,v-table-table,v-tabsheet,v-tabsheet-caption-close,v-tabsheet-content,v-tabsheet-deco,v-tabsheet-hidetabs,v-tabsheet-scroller,v-tabsheet-scrollerNext,v-tabsheet-scrollerNext-disabled,v-tabsheet-scrollerPrev,v-tabsheet-scrollerPrev-disabled,v-tabsheet-spacertd,v-tabsheet-tabcontainer,v-tabsheet-tabitem,v-tabsheet-tabitem-selected,v-tabsheet-tabitemcell,v-tabsheet-tabitemcell-disabled,v-tabsheet-tabs,v-textarea,v-textarea-prompt,v-textarea-readonly,v-textfield,v-textfield-prompt,v-textfield-readonly,v-tk,v-tooltip,v-tooltip-text,v-touchkit-backgroundstripes,v-touchkit-cancel-image,v-touchkit-combobox,v-touchkit-combobox-close-button,v-touchkit-combobox-drop-down,v-touchkit-combobox-popup-filter,v-touchkit-combobox-select-item,v-touchkit-componentgroup-cell,v-touchkit-componentgroup-cell-fullwrapper,v-touchkit-componentgroup-row,v-touchkit-componentgroup-row-cap,v-touchkit-componentgroup-row-full,v-touchkit-componentgroup-row-nocap,v-touchkit-componentgroup-table,v-touchkit-date-cancel,v-touchkit-date-ok,v-touchkit-datepopover,v-touchkit-datepopover-hidedays,v-touchkit-datepopover-nonext,v-touchkit-datepopover-noprev,v-touchkit-fullscreen,v-touchkit-horizontalbuttongroup,v-touchkit-navbar,v-touchkit-navbar-caption,v-touchkit-navbar-left,v-touchkit-navbar-right,v-touchkit-navbutton,v-touchkit-navbutton-back,v-touchkit-navbutton-desc,v-touchkit-navbutton-emphasis,v-touchkit-navbutton-forward,v-touchkit-navbutton-pill,v-touchkit-navpanel,v-touchkit-navpanel-container,v-touchkit-navpanel-notransit,v-touchkit-navpanel-placeholder,v-touchkit-navpanel-wrapper,v-touchkit-navview,v-touchkit-navview-notoolbar,v-touchkit-navview-toolbar,v-touchkit-navview-wrapper,v-touchkit-numberfield,v-touchkit-offlinemode,v-touchkit-offlinemode-panel,v-touchkit-ok-image,v-touchkit-opacity-transition,v-touchkit-plain,v-touchkit-popover,v-touchkit-popover-pointer,v-touchkit-popover-pointer-bottom,v-touchkit-relative,v-touchkit-sadface,v-touchkit-smallscreen,v-touchkit-swipeview,v-touchkit-switch,v-touchkit-switch-focus,v-touchkit-switch-slider,v-touchkit-tabbar,v-touchkit-tabbar-toolbar,v-touchkit-tabbar-wrapper,v-touchkit-toolbar,v-touchkit-verticalcomponentgroup,v-tree,v-tree-node,v-tree-node-caption,v-tree-node-caption-drag-center,v-tree-node-children,v-tree-node-drag-bottom,v-tree-node-drag-top,v-tree-node-expanded,v-tree-node-leaf,v-tree-node-selected,v-treetable,v-treetable-animation-clone,v-treetable-animation-clone-wrapper,v-treetable-node-closed,v-treetable-node-open,v-treetable-treespacer,v-ui,v-ui-embedded,v-upload,v-upload-immediate,v-vertical,v-verticallayout,v-verticallayout-margin-bottom,v-verticallayout-margin-left,v-verticallayout-margin-right,v-verticallayout-margin-top,v-verticallayout-slot,v-verticallayout-spacing-off,v-verticallayout-spacing-on,v-widget,v-window,v-window-closebox,v-window-contents,v-window-draggingCurtain,v-window-footer,v-window-footer-noresize,v-window-header,v-window-modalitycurtain,v-window-outerheader,v-window-resizebox,v-window-resizebox-disabled,v-window-resizingCurtain,v-window-wrap;
 
 /**
  * General borders
@@ -77,6 +73,7 @@
 
 /* Table */
 @def tableSelectionGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4d8cb9), to(#3e6fa8))');
+@def tableRowHeight 30px;
 
 /* TouchComboBox */
 @def touchComboBoxItemButton literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#fcfcfc), to(#eaeaea))');
@@ -1170,100 +1167,252 @@ body e.v-app-loading {
 /* Table
  * TODO this is quicly copy pasted and modified from reindeer. Remove obsolete code, tune colors etc.
  */
-
-
-@def tableRowHeight 30px;
-
-.v-table-header-wrap,
-.v-table-footer-wrap {
-	border-color: #c2c3c4;
-	background: navbarGradient;
-	height: tableRowHeight;
-	font-weight: bold;
-	color: navbarButtonColor;
+ 
+.v-table {
+overflow: hidden;
+text-align: left;
 }
 
-.v-table-footer-wrap {
-	text-transform: none;
-	font-size: 12px;
-	font-weight: normal;
+.v-table-header table,.v-table-table,.v-table-footer table {
+border: 0;
+border-collapse: separate;
+border-spacing: 0;
+font-size: 16px;
+margin: 0;
+padding: 0;
+}
+
+.v-table-header-cell,.v-table-header-cell-asc,.v-table-header-cell-desc {
+cursor: pointer;
+padding: 0;
 }
 
 .v-table-footer td {
-	border-color: #c2c3c4;
+border-color: #c2c3c4;
+border-right: 1px solid #aaa;
+padding: 0;
+}
+
+.v-table-footer-cell {
+cursor: pointer;
 }
 
 .v-table-footer-container {
-	padding-right: 7px;
+float: right;
+height: 16px;
+overflow: hidden;
+padding-right: 7px;
+white-space: nowrap;
 }
 
-.v-table-header,
-.v-table-footer,
-.v-table-footer table {
-	height: tableRowHeight;
+.v-table-resizer {
+background: transparent;
+border-right: 1px solid #c2c3c4;
+cursor: col-resize;
+display: block;
+float: right;
+height: tableRowHeight;
+overflow: hidden;
+width: 2px;
 }
 
 .v-table-caption-container {
-	heigth: 16px;
-	padding-top: 4px;
-	padding-right: 4px;
+height: 16px;
+margin-left: 6px;
+overflow: hidden;
+padding-right: 4px;
+padding-top: 4px;
+white-space: nowrap;
 }
-.v-table-caption-container .v-icon {
-	height: 16px;
-	margin: -4px 3px 0 0;
-	vertical-align: middle;
-}
-.v-table-footer-container {
-	heigth: 16px;	
-}
-.v-table-resizer {
-	height: tableRowHeight;
-	width: 2px;
-	background: transparent;
-	border-right: 1px solid #c2c3c4;
+
+.v-table-caption-container-align-right {
+float: right;
+text-align: right;
 }
 
 .v-table-sort-indicator {
-	background: transparent;
-	width: 0px;
-	height: tableRowHeight;
+background: transparent;
+float: right;
+height: tableRowHeight;
+width: 0;
 }
 
-@sprite .v-table-header-cell-asc .v-table-sort-indicator {
-	gwt-image: "columnAscending";
-	margin-top: 10px;
+.v-table-header-cell-asc .v-table-sort-indicator,.v-table-header-cell-desc .v-table-sort-indicator {
+float: right;
+height: 1.2em;
+width: 16px;
 }
 
-@sprite .v-table-header-cell-desc .v-table-sort-indicator {
-	gwt-image: "columnDescending";
-	margin-top: 10px;
-}
 .v-table-body {
-	border-color: #c2c3c4;
-	background: #fff;
+background: #fff;
+border: 1px solid #aaa;
+border-color: #c2c3c4;
 }
-.v-table-cell-content {
-	padding-top: 0;
-	border-right-color: #d3d4d5;
-	vertical-align: top;
+
+.v-table-row-spacer {
+height: 10px;
+overflow: hidden;
 }
-.v-table-cell-wrapper {
-	padding-top: 5px;
-	padding-bottom: 5px;
+
+.v-table-row,.v-table-row-odd {
+background: #fff;
+border: 0;
+cursor: pointer;
+margin: 0;
+padding: 0;
 }
-.v-table-row-odd {
-	background: #eff0f1;
+
+.v-table-generated-row {
+background: #efefef;
 }
-.v-table-cell-content:last-child {
-	border-right-color: transparent;
-}
+
 .v-table .v-selected {
-	background: #4d749f;
-	color: #fff;
-	text-shadow: #3b5a7a 0 1px 0;
+background: #4d749f;
+color: #fff;
+text-shadow: #3b5a7a 0 1px 0;
 }
+
+.v-table-cell-content {
+border-right: 1px solid #aaa;
+border-right-color: #d3d4d5;
+overflow: hidden;
+padding: 0 6px;
+vertical-align: top;
+white-space: nowrap;
+}
+
+.v-table-cell-wrapper {
+overflow: hidden;
+padding-bottom: 5px;
+padding-top: 5px;
+white-space: nowrap;
+}
+
+.v-table-cell-wrapper-align-right {
+text-align: right;
+}
+
+.v-table-focus-slot-left {
+background: transparent;
+border-left: 2px solid #999;
+border-left-color: #222;
+border-right: 1px solid #aaa;
+float: none;
+margin-bottom: -1.2em;
+margin-left: 0;
+width: auto;
+}
+
+.v-table-focus-slot-right {
+border-right: 2px solid #999;
+border-right-color: #222;
+margin-left: -2px;
+margin-right: 0;
+}
+
+.v-table-header-drag {
+background: #efefef;
+border: 1px solid #eee;
+margin-top: 20px;
+opacity: 0.9;
+position: absolute;
+z-index: 30000;
+}
+
+.v-table-scrollposition {
+background: transparent;
+border: none;
+width: auto;
+}
+
+.v-table-scrollposition span {
+-webkit-box-shadow: rgba(0,0,0,.5) 0 1px 2px;
+background: navbarGradient;
+border: none;
+border-radius: 4px;
+color: #222;
+display: block;
+height: 13px;
+padding: 4px 30px;
+position: relative;
+text-align: center;
+text-shadow: #fff 0 1px 0;
+top: 1px;
+white-space: nowrap;
+}
+
+.v-table-body:focus,.v-table-body-wrapper:focus {
+outline: none;
+}
+
+.v-table-body.focused {
+border-color: #388ddd;
+}
+
+.v-table-focus .v-table-cell-content {
+border-bottom: 1px dotted #0066bd;
+border-top: 1px dotted #0066bd;
+}
+
+.v-table-focus .v-table-cell-wrapper {
+margin-bottom: -1px;
+margin-top: -1px;
+}
+
+.v-table-header-wrap,.v-table-footer-wrap {
+background: navbarGradient;
+border-color: #c2c3c4;
+color: navbarButtonColor;
+font-weight: bold;
+height: tableRowHeight;
+overflow: hidden;
+}
+
+.v-table-footer-wrap {
+border: 1px solid #aaa;
+border-top: none;
+font-size: 12px;
+font-weight: normal;
+text-transform: none;
+}
+
+.v-table-header,.v-table-footer,.v-table-footer table {
+height: tableRowHeight;
+}
+
+.v-table-caption-container .v-icon {
+height: 16px;
+margin: -4px 3px 0 0;
+vertical-align: middle;
+}
+
+.v-table-row-odd {
+background: #eff0f1;
+}
+
+.v-table-cell-content:last-child {
+border-right-color: transparent;
+}
+
 .v-table .v-selected .v-table-cell-content {
-	border-right-color: #466c90;
+border-right-color: #466c90;
+}
+
+.v-table-header-drag img {
+height: 16px;
+margin: -3px 3px 0 0;
+}
+
+.v-table.v-disabled .v-table-header-cell,.v-table.v-disabled .v-table-header-cell-asc,.v-table.v-disabled .v-table-header-cell-desc,.v-table.v-disabled .v-table-resizer,.v-table-body-noselection .v-table-row,.v-table-body-noselection .v-table-row-odd,.v-table.v-disabled .v-table-column-selector {
+cursor: default;
+}
+
+.v-table-caption-container-align-center,.v-table-cell-wrapper-align-center {
+text-align: center;
+}
+
+.v-table-caption-container .v-icon,.v-table-header-drag .v-icon,.v-table-header-drag .v-icon,.v-table-header-drag * {
+vertical-align: middle;
 }
 
 @sprite .v-table-column-selector {
@@ -1275,40 +1424,15 @@ body e.v-app-loading {
     position: relative;
     cursor: pointer;
 }
-.v-table-focus-slot-left {
-	border-left-color: #222;
-	margin-left: 0;
-}
-.v-table-focus-slot-right {
-	border-right-color: #222;
-	margin-right: 0;
+
+@sprite .v-table-header-cell-asc .v-table-sort-indicator {
+	gwt-image: "columnAscending";
+	margin-top: 10px;
 }
 
-.v-table-header-drag * {
-	vertical-align: middle;
-}
-.v-table-header-drag img {
-	height: 16px;
-	margin: -3px 3px 0 0;
-}
-.v-table-scrollposition {
-	width: auto;
-	background: transparent;
-	border: none;
-}
-.v-table-scrollposition span {
-	background: navbarGradient;
-	border: 1px solid #939494;
-	border: none;
-	border-radius: 4px;
-	height: 13px;
-	padding: 4px 30px;
-	white-space: nowrap;
-	color: #222;
-	text-shadow: #fff 0 1px 0;
-	position: relative;
-	top: 1px;
-	-webkit-box-shadow: rgba(0,0,0,.5) 0 1px 2px;
+@sprite .v-table-header-cell-desc .v-table-sort-indicator {
+	gwt-image: "columnDescending";
+	margin-top: 10px;
 }
 
 

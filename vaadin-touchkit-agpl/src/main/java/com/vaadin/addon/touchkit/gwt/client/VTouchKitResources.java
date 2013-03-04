@@ -13,9 +13,8 @@ public interface VTouchKitResources extends ClientBundle {
     public static final VTouchKitResources INSTANCE = GWT
             .create(VTouchKitResources.class);
 
-    @NotStrict
     @Source({"theme/base.css","theme/touchkit.css"})
-    public CssResource css();
+    public ToucKitStyles css();
 
     @NotStrict
     @Source("theme/high-dpi.css")
@@ -173,5 +172,5 @@ public interface VTouchKitResources extends ClientBundle {
 
     @Source("theme/img/tree/drag-slot-dot.png")
     public DataResource dragSlotDotImage();
-
+    
 }
