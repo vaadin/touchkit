@@ -7,6 +7,8 @@ import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import com.vaadin.addon.touchkit.extensions.LocalStorage;
+import com.vaadin.addon.touchkit.gwt.client.offlinemode.CacheManifestStatusIndicator;
 import com.vaadin.server.BootstrapFragmentResponse;
 import com.vaadin.server.BootstrapListener;
 import com.vaadin.server.BootstrapPageResponse;
@@ -52,7 +54,8 @@ public class ApplicationCacheSettings implements BootstrapListener {
                             widgetsetUrl)), scriptTag.baseUri()));
 
             // Add cache manifest attribute to html tag
-            document.getElementsByTag("html").attr("manifest",
+            document.getElementsByTag("html").attr(
+                    "manifest",
                     vaadinDir + "widgetsets/" + widgetset + "/"
                             + generateManifestFileName(response));
 
@@ -99,4 +102,33 @@ public class ApplicationCacheSettings implements BootstrapListener {
         this.cacheManifestEnabled = cacheManifestEnabled;
     }
 
+    /**
+     * Specifies the message to show when an update to the application cache is
+     * available. When a new version of the application cache has been loaded by
+     * the client, this message is shown in a confirmation box. Answering 'OK'
+     * in this box causes the application to refresh and use the new application
+     * cache (== new version of the widget set).
+     * 
+     * @param message
+     *            The new message. The default is
+     *            "There are updates ready to be installed. Would you like to restart now?"
+     */
+    public void setUpdateNowMessage(String message) {
+        LocalStorage.get().put(CacheManifestStatusIndicator.UPDATE_NOW_MSG_KEY,
+                message);
+    }
+
+    /**
+     * Specifies how often to check for and download updates to the application
+     * cache (== widget set).
+     * 
+     * @param interval
+     *            The interval in seconds. The default is 30 minutes (1800
+     *            seconds).
+     */
+    public void setUpdateCheckInterval(int interval) {
+        LocalStorage.get().put(
+                CacheManifestStatusIndicator.UPDATE_CHECK_INTERVAL_KEY,
+                String.valueOf(interval));
+    }
 }

@@ -1,10 +1,10 @@
 package com.vaadin.addon.touchkit.gwt.client.offlinemode;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.storage.client.Storage;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -14,7 +14,9 @@ import com.google.gwt.user.client.ui.RootPanel;
  * offline mode is ready to be used.
  */
 public class CacheManifestStatusIndicator implements EntryPoint {
-    
+    public static final String UPDATE_NOW_MSG_KEY = "updateNowMessage";
+    public static final String UPDATE_CHECK_INTERVAL_KEY = "updateCheckInterval";
+
     private static final int UNCACHED = 0;
     private static final int IDLE = 1;
     private static final int CHECKING = 2;
@@ -23,19 +25,45 @@ public class CacheManifestStatusIndicator implements EntryPoint {
     private static final int OBSOLETE = 5;
 
     private Element progressElement;
-    private CacheManifestStatusMessages messages;
+    private String updateNowMessage = "There are updates ready to be installed. Would you like to restart now?";
     private boolean updating;
+    // Check for updates once every 30 min by default.
+    private int updateCheckInterval = 1800000;
 
     public void onModuleLoad() {
         new CacheManifestStatusIndicator().init();
     }
 
     public void init() {
-        messages = GWT.create(CacheManifestStatusMessages.class);
+        loadSettingsFromLocalStorage();
         hookAllListeners(this);
         scheduleUpdateChecker();
-        if(getStatus() == CHECKING || getStatus() == DOWNLOADING)  {
+        if (getStatus() == CHECKING || getStatus() == DOWNLOADING) {
             showProgress();
+        }
+    }
+
+    /**
+     * Loads the configurable settings from localstorage. The settings are
+     * "updateNowMessage" for specifying the message to show when a new version
+     * of the cache is ready, and "updateCheckInterval" for specifying how often
+     * to check for new versions.
+     */
+    private void loadSettingsFromLocalStorage() {
+        Storage localStorage = Storage.getLocalStorageIfSupported();
+        if (localStorage != null) {
+            String newMessage = localStorage.getItem(UPDATE_NOW_MSG_KEY);
+            if (newMessage != null && !newMessage.isEmpty()) {
+                updateNowMessage = newMessage;
+            }
+            String updateCheckIntervalStr = localStorage
+                    .getItem(UPDATE_CHECK_INTERVAL_KEY);
+            if (updateCheckIntervalStr != null
+                    && !updateCheckIntervalStr.isEmpty()) {
+                // The value in local storage is in seconds, but we need
+                // milliseconds.
+                updateCheckInterval = Integer.valueOf(updateCheckIntervalStr) * 1000;
+            }
         }
     }
 
@@ -51,7 +79,7 @@ public class CacheManifestStatusIndicator implements EntryPoint {
                 }
                 return true;
             }
-        }, 1800000);
+        }, updateCheckInterval);
     }
 
     protected void onCacheEvent(Event event) {
@@ -92,7 +120,7 @@ public class CacheManifestStatusIndicator implements EntryPoint {
 
     protected void requestUpdate(boolean force) {
         consoleLog("Requesting permission to update");
-        if (force || Window.confirm(messages.updateNowMsg())) {
+        if (force || Window.confirm(updateNowMessage)) {
             Window.Location.reload();
         }
     }
