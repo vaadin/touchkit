@@ -276,6 +276,7 @@ public class DatePicker extends SimplePanel implements
                 removeBackupWidget();
             }
         } else {
+            removeHtml5Input();
             addBackupWidget();
         }
         if (date != null) {
@@ -310,6 +311,7 @@ public class DatePicker extends SimplePanel implements
     private void removeBackupWidget() {
         if (backUpWidget != null && backUpWidget.isAttached()) {
             backUpWidget.removeFromParent();
+            backUpWidget = null;
         }
     }
 
@@ -318,6 +320,7 @@ public class DatePicker extends SimplePanel implements
             backUpWidget = new VButton();
             add(backUpWidget);
             backUpWidget.addClickHandler(this);
+            updateValue();
         }
     }
 
