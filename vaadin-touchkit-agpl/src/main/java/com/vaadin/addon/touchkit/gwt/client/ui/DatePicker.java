@@ -56,7 +56,7 @@ public class DatePicker extends SimplePanel implements
         /**
          * Resolution in time (usually minutes)
          */
-        TIME("datetime", PredefinedFormat.DATE_TIME_MEDIUM),
+        TIME("datetime", PredefinedFormat.DATE_TIME_SHORT),
         /**
          * Resolution in days
          */

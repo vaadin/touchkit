@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
@@ -14,6 +15,8 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.vaadin.addon.touchkit.gwt.client.ui.DatePicker.Resolution;
 import com.vaadin.client.ui.VButton;
@@ -28,6 +31,8 @@ public class CalendarOverlay extends VOverlay implements
     private static final String CLASSNAME = "v-touchkit-datepopover";
 
     private com.google.gwt.user.datepicker.client.DatePicker calendarWidget = null;
+    private TextBox timeBox;
+
     private final VButton okButton;
     private final VButton cancelButton;
     private final Resolution resolution;
@@ -35,7 +40,6 @@ public class CalendarOverlay extends VOverlay implements
     private final Date max;
 
     public CalendarOverlay(Resolution resolution, final Date min, final Date max) {
-
         this.resolution = resolution;
         this.min = min;
         this.max = max;
@@ -44,11 +48,19 @@ public class CalendarOverlay extends VOverlay implements
         FlowPanel panel = new FlowPanel();
         add(panel);
 
-        calendarWidget = new com.google.gwt.user.datepicker.client.DatePicker();
+        calendarWidget = GWT
+                .create(com.google.gwt.user.datepicker.client.DatePicker.class);
 
         calendarWidget.addShowRangeHandlerAndFire(showRangeHandler);
 
         panel.add(calendarWidget);
+
+        if (resolution == Resolution.TIME) {
+            SimplePanel p = new SimplePanel();
+            timeBox = GWT.create(TextBox.class);
+            p.add(timeBox);
+            panel.add(p);
+        }
 
         okButton = new VButton();
         okButton.addStyleName("v-touchkit-date-ok");
@@ -66,7 +78,6 @@ public class CalendarOverlay extends VOverlay implements
         cancelButton.addClickHandler(CalendarOverlay.this);
 
         addStyleName(CLASSNAME);
-
         if (resolution == Resolution.MONTH) {
             addStyleName(CLASSNAME + "-hidedays");
         }
@@ -170,6 +181,9 @@ public class CalendarOverlay extends VOverlay implements
     public void setDate(Date date) {
         calendarWidget.setValue(date, false);
         calendarWidget.setCurrentMonth(date);
+        if (resolution == Resolution.TIME) {
+            timeBox.setText(timeOnlyFormat.format(date));
+        }
     }
 
     @Override
@@ -179,6 +193,8 @@ public class CalendarOverlay extends VOverlay implements
             Date value = calendarWidget.getValue();
             if (resolution == Resolution.MONTH) {
                 value = calendarWidget.getCurrentMonth();
+            } else if (resolution == Resolution.TIME) {
+                value = trySetTimeFromTimeBoxText(value);
             }
             ValueChangeEvent.fire(CalendarOverlay.this, value);
             this.hide();
@@ -186,6 +202,22 @@ public class CalendarOverlay extends VOverlay implements
             this.hide(false);
         }
     }
+
+    @SuppressWarnings("deprecation")
+    protected Date trySetTimeFromTimeBoxText(Date value) {
+        try {
+            Date time = timeOnlyFormat.parse(timeBox.getText());
+            value.setHours(time.getHours());
+            value.setMinutes(time.getMinutes());
+        } catch (IllegalArgumentException e) {
+            // Couldn't parse hours, just ignore them and use the old,
+            // unmodified value.
+        }
+        return value;
+    }
+
+    private final static DateTimeFormat timeOnlyFormat = DateTimeFormat
+            .getFormat(DateTimeFormat.PredefinedFormat.HOUR24_MINUTE);
 
     protected final static DateTimeFormat dropTimeFormat = DateTimeFormat
             .getFormat("yyyyMMdd");
