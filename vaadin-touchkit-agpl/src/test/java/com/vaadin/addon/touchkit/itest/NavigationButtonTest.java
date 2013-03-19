@@ -1,11 +1,14 @@
 package com.vaadin.addon.touchkit.itest;
 
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
+import com.vaadin.addon.touchkit.gwt.client.theme.StyleNames;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.addon.touchkit.ui.NavigationManager;
 import com.vaadin.addon.touchkit.ui.NavigationView;
+import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Layout;
 
 public class NavigationButtonTest extends AbstractTouchKitIntegrationTest {
 
@@ -14,17 +17,32 @@ public class NavigationButtonTest extends AbstractTouchKitIntegrationTest {
             super();
             setCaption("First");
             CssLayout layout = new CssLayout();
+            addNavigationButtons(layout);
+
+            VerticalComponentGroup group = new VerticalComponentGroup();
+            addNavigationButtons(group);
+            layout.addComponent(group);
+
+            setContent(layout);
+        }
+
+        private void addNavigationButtons(Layout layout) {
             NavigationButton button = new NavigationButton(
                     "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                     new SecondView());
             layout.addComponent(button);
 
             button = new NavigationButton("NavigationButton with description",
-                    new FourthView());
+                    new GenericView("Fourth"));
             button.setDescription("4");
             layout.addComponent(button);
 
-            setContent(layout);
+            button = new NavigationButton(
+                    "NavigationButton with description, styled",
+                    new GenericView("Fifth"));
+            button.setDescription("5");
+            button.addStyleName(StyleNames.NAVIGATION_BUTTON_DESC_PILL);
+            layout.addComponent(button);
         }
     }
 
@@ -34,25 +52,17 @@ public class NavigationButtonTest extends AbstractTouchKitIntegrationTest {
             setCaption("Second");
             NavigationButton button = new NavigationButton(
                     "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                    new ThirdView());
+                    new GenericView("Third"));
             button.setDescription("3");
             setContent(button);
         }
     }
 
-    public static class ThirdView extends NavigationView {
-        public ThirdView() {
+    public static class GenericView extends NavigationView {
+        public GenericView(String viewName) {
             super();
-            setCaption("Third");
-            setContent(new Label("This is the third view"));
-        }
-    }
-
-    public static class FourthView extends NavigationView {
-        public FourthView() {
-            super();
-            setCaption("Fourth");
-            setContent(new Label("This is the fourth view"));
+            setCaption(viewName);
+            setContent(new Label("This is the '" + viewName + "' view"));
         }
     }
 

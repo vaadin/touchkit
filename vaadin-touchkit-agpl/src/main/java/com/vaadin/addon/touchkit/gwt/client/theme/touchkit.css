@@ -59,6 +59,7 @@
 
 /* Navbuttons */
 @def navButtonGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4d8cb9), to(#3e6fa8))');
+@def navButtonPaddingRight 16px;
 
 /* Slider */
 @def sliderBaseGradient literal('-webkit-gradient(linear, 0% 0%, 0% 90%, from(#ccc), to(#fff))');
@@ -486,7 +487,7 @@ body e.v-app-loading {
 	font-weight: bold;
 	line-height: 43px;
 	margin: 0;
-	padding: 0;
+	padding: 0 navButtonPaddingRight 0 0;
 	overflow:hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -494,7 +495,7 @@ body e.v-app-loading {
 
 .v-touchkit-verticalcomponentgroup .v-touchkit-navbutton {
 	margin: 0 negativeListLayoutMargin;
-	padding: 0 listLayoutMargin;
+    padding: 0 navButtonPaddingRight 0 listlayoutmargin;
 	outline: none;
 }
 
@@ -1758,7 +1759,7 @@ span.v-datefield-calendarpanel-month {
 .v-touchkit-componentgroup-cell > .v-touchkit-navbutton {
     padding-left: listLayoutMargin;
     margin-left: negativelistLayoutMargin;
-    padding-right: listLayoutMargin;
+    padding-right: navButtonPaddingRight;
     margin-right: negativelistLayoutMargin;
 }
 
