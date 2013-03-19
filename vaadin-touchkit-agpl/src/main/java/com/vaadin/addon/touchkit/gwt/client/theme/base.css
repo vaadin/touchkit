@@ -657,7 +657,7 @@ e.v-app select, .v-window select {
 }
 */
 
-e.v-app input[type="text"], e.v-app input[type="password"], e.v-app input[type="reset"], e.v-app select, e.v-app textarea, .v-window input[type="text"], .v-window input[type="password"], .v-window input[type="reset"], .v-window select, .v-window textarea {
+.v-app input[type="text"], .v-app input[type="password"], .v-app input[type="reset"], .v-app select, .v-app textarea, .v-window input[type="text"], .v-window input[type="password"], .v-window input[type="reset"], .v-window select, .v-window textarea {
 	padding: 2px;
 }
 
