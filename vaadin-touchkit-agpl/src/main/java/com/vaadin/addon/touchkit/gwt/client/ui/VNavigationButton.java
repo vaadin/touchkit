@@ -17,7 +17,8 @@ import com.google.gwt.event.dom.client.TouchStartHandler;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 
-public class VNavigationButton extends HTML implements TouchStartHandler, TouchCancelHandler, TouchEndHandler, TouchMoveHandler, ClickHandler {
+public class VNavigationButton extends HTML implements TouchStartHandler,
+        TouchCancelHandler, TouchEndHandler, TouchMoveHandler, ClickHandler {
     private static final String NAVBUTTON_CLASSNAME = "v-touchkit-navbutton";
     private Widget targetWidget;
     private String placeHolderCaption;
@@ -104,6 +105,12 @@ public class VNavigationButton extends HTML implements TouchStartHandler, TouchC
             if (descriptionElement == null) {
                 descriptionElement = Document.get().createSpanElement();
                 descriptionElement.setClassName(NAVBUTTON_CLASSNAME + "-desc");
+            }
+            /*
+             * Add the descriptionElement if it's not already added as it might
+             * have been overwritten by a call to #setText
+             */
+            if (!getElement().isOrHasChild(descriptionElement)) {
                 getElement().insertFirst(descriptionElement);
             }
             descriptionElement.setInnerHTML(description);
@@ -128,8 +135,8 @@ public class VNavigationButton extends HTML implements TouchStartHandler, TouchC
             NativeEvent nativeEvent = event.getNativeEvent();
             NativeEvent evt = Document.get().createClickEvent(1,
                     nativeEvent.getScreenX(), nativeEvent.getScreenY(),
-                    nativeEvent.getClientX(), nativeEvent.getClientY(), false, false,
-                    false, false);
+                    nativeEvent.getClientX(), nativeEvent.getClientY(), false,
+                    false, false, false);
             getElement().dispatchEvent(evt);
             touchStarted = false;
         }
@@ -147,7 +154,7 @@ public class VNavigationButton extends HTML implements TouchStartHandler, TouchC
 
     @Override
     public void onClick(ClickEvent event) {
-        if(enabled) {
+        if (enabled) {
             getElement().focus();
             navigate();
         }
