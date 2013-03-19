@@ -1713,7 +1713,7 @@ span.v-datefield-calendarpanel-month {
 	border-radius: listLayoutMargin;
 	background: white;
 	padding: 0 listLayoutMargin;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
 	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.5);
 	overflow: hidden;
 	position: relative;
@@ -1915,7 +1915,7 @@ span.v-datefield-calendarpanel-month {
 	font-size: 17px;
 	font-weight: bold;
 	padding-right: 5px;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
 	white-space: nowrap;
     overflow-x: hidden;
     text-overflow: ellipsis;
@@ -2177,7 +2177,7 @@ span.v-datefield-calendarpanel-month {
     height: 30px;
     padding: 0;
     overflow: hidden;
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     background: transparent;
     color: navbarButtonColor;
     text-shadow: navbarButtonTextShadow;
