@@ -386,9 +386,6 @@ public interface ToucKitStyles extends CssResource {
     @ClassName("v-touchkit-componentgroup-row-nocap")
     String vTouchkitComponentgroupRowNocap();
     
-    @ClassName("v-touchkit-componentgroup-table")
-    String vTouchkitComponentgroupTable();
-    
     @ClassName("v-touchkit-date-cancel")
     String vTouchkitDateCancel();
     
