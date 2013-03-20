@@ -9,6 +9,7 @@ import com.vaadin.addon.touchkit.gwt.client.ui.VNavigationManager.AnimationListe
 import com.vaadin.addon.touchkit.ui.NavigationManager;
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.ConnectorHierarchyChangeEvent;
+import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.AbstractComponentContainerConnector;
 import com.vaadin.client.ui.layout.ElementResizeEvent;
 import com.vaadin.client.ui.layout.ElementResizeListener;
@@ -26,7 +27,18 @@ public class NavigationManagerConnector extends
     }
 
     @Override
+    public void onStateChanged(StateChangeEvent stateChangeEvent) {
+        super.onStateChanged(stateChangeEvent);
+        updateWidgets();
+    }
+
+    @Override
     public void onConnectorHierarchyChange(ConnectorHierarchyChangeEvent event) {
+        // No need to do anything here as all hierarchy changes are already
+        // handled by #onStateChanged
+    }
+
+    private void updateWidgets() {
         if (getParent() == null) {
             // Component is removed, skip stuff to save user from JS exceptions
             // and some milliseconds of lost life
