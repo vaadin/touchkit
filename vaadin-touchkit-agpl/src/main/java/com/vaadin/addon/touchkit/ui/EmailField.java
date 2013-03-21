@@ -8,7 +8,7 @@ import com.vaadin.ui.TextField;
  * <p>
  * Modern browsers and devices provide a better interface for entering email
  * addresses when this field is used. This is especially important for touch
- * devices that can provide a on-screen keyboard customized for email address
+ * devices that can provide an on-screen keyboard optimized for email address
  * entry.
  * </p>
  */

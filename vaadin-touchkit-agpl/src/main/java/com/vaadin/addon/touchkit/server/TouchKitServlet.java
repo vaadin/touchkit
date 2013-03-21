@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,16 +12,19 @@ import com.vaadin.server.VaadinService;
 import com.vaadin.server.VaadinServlet;
 
 /**
- * This servlet should be used by TouchKit applications. It automatically
- * creates TouchKitSettings bound to {@link VaadinService} in
- * {@link #servletInitialized()} method. It should be overridden to configure
- * defaults suitable for this web application.
+ * This servlet should be used by all TouchKit applications. It automatically
+ * creates an instance of TouchKitSettings bound to the current
+ * {@link VaadinService} in the {@link #servletInitialized()} method. The
+ * {@link #servletInitialized()} method can be overridden to configure defaults
+ * suitable for this web application.
  * <p>
- * If TouchKit application cannot use this Servlet as super class, developers
- * should create and bound {@link TouchKitSettings} instance manually.
+ * If a TouchKit application cannot use this Servlet as its super class,
+ * developers should manually create and bind a {@link TouchKitSettings}
+ * instance.
  */
 public class TouchKitServlet extends VaadinServlet {
 
+    /** The TouchKitSettings instance used */
     private TouchKitSettings touchKitSettings;
 
     /*
@@ -37,7 +39,8 @@ public class TouchKitServlet extends VaadinServlet {
     }
 
     /**
-     * @return TouchKitSettings bound to VaadinService related to this Servlet
+     * @return The {@link TouchKitSettings} instance bound to the
+     *         {@link VaadinService} related to this servlet
      */
     public TouchKitSettings getTouchKitSettings() {
         return touchKitSettings;
@@ -56,6 +59,7 @@ public class TouchKitServlet extends VaadinServlet {
         }
     }
 
+    @Override
     protected void writeStaticResourceResponse(HttpServletRequest request,
             HttpServletResponse response, URL resourceUrl) throws IOException {
         String file = resourceUrl.getFile();

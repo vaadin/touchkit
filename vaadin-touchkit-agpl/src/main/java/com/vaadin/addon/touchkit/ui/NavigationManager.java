@@ -13,15 +13,16 @@ import com.vaadin.ui.Component;
 import com.vaadin.util.ReflectTools;
 
 /**
- * A non-visible component container that allows for smooth navigation between
- * components, or views. It support all components, but back buttons are updated
- * automatically only for {@link NavigationView}s.
+ * The NavigationManager is a non-visible component container that allows for
+ * smooth navigation between components, or views. It support all components,
+ * but back buttons are updated automatically only for {@link NavigationView}s.
  * <p>
  * When a component is navigated to, it replaces the currently visible
  * component, which in turn is pushed on to the stack of previous views. One can
  * navigate backwards by calling {@link #navigateBack()}, in which case the
- * currently visible view is forgotten and the previous view is restored from
- * the stack and made visible.
+ * currently visible view is forgotten (still cached in case the user decides to
+ * navigate to it again, see {@link #getNextComponent()}) and the previous view
+ * is restored from the stack and made visible.
  * <p>
  * When used with {@link NavigationView}s, {@link NavigationBar}s and
  * {@link NavigationButton}s, navigation is smooth and quite automatic.
@@ -42,7 +43,7 @@ public class NavigationManager extends AbstractComponentContainer {
      * 
      * Actually has three 'active' components: previous, current and next. The
      * previous component is actually pushed onto the viewStack only when
-     * natigateTo() pushes everything down. I.e setPreviousComponent() actually
+     * navigateTo() pushes everything down. I.e setPreviousComponent() actually
      * replaces the previous component before it's pushed onto the stack. In
      * javadoc, this is simplified to ignore implementation details, instead
      * pretending the previous component is topmost on the 'history'.
@@ -52,15 +53,15 @@ public class NavigationManager extends AbstractComponentContainer {
     private boolean maintainBreadcrumb = true;
 
     /**
-     * Constructs a {@link NavigationManager} that is 100% wide and high.
+     * Constructs a NavigationManager that is 100% wide and high.
      */
     public NavigationManager() {
         setSizeFull();
     }
 
     /**
-     * Constructs a {@link NavigationManager} that is 100% wide and high, and
-     * initially navigates to (shows) the given component.
+     * Constructs a NavigationManager that is 100% wide and high, and initially
+     * navigates to (shows) the given component.
      */
     public NavigationManager(Component c) {
         this();
@@ -73,16 +74,17 @@ public class NavigationManager extends AbstractComponentContainer {
     }
 
     /**
-     * viewStack holds components that are kind of before the previous
-     * components. By default NavigatioManager automatically maintains this
-     * stack so that it can provide automatic "back navigation". Developers can
-     * override components in this stack if they want to manually modify the
-     * "breadcrump" or e.g. release previous views for garbage collection.
+     * Gets the view stack. Each time the user navigates forward, the previous
+     * view is pushed on top of the view stack and when navigating backwards,
+     * views are popped off of the view stack.
+     * <p>
+     * Developers can override components in this stack if they want to manually
+     * modify the breadcrumb or e.g. release previous views for garbage
+     * collection.
      * 
      * @see #isMaintainBreadcrumb()
      * 
-     * @return components that the navigation manager has saved to be on the
-     *         "left side" of previous component.
+     * @return the navigation view stack.
      */
     public Stack<Component> getViewStack() {
         return viewStack;
@@ -92,7 +94,7 @@ public class NavigationManager extends AbstractComponentContainer {
      * Navigates to the given component, effectively making it the new visible
      * component. If the given component is actually the previous component in
      * the history, {@link #navigateBack()} is performed, otherwise the replaced
-     * view (previously visible) is pushed onto the history.
+     * view (previously visible) is pushed onto the view stack.
      * 
      * @param c
      *            the view to navigate to
@@ -156,8 +158,10 @@ public class NavigationManager extends AbstractComponentContainer {
     }
 
     /**
-     * Makes the previous component in the history visible, replacing (and
-     * essentially forgetting) the component that was previously visible.
+     * Navigates backwards in history by popping the previous component off of
+     * the view stack and making it visible. The currently visible view is
+     * replaced and cached for a short while (see {@link #getNextComponent()} in
+     * case the user wishes to return to the same view.
      */
     public void navigateBack() {
         if (getPreviousComponent() == null) {
@@ -185,21 +189,22 @@ public class NavigationManager extends AbstractComponentContainer {
     }
 
     /**
-     * Sets the currently displayed component in the NavigationManager.
+     * Sets the currently visible component in the NavigationManager.
      * <p>
-     * If current component is already set it is overridden. If the new
-     * component or the next component is of type NavigationView, their previous
-     * components will be automatically re-assigned.
+     * If the current component is already set it is overridden. If the previous
+     * component or the next component is of type NavigationView, their next and
+     * previous components will be automatically re-assigned.
      * 
-     * @param newcurrentComponent
+     * @param newCurrentComponent
+     *            the component to set as the currently visible component.
      */
-    public void setCurrentComponent(Component newcurrentComponent) {
-        if (getCurrentComponent() != newcurrentComponent) {
+    public void setCurrentComponent(Component newCurrentComponent) {
+        if (getCurrentComponent() != newCurrentComponent) {
             if (getCurrentComponent() != null) {
                 removeComponent(getCurrentComponent());
             }
-            getState().setCurrentComponent(newcurrentComponent);
-            addComponent(newcurrentComponent);
+            getState().setCurrentComponent(newCurrentComponent);
+            addComponent(newCurrentComponent);
             if (getPreviousComponent() != null
                     && getCurrentComponent() instanceof NavigationView) {
                 NavigationView view = (NavigationView) getCurrentComponent();
@@ -216,8 +221,6 @@ public class NavigationManager extends AbstractComponentContainer {
     }
 
     /**
-     * Returns the currently visible component.
-     * 
      * @return the component that is currently visible
      */
     public Component getCurrentComponent() {
@@ -229,6 +232,7 @@ public class NavigationManager extends AbstractComponentContainer {
      * component - i.e modifies the history.
      * 
      * @param newPreviousComponent
+     *            the new previous component
      */
     public void setPreviousComponent(Component newPreviousComponent) {
         if (getPreviousComponent() != newPreviousComponent) {
@@ -248,9 +252,8 @@ public class NavigationManager extends AbstractComponentContainer {
     }
 
     /**
-     * Gets the previous component from the history.
-     * 
-     * @return the previous component, or null if n/a
+     * @return the previous component, e.g. the top of the view stack, or null
+     *         if n/a
      */
     public Component getPreviousComponent() {
         return (Component) getState().getPreviousComponent();
@@ -262,6 +265,9 @@ public class NavigationManager extends AbstractComponentContainer {
      * to be pre-rendered before the actual navigation (and animation) occurs.
      * Having a null as nextComponent shows a placeholder content until the next
      * view is rendered.
+     * <p>
+     * When navigating backwards, this is used to cache the views in case the
+     * user decides to return to the same view.
      */
     public void setNextComponent(Component nextComponent) {
         if (this.getNextComponent() == nextComponent) {
@@ -278,10 +284,8 @@ public class NavigationManager extends AbstractComponentContainer {
     }
 
     /**
-     * Gets the next component, if one is set.
-     * 
      * @see #setNextComponent(Component)
-     * @return the next component, or null id n/a
+     * @return the next component, or null if none set
      */
     public Component getNextComponent() {
         return (Component) getState().getNextComponent();
@@ -289,11 +293,15 @@ public class NavigationManager extends AbstractComponentContainer {
 
     /**
      * This operation is not supported
+     * 
+     * @throws UnsupportedOperationException
      */
+    @Override
     public void replaceComponent(Component oldComponent, Component newComponent) {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public Iterator<Component> getComponentIterator() {
         ArrayList<Component> components = getComponents();
         return components.iterator();
@@ -313,6 +321,10 @@ public class NavigationManager extends AbstractComponentContainer {
         return components;
     }
 
+    /**
+     * A NavigationEvent is triggered when the user navigates forward or
+     * backward in the NavigationManager.
+     */
     public static class NavigationEvent extends com.vaadin.ui.Component.Event {
 
         public enum Direction {
@@ -321,36 +333,72 @@ public class NavigationManager extends AbstractComponentContainer {
 
         private Direction direction;
 
+        /**
+         * Constructs a NavigationEvent with the given source and direction of
+         * navigation.
+         * 
+         * @param source
+         *            the source
+         * @param direction
+         *            the direction of navigation
+         */
         public NavigationEvent(Component source, Direction direction) {
             super(source);
             this.direction = direction;
         }
 
+        /**
+         * @return the direction of navigation
+         */
         public Direction getDirection() {
             return direction;
         }
 
     }
 
+    /**
+     * A NavigationListener is notified whenever a navigation event occurs.
+     * NavigationListeners can be used for setting the next view in cases where
+     * it is known. See {@link #setNextComponent(com.vaadin.ui.Component)}
+     */
     public interface NavigationListener extends ConnectorEventListener {
         Method METHOD = ReflectTools.findMethod(NavigationListener.class,
                 "navigate", NavigationEvent.class);
 
+        /**
+         * Called when a navigation event is triggered
+         * 
+         * @param event
+         *            the navigation event.
+         */
         public void navigate(NavigationEvent event);
     }
 
+    /**
+     * Adds a navigation listener that is notified whenever a navigation event
+     * occurs.
+     * 
+     * @param listener
+     *            the listener to add.
+     */
     public void addNavigationListener(NavigationListener listener) {
         addListener(NavigationEvent.class, listener, NavigationListener.METHOD);
     }
 
+    /**
+     * Removes a navigation listener.
+     * 
+     * @param listener
+     *            the listener to remove.
+     */
     public void removeListener(NavigationListener listener) {
         removeListener(NavigationEvent.class, listener,
                 NavigationListener.METHOD);
     }
 
     /**
-     * @return true if NavigationManager should maintain "breadcrumb" of
-     *         previous views. The default is true.
+     * @return true if NavigationManager should maintain a breadcrumb of visited
+     *         views. The default is true.
      * @see #setMaintainBreadcrumb(boolean)
      */
     public boolean isMaintainBreadcrumb() {
@@ -358,17 +406,18 @@ public class NavigationManager extends AbstractComponentContainer {
     }
 
     /**
-     * Configures whether the NavigationManager maintains "breadcrumb"
-     * automatically. This is handy when using NavigationViews to dive into a
-     * deep hierarchy.
+     * Configures whether the NavigationManager maintains a breadcrumb of
+     * visited views automatically. This is handy when using NavigationViews to
+     * dive into a deep hierarchy.
      * 
      * @param maintainBreadcrumb
-     *            true if "breadcrumb" should be maintained
+     *            true if a breadcrumb should be maintained
      */
     public void setMaintainBreadcrumb(boolean maintainBreadcrumb) {
         this.maintainBreadcrumb = maintainBreadcrumb;
     }
 
+    @Override
     public int getComponentCount() {
         return getComponents().size();
     }

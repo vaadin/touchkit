@@ -7,22 +7,25 @@ import com.vaadin.server.AbstractExtension;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.UI;
 
-/**
- * TODO Needs a client side extension as well
- * 
- * 
+/*
  * - go offline
- * 
+ *
  * - persistent session cookie
- * 
+ *
  * In TK2 offline mode delay is in app config but it could just as well be
  * written to offline storage or cookie. This way these settings could survive
  * without bootstrap listener which are problematic
- * 
+ *
  * TODO rename or split to different features
+ *
+ */
+
+/**
+ * The OfflineMode extension adds offline support for the application. Settings
+ * for offline mode can be accessed through this class and offline mode can be
+ * triggered even though the network connection is still online.
  * 
- * @author mattitahvonen
- * 
+ * @author Vaadin Ltd
  */
 public class OfflineMode extends AbstractExtension {
 
@@ -33,10 +36,19 @@ public class OfflineMode extends AbstractExtension {
         return (OfflineModeState) super.getState();
     }
 
+    /**
+     * @return true if offline mode is enabled for the application.
+     */
     public boolean isOfflineModeEnabled() {
         return getState().offlineModeTimeout == -1;
     }
 
+    /**
+     * Enable or disable offline mode for the application.
+     * 
+     * @param offlineModeEnabled
+     *            true to enable, false to disable.
+     */
     public void setOfflineModeEnabled(boolean offlineModeEnabled) {
         if (isOfflineModeEnabled() != offlineModeEnabled) {
             if (offlineModeEnabled) {
@@ -48,38 +60,39 @@ public class OfflineMode extends AbstractExtension {
     }
 
     /**
-     * Returns the amount of seconds the client side waits request from the
-     * server until it opens the offline mode. -1 means "offline mode" is
-     * completely disabled on slow connection.
+     * Returns the amount of seconds the client side waits for requests to
+     * return a response from the server until it opens the offline mode. A
+     * value of -1 means that offline mode is completely disabled on slow
+     * connections.
      */
     public int getOfflineModeTimeout() {
         return getState().offlineModeTimeout;
     }
 
     /**
-     * Sets the timeout (in seconds) how long the client side waits for server
-     * to respond before falling back to "offline mode". If the value is set for
-     * -1, the client side waits forever.
+     * Sets the timeout for how long the client side waits for the server to
+     * respond before falling back to offline mode. If the value is set to -1,
+     * the client side waits forever.
      * 
-     * @param offlineModeDelay
-     *            timeout in seconds
+     * @param offlineModeTimeout
+     *            timeout in seconds, -1 to disable the timeout.
      */
-    public void setOfflineModeTimeout(int offlineModeDelay) {
-        getState().offlineModeTimeout = offlineModeDelay;
+    public void setOfflineModeTimeout(int offlineModeTimeout) {
+        getState().offlineModeTimeout = offlineModeTimeout;
     }
 
     /**
      * Vaadin uses the servlet's session mechanism to track users. With its
-     * default settings all sessions will be discarded when the browser
-     * application closes. For mobile web applications (such as web apps in iOS
-     * devices that are added to home screen) this might not be the desired
+     * default settings, all sessions will be discarded when the browser
+     * application closes. For mobile web applications (such as web apps that
+     * are added to the home screen in iOS) this might not be the desired
      * solution.
      * <p>
-     * Persistent session cookie is on by default if the UI uses
+     * The persistent session cookie is on by default if the UI uses the
      * {@link PreserveOnRefresh} annotation.
      * 
-     * @return true if session cookie will be made persistent when closing the
-     *         browser application
+     * @return true if the session cookie will be made persistent when closing
+     *         the browser application
      */
     public boolean isPersistentSessionCookie() {
         if (persistentSessionCookie != null) {
@@ -96,18 +109,20 @@ public class OfflineMode extends AbstractExtension {
 
     /**
      * Vaadin uses the servlet's session mechanism to track users. With its
-     * default settings all sessions will be discarded when the browser
-     * application closes. For mobile web applications (such as web apps in iOS
-     * devices that are added to home screen) this might not be the desired
-     * solution. With this method the session cookie can be made persistent. A
-     * returning user can then be shown his/her previous UI state.
+     * default settings, all sessions will be discarded when the browser
+     * application closes. For mobile web applications (such as web apps that
+     * are added to the home screen in iOS) this might not be the desired
+     * solution.
      * <p>
-     * Persistent session cookie is on by default if the UI uses
+     * This method makes the session cookie persistent. A returning user can
+     * then be shown his/her previous UI state.
+     * <p>
+     * The persistent session cookie is on by default if the UI uses the
      * {@link PreserveOnRefresh} annotation. It is suggested to be used with
      * TouchKit applications that might be used as home screen apps.
      * <p>
      * 
-     * Note, that the normal session lifetime is still respected although
+     * Note that the normal session lifetime is still respected although
      * persistent cookies are in use.
      * 
      * @param persistentSessionCookie
@@ -130,9 +145,9 @@ public class OfflineMode extends AbstractExtension {
     }
 
     /**
-     * Instructs the client side to get into offline mode. Can be used
-     * beforehand if e.g. the user knows he is about to lose his network
-     * connection.
+     * Instructs the client side to go into offline mode. This can be used e.g.
+     * if the user knows he is about to lose his network connection or for
+     * testing purposes.
      */
     public void goOffline() {
         getRpcProxy(OfflineModeClientRpc.class).goOffline();

@@ -1,13 +1,13 @@
 package com.vaadin.addon.touchkit.gwt.client.offlinemode;
 
 /**
- * Applications that need a to have advanced offline mode use this interface to
- * connect to TouchKit. By default framework uses {@link DefaultOfflineMode}
- * that simply displays a sad face and a message why the online app cannot be
- * used.
+ * Applications that need to have an advanced offline mode use this interface to
+ * connect to TouchKit. By default the framework uses an instance of
+ * {@link DefaultOfflineMode} that simply displays a sad face and a message why
+ * the online app cannot be used.
  * <p>
- * To replace this with your own implementation use a GWT deferred binding
- * rule in your widgetset. An example: <code><pre>
+ * Add a GWT deferred binding rule in your widgetset to replace this with your
+ * own implementation. An example: <code><pre>
         <replace-with
                 class="com.example.widgetset.client.MyOfflineMode">
                 <when-type-is
@@ -15,8 +15,6 @@ package com.vaadin.addon.touchkit.gwt.client.offlinemode;
         </replace-with>
  * </pre></code>
  * <p>
- * 
- * 
  */
 public interface OfflineMode {
 
@@ -33,38 +31,53 @@ public interface OfflineMode {
          * The offline mode activation was requested by the server side
          * application.
          */
-        ACTIVATED_BY_SERVER, UNKNOWN, ONLINE_APP_NOT_STARTED
+        ACTIVATED_BY_SERVER,
+        /**
+         * The reason is unknown.
+         */
+        UNKNOWN,
+        /**
+         * The online app is not started.
+         */
+        ONLINE_APP_NOT_STARTED
     }
 
+    /**
+     * Holds the reason for why the offline mode was activated. Passed to the
+     * {@link #activate(ActivationEvent)} method.
+     */
     public interface ActivationEvent {
 
         /**
-         * Human readable message why offline mode was activated.
-         * 
-         * @return
+         * @return A human readable message telling why the offline mode was
+         *         activated.
          */
         String getActivationMessage();
 
+        /**
+         * @return the ActivationReason code for why the offline mode was
+         *         activated.
+         */
         ActivationReason getActivationReason();
 
     }
 
     /**
-     * This method is called when TouchKit app desides to go offline. This
-     * happens most commonly if there is no network connection available.
-     * Offline mode can also be activated due to e.g. inaccessible server, bad
-     * responses or due to a request by the server side application.
-     * <p>
+     * This method is called when a TouchKit app decides to go offline. This
+     * most commonly happens if there is no network connection available.
+     * Offline mode can also be activated e.g. due to an inaccessible server,
+     * bad responses or as the result of a request by the server side
+     * application.
      * 
      * @param event
-     *            containing details about the activation
+     *            Details about the activation.
      */
     public abstract void activate(ActivationEvent event);
 
     /**
-     * This method is called when the touch kit detects that now it might be
-     * possible to get online again (e.g. network connection has returned).
-     * Implementation should e.g. remove or hide offline related elements from
+     * This method is called when TouchKit detects that it might be possible to
+     * go online again (e.g. the network connection has returned). The
+     * implementation should e.g. remove or hide offline related elements from
      * the document.
      * 
      * <p>

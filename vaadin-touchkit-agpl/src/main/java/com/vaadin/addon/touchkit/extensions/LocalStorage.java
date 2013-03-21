@@ -11,9 +11,9 @@ import com.vaadin.server.Extension;
 import com.vaadin.ui.UI;
 
 /**
- * A server side proxy to browsers HTML5 local storage. Local storage is a
+ * A server side proxy for the browser's HTML5 local storage. Local storage is a
  * persistent string-string map provided by modern browsers. Using this
- * extension, server side code can access that "map" in browsers memory.
+ * extension, server side code can access that map.
  * <p>
  * For more details about HTML 5 storage see {@link Storage}.
  */
@@ -23,11 +23,11 @@ public class LocalStorage extends AbstractExtension {
     private HashMap<Integer, LocalStorageCallback> callbacks;
 
     /**
-     * Detects the value of given key on the client side HTML5 storage. The
-     * value is detected asynchronously as the value detection requires a client
-     * server round trip.
+     * Detects the value of the given key in the client side HTML5 storage. The
+     * value is detected asynchronously, as the value detection requires a
+     * client server round trip.
      * <p>
-     * This method uses thread local to get currently used UI.
+     * This method uses thread local to get the currently active UI.
      * 
      * @see #get(String, LocalStorageCallback)
      */
@@ -36,10 +36,10 @@ public class LocalStorage extends AbstractExtension {
     }
 
     /**
-     * Returns a local storage proxy bound to current UI (detected via thread
-     * local).
+     * Returns a local storage proxy bound to the currently active UI (detected
+     * via a thread local).
      * 
-     * @return existing or newly created instance for current UI
+     * @return an existing or newly created instance for the currently active UI
      */
     public static LocalStorage get() {
         UI ui = UI.getCurrent();
@@ -47,15 +47,16 @@ public class LocalStorage extends AbstractExtension {
     }
 
     /**
-     * Returns a local storage proxy bound to given UI.
+     * Returns a local storage proxy bound to the given UI.
      * 
      * @param ui
-     * @return LocalStorage extension bound to given UI. If extension is not yet
-     *         used, a new one is created.
+     *            the UI to bind to.
+     * @return A LocalStorage extension bound to the given UI. If an extension
+     *         is not yet applied, a new one is created and applied to the UI.
      */
     public static LocalStorage get(UI ui) {
         if (ui == null) {
-            throw new IllegalArgumentException("UI must be provided");
+            throw new IllegalArgumentException("A UI must be provided");
         }
         LocalStorage locator = null;
         // Do we already have an extension attached?
@@ -126,11 +127,13 @@ public class LocalStorage extends AbstractExtension {
     }
 
     /**
-     * Detects the value of given key on the client side HTML5 storage. The
-     * value is detected asynchronously as the value detection requires a client
-     * server round trip.
+     * Detects the value of the given key in the client side HTML5 storage. The
+     * value is detected asynchronously, as the value detection requires a
+     * client server round trip.
      * 
      * @param callback
+     *            The {@link LocalStorageCallback} called when the value is
+     *            available.
      */
     public void get(String key, LocalStorageCallback callback) {
         int requestId = nextRequestId();
@@ -142,16 +145,16 @@ public class LocalStorage extends AbstractExtension {
     }
 
     /**
-     * Puts a given key-value pair into browsers local storage. Possible
-     * previously existing value is overridden.
+     * Stores a given key-value pair in the browser's local storage. Any
+     * previous value is overridden.
      * <p>
-     * Note, that if you wish to be sure the value is persisted properly, you
-     * can use the version with callback.
-     * 
-     * @see #put(String, String, LocalStorageCallback)
+     * Note that if you wish to be sure that the value is persisted properly,
+     * you can use {@link #put(String, String, LocalStorageCallback)}.
      * 
      * @param key
+     *            The key
      * @param value
+     *            The value for the key
      */
     public void put(String key, String value) {
         getRpcProxy(LocalStorageClientRpc.class).put(nextRequestId(), key,
@@ -159,15 +162,19 @@ public class LocalStorage extends AbstractExtension {
     }
 
     /**
-     * Puts a given key-value pair into browsers local storage. Possible
-     * previously existing value is overridden.
+     * Stores a given key-value pair in the browser's local storage. Any
+     * previous value is overridden.
      * <p>
      * The callback given as parameter is notified if local storage access
      * succeeded or failed.
      * 
      * @param key
+     *            The key
      * @param value
+     *            The value for the key
      * @param callback
+     *            A {@link LocalStorageCallback} to notify of success or
+     *            failure.
      */
     public void put(String key, String value, LocalStorageCallback callback) {
         int requestId = nextRequestId();

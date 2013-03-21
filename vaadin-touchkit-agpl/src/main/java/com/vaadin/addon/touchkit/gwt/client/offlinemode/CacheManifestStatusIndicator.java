@@ -34,6 +34,9 @@ public class CacheManifestStatusIndicator implements EntryPoint {
         new CacheManifestStatusIndicator().init();
     }
 
+    /**
+     * Initializes and starts the monitoring.
+     */
     public void init() {
         loadSettingsFromLocalStorage();
         hookAllListeners(this);
@@ -82,6 +85,13 @@ public class CacheManifestStatusIndicator implements EntryPoint {
         }, updateCheckInterval);
     }
 
+    /**
+     * Called when a cache event is triggered. All events except for error
+     * events are handled here.
+     * 
+     * @param event
+     *            The event.
+     */
     protected void onCacheEvent(Event event) {
         // consoleLog(event.getType());
         if ("cached".equals(event.getType())) {
@@ -100,10 +110,20 @@ public class CacheManifestStatusIndicator implements EntryPoint {
         }
     }
 
+    /**
+     * Called when an error event is triggered.
+     * 
+     * @param event
+     *            The error event.
+     */
     protected void onError(Event event) {
         consoleLog("An error occurred");
     }
 
+    /**
+     * Shows the progress element, which, by default, is styled to be a small
+     * animated spinner in the top right corner of the screen.
+     */
     protected void showProgress() {
         if (progressElement == null) {
             progressElement = Document.get().createDivElement();
@@ -112,12 +132,23 @@ public class CacheManifestStatusIndicator implements EntryPoint {
         RootPanel.getBodyElement().appendChild(progressElement);
     }
 
+    /**
+     * Hides the progress element.
+     */
     protected void hideProgress() {
         if (progressElement != null) {
             progressElement.removeFromParent();
         }
     }
 
+    /**
+     * Called when a new version of the application cache (i.e. the widgetset)
+     * has been detected. The default implementation asks the user if we should
+     * update now unless forced.
+     * 
+     * @param force
+     *            true to force reloading the site without asking the user.
+     */
     protected void requestUpdate(boolean force) {
         consoleLog("Requesting permission to update");
         if (force || Window.confirm(updateNowMessage)) {
@@ -125,6 +156,12 @@ public class CacheManifestStatusIndicator implements EntryPoint {
         }
     }
 
+    /**
+     * Hooks all listeners to the specified instance.
+     * 
+     * @param instance
+     *            the instance to hook the listeners to.
+     */
     protected final native void hookAllListeners(
             CacheManifestStatusIndicator instance)
     /*-{
@@ -154,16 +191,31 @@ public class CacheManifestStatusIndicator implements EntryPoint {
             }, false);
     }-*/;
 
+    /**
+     * @return The status of the application cache. See the constants in this
+     *         class for possible values.
+     */
     private static native int getStatus()
     /*-{
         return $wnd.applicationCache.status;
     }-*/;
 
+    /**
+     * Asks the application cache to update itself, i.e. visit the server and
+     * check if there's an update available.
+     */
     protected static native void updateCache()
     /*-{
         return $wnd.applicationCache.update();
     }-*/;
 
+    /**
+     * Logs a message to the javascript console. The message will be prefixed
+     * with "CacheManifestStatusIndicator: "
+     * 
+     * @param message
+     *            The message to log.
+     */
     native void consoleLog(String message)
     /*-{
        console.log("CacheManifestStatusIndicator: " + message );

@@ -25,9 +25,29 @@ import com.vaadin.server.widgetsetutils.ConnectorBundleLoaderFactory;
 import com.vaadin.shared.ui.Connect.LoadStyle;
 
 /**
- * TouchKitWidgetMapGenerator makes some heavy classes that are rarely used in
- * mobile devices loaded lazily. This way saving bandwidth and making the
- * initial loading time smaller.
+ * TouchKitWidgetMapGenerator enables lazy loading of some heavy widget classes
+ * that are rarely used in mobile devices. This way saves bandwidth and improves
+ * the loading time.
+ * 
+ * Components for which the widgets are lazily loaded:
+ * <ul>
+ * <li>{@link com.vaadin.ui.VerticalLayout}</li>
+ * <li>{@link com.vaadin.ui.HorizontalLayout}</li>
+ * <li>{@link com.vaadin.ui.GridLayout}</li>
+ * <li>{@link com.vaadin.ui.AbsoluteLayout}</li>
+ * <li>{@link com.vaadin.ui.HorizontalSplitPanel}</li>
+ * <li>{@link com.vaadin.ui.VerticalSplitPanel}</li>
+ * <li>{@link com.vaadin.ui.Accordion}</li>
+ * <li>{@link com.vaadin.ui.ComboBox}</li>
+ * <li>{@link com.vaadin.ui.TabSheet}</li>
+ * <li>{@link com.vaadin.ui.MenuBar}</li>
+ * <li>{@link com.vaadin.ui.Panel}</li>
+ * <li>{@link com.vaadin.ui.Window}</li>
+ * <li>{@link com.vaadin.ui.RichTextArea}</li>
+ * <li>{@link com.vaadin.ui.TwinColSelect}</li>
+ * <li>{@link com.vaadin.ui.CustomLayout}</li>
+ * <li>{@link com.vaadin.ui.PopupView}</li>
+ * </ul>
  */
 public class TouchKitBundleLoaderFactory extends ConnectorBundleLoaderFactory {
 

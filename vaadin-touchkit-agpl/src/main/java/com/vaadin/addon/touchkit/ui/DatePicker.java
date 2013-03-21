@@ -9,21 +9,24 @@ import com.vaadin.ui.AbstractField;
 import com.vaadin.ui.DateField;
 
 /**
- * EXPERIMENTAL!
+ * DatePicker is a field used to ask time values from the user. In contrast to
+ * the standard Vaadin {@link DateField}, this component shows a native
+ * DatePicker in browsers that support this. Browsers that do not support native
+ * date pickers show a touch friendly fallback.
  * 
- * This component is still experimental, don't expect it to by as high quality
- * as the library in general.
- * <p>
- * Field used to ask time values from users. Instead of std Vaadin
- * {@link DateField} developers might want to use this to let browsers show
- * their own native date picker. Native date pickers are supported on most
- * recent devices only.
+ * Browsers that have good support for native date pickers:
+ * <ul>
+ * <li>iOS - full support since 5.0, earlier versions have partial support</li>
+ * <li>Android - partial, but good support in 4.2+</li>
+ * </ul>
+ * Earlier versions of Android have very limited support for native date
+ * pickers.
  */
 @SuppressWarnings("serial")
 public class DatePicker extends AbstractField<Date> {
 
     /**
-     * Create new DatePicker
+     * Constructs a new DatePicker instance with day resolution.
      */
     public DatePicker() {
         registerRpc(rpc);
@@ -31,10 +34,11 @@ public class DatePicker extends AbstractField<Date> {
     }
 
     /**
-     * Create new DatePicker with caption
+     * Constructs a new DatePicker instance with day resolution and the
+     * specified caption.
      * 
      * @param caption
-     *            Caption of DatePicker
+     *            The caption
      */
     public DatePicker(String caption) {
         this();
@@ -67,28 +71,27 @@ public class DatePicker extends AbstractField<Date> {
     }
 
     /**
-     * Get current resolution of this DatePicker
-     * 
-     * @return Resolution
+     * @return The current resolution
      */
     public Resolution getResolution() {
         return getState().resolution;
     }
 
     /**
-     * Set current resolution of this DatePicker
+     * Sets the current resolution of this DatePicker
      * 
      * @param resolution
-     *            Resolution of DatePicker. Not all resolutions are supported on
-     *            all devices.
+     *            The resolution. Not all resolutions are supported on all
+     *            devices.
      */
     public void setResolution(Resolution resolution) {
         getState().resolution = resolution;
     }
 
     /**
-     * Define if component should use native date field when possible. Eg. iOS
-     * Safari supports native date fields since iOS version 5.
+     * Sets whether to use native date field when possible or always use the
+     * fallback. E.g. iOS Safari fully supports native date fields since iOS
+     * version 5.
      * 
      * @param useNative
      *            If true native date field is used with browsers supporting it
@@ -98,21 +101,21 @@ public class DatePicker extends AbstractField<Date> {
     }
 
     /**
-     * If native date field is used when supported.
-     * 
-     * @return true if native field is used when supported
+     * @return true if native date field is used in supported browsers.
      */
     public boolean isUseNative() {
         return getState().useNative;
     }
 
     /**
-     * Set minimal value accepted from user. Notice that this is supported only
-     * by some devices in native mode. This function is here for future use.
+     * Sets the minimum date value accepted from the user. Notice that, in
+     * native mode, this is supported only by some devices. This function is
+     * here for future use.
      * 
      * @param min
-     *            Minimal value accepted from user. Null to clear. Minimal value
-     *            must be before maximal value (if defined).
+     *            The minimum date value accepted from the user. Set to null to
+     *            clear. The value must be before the maximum date value (if
+     *            defined).
      */
     public void setMin(Date min) {
         if (min != null && getState().max != null) {
@@ -126,21 +129,21 @@ public class DatePicker extends AbstractField<Date> {
     }
 
     /**
-     * Get minimal value accepted from user.
-     * 
-     * @return Minimal value accepted from user, null if not define.
+     * @return The minimum date value accepted from the user, null if undefined.
      */
     public Date getMin() {
         return getState().min;
     }
 
     /**
-     * Set maximal value accepted from user. Notice that this is supported only
-     * by some devices in native mode. This function is here for future use.
+     * Sets the maximum date value accepted from the user. Notice that, in
+     * native mode, this is supported only by some devices. This function is
+     * here for future use.
      * 
      * @param max
-     *            Maximal value accepted from user. Null to clear. Maximal value
-     *            must be after minimal value (if defined).
+     *            Maximum date value accepted from the user. Set to null to
+     *            clear. The value must be after the minimum date value (if
+     *            defined).
      */
     public void setMax(Date max) {
         if (max != null && getState().min != null) {
@@ -154,9 +157,7 @@ public class DatePicker extends AbstractField<Date> {
     }
 
     /**
-     * Get maximal value accepted from user.
-     * 
-     * @return Maximal value accepted from user, null if not define.
+     * @return The maximum date value accepted from the user, null if undefined.
      */
     public Date getMax() {
         return getState().max;

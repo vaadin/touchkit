@@ -7,18 +7,19 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 
 /**
- * SwipeView is as simple layout which has scrollable content area. It is meant
- * to be used inside a NavigationManager where it controls its parent on
- * horizontal "swipe gestures" aka horizontal scrolls. Swiping navigates
- * forward/backward.
+ * The SwipeView is a simple layout which has a scrollable content area. It is
+ * meant to be used inside a {@link NavigationManager} where it controls its
+ * parent on horizontal swipe gestures aka horizontal scrolls. Swiping navigates
+ * forward/backward in the NavigationManager.
  * <p>
- * To make the usage fluent, developer is suggested to fill both next and
- * previous component.
+ * To make usage as fluent as possible, it is suggested to set both next and
+ * previous component in the NavigationManager. This can be done using a
+ * {@link com.vaadin.addon.touchkit.ui.NavigationManager.NavigationListener}.
  */
 public class SwipeView extends AbstractSingleComponentContainer {
 
     /**
-     * Creates a {@link SwipeView}.
+     * Constructs a SwipeView.
      */
     public SwipeView() {
         setSizeFull();
@@ -47,29 +48,37 @@ public class SwipeView extends AbstractSingleComponentContainer {
     }
 
     /**
-     * Creates a {@link SwipeView} with the given caption and an empty
-     * {@link CssLayout} as content.
+     * Constructs a SwipeView with the given caption and an empty
+     * {@link CssLayout} as its content.
      * 
      * @param caption
+     *            the caption
      */
     public SwipeView(String caption) {
         this();
         setCaption(caption);
     }
 
+    /**
+     * Sets the vertical scroll position
+     * 
+     * @param scrollPosition
+     *            the vertical scroll position (y-coordinate)
+     */
     public void setScrollPosition(int scrollPosition) {
         getState().scrollTop = scrollPosition;
         markAsDirty();
     }
 
+    /**
+     * @return the vertical scroll position.
+     */
     public int getScrollPosition() {
         return getState().scrollTop;
     }
 
     /**
-     * Gets the @link {@link NavigationManager} in which this view is contained.
-     * 
-     * @return the {@link NavigationManager} or null if not inside one
+     * @return the parent {@link NavigationManager} or null if not inside one
      */
     public NavigationManager getNavigationManager() {
         Component p = getParent();
@@ -78,5 +87,5 @@ public class SwipeView extends AbstractSingleComponentContainer {
         }
         return null;
     }
-    
+
 }

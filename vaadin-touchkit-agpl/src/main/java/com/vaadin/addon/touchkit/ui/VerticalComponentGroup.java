@@ -8,18 +8,17 @@ import com.vaadin.ui.AbstractLayout;
 import com.vaadin.ui.Component;
 
 /**
- * A layout to group controls vertically. Items in a
- * {@link VerticalComponentGroup} have by default white background, margins and
- * rounded corners.
+ * The VerticalComponentGroup is a layout to group controls vertically. Items in
+ * a VerticalComponentGroup have a white background, margins and rounded corners
+ * by default.
  * <p>
  * Captions are rendered on the same row as the component. Relative widths are
  * relative to the {@link VerticalComponentGroup} width except if the component
  * has a caption, in which case a relative width is relative to the remaining
  * available space.
  * <p>
- * Due to the styling, {@link VerticalComponentGroup} is by default more
- * flexible than {@link HorizontalButtonGroup} and it can accommodate many
- * components.
+ * Due to the styling, VerticalComponentGroup is more flexible than
+ * {@link HorizontalButtonGroup} and it can accommodate many components.
  */
 @SuppressWarnings("serial")
 public class VerticalComponentGroup extends AbstractLayout {
@@ -27,22 +26,25 @@ public class VerticalComponentGroup extends AbstractLayout {
     protected LinkedList<Component> components = new LinkedList<Component>();
 
     /**
-     * Creates a vertical component group.
-     * <p>
-     * The default width is 100%.
+     * Constructs a vertical component group with 100% width.
      */
     public VerticalComponentGroup() {
         this(null);
     }
 
     /**
-     * Creates a vertical component group that is 100% wide.
+     * Creates a vertical component group that is 100% wide with the provided
+     * caption.
+     * 
+     * @param caption
+     *            the caption.
      */
     public VerticalComponentGroup(String caption) {
         getState().caption = caption;
         setWidth(null);
     }
 
+    @Override
     protected VerticalComponentGroupState getState() {
         return (VerticalComponentGroupState) super.getState();
     }

@@ -32,11 +32,12 @@ public class OfflineModeEntrypoint implements EntryPoint {
                             || !ApplicationConfiguration
                                     .getRunningApplications().get(0)
                                     .isApplicationRunning()) {
-                        if(!getOfflineMode().isActive()) {
-                            getOfflineMode().activate(
-                                    new OfflineModeActivationEventImpl(
-                                            "The application didn't start properly.",
-                                            ActivationReason.ONLINE_APP_NOT_STARTED));
+                        if (!getOfflineMode().isActive()) {
+                            getOfflineMode()
+                                    .activate(
+                                            new OfflineModeActivationEventImpl(
+                                                    "The application didn't start properly.",
+                                                    ActivationReason.ONLINE_APP_NOT_STARTED));
                         }
 
                     }
@@ -45,6 +46,11 @@ public class OfflineModeEntrypoint implements EntryPoint {
         }
     }
 
+    /**
+     * Creates an instance of {@link OfflineMode} by using GWT deferred binding.
+     * 
+     * @return the OfflineMode application.
+     */
     public static OfflineMode getOfflineMode() {
         if (app == null) {
             app = GWT.create(OfflineMode.class);
@@ -52,6 +58,9 @@ public class OfflineModeEntrypoint implements EntryPoint {
         return app;
     }
 
+    /**
+     * @return true if the network is online.
+     */
     private static native boolean isNetworkOnline()
     /*-{
         return $wnd.navigator.onLine;

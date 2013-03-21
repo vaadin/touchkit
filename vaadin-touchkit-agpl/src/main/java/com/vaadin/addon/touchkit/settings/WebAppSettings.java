@@ -9,10 +9,14 @@ import com.vaadin.server.BootstrapListener;
 import com.vaadin.server.BootstrapPageResponse;
 
 /**
- * This class is used to configure various settings that control how this
- * application behaves when linked from mobile devices. Some of these settings
- * are platform specific, most introduced by Apple for their
+ * The WebAppSettings class is used to configure various settings that control
+ * how the application behaves when linked to from mobile devices. Some of these
+ * settings are platform specific, most introduced by Apple for their
  * "home screen web app" concept.
+ * 
+ * See the <a href=
+ * "http://developer.apple.com/library/safari/#documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html"
+ * >Apple Meta tags documentation</a> for details.
  */
 public class WebAppSettings implements BootstrapListener {
 
@@ -26,20 +30,20 @@ public class WebAppSettings implements BootstrapListener {
      * true, the client may for instance hide the browsers own UI and give more
      * space for the web app. E.g. if app with this header is added to the home
      * screen on an iOS device, browser controls are hidden when the application
-     * is started via the homescreen icon.
-     * 
-     * <p>
-     * See {@link http://developer.apple.com/library/safari/} for more details.
+     * is started via the home screen icon.
      * 
      * @param webAppCapable
+     *            true to treat the application as a web application rather than
+     *            a web page.
      */
     public void setWebAppCapable(boolean webAppCapable) {
         this.webAppCapable = webAppCapable;
     }
 
     /**
-     * @return
-     * @see #setWebAppCapable(Boolean)
+     * @return true if the app is to be treated as a web application instead of
+     *         a web page. The default is true.
+     * @see #setWebAppCapable(boolean)
      */
     public boolean isWebAppCapable() {
         return webAppCapable;
@@ -48,17 +52,20 @@ public class WebAppSettings implements BootstrapListener {
     /**
      * Some mobile devices (like Apple's iOS devices) may allow customizing
      * status bars appearances.
-     * <p>
-     * See {@link http://developer.apple.com/library/safari/} for more details.
+     * 
+     * See the <a href=
+     * "http://developer.apple.com/library/safari/#documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html%23//apple_ref/doc/uid/TP40008193-SW4"
+     * >apple-mobile-web-app-status-bar-style documentation</a> for details.
      * 
      * @param statusBarStyle
+     *            The style of the status bar.
      */
     public void setStatusBarStyle(String statusBarStyle) {
         this.statusBarStyle = statusBarStyle;
     }
 
     /**
-     * @return
+     * @return the status bar style or null if none set.
      * @see #setStatusBarStyle(String)
      */
     public String getStatusBarStyle() {
@@ -71,13 +78,14 @@ public class WebAppSettings implements BootstrapListener {
      * screen.
      * 
      * @param startupImage
+     *            the splash screen image to use.
      */
     public void setStartupImage(String startupImage) {
         this.startupImage = startupImage;
     }
 
     /**
-     * @return
+     * @return the splash screen image used or null if none set.
      * @see #setStartupImage(String)
      */
     public String getStartupImage() {

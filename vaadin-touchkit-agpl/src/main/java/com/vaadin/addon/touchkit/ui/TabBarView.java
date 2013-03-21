@@ -14,9 +14,9 @@ import com.vaadin.ui.TabSheet.Tab;
 import com.vaadin.util.ReflectTools;
 
 /**
- * A tabsheet implementation that mimics the native tabsheet (TabBarView) in e.g
- * iOS. By default a bar with equally sized tab buttons is shown below the tab
- * content.
+ * The TabBarView is a tabsheet implementation that mimics the native tabsheet
+ * (TabBarView) in iOS. By default a bar with equally sized tab buttons is shown
+ * below the tab content.
  */
 public class TabBarView extends AbstractComponentContainer {
 
@@ -26,12 +26,12 @@ public class TabBarView extends AbstractComponentContainer {
     private LinkedList<Component> tabs = new LinkedList<Component>();
 
     /**
-     * Creates a {@link TabBarView} that is 100% wide and high.
+     * Constructs a {@link TabBarView} that is 100% wide and high.
      */
     public TabBarView() {
         super();
         setSizeFull();
-       super.addComponent(toolbar);
+        super.addComponent(toolbar);
     }
 
     /**
@@ -94,9 +94,11 @@ public class TabBarView extends AbstractComponentContainer {
     }
 
     /**
-     * @deprecated Behavior differs from regular {@link ComponentContainer}s,
-     *             use the specialized API instead: {@link #addTab(Component)}
-     *             and {@link #removeTab(Component)}
+     * @deprecated The behavior differs from regular {@link ComponentContainer}
+     *             s, use the specialized API instead:
+     *             {@link #addTab(Component)} and {@link #removeTab(Component)}
+     * 
+     * @throws UnsupportedOperationException
      */
     @Deprecated
     @Override
@@ -129,9 +131,11 @@ public class TabBarView extends AbstractComponentContainer {
     }
 
     /**
-     * @deprecated Behavior differs from regular {@link ComponentContainer}s,
-     *             use the specialized API instead: {@link #addTab(Component)}
-     *             and {@link #removeTab(Component)}
+     * @deprecated The behavior differs from regular {@link ComponentContainer}
+     *             s, use the specialized API instead:
+     *             {@link #addTab(Component)} and {@link #removeTab(Component)}
+     * 
+     * @throws UnsupportedOperationException
      */
     @Deprecated
     @Override
@@ -141,10 +145,10 @@ public class TabBarView extends AbstractComponentContainer {
     }
 
     /**
-     * Removes the given tab (content and tab-bar button) from the
-     * {@link TabBarView}
+     * Removes the given tab (content and tab-bar button) from the TabBarView
      * 
      * @param tab
+     *            the tab to remove
      */
     public void removeTab(Tab tab) {
         removeTab(tab.getComponent());
@@ -192,9 +196,11 @@ public class TabBarView extends AbstractComponentContainer {
     }
 
     /**
-     * @deprecated Behavior differs from regular {@link ComponentContainer}s,
-     *             use the specialized API instead: {@link #addTab(Component)}
-     *             and {@link #removeTab(Component)}
+     * @deprecated The behavior differs from regular {@link ComponentContainer}
+     *             s, use the specialized API instead:
+     *             {@link #addTab(Component)} and {@link #removeTab(Component)}
+     * 
+     * @throws UnsupportedOperationException
      */
     @Override
     @Deprecated
@@ -296,7 +302,7 @@ public class TabBarView extends AbstractComponentContainer {
     public static class SelectedTabChangeEvent extends Component.Event {
 
         /**
-         * New instance of selected tab change event
+         * Constructs a new instance of SelectedTabChangeEvent
          * 
          * @param source
          *            the Source of the event.
@@ -306,7 +312,7 @@ public class TabBarView extends AbstractComponentContainer {
         }
 
         /**
-         * TabSheet where the event occurred.
+         * Gets the TabSheet where the event occurred.
          * 
          * @return the Source of the event.
          */
@@ -367,7 +373,7 @@ public class TabBarView extends AbstractComponentContainer {
     public int getComponentCount() {
         return 1 + (currentComponent != null ? 1 : 0);
     }
-    
+
     @Override
     public Iterator<Component> iterator() {
         return getComponentIterator();

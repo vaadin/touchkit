@@ -8,9 +8,10 @@ import com.vaadin.ui.AbstractComponentContainer;
 import com.vaadin.ui.Component;
 
 /**
- * A navigation bar that contains an XHTML caption in the middle and component
- * areas (most commonly for buttons) on the left and right. A back-button is
- * automatically shown if a <code>previousView</code> is available.
+ * The NavigationBar component sits at the top of a {@link NavigationView} and
+ * contains an XHTML caption in the middle as well as component slots (most
+ * commonly for buttons) on the left and right. A back-button is automatically
+ * shown if a <code>previousView</code> is available.
  * <p>
  * Commonly used in a {@link NavigationView}.
  * </p>
@@ -24,6 +25,9 @@ public class NavigationBar extends AbstractComponentContainer {
     private Component navigationBarComponent;
     private Component leftNavigationBarComponent;
 
+    /**
+     * Constructs a new NavigationBar
+     */
     public NavigationBar() {
         backButton.setVisible(false);
         backButton.setStyleName(STYLE_NAME_BACK_BUTTON);
@@ -36,14 +40,12 @@ public class NavigationBar extends AbstractComponentContainer {
     }
 
     /**
-     * Sets the component on the left side of the caption.
-     * 
-     * <p>
-     * This place is most commonly reserved for the back button. In case the
-     * {@link #setPreviousView(Component)} method is used, it replaces existing
-     * components from this location.
+     * Sets the component in the left slot. This place most commonly features
+     * the back button. Setting the left component replaces any existing
+     * components, including the back button.
      * 
      * @param c
+     *            the component to put in the left slot.
      */
     public void setLeftComponent(Component c) {
         if (leftNavigationBarComponent != null) {
@@ -59,17 +61,17 @@ public class NavigationBar extends AbstractComponentContainer {
     }
 
     /**
-     * @return the component on the left side of the caption or null if the
-     *         component is not set
+     * @return the component in the left slot or null if the none is set
      */
     public Component getLeftComponent() {
         return leftNavigationBarComponent;
     }
 
     /**
-     * Sets the component on the right side of the caption.
+     * Sets the component in the right slot.
      * 
      * @param c
+     *            the component to put in the right slot.
      */
     public void setRightComponent(Component c) {
         if (navigationBarComponent != null) {
@@ -84,17 +86,18 @@ public class NavigationBar extends AbstractComponentContainer {
     }
 
     /**
-     * @return the component on right side of the caption or null if not set
+     * @return the component in the right slot or null if none set
      */
     public Component getRightComponent() {
         return navigationBarComponent;
     }
 
     /**
-     * Sets which view (component) will be navigated to when the back-button is
+     * Sets which view (component) will be navigated to when the back button is
      * pressed.
      * 
      * @param component
+     *            the previous view
      */
     public void setPreviousView(Component component) {
         if (getBackButton().getParent() != null) {
@@ -105,24 +108,26 @@ public class NavigationBar extends AbstractComponentContainer {
     }
 
     /**
-     * Get the previousView that will be navigated to when the back-button is
+     * Gets the previousView that will be navigated to when the back button is
      * pressed.
      * 
-     * @return the previousView or null if n/a
+     * @return the previousView or null if none set
      * @see #setPreviousView(Component)
      */
     public Component getPreviousView() {
         return getBackButton().getTargetView();
     }
 
+    /**
+     * @return the back button
+     */
     private NavigationButton getBackButton() {
         return backButton;
     }
 
     /**
-     * Not supported by NavigationBar.
-     * 
-     * @deprecated
+     * @deprecated Not supported by NavigationBar.
+     * @throws UnsupportedOperationException
      */
     @Deprecated
     @Override
@@ -132,9 +137,8 @@ public class NavigationBar extends AbstractComponentContainer {
     }
 
     /**
-     * Not supported by NavigationBar.
-     * 
-     * @deprecated
+     * @deprecated Not supported by NavigationBar.
+     * @throws UnsupportedOperationException
      */
     @Deprecated
     public void replaceComponent(Component oldComponent, Component newComponent) {
@@ -156,6 +160,7 @@ public class NavigationBar extends AbstractComponentContainer {
         return getComponentIterator();
     }
 
+    @Override
     public int getComponentCount() {
         int count = 0;
         if (backButton != null) {
@@ -166,5 +171,4 @@ public class NavigationBar extends AbstractComponentContainer {
         }
         return count;
     }
-
 }

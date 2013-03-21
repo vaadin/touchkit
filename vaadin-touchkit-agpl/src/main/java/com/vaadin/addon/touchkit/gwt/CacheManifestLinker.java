@@ -26,8 +26,12 @@ import com.google.gwt.core.ext.linker.LinkerOrder;
 import com.google.gwt.core.ext.linker.SelectionProperty;
 import com.google.gwt.core.ext.linker.Shardable;
 
-
 /**
+ * A GWT linker that produces a cache.manifest file describing what to cache in
+ * the application cache. Very useful for specifying which resources need to be
+ * available when in offline mode.
+ */
+/*
  * TODO review and improve this impl
  */
 @LinkerOrder(LinkerOrder.Order.POST)
@@ -58,7 +62,7 @@ public class CacheManifestLinker extends AbstractLinker {
     @SuppressWarnings("rawtypes")
     public ArtifactSet link(TreeLogger logger, LinkerContext context,
             ArtifactSet artifacts, boolean onePermutation)
-                    throws UnableToCompleteException {
+            throws UnableToCompleteException {
 
         loadTouchKitWidgetSetResources(context);
 
@@ -219,7 +223,7 @@ public class CacheManifestLinker extends AbstractLinker {
 
     private Artifact<?> createCacheManifest(LinkerContext context,
             TreeLogger logger, Set<String> artifacts, String userAgent)
-                    throws UnableToCompleteException {
+            throws UnableToCompleteException {
 
         StringBuilder cm = new StringBuilder();
         cm.append("CACHE MANIFEST\n");

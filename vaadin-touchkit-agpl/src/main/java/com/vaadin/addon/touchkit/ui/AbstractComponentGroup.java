@@ -9,9 +9,10 @@ import com.vaadin.ui.AbstractComponentContainer;
 import com.vaadin.ui.Component;
 
 /**
- * Parent class that encapsulates similarities between
- * {@link HorizontalButtonGroup} and {@link VerticalComponentGroup}. Does not
- * support changing orientation on the fly.
+ * The AbstractComponentGroup class is the base class for the
+ * {@link HorizontalButtonGroup}.
+ * 
+ * This class should not be used directly.
  */
 public abstract class AbstractComponentGroup extends AbstractComponentContainer {
 
@@ -67,7 +68,7 @@ public abstract class AbstractComponentGroup extends AbstractComponentContainer 
     public Iterator<Component> getComponentIterator() {
         return children.iterator();
     }
-    
+
     @Override
     public Iterator<Component> iterator() {
         return getComponentIterator();

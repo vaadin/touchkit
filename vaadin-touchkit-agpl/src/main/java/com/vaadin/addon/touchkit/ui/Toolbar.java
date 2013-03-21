@@ -5,13 +5,13 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 
 /**
- * A native looking toolbar for showing buttons.
+ * The Toolbar is a native looking toolbar for showing buttons.
  * <p>
  * Typically {@link Button}s with icons or a {@link HorizontalButtonGroup}
  * containing Buttons are added to the Toolbar. All components will be rendered
  * as equally sized and centered vertically in the toolbar.
  * <p>
- * Toolbar is typically used as a part of a {@link NavigationView}.
+ * A Toolbar is typically used as a part of a {@link NavigationView}.
  * 
  */
 public class Toolbar extends CssLayout {
@@ -27,7 +27,8 @@ public class Toolbar extends CssLayout {
     private static final String STYLENAME = "v-touchkit-toolbar";
 
     /**
-     * By default the Toolbar has no margin, is 100% wide and 44px high.
+     * Constructs a new Toolbar which has no margin and is 100% wide by 44px
+     * high.
      */
     public Toolbar() {
         setStyleName(STYLENAME);
@@ -42,7 +43,6 @@ public class Toolbar extends CssLayout {
             component.setWidth(width, Unit.PERCENTAGE);
         }
     }
-
 
     @Override
     protected String getCss(Component c) {

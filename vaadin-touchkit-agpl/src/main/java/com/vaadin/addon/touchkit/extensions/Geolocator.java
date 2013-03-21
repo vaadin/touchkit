@@ -12,13 +12,13 @@ import com.vaadin.server.Extension;
 import com.vaadin.ui.UI;
 
 /**
- * Geolocator extension can be used to detect clients geographical location,
- * direction, altitude etc.
+ * The Geolocator extension can be used to detect the client's geographical
+ * location, direction, altitude, etc.
  * <p>
- * Under the hood Geolocator is a UI extension and should be used via static
- * {@link #detect(PositionCallback)} method. As the detection happens on the
- * client side, detection is asynchronous and result is passed to given
- * {@link PositionCallback}.
+ * Under the hood, Geolocator is a UI extension and should be used via the
+ * static {@link #detect(PositionCallback)} method. As the detection happens on
+ * the client side, it is asynchronous and the result is passed to the
+ * registered {@link PositionCallback}.
  */
 @SuppressWarnings("serial")
 public class Geolocator extends AbstractExtension {
@@ -27,10 +27,13 @@ public class Geolocator extends AbstractExtension {
     /**
      * Detects the current geographic location of the client. The detection
      * happens asynchronously and the position is reported to the callback given
-     * as an argument. Note that you may need to call this method multiple
-     * times, as the location changes if the client moves.
+     * in the callback argument. Note that this only checks the position once,
+     * you need to call this method multiple times if you want to update the
+     * location as the client moves.
      * 
-     * @param positionCallback
+     * @param callback
+     *            The {@link PositionCallback} instance that is called when the
+     *            position is available.
      */
     public static void detect(PositionCallback callback) {
         Geolocator locator = null;
@@ -48,6 +51,10 @@ public class Geolocator extends AbstractExtension {
         locator.detectCurrentPosition(callback);
     }
 
+    /**
+     * Constructs a GeoLocator, called by the {@link #detect(PositionCallback)}
+     * method.
+     */
     private Geolocator() {
         registerRpc(new GeolocatorServerRpc() {
             @Override
@@ -63,9 +70,12 @@ public class Geolocator extends AbstractExtension {
     }
 
     /**
-     * Asks the client for the current location information.
+     * Asks the client for the current location information and passes it along
+     * to the provided callback.
      * 
      * @param callback
+     *            the {@link PositionCallback} to call when the position data is
+     *            available.
      */
     private void detectCurrentPosition(PositionCallback callback) {
         int callbackid = 0;

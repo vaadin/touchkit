@@ -10,18 +10,18 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 
 /**
- * A component container which integrates well with the
- * {@link NavigationManager}, and consists of a {@link NavigationBar}, a content
+ * The NavigationView is a component container which integrates well with the
+ * {@link NavigationManager}. It consists of a {@link NavigationBar}, a content
  * area, and optionally a {@link Toolbar}.
  * <p>
- * The content area is scrollable (i.e. no need to use a Panel in it).
- * {@link NavigationView} is most commonly used with {@link NavigationManager}
- * which provides smooth forward/back animations.
+ * The content area is scrollable (i.e. no need to use a {@link Panel} in it).
+ * The {@link NavigationView} is most commonly used with a
+ * {@link NavigationManager} which provides smooth forward/back animations.
  * <p>
  * In addition to the main content area (set with {@link #setContent(Component)}
- * ), {@link NavigationView} can contain a secondary component that is by
- * default positioned at the bottom of the layout. The secondary content is set
- * with {@link #setToolbar(Component)}, and is usually a {@link Toolbar}.
+ * ), a {@link NavigationView} can contain a secondary component which, by
+ * default, is positioned at the bottom of the layout. The secondary content is
+ * set with {@link #setToolbar(Component)}, and is usually a {@link Toolbar}.
  * 
  */
 public class NavigationView extends AbstractComponentContainer {
@@ -38,7 +38,7 @@ public class NavigationView extends AbstractComponentContainer {
     };
 
     /**
-     * Creates a {@link NavigationView} with the given content.
+     * Constructs a NavigationView with the given content.
      * 
      * @param content
      */
@@ -47,7 +47,7 @@ public class NavigationView extends AbstractComponentContainer {
     }
 
     /**
-     * Creates a {@link NavigationView} with an empty {@link CssLayout} as
+     * Constructs a NavigationView with an empty {@link CssLayout} as its
      * content.
      */
     public NavigationView() {
@@ -55,10 +55,11 @@ public class NavigationView extends AbstractComponentContainer {
     }
 
     /**
-     * Creates a {@link NavigationView} with the given caption and an empty
-     * {@link CssLayout} as content.
+     * Constructs a NavigationView with the given caption and an empty
+     * {@link CssLayout} as its content.
      * 
      * @param caption
+     *            the caption
      */
     public NavigationView(String caption) {
         this();
@@ -66,10 +67,12 @@ public class NavigationView extends AbstractComponentContainer {
     }
 
     /**
-     * Creates a {@link NavigationView} with the given caption and content.
+     * Constructs a NavigationView with the given caption and content.
      * 
      * @param caption
+     *            the caption
      * @param content
+     *            the content
      */
     public NavigationView(String caption, Component content) {
         registerRpc(rpc);
@@ -82,10 +85,11 @@ public class NavigationView extends AbstractComponentContainer {
     }
 
     /**
-     * Sets the main content. If nulled, an empty {@link CssLayout} will be set
-     * as content.
+     * Sets the main content of the NavigationView. If null, an empty
+     * {@link CssLayout} will be used.
      * 
      * @param c
+     *            the component to set as the content
      */
     public void setContent(Component c) {
         if (mainComponent == c) {
@@ -102,9 +106,7 @@ public class NavigationView extends AbstractComponentContainer {
     }
 
     /**
-     * Gets the component currently set as content.
-     * 
-     * @return
+     * @return the content of the navigation view.
      */
     public Component getContent() {
         return mainComponent;
@@ -122,7 +124,7 @@ public class NavigationView extends AbstractComponentContainer {
     /**
      * The toolbar or content can be removed - other attempts will result in an
      * {@link IllegalArgumentException}. If the content is removed, an empty
-     * {@link CssLayout} is set as content.
+     * {@link CssLayout} is set as the content.
      */
     @Override
     public void removeComponent(Component c) {
@@ -148,25 +150,24 @@ public class NavigationView extends AbstractComponentContainer {
     }
 
     /**
-     * Gets the {@link NavigationBar}
-     * 
-     * @return
+     * @return the {@link NavigationBar}
      */
     public NavigationBar getNavigationBar() {
         return navigationBar;
     }
 
     /**
-     * Sets the component on the right side of the navigation bar.
+     * Sets the component in the navigation bar's right slot.
      * 
      * @param c
+     *            the component to set in the right slot.
      */
     public void setRightComponent(Component c) {
         getNavigationBar().setRightComponent(c);
     }
 
     /**
-     * @return the component on the right side of the navigation bar or null if
+     * @return the component in the right slot of the navigation bar or null if
      *         not set
      */
     public Component getRightComponent() {
@@ -174,17 +175,19 @@ public class NavigationView extends AbstractComponentContainer {
     }
 
     /**
-     * Sets the component on the left side of the navigation bar. Most commonly
-     * this component slot is automatically populated by the NavigationView.
+     * Sets the component in the navigation bar's left slot. Most commonly this
+     * component slot is automatically populated by the NavigationView (a back
+     * button).
      * 
      * @param c
+     *            the component to set in the left slot.
      */
     public void setLeftComponent(Component c) {
         getNavigationBar().setLeftComponent(c);
     }
 
     /**
-     * @return the component on the left side of the navigation bar or null if
+     * @return the component in the left slot of the navigation bar or null if
      *         not set
      */
     public Component getLeftComponent() {
@@ -234,6 +237,7 @@ public class NavigationView extends AbstractComponentContainer {
      * The main content and the toolbar can be replaced - other attempts will
      * result in an {@link IllegalArgumentException}
      */
+    @Override
     public void replaceComponent(Component oldComponent, Component newComponent) {
         if (mainComponent == oldComponent) {
             setContent(newComponent);
@@ -245,6 +249,7 @@ public class NavigationView extends AbstractComponentContainer {
         }
     }
 
+    @Override
     public Iterator<Component> getComponentIterator() {
         LinkedList<Component> linkedList = new LinkedList<Component>();
         if (navigationBar != null) {
@@ -264,6 +269,7 @@ public class NavigationView extends AbstractComponentContainer {
      * toolbar is set, it is removed from the layout and forgotten.
      * 
      * @param toolbar
+     *            The component to put in the toolbar slot.
      */
     public void setToolbar(Component toolbar) {
         if (this.toolbar != null && this.toolbar != toolbar) {
@@ -276,9 +282,8 @@ public class NavigationView extends AbstractComponentContainer {
     }
 
     /**
-     * Returns the toolbar for the view.
-     * 
-     * @return The toolbar or null if no toolbar has been set
+     * @return The component in the toolbar slot or null if no toolbar has been
+     *         set
      */
     public Component getToolbar() {
         return toolbar;
@@ -289,10 +294,19 @@ public class NavigationView extends AbstractComponentContainer {
         return (NavigationViewState) super.getState();
     }
 
+    /**
+     * Scrolls the view to the specified position.
+     * 
+     * @param scrollPosition
+     *            the position to scroll to (y coordinate).
+     */
     public void setScrollPosition(int scrollPosition) {
         getState().scrollPosition = scrollPosition;
     }
 
+    /**
+     * @return The scroll position of the view.
+     */
     public int getScrollPosition() {
         return getState().scrollPosition;
     }
@@ -300,7 +314,7 @@ public class NavigationView extends AbstractComponentContainer {
     /**
      * Gets the @link {@link NavigationManager} in which this view is contained.
      * 
-     * @return the {@link NavigationManager} or null if not inside one
+     * @return the parent {@link NavigationManager} or null if not inside one.
      */
     public NavigationManager getNavigationManager() {
         Component p = getParent();
@@ -310,10 +324,11 @@ public class NavigationView extends AbstractComponentContainer {
         return null;
     }
 
+    @Override
     public int getComponentCount() {
         return toolbar != null ? 3 : 2;
     }
-    
+
     @Override
     public Iterator<Component> iterator() {
         return getComponentIterator();

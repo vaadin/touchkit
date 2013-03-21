@@ -15,13 +15,14 @@ import com.vaadin.client.ui.VNativeButton;
 import com.vaadin.client.ui.VOverlay;
 
 /**
- * This class is the "default offline mode" used by Vaadin TouchKit. It is
- * displayed when network connection is down or if the server cannot be reached
- * for some other reason.
+ * This class is the default implementation of the offline mode used by Vaadin
+ * TouchKit. It is displayed when the network connection is down or if the
+ * server cannot be reached for some other reason.
  * <p>
- * Messages displayed by the default "offline mode", the can replaced by adding
- * customized properties files for {@link OfflineModeMessages} bundle. See GWT
- * int18n docs for more details.
+ * Messages displayed by the default offline mode can be replaced by adding
+ * customized properties files for the {@link OfflineModeMessages} bundle. See
+ * <a href="https://developers.google.com/web-toolkit/doc/latest/DevGuideI18n">
+ * the GWT i18n documentation</a> for more details.
  * 
  */
 public class DefaultOfflineMode implements OfflineMode {
@@ -56,7 +57,7 @@ public class DefaultOfflineMode implements OfflineMode {
         overlay.addStyleName("v-window");
         overlay.addStyleName("v-touchkit-offlinemode");
         Style style = overlay.getElement().getStyle();
-        style.setZIndex(Z_INDEX); // Make sure this is over loading indicator
+        style.setZIndex(Z_INDEX); // Make sure this is overloading the indicator
         flowPanel = new FlowPanel();
         overlay.add(flowPanel);
 
@@ -67,19 +68,26 @@ public class DefaultOfflineMode implements OfflineMode {
         overlay.setHeight(Window.getClientHeight() + "px");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public boolean isActive() {
         return active;
     }
 
+    /**
+     * @return The activation message passed to us in the parameter for the
+     *         {@link #activate(ActivationEvent)} method.
+     */
     public String getActivationMessage() {
         return activationMessage;
     }
 
     /**
-     * This method is called by the default {@link #activate(String, int)}
-     * implementation to build the contents of the offline mode each time
-     * offline mode is activated. Simplest method to customize offline mode is
-     * to override this method and add custom app to panel returned by
+     * This method is called by the default {@link #activate(ActivationEvent)}
+     * implementation to build the contents of the offline mode each time it is
+     * activated. The simplest method to customize offline mode is to override
+     * this method and add a custom app to the panel returned by the
      * {@link #getPanel()} method.
      */
     protected void buildDefaultContent() {
@@ -114,8 +122,8 @@ public class DefaultOfflineMode implements OfflineMode {
         }
     }
 
-    /* (non-Javadoc)
-     * @see com.vaadin.addon.touchkit.gwt.client.TouchKitOfflineMode#deactivate()
+    /**
+     * {@inheritDoc}
      */
     @Override
     public boolean deactivate() {

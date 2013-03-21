@@ -10,16 +10,23 @@ import com.vaadin.server.BootstrapFragmentResponse;
 import com.vaadin.server.BootstrapListener;
 import com.vaadin.server.BootstrapPageResponse;
 
+/**
+ * The ApplicationIcons class adds OS level icons (e.g. the iOS home screen
+ * icon) for the application.
+ * 
+ * @see ApplicationIcon
+ */
 public class ApplicationIcons implements BootstrapListener {
-    
+
     private LinkedList<ApplicationIcon> applicationIcon = new LinkedList<ApplicationIcon>();
-    
+
     /**
-     * Sets the webpage icon for this web app. This icon may be used by the
-     * client OS in case user bookmarks the web page containing this window.
+     * Sets the web page icon for this web app. This icon may be used by the
+     * client OS in case the user bookmarks the web page containing this window.
      * 
      * @param url
-     * @see #addApplicationIcon(int, int, String)
+     *            the URL of the icon.
+     * @see #addApplicationIcon(int, int, String, boolean)
      */
     public void addApplicationIcon(final String url) {
         applicationIcon.add(new ApplicationIcon() {
@@ -44,11 +51,16 @@ public class ApplicationIcons implements BootstrapListener {
      * client OS in case user bookmarks the web page containing this window.
      * <p>
      * 
-     * See {@link http://developer.apple.com/library/safari/} for more details.
+     * See <a href=
+     * "http://developer.apple.com/library/ios/#documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html%23//apple_ref/doc/uid/TP40002051-CH3-SW4"
+     * >Apple's developer documentation</a> for more details.
      * 
      * @param width
+     *            the width of the icon
      * @param height
+     *            the height of the icon
      * @param url
+     *            the URL of the icon
      */
     public void addApplicationIcon(final int width, final int height,
             final String url, final boolean preComposed) {
@@ -68,19 +80,17 @@ public class ApplicationIcons implements BootstrapListener {
         });
     }
 
-
     /**
-     * Gets the {@link ApplicationIcon}s that have previously been added to this
-     * window with {@link #addApplicationIcon(String)} or
-     * {@link #addApplicationIcon(int, int, String)}.
+     * Gets the {@link ApplicationIcon}s that have been added to this window
+     * with {@link #addApplicationIcon(String)} or
+     * {@link #addApplicationIcon(int, int, String, boolean)}.
      * 
-     * @return
+     * @return the icons added to this window.
      */
     public ApplicationIcon[] getApplicationIcons() {
         return applicationIcon.toArray(new ApplicationIcon[applicationIcon
                 .size()]);
     }
-
 
     @Override
     public void modifyBootstrapFragment(BootstrapFragmentResponse response) {
@@ -91,21 +101,19 @@ public class ApplicationIcons implements BootstrapListener {
     public void modifyBootstrapPage(BootstrapPageResponse response) {
         Document document = response.getDocument();
         Element head = document.getElementsByTag("head").get(0);
-        
+
         for (ApplicationIcon icon : applicationIcon) {
-            // <link rel="apple-touch-icon" sizes="114x114" href="touch-icon-iphone4.png" />
+            // <link rel="apple-touch-icon" sizes="114x114"
+            // href="touch-icon-iphone4.png" />
             Element iconEl = document.createElement("link");
             iconEl.attr("rel", "apple-touch-icon");
             String sizes = icon.getSizes();
-            if(sizes != null) {
+            if (sizes != null) {
                 iconEl.attr("sizes", sizes);
             }
             iconEl.attr("href", icon.getHref());
             head.appendChild(iconEl);
         }
-        
     }
 
-    
-    
 }

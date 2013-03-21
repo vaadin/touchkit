@@ -8,11 +8,10 @@ import com.vaadin.ui.TextField;
  * <p>
  * Modern browsers and devices provide a better interface for entering numbers
  * when this field is used. This is especially important for touch devices that
- * can provide a on-screen keyboard customized for numerical input.
+ * can provide an on-screen keyboard optimized for numerical input.
  * </p>
- * 
- * TODO with typed properties in V7 this field should have Number as its type
  */
+// TODO: with typed properties in V7 this field should have Number as its type
 public class NumberField extends TextField {
 
     /**

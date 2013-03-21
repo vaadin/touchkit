@@ -7,7 +7,6 @@ import com.vaadin.addon.touchkit.gwt.client.vcom.navigation.NavigationButtonRpc;
 import com.vaadin.addon.touchkit.gwt.client.vcom.navigation.NavigationButtonSharedState;
 import com.vaadin.server.Resource;
 import com.vaadin.shared.Connector;
-import com.vaadin.shared.MouseEventDetails;
 import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
@@ -16,13 +15,13 @@ import com.vaadin.ui.HasComponents.ComponentAttachListener;
 import com.vaadin.util.ReflectTools;
 
 /**
- * A Button implementation optimized to be used inside a
+ * The NavigationButton is a Button implementation optimized to be used inside a
  * {@link NavigationManager} or generally in touch devices.
  * <p>
- * Clicking button will automatically navigate to the target view if one is
- * defined in this button (via constructor or {@link #setTargetView(Component)}
- * ). On the client side, the {@link NavigationManager} will start animation
- * immediately when clicked, while the server request/response has finished.
+ * Clicking button will automatically navigate to the target view, if defined in
+ * this button (via constructor or {@link #setTargetView(Component)} ). On the
+ * client side, the {@link NavigationManager} will start animation immediately
+ * when clicked, while the client is waiting for a response from the server.
  * <p>
  * Note that navigation will only work when the button is used inside a
  * {@link NavigationManager}, otherwise it will work as a regular {@link Button}.
@@ -32,10 +31,10 @@ public class NavigationButton extends AbstractComponent {
     private ComponentAttachListener componentAttachListener;
 
     /**
-     * Creates a new navigation button.
+     * Constructs a new NavigationButton with the given caption.
      * 
      * @param caption
-     *            the Button caption
+     *            the caption
      */
     public NavigationButton(String caption) {
         this();
@@ -59,7 +58,7 @@ public class NavigationButton extends AbstractComponent {
      * explicitly.
      * 
      * @param caption
-     *            the Button caption
+     *            the caption
      * @param targetView
      *            the view to navigate to when pressed
      */
@@ -69,7 +68,7 @@ public class NavigationButton extends AbstractComponent {
     }
 
     /**
-     * Creates a navigation button without caption nor target view.
+     * Creates a navigation button without any caption nor target view.
      */
     public NavigationButton() {
         registerRpc(new NavigationButtonRpc() {
@@ -111,8 +110,7 @@ public class NavigationButton extends AbstractComponent {
     }
 
     /**
-     * Gets the @link {@link NavigationManager} in which this button is
-     * contained.
+     * Gets the {@link NavigationManager} in which this button is contained.
      * 
      * @return the {@link NavigationManager} or null if not inside one
      */
@@ -127,11 +125,12 @@ public class NavigationButton extends AbstractComponent {
     /**
      * Sets the view that will be navigated to when the button is pressed.
      * <p>
-     * The button communicates directly with a {@link NavigationManager} to make
-     * the actual navigation work.
+     * The client side widget communicates directly with a
+     * {@link NavigationManager} to make the actual navigation work.
      * </p>
      * 
      * @param targetView
+     *            The view to navigate to when pressed.
      */
     public void setTargetView(Component targetView) {
         getState().setTargetView(targetView);
@@ -182,6 +181,8 @@ public class NavigationButton extends AbstractComponent {
      * </p>
      * 
      * @see com.vaadin.ui.AbstractComponent#getCaption()
+     * 
+     * @return the caption
      */
     @Override
     public String getCaption() {
@@ -192,7 +193,7 @@ public class NavigationButton extends AbstractComponent {
      * Gets the target view that will be navigated to when the button is
      * pressed.
      * 
-     * @return the current target view
+     * @return the target view
      * @see #setTargetView(Component)
      */
     public Component getTargetView() {
@@ -201,14 +202,16 @@ public class NavigationButton extends AbstractComponent {
 
     /**
      * Returns the caption that is expected to be on the view this button
-     * navigates to.
+     * navigates to. Used for the placeholder, which is visible before the
+     * client has a chance to render the real target view.
      * <p>
      * If the caption is not set explicitly with
      * {@link #setTargetViewCaption(String)}, the caption of target view is
      * used. In case neither explicit target view caption or the target view is
      * not defined the button caption is used.
      * 
-     * @return the caption that will be used for placeholder of the target view.
+     * @return the caption that will be used for the placeholder of the target
+     *         view.
      */
     public String getTargetViewCaption() {
         return getState().getTargetViewCaption();
@@ -216,7 +219,8 @@ public class NavigationButton extends AbstractComponent {
 
     /**
      * Sets the caption that is expected to be on the view this button navigates
-     * to.
+     * to. This is used for the placeholder, which is visible before the client
+     * has a chance to render the real target view.
      * 
      * @param targetViewCaption
      *            the explicit caption of the target view.
@@ -226,23 +230,33 @@ public class NavigationButton extends AbstractComponent {
         markAsDirty();
     }
 
+    /**
+     * Sets the icon for the button
+     * 
+     * @param icon
+     *            the icon
+     */
     public void setIcon(Resource icon) {
         getState();
         setResource(NavigationButtonSharedState.MY_ICON_RESOURCE, icon);
     }
 
+    /**
+     * @return the icon for the button or null if none set.
+     */
     public Resource getIcon() {
         getState();
         return getResource(NavigationButtonSharedState.MY_ICON_RESOURCE);
     }
 
     /**
-     * Click event. This event is thrown, when the button is clicked.
+     * Click event. This event is triggered, when the navigation button is
+     * clicked.
      */
     public class NavigationButtonClickEvent extends Component.Event {
 
         /**
-         * New instance of text change event.
+         * Constructs a new NavigationButtonClickEvent
          * 
          * @param source
          *            the Source of the event.
@@ -264,8 +278,9 @@ public class NavigationButton extends AbstractComponent {
                         NavigationButtonClickEvent.class);
 
         /**
-         * Called when a {@link Button} has been clicked. A reference to the
-         * button is given by {@link NavigationButtonClickEvent#getButton()}.
+         * Called when a {@link NavigationButton} has been clicked. A reference
+         * to the button is given by
+         * {@link NavigationButtonClickEvent#getSource()}.
          * 
          * @param event
          *            An event containing information about the click.
@@ -275,10 +290,10 @@ public class NavigationButton extends AbstractComponent {
     }
 
     /**
-     * Adds the button click listener.
+     * Adds a navigation button click listener.
      * 
      * @param listener
-     *            the Listener to be added.
+     *            the Listener to add.
      */
     public void addClickListener(NavigationButtonClickListener listener) {
         addListener(NavigationButtonClickEvent.class, listener,
@@ -286,10 +301,10 @@ public class NavigationButton extends AbstractComponent {
     }
 
     /**
-     * Removes the button click listener.
+     * Removes a navigation button click listener.
      * 
      * @param listener
-     *            the Listener to be removed.
+     *            the Listener to remove.
      */
     public void removeClickListener(NavigationButtonClickListener listener) {
         removeListener(NavigationButtonClickEvent.class, listener,
@@ -299,7 +314,7 @@ public class NavigationButton extends AbstractComponent {
     /**
      * Simulates a button click, notifying all server-side listeners.
      * 
-     * No action is taken is the button is disabled.
+     * No action is taken if the button is disabled.
      */
     public void click() {
         if (isEnabled() && !isReadOnly()) {
@@ -316,8 +331,8 @@ public class NavigationButton extends AbstractComponent {
     /**
      * Fires a click event to all listeners without any event details.
      * 
-     * In subclasses, override {@link #fireClick(MouseEventDetails)} instead of
-     * this method.
+     * In subclasses, override {@link #fireEvent(java.util.EventObject)} instead
+     * of this method.
      */
     protected void fireClick() {
         fireEvent(new NavigationButtonClickEvent(this));

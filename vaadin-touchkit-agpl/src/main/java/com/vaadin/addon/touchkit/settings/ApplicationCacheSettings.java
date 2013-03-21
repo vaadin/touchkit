@@ -63,11 +63,11 @@ public class ApplicationCacheSettings implements BootstrapListener {
     }
 
     /**
-     * Give manifest file name for given page response
+     * Generates the manifest file name for the given page response
      * 
      * @param response
-     *            Page response where manifest will be added.
-     * @return Manifest file name, eg. "safari.manifest".
+     *            Page response where the manifest will be added.
+     * @return The manifest file name, eg. "safari.manifest".
      */
     protected String generateManifestFileName(BootstrapPageResponse response) {
         // Default implementation of TouchKit only supports webkit (safari)
@@ -94,10 +94,20 @@ public class ApplicationCacheSettings implements BootstrapListener {
         return null;
     }
 
+    /**
+     * @return true if the cache manifest (and thus application cache) is
+     *         enabled.
+     */
     public boolean isCacheManifestEnabled() {
         return cacheManifestEnabled;
     }
 
+    /**
+     * Enable or disable the cache manifest (and thus application cache).
+     * 
+     * @param cacheManifestEnabled
+     *            true to enable.
+     */
     public void setCacheManifestEnabled(boolean cacheManifestEnabled) {
         this.cacheManifestEnabled = cacheManifestEnabled;
     }

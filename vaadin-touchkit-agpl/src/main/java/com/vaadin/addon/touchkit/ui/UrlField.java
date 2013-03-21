@@ -11,11 +11,10 @@ import com.vaadin.ui.TextField;
  * <p>
  * Modern browsers and devices provide a better interface for entering URLs when
  * this field is used. This is especially important for touch devices that can
- * provide a on-screen keyboard customized for URL input.
+ * provide an on-screen keyboard optimized for URL input.
  * </p>
- * 
- * TODO consider making the type of this field URL
  */
+// TODO: consider making the type of this field URL
 public class UrlField extends TextField {
     /**
      * @see TextField#TextField()
@@ -53,7 +52,7 @@ public class UrlField extends TextField {
     }
 
     /**
-     * Convenience getter to cast java.net.URL.
+     * Convenience getter to make a java.net.URL out of the string.
      * 
      * @return Field value as URL.
      * @throws MalformedURLException
