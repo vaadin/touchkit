@@ -13,9 +13,10 @@ import com.google.gwt.user.client.ui.Widget;
 public class VerticalComponentGroupWidget extends ComplexPanel {
 
     static class WidgetWrapper extends DivElement {
-        
-        protected WidgetWrapper() {}
-        
+
+        protected WidgetWrapper() {
+        }
+
         public static final String ROW_CLASSNAME = SHORT_CLASSNAME + "-row";
         public static final String ROW_WITH_CAPTION_STYLENAME = ROW_CLASSNAME
                 + "-cap";
@@ -55,7 +56,8 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
                 captionElement.getStyle().setProperty("display", null);
                 setClassName(ROW_CLASSNAME + " " + ROW_WITH_CAPTION_STYLENAME);
             } else {
-                setClassName(ROW_CLASSNAME + " " + ROW_WITHOUT_CAPTION_STYLENAME);
+                setClassName(ROW_CLASSNAME + " "
+                        + ROW_WITHOUT_CAPTION_STYLENAME);
             }
             return needsCaption;
         }
@@ -66,7 +68,8 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
          * @param fullSizeWidget
          */
         public final void setFullSizeWidget(boolean fullSizeWidget) {
-            UIObject.setStyleName(this, ROW_WITH_FULLSIZE_WIDGET_STYLENAME, fullSizeWidget);
+            UIObject.setStyleName(this, ROW_WITH_FULLSIZE_WIDGET_STYLENAME,
+                    fullSizeWidget);
         }
     }
 
@@ -80,7 +83,7 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
         setStyleName(CLASSNAME);
     }
 
-    private WidgetWrapper getRowElement(Widget widget) {
+    private WidgetWrapper getWidgetWrapper(Widget widget) {
         com.google.gwt.dom.client.Element parentElement = widget.getElement()
                 .getParentElement();
         return (WidgetWrapper) (parentElement == null ? null : parentElement
@@ -98,11 +101,19 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
      */
     public void addOrMove(final Widget widget, int index) {
         if (widgets.contains(widget)) {
-            if (widgets.indexOf(widget) == index) {
-                return;
-            } else {
-                remove(widget);
-                addWidget(widget, index);
+            if (widgets.indexOf(widget) != index) {
+                // place has changed,
+                // just move wrapper to another index and update list
+                WidgetWrapper widgetWrapper = getWidgetWrapper(widget);
+                widgetWrapper.removeFromParent();
+                if (index < 0 || index >= widgets.size()) {
+                    getElement().appendChild(widgetWrapper);
+                } else {
+                    getElement().insertBefore(widgetWrapper,
+                            getWidgetWrapper(widgets.get(index)));
+                }
+                widgets.remove(widget);
+                widgets.add(index, widget);
             }
         } else {
             addWidget(widget, index);
@@ -129,14 +140,13 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
             getElement().appendChild(row);
             widgets.add(widget);
         } else {
-            getElement().insertBefore(row, getRowElement(widgets.get(index)));
+            getElement()
+                    .insertBefore(row, getWidgetWrapper(widgets.get(index)));
             widgets.add(index, widget);
         }
 
         add(widget, row.getWidgetCell());
     }
-    
-    
 
     /**
      * Adds Widget to group
@@ -151,7 +161,7 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
         if (!widgets.contains(widget)) {
             return false;
         }
-        DivElement element = getRowElement(widget);
+        DivElement element = getWidgetWrapper(widget);
 
         boolean ret = super.remove(widget);
 
@@ -172,7 +182,7 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
 
     public void updateCaption(Widget child, String caption, String url,
             String width) {
-        WidgetWrapper row = getRowElement(child);
+        WidgetWrapper row = getWidgetWrapper(child);
         boolean hasCaptionOrIcon = row.setCaption(caption, url);
         row.setFullSizeWidget(hasCaptionOrIcon && "100.0%".equals(width));
     }

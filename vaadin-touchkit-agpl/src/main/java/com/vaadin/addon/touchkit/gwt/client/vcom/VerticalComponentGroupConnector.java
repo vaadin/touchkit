@@ -18,10 +18,6 @@ import com.vaadin.shared.ui.Connect;
 @Connect(VerticalComponentGroup.class)
 public class VerticalComponentGroupConnector extends AbstractLayoutConnector {
 
-    @Override
-    public VerticalComponentGroupState getState() {
-        return (VerticalComponentGroupState) super.getState();
-    }
 
     @Override
     public void onStateChanged(StateChangeEvent stateChangeEvent) {
@@ -42,10 +38,7 @@ public class VerticalComponentGroupConnector extends AbstractLayoutConnector {
         for (int i = 0; i < children.size(); ++i) {
             ComponentConnector connector = children.get(i);
             Widget widget = connector.getWidget();
-            getWidget()
-                    .addOrMove(
-                            widget,
-                            i);
+            getWidget().addOrMove(widget, i);
             oldChildren.remove(connector);
         }
 

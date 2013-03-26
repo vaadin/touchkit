@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.vaadin.addon.touchkit.gwt.client.vcom.AbstractComponentGroupState;
 import com.vaadin.ui.AbstractComponentContainer;
 import com.vaadin.ui.Component;
 
@@ -18,11 +17,6 @@ public abstract class AbstractComponentGroup extends AbstractComponentContainer 
 
     protected List<Component> children = new ArrayList<Component>();
 
-    @Override
-    public AbstractComponentGroupState getState() {
-        return (AbstractComponentGroupState) super.getState();
-    }
-
     /**
      * Constructs a {@link AbstractComponentGroup} with the given caption.
      * 
@@ -34,9 +28,21 @@ public abstract class AbstractComponentGroup extends AbstractComponentContainer 
     }
 
     @Override
-    public void addComponent(Component c) {
-        children.add(c);
-        super.addComponent(c);
+    public void addComponent(Component component) {
+        addComponent(component, children.size());
+    }
+
+    public void addComponent(Component component, int index) {
+        if (children.contains(component)) {
+            if (children.indexOf(component) != index) {
+                children.remove(component);
+                children.add(index, component);
+                markAsDirty();
+            }
+        } else {
+            children.add(index, component);
+            super.addComponent(component);
+        }
         markAsDirty();
     }
 
@@ -53,8 +59,8 @@ public abstract class AbstractComponentGroup extends AbstractComponentContainer 
         if (index != -1) {
             children.remove(index);
             children.add(index, newComponent);
-            fireComponentDetachEvent(oldComponent);
-            fireComponentAttachEvent(newComponent);
+            super.removeComponent(oldComponent);
+            super.addComponent(newComponent);
             markAsDirty();
         }
     }

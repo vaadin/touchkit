@@ -8,7 +8,6 @@ import com.vaadin.addon.touchkit.gwt.client.ui.HorizontalButtonGroupWidget;
 import com.vaadin.addon.touchkit.ui.HorizontalButtonGroup;
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.ConnectorHierarchyChangeEvent;
-import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.AbstractComponentContainerConnector;
 import com.vaadin.shared.communication.URLReference;
 import com.vaadin.shared.ui.Connect;
@@ -19,18 +18,6 @@ public class HorizontalButtonGroupConnector extends
 
     private HorizontalButtonGroupWidget theWidget;
 
-    @Override
-    public AbstractComponentGroupState getState() {
-        return (AbstractComponentGroupState) super.getState();
-    }
-
-    @Override
-    public void onStateChanged(StateChangeEvent stateChangeEvent) {
-        super.onStateChanged(stateChangeEvent);
-
-        // ((HorizontalComponentGroupWidget) getWidget())
-        // .setMarginStyles(new VMarginInfo(getState().getMarginsBitmask()));
-    }
 
     @Override
     public void onConnectorHierarchyChange(ConnectorHierarchyChangeEvent event) {
