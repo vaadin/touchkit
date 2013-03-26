@@ -702,6 +702,8 @@ body e.v-app-loading {
 	/* full size by default */
 	width: 100%;
 	height: 100%;
+	/* Widgets are inline-block in V7 by default, A 2.3 is "allergic" to them */
+	display: block;
 }
 
 .v-touchkit-navview-wrapper {
@@ -2439,3 +2441,4 @@ span.v-datefield-calendarpanel-month {
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
 }
+

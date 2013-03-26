@@ -76,8 +76,6 @@ public class NavigationView extends AbstractComponentContainer {
      */
     public NavigationView(String caption, Component content) {
         registerRpc(rpc);
-        navigationBar.setWidth("100%");
-        setSizeFull();
         mainComponent = content;
         super.addComponent(getContent());
         super.addComponent(getNavigationBar());
