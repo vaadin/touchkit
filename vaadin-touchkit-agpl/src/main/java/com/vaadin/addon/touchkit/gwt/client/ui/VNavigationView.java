@@ -39,11 +39,6 @@ public class VNavigationView extends ComplexPanel {
         super.setStyleName(style);
     }
 
-    // public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
-    // Util.runWebkitOverflowAutoFix(wrapper);
-    // rendering = false;
-    // }
-
     public void setToolbar(Widget widget) {
         hasToolbar = widget != null;
         setStyleDependentName("notoolbar", !hasToolbar);
