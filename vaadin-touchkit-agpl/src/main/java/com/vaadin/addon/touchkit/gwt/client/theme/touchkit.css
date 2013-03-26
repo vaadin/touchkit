@@ -180,6 +180,7 @@
 .v-loading-indicator,
 .v-loading-indicator-delay,
 .v-loading-indicator-wait {
+	pointer-events: none;
 	position: absolute;
 	z-index: 30000;
 	background: spinner no-repeat 50%;
