@@ -444,6 +444,8 @@ body e.v-app-loading {
 .v-touchkit-navpanel {
 	position: relative;
 	overflow: hidden;
+	/* Needed for Android 2, see #11278 */
+	display:block;
 }
 
 .v-touchkit-navpanel-wrapper {
