@@ -7,9 +7,12 @@ import com.vaadin.addon.touchkit.ui.HorizontalButtonGroup;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 
 public class ButtonsInComponentGroups extends AbstractTouchKitIntegrationTest {
@@ -22,6 +25,18 @@ public class ButtonsInComponentGroups extends AbstractTouchKitIntegrationTest {
 
         Button button = new Button("Button not in a component group");
         button.setWidth("100%");
+        button.addClickListener(new ClickListener() {
+            @Override
+            public void buttonClick(ClickEvent event) {
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                Notification.show("Clicked");
+            }
+        });
         l.addComponent(button);
 
         VerticalComponentGroup verticalComponentGroup = new VerticalComponentGroup(
