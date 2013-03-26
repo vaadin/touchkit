@@ -1175,6 +1175,8 @@ body e.v-app-loading {
 .v-table {
 overflow: hidden;
 text-align: left;
+/* Must be block for A 2.3 */
+display:block;
 }
 
 .v-table-header table,.v-table-table,.v-table-footer table {
@@ -2441,4 +2443,3 @@ span.v-datefield-calendarpanel-month {
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
 }
-
