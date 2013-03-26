@@ -26,6 +26,7 @@ import com.vaadin.shared.ui.Connect;
 @Connect(com.vaadin.addon.touchkit.extensions.OfflineMode.class)
 public class OfflineModeConnector extends AbstractExtensionConnector implements
         CommunicationHandler, CommunicationErrorHandler {
+    private static final String SESSION_COOKIE = "JSESSIONID";
     private static final int MAX_SUSPENDED_TIMEOUT = 5000;
     boolean online = isNetworkOnline();
     boolean forcedOffline = false;
@@ -41,6 +42,7 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
 
     private int offlineTimeoutMillis;
     private boolean applicationStarted = false;
+    private boolean persistenCookieSet;
 
     public OfflineModeConnector() {
         super();
@@ -48,9 +50,10 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
             @Override
             public void goOffline() {
                 forcedOffline = true;
-                OfflineModeConnector.this.goOffline(new OfflineModeActivationEventImpl(
-                        "Offline mode started by a request",
-                        ActivationReason.ACTIVATED_BY_SERVER));
+                OfflineModeConnector.this
+                        .goOffline(new OfflineModeActivationEventImpl(
+                                "Offline mode started by a request",
+                                ActivationReason.ACTIVATED_BY_SERVER));
             }
         });
     }
@@ -138,10 +141,15 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
             if (isNetworkOnline()) {
                 online = true;
             } else {
-                goOffline(new OfflineModeActivationEventImpl("No network connection",
-                        ActivationReason.NO_NETWORK));
+                goOffline(new OfflineModeActivationEventImpl(
+                        "No network connection", ActivationReason.NO_NETWORK));
             }
             applicationStarted = true;
+        } else if (persistenCookieSet && getSessionCookie() == null) {
+            // Session expired, add fake id -> server side visit will cause
+            // normal session expired message instead of disabled cookies
+            // warning. See #11420 && VaadinServlet.ensureCookiesEnabled... method
+            Cookies.setCookie(SESSION_COOKIE, "invalidateme");
         }
 
         if (offlineTimeoutMillis >= 0) {
@@ -176,12 +184,20 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
 
     private void updateSessionCookieExpiration() {
         if (getState().persistentSessionTimeout != null) {
-            String cookie = Cookies.getCookie("JSESSIONID");
-            Date date = new Date();
-            date = new Date(date.getTime()
-                    + getState().persistentSessionTimeout * 1000L);
-            Cookies.setCookie("JSESSIONID", cookie, date);
+            String cookie = getSessionCookie();
+            if (cookie != null) {
+                Date date = new Date();
+                date = new Date(date.getTime()
+                        + getState().persistentSessionTimeout * 1000L);
+                Cookies.setCookie(SESSION_COOKIE, cookie, date);
+                persistenCookieSet = true;
+            }
+            // else httpOnly, noop
         }
+    }
+
+    private String getSessionCookie() {
+        return Cookies.getCookie(SESSION_COOKIE);
     }
 
     @Override
