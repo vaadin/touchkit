@@ -2,25 +2,27 @@ package com.vaadin.addon.touchkit.gwt.client.vcom.navigation;
 
 import java.util.List;
 
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ScrollEvent;
 import com.google.gwt.event.dom.client.ScrollHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
-import com.vaadin.shared.ui.Connect;
 import com.vaadin.addon.touchkit.gwt.client.ui.VNavigationView;
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.ConnectorHierarchyChangeEvent;
 import com.vaadin.client.communication.RpcProxy;
 import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.AbstractComponentContainerConnector;
+import com.vaadin.shared.ui.Connect;
 
 @Connect(com.vaadin.addon.touchkit.ui.NavigationView.class)
 public class NavigationViewConnector extends
         AbstractComponentContainerConnector implements ScrollHandler {
 
     private NavigationBarConnector navigationBar;
-    
+
     private HandlerRegistration scrollHandler;
 
     NavigationViewServerRpc rpc = RpcProxy.create(
@@ -64,7 +66,7 @@ public class NavigationViewConnector extends
 
     @Override
     protected void init() {
-        scrollHandler = getWidget().addHandler(this, ScrollEvent.getType());
+        scrollHandler = getWidget().addScrollHandler(this);
     }
 
     @Override
@@ -82,7 +84,15 @@ public class NavigationViewConnector extends
     @Override
     public void onStateChanged(StateChangeEvent stateChangeEvent) {
         super.onStateChanged(stateChangeEvent);
-        getWidget().setScrollTop(getState().scrollPosition);
+        // Schedule to be the last thing to do in update batch as children
+        // are not necessary update and there might not be enough stuff to
+        // scroll at this point.
+        Scheduler.get().scheduleFinally(new ScheduledCommand() {
+            @Override
+            public void execute() {
+                getWidget().setScrollTop(getState().scrollPosition);
+            }
+        });
     }
 
 }
