@@ -14,6 +14,7 @@ import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.AbstractComponentContainer;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.Component;
@@ -69,11 +70,11 @@ public class TouchkitTestUI extends UI {
                 + getClass().getPackage().getName().replace(".", "/")
                 + "/itest");
 
-        Collection<Class<? extends ComponentContainer>> tests = new ArrayList<Class<? extends ComponentContainer>>();
+        Collection<Class<? extends AbstractComponent>> tests = new ArrayList<Class<? extends AbstractComponent>>();
         addTests(getClass().getPackage().getName() + ".itest", itestroot, tests);
 
         Table table = new Table();
-        final BeanItemContainer<Class<? extends ComponentContainer>> beanItemContainer = new BeanItemContainer<Class<? extends ComponentContainer>>(
+        final BeanItemContainer<Class<? extends AbstractComponent>> beanItemContainer = new BeanItemContainer<Class<? extends AbstractComponent>>(
                 tests);
         table.setContainerDataSource(beanItemContainer);
         table.setVisibleColumns(new Object[] { "simpleName" });
@@ -82,9 +83,11 @@ public class TouchkitTestUI extends UI {
                     Object columnId) {
                 Class<?> c = (Class<?>) itemId;
                 try {
-                    AbstractTouchKitIntegrationTest t = (AbstractTouchKitIntegrationTest) c
+                    AbstractComponent t = (AbstractComponent) c
                             .newInstance();
-                    Label label2 = new Label(t.getDescription());
+                    String description = t.getDescription();
+                    if(description == null) {description = "-";};
+                    Label label2 = new Label(description);
                     // label2.setWidth("300px");
                     // label2.setHeight("50px");
                     return label2;
@@ -138,7 +141,7 @@ public class TouchkitTestUI extends UI {
     }
 
     private void addTests(String base, File itestroot,
-            Collection<Class<? extends ComponentContainer>> tests) {
+            Collection<Class<? extends AbstractComponent>> tests) {
         File[] listFiles = itestroot.listFiles();
         for (File file : listFiles) {
             if (file.isDirectory()) {
@@ -149,11 +152,9 @@ public class TouchkitTestUI extends UI {
                 try {
                     Class<?> forName = Class.forName(base + "." + name);
 
-                    if (AbstractTouchKitIntegrationTest.class
+                    if (AbstractComponent.class
                             .isAssignableFrom(forName)) {
-                        tests.add((Class<? extends AbstractTouchKitIntegrationTest>) forName);
-                    } else if (forName == NavPanelTestWithViews.class) {
-                        tests.add((Class<? extends ComponentContainer>) forName);
+                        tests.add((Class<? extends AbstractComponent>) forName);
                     }
                 } catch (ClassNotFoundException e) {
                     // TODO Auto-generated catch block
