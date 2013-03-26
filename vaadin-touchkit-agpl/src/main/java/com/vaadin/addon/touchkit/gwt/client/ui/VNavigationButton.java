@@ -1,5 +1,7 @@
 package com.vaadin.addon.touchkit.gwt.client.ui;
 
+import java.util.Date;
+
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.dom.client.NativeEvent;
@@ -16,6 +18,7 @@ import com.google.gwt.event.dom.client.TouchStartEvent;
 import com.google.gwt.event.dom.client.TouchStartHandler;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
+import com.vaadin.client.VConsole;
 
 public class VNavigationButton extends HTML implements TouchStartHandler,
         TouchCancelHandler, TouchEndHandler, TouchMoveHandler, ClickHandler {
@@ -25,8 +28,10 @@ public class VNavigationButton extends HTML implements TouchStartHandler,
     private String caption;
     private ImageElement icon;
     private SpanElement descriptionElement;
-    private boolean touchStarted = false;
     private boolean enabled;
+    static final long IGNORE_SIMULATED_CLICKS_THRESHOLD = 500;
+    private boolean touchStarted = false;
+    private Date fastClickAt;
 
     public VNavigationButton() {
         setStyleName(NAVBUTTON_CLASSNAME);
@@ -139,6 +144,7 @@ public class VNavigationButton extends HTML implements TouchStartHandler,
                     false, false, false);
             getElement().dispatchEvent(evt);
             touchStarted = false;
+            fastClickAt = new Date();
         }
     }
 
@@ -150,11 +156,20 @@ public class VNavigationButton extends HTML implements TouchStartHandler,
     @Override
     public void onTouchStart(TouchStartEvent event) {
         touchStarted = true;
+        fastClickAt = null;
+        getElement().focus();
     }
 
     @Override
     public void onClick(ClickEvent event) {
         if (enabled) {
+            if (fastClickAt != null
+                    && (new Date().getTime() - fastClickAt.getTime()) < IGNORE_SIMULATED_CLICKS_THRESHOLD) {
+                VConsole.log("Ignored simulated event fired by old ios or android "
+                        + (new Date().getTime() - fastClickAt.getTime()));
+                fastClickAt = null;
+                return;
+            }
             getElement().focus();
             navigate();
         }
