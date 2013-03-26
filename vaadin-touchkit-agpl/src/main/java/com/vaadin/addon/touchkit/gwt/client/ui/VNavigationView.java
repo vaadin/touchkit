@@ -1,7 +1,12 @@
 package com.vaadin.addon.touchkit.gwt.client.ui;
 
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.event.dom.client.ScrollEvent;
+import com.google.gwt.event.dom.client.ScrollHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.client.ui.TouchScrollDelegate;
@@ -26,9 +31,10 @@ public class VNavigationView extends ComplexPanel {
         toolbarDiv.setClassName(CLASSNAME + "-toolbar");
         getElement().appendChild(toolbarDiv);
 
-        
-        TouchScrollHandler touchScrollHandler = TouchScrollDelegate.enableTouchScrolling(this);
+        TouchScrollHandler touchScrollHandler = TouchScrollDelegate
+                .enableTouchScrolling(this);
         touchScrollHandler.addElement(wrapper);
+        DOM.sinkEvents(wrapper, Event.ONSCROLL);
     }
 
     @Override
@@ -102,6 +108,10 @@ public class VNavigationView extends ComplexPanel {
 
     public void setScrollTop(int scrollTop) {
         wrapper.setScrollTop(scrollTop);
+    }
+
+    public HandlerRegistration addScrollHandler(ScrollHandler scrollHandler) {
+        return addHandler(scrollHandler, ScrollEvent.getType());
     }
 
 }
