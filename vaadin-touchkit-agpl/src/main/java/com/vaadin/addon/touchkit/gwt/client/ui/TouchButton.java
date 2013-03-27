@@ -19,7 +19,7 @@ import com.vaadin.client.ui.VButton;
 public class TouchButton extends VButton implements TouchStartHandler,
         TouchCancelHandler, TouchEndHandler, TouchMoveHandler {
 
-    static final long IGNORE_SIMULATED_CLICKS_THRESHOLD = 500;
+    static final long IGNORE_SIMULATED_CLICKS_THRESHOLD = 1500;
     private boolean touchStarted;
     private Date fastClickAt;
 

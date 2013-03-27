@@ -27,7 +27,7 @@ public class VNavigationButton extends HTML implements TouchStartHandler,
     private ImageElement icon;
     private SpanElement descriptionElement;
     private boolean enabled;
-    static final long IGNORE_SIMULATED_CLICKS_THRESHOLD = 500;
+    static final long IGNORE_SIMULATED_CLICKS_THRESHOLD = 1500;
     private boolean touchStarted = false;
     private Date fastClickAt;
 
