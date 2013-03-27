@@ -5,11 +5,13 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.addon.touchkit.gwt.client.ui.VNavigationButton;
+import com.vaadin.addon.touchkit.gwt.client.ui.VNavigationManager;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
-import com.vaadin.client.ServerConnector;
+import com.vaadin.client.VConsole;
 import com.vaadin.client.communication.RpcProxy;
 import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.AbstractComponentConnector;
+import com.vaadin.shared.Connector;
 import com.vaadin.shared.ui.Connect;
 
 @Connect(NavigationButton.class)
@@ -47,18 +49,6 @@ public class NavigationButtonConnector extends AbstractComponentConnector {
         getWidget().setText(caption);
         getWidget().setEnabled(getState().enabled);
 
-        ServerConnector targetView = (ServerConnector) getState()
-                .getTargetView();
-        String targetViewCaption = getState().getTargetViewCaption();
-        if (targetView == null) {
-            getWidget().setTargetWidget(null);
-            getWidget().setPlaceHolderCaption(targetViewCaption);
-        } else {
-            getWidget().setPlaceHolderCaption(null);
-            getWidget().setTargetWidget(
-                    ((AbstractComponentConnector) targetView).getWidget());
-        }
-        
         if (getResourceUrl(NavigationButtonSharedState.MY_ICON_RESOURCE) != null) {
             getWidget()
                     .setIcon(
@@ -68,6 +58,75 @@ public class NavigationButtonConnector extends AbstractComponentConnector {
         String description = getState().description;
         getWidget().setDescription(description);
 
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+        getWidget().addClickHandler(new ClickHandler() {
+
+            @Override
+            public void onClick(ClickEvent event) {
+                VNavigationManager panel = getWidget().findNavigationPanel();
+                if (panel != null) {
+                    if (getTargetWidget() != null) {
+                        if (getTargetWidget().getParent() == panel) {
+                            panel.setCurrentWidget(getTargetWidget());
+                        } else {
+                            NavigationManagerConnector parent2 = (NavigationManagerConnector) getParent()
+                                    .getParent().getParent();
+                            AbstractComponentConnector previousComponent = (AbstractComponentConnector) parent2
+                                    .getState().getPreviousComponent();
+                            AbstractComponentConnector nextComponent = (AbstractComponentConnector) parent2
+                                    .getState().getNextComponent();
+
+                            if (previousComponent != null
+                                    && getState().getTargetView()
+                                            .getConnectorId() == previousComponent
+                                            .getConnectorId()) {
+                                // See #11436 && #11437
+                                // VConsole.error("Ehh, equal with previous based on identifiers, but widget is different"
+                                // + (getTargetWidget() !=
+                                // previousComponent.getWidget()));
+                                // get target widget widget via hierarchy
+                                panel.setCurrentWidget(previousComponent
+                                        .getWidget());
+                            } else if (nextComponent != null
+                                    && getState().getTargetView()
+                                            .getConnectorId() == nextComponent
+                                            .getConnectorId()) {
+                                // See #11436 && #11437
+                                // VConsole.error("Ehh!, equal with next based on identifiers, but widget is different"
+                                // + (getTargetWidget() !=
+                                // nextComponent.getWidget()));
+                                panel.setCurrentWidget(nextComponent
+                                        .getWidget());
+                            } else {
+                                // TODO check if should this happen at all!?
+                                panel.setNextWidget(getTargetWidget());
+                                panel.navigateForward();
+                            }
+                        }
+                    } else {
+                        VConsole.error("Placeholder navigation..");
+                        panel.navigateToPlaceholder(getPlaceHolderCaption());
+                    }
+                }
+            }
+
+        });
+    }
+
+    protected String getPlaceHolderCaption() {
+        return getState().getTargetViewCaption();
+    }
+
+    private Widget getTargetWidget() {
+        Connector targetView = getState().getTargetView();
+        if (targetView == null) {
+            return null;
+        }
+        return ((AbstractComponentConnector) targetView).getWidget();
     }
 
     @Override

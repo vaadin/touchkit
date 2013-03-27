@@ -23,8 +23,6 @@ import com.vaadin.client.VConsole;
 public class VNavigationButton extends HTML implements TouchStartHandler,
         TouchCancelHandler, TouchEndHandler, TouchMoveHandler, ClickHandler {
     private static final String NAVBUTTON_CLASSNAME = "v-touchkit-navbutton";
-    private Widget targetWidget;
-    private String placeHolderCaption;
     private String caption;
     private ImageElement icon;
     private SpanElement descriptionElement;
@@ -42,28 +40,9 @@ public class VNavigationButton extends HTML implements TouchStartHandler,
         addClickHandler(this);
     }
 
-    public Widget getTargetWidget() {
-        return targetWidget;
-    }
 
-    private void navigate() {
-        VNavigationManager panel = findNavigationPanel(this);
-        if (panel != null) {
-            if (getTargetWidget() != null) {
-                if (getTargetWidget().getParent() == panel) {
-                    panel.setCurrentWidget(getTargetWidget());
-                } else {
-                    panel.setNextWidget(getTargetWidget());
-                    panel.navigateForward();
-                }
-            } else {
-                panel.navigateToPlaceholder(getPlaceHolderCaption());
-            }
-        }
-    }
-
-    public static VNavigationManager findNavigationPanel(Widget w) {
-        Widget parent2 = w.getParent();
+    public VNavigationManager findNavigationPanel() {
+        Widget parent2 = getParent();
         while (parent2 != null && !(parent2 instanceof VNavigationManager)) {
             parent2 = parent2.getParent();
         }
@@ -78,21 +57,6 @@ public class VNavigationButton extends HTML implements TouchStartHandler,
 
     public String getCaption() {
         return caption;
-    }
-
-    public void setTargetWidget(Widget widget) {
-        targetWidget = widget;
-    }
-
-    public void setPlaceHolderCaption(String targetViewCaption) {
-        placeHolderCaption = targetViewCaption;
-    }
-
-    public String getPlaceHolderCaption() {
-        if (placeHolderCaption != null) {
-            return placeHolderCaption;
-        }
-        return getCaption();
     }
 
     public void setIcon(String iconUrl) {
@@ -171,7 +135,6 @@ public class VNavigationButton extends HTML implements TouchStartHandler,
                 return;
             }
             getElement().focus();
-            navigate();
         }
     }
 
