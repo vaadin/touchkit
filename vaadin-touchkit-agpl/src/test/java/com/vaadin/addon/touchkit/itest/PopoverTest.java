@@ -41,8 +41,8 @@ public class PopoverTest extends AbstractTouchKitIntegrationTest {
                 popover.setWidth("360px");
                 popover.setHeight("400px");
 
-                popover.setContent(NavigationViewBarTest.createView("foo",
-                        "foo", false));
+                popover.setContent(new NavigationViewBarTest().createView(
+                        "foo", "foo", false));
 
                 popover.showRelativeTo(event.getButton());
             }
@@ -56,7 +56,7 @@ public class PopoverTest extends AbstractTouchKitIntegrationTest {
                 popover.setWidth("360px");
                 popover.setHeight("400px");
 
-                popover.setContent(NavigationViewBarTest
+                popover.setContent(new NavigationViewBarTest()
                         .makeNavigationManager());
 
                 popover.showRelativeTo(event.getButton());

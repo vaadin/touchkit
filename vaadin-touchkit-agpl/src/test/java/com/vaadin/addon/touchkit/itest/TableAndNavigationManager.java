@@ -9,16 +9,36 @@ import com.vaadin.addon.touchkit.ui.NavigationManager.NavigationListener;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Table.RowHeaderMode;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Table;
 
-public class NavigationViewBarTest extends AbstractTouchKitIntegrationTest {
+public class TableAndNavigationManager extends AbstractTouchKitIntegrationTest {
     
     Random r = new Random(0);
 
-    public NavigationViewBarTest() {
+    public TableAndNavigationManager() {
         setDescription("NavigationView and -Bar test");
-        addComponent(makeNavigationManager());
+        HorizontalLayout horizontalLayout = new HorizontalLayout();
+        horizontalLayout.setSizeFull();
+        horizontalLayout.addComponent(makeTable());
+        horizontalLayout.addComponent(makeNavigationManager());
+        addComponent(horizontalLayout);
+    }
+
+    private Component makeTable() {
+        Table table = new Table();
+        table.setSizeFull();
+        table.addContainerProperty("Dii", String.class, "pa");
+        table.addContainerProperty("Dai", String.class, "ba");
+        table.setRowHeaderMode(RowHeaderMode.INDEX);
+        for(int i = 0;  i < 100; i++) {
+            table.addItem();
+        }
+        return table;
     }
 
     NavigationManager makeNavigationManager() {
