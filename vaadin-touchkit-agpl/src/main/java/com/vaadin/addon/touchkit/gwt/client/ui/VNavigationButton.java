@@ -30,13 +30,15 @@ public class VNavigationButton extends HTML implements TouchStartHandler,
     static final long IGNORE_SIMULATED_CLICKS_THRESHOLD = 1500;
     private boolean touchStarted = false;
     private Date fastClickAt;
-
+    
     public VNavigationButton() {
         setStyleName(NAVBUTTON_CLASSNAME);
-        addTouchStartHandler(this);
-        addTouchCancelHandler(this);
-        addTouchEndHandler(this);
-        addTouchMoveHandler(this);
+        if(TouchButton.useFastClicks) {
+            addTouchStartHandler(this);
+            addTouchCancelHandler(this);
+            addTouchEndHandler(this);
+            addTouchMoveHandler(this);
+        }
         addClickHandler(this);
     }
 
