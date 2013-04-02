@@ -67,7 +67,6 @@ public class GeolocatorConnector extends AbstractExtensionConnector {
 
     @Override
     protected void extend(ServerConnector target) {
-        // TODO WTF should be done here??
     }
 
     private static native double safeget(String string, Coordinates c)

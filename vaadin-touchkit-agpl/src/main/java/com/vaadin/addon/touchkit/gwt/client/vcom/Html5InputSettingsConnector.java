@@ -26,7 +26,6 @@ public class Html5InputSettingsConnector extends AbstractExtensionConnector {
     }
     @Override
     protected void extend(ServerConnector target) {
-        // TODO WTF should be done here??
     }
     
     @Override

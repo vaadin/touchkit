@@ -33,11 +33,6 @@ import com.vaadin.util.ReflectTools;
  */
 public class NavigationManager extends AbstractComponentContainer {
 
-    /*-
-    TODO deprecate + throw on component container mutation methods.
-    
-     */
-
     /*
      * Implementation notes
      * 

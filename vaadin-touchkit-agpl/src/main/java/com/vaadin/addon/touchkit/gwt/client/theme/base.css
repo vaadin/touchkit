@@ -1,9 +1,4 @@
-/* This file contains essential stuff from base theme. 
- * 
- * TODO figure out a way to maintain this automatically
- *
- * 
- */
+/* This file contains essential stuff from base theme. */
 
 .v-generated-body, .v-app {
 	width: 100%;
@@ -1876,7 +1871,7 @@ div.v-progressindicator-indeterminate-disabled {
 	position: absolute;
 }
 
-/** TODO implement something similar with modern css
+/** implement something similar with modern css (#11458)
 
 .v-shadow .top-left {
 	position: absolute;
@@ -2707,7 +2702,7 @@ div.v-window-header {
 	height: 100%;
 }
 
-/* TODO add modern CSS versio 
+/* add modern CSS version (#11458)
 .v-shadow-window {
 	position: absolute;
 }

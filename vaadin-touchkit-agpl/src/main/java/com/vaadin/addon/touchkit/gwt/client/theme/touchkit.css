@@ -955,11 +955,7 @@ body e.v-app-loading {
 	}
 
 
-/* Switch style checkbox.
- * TODO Consider styling with pure css:
- * http://css3wizardry.com/2010/09/16/making-an-iphone-switch-control-without-images/
- */
-
+/* Switch style checkbox. */
 @url switch switchImage;
 .v-touchkit-switch {
 	overflow: hidden;
@@ -1170,10 +1166,7 @@ body e.v-app-loading {
 	}
 	
 	
-/* Table
- * TODO this is quicly copy pasted and modified from reindeer. Remove obsolete code, tune colors etc.
- */
- 
+/* Table */
 .v-table {
 overflow: hidden;
 text-align: left;

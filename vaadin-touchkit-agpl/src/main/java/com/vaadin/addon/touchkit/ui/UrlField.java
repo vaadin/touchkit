@@ -14,7 +14,6 @@ import com.vaadin.ui.TextField;
  * provide an on-screen keyboard optimized for URL input.
  * </p>
  */
-// TODO: consider making the type of this field URL
 public class UrlField extends TextField {
     /**
      * @see TextField#TextField()

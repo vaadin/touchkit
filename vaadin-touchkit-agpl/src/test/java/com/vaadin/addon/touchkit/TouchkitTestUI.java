@@ -55,13 +55,10 @@ public class TouchkitTestUI extends UI {
                 }
                 return;
             } catch (ClassNotFoundException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (InstantiationException e) {
-                // TODO Auto-generated catch block
                 // e.printStackTrace();
             } catch (IllegalAccessException e) {
-                // TODO Auto-generated catch block
                 // e.printStackTrace();
             }
         }
@@ -92,7 +89,6 @@ public class TouchkitTestUI extends UI {
                     // label2.setHeight("50px");
                     return label2;
                 } catch (Exception e) {
-                    // TODO Auto-generated catch block
                     // e.printStackTrace();
                 }
                 return null;
@@ -157,7 +153,6 @@ public class TouchkitTestUI extends UI {
                         tests.add((Class<? extends AbstractComponent>) forName);
                     }
                 } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }

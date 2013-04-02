@@ -23,9 +23,6 @@ public class SwipeViewConnector extends AbstractSingleComponentContainerConnecto
     public SwipeViewConnector() {
         getWidget().addHandler(this, ScrollEvent.getType());
         getWidget().setSwipeListener(this);
-
-        // TODO needs system to disable swipes when there is ongoing
-        // communication with server.
     }
     
     @Override

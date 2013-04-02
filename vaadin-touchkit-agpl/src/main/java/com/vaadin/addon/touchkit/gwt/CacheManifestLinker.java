@@ -31,9 +31,6 @@ import com.google.gwt.core.ext.linker.Shardable;
  * the application cache. Very useful for specifying which resources need to be
  * available when in offline mode.
  */
-/*
- * TODO review and improve this impl
- */
 @LinkerOrder(LinkerOrder.Order.POST)
 @Shardable
 public class CacheManifestLinker extends AbstractLinker {
@@ -93,7 +90,6 @@ public class CacheManifestLinker extends AbstractLinker {
 
             if (userAgent == null || userAgent.equals("")) {
                 // If only one permutation, expect safari
-                // TODO fetch real value
                 userAgent = "safari";
             }
 

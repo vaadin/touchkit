@@ -102,7 +102,6 @@ public class NavigationButtonConnector extends AbstractComponentConnector {
                                 panel.setCurrentWidget(nextComponent
                                         .getWidget());
                             } else {
-                                // TODO check if should this happen at all!?
                                 panel.setNextWidget(getTargetWidget());
                                 panel.navigateForward();
                             }

@@ -63,8 +63,6 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
         }
 
         /**
-         * TODO verify it this is needed!!
-         * 
          * @param fullSizeWidget
          */
         public final void setFullSizeWidget(boolean fullSizeWidget) {

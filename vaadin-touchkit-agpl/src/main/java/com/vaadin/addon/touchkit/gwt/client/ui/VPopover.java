@@ -47,11 +47,6 @@ public class VPopover extends com.vaadin.client.ui.VWindow {
         }
 
         setPopupPosition(0, top);
-
-        /*
-         * TODO Animation. If relative element is below middle point, slide from
-         * bottom else slide from top.
-         */
     }
 
     private Element getWrapperElement() {

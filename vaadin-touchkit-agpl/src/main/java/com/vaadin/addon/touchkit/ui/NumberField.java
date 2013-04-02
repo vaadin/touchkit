@@ -11,7 +11,6 @@ import com.vaadin.ui.TextField;
  * can provide an on-screen keyboard optimized for numerical input.
  * </p>
  */
-// TODO: with typed properties in V7 this field should have Number as its type
 public class NumberField extends TextField {
 
     /**

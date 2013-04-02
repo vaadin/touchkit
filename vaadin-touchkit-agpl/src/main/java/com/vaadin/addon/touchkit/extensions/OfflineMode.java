@@ -7,19 +7,6 @@ import com.vaadin.server.AbstractExtension;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.UI;
 
-/*
- * - go offline
- *
- * - persistent session cookie
- *
- * In TK2 offline mode delay is in app config but it could just as well be
- * written to offline storage or cookie. This way these settings could survive
- * without bootstrap listener which are problematic
- *
- * TODO rename or split to different features
- *
- */
-
 /**
  * The OfflineMode extension adds offline support for the application. Settings
  * for offline mode can be accessed through this class and offline mode can be

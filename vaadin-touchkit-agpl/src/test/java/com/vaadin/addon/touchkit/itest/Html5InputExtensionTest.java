@@ -65,7 +65,6 @@ public class Html5InputExtensionTest extends AbstractTouchKitIntegrationTest {
                         any.setValue(null);
                     }
                 } catch (CommitException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
 

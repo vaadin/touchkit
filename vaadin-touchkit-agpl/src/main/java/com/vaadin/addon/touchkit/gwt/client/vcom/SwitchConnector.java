@@ -100,7 +100,6 @@ public class SwitchConnector extends AbstractFieldConnector implements
 
         getWidget().setValue(getState().checked);
 
-        // TODO: How to handle immediate in Vaadin 7?
         // getState().isImmediate();
     }
 

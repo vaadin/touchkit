@@ -479,8 +479,6 @@ public class VNavigationManager extends ComplexPanel {
 
     @Override
     public void setWidth(String width) {
-        // TODO check if pending width haxie is still needed in V7 compatible
-        // branch
         VConsole.log("VNavp" + width);
         if (transitionPending) {
             VConsole.log("transitionPending, postponing width setting");
