@@ -55,7 +55,28 @@
 							</execution>
 						</executions>
 					</plugin>
-				</plugins>
+                    <!-- Extracts the TouchKit chapter from BoV -->
+                    <plugin>
+                        <groupId>com.github.zch</groupId>
+                        <artifactId>pdfsplit-maven-plugin</artifactId>
+                        <version>1.0.0</version>
+                        <executions>
+                            <execution>
+                                <id>pdfsplit</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>split</goal>
+                                </goals>
+                                <configuration>
+                                    <inputUrl>https://vaadin.com/download/book-of-vaadin/vaadin-7/pdf/book-of-vaadin.pdf</inputUrl>
+                                    <!-- NOTE! This may need to be updated when the book changes. Always check the result before release. -->
+                                    <pageRange>479-508</pageRange>
+                                    <outFile>${project.build.directory}/vaadin-touchkit-manual.pdf</outFile>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
 			</build>
 		</profile>
 	</profiles>
@@ -140,7 +161,11 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</pluginRepository>
-	</pluginRepositories>
+        <pluginRepository>
+            <id>pdfsplit-plugin</id>
+            <url>https://raw.github.com/zch/maven/releases/</url>
+        </pluginRepository>
+    </pluginRepositories>
 
 	<build>
 
@@ -153,7 +178,6 @@
 			<resource>
 				<directory>src/main/resources</directory>
 			</resource>
-
 		</resources>
 
 		<plugins>
@@ -275,7 +299,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 		</plugins>
 		<pluginManagement>
 			<plugins>
