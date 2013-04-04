@@ -1,50 +1,81 @@
 <module>
-    <!-- load the cache manifest status indicator first of all -->
-    <entry-point class="com.vaadin.addon.touchkit.gwt.client.offlinemode.CacheManifestStatusIndicator"/>
+	<!-- WS Compiler: manually edited -->
+	<inherits name="com.vaadin.DefaultWidgetSet" />
+	<inherits name="com.google.gwt.resources.Resources" />
 
-    <!-- WS Compiler: manually edited -->
-    <inherits name="com.vaadin.DefaultWidgetSet"/>
-    <inherits name="com.google.gwt.resources.Resources"/>
+	<define-property name="webkitvariant" values="std,android2" />
+	<property-provider name="webkitvariant"><![CDATA[
+	  {
+	    var ua = window.navigator.userAgent.toLowerCase();
+	    if (ua.indexOf('android 2.') != -1) { return 'android2'; }
+	    return 'std';
+	  }
+	]]></property-provider>
+	
+	<!--  Forward compatible optimization when we begin working with IE10/mobile FF -->
+	<set-property name="webkitvariant" value="std" >
+        <none>
+            <when-property-is name="user.agent" value="safari" />
+        </none>
+    </set-property>
+    
+	<!-- Remove this ("soft permutation") once cache manifest linker and servlet 
+		properly support any permutations -->
+	<collapse-property name="webkitvariant" values="*" />
 
-    <set-property name="user.agent" value="safari"/>
-
-    <replace-with
-            class="com.vaadin.addon.touchkit.gwt.client.ui.TouchButton">
-        <when-type-is class="com.vaadin.client.ui.button.VButton"/>
-    </replace-with>
-
-    <replace-with
-            class="com.vaadin.addon.touchkit.gwt.client.offlinemode.DefaultOfflineMode">
-        <when-type-is
-                class="com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineMode"/>
-    </replace-with>
-
-
-    <!-- 	 <replace-with class="com.vaadin.addon.touchkit.gwt.client.VRemoteDebugConsole">  -->
-    <!-- 		<when-type-is class="com.vaadin.client.Console" /> </replace-with> -->
-
-    <!-- Use annotation based widget loading strategy instead of the eager method.
-        Makes initial loading time smaller on a slow network -->
-    <generate-with class="com.vaadin.addon.touchkit.gwt.TouchKitBundleLoaderFactory">
-        <when-type-assignable
-                class="com.vaadin.client.metadata.ConnectorBundleLoader"/>
-    </generate-with>
+	<!-- load the cache manifest status indicator first of all -->
+	<entry-point
+		class="com.vaadin.addon.touchkit.gwt.client.offlinemode.CacheManifestStatusIndicator" />
 
 
-    <!-- Load css etc eagerly to avoid calc errors -->
-    <entry-point
-            class="com.vaadin.addon.touchkit.gwt.client.VEagerResourceLoader"/>
+	<set-property name="user.agent" value="safari" />
 
-    <define-configuration-property name='touchkit.manifestlinker.additionalCacheRoot'
-                                   is-multi-valued='true'/>
+	<replace-with class="com.vaadin.addon.touchkit.gwt.client.ui.TouchButton">
+		<when-type-is class="com.vaadin.client.ui.VButton" />
+		<when-property-is name="webkitvariant" value="std" />
+	</replace-with>
 
-    <define-linker name="touchkitcachemanifest"
-                   class="com.vaadin.addon.touchkit.gwt.CacheManifestLinker"/>
-    <add-linker name="touchkitcachemanifest"/>
+	<replace-with
+		class="com.vaadin.addon.touchkit.gwt.client.Android2NativeSelectReplacement">
+		<when-type-is class="com.vaadin.client.ui.VNativeSelect" />
+		<when-property-is name="webkitvariant" value="android2" />
+	</replace-with>
 
-    <entry-point class="com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineModeEntrypoint"/>
+	<replace-with
+		class="com.vaadin.addon.touchkit.gwt.client.offlinemode.DefaultOfflineMode">
+		<when-type-is
+			class="com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineMode" />
+	</replace-with>
 
-    <add-linker name="xsiframe"/>
-    <set-configuration-property name="devModeRedirectEnabled" value="true"/>
+
+	<!-- <replace-with class="com.vaadin.addon.touchkit.gwt.client.VRemoteDebugConsole"> -->
+	<!-- <when-type-is class="com.vaadin.client.Console" /> </replace-with> -->
+
+	<!-- Use annotation based widget loading strategy instead of the eager method. 
+		Makes initial loading time smaller on a slow network -->
+	<generate-with
+		class="com.vaadin.addon.touchkit.gwt.TouchKitBundleLoaderFactory">
+		<when-type-assignable
+			class="com.vaadin.client.metadata.ConnectorBundleLoader" />
+	</generate-with>
+
+
+	<!-- Load css etc eagerly to avoid calc errors -->
+	<entry-point
+		class="com.vaadin.addon.touchkit.gwt.client.VEagerResourceLoader" />
+
+	<define-configuration-property
+		name='touchkit.manifestlinker.additionalCacheRoot' is-multi-valued='true' />
+
+	<define-linker name="touchkitcachemanifest"
+		class="com.vaadin.addon.touchkit.gwt.CacheManifestLinker" />
+	<add-linker name="touchkitcachemanifest" />
+
+	<entry-point
+		class="com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineModeEntrypoint" />
+
+	<add-linker name="xsiframe" />
+	<set-configuration-property name="devModeRedirectEnabled"
+		value="true" />
 
 </module>

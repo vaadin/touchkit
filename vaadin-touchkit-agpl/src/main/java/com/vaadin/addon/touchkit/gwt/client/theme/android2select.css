@@ -1,0 +1,49 @@
+.android23SelectOverlayGlass {
+	background-color: rgba(0,0,0,0.4);	
+}
+
+.android23Select {
+	border: 1px solid #666;
+	border-radius: 2px;
+	background: #ddd;
+	position:relative;
+	max-width:100%;
+}
+
+.android23Select>div {
+	height: 30px;
+	min-width: 100px;
+	line-height: 30px;
+	padding: 0 26px 0 10px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.android23Select>div:after {
+	content: "\25BC";
+	position:absolute;
+	right:0;
+	width:20px;
+}
+
+.android23SelectOverlay {
+	max-height:80%;
+	max-width:80%;
+	overflow:auto !important;
+}
+.android23SelectOverlay table {
+	background: white;
+	border-collapse: collapse;
+}
+.android23SelectOverlay td {
+	border: 1px solid #666;
+}
+.android23SelectOverlay td>div {
+	padding: 5px 20px;
+}
+
+.android23SelectSelectedItem:before {
+	content: "\2713";
+	position:absolute;
+	margin-left: -15px;
+}
