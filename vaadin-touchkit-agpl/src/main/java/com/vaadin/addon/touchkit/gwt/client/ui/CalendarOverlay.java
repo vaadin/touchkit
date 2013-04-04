@@ -15,11 +15,11 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.vaadin.addon.touchkit.gwt.client.ui.DatePicker.Resolution;
-import com.vaadin.client.ui.VButton;
 import com.vaadin.client.ui.VOverlay;
 
 /**
@@ -33,8 +33,8 @@ public class CalendarOverlay extends VOverlay implements
     private com.google.gwt.user.datepicker.client.DatePicker calendarWidget = null;
     private TextBox timeBox;
 
-    private final VButton okButton;
-    private final VButton cancelButton;
+    private final Label okButton;
+    private final Label cancelButton;
     private final Resolution resolution;
     private final Date min;
     private final Date max;
@@ -62,20 +62,15 @@ public class CalendarOverlay extends VOverlay implements
             panel.add(p);
         }
 
-        okButton = new VButton();
+        okButton = new Label("✓");
         okButton.addStyleName("v-touchkit-date-ok");
-        okButton.setHtml("<div class=\"v-touchkit-ok-image\">&nbsp;</div>");
-        panel.add(okButton);
-        okButton.setWidth("45%");
         okButton.addClickHandler(CalendarOverlay.this);
 
-        cancelButton = new VButton();
+        cancelButton = new Label("✕");
         cancelButton.addStyleName("v-touchkit-date-cancel");
-        cancelButton
-                .setHtml("<div class=\"v-touchkit-cancel-image\">&nbsp;</div>");
-        panel.add(cancelButton);
-        cancelButton.setWidth("45%");
         cancelButton.addClickHandler(CalendarOverlay.this);
+        panel.add(cancelButton);
+        panel.add(okButton);
 
         addStyleName(CLASSNAME);
         if (resolution == Resolution.MONTH) {
@@ -188,8 +183,7 @@ public class CalendarOverlay extends VOverlay implements
 
     @Override
     public void onClick(ClickEvent event) {
-        VButton button = (VButton) event.getSource();
-        if (button == okButton) {
+        if (event.getSource() == okButton) {
             Date value = calendarWidget.getValue();
             if (resolution == Resolution.MONTH) {
                 value = calendarWidget.getCurrentMonth();
@@ -198,7 +192,7 @@ public class CalendarOverlay extends VOverlay implements
             }
             ValueChangeEvent.fire(CalendarOverlay.this, value);
             this.hide();
-        } else if (button == cancelButton) {
+        } else if (event.getSource() == cancelButton) {
             this.hide(false);
         }
     }

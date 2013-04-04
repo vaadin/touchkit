@@ -68,9 +68,6 @@ public interface ToucKitStyles extends CssResource {
     @ClassName("gwt-DatePicker")
     String gwtDatePicker();
         
-    @ClassName("html-face")
-    String htmlFace();
-    
     @ClassName("icon-arrow-down")
     String iconArrowDown();
     
@@ -349,10 +346,7 @@ public interface ToucKitStyles extends CssResource {
     
     @ClassName("v-touchkit-backgroundstripes")
     String vTouchkitBackgroundstripes();
-    
-    @ClassName("v-touchkit-cancel-image")
-    String vTouchkitCancelImage();
-    
+        
     @ClassName("v-touchkit-combobox")
     String vTouchkitCombobox();
     
@@ -475,9 +469,6 @@ public interface ToucKitStyles extends CssResource {
     
     @ClassName("v-touchkit-offlinemode-panel")
     String vTouchkitOfflinemodePanel();
-    
-    @ClassName("v-touchkit-ok-image")
-    String vTouchkitOkImage();
     
     @ClassName("v-touchkit-opacity-transition")
     String vTouchkitOpacityTransition();
