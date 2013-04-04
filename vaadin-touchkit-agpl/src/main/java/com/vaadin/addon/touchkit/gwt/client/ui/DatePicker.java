@@ -236,8 +236,12 @@ public class DatePicker extends SimplePanel implements
         if (input != null) {
             input.setValue(dateToString(date));
         } else if (backUpWidget != null) {
-            backUpWidget.setText(DateTimeFormat.getFormat(
-                    resolution.getPredefinedFormat()).format(date));
+            if(date == null) {
+                backUpWidget.setText("");
+            } else {
+                backUpWidget.setText(DateTimeFormat.getFormat(
+                        resolution.getPredefinedFormat()).format(date));
+            }
         }
     }
 
