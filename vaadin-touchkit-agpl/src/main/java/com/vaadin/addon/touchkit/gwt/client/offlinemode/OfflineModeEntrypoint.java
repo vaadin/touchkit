@@ -4,6 +4,7 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Timer;
 import com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineMode.ActivationReason;
+import com.vaadin.addon.touchkit.gwt.client.vcom.OfflineModeConnector;
 import com.vaadin.client.ApplicationConfiguration;
 
 /**
@@ -16,7 +17,7 @@ public class OfflineModeEntrypoint implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-        if (!isNetworkOnline()) {
+        if (!OfflineModeConnector.isNetworkOnline()) {
             getOfflineMode().activate(
                     new OfflineModeActivationEventImpl("No network connection",
                             ActivationReason.NO_NETWORK));
@@ -57,13 +58,5 @@ public class OfflineModeEntrypoint implements EntryPoint {
         }
         return app;
     }
-
-    /**
-     * @return true if the network is online.
-     */
-    private static native boolean isNetworkOnline()
-    /*-{
-        return $wnd.navigator.onLine;
-    }-*/;
 
 }

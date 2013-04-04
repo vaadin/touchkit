@@ -7,6 +7,7 @@ import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.Window.Location;
 import com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineMode;
 import com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineModeActivationEventImpl;
 import com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineModeEntrypoint;
@@ -102,7 +103,15 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
         Window.Location.reload();
     }
 
-    public static native boolean isNetworkOnline()
+    public static boolean isNetworkOnline() {
+        String host = Location.getHost();
+        if (host.startsWith("127.0.0.1") || host.startsWith("localhost")) {
+            return true;
+        }
+        return isNavigatorOnline();
+    }
+
+    private static native boolean isNavigatorOnline()
     /*-{
         if($wnd.navigator.onLine != undefined) {
             return $wnd.navigator.onLine;
@@ -148,7 +157,8 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
         } else if (persistenCookieSet && getSessionCookie() == null) {
             // Session expired, add fake id -> server side visit will cause
             // normal session expired message instead of disabled cookies
-            // warning. See #11420 && VaadinServlet.ensureCookiesEnabled... method
+            // warning. See #11420 && VaadinServlet.ensureCookiesEnabled...
+            // method
             Cookies.setCookie(SESSION_COOKIE, "invalidateme");
         }
 
