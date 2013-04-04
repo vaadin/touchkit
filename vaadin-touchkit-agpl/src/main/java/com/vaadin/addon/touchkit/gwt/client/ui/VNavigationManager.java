@@ -332,7 +332,13 @@ public class VNavigationManager extends ComplexPanel {
         animationListeners.remove(animationListener);
     }
 
+    int lastWidth;
+
     public void resetPositionsAndChildSizes() {
+        if (getPixelWidth() == lastWidth) {
+            return;
+        }
+        lastWidth = getPixelWidth();
         VConsole.error("handleChildSizesAndPositions");
         // update positions. Not set with percentages as ios safari bugs
         // occasionally with percentages in translate3d.
@@ -475,20 +481,6 @@ public class VNavigationManager extends ComplexPanel {
             add(w, -currentWrapperPos - 1);
         }
         prevView = w;
-    }
-
-    @Override
-    public void setWidth(String width) {
-        VConsole.log("VNavp" + width);
-        if (transitionPending) {
-            VConsole.log("transitionPending, postponing width setting");
-            pendingWidth = width;
-            return;
-        }
-        if (this.width == null || !this.width.equals(width)) {
-            this.width = width;
-            super.setWidth(width);
-        }
     }
 
     private void slideFromLeft() {
