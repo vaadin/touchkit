@@ -9,56 +9,149 @@
 
 	<p>
 		<a href="https://vaadin.com/add-ons/touchkit">Vaadin TouchKit</a> is
-		an add-on component for Vaadin to aid creating mobile web applications
-		for touch based devices like smartphones and tablets.
+		an add-on component for Vaadin Framework. This add-on is intended to 
+		aid Vaadin developers in creating mobile web applications
+		for touch devices (smartphones and tablets). Provided set of 
+		beautiful UI components helps in building applications 
+		that look and feel great on iPad, iPhone as well as Android devices.
 	</p>
+	<p>This version of TouchKit is built against Vaadin
+		${vaadin.version.maven}, but is expected to be forward compatible with
+		minor versions.
+		</p>
+	<p>Please not that this Vaadin TouchKit version is still in beta
+		phase.</p>
 
-	<p>Note, that this Vaadin 7 compatible version is still at beta
-		level. We still have some bugs and performance issues to tackle. If
-		you have tight schedule in your project, consider using the Vaadin 6
-		compatible 2.X branch at this point.</p>
+	
 
+	<h2>Installation</h2>
+
+	<p>This add-on is installed just like any other Vaadin Add-on.
+	For instructions using Vaadin Add-ons in your project please read the Book of Vaadin Chapter:  
+	<a href="https://vaadin.com/book/vaadin7/-/page/addons.html#addons.overview">Using Vaadin Add-ons</a>
+	</p> 
 	<p>
-		TouchKit 3 (and Vaadin 7) versions of our demo apps are availabels via
-		SVN: <a href="http://dev.vaadin.com/svn/branches/vornitologist3/">Vornitologist</a>
-		and <a href="http://dev.vaadin.com/svn/branches/mobilemail3/">Mobilemail</a>.
-	</p>
-
+	 Note, that the package also has client side extensions, so make sure that you compile
+	  your widgetset after installation!</p>
+	
+	<h3>Maven</h3>
+	
 	<p>Usage of modern build systems like Maven, that supports
-		transient dependencies, is highly encouraged. Things should work fine
-		with following dependency declaration and Vaadin Maven plugin:</p>
-	<pre>
-		
+		transient dependencies, is highly encouraged. Include Vaadin TouchKit
+		in your project using following dependency declaration and Vaadin Maven plugin:
+		</p>
+	<p>
+	Dependency snippet:
+	</p>
+	
+<pre>		
 &lt;dependency&gt;
 	&lt;groupId&gt;com.vaadin.addon&lt;/groupId&gt;
 	&lt;artifactId&gt;vaadin-touchkit-${license.short.name}&lt;/artifactId&gt;
 	&lt;version&gt;${Implementation-Version}&lt;/version&gt;
 	&lt;type&gt;jar&lt;/type&gt;
-&lt;/dependency&gt;
-			
-	</pre>
-
-
-	<h2>License</h2>
+&lt;/dependency&gt;			
+</pre>
+	
+	<h3>IVY</h3>
+	
 	<p>
-		Vaadin TouchKit is a dual licensed product. See <a
-			href="licensing.txt">licensing.txt</a> file for licensing details
-		about the package you are using.
+		Dependency snippet:
+	</p>
+<pre>
+&lt;dependency org="com.vaadin.addon" name="vaadin-touchkit-${license.short.name}" rev="${project.version}" conf="default->default" /&gt;
+</pre>
+	<h3>Using plain JAR</h3>
+	<p>
+		For using Vaadin TouchKit in projects not using any build automation, just add the JAR to your project's classpath.
+		The TouchKit JAR should be put in the WEB-INF/lib folder of the web application.
+	</p>
+	
+	<h2>Licensing</h2>
+	
+	<p>
+		Vaadin TouchKit is a dual licensed product. Available licensing models are:
+		<ul>
+			<li>AGPL - Affero General Public License (version 3)</li>
+			<li>CVAL - Commercial Vaadin Add-on License (version 2.0)</li>
+		</ul>
+	</p>
+	
+	<p>
+		You have downloaded Vaadin TouchKit 
+		using <b>${license.short.name}</b> license. Read <a href="licensing.txt">licensing.txt</a>
+		for detailed information about this license type.  
+	</p>
+	
+	<h3>Choosing the right license</h3>
+	<p>
+		As a general rule using AGPL licensed version of Vaadin TouchKit sets few restrictions. 
+	</p>
+	<p>
+		Using AGPL, You MUST 
+		<ul>	
+ 			<li>include full text of license in modified software.</li>
+ 			<li>state significant changes made to software.</li>
+ 			<li>disclose your application source code when you distribute the software.</li>
+  		</ul>
+  		In case you want to remove any of the above mentioned restrictions you need to acquire CVALs for each developer 
+  		that is using the product.
+  		You may use the commercial license for 30 days to evaluate the product. Once trial period expires you must stop 
+  		using the commercial product or acquire a license for it.
+  	</p>
+
+	<p>You should however read carefully through both the license agreements to determine which license fits your need.</p>
+	
+	<h3>Obtaining a commercial license</h3>
+	
+	<p>
+		You may obtain a commercial license by subscribing to <a href="https://vaadin.com/pro">
+		Vaadin Pro Account</a> and downloading the license key from
+        <a href="https://vaadin.com/pro/software-center">Software Center</a> or by purchasing a perpetual license from 
+		<a href="https://vaadin.com/addon/vaadin-touchkit">Vaadin Directory</a>.
 	</p>
 
-	<h2>Manual</h2>
-
+	<h3>Registering a commercial license</h3>
+	
 	<p>
-		TouchKit manual is included as a chapter in <a
-			href="https://vaadin.com/book/vaadin7/-/page/mobile.components.html">the
-			Book of Vaadin</a>.
+		Register your copy of Vaadin TouchKit by creating a file named
+		<i>.vaadin.touchkit.developer.license</i> containing the license key in your home 
+		directory or by setting the <i>vaadin.touchkit.developer.license=license_key</i>
+		system property to disable license warning message.
 	</p>
 
-	<h2>Dependencies</h2>
-
-	<p>This version of TouchKit is built against Vaadin
-		${vaadin.version.maven}, but is expected to be forward compatible with
-		minor versions.</p>
-
+	<h2>Links</h2>
+	<p>
+		Product homepage:<br/>
+		<a href="https://vaadin.com/add-ons/touchkit">https://vaadin.com/add-ons/touchkit</a>
+	</p>
+	<p>
+		Documentation:
+		<ul>
+		<li>
+			<a href="https://vaadin.com/book/vaadin7/-/page/mobile.html">
+			Vaadin TouchKit online Manual (Book of Vaadin)</a>
+		</li>
+		<li>
+			<a href="vaadin-touchkit-manual.pdf">
+			Vaadin TouchKit Manual (PDF)</a>
+		</li>
+		</ul>
+	</p>
+	<p>
+		Issue tracker:<br/>
+		<a href="http://dev.vaadin.com/">Vaadin Trac</a>
+	</p>
+	<p>
+		SCM:<br/>
+		<a href="http://dev.vaadin.com/svn/addons/TouchKit/">Vaadin TouchKit (SVN)</a>
+	</p>
+	<p>
+		Example applications:
+		<ul>
+		<li><a href="http://dev.vaadin.com/svn/branches/vornitologist3/">Vornitologist (SVN)</a></li>
+		<li><a href="http://dev.vaadin.com/svn/branches/mobilemail3/">Mobilemail (SVN)</a></li>
+		</ul>
+	</p>
 </body>
 </html>
