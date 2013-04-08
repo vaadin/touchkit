@@ -3,8 +3,8 @@ package com.vaadin.addon.touchkit.gwt.client;
 import com.vaadin.client.ui.VCheckBox;
 
 /**
- * Overrides default implementation of client side CheckBox. Ignores setText
- * command as caption is presented by parent.
+ * Overrides the default implementation of client side CheckBox. Ignores the setText
+ * command as the caption is presented by the parent.
  */
 public class CheckBox extends VCheckBox {
   

@@ -6,6 +6,7 @@
  * <p>
  * Widgets in this package should also be usable as plain GWT Widgets
  * when building offline mode or pure client side apps.
- * 
+ *
+ * @author Vaadin Ltd
  */
 package com.vaadin.addon.touchkit.gwt.client.ui;
