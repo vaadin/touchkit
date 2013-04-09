@@ -8,6 +8,7 @@ import com.google.gwt.storage.client.Storage;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.vaadin.client.BrowserInfo;
 
 /**
  * This is a simple application cache monitor. It also notifies demo users when
@@ -43,6 +44,34 @@ public class CacheManifestStatusIndicator implements EntryPoint {
         scheduleUpdateChecker();
         if (getStatus() == CHECKING || getStatus() == DOWNLOADING) {
             showProgress();
+        }
+        // Sometimes android leaves the status indicator spinning and spinning
+        // and spinning...
+        pollForStatusOnAndroid();
+    }
+
+    private void pollForStatusOnAndroid() {
+        if (BrowserInfo.get().isAndroid()) {
+            Scheduler.get().scheduleFixedPeriod(
+                    new Scheduler.RepeatingCommand() {
+                        @Override
+                        public boolean execute() {
+                            if (updating) {
+                                // The normal listeners are working correctly
+                                return false;
+                            }
+                            switch (getStatus()) {
+                            case IDLE:
+                                hideProgress();
+                                return false;
+                            case UPDATEREADY:
+                                requestUpdate(false);
+                                return false;
+                            default:
+                                return true;
+                            }
+                        }
+                    }, 500);
         }
     }
 
