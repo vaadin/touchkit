@@ -1,0 +1,588 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Vaadin Framework @version@</title>
+<style type="text/css">
+html {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+body {
+    background-color: #fff;
+    font: normal 14px/20px Helvetica, "Lucida Grande", Arial, Verdana, sans-serif;
+    color: #464440;
+    padding: 0;
+    min-width: 980px;
+    text-align: left;
+    margin: 0 auto;
+}
+
+.clearer {
+    height: 0;
+    overflow: hidden;
+    clear: both;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #000;
+    font-weight: normal;
+    line-height: normal;
+}
+
+h1 {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 23px;
+}
+
+h4 {
+    font-size: 18px;
+    margin-bottom: .8em;
+}
+
+h5 {
+    font-size: 16px;
+    margin-bottom: .5em;
+}
+
+h6 {
+    font-size: 14px;
+    margin: .6em 0 .1em;
+}
+
+p {
+    margin: 0 0 1em;
+}
+
+a {
+    text-decoration: none;
+    padding: 0 3px;
+    margin: 0 -3px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+
+a:link {
+    color: #00a2d8;
+}
+
+a:visited {
+    color: #00a248;
+}
+
+a:hover {
+    background: #e4e3da;
+    color: #505048;
+}
+
+a:active {
+    color: #000;
+    background: #a09f91;
+}
+
+ul {
+    list-style-type: square;
+}
+
+.codeblock {
+    background: #f0efea;
+    padding: 1em;
+    margin: 1em 0;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+}
+
+.codeblock h4 {
+    margin-top: 0;
+}
+
+    /***************************************************
+     * Furniture
+     ***************************************************/
+
+#header {
+    height: 93px;
+    position: relative;
+}
+
+#header h1 {
+    width: 393px;
+    height: 46px;
+    background: transparent url(../img/vaadin-logo.png) no-repeat;
+    position: absolute;
+    top: 23px;
+    left: 50%;
+    margin: 0;
+    margin-left: -484px;
+    text-indent: -9999px;
+}
+
+#version {
+    position: absolute;
+    left: 50%;
+    top: 38px;
+    color: #000;
+    text-align: right;
+    width: 484px;
+}
+
+#version a {
+    color: #78776d;
+    display: inline-block;
+    zoom: 1;
+    padding: 1px 12px;
+    font-size: 12px;
+    background: #e4e3da;
+    -moz-border-radius: 9px;
+    -webkit-border-radius: 9px;
+    border-radius: 9px;
+}
+
+#version a:hover {
+    border: none;
+    background: #a09f91;
+    color: #fff;
+}
+
+#version .release-notes {
+    margin-left: 10px;
+}
+
+#subheader {
+    position: relative;
+    height: 38px;
+    line-height: 38px;
+    background: #000;
+}
+
+#menu,
+#links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#subheader li {
+    display: inline;
+    float: left;
+    padding: 0;
+}
+
+#menu {
+    position: absolute;
+    left: 50%;
+    width: 650px;
+    margin-left: -483px;
+    font-weight: bold;
+    white-space: nowrap;
+    z-index: 2;
+}
+
+#menu li {
+    margin: 0 .3em;
+}
+
+#menu li,
+#menu a {
+    color: #d9d8cb;
+}
+
+#links {
+    width: 484px;
+    position: absolute;
+    top: 2px;
+    left: 50%;
+    z-index: 1;
+}
+
+#links li {
+    float: right;
+}
+
+#links a {
+    font-size: 12px;
+    line-height: 34px;
+    color: #a09f91;
+    margin-left: 14px;
+    white-space: nowrap;
+}
+
+#subheader a:hover {
+    background: transparent;
+    color: #fff;
+}
+
+ul {
+    padding-left: 1.3em;
+}
+
+#footer {
+    margin: 0 auto;
+    width: 968px;
+    height: 60px;
+    color: #000;
+    font-size: 11px;
+}
+
+#footer a {
+    float: right;
+}
+
+#footer strong {
+    font-size: 13px;
+}
+
+#footer strong em {
+    color: #00b4f0;
+    font-style: normal;
+    margin: 0 0.2em 0 -0.15em;
+}
+
+    /***************************************************
+     * Content wrapper
+     ***************************************************/
+
+#content {
+    position: relative;
+    margin: 0 0 56px -484px;
+    left: 50%;
+    width: 968px;
+    overflow: hidden;
+}
+
+    /***************************************************
+     * Vertical tabs
+     ***************************************************/
+#tabs {
+    float: left;
+    width: 196px;
+}
+
+#tabs .tab {
+    font-size: 18px;
+    cursor: pointer;
+    padding: 8px 14px;
+    background: #fff;
+    color: #a09f91;
+    -webkit-transition: linear .2s color;
+}
+
+#tabs .tab * {
+    vertical-align: middle;
+}
+
+#tabs .tab a {
+    margin: 0;
+    padding: 0;
+    color: #00a2d8;
+    -webkit-transition: linear .2s color;
+}
+
+#tabs .tab:hover a,
+#tabs .tab a:focus {
+    background: transparent;
+    margin: 0;
+    padding: 0;
+    color: #464440;
+}
+
+#tabs .tab:hover {
+    color: #464440;
+}
+
+#tabs .tab span {
+    font-size: 9px;
+    margin-left: .7em;
+}
+
+#tabs .selected,
+#tabs .selected:hover,
+#tabs .selected:hover a,
+#tabs .selected a,
+#tabs .selected a:hover,
+#tabs .selected a:focus {
+    color: #000;
+    cursor: default;
+    -webkit-transition: linear .2s color;
+    font-weight: bold;
+}
+
+#tabs .first {
+    margin-top: 0;
+}
+
+h3.reasons {
+    color: #78776d;
+    margin: 0 0 40px;
+    height: 30px;
+}
+
+#reasons {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#reasons.js {
+    float: left;
+    width: 769px;
+}
+
+#reasons .tab {
+    display: block;
+    margin: 0 0 1em;
+    padding: 20px 40px;
+    background: #efeee9;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+    clear: left;
+    overflow: hidden;
+}
+
+#reasons.js .tab {
+    width: 689px;
+}
+
+#reasons .tab h4 {
+    font-weight: bold;
+    font-size: 24px;
+    margin: 14px 0 24px;
+}
+
+#reasons .tab .col {
+    width: 22.8%;
+    margin-right: 2%;
+    float: left;
+    margin-bottom: 2em;
+}
+
+#reasons .tab .col2 {
+    width: 47.8%;
+    margin-right: 2%;
+    float: left;
+    margin-bottom: 2em;
+}
+
+#reasons .tab .col3 {
+    width: 72.8%;
+    margin-right: 2%;
+    float: left;
+    margin-bottom: 2em;
+}
+
+#reasons .tab .col4 {
+    clear: left;
+    margin-bottom: 2em;
+}
+
+#reasons .tab .newline {
+    clear: left;
+}
+
+#reasons .tab p:last-child {
+    margin: 0;
+}
+
+#reasons .tab h5 {
+    margin-top: 0;
+}
+
+    /***************************************************
+     * Section specific styles
+     ***************************************************/
+img {
+    border: none;
+}
+
+.book {
+    overflow: hidden;
+}
+
+.book h5 {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.book h6 {
+    margin: -0.7em 0 .7em;
+    color: #464440;
+    font-size: 13px;
+    font-style: italic;
+    color: #736f5e;
+}
+
+.book img {
+    float: left;
+    margin-right: 1.2em;
+}
+
+.dzone img,
+.tutorial img {
+    float: left;
+    margin: 0 1em 2em 0;
+}
+
+.tools img {
+    margin: 0em 2em .8em 2em;
+    float: right;
+}
+
+.nested-list ol {
+    counter-reset: item
+}
+
+.nested-list li {
+    display: block
+}
+
+.nested-list li:before {
+    content: counters(item, ".") ". ";
+    counter-increment: item
+}
+</style>
+</head>
+
+<body>
+<div id="header">
+    <h1>Vaadin &ndash; thinking of U and I</h1>
+
+    <div id="version">
+        <strong>Vaadin TouchKit ${Implementation-Version}</strong>
+    </div>
+</div>
+<!-- /header -->
+
+<div id="content">
+    <h2 id="tableofcontents">Release Notes for Vaadin TouchKit ${Implementation-Version}</h2>
+    <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#package">Package Contents</a></li>
+        <li><a href="#new">New in Vaadin TouchKit ${Implementation-Version}</a></li>
+        <li><a href="#changelog">Complete change log for Vaadin TouchKit ${Implementation-Version}</a></li>
+        <li><a href="#knownissues">Known issues</a></li>
+        <li><a href="#vaadinontheweb">Links</a></li>
+    </ul>
+
+    <h2 id="overview">Overview</h2>
+
+    <p>
+        <b>Vaadin TouchKit</b> adds components, utilities and a theme tailored for touch devices for
+        use with Vaadin Framework 7.
+    </p>
+
+    <h3 id="package">Package Contents</h3>
+
+    <p>Inside the ZIP installation package you will find:</p>
+
+    <ul>
+        <li>TouchKit JARs</li>
+        <li>The TouchKit manual (a chapter of Book of Vaadin)</li>
+        <li>README and licensing information</li>
+    </ul>
+
+    <p>
+        See the <tt>README.html</tt> in the installation package for more information
+        about the package contents. The bundled manual gives more detailed instructions.
+    </p>
+
+    <h3 id="new">New in Vaadin TouchKit ${Implementation-Version}</h3>
+
+    <p>The following features and enhancements are new in Vaadin TouchKit ${Implementation-Version}:</p>
+    <ul>
+        <li>Vaadin 7 support</li>
+        <li>Easier creation of custom themes</li>
+        <li>UrlField - A HTML5 URL field</li>
+        <li>DatePicker - A HTML5 field for native picking of dates and times with a fallback mode for when not
+            supported
+        </li>
+        <li>Support for HTML5 local storage from the server side</li>
+        <li>Application cache handling reports when there is a new version available</li>
+    </ul>
+
+    <h3 id="changelog">Change Log</h3>
+
+    <p>
+        For a complete list of changes in this release, please see the <a
+            href="http://dev.vaadin.com/query?status=closed&milestone=Vaadin+TouchKit+3.0.0+beta1&milestone=TouchKit+3.0.0-alpha5&group=resolution&col=id&col=summary&col=owner&col=type&col=priority&col=component&col=version&order=priority">list
+        of closed tickets</a>.
+    </p>
+
+    <h2 id="knownissues">Known Issues</h2>
+    <ul>
+        <li>Android 2.3 support is limited due to the buggy browser on these devices.</li>
+    </ul>
+
+
+    <h2 id="vaadinontheweb">Links</h2>
+
+    <ul>
+        <li><a href="http://vaadin.com">vaadin.com - The developer
+            portal containing everything you need to know about Vaadin</a>
+        </li>
+        <li><a href="http://demo.vaadin.com/vornitologist">The Vornitologist demo</a></li>
+        <li><a href="http://demo.vaadin.com/mobilemail">The MobileMail demo</a></li>
+        <li><a href="http://vaadin.com/forum">vaadin.com/forum -
+            Forums for Vaadin related discussions</a>
+        </li>
+        <li><a href="http://vaadin.com/book">vaadin.com/book - Book
+            of Vaadin - everything you need to know about Vaadin</a>
+        </li>
+
+        <li><a href="http://vaadin.com/pro-account">vaadin.com/pro-account
+            - Commercial support and tools for Vaadin development </a>
+        </li>
+        <li><a href="http://vaadin.com/services">vaadin.com/services
+            - Expert services for Vaadin</a>
+        </li>
+        <li><a href="http://vaadin.com/company">vaadin.com/company
+            - Information about the company behind Vaadin and Vaadin TouchKit</a>
+        </li>
+
+        <li><a href="http://dev.vaadin.com">dev.vaadin.com - Bug tracker</a></li>
+    </ul>
+
+</div>
+<!-- /content-->
+
+<div id="footer">
+		<span class="slogan"><strong>vaadin <em>}></em> </strong>
+			thinking of U and I<span> <a href="#top">&uarr; Back to
+                top</a>
+</div>
+<!-- /footer -->
+</body>
+</html>
+
+<!-- Keep this comment at the end of the file
+Local variables:
+mode: xml
+sgml-omittag:nil
+sgml-shorttag:nil
+sgml-namecase-general:nil
+sgml-general-insert-case:lower
+sgml-minimize-attributes:nil
+sgml-always-quote-attributes:t
+sgml-indent-step:2
+sgml-indent-data:t
+sgml-parent-document:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:("/etc/sgml/catalog" "/usr/share/xemacs21/xemacs-packages/etc/psgml-dtds/CATALOG")
+sgml-local-ecat-files:("ECAT" "~/sgml/ECAT" "/usr/share/sgml/ECAT" "/usr/local/share/sgml/ECAT" "/usr/local/lib/sgml/ECAT")
+End:
+-->

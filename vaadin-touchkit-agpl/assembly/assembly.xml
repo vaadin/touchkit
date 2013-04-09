@@ -44,5 +44,9 @@
 			<source>../vaadin-touchkit-agpl/assembly/README.html</source>
 			<filtered>true</filtered>
 		</file>
+        <file>
+            <source>../vaadin-touchkit-agpl/assembly/release-notes.html</source>
+            <filtered>true</filtered>
+        </file>
 	</files>
 </assembly>
