@@ -5,10 +5,7 @@ import com.vaadin.ui.themes.BaseTheme;
 /**
  * This class contains special style variations available in the TouchKit theme.
  */
-public class StyleNames extends BaseTheme {
-    // Overridden from BaseTheme
-    public static final String THEME_NAME = "touchkit";
-
+public interface StyleNames extends BaseTheme {
     /** Makes a normal Button red. */
     public static final String BUTTON_RED = "red";
 
@@ -58,4 +55,24 @@ public class StyleNames extends BaseTheme {
      */
     public static final String NAVBAR_BUTTON_ARROW_RIGHT = "icon-arrow-right";
 
+
+    // Included from the Base theme
+
+    /**
+     * Creates a button that looks like a regular hypertext link but still acts
+     * like a normal button.
+     */
+    public static final String BUTTON_LINK = "link";
+
+    /**
+     * Adds the connector lines between a parent node and its child nodes to
+     * indicate the tree hierarchy better.
+     */
+    public static final String TREE_CONNECTORS = "connectors";
+
+    /**
+     * Clips the component so it will be constrained to its given size and not
+     * overflow.
+     */
+    public static final String CLIP = "v-clip";
 }
