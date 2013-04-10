@@ -64,7 +64,7 @@ public class TabBarTest extends AbstractTouchKitIntegrationTest {
                 sb.append(label.getValue());
                 sb.append("Content on this tab should be scrollable");
                 for (int i = 0; i < 200; i++) {
-                    sb.append("Row " + i + "</br>");
+                    sb.append("Row " + i + "<br/>");
                 }
                 label.setContentMode(ContentMode.HTML);
                 label.setValue(sb.toString());
