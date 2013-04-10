@@ -59,3 +59,10 @@
 	-webkit-background-size: 150px 27px;
 	background-position-y: -1px;
 	}
+
+@url clock2x clockImage2x;
+.v-touchkit-datepopover-time {
+    background-image: clock2x;
+    -webkit-background-size: 25px 25px;
+    background-position-y: 3px;
+}

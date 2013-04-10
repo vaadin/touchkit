@@ -14,6 +14,7 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -57,6 +58,7 @@ public class CalendarOverlay extends VOverlay implements
 
         if (resolution == Resolution.TIME) {
             SimplePanel p = new SimplePanel();
+            p.setStyleName(CLASSNAME + "-time");
             timeBox = GWT.create(TextBox.class);
             p.add(timeBox);
             panel.add(p);

@@ -158,6 +158,14 @@ public interface VTouchKitResources extends ClientBundle {
     public DataResource calendar2x();
 
     /*
+     * DatePicker
+     */
+    @Source("theme/img/clock.png")
+    public DataResource clockImage();
+    @Source("theme/img/clock-2x.png")
+    public DataResource clockImage2x();
+
+    /*
      * HiRes pictures based on base theme
      */
     @Source("theme/img/arrow-down.png")
