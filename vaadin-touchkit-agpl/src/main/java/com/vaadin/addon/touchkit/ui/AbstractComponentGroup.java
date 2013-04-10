@@ -29,6 +29,9 @@ public abstract class AbstractComponentGroup extends AbstractComponentContainer 
 
     @Override
     public void addComponent(Component component) {
+        if(component.getParent() == this) {
+            removeComponent(component);
+        }
         addComponent(component, children.size());
     }
 
