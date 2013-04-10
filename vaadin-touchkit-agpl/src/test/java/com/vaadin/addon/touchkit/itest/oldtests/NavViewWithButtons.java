@@ -9,6 +9,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.CssLayout;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Notification;
 
 
@@ -36,7 +37,7 @@ class NavViewWithButtonsT extends NavigationView implements ClickListener {
 
         setLeftComponent(group);
 
-        CssLayout right = new CssLayout();
+        HorizontalLayout right = new HorizontalLayout();
 
         HorizontalButtonGroup group2 = new HorizontalButtonGroup();
 
