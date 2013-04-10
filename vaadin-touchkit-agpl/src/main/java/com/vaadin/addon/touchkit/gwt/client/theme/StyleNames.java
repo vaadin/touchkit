@@ -5,7 +5,7 @@ import com.vaadin.ui.themes.BaseTheme;
 /**
  * This class contains special style variations available in the TouchKit theme.
  */
-public interface StyleNames extends BaseTheme {
+public interface StyleNames {
     /** Makes a normal Button red. */
     public static final String BUTTON_RED = "red";
 
