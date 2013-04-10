@@ -7,6 +7,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.addon.touchkit.gwt.client.ui.VNavigationButton;
 import com.vaadin.addon.touchkit.gwt.client.ui.VNavigationManager;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
+import com.vaadin.client.ServerConnector;
 import com.vaadin.client.VConsole;
 import com.vaadin.client.communication.RpcProxy;
 import com.vaadin.client.communication.StateChangeEvent;
@@ -73,11 +74,17 @@ public class NavigationButtonConnector extends AbstractComponentConnector {
                         if (getTargetWidget().getParent() == panel) {
                             panel.setCurrentWidget(getTargetWidget());
                         } else {
-                            NavigationManagerConnector parent2 = (NavigationManagerConnector) getParent()
-                                    .getParent().getParent();
-                            AbstractComponentConnector previousComponent = (AbstractComponentConnector) parent2
+                            
+                            NavigationManagerConnector navigationManager;
+                            ServerConnector parent2 = getParent();
+                            while(parent2 != null && !(parent2 instanceof NavigationManagerConnector)) {
+                                parent2 = parent2.getParent();
+                            }
+                            navigationManager = (NavigationManagerConnector) parent2;
+                            
+                            AbstractComponentConnector previousComponent = (AbstractComponentConnector) navigationManager
                                     .getState().getPreviousComponent();
-                            AbstractComponentConnector nextComponent = (AbstractComponentConnector) parent2
+                            AbstractComponentConnector nextComponent = (AbstractComponentConnector) navigationManager
                                     .getState().getNextComponent();
 
                             if (previousComponent != null
