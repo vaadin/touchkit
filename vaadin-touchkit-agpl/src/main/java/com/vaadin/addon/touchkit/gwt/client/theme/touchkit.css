@@ -1701,11 +1701,17 @@ span.v-datefield-calendarpanel-month {
 
 /* Tree styles */
 
+.v-tree {
+	display:block;
+}
+
 .v-tree-node {
 	padding: 4px 0;
 }
 .v-tree-node-caption {
-	margin-left: 1.5em;
+	margin-left: 35px;
+	min-height: 35px;
+	line-height: 28px;
 }
 
 /** Component group stylings must be as last as they override default styles */
@@ -2395,10 +2401,11 @@ span.v-datefield-calendarpanel-month {
 }
 
 .v-tree-node {
-    background-position: 4px 4px;
+    background-position: 10px 8px;
     background-size: auto 16px;
     background-repeat: no-repeat;
     padding: 1px 0;
+    
 }
 
 @url arrowDownUrl arrowDownImage;
