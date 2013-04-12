@@ -15,7 +15,31 @@ import com.vaadin.ui.UI;
  * persistent string-string map provided by modern browsers. Using this
  * extension, server side code can access that map.
  * <p>
+ * Local storage can be used bit like traditional cookies to store data on the
+ * browser, but with LocalStorage one can store much larger data and the stored
+ * data is not transferred in each HTTP request. Also if you have hybrid
+ * client-server application, you can use this class to easily fetch date stored
+ * by your client side module.
+ * <p>
  * For more details about HTML 5 storage see {@link Storage}.
+ * <p>
+ * To save a value in browser use {@link #put(String, String)} method.
+ * <p>
+ * As the values are behind network, retrieving a value must be done using
+ * asynchronous AP. E.g. like this:
+ * <code><pre>
+LocalStorage.detectValue("myproperty",
+        new LocalStorageCallback() {
+            public void onSuccess(String value) {
+                Notification.show("Value received:" + value);
+            }
+
+            public void onFailure(FailureEvent error) {
+                Notification.show("Value retrieval failed: " + error.getMessage());
+            }
+        });
+ * </pre></code>
+ * 
  */
 @SuppressWarnings("serial")
 public class LocalStorage extends AbstractExtension {
