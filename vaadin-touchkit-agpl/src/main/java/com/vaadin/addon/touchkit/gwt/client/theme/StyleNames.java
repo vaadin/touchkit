@@ -1,6 +1,6 @@
 package com.vaadin.addon.touchkit.gwt.client.theme;
 
-import com.vaadin.ui.themes.BaseTheme;
+import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 
 /**
  * This class contains special style variations available in the TouchKit theme.
@@ -14,6 +14,12 @@ public interface StyleNames {
 
     /** Makes a normal Button blue. */
     public static final String BUTTON_BLUE = "blue";
+
+    /**
+     * Makes a normal Button look like a navigation button. Works in
+     * {@link VerticalComponentGroup}.
+     */
+    public static final String BUTTON_NAVIGATION = "nav";
 
     /**
      * Makes the description in a NavigationButton look kind of like a pill. See
@@ -54,7 +60,6 @@ public interface StyleNames {
      * {@link com.vaadin.addon.touchkit.ui.NavigationBar}
      */
     public static final String NAVBAR_BUTTON_ARROW_RIGHT = "icon-arrow-right";
-
 
     // Included from the Base theme
 

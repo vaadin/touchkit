@@ -146,6 +146,9 @@ public interface ToucKitStyles extends CssResource {
     
     @ClassName("v-button-link")
     String vButtonLink();
+
+    @ClassName("v-button-nav")
+    String vButtonNav();
     
     @ClassName("v-button-nextyear")
     String vButtonNextyear();
