@@ -43,7 +43,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<license.short.name>cval</license.short.name>
-		<vaadin.version.maven>7.0.1</vaadin.version.maven>
+		<vaadin.version.maven>7.0.4</vaadin.version.maven>
 		<gpg.passphrase.file>empty.properties</gpg.passphrase.file>
 		<gpg.skip>true</gpg.skip>
 		<snapshot.repository.url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</snapshot.repository.url>
