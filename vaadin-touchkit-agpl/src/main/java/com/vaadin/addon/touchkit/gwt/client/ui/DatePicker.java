@@ -26,6 +26,7 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.vaadin.client.BrowserInfo;
 import com.vaadin.client.VConsole;
 import com.vaadin.client.ui.VButton;
+import com.vaadin.shared.VBrowserDetails;
 
 /**
  * DatePicker widget. Uses HTML5 date input fields to ask time values from user.
@@ -236,7 +237,7 @@ public class DatePicker extends SimplePanel implements
         if (input != null) {
             input.setValue(dateToString(date));
         } else if (backUpWidget != null) {
-            if(date == null) {
+            if (date == null) {
                 backUpWidget.setText("");
             } else {
                 backUpWidget.setText(DateTimeFormat.getFormat(
@@ -271,7 +272,7 @@ public class DatePicker extends SimplePanel implements
         if (useNative) {
             addHtml5Input();
             input.setAttribute("type", res.getType());
-            if ("text".equals(input.getType())) {
+            if ("text".equals(input.getType()) || isOldAndroid()) {
                 // HTML5 is not supported, revert to backup.
                 removeHtml5Input();
                 addBackupWidget();
@@ -286,6 +287,18 @@ public class DatePicker extends SimplePanel implements
         if (date != null) {
             updateValue();
         }
+    }
+
+    /**
+     * @return true if the Android version is older than 4.2, in which case the
+     *         HTML5 date field is not very useful.
+     */
+    private boolean isOldAndroid() {
+        VBrowserDetails details = new VBrowserDetails(
+                BrowserInfo.getBrowserString());
+        return details.isAndroid()
+                && (details.getOperatingSystemMajorVersion() < 4 || details
+                        .getOperatingSystemMinorVersion() < 2);
     }
 
     private void addHtml5Input() {
