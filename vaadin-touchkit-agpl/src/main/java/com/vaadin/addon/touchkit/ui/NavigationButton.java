@@ -3,6 +3,7 @@ package com.vaadin.addon.touchkit.ui;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 
+import com.vaadin.addon.touchkit.gwt.client.theme.StyleNames;
 import com.vaadin.addon.touchkit.gwt.client.vcom.navigation.NavigationButtonRpc;
 import com.vaadin.addon.touchkit.gwt.client.vcom.navigation.NavigationButtonSharedState;
 import com.vaadin.server.Resource;
@@ -336,6 +337,18 @@ public class NavigationButton extends AbstractComponent {
      */
     protected void fireClick() {
         fireEvent(new NavigationButtonClickEvent(this));
+    }
+
+    /**
+     * Description in NavigationButton is show on the right side of the button.
+     * Normally with bit smaller and gray text.
+     * 
+     * @see com.vaadin.addon.touchkit.gwt.client.theme.StyleNames#NAVIGATION_BUTTON_DESC_PILL
+     * @see com.vaadin.ui.AbstractComponent#setDescription(java.lang.String)
+     */
+    @Override
+    public void setDescription(String description) {
+        super.setDescription(description);
     }
 
 }
