@@ -46,14 +46,14 @@
 								<descriptor>assembly/assembly.xml</descriptor>
 							</descriptors>
 						</configuration>
-						<executions>
-							<execution>
-								<goals>
-									<goal>single</goal>
-								</goals>
-								<phase>install</phase>
-							</execution>
-						</executions>
+<!-- 						<executions> -->
+<!-- 							<execution> -->
+<!-- 								<goals> -->
+<!-- 									<goal>single</goal> -->
+<!-- 								</goals> -->
+<!-- 								<phase>install</phase> -->
+<!-- 							</execution> -->
+<!-- 						</executions> -->
 					</plugin>
                     <!-- Extracts the TouchKit chapter from BoV -->
                     <plugin>
