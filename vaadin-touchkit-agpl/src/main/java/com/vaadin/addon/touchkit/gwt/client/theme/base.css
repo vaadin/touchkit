@@ -1794,15 +1794,6 @@ div.v-progressindicator-indeterminate-disabled {
 	font-style: italic;
 }
 
-.v-filterselect-button {
-	display: inline-block;
-	cursor: pointer;
-	width: 1em;
-	margin-right: -1em;
-	height: 1em;
-	background: transparent url(common/img/sprites.png) no-repeat -5px -8px;
-}
-
 .v-filterselect.v-readonly .v-filterselect-button {
 	display: none;
 }

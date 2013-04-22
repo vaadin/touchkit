@@ -1481,20 +1481,6 @@ vertical-align: middle;
 	margin: 0;
 	}
 
-.v-filterselect-button {
-	position: absolute;
-	right: 0px;
-	height: 25px;
-	background-position-y: -6px;
-	background-position-x: -2px;
-	width: 25px;
-	opacity: .3;
-	}
-
-.v-filterselect-button:active {
-	opacity: 1;
-	}
-
 .v-filterselect-input:focus,
 .v-datefield-textfield:focus {
 	outline: none;
@@ -1574,9 +1560,28 @@ vertical-align: middle;
 	margin: 7px auto;
 	}
 
+.v-filterselect {
+	position:relative;
+}
 
 @url comboBoxArrowDown comboBoxArrowDown2x;
 @url comboBoxArrowUp comboBoxArrowUp2x;
+
+.v-filterselect-button {
+	right: 0px;
+	height: 25px;
+	width: 25px;
+	position: absolute;
+}
+.v-filterselect-button:before {
+	opacity: .8;
+	content: "\25BC";
+	margin-left: 5px;
+}
+
+.v-filterselect-button:active {
+	opacity: 1;
+	}
 
 .v-filterselect-nextpage span,
 .v-filterselect-prevpage span {
