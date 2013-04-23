@@ -134,14 +134,6 @@ public interface VTouchKitResources extends ClientBundle {
     @ImageOptions(repeatStyle = RepeatStyle.None)
     public ImageResource columnSelector();
 
-    @Source("theme/img/date-ok-symbol.png")
-    @ImageOptions(repeatStyle = RepeatStyle.None)
-    public ImageResource dateOkSymbol();
-
-    @Source("theme/img/date-cancel-symbol.png")
-    @ImageOptions(repeatStyle = RepeatStyle.None)
-    public ImageResource dateCancelSymbol();
-
     /*
      * ComboBox
      */

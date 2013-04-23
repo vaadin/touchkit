@@ -1643,7 +1643,8 @@ vertical-align: middle;
 	-webkit-background-size: 16px 16px;
 	width: 25px;
 	height: 27px;
-	}
+	margin-left: -25px;
+}
 
 .v-datefield-error {
 	border: 2px solid rgba(250,40,0,.6);
@@ -1792,20 +1793,6 @@ span.v-datefield-calendarpanel-month {
 	color: #4e64a1;
 	/*padding-top: 10px;*/
 	font-size:17px;
-}
-
-.v-touchkit-verticalcomponentgroup .v-filterselect {
-	/*padding-top: 10px;*/
-}
-
-.v-touchkit-verticalcomponentgroup .v-datefield-button {
-	margin-top:8px;
-	background-position: 6px;
-}
-
-.v-touchkit-verticalcomponentgroup .v-select-select {
-	margin-top: 5px;
-	height:30px;
 }
 
 .v-touchkit-verticalcomponentgroup .v-slider {
