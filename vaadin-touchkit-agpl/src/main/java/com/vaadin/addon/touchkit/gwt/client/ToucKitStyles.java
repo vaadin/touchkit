@@ -554,8 +554,6 @@ public interface ToucKitStyles extends CssResource {
     @ClassName("gwt-MenuItem-selected")
     String gwtMenuItemSelected();
     
-    String invalidlayout();
-    
     @ClassName("no-box-drag-hints")
     String noBoxDragHints();
     
@@ -731,16 +729,7 @@ public interface ToucKitStyles extends CssResource {
     
     @ClassName("v-ddwrapper-over-top")
     String vDdwrapperOverTop();
-    
-    @ClassName("v-debug-console")
-    String vDebugConsole();
-    
-    @ClassName("v-debug-console-caption")
-    String vDebugConsoleCaption();
-    
-    @ClassName("v-debug-console-content")
-    String vDebugConsoleContent();
-    
+        
     @ClassName("v-disabled")
     String vDisabled();
     
