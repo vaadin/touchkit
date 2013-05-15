@@ -13,7 +13,7 @@ import com.vaadin.addon.touchkit.itest.TabBarTest;
 public class TabBarITCase extends AbstractTestBenchTest {
     @Test
     public void whenClickTab_thenTabSelected() throws IOException,
-            AssertionError {
+            AssertionError, InterruptedException {
         startBrowser();
         try {
             // given
@@ -36,11 +36,14 @@ public class TabBarITCase extends AbstractTestBenchTest {
 
                 // when
                 tab.click();
+                
+                Thread.sleep(1000);
 
                 // then
-                text = driver
+                WebElement element = driver
                         .findElement(
-                                By.xpath("//div[@class = 'v-touchkit-tabbar-wrapper']/div[contains(@class, 'v-label')]"))
+                                By.xpath("//div[contains(@class, 'v-touchkit-tabbar-wrapper')]/div[contains(@class, 'v-label')]"));
+                text = element
                         .getText();
 
                 assertTrue(text.contains(tabname));
@@ -51,7 +54,7 @@ public class TabBarITCase extends AbstractTestBenchTest {
     }
 
     @Test
-    public void givenRemoveButton_whenPressRemove_thenCurrentTabVanishes() {
+    public void givenRemoveButton_whenPressRemove_thenCurrentTabVanishes() throws InterruptedException {
         startBrowser();
         try {
             // given
@@ -66,6 +69,9 @@ public class TabBarITCase extends AbstractTestBenchTest {
             // when
             removeButton.click();
 
+            Thread.sleep(500);
+
+
             // then
             body = driver.findElement(By.tagName("body")).getText();
             assertTrue(!body.contains("Tab0"));
@@ -78,7 +84,7 @@ public class TabBarITCase extends AbstractTestBenchTest {
     }
 
     @Test
-    public void givenFirstTabSelected_whenPressSetSelected_thenLastTabSelected() {
+    public void givenFirstTabSelected_whenPressSetSelected_thenLastTabSelected() throws InterruptedException {
         startBrowser();
         try {
             // given
@@ -91,11 +97,13 @@ public class TabBarITCase extends AbstractTestBenchTest {
 
             // when
             selectionButton.click();
+            
+            Thread.sleep(500);
 
             // then
             String content = driver
                     .findElement(
-                            By.xpath("//div[@class = 'v-touchkit-tabbar-wrapper']/div[contains(@class, 'v-label')]"))
+                            By.xpath("//div[contains(@class, 'v-touchkit-tabbar-wrapper')]/div[contains(@class, 'v-label')]"))
                     .getText();
 
             assertTrue(!content.contains("Tab0"));

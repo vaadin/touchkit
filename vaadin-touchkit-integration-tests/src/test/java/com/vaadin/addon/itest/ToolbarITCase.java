@@ -21,7 +21,7 @@ public class ToolbarITCase extends AbstractTestBenchTest {
             driver.navigate().to(BASEURL + ToolbarTest.class.getName());
             WebElement toolbar = driver
                     .findElement(By
-                            .xpath("//div[contains(@class, 'v-touchkit-toolbar')]//div[@class = 'v-csslayout-container']"));
+                            .xpath("//div[contains(@class, 'v-touchkit-toolbar')]"));
             WebElement label = driver.findElement(By
                     .xpath("//div[contains(@class, 'v-label')]"));
             List<WebElement> toolbarButtons = toolbar.findElements(By
