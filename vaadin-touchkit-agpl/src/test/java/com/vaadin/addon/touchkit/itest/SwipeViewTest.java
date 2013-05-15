@@ -26,7 +26,9 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Embedded;
 import com.vaadin.ui.Form;
+import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Layout;
 import com.vaadin.ui.NativeSelect;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
@@ -163,9 +165,13 @@ public class SwipeViewTest extends AbstractTouchKitIntegrationTest {
         }
 
         class SwipeViewWithNormalContent extends SwipeView {
+            @SuppressWarnings("deprecation")
             public SwipeViewWithNormalContent() {
                 CssLayout cssLayout = new CssLayout();
                 Form form = new Form();
+                FormLayout layout = (FormLayout) form.getLayout();
+                layout.setMargin(false);
+                form.setSizeUndefined();
 
                 CheckBox cb = new CheckBox();
 

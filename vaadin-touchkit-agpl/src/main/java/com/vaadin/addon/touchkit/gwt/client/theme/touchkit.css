@@ -1757,6 +1757,12 @@ span.v-datefield-calendarpanel-month {
     margin: listLayoutMargin 0;
 }
 
+.v-touchkit-componentgroup-cell > .v-form {
+    margin-left: negativeListLayoutMargin;
+    margin-right: negativeListLayoutMargin;
+    display: block;
+}
+
 .v-touchkit-componentgroup-cell > .v-select-optiongroup {
     margin: 0;
 }
