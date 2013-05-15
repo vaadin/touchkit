@@ -15,11 +15,10 @@ import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.Window.Navigator;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.vaadin.client.BrowserInfo;
-import com.vaadin.client.VConsole;
 
 public class VNavigationManager extends ComplexPanel {
 
@@ -107,7 +106,6 @@ public class VNavigationManager extends ComplexPanel {
     private void animateHorizontally(final int views, final boolean lockClient) {
         prepareForAnimation();
         if (lockClient) {
-            VConsole.log("Locking client until transition has finished");
             transitionPending = true;
             fireAnimationWillStart();
         }
@@ -180,16 +178,13 @@ public class VNavigationManager extends ComplexPanel {
     }-*/;
 
     private void initIosScroollHack() {
-        VConsole.error("Deterniming need for ios6 scroll haxie");
-        needsIos6ScrollingWorkaround = BrowserInfo.get().isIOS()
-                && BrowserInfo.getBrowserString().contains(" OS 6_");
+        needsIos6ScrollingWorkaround = Navigator.getUserAgent().contains(" OS 6_") && Navigator.getUserAgent().contains(" afari");
         // Disable hack if "fullscreen", the hack disturbs e.g. SwipeView a
         // LOT as it slows down "warming up" the hardware accelerated layer
         if (needsIos6ScrollingWorkaround
                 && getOffsetWidth() == RootPanel.get().getOffsetWidth()) {
             needsIos6ScrollingWorkaround = false;
         }
-        VConsole.error("Needed" + needsIos6ScrollingWorkaround);
     }
 
     private void moveAside(com.google.gwt.dom.client.Element element) {
@@ -241,12 +236,9 @@ public class VNavigationManager extends ComplexPanel {
     }
 
     private void onTransitionEnd() {
-        VConsole.log("Trs end");
-
         new Timer() {
             @Override
             public void run() {
-                VConsole.log("Place holder hide");
                 hidePlaceHolder();
             }
         }.schedule(160);
@@ -318,7 +310,6 @@ public class VNavigationManager extends ComplexPanel {
 
     @Override
     public boolean remove(Widget w) {
-        VConsole.error("Removing" + w.getElement().getId());
         com.google.gwt.dom.client.Element wrapperElement = w.getElement()
                 .getParentElement();
         boolean removed = super.remove(w);
@@ -339,7 +330,6 @@ public class VNavigationManager extends ComplexPanel {
             return;
         }
         lastWidth = getPixelWidth();
-        VConsole.error("handleChildSizesAndPositions");
         // update positions. Not set with percentages as ios safari bugs
         // occasionally with percentages in translate3d.
 

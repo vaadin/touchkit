@@ -16,9 +16,9 @@ import com.google.gwt.event.dom.client.TouchMoveEvent;
 import com.google.gwt.event.dom.client.TouchMoveHandler;
 import com.google.gwt.event.dom.client.TouchStartEvent;
 import com.google.gwt.event.dom.client.TouchStartHandler;
+import com.google.gwt.user.client.Window.Navigator;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
-import com.vaadin.client.VConsole;
 
 public class VNavigationButton extends HTML implements TouchStartHandler,
         TouchCancelHandler, TouchEndHandler, TouchMoveHandler, ClickHandler {
@@ -30,10 +30,11 @@ public class VNavigationButton extends HTML implements TouchStartHandler,
     static final long IGNORE_SIMULATED_CLICKS_THRESHOLD = 1500;
     private boolean touchStarted = false;
     private Date fastClickAt;
+    public static boolean useFastClicks = !Navigator.getUserAgent().toLowerCase().contains("android 2");
     
     public VNavigationButton() {
         setStyleName(NAVBUTTON_CLASSNAME);
-        if(TouchButton.useFastClicks) {
+        if(VNavigationButton.useFastClicks) {
             addTouchStartHandler(this);
             addTouchCancelHandler(this);
             addTouchEndHandler(this);
@@ -131,8 +132,8 @@ public class VNavigationButton extends HTML implements TouchStartHandler,
         if (enabled) {
             if (fastClickAt != null
                     && (new Date().getTime() - fastClickAt.getTime()) < IGNORE_SIMULATED_CLICKS_THRESHOLD) {
-                VConsole.log("Ignored simulated event fired by old ios or android "
-                        + (new Date().getTime() - fastClickAt.getTime()));
+//                VConsole.log("Ignored simulated event fired by old ios or android "
+//                        + (new Date().getTime() - fastClickAt.getTime()));
                 fastClickAt = null;
                 return;
             }

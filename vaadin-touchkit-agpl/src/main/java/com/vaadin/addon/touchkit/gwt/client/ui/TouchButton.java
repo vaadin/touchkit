@@ -13,7 +13,6 @@ import com.google.gwt.event.dom.client.TouchMoveHandler;
 import com.google.gwt.event.dom.client.TouchStartEvent;
 import com.google.gwt.event.dom.client.TouchStartHandler;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.Window.Navigator;
 import com.vaadin.client.VConsole;
 import com.vaadin.client.ui.VButton;
 
@@ -23,10 +22,8 @@ public class TouchButton extends VButton implements TouchStartHandler,
     static final long IGNORE_SIMULATED_CLICKS_THRESHOLD = 1500;
     private boolean touchStarted;
     private Date fastClickAt;
-    public static boolean useFastClicks = !Navigator.getUserAgent().toLowerCase().contains("android 2");
-
     public TouchButton() {
-        if(useFastClicks) {
+        if(VNavigationButton.useFastClicks) {
             addTouchStartHandler(this);
             addTouchCancelHandler(this);
             addTouchMoveHandler(this);
