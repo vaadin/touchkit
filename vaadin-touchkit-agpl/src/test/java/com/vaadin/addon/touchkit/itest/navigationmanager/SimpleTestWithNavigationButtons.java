@@ -26,13 +26,13 @@ public class SimpleTestWithNavigationButtons extends
         final NavigationManager navigationManager = new NavigationManager();
 
         final CssLayout cL = new CssLayout();
-        cL.setDebugId("l1");
+        cL.setId("l1");
         final CssLayout nL = new CssLayout();
-        nL.setDebugId("l2");
+        nL.setId("l2");
         CssLayout pL = new CssLayout();
-        pL.setDebugId("l0");
+        pL.setId("l0");
         final CssLayout yetAnother = new CssLayout();
-        yetAnother.setDebugId("l3");
+        yetAnother.setId("l3");
 
         cL.addComponent(new Label("CURR"));
         NavigationButton button = new NavigationButton("-->");
