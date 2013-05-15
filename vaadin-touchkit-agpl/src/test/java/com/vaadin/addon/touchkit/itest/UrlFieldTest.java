@@ -15,6 +15,7 @@ public class UrlFieldTest extends AbstractTouchKitIntegrationTest {
         setDescription("This is UrlField test");
 
         final UrlField nf = new UrlField("UrlField");
+        nf.setStyleName("urlfield");
         nf.setImmediate(true);
         nf.addTextChangeListener(new TextChangeListener() {
             public void textChange(TextChangeEvent event) {
