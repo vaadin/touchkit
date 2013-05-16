@@ -43,7 +43,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<license.short.name>cval</license.short.name>
-		<vaadin.version.maven>7.0.4</vaadin.version.maven>
+		<vaadin.version.maven>7.0.1</vaadin.version.maven>
 		<gpg.passphrase.file>empty.properties</gpg.passphrase.file>
 		<gpg.skip>true</gpg.skip>
 		<snapshot.repository.url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</snapshot.repository.url>
@@ -52,20 +52,31 @@
 		<Implementation-Title>Vaadin TouchKit</Implementation-Title>
 		<Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
 		<Vaadin-Addon>vaadin-touchkit-${license.short.name}-${project.version}.jar</Vaadin-Addon>
-		
+
 		<jetty.version>8.1.7.v20120910</jetty.version>
-		
+
 
 	</properties>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>pdfsplit-plugin</id>
-            <url>https://raw.github.com/zch/maven/releases/</url>
-        </pluginRepository>
-    </pluginRepositories>
-
-    <description>Provides components and features for mobile devices.</description>
+	<description>Provides components and features for mobile devices.</description>
+	
+		<pluginRepositories>
+		<pluginRepository>
+			<id>vaadin-snapshots</id>
+			<url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>pdfsplit-plugin</id>
+			<url>https://raw.github.com/zch/maven/releases/</url>
+		</pluginRepository>
+	</pluginRepositories>
+	
 	<build>
 		<sourceDirectory>../vaadin-touchkit-agpl/src/main/java</sourceDirectory>
 
@@ -92,6 +103,27 @@
 		</resources>
 
 		<plugins>
+
+			<!-- Extracts the TouchKit chapter from BoV -->
+			<plugin>
+				<groupId>com.github.zch</groupId>
+				<artifactId>pdfsplit-maven-plugin</artifactId>
+				<version>1.0.1</version>
+				<executions>
+					<execution>
+						<id>pdfsplit</id>
+						<phase>package</phase>
+						<goals>
+							<goal>split</goal>
+						</goals>
+						<configuration>
+							<inputUrl>https://vaadin.com/download/book-of-vaadin/vaadin-7/pdf/book-of-vaadin.pdf</inputUrl>
+							<chapter>Chapter 22. Mobile Applications with TouchKit</chapter>
+							<outFile>${project.build.directory}/vaadin-touchkit-manual.pdf</outFile>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -164,45 +196,11 @@
 					</execution>
 				</executions>
 			</plugin>
-<!--
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>copy-dependencies</id>
-						<phase>package</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-						<configuration>
-							<includeScope>runtime</includeScope>
-							<outputDirectory>target/libs</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
--->
-            <!-- Extracts the TouchKit chapter from BoV -->
-            <plugin>
-                <groupId>com.github.zch</groupId>
-                <artifactId>pdfsplit-maven-plugin</artifactId>
-                <version>1.0.1</version>
-                <executions>
-                    <execution>
-                        <id>pdfsplit</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>split</goal>
-                        </goals>
-                        <configuration>
-                            <inputUrl>https://vaadin.com/download/book-of-vaadin/vaadin-7/pdf/book-of-vaadin.pdf</inputUrl>
-                            <chapter>Chapter 22. Mobile Applications with TouchKit</chapter>
-                            <outFile>${project.build.directory}/vaadin-touchkit-manual.pdf</outFile>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-dependency-plugin</artifactId> 
+				<executions> <execution> <id>copy-dependencies</id> <phase>package</phase> 
+				<goals> <goal>copy-dependencies</goal> </goals> <configuration> <includeScope>runtime</includeScope> 
+				<outputDirectory>target/libs</outputDirectory> </configuration> </execution> 
+				</executions> </plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -223,6 +221,7 @@
 					</execution>
 				</executions>
 			</plugin>
+
 		</plugins>
 
 		<pluginManagement>
@@ -273,7 +272,7 @@
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-themes</artifactId>
 			<version>${vaadin.version.maven}</version>
-			<scope>compile</scope>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
