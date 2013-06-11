@@ -50,23 +50,23 @@ public class VNavigationView extends ComplexPanel {
         setStyleDependentName("notoolbar", !hasToolbar);
         if (hasToolbar) {
             if (toolbar != null && toolbar != widget) {
-                forgetComponent(toolbar);
+                remove(toolbar);
             }
             toolbar = widget;
             if (!toolbar.isAttached()) {
                 add(toolbar, toolbarDiv);
             }
         } else if (toolbar != null) {
-            forgetComponent(toolbar);
+            remove(toolbar);
         }
     }
 
     public void setContent(Widget widget) {
         if (content != null && content != widget) {
-            forgetComponent(content);
+            remove(content);
         }
         content = widget;
-        if (!content.isAttached()) {
+        if (content.getParent() != this) {
             add(content, wrapper);
         }
     }
@@ -76,19 +76,22 @@ public class VNavigationView extends ComplexPanel {
             navbar.removeFromParent();
         }
         navbar = newNavBar;
-        if (!navbar.isAttached()) {
+        if (navbar.getParent() != this) {
             insert(navbar, getElement(), 0, true);
         }
     }
 
-    private void forgetComponent(Widget widget) {
-        widget.removeFromParent();
-        // client.unregisterPaintable(content2);
-        if (content == widget) {
-            content = null;
-        } else {
-            toolbar = null;
+    @Override
+    public boolean remove(Widget w) {
+        boolean removed = super.remove(w);
+        if (removed) {
+            if (content == w) {
+                content = null;
+            } else if (toolbar == w) {
+                toolbar = null;
+            }
         }
+        return removed;
     }
 
     public void replaceChildComponent(Widget oldComponent, Widget newComponent) {

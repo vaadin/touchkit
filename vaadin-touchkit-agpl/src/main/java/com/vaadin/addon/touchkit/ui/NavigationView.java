@@ -101,6 +101,7 @@ public class NavigationView extends AbstractComponentContainer {
         }
         super.addComponent(c);
         mainComponent = c;
+        markAsDirty();
     }
 
     /**
@@ -135,6 +136,7 @@ public class NavigationView extends AbstractComponentContainer {
             throw new IllegalArgumentException(
                     " Only the toolbar or main content can be removed");
         }
+        markAsDirty();
     }
 
     /**
