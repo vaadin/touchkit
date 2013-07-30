@@ -277,13 +277,6 @@ public class TabBarView extends AbstractComponentContainer {
             return relatedComponent;
         }
 
-        // FIXME
-        // @Override
-        // protected void fireClick(MouseEventDetails details) {
-        // setSelectedTab(getComponent());
-        // super.fireClick(details);
-        // }
-
     }
 
     private static final Method SELECTED_TAB_CHANGE_METHOD;

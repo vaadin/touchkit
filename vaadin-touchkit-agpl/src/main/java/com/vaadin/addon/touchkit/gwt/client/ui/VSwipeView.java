@@ -52,7 +52,7 @@ public class VSwipeView extends SimplePanel {
     private boolean touchDrag;
     private VNavigationManager np;
     private Element scrollElement;
-    private TouchStartEvent dragStartEvent;
+    protected TouchStartEvent dragStartEvent;
     private TouchScrollDelegate touchScrollDelegate;
 
     private boolean enabled = true;
@@ -74,13 +74,18 @@ public class VSwipeView extends SimplePanel {
         DOM.sinkEvents(scrollElement, Event.ONSCROLL);
         touchScrollDelegate = new TouchScrollDelegate(scrollElement);
 
+        initHandlers();
+    }
+
+    protected void initHandlers() {
+        getElement().getStyle().setProperty("msTouchAction", "pan-y");
         addHandler(new TouchStartHandler() {
             public void onTouchStart(TouchStartEvent event) {
                 dragStartEvent = event;
                 dragStart(event);
             }
         }, TouchStartEvent.getType());
-
+        
         addHandler(new MouseDownHandler() {
 
             public void onMouseDown(MouseDownEvent event) {
@@ -103,7 +108,7 @@ public class VSwipeView extends SimplePanel {
                 dragMove(event);
             }
         }, TouchMoveEvent.getType());
-
+        
         addHandler(new MouseUpHandler() {
 
             public void onMouseUp(MouseUpEvent event) {
@@ -117,9 +122,10 @@ public class VSwipeView extends SimplePanel {
                 dragEnd(event);
             }
         }, TouchEndEvent.getType());
-    }
+        
+	}
 
-    public boolean isEnabled() {
+	public boolean isEnabled() {
         return enabled;
     }
 

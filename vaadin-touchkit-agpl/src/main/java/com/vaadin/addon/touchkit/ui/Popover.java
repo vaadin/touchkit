@@ -113,7 +113,7 @@ public class Popover extends Window {
     }
 
     /**
-     * Removes the popover from the parent {@link Window}.
+     * Removes the popover from the UI.
      */
     public void removeFromParent() {
         if (getParent() != null) {

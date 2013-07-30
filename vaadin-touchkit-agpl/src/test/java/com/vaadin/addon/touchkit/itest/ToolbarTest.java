@@ -1,6 +1,7 @@
 package com.vaadin.addon.touchkit.itest;
 
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
+import com.vaadin.addon.touchkit.extensions.FontAwesomeIcon;
 import com.vaadin.addon.touchkit.ui.Toolbar;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Button;
@@ -16,7 +17,15 @@ public class ToolbarTest extends AbstractTouchKitIntegrationTest {
 
         for (int loop = 0; loop < 10; loop++) {
             Button button = new Button();
-            button.setIcon(new ThemeResource("../runo/icons/32/folder.png"));
+            if(loop%2==0) {
+            	FontAwesomeIcon.HOME.add(button);
+            } else {
+                button.setIcon(new ThemeResource("../runo/icons/64/folder.png"));
+            }
+            if(loop%3==0) {
+            	button.setCaption("Diipa");
+            }
+
             final int identifier = loop;
             button.addClickListener(new Button.ClickListener() {
 

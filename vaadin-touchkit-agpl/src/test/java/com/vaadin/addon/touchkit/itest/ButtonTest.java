@@ -8,7 +8,9 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.themes.BaseTheme;
 
 public class ButtonTest extends AbstractTouchKitIntegrationTest implements ClickListener {
-    public ButtonTest() {
+    private int i;
+
+	public ButtonTest() {
         setDescription("This is a button test");
         Button button = new Button();
         button.setCaption("button caption");
@@ -25,7 +27,7 @@ public class ButtonTest extends AbstractTouchKitIntegrationTest implements Click
 
     @Override
     public void buttonClick(ClickEvent event) {
-        Notification.show("Clicked");
+        Notification.show("Clicked " + ++i);
     }
 
 }

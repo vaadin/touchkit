@@ -12,6 +12,7 @@ import com.vaadin.addon.touchkit.gwt.client.offlinemode.CacheManifestStatusIndic
 import com.vaadin.server.BootstrapFragmentResponse;
 import com.vaadin.server.BootstrapListener;
 import com.vaadin.server.BootstrapPageResponse;
+import com.vaadin.server.WebBrowser;
 
 /**
  * This class is used to control HTML5 application cache settings.
@@ -69,9 +70,14 @@ public class ApplicationCacheSettings implements BootstrapListener {
      *            Page response where the manifest will be added.
      * @return The manifest file name, eg. "safari.manifest".
      */
-    protected String generateManifestFileName(BootstrapPageResponse response) {
-        // Default implementation of TouchKit only supports webkit (safari)
-        // browsers for now.
+    @SuppressWarnings("deprecation")
+	protected String generateManifestFileName(BootstrapPageResponse response) {
+    	WebBrowser browser = response.getSession().getBrowser();
+    	if(browser.isFirefox()) {
+    		return "gecko1_8.manifest";
+    	} else if (browser.isIE()) {
+    		return "ie10.manifest";
+    	}
         return "safari.manifest";
     }
 

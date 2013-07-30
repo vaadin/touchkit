@@ -3,6 +3,7 @@ package com.vaadin.addon.touchkit.gwt.client.ui;
 import com.google.gwt.animation.client.Animation;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Touch;
@@ -32,7 +33,6 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.HasValue;
-import com.vaadin.addon.touchkit.gwt.client.VEagerResourceLoader;
 import com.vaadin.client.ApplicationConnection;
 import com.vaadin.client.ui.Field;
 
@@ -52,13 +52,6 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
     public static final String CLASSNAME = "v-touchkit-switch";
     private final int DRAG_THRESHOLD_PIXELS = 10;
     private final int ANIMATION_DURATION_MS = 300;
-
-    /**
-     * The amount of pixels to move the background so that it is under the
-     * border. In iPhone 4 the amount is different because of pixel scaling.
-     */
-    private static final int BACKGROUND_POSITION_X_OFFSET = VEagerResourceLoader
-            .isHighDPI() ? -1 : 0;
 
     /** Reference to the server connection object. */
     ApplicationConnection client;
@@ -84,13 +77,15 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
         // Change to proper element or remove if extending another widget
         setElement(Document.get().createDivElement());
 
-        setStyleName(CLASSNAME + "-wrapper");
+        DivElement el = Document.get().createDivElement();
+        el.addClassName(CLASSNAME + "-wrapper");
 
         mainElement = Document.get().createDivElement();
         // This method call of the Paintable interface sets the component
         // style name in DOM tree
         mainElement.setClassName(CLASSNAME);
-        getElement().appendChild(mainElement);
+        el.appendChild(mainElement);
+        getElement().appendChild(el);
 
         // build the DOM
         slider = Document.get().createDivElement();
@@ -139,8 +134,8 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
         if (unvisiblePartWidth == 0) {
             // Calculate the width of the part that is not currently visible
             // and init the state on the first rendering.
-            int width = mainElement.getClientWidth();
-            int sliderWidth = slider.getClientWidth();
+            int width = mainElement.getParentElement().getClientWidth();
+            int sliderWidth = mainElement.getClientWidth();
             unvisiblePartWidth = sliderWidth - width;
             if (unvisiblePartWidth < 3) {
                 // CSS not loaded yet
@@ -155,10 +150,14 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
 
             public void execute() {
                 final int targetLeft = (value ? 0 : -getUnvisiblePartWidth());
+                final Element parentElement = mainElement.getParentElement();
 
                 if (skipAnimation) {
-                    mainElement.getStyle().setProperty("backgroundPositionX",
-                            targetLeft + BACKGROUND_POSITION_X_OFFSET + "px");
+                    parentElement.getStyle().setProperty(
+                            Css3Propertynames.INSTANCE._transition(), "");
+                    setStyleName(parentElement, CLASSNAME + "-off", !value);
+                    mainElement.getStyle().setProperty("left",
+                            targetLeft + "px");
                 } else {
                     Animation a = new Animation() {
 
@@ -166,13 +165,19 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
                         protected void onUpdate(double progress) {
                             int currentLeft = getCurrentPosition();
                             int newLeft = (int) (currentLeft + (progress * (targetLeft - currentLeft)));
-                            mainElement.getStyle().setProperty(
-                                    "backgroundPositionX",
-                                    newLeft + BACKGROUND_POSITION_X_OFFSET
-                                            + "px");
+                            mainElement.getStyle().setProperty("left",
+                                    newLeft + "px");
                         }
+
+                        protected void onComplete() {
+                        };
                     };
                     a.run(ANIMATION_DURATION_MS);
+                    float d = ANIMATION_DURATION_MS / 1000;
+                    parentElement.getStyle().setProperty(
+                            Css3Propertynames.INSTANCE._transition(),
+                            "background " + d + "s");
+                    setStyleName(parentElement, CLASSNAME + "-off", !value);
                 }
             }
         };
@@ -185,8 +190,7 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
     }
 
     private int getCurrentPosition() {
-        String currentLeftString = mainElement.getStyle().getProperty(
-                "backgroundPositionX");
+        String currentLeftString = mainElement.getStyle().getProperty("left");
         if (currentLeftString == null || currentLeftString.length() == 0) {
             currentLeftString = "0px";
         }
@@ -266,8 +270,7 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
                 }
 
                 // set the CSS left
-                mainElement.getStyle().setProperty("backgroundPositionX",
-                        left + BACKGROUND_POSITION_X_OFFSET + "px");
+                mainElement.getStyle().setProperty("left", left + "px");
             }
         }
     }

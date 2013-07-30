@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import com.vaadin.addon.touchkit.itest.oldtests.NavPanelTestWithViews;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.data.util.BeanItemContainer;
@@ -18,7 +17,6 @@ import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.AbstractComponentContainer;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Table;
@@ -104,7 +102,7 @@ public class TouchkitTestUI extends UI {
             }
         });
         table.setSizeFull();
-        debugmode.setValue(true);
+        debugmode.setValue(false);
         HorizontalLayout options = new HorizontalLayout();
         options.addComponent(debugmode);
         TextField textField = new TextField();

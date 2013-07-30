@@ -624,9 +624,13 @@ e.v-app select, .v-window select {
 }
 */
 
+/*
+
 .v-app input[type="text"], .v-app input[type="password"], .v-app input[type="reset"], .v-app select, .v-app textarea, .v-window input[type="text"], .v-window input[type="password"], .v-window input[type="reset"], .v-window select, .v-window textarea {
 	padding: 2px;
 }
+
+*/
 
 .v-drag-element {
 	z-index: 60000;
@@ -642,9 +646,6 @@ e.v-app select, .v-window select {
 .v-scrollable {
 	overflow: auto;
 	line-height: normal;
-}
-
-.v-ios.v-sa6 .v-scrollable {
 	-webkit-overflow-scrolling: touch;
 }
 
@@ -1507,8 +1508,7 @@ div.v-csslayout {
 */
 
 .v-Notification h1, .v-Notification p, .v-Notification-error h1, .v-Notification-error p, .v-Notification-warning h1, .v-Notification-warning p {
-	display: inline;
-	margin: 0 0.5em 0 0;
+	margin: 0 1em;
 }
 
 .v-Notification-warning {
@@ -1669,10 +1669,6 @@ div.v-progressindicator-indeterminate-disabled {
 	background: transparent;
 }
 
-.v-select {
-	text-align: left;
-}
-
 .v-select-optiongroup .v-select-option {
 	display: block;
 	white-space: nowrap;
@@ -1689,10 +1685,6 @@ div.v-progressindicator-indeterminate-disabled {
 	zoom: 1;
 }
 */
-
-.v-select-select {
-	display: block;
-}
 
 .v-select-twincol {
 	white-space: nowrap;
@@ -2236,7 +2228,7 @@ input.v-textfield-readonly:focus, textarea.v-textarea-readonly:focus {
 	outline: none;
 }
 
-.v-sa input:focus, .v-sa textarea:focus {
+input:focus, textarea:focus {
 	outline-width: medium;
 }
 

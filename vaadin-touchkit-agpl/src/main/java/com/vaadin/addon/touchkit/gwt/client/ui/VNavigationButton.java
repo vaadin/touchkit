@@ -21,128 +21,131 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 
 public class VNavigationButton extends HTML implements TouchStartHandler,
-        TouchCancelHandler, TouchEndHandler, TouchMoveHandler, ClickHandler {
-    private static final String NAVBUTTON_CLASSNAME = "v-touchkit-navbutton";
-    private String caption;
-    private ImageElement icon;
-    private SpanElement descriptionElement;
-    private boolean enabled;
-    static final long IGNORE_SIMULATED_CLICKS_THRESHOLD = 1500;
-    private boolean touchStarted = false;
-    private Date fastClickAt;
-    public static boolean useFastClicks = !Navigator.getUserAgent().toLowerCase().contains("android 2");
-    
-    public VNavigationButton() {
-        setStyleName(NAVBUTTON_CLASSNAME);
-        if(VNavigationButton.useFastClicks) {
-            addTouchStartHandler(this);
-            addTouchCancelHandler(this);
-            addTouchEndHandler(this);
-            addTouchMoveHandler(this);
-        }
-        addClickHandler(this);
-    }
+		TouchCancelHandler, TouchEndHandler, TouchMoveHandler, ClickHandler {
+	private static final String NAVBUTTON_CLASSNAME = "v-touchkit-navbutton";
+	private String caption;
+	private ImageElement icon;
+	private SpanElement descriptionElement;
+	private boolean enabled;
+	static final long IGNORE_SIMULATED_CLICKS_THRESHOLD = 1500;
+	private boolean touchStarted = false;
+	private Date fastClickAt;
 
+	// TODO check if WP could support fast clicks as well. Now seem to get
+	// duplicate events every now and then
+	public static boolean useFastClicks = !Navigator.getUserAgent()
+			.toLowerCase().contains("android 2");
 
-    public VNavigationManager findNavigationPanel() {
-        Widget parent2 = getParent();
-        while (parent2 != null && !(parent2 instanceof VNavigationManager)) {
-            parent2 = parent2.getParent();
-        }
-        return (VNavigationManager) parent2;
-    }
+	public VNavigationButton() {
+		setStyleName(NAVBUTTON_CLASSNAME);
+		if (VNavigationButton.useFastClicks) {
+			addTouchStartHandler(this);
+			addTouchCancelHandler(this);
+			addTouchEndHandler(this);
+			addTouchMoveHandler(this);
+		}
+		addClickHandler(this);
+	}
 
-    @Override
-    public void setText(String text) {
-        caption = text;
-        super.setText(text);
-    }
+	public VNavigationManager findNavigationPanel() {
+		Widget parent2 = getParent();
+		while (parent2 != null && !(parent2 instanceof VNavigationManager)) {
+			parent2 = parent2.getParent();
+		}
+		return (VNavigationManager) parent2;
+	}
 
-    public String getCaption() {
-        return caption;
-    }
+	@Override
+	public void setText(String text) {
+		caption = text;
+		super.setText(text);
+	}
 
-    public void setIcon(String iconUrl) {
-        if (icon == null) {
-            icon = Document.get().createImageElement();
-            icon.setClassName(IconWidget.CLASSNAME);
-        }
-        icon.setSrc(iconUrl);
-        getElement().insertFirst(icon);
-    }
+	public String getCaption() {
+		return caption;
+	}
 
-    public void setDescription(String description) {
-        if (description != null && !description.trim().isEmpty()) {
+	public void setIcon(String iconUrl) {
+		if (icon == null) {
+			icon = Document.get().createImageElement();
+			icon.setClassName(IconWidget.CLASSNAME);
+		}
+		icon.setSrc(iconUrl);
+		getElement().insertFirst(icon);
+	}
 
-            if (descriptionElement == null) {
-                descriptionElement = Document.get().createSpanElement();
-                descriptionElement.setClassName(NAVBUTTON_CLASSNAME + "-desc");
-            }
-            /*
-             * Add the descriptionElement if it's not already added as it might
-             * have been overwritten by a call to #setText
-             */
-            if (!getElement().isOrHasChild(descriptionElement)) {
-                getElement().insertFirst(descriptionElement);
-            }
-            descriptionElement.setInnerHTML(description);
+	public void setDescription(String description) {
+		if (description != null && !description.trim().isEmpty()) {
 
-        } else if (descriptionElement != null) {
+			if (descriptionElement == null) {
+				descriptionElement = Document.get().createSpanElement();
+				descriptionElement.setClassName(NAVBUTTON_CLASSNAME + "-desc");
+			}
+			/*
+			 * Add the descriptionElement if it's not already added as it might
+			 * have been overwritten by a call to #setText
+			 */
+			if (!getElement().isOrHasChild(descriptionElement)) {
+				getElement().insertFirst(descriptionElement);
+			}
+			descriptionElement.setInnerHTML(description);
 
-            descriptionElement.removeFromParent();
-            descriptionElement = null;
-        }
-    }
+		} else if (descriptionElement != null) {
 
-    @Override
-    public void onTouchMove(TouchMoveEvent event) {
-        touchStarted = false;
-    }
+			descriptionElement.removeFromParent();
+			descriptionElement = null;
+		}
+	}
 
-    @Override
-    public void onTouchEnd(TouchEndEvent event) {
-        if (touchStarted) {
-            event.preventDefault();
-            event.stopPropagation();
-            NativeEvent nativeEvent = event.getNativeEvent();
-            NativeEvent evt = Document.get().createClickEvent(1,
-                    nativeEvent.getScreenX(), nativeEvent.getScreenY(),
-                    nativeEvent.getClientX(), nativeEvent.getClientY(), false,
-                    false, false, false);
-            getElement().dispatchEvent(evt);
-            touchStarted = false;
-            fastClickAt = new Date();
-        }
-    }
+	@Override
+	public void onTouchMove(TouchMoveEvent event) {
+		touchStarted = false;
+	}
 
-    @Override
-    public void onTouchCancel(TouchCancelEvent event) {
-        touchStarted = false;
-    }
+	@Override
+	public void onTouchEnd(TouchEndEvent event) {
+		if (touchStarted) {
+			event.preventDefault();
+			event.stopPropagation();
+			NativeEvent nativeEvent = event.getNativeEvent();
+			NativeEvent evt = Document.get().createClickEvent(1,
+					nativeEvent.getScreenX(), nativeEvent.getScreenY(),
+					nativeEvent.getClientX(), nativeEvent.getClientY(), false,
+					false, false, false);
+			getElement().dispatchEvent(evt);
+			touchStarted = false;
+			fastClickAt = new Date();
+		}
+	}
 
-    @Override
-    public void onTouchStart(TouchStartEvent event) {
-        touchStarted = true;
-        fastClickAt = null;
-        getElement().focus();
-    }
+	@Override
+	public void onTouchCancel(TouchCancelEvent event) {
+		touchStarted = false;
+	}
 
-    @Override
-    public void onClick(ClickEvent event) {
-        if (enabled) {
-            if (fastClickAt != null
-                    && (new Date().getTime() - fastClickAt.getTime()) < IGNORE_SIMULATED_CLICKS_THRESHOLD) {
-//                VConsole.log("Ignored simulated event fired by old ios or android "
-//                        + (new Date().getTime() - fastClickAt.getTime()));
-                fastClickAt = null;
-                return;
-            }
-            getElement().focus();
-        }
-    }
+	@Override
+	public void onTouchStart(TouchStartEvent event) {
+		touchStarted = true;
+		fastClickAt = null;
+		getElement().focus();
+	}
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
+	@Override
+	public void onClick(ClickEvent event) {
+		if (enabled) {
+			if (fastClickAt != null
+					&& (new Date().getTime() - fastClickAt.getTime()) < IGNORE_SIMULATED_CLICKS_THRESHOLD) {
+				// VConsole.log("Ignored simulated event fired by old ios or android "
+				// + (new Date().getTime() - fastClickAt.getTime()));
+				fastClickAt = null;
+				return;
+			}
+			getElement().focus();
+		}
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 
 }

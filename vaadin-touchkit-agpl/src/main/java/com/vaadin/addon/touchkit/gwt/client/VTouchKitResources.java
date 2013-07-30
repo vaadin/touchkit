@@ -2,23 +2,27 @@ package com.vaadin.addon.touchkit.gwt.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
-import com.google.gwt.resources.client.CssResource;
-import com.google.gwt.resources.client.CssResource.NotStrict;
 import com.google.gwt.resources.client.DataResource;
+import com.google.gwt.resources.client.DataResource.DoNotEmbed;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.resources.client.ImageResource.ImageOptions;
 import com.google.gwt.resources.client.ImageResource.RepeatStyle;
+import com.vaadin.addon.touchkit.gwt.client.theme.ParkingStyles;
 
 public interface VTouchKitResources extends ClientBundle {
     public static final VTouchKitResources INSTANCE = GWT
             .create(VTouchKitResources.class);
 
-    @Source({"theme/base.css","theme/touchkit.css"})
-    public ToucKitStyles css();
+    @Source({"theme/base.css","theme/parking.css"})
+    public ParkingStyles css();
+    
+    @Source("theme/FontAwesome.woff")
+    @DoNotEmbed
+    DataResource fontAwesome();
 
-    @NotStrict
-    @Source("theme/high-dpi.css")
-    public CssResource highDpiCss();
+    @Source("theme/FontAwesome.otf")
+    @DoNotEmbed
+    DataResource fontAwesomeOtf();
 
     @Source("theme/img/spinner.png")
     public DataResource spinnerImage();
@@ -98,25 +102,13 @@ public interface VTouchKitResources extends ClientBundle {
      * Popover images
      */
 
-    @Source("theme/img/popover-arrow.png")
+    @Source("theme/img/popover-arrow-parking.png")
     @ImageOptions(repeatStyle = RepeatStyle.None)
     public ImageResource popoverArrowImage();
 
-    @Source("theme/img/popover-arrow-down.png")
+    @Source("theme/img/popover-arrow-parking-down.png")
     @ImageOptions(repeatStyle = RepeatStyle.None)
     public ImageResource popoverArrowDownImage();
-
-    /*
-     * Switch
-     */
-
-    @Source("theme/img/switch.png")
-    @ImageOptions(repeatStyle = RepeatStyle.None)
-    public DataResource switchImage();
-
-    @Source("theme/img/switch-2x.png")
-    @ImageOptions(repeatStyle = RepeatStyle.None)
-    public DataResource switchImage2x();
 
     /*
      * Table

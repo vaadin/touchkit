@@ -9,12 +9,12 @@ import com.vaadin.addon.touchkit.ui.NavigationManager.NavigationListener;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Table.RowHeaderMode;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Table;
+import com.vaadin.ui.Table.RowHeaderMode;
 
 public class TableAndNavigationManager extends AbstractTouchKitIntegrationTest {
     
@@ -36,8 +36,14 @@ public class TableAndNavigationManager extends AbstractTouchKitIntegrationTest {
         table.addContainerProperty("Dai", String.class, "ba");
         table.setRowHeaderMode(RowHeaderMode.INDEX);
         for(int i = 0;  i < 100; i++) {
-            table.addItem();
+            Object item = table.addItem();
+            if( i == 3) {
+            	table.setValue(item);
+            }
         }
+        
+        table.setSortContainerPropertyId("Dii");
+        
         return table;
     }
 

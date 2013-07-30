@@ -1,8 +1,6 @@
 package com.vaadin.addon.touchkit.ui;
 
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.CssLayout;
 
 /**
  * The Toolbar is a native looking toolbar for showing buttons.
@@ -14,15 +12,7 @@ import com.vaadin.ui.CssLayout;
  * A Toolbar is typically used as a part of a {@link NavigationView}.
  * 
  */
-public class Toolbar extends CssLayout {
-
-    /*-
-     *  Implementation notes
-     *  
-     * If we'd want buttons to layout exactly like in ios, we'd need to add 
-     * spacers between components and expand spacers. Currently space spread
-     * equally and components aligned center.
-     */
+public class Toolbar extends HorizontalButtonGroup {
 
     private static final String STYLENAME = "v-touchkit-toolbar";
 
@@ -31,23 +21,7 @@ public class Toolbar extends CssLayout {
      * high.
      */
     public Toolbar() {
-        setStyleName(STYLENAME);
-        setWidth(100, Unit.PERCENTAGE);
-    }
-
-    @Override
-    public void addComponent(Component c) {
-        super.addComponent(c);
-        float width = 100 / getComponentCount();
-        for (Component component : components) {
-            component.setWidth(width, Unit.PERCENTAGE);
-        }
-    }
-
-    @Override
-    protected String getCss(Component c) {
-        String css = "float:left;";
-        return css;
+    	setPrimaryStyleName(STYLENAME);
     }
 
 }

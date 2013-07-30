@@ -19,6 +19,7 @@ import com.google.gwt.user.client.Window.Navigator;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.vaadin.client.BrowserInfo;
 
 public class VNavigationManager extends ComplexPanel {
 
@@ -86,7 +87,8 @@ public class VNavigationManager extends ComplexPanel {
         setStyleName(CLASSNAME);
         wrapper.setClassName(WRAPPER_CLASSNAME);
         getElement().appendChild(wrapper);
-        hookTransitionEndListener(wrapper);
+        hookTransitionEndListener(Css3Propertynames.transitionEnd(),
+                wrapper);
     }
 
     private void add(Widget child, int pos) {
@@ -113,8 +115,16 @@ public class VNavigationManager extends ComplexPanel {
         Style style = wrapper.getStyle();
         // ensure animation are "on" (from css), they might not be on due
         // setHorizontalOffset
-        style.setProperty("webkitTransition", "");
+        style.setProperty(Css3Propertynames.transition(), "");
         setLeftUsingTranslate3d(style, currentWrapperPos);
+        if(!BrowserInfo.get().isWebkit()) {
+        	// FIXME FF && IE10 don't fire transition end events properly for some reason
+        	new Timer() {
+				@Override
+				public void run() {
+					onTransitionEnd();
+				}}.schedule(300);
+        }
     }
 
     private Element createContainerElement() {
@@ -165,10 +175,11 @@ public class VNavigationManager extends ComplexPanel {
         }
     }
 
-    private native void hookTransitionEndListener(DivElement el)
+    private native void hookTransitionEndListener(String eventName,
+            DivElement el)
     /*-{
     	var me = this;
-        el.addEventListener("webkitTransitionEnd",function(event) {
+        el.addEventListener(eventName,function(event) {
         	if(event.target == el) {
         	    	$entry(
         	        	me.@com.vaadin.addon.touchkit.gwt.client.ui.VNavigationManager::onTransitionEnd()()
@@ -178,7 +189,9 @@ public class VNavigationManager extends ComplexPanel {
     }-*/;
 
     private void initIosScroollHack() {
-        needsIos6ScrollingWorkaround = Navigator.getUserAgent().contains(" OS 6_") && Navigator.getUserAgent().contains(" afari");
+        needsIos6ScrollingWorkaround = Navigator.getUserAgent().contains(
+                " OS 6_")
+                && Navigator.getUserAgent().contains(" afari");
         // Disable hack if "fullscreen", the hack disturbs e.g. SwipeView a
         // LOT as it slows down "warming up" the hardware accelerated layer
         if (needsIos6ScrollingWorkaround
@@ -271,9 +284,10 @@ public class VNavigationManager extends ComplexPanel {
     private void prepareForAnimation(Widget p) {
         if (p != null) {
             Style style = p.getElement().getParentElement().getStyle();
-            String property = style.getProperty("webkitTransform");
+            String property = style.getProperty(Css3Propertynames
+                    .transform());
             MatchResult exec = regExp3dValues.exec(property);
-            style.setProperty("webkitTransform",
+            style.setProperty(Css3Propertynames.transform(),
                     "translate3d(" + exec.getGroup(1) + ",0,0)");
         }
     }
@@ -283,10 +297,10 @@ public class VNavigationManager extends ComplexPanel {
             // we'll swift the element to place where even ios 6 webkit don't
             // sink events for it
             Style style = p.getElement().getParentElement().getStyle();
-            String property = style.getProperty("webkitTransform");
+            String property = style.getProperty(Css3Propertynames.transform());
             MatchResult exec = regExp3dValues.exec(property);
             style.setProperty(
-                    "webkitTransform",
+                    Css3Propertynames.transform(),
                     "translate3d(" + exec.getGroup(1) + ",-"
                             + Window.getClientHeight() + "px,0)");
         }
@@ -336,7 +350,7 @@ public class VNavigationManager extends ComplexPanel {
         /*
          * Disable animation for while.
          */
-        wrapper.getStyle().setProperty("webkitTransition", "none");
+        wrapper.getStyle().setProperty(Css3Propertynames.transition(), "none");
         currentWrapperPos = 0;
         animateHorizontally(0, false);
         transitionPending = false;
@@ -352,7 +366,7 @@ public class VNavigationManager extends ComplexPanel {
             setPosition(nextView, -currentWrapperPos + 1);
             // client.handleComponentRelativeSize((Widget) nextView);
         }
-        wrapper.getStyle().setProperty("webkitTransition", "");
+        wrapper.getStyle().setProperty(Css3Propertynames.transition(), "");
         prepareIos6ForScrolling();
     }
 
@@ -385,7 +399,7 @@ public class VNavigationManager extends ComplexPanel {
     public void setHorizontalOffset(int deltaX, boolean animate) {
         final Style style = wrapper.getStyle();
         if (!animate) {
-            style.setProperty("webkitTransition", "none");
+            style.setProperty(Css3Propertynames.transition(), "none");
         }
         prepareForAnimation();
 
@@ -394,7 +408,7 @@ public class VNavigationManager extends ComplexPanel {
         if (!animate) {
             Scheduler.get().scheduleDeferred(new ScheduledCommand() {
                 public void execute() {
-                    style.setProperty("webkitTransition", "");
+                    style.setProperty(Css3Propertynames.transition(), "");
                 }
             });
         }
@@ -406,7 +420,7 @@ public class VNavigationManager extends ComplexPanel {
      *            multiple of panel width
      */
     private void setLeftUsingTranslate3d(Style style, double pos) {
-        style.setProperty("webkitTransform",
+        style.setProperty(Css3Propertynames.transform(),
                 "translate3d(" + Math.round((int) (pos * getPixelWidth()))
                         + "px,0,0)");
     }

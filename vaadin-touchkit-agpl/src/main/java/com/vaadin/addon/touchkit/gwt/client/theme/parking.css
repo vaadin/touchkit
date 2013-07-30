@@ -1,17 +1,43 @@
 
-@external v-datefield-calendarpanel-day-disabled,blue,datePickerDay,datePickerDayIsDisabled,datePickerDayIsFiller,datePickerDayIsValue,datePickerDays,datePickerMonth,datePickerMonthSelector,datePickerNextButton,datePickerPreviousButton,datePickerWeekdayLabel,datePickerWeekendLabel,v-touchkit-datepopover-time,empty,focused,green,gwt-DatePicker,gwt-MenuItem,gwt-MenuItem-selected,html-face,icon-arrow-down,icon-arrow-left,icon-arrow-right,icon-arrow-up,no-box-drag-hints,no-horizontal-drag-hints,no-vertical-drag-hints,popupContent,red,relative,v-absolutelayout,v-absolutelayout-canvas,v-absolutelayout-margin,v-absolutelayout-wrapper,v-accordion,v-accordion-item,v-accordion-item-caption,v-accordion-item-content,v-accordion-item-open,v-align-bottom,v-align-center,v-align-middle,v-align-right,v-app,v-app-loading,v-app-loginpage,v-button,v-button-blue,v-button-caption,v-button-green,v-button-link,v-button-nextyear,v-button-no-decoration,v-button-red,v-button-selected,v-button-white,v-button-wrap,v-cache-loading-indicator,v-caption,v-caption-on-bottom,v-caption-on-left,v-caption-on-right,v-caption-on-top,v-captiontext,v-captionwrapper,v-checkbox,v-clip,v-contextmenu,v-csslayout,v-csslayout-container,v-csslayout-margin,v-csslayout-margin-bottom,v-csslayout-margin-left,v-csslayout-margin-right,v-csslayout-margin-top,v-customcomponent,v-customlayout,v-datefield,v-datefield-button,v-datefield-button-readonly,v-datefield-calendarpanel,v-datefield-calendarpanel-day,v-datefield-calendarpanel-day-focused,v-datefield-calendarpanel-day-offmonth,v-datefield-calendarpanel-day-selected,v-datefield-calendarpanel-day-today,v-datefield-calendarpanel-header,v-datefield-calendarpanel-month,v-datefield-calendarpanel-weeknumber,v-datefield-error,v-datefield-focus,v-datefield-popup,v-datefield-popupcalendar,v-datefield-prompt,v-datefield-textfield,v-datefield-time,v-ddwrapper,v-ddwrapper-over,v-ddwrapper-over-bottom,v-ddwrapper-over-left,v-ddwrapper-over-right,v-ddwrapper-over-top,v-disabled,v-drag-element,v-embedded-image,v-errorindicator,v-errormessage,v-expand,v-filterselect,v-filterselect-button,v-filterselect-focus,v-filterselect-input,v-filterselect-nextpage,v-filterselect-nextpage-off,v-filterselect-no-input,v-filterselect-prevpage,v-filterselect-prevpage-off,v-filterselect-prompt,v-filterselect-status,v-filterselect-suggestmenu,v-filterselect-suggestpopup,v-form,v-form-content,v-formlayout,v-formlayout-captioncell,v-formlayout-cell,v-formlayout-contentcell,v-formlayout-error-indicator,v-formlayout-errorcell,v-formlayout-firstrow,v-formlayout-lastrow,v-formlayout-margin-bottom,v-formlayout-margin-left,v-formlayout-margin-right,v-formlayout-margin-top,v-formlayout-row,v-formlayout-spacing,v-generated-body,v-gridlayout,v-gridlayout-margin-bottom,v-gridlayout-margin-left,v-gridlayout-margin-right,v-gridlayout-margin-top,v-gridlayout-slot,v-gridlayout-spacing,v-gridlayout-spacing-off,v-gridlayout-spacing-on,v-has-caption,v-has-height,v-has-width,v-horizontal,v-horizontallayout,v-horizontallayout-margin-bottom,v-horizontallayout-margin-left,v-horizontallayout-margin-right,v-horizontallayout-margin-top,v-horizontallayout-slot,v-horizontallayout-spacing-off,v-horizontallayout-spacing-on,v-icon,v-inline-datefield,v-inline-datefield-button,v-inline-datefield-button-readonly,v-inline-datefield-calendarpanel,v-inline-datefield-calendarpanel-day,v-inline-datefield-calendarpanel-day-disabled,v-inline-datefield-calendarpanel-day-focused,v-inline-datefield-calendarpanel-day-offmonth,v-inline-datefield-calendarpanel-day-selected,v-inline-datefield-calendarpanel-day-today,v-inline-datefield-calendarpanel-header,v-inline-datefield-calendarpanel-month,v-inline-datefield-calendarpanel-weeknumber,v-inline-datefield-popup,v-inline-datefield-popupcalendar,v-inline-datefield-prompt,v-inline-datefield-textfield,v-inline-datefield-time,v-ios,v-label,v-label-grey-title,v-label-undef-w,v-layout,v-layout-margin-bottom,v-layout-margin-left,v-layout-margin-right,v-layout-margin-top,v-layout-spacing-on,v-link,v-loading-indicator,v-loading-indicator-delay,v-loading-indicator-wait,v-loginform,v-margin-bottom,v-margin-left,v-margin-right,v-margin-top,v-menubar,v-menubar-menuitem,v-menubar-menuitem-caption,v-menubar-menuitem-checked,v-menubar-menuitem-disabled,v-menubar-menuitem-selected,v-menubar-more-menuitem,v-menubar-popup,v-menubar-separator,v-menubar-submenu,v-menubar-submenu-check-column,v-menubar-submenu-indicator,v-nativebutton,v-nativebutton-caption,v-nativebutton-link,v-Notification,v-Notification-error,v-Notification-system,v-Notification-tray,v-Notification-warning,v-off,v-orderedlayout,v-orderedlayout-margin-bottom,v-orderedlayout-margin-left,v-orderedlayout-margin-right,v-orderedlayout-margin-top,v-orderedlayout-spacing-off,v-orderedlayout-spacing-on,v-overlay-container,v-panel,v-panel-caption,v-panel-caption-light,v-panel-content,v-panel-content-light,v-panel-deco,v-panel-deco-light,v-panel-light,v-panel-nocaption,v-popupview,v-popupview-loading,v-popupview-popup,v-pressed,v-progressindicator,v-progressindicator-indeterminate,v-progressindicator-indeterminate-disabled,v-progressindicator-indicator,v-progressindicator-wrapper,v-readonly,v-required-field-indicator,v-sa,v-sa6,v-scrollable,v-select,v-select-option,v-select-optiongroup,v-select-select,v-select-twincol,v-select-twincol-buttons,v-select-twincol-caption-left,v-select-twincol-caption-right,v-select-twincol-deco,v-select-twincol-options,v-select-twincol-selections,v-selected,v-shadow,v-shadow-window,v-slider,v-slider-base,v-slider-feedback,v-slider-handle,v-slider-handle-active,v-slider-vertical,v-slot,v-spacing,v-splitpanel-horizontal,v-splitpanel-hsplitter,v-splitpanel-vertical,v-splitpanel-vsplitter,v-table,v-table-body,v-table-body-noselection,v-table-body-wrapper,v-table-caption-container,v-table-caption-container-align-center,v-table-caption-container-align-right,v-table-cell-content,v-table-cell-wrapper,v-table-cell-wrapper-align-center,v-table-cell-wrapper-align-right,v-table-column-selector,v-table-drag,v-table-focus,v-table-focus-slot-left,v-table-focus-slot-right,v-table-footer,v-table-footer-cell,v-table-footer-container,v-table-footer-wrap,v-table-generated-row,v-table-header,v-table-header-cell,v-table-header-cell-asc,v-table-header-cell-desc,v-table-header-drag,v-table-header-wrap,v-table-resizer,v-table-row,v-table-row-animating,v-table-row-drag-bottom,v-table-row-drag-middle,v-table-row-drag-top,v-table-row-odd,v-table-row-spacer,v-table-scrollposition,v-table-sort-indicator,v-table-table,v-tabsheet,v-tabsheet-caption-close,v-tabsheet-content,v-tabsheet-deco,v-tabsheet-hidetabs,v-tabsheet-scroller,v-tabsheet-scrollerNext,v-tabsheet-scrollerNext-disabled,v-tabsheet-scrollerPrev,v-tabsheet-scrollerPrev-disabled,v-tabsheet-spacertd,v-tabsheet-tabcontainer,v-tabsheet-tabitem,v-tabsheet-tabitem-selected,v-tabsheet-tabitemcell,v-tabsheet-tabitemcell-disabled,v-tabsheet-tabs,v-textarea,v-textarea-prompt,v-textarea-readonly,v-textfield,v-textfield-prompt,v-textfield-readonly,v-tk,v-tooltip,v-tooltip-text,v-touchkit-backgroundstripes,v-touchkit-combobox,v-touchkit-combobox-close-button,v-touchkit-combobox-drop-down,v-touchkit-combobox-popup-filter,v-touchkit-combobox-select-item,v-touchkit-componentgroup-cell,v-touchkit-componentgroup-cell-fullwrapper,v-touchkit-componentgroup-row,v-touchkit-componentgroup-row-cap,v-touchkit-componentgroup-row-full,v-touchkit-componentgroup-row-nocap,v-touchkit-date-cancel,v-touchkit-date-ok,v-touchkit-datepopover,v-touchkit-datepopover-hidedays,v-touchkit-datepopover-nonext,v-touchkit-datepopover-noprev,v-touchkit-fullscreen,v-touchkit-horizontalbuttongroup,v-touchkit-navbar,v-touchkit-navbar-caption,v-touchkit-navbar-left,v-touchkit-navbar-right,v-touchkit-navbutton,v-touchkit-navbutton-back,v-touchkit-navbutton-desc,v-touchkit-navbutton-emphasis,v-touchkit-navbutton-forward,v-touchkit-navbutton-pill,v-touchkit-navpanel,v-touchkit-navpanel-container,v-touchkit-navpanel-notransit,v-touchkit-navpanel-placeholder,v-touchkit-navpanel-wrapper,v-touchkit-navview,v-touchkit-navview-notoolbar,v-touchkit-navview-toolbar,v-touchkit-navview-wrapper,v-touchkit-numberfield,v-touchkit-offlinemode,v-touchkit-offlinemode-panel,v-touchkit-opacity-transition,v-touchkit-plain,v-touchkit-popover,v-touchkit-popover-pointer,v-touchkit-popover-pointer-bottom,v-touchkit-relative,v-touchkit-sadface,v-touchkit-smallscreen,v-touchkit-swipeview,v-touchkit-switch,v-touchkit-switch-focus,v-touchkit-switch-slider,v-touchkit-tabbar,v-touchkit-tabbar-toolbar,v-touchkit-tabbar-wrapper,v-touchkit-toolbar,v-touchkit-verticalcomponentgroup,v-tree,v-tree-node,v-tree-node-caption,v-tree-node-caption-drag-center,v-tree-node-children,v-tree-node-drag-bottom,v-tree-node-drag-top,v-tree-node-expanded,v-tree-node-leaf,v-tree-node-selected,v-treetable,v-treetable-animation-clone,v-treetable-animation-clone-wrapper,v-treetable-node-closed,v-treetable-node-open,v-treetable-treespacer,v-ui,v-ui-embedded,v-upload,v-upload-immediate,v-vertical,v-verticallayout,v-verticallayout-margin-bottom,v-verticallayout-margin-left,v-verticallayout-margin-right,v-verticallayout-margin-top,v-verticallayout-slot,v-verticallayout-spacing-off,v-verticallayout-spacing-on,v-widget,v-window,v-window-closebox,v-window-contents,v-window-draggingCurtain,v-window-footer,v-window-footer-noresize,v-window-header,v-window-modalitycurtain,v-window-outerheader,v-window-resizebox,v-window-resizebox-disabled,v-window-resizingCurtain,v-window-wrap,v-button-nav;
+@external v-datefield-calendarpanel-day-disabled,blue,datePickerDay,datePickerDayIsDisabled,datePickerDayIsFiller,datePickerDayIsValue,datePickerDays,datePickerMonth,datePickerMonthSelector,datePickerNextButton,datePickerPreviousButton,datePickerWeekdayLabel,datePickerWeekendLabel,v-touchkit-datepopover-time,empty,focused,green,gwt-DatePicker,gwt-MenuItem,gwt-MenuItem-selected,html-face,icon-arrow-down,icon-arrow-left,icon-arrow-right,icon-arrow-up,no-box-drag-hints,no-horizontal-drag-hints,no-vertical-drag-hints,popupContent,red,relative,v-absolutelayout,v-absolutelayout-canvas,v-absolutelayout-margin,v-absolutelayout-wrapper,v-accordion,v-accordion-item,v-accordion-item-caption,v-accordion-item-content,v-accordion-item-open,v-align-bottom,v-align-center,v-align-middle,v-align-right,v-app,v-app-loading,v-app-loginpage,v-button,v-button-blue,v-button-caption,v-button-green,v-button-link,v-button-nextyear,v-button-no-decoration,v-button-red,v-button-selected,v-button-white,v-button-wrap,v-cache-loading-indicator,v-caption,v-caption-on-bottom,v-caption-on-left,v-caption-on-right,v-caption-on-top,v-captiontext,v-captionwrapper,v-checkbox,v-clip,v-contextmenu,v-csslayout,v-csslayout-container,v-csslayout-margin,v-csslayout-margin-bottom,v-csslayout-margin-left,v-csslayout-margin-right,v-csslayout-margin-top,v-customcomponent,v-customlayout,v-datefield,v-datefield-button,v-datefield-button-readonly,v-datefield-calendarpanel,v-datefield-calendarpanel-day,v-datefield-calendarpanel-day-focused,v-datefield-calendarpanel-day-offmonth,v-datefield-calendarpanel-day-selected,v-datefield-calendarpanel-day-today,v-datefield-calendarpanel-header,v-datefield-calendarpanel-month,v-datefield-calendarpanel-weeknumber,v-datefield-error,v-datefield-focus,v-datefield-popup,v-datefield-popupcalendar,v-datefield-prompt,v-datefield-textfield,v-datefield-time,v-ddwrapper,v-ddwrapper-over,v-ddwrapper-over-bottom,v-ddwrapper-over-left,v-ddwrapper-over-right,v-ddwrapper-over-top,v-disabled,v-drag-element,v-embedded-image,v-errorindicator,v-errormessage,v-expand,v-filterselect,v-filterselect-button,v-filterselect-focus,v-filterselect-input,v-filterselect-nextpage,v-filterselect-nextpage-off,v-filterselect-no-input,v-filterselect-prevpage,v-filterselect-prevpage-off,v-filterselect-prompt,v-filterselect-status,v-filterselect-suggestmenu,v-filterselect-suggestpopup,v-form,v-form-content,v-formlayout,v-formlayout-captioncell,v-formlayout-cell,v-formlayout-contentcell,v-formlayout-error-indicator,v-formlayout-errorcell,v-formlayout-firstrow,v-formlayout-lastrow,v-formlayout-margin-bottom,v-formlayout-margin-left,v-formlayout-margin-right,v-formlayout-margin-top,v-formlayout-row,v-formlayout-spacing,v-generated-body,v-gridlayout,v-gridlayout-margin-bottom,v-gridlayout-margin-left,v-gridlayout-margin-right,v-gridlayout-margin-top,v-gridlayout-slot,v-gridlayout-spacing,v-gridlayout-spacing-off,v-gridlayout-spacing-on,v-has-caption,v-has-height,v-has-width,v-horizontal,v-horizontallayout,v-horizontallayout-margin-bottom,v-horizontallayout-margin-left,v-horizontallayout-margin-right,v-horizontallayout-margin-top,v-horizontallayout-slot,v-horizontallayout-spacing-off,v-horizontallayout-spacing-on,v-icon,v-inline-datefield,v-inline-datefield-button,v-inline-datefield-button-readonly,v-inline-datefield-calendarpanel,v-inline-datefield-calendarpanel-day,v-inline-datefield-calendarpanel-day-disabled,v-inline-datefield-calendarpanel-day-focused,v-inline-datefield-calendarpanel-day-offmonth,v-inline-datefield-calendarpanel-day-selected,v-inline-datefield-calendarpanel-day-today,v-inline-datefield-calendarpanel-header,v-inline-datefield-calendarpanel-month,v-inline-datefield-calendarpanel-weeknumber,v-inline-datefield-popup,v-inline-datefield-popupcalendar,v-inline-datefield-prompt,v-inline-datefield-textfield,v-inline-datefield-time,v-label,v-label-grey-title,v-label-undef-w,v-layout,v-layout-margin-bottom,v-layout-margin-left,v-layout-margin-right,v-layout-margin-top,v-layout-spacing-on,v-link,v-loading-indicator,v-loading-indicator-delay,v-loading-indicator-wait,v-loginform,v-margin-bottom,v-margin-left,v-margin-right,v-margin-top,v-menubar,v-menubar-menuitem,v-menubar-menuitem-caption,v-menubar-menuitem-checked,v-menubar-menuitem-disabled,v-menubar-menuitem-selected,v-menubar-more-menuitem,v-menubar-popup,v-menubar-separator,v-menubar-submenu,v-menubar-submenu-check-column,v-menubar-submenu-indicator,v-nativebutton,v-nativebutton-caption,v-nativebutton-link,v-Notification,v-Notification-error,v-Notification-system,v-Notification-tray,v-Notification-warning,v-off,v-orderedlayout,v-orderedlayout-margin-bottom,v-orderedlayout-margin-left,v-orderedlayout-margin-right,v-orderedlayout-margin-top,v-orderedlayout-spacing-off,v-orderedlayout-spacing-on,v-overlay-container,v-panel,v-panel-caption,v-panel-caption-light,v-panel-content,v-panel-content-light,v-panel-deco,v-panel-deco-light,v-panel-light,v-panel-nocaption,v-popupview,v-popupview-loading,v-popupview-popup,v-pressed,v-progressindicator,v-progressindicator-indeterminate,v-progressindicator-indeterminate-disabled,v-progressindicator-indicator,v-progressindicator-wrapper,v-readonly,v-required-field-indicator,v-scrollable,v-select,v-select-option,v-select-optiongroup,v-select-select,v-select-twincol,v-select-twincol-buttons,v-select-twincol-caption-left,v-select-twincol-caption-right,v-select-twincol-deco,v-select-twincol-options,v-select-twincol-selections,v-selected,v-shadow,v-shadow-window,v-slider,v-slider-base,v-slider-feedback,v-slider-handle,v-slider-handle-active,v-slider-vertical,v-slot,v-spacing,v-splitpanel-horizontal,v-splitpanel-hsplitter,v-splitpanel-vertical,v-splitpanel-vsplitter,v-table,v-table-body,v-table-body-noselection,v-table-body-wrapper,v-table-caption-container,v-table-caption-container-align-center,v-table-caption-container-align-right,v-table-cell-content,v-table-cell-wrapper,v-table-cell-wrapper-align-center,v-table-cell-wrapper-align-right,v-table-column-selector,v-table-drag,v-table-focus,v-table-focus-slot-left,v-table-focus-slot-right,v-table-footer,v-table-footer-cell,v-table-footer-container,v-table-footer-wrap,v-table-generated-row,v-table-header,v-table-header-cell,v-table-header-cell-asc,v-table-header-cell-rowheader,v-table-header-cell-desc,v-table-header-drag,v-table-header-wrap,v-table-resizer,v-table-row,v-table-row-animating,v-table-row-drag-bottom,v-table-row-drag-middle,v-table-row-drag-top,v-table-row-odd,v-table-row-spacer,v-table-scrollposition,v-table-sort-indicator,v-table-table,v-tabsheet,v-tabsheet-caption-close,v-tabsheet-content,v-tabsheet-deco,v-tabsheet-hidetabs,v-tabsheet-scroller,v-tabsheet-scrollerNext,v-tabsheet-scrollerNext-disabled,v-tabsheet-scrollerPrev,v-tabsheet-scrollerPrev-disabled,v-tabsheet-spacertd,v-tabsheet-tabcontainer,v-tabsheet-tabitem,v-tabsheet-tabitem-selected,v-tabsheet-tabitemcell,v-tabsheet-tabitemcell-disabled,v-tabsheet-tabs,v-textarea,v-textarea-prompt,v-textarea-readonly,v-textfield,v-textfield-prompt,v-textfield-readonly,v-tk,v-tooltip,v-tooltip-text,v-touchkit-backgroundstripes,v-touchkit-combobox,v-touchkit-combobox-close-button,v-touchkit-combobox-drop-down,v-touchkit-combobox-popup-filter,v-touchkit-combobox-select-item,v-touchkit-componentgroup-cell,v-touchkit-componentgroup-cell-fullwrapper,v-touchkit-componentgroup-row,v-touchkit-componentgroup-row-cap,v-touchkit-componentgroup-row-full,v-touchkit-componentgroup-row-nocap,v-touchkit-date-cancel,v-touchkit-date-ok,v-touchkit-datepopover,v-touchkit-datepopover-hidedays,v-touchkit-datepopover-nonext,v-touchkit-datepopover-noprev,v-touchkit-fullscreen,v-touchkit-horizontalbuttongroup,v-touchkit-navbar,v-touchkit-navbar-caption,v-touchkit-navbar-left,v-touchkit-navbar-right,v-touchkit-navbutton,v-touchkit-navbutton-back,v-touchkit-navbutton-desc,v-touchkit-navbutton-emphasis,v-touchkit-navbutton-forward,v-touchkit-navbutton-pill,v-touchkit-navpanel,v-touchkit-navpanel-container,v-touchkit-navpanel-notransit,v-touchkit-navpanel-placeholder,v-touchkit-navpanel-wrapper,v-touchkit-navview,v-touchkit-navview-notoolbar,v-touchkit-navview-toolbar,v-touchkit-navview-wrapper,v-touchkit-numberfield,v-touchkit-offlinemode,v-touchkit-offlinemode-panel,v-touchkit-opacity-transition,v-touchkit-plain,v-touchkit-popover,v-touchkit-popover-pointer,v-touchkit-popover-pointer-bottom,v-touchkit-relative,v-touchkit-sadface,v-touchkit-smallscreen,v-touchkit-swipeview,v-touchkit-switch-wrapper, v-touchkit-switch-off, v-touchkit-switch,v-touchkit-switch-focus,v-touchkit-switch-slider,v-touchkit-tabbar,v-touchkit-tabbar-toolbar,v-touchkit-tabbar-wrapper,v-touchkit-toolbar,v-touchkit-verticalcomponentgroup,v-tree,v-tree-node,v-tree-node-caption,v-tree-node-caption-drag-center,v-tree-node-children,v-tree-node-drag-bottom,v-tree-node-drag-top,v-tree-node-expanded,v-tree-node-leaf,v-tree-node-selected,v-treetable,v-treetable-animation-clone,v-treetable-animation-clone-wrapper,v-treetable-node-closed,v-treetable-node-open,v-treetable-treespacer,v-ui,v-ui-embedded,v-upload,v-upload-immediate,v-vertical,v-verticallayout,v-verticallayout-margin-bottom,v-verticallayout-margin-left,v-verticallayout-margin-right,v-verticallayout-margin-top,v-verticallayout-slot,v-verticallayout-spacing-off,v-verticallayout-spacing-on,v-widget,v-window,v-window-closebox,v-window-contents,v-window-draggingCurtain,v-window-footer,v-window-footer-noresize,v-window-header,v-window-modalitycurtain,v-window-outerheader,v-window-resizebox,v-window-resizebox-disabled,v-window-resizingCurtain,v-window-wrap,v-button-nav,v-touchkit-datepicker;
+
+
+@url fontAwesome fontAwesome;
+
+/* FIXME, this breaks everything for some reason. All permutations get these.
+@if webkitvariant android2 {
+	@url fontAwesome fontAwesomeOtf;
+	@def fontformat format('otf');
+}
+*/;
+
+@font-face {
+	font-family: "TkIcons";
+	src: fontAwesome;
+	font-weight: normal;
+	font-style: normal;
+}
+
+@def baseBackground #F5F5F2;
+@def lightText #5E5D55;
+@def darkText #43423D; /*#64635a*/
+@def darkBackground lightText; /*76756c*/
+
+@def lightEmboss inset 0 -10px 10px #f6f6f6;
 
 /**
  * General borders
  */
-@def divider 1px solid #9f9f9f;
-@def lightDivider 1px solid rgba(187,187,187,.5);
-@def listBorder 1px solid #bbb;
+@def thinBorder 1px solid #E6E6E6;
+@def divider thinBorder;
+@def lightDivider thinBorder;
+@def listBorder thinBorder;
+@def borderRadius 3px;
 
 /**
  * Caption color
  */
-@def captionColor #44698b;
+@def captionColor lightText;
 
 
 /**
@@ -27,35 +53,25 @@
 @def buttonInsetBackground rgba(37,38,40,.6);
 @def buttonBoxShadow 0 1px 2px rgba(0,0,0,.5);
 @def buttonTextShadow 0 -1px 0 rgba(0,0,0,.75);
-@def buttonColor #fff;
-@def buttonFontSize 20px;
+@def buttonColor #3797BD; /*VaadinMagenta: #e61e6e Other cyans #3797BD 2E85A8 #00a1d8;*/
+@def buttonFontSize 16px;
 @def buttonGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(246,246,246,.46)), to(rgba(145,149,159,.46)), color-stop(.49, rgba(160,162,167,.46)), color-stop(.51, rgba(130,133,142,.46)))');
 @def buttonColorGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(246,246,246,.26)), to(rgba(145,149,159,.26)), color-stop(.49, rgba(160,162,167,.26)), color-stop(.51, rgba(130,133,142,.26)))');
 @def buttonActiveGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(200,200,200,.55)), to(rgba(128,131,141,.55)), color-stop(.49, rgba(132,134,138,.55)), color-stop(.51, rgba(101,104,113,.55)))');
 
 @def redButtonInsetBackground rgb(170,0,0);
-@def redButtonWrapBgColor rgb(189,0,0);
+@def redButtonWrapBgColor #ed5931;
 @def greenButtonInsetBackground rgb(0,150,0);
 @def greenButtonWrapBgColor rgb(0,170,0);
 @def blueButtonInsetBackground rgb(0,0,170);
-@def blueButtonWrapBgColor rgb(0,0,189);
-
-/**
- * Navbar
- */
-@def navbarTextShadow 0 1px 1px rgba(255,255,255,.75);
-@def navbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#edeeef), to(#c9cccf))');
-@def greenNavbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#edeeef), to(#c9cccf))');
+@def blueButtonWrapBgColor buttonColor;
 
 /**
  * Navbar buttons
  */
-@def navbarButtonColor #3d3f41;
-@def navbarButtonTextShadow 0 1px 0 rgba(255,255,255,.5);
-@def navbarButtonGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,.23)), to(rgba(73,73,73,.23)))');
-@def navbarButtonActiveGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(180,180,180,.3)), to(rgba(30,30,30,.3)))');
-@def navbarButtonBorder 1px solid rgba(142,147,152,.66);
-@def navbarButtonBoxShadow 0 1px 0 rgba(255,255,255,.25), inset 0 1px 0 rgba(255,255,255,.3);
+@def navbarButtonColor buttonColor;
+@def navbarButtonBorder none;
+@def navbarButtonBoxShadow none;
 
 
 /* Tabbar */
@@ -72,14 +88,12 @@
 
 
 /* Default popover */
-@def popoverGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(93,101,109,.86)), to(rgba(24,25,26,.9)), color-stop(.25, rgba(40,45,51,.86)))');
 @def popoverNavbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0)), to(rgba(0,0,0,0)), color-stop(.49, rgba(0,0,0,.2)), color-stop(.51, rgba(0,0,0,.45)))');
 @def popoverToolbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0)), to(rgba(255,255,255,0)), color-stop(.2, rgba(255,255,255,.15)), color-stop(.55, rgba(255,255,255,.1)), color-stop(.56, rgba(255,255,255,.05)))');
 
 
 /* Table */
-@def tableSelectionGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4d8cb9), to(#3e6fa8))');
-@def tableRowHeight 30px;
+@def tableHeaderHeight 30px;
 
 /* TouchComboBox */
 @def touchComboBoxItemButton literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#fcfcfc), to(#eaeaea))');
@@ -96,11 +110,13 @@
 	}
 
 /* Fonts */
-body {
+body, input, textarea, select, option {
 	font-family: "Helvetica Neue", Helvetica, Arial, Tahoma, Verdana;
+}
+
+body {
 	font-size: 14px;
 	line-height: 19px;
-	color: #222;
 	-webkit-text-size-adjust: none;
 }
 
@@ -112,15 +128,15 @@ body {
 }
 
 .v-contextmenu {
-	background: #f8f8f9;
+	background: baseBackground;
 	border: none;
-	border-radius: 3px;
+	border-radius: borderRadius;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	-o-border-radius: 3px;
+	box-shadow: 0 0 2px rgba(0, 0, 0, .8);
 	overflow: hidden;
 	padding: 4px 0;
-	-webkit-box-shadow: 0 0 40px rgba(0, 0, 0, .6);
 }
 .v-contextmenu .gwt-MenuItem {
 	padding: 1px 12px 1px 8px;
@@ -150,6 +166,7 @@ body {
 .v-touchkit-sadface {
 	display:inline-block;
 	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
 	font-size: 4em;
 	font-weight: bold;
 	height:1em;
@@ -157,13 +174,11 @@ body {
 }
 
 /* Default background for application */
-@url linenBg linenBgImage ;
 .v-app,
 .v-touchkit-backgroundstripes,
 .v-touchkit-offlinemode {
-	background: #e0e1e3 linenBg;
-	text-shadow: 0 1px 0 rgba(255,255,255,.3);
-	}
+	background: baseBackground;
+}
 
 
 /* Loading indicator */
@@ -177,17 +192,20 @@ body {
 	background: spinner no-repeat 50%;
 	opacity: 1;
 	top: 0;
-	left: 0;
-	right: 0;
+	left: 25%;
+	right: 25%;
 	bottom: 0;
 	margin: 0;
-	height: 100%;
-	width: 100%;
+	height: 50%;
 	overflow: hidden;
 	-webkit-animation-name: spinnerRotate;
 	-webkit-animation-duration: 2s;
 	-webkit-animation-iteration-count: infinite;
 	-webkit-animation-timing-function: linear;
+	animation-name: spinnerRotate;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
 	}
 	
 .v-popupview-loading {
@@ -198,6 +216,10 @@ body {
     -webkit-animation-duration: 2s;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
+    animation-name: spinnerRotate;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
 
 div.v-progressindicator-indeterminate {
@@ -208,6 +230,10 @@ div.v-progressindicator-indeterminate {
     -webkit-animation-duration: 2s;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
+    animation-name: spinnerRotate;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
 
 body e.v-app-loading {
@@ -227,6 +253,15 @@ body e.v-app-loading {
 	}
 }
 
+@keyframes spinnerRotate {
+	from {
+		transform:rotate(0deg);
+	}
+	to {
+		transform:rotate(360deg);
+	}
+}
+
 .v-loading-indicator {
 	opacity: .5;
 	}
@@ -236,22 +271,29 @@ body e.v-app-loading {
 	}
 
 /* Clear Vaadin core theme styles from buttons */
+/* TODO clearing shouldn't be neede anymore!! */
 /* Default view buttons */
 .v-button {
 	margin: 0;
 	border: none;
 	width: auto;
 	height: auto;
-	display: inline-block;
-	border-radius: listLayoutMargin;
-	background: buttonInsetBackground;
-	-webkit-box-shadow: buttonInsetBoxShadow;
+	display: block;
+	border-radius: borderRadius;
+	background: white;
 	padding: 3px;
 	text-align: center;
 	position:relative;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	
+	box-shadow: buttonBoxShadow;
+	font-size: buttonFontSize;
+	font-weight: medium;
+	line-height:2;
+	color: buttonColor;
+	
 }
 
 .v-button:focus {
@@ -272,30 +314,9 @@ body e.v-app-loading {
 	-webkit-user-select: none;
 }
 
-.v-button:active .v-button-wrap {
-	background-image: buttonActiveGradient;
-}
-
-.v-button-caption {
-	line-height: 37px;
-	color: buttonColor;
-	text-shadow: buttonTextShadow;
-	font-size: buttonFontSize;
-	font-weight: bold;
-	}
-
 .v-button-wrap {
 	display: block;
-	border-radius: 7px;
-	background-image: buttonGradient;
-	-webkit-box-shadow: buttonBoxShadow;
 	padding: 0 listLayoutMargin;
-	height: 35px;
-	line-height: 37px;
-	font-size: buttonFontSize;
-	font-weight: bold;
-	color: buttonColor;
-	text-shadow: buttonTextShadow;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
@@ -312,13 +333,13 @@ body e.v-app-loading {
 	border-radius: 0;
 	background: transparent;
 	-webkit-box-shadow: none;
+	box-shadow: none;
 	padding: 0;
 	height: auto;
 	margin: 0;
 	font-size: 14px;
 	font-weight: normal;
-	text-shadow: none;
-	color: captionColor;
+	color: buttonColor;
 	line-height: inherit;
 	}
 
@@ -332,6 +353,10 @@ body e.v-app-loading {
 	text-decoration: none;
 	line-height: 1;
 	}
+	
+a {
+	color: buttonColor;
+}
 
 /* Navbar custom icon buttons */
 @url navbarArrowUp navbarArrowUpImage;
@@ -377,46 +402,6 @@ body e.v-app-loading {
 	margin-right: -2px;
 	}
 
-
-/* Toolbar buttons (icons only by default) */
-.v-touchkit-toolbar .v-button,
-.v-touchkit-toolbar .v-touchkit-horizontalbuttongroup {
-	display: inline-block;
-	margin: 0;
-	background: transparent;
-	border-radius: 4px;
-	-webkit-box-shadow: none;
-	height: auto;
-	padding: 0;
-	}
-
-.v-touchkit-toolbar .v-button-wrap {
-	background: transparent;
-	height: auto;
-	padding: 0;
-	-webkit-box-shadow: none;
-	font-size: 10px;
-	line-height: 1;
-	color: navbarButtonColor;
-	text-shadow: navbarButtonTextShadow;
-	overflow: visible;
-	display: inline-block;
-	}
-
-.v-touchkit-toolbar .v-button-wrap {
-	background: transparent;
-	}
-
-.v-touchkit-toolbar .v-button-caption {
-	display: none;
-	line-height: 1;
-	}
-
-.v-touchkit-toolbar .v-button .v-icon {
-	height: 25px;
-	margin-top: 10px;
-	}
-
 .v-touchkit-navpanel {
 	position: relative;
 	overflow: hidden;
@@ -430,6 +415,8 @@ body e.v-app-loading {
 	height: 100%;
 	-webkit-transform: translate3d(0, 0, 0);
 	-webkit-transition: -webkit-transform 0.3s linear;
+	transform: translate3d(0, 0, 0);
+	transition: transform 0.3s linear;
 }
 
 .v-touchkit-navpanel-container, 
@@ -437,10 +424,10 @@ body e.v-app-loading {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	background: #e0e1e3 linenBg;
 	/* Not visible until positioned */
 	opacity: 0;
 	-webkit-transition: opacity 0.15s linear;
+	transition: opacity 0.15s linear;
 }
 
 .v-touchkit-navpanel-placeholder, 
@@ -448,13 +435,14 @@ body e.v-app-loading {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	background: backgroundStripes;
+	background: baseBackground;
 }
 
 
 /* TODO giallo for placeholder */
 .v-touchkit-navpanel-notransit {
 	-webkit-transition: none;
+	transition: none;
 	}
 
 .v-touchkit-navbutton,
@@ -463,9 +451,9 @@ body e.v-app-loading {
 	-webkit-user-select: none;
 	display: block;
 	position: relative;
-	font-size: 17px;
 	font-weight: bold;
-	line-height: 43px;
+	color: darkText;
+	line-height: 2;
 	margin: 0;
 	padding: 0 navButtonPaddingRight 0 0;
 	overflow:hidden;
@@ -478,6 +466,7 @@ body e.v-app-loading {
     padding: 0 navButtonPaddingRight 0 listlayoutmargin;
 	background:transparent;
 	-webkit-box-shadow: none;
+	box-shadow: none;
 	text-align: left;
 	border-radius: 0;
 }
@@ -487,21 +476,15 @@ body e.v-app-loading {
 	outline: none;
 }
 
-.v-touchkit-verticalcomponentgroup .v-button-caption {
-	font-size: 16px;
-	vertical-align: top;
-	line-height: 35px;
-}
-
 .v-button-nav>span {
     padding: 0 navButtonPaddingRight 0 listlayoutmargin;
 	background: transparent !important;
 	-webkit-box-shadow: none;
+	box-shadow: none;
 	height:43px;
 }
 .v-button-nav>span>span {
 	color: black;
-	text-shadow: none;
 	margin: 0;
 	padding:0;
 	line-height:43px !important;
@@ -512,9 +495,8 @@ body e.v-app-loading {
 
 .v-touchkit-verticalcomponentgroup .v-touchkit-navbutton:active,
 .v-button-nav:active {
-	background: navButtonGradient;
+	background: buttonColor;
 	color: #fff;
-	text-shadow: 0 1px 1px #396897;
 }
 
 .v-touchkit-verticalcomponentgroup .v-formlayout .v-formlayout-contentcell { 
@@ -555,84 +537,49 @@ body e.v-app-loading {
 	line-height: 1;
 	margin-top: 12px;
 	font-weight: bold;
-	text-shadow: none;
-	-webkit-box-shadow: inset 0 1px 0 rgba(0,0,0,.15);
 	}
 
 .v-touchkit-navbutton-pill:active .v-touchkit-navbutton-desc {
 	background: #fff;
 	color: #5d81ab;
-	text-shadow: none;
-	-webkit-box-shadow: none;
 	}
 
-@url navArrowUrl navArrowImage;
 .v-touchkit-navbutton:after {
-	content: "";
+	font-family: "TkIcons";
+	content: "\f061";
 	position: absolute;
 	right: listLayoutMargin;
 	top: 0;
 	bottom: 0;
-	background: navArrowUrl no-repeat 50%;
 	width: 10px;
 	margin-right: -1px;
 	}
 
-@url navArrowWhiteUrl navArrowWhiteImage;
 .v-touchkit-navbutton:active:after {
-	background-image: navArrowWhiteUrl;
-	}
+}
 
-@url backButtonUrl backButtonImage;
-
-.v-touchkit-navbutton-back,
-.v-touchkit-navbutton-forward {
-	display:block;
-	-webkit-border-image: backButtonUrl 0 6 0 13 stretch stretch;
-	border-width: 0 6px 0 13px;
-	width: auto;
-	height: 30px;
-	padding: 0 4px 0 3px;
-	background: transparent;
-	font-weight: bold;
-	text-align: left;
-	color: navbarButtonColor;
-	text-shadow: navbarButtonTextShadow;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	font-size: 12px;
-	line-height: 30px;
-	margin-right: auto;
-	}
 
 .v-touchkit-navbutton.v-touchkit-navbutton-back .v-touchkit-navbutton-desc {
 	margin-left: 0;
 	margin-right: 0;
 }
 
-@url forwardButtonUrl forwardButtonImage;
 .v-touchkit-navbutton-forward {
-	-webkit-border-image: forwardButtonUrl 0 13 0 6 stretch stretch;
+/*
 	border-width: 0 13px 0 6px;
 	width: auto;
 	height: 30px;
 	padding: 0 3px 0 4px;
 	color: navbarButtonColor;
-	text-shadow: navbarButtonTextShadow;
 	margin-left: auto;
 	margin-right:0;
-}
-
-.v-touchkit-navbutton-back:after,
-.v-touchkit-navbutton-forward:after {
-	display:none;	
+*/
 }
 
 .v-touchkit-navbar-left {
 	position: absolute;
 	left: 6px;
-	top: 7px;
+	top: 6px;
 	max-width: 35%;
 	z-index: 1;
 	padding-right:4px;
@@ -641,17 +588,15 @@ body e.v-app-loading {
 .v-touchkit-navbar,
 .v-touchkit-navpanel-placeholder > div,
 .v-touchkit-popover.v-touchkit-fullscreen .v-touchkit-navpanel-placeholder > div {
-	background: navbarGradient;
-	color: #52555a;
+	color: lightText;
 	display: block;
 	height: 43px;
 	font-size: 20px;
-	font-weight: bold;
-	text-decoration: none;
-	text-shadow: navbarTextShadow;
 	border-bottom: divider;
 	text-align: center;
 	position: relative;
+	background: white;
+	box-shadow: lightEmboss;
 }
 
 .v-touchkit-navbar .v-touchkit-navbar-caption, 
@@ -676,7 +621,7 @@ body e.v-app-loading {
 .v-touchkit-navbar-right {
 	position: absolute;
 	right: 6px;
-	top: 7px;
+	top: 6px;
 	max-width: 35%;
 	padding-left:4px;
 }
@@ -694,11 +639,9 @@ body e.v-app-loading {
 	vertical-align:top;
 }
 
-
 .v-touchkit-navview-notoolbar .v-touchkit-navview-toolbar {
 	display: none;
 }
-
 
 /* NavigationView */
 
@@ -727,34 +670,14 @@ body e.v-app-loading {
 	right: 0;	
 }
 
-
-.v-touchkit-toolbar {
-	background: navbarGradient;
-	color: navbarButtonColor;
-	text-shadow: navbarButtonTextShadow;
-	height: 43px;
-	}
-
-.v-touchkit-navview-toolbar .v-touchkit-navbar-caption {
-	font-size: 13px;
-	}
-
-.v-touchkit-toolbar > .v-csslayout-margin {
-	padding: 2px;
-	}
-
 .v-touchkit-navview-toolbar {
 	position: absolute;
-	height: 43px;
+	height: 48px;
 	bottom: 0;
 	left: 0;
 	right: 0;
 	border-top: divider;
-	}
-
-.v-touchkit-navview-toolbar > .v-touchkit-toolbar {
-	overflow: visible;
-	}
+}
 
 .v-touchkit-navview-notoolbar .v-touchkit-navview-toolbar {
 	display: none;
@@ -789,8 +712,8 @@ body e.v-app-loading {
 
 /* touchkit sub window */
 .v-touchkit-popover {
-	background: transparent;
-	}
+	
+}
 
 .v-window-modalitycurtain {
 	background: #3d3e40;
@@ -798,20 +721,12 @@ body e.v-app-loading {
 	}
 
 .v-window-modalitycurtain.relative {
-	opacity: 0;
+	opacity: 0.2;
 	}
 
+/* popover that is not relative to component, nor fullscreen */
 .v-touchkit-popover.v-touchkit-plain {
-	/* popover that is not relative to component, nor fullscreen */
-	-webkit-box-shadow: 0 0 40px rgba(0,0,0,.5);
 	background: #fff;
-	/* Disabled, too slow on 1st-gen iPad
-	-webkit-animation-name: popup;
-	-webkit-animation-duration: .2s;
-	-webkit-animation-iteration-count: 1;
-	-webkit-animation-timing-function: ease-out;
-	-webkit-animation-delay: .05s;
-	*/
 }
 
 /*
@@ -825,28 +740,15 @@ body e.v-app-loading {
 }
 */
 
-.v-touchkit-fullscreen {
-	background: linenBg;
-}
-
 .v-window-contents {
-	background: transparent;
+	background: baseBackground;
 }
 
 .v-touchkit-popover.v-touchkit-relative .v-window-wrap {
 	overflow: visible;
 	background: transparent;
 	position: relative;
-	-webkit-box-shadow: 0 0 40px rgba(0,0,0,.6);
-	border-radius: listLayoutMargin;
-	border: 1px solid rgba(25,33,40,.5);
-	background: popoverGradient;
-}
-
-.v-touchkit-popover.v-touchkit-relative .v-window-contents {
-	border-radius: 11px;
-	position: relative;
-	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.15), inset 0 0 1px rgba(255,255,255,.2);
+	border: thinBorder;
 }
 
 .v-touchkit-popover.v-touchkit-relative.v-touchkit-smallscreen .v-window-wrap,
@@ -854,20 +756,6 @@ body e.v-app-loading {
 	padding: 0;
 	border: none;
 	border-radius: 0;
-}
-
-.v-touchkit-popover.v-touchkit-relative .v-touchkit-navpanel-placeholder,
-.v-touchkit-popover.v-touchkit-relative .v-touchkit-navpanel-placeholder > div {
-	background: transparent;
-	border-top: 0;
-	border-bottom: 0;
-}
-
-.v-touchkit-popover.v-touchkit-relative .v-window-contents > div > .v-verticallayout {
-	padding-top: 7px;
-	padding-bottom: 7px;
-	padding-left: 7px;
-	padding-right: 7px;
 }
 
 .v-touchkit-popover .v-window-closebox,
@@ -883,106 +771,87 @@ body e.v-app-loading {
 @sprite .v-touchkit-popover-pointer {
 	gwt-image: "popoverArrowDownImage";
 	position: absolute;
-	margin-top: -1px;
+	margin-top: 0px;
+	width: 45px;
+	height: 20px;
+	background-size: 45px 20px;
 }
 
 @sprite .v-touchkit-popover-pointer-bottom {
 	gwt-image: "popoverArrowImage";
 	position: absolute;
-	margin-top: 3px;
+	margin-top: 1px;
+	width: 45px;
+	height: 20px;
+	background-size: 45px 20px;
 }
-
-.v-touchkit-popover.v-touchkit-relative .v-touchkit-navview-wrapper {
-	background: #f6f6f7;
-	margin: 0 5px;
-	-webkit-box-shadow: inset 0 3px 2px rgba(0,0,0,.4);
-	border-radius: 6px;
-	z-index: 1;
-}
-.v-touchkit-popover.v-touchkit-relative .v-touchkit-navview-notoolbar .v-touchkit-navview-wrapper {
-	bottom: 5px;
-}
-
-.v-touchkit-popover.v-touchkit-relative .v-touchkit-navpanel-container {
-	background: transparent;
-}
-
-.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar,
-.v-touchkit-popover.v-touchkit-relative .v-touchkit-navpanel-placeholder {
-	background: popoverNavbarGradient;
-	border: 0;
-}
-.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar-caption,
-.v-touchkit-popover.v-touchkit-relative .v-touchkit-navpanel-placeholder > div {
-	color: buttonColor;
-	text-shadow: buttonTextShadow;
-}
-.v-touchkit-popover.v-touchkit-relative .v-touchkit-navview-toolbar {
-	border: 0;
-	background: popoverToolbarGradient;
-	height: 43px;
-	padding-top: 8px;
-}
-.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar .v-button,
-.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar .v-touchkit-horizontalbuttongroup {
-	border-color: rgba(0,0,0,.4);
-	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.1);
-}
-.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbar .v-button-caption {
-	color: buttonColor;
-	text-shadow: buttonTextShadow;
-}
-
-@url popoverBackButtonUrl popoverBackButtonImage;
-.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbutton-back {
-	color: buttonColor;
-	text-shadow: buttonTextShadow;
-	-webkit-border-image: popoverBackButtonUrl 0 6 0 13 stretch stretch;
-}
-
-@url popoverForwardButtonUrl popoverForwardButtonImage;
-.v-touchkit-popover.v-touchkit-relative .v-touchkit-navbutton-forward {
-	color: buttonColor;
-	text-shadow: buttonTextShadow;
-	-webkit-border-image: popoverForwardButtonUrl 0 6 0 13 stretch stretch;
-}
-
-.v-touchkit-popover.v-touchkit-relative .v-touchkit-toolbar {
-	border: 0;
-	background: transparent;
-	}
-
-.v-touchkit-popover.v-touchkit-relative .v-touchkit-toolbar .v-button-wrap {
-	color: buttonColor;
-	text-shadow: buttonTextShadow;
-	}
-
 
 /* Switch style checkbox. */
-@url switch switchImage;
-.v-touchkit-switch {
-	overflow: hidden;
+.v-touchkit-switch-wrapper {
+	width: 60px;
+	height: 22px;
+	font-size:16px;
 	position: relative;
-	width: 90px;
-	height: 26px;
-	overflow: hidden;
-	background: switch;
-	-webkit-background-origin: border-box;
-	border: 1px solid rgba(0,0,0,.2);
-	border-radius: 4px;
-	}
-
+	background: #00a1d8;
+	border-radius: borderRadius;
+	border: 1px solid rgba(0,0,0,0.15);
+	overflow:hidden;
+	font-weight: 700;
+	box-shadow: inset 0px 1px 2px 0px rgba(0,0,0,0.1);
+	line-height: 1;
+}
+.v-touchkit-switch-off {
+	background: #c8c7b5;
+}
+.v-touchkit-switch {
+	left:0%;
+	width: 150%;
+	height:100%;
+	position:absolute;
+	box-sizing: border-box;
+}
+.v-touchkit-switch:before,
+.v-touchkit-switch:after {
+	text-align:center;
+	position:absolute;
+	margin:2px;
+	color:white;
+}
+.v-touchkit-switch:before {
+	content: "I";
+	right: 66.6%;
+	left:0;
+}
+.v-touchkit-switch:after {
+	content: "O";
+	right: 0;
+	left:66.6%;
+}
 .v-touchkit-switch-slider {
-	/* Used only for measuring the slide amount. The dimensions of this element should match the dimensions of the switch image */
-	position: absolute;
-	width: 146px;
-	height: 25px;
-	}
+	height: 100%;
+	left:33.3%;
+	right:33.3%;
+	text-align:center;
+	position:absolute;
+	color:#a09f91;
+	box-sizing:border-box;
+}
+.v-touchkit-switch-slider:after {
+	content: "III";
+	position:absolute;
+	background: #dcdbd0;
+	box-shadow: inset 0px 2px 2px 0px rgba(255,255,255,0.3),inset 0px -2px 2px 0px rgba(0,0,0,0.1);
+	text-shadow: 1px 1px 2px rgba(255,255,255, 0.5);
+	border-radius: 1px;
+	left:0px;
+	right:0px;
+	top:0px;
+	bottom:0px;
+	margin:2px 5px;
+}
 
-.v-touchkit-switch-focus,
-.v-touchkit-switch:focus {
-	outline: none;
-	}
+.v-touchkit-switch-focus{}
+
 
 .v-slider-feedback {
 	font-size: 20px;
@@ -994,7 +863,7 @@ body e.v-app-loading {
 
 .v-touchkit-verticalcomponentgroup .v-checkbox {
 	line-height: 43px;
-	font-size: 17px;
+	font-size: 16px;
 	font-weight: bold;
 	}
 
@@ -1020,70 +889,17 @@ body e.v-app-loading {
 .v-touchkit-tabbar-toolbar .v-touchkit-toolbar {
 	position: absolute;
 	bottom: 0;
-	height: 48px;
-	background: tabbarGradient;
-	border-top: 1px solid #4c4c4c;
-	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.2);
-	color: buttonColor;
-	text-shadow: buttonTextShadow;
-	padding-top:2px;
-}
-
-.v-touchkit-toolbar {
-	overflow: hidden;
-}
-
-.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-caption {
-	display:none;
-}
-
-.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button {
-	padding: 3px;
-	height: 42px;
-    position: relative;
-}
-
-.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-wrap {
-	color: #999;
-	text-shadow: none;
-	margin: 0;
-	height: auto;
-	width: auto;
-	padding: 0;
-}
-
-.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button:active .v-button-wrap {
-    background-image:none;
-}
-
-.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-caption {
-	color: inherit;
-	font-size: 10px;
-	font-family: "Helvetica Neue", Helvetica, Arial, Tahoma, Verdana, sans-serif;
-	display: block;
-	margin: 3px 0 0 0;
-	position: absolute;
-    bottom: 2px;
-    left: 0;
-	width: 100%;
-	height: auto;
-	border-radius: 0;
-	text-indent: 0;
-	vertical-align: middle;
-	margin: 7px 0 0 0; /* At the bottom of the button, even without icon */
-}
-
-.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button .v-icon {
-	margin: 0 0 -3px 0; /* Compensate the space consumed by icon as caption is positioned with margin */
+	left: 0;
+	right: 0;
+	border-top: thinBorder;
 }
 
 .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-selected {
-	background: rgba(255,255,255,.15);	
-	border-radius: 4px;
+	background: baseBackground;
 }
 
 .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-selected .v-button-wrap {
-	color: #fff;
+	color: darkText;
 }
 
 /* Layout margins */
@@ -1143,26 +959,30 @@ body e.v-app-loading {
 	padding-left: 8px;
 }
 
-
+.v-layout>.v-button,
+.v-layout>.v-touchkit-horizontalbuttongroup {
+	margin: listLayoutMargin;
+}
 
 
 /* Notifications */
 .v-Notification {
-	background: popoverGradient;
-	border: 2px solid rgba(0,0,0,.3);
-	border-top-color: rgba(100,100,100,.4);
-	border-bottom-color: rgba(0,0,0,.7);
-	border-radius: listLayoutMargin;
+	background: darkBackground;
 	padding: 30px 30px;
 	text-align: center;
 	color: #fff;
 	line-height: normal;
-	text-shadow: 0 1px 1px rgba(0,0,0,.2);
-	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.4), 0 2px 1px 1px rgba(0,0,0,.5), inset 0 0 1px rgba(255,255,255,.16);
 	overflow: hidden;
 	max-width: 85%; 
 	}
 	
+.v-Notification-error {
+	background: rgb(245,89,47);
+}
+
+.v-Notification-warning {
+	background: #ee7c08;
+}
 	
 /* Table */
 .v-table {
@@ -1173,22 +993,23 @@ display:block;
 }
 
 .v-table-header table,.v-table-table,.v-table-footer table {
-border: 0;
-border-collapse: separate;
-border-spacing: 0;
-font-size: 16px;
-margin: 0;
-padding: 0;
+	border: 0;
+	border-collapse: separate;
+	border-spacing: 0;
+	font-size: 16px;
+	margin: 0;
+	padding: 0;
 }
 
-.v-table-header-cell,.v-table-header-cell-asc,.v-table-header-cell-desc {
+.v-table-header-cell,
+.v-table-header-cell-rowheader,
+.v-table-header-cell-asc,
+.v-table-header-cell-desc {
 cursor: pointer;
 padding: 0;
 }
 
 .v-table-footer td {
-border-color: #c2c3c4;
-border-right: 1px solid #aaa;
 padding: 0;
 }
 
@@ -1210,7 +1031,7 @@ border-right: 1px solid #c2c3c4;
 cursor: col-resize;
 display: block;
 float: right;
-height: tableRowHeight;
+height: tableHeaderHeight;
 overflow: hidden;
 width: 2px;
 }
@@ -1232,7 +1053,7 @@ text-align: right;
 .v-table-sort-indicator {
 background: transparent;
 float: right;
-height: tableRowHeight;
+height: tableHeaderHeight;
 width: 0;
 }
 
@@ -1244,8 +1065,6 @@ width: 16px;
 
 .v-table-body {
 background: #fff;
-border: 1px solid #aaa;
-border-color: #c2c3c4;
 }
 
 .v-table-row-spacer {
@@ -1253,60 +1072,58 @@ height: 10px;
 overflow: hidden;
 }
 
-.v-table-row,.v-table-row-odd {
-background: #fff;
-border: 0;
-cursor: pointer;
-margin: 0;
-padding: 0;
+.v-table-row,
+.v-table-row-odd {
+	background: #fff;
+	color: darkText;
+	border: 0;
+	cursor: pointer;
+	margin: 0;
+	padding: 0;
 }
 
 .v-table-generated-row {
-background: #efefef;
-}
-
-.v-table .v-selected {
-background: #4d749f;
-color: #fff;
-text-shadow: #3b5a7a 0 1px 0;
+	
 }
 
 .v-table-cell-content {
-border-right: 1px solid #aaa;
-border-right-color: #d3d4d5;
-overflow: hidden;
-padding: 0 6px;
-vertical-align: top;
-white-space: nowrap;
+	overflow: hidden;
+	padding: 6px 7px 6px 6px;
+	vertical-align: top;
+	white-space: nowrap;
+}
+
+.v-table .v-selected {
+	background: buttonColor;
+	color: #fff;
 }
 
 .v-table-cell-wrapper {
-overflow: hidden;
-padding-bottom: 5px;
-padding-top: 5px;
-white-space: nowrap;
+	overflow: hidden;
+	padding: 5px 0;
+	white-space: nowrap;
 }
 
 .v-table-cell-wrapper-align-right {
-text-align: right;
+	text-align: right;
 }
 
 .v-table-focus-slot-left {
-background: transparent;
-border-left: 2px solid #999;
-border-left-color: #222;
-border-right: 1px solid #aaa;
-float: none;
-margin-bottom: -1.2em;
-margin-left: 0;
-width: auto;
+	background: transparent;
+	border-left: 2px solid #999;
+	border-left-color: #222;
+	border-right: 1px solid #aaa;
+	float: none;
+	margin-bottom: -1.2em;
+	margin-left: 0;
+	width: auto;
 }
 
 .v-table-focus-slot-right {
-border-right: 2px solid #999;
-border-right-color: #222;
-margin-left: -2px;
-margin-right: 0;
+	border-right: 2px solid #999;
+	border-right-color: #222;
+	margin-left: -2px;
+	margin-right: 0;
 }
 
 .v-table-header-drag {
@@ -1325,18 +1142,15 @@ width: auto;
 }
 
 .v-table-scrollposition span {
--webkit-box-shadow: rgba(0,0,0,.5) 0 1px 2px;
-background: navbarGradient;
 border: none;
-border-radius: 4px;
-color: #222;
+color: white;
+background: darkBackground;
+opacity: 0.8;
 display: block;
-height: 13px;
-padding: 4px 30px;
+padding: 10px 30px;
 position: relative;
+top: listLayoutMargin;
 text-align: center;
-text-shadow: #fff 0 1px 0;
-top: 1px;
 white-space: nowrap;
 }
 
@@ -1358,43 +1172,34 @@ margin-bottom: -1px;
 margin-top: -1px;
 }
 
-.v-table-header-wrap,.v-table-footer-wrap {
-background: navbarGradient;
-border-color: #c2c3c4;
-color: navbarButtonColor;
-font-weight: bold;
-height: tableRowHeight;
-overflow: hidden;
+.v-table-header-wrap,
+.v-table-footer-wrap {
+	background: darkBackground;
+	color: white;
+	height: tableHeaderHeight;
+	overflow: hidden;
 }
 
 .v-table-footer-wrap {
-border: 1px solid #aaa;
-border-top: none;
-font-size: 12px;
-font-weight: normal;
-text-transform: none;
+	border-top: none;
 }
 
 .v-table-header,.v-table-footer,.v-table-footer table {
-height: tableRowHeight;
+	height: tableHeaderHeight;
 }
 
 .v-table-caption-container .v-icon {
-height: 16px;
-margin: -4px 3px 0 0;
-vertical-align: middle;
+	height: 16px;
+	margin: -4px 3px 0 0;
+	vertical-align: middle;
 }
 
 .v-table-row-odd {
-background: #eff0f1;
+	background: baseBackground;
 }
 
 .v-table-cell-content:last-child {
 border-right-color: transparent;
-}
-
-.v-table .v-selected .v-table-cell-content {
-border-right-color: #466c90;
 }
 
 .v-table-header-drag img {
@@ -1424,14 +1229,16 @@ vertical-align: middle;
     cursor: pointer;
 }
 
-@sprite .v-table-header-cell-asc .v-table-sort-indicator {
-	gwt-image: "columnAscending";
-	margin-top: 10px;
+.v-table-header-cell-asc .v-table-sort-indicator:before {
+	content: "\25b2";
+	line-height: tableHeaderHeight;
+	font-size: 70%;
 }
 
-@sprite .v-table-header-cell-desc .v-table-sort-indicator {
-	gwt-image: "columnDescending";
-	margin-top: 10px;
+.v-table-header-cell-desc .v-table-sort-indicator:before {
+	content: "\25bc";
+	line-height: tableHeaderHeight;
+	font-size: 70%;
 }
 
 
@@ -1520,7 +1327,7 @@ vertical-align: middle;
 .v-filterselect-suggestpopup .gwt-MenuItem:active,
 .v-filterselect-suggestpopup .gwt-MenuItem:hover,
 .v-filterselect-suggestpopup .gwt-MenuItem:focus {
-	background: tableSelectionGradient;
+    /*	background: tableSelectionGradient; */
 	}
 
 .v-filterselect-nextpage,
@@ -1720,22 +1527,38 @@ span.v-datefield-calendarpanel-month {
 	position: relative;
 	width: 100%;
 	margin: 0;
-	border: listBorder;
-	border-radius: listLayoutMargin;
+	border-top: listBorder;
+	border-bottom: listBorder;
 	background: white;
 	-webkit-box-sizing: border-box;
-	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.5);
+	box-shadow: 0 1px rgba(0,0,0,0.1);
 	overflow: hidden;
 	position: relative;
 	margin-bottom: listLayoutMargin;
 }
 
 .v-touchkit-verticalcomponentgroup .v-textfield,
+.v-touchkit-verticalcomponentgroup .v-textarea,
 .v-touchkit-verticalcomponentgroup .v-touchkit-numberfield {
+	-webkit-appearance: none;
 	border:0;
+	border-radius:0;
 	background: transparent;
-	color: #4e64a1;
-	font-size:17px;
+	color: buttonColor;
+	font-size:16px;
+	margin:0;
+}
+
+.v-touchkit-verticalcomponentgroup .v-textfield,
+.v-touchkit-verticalcomponentgroup .v-touchkit-numberfield {
+	height: 42px;
+}
+
+.v-touchkit-verticalcomponentgroup .v-textfield:focus,
+.v-touchkit-verticalcomponentgroup .v-textarea:focus,
+.v-touchkit-verticalcomponentgroup .v-touchkit-numberfield:focus {
+	box-shadow: inset 0px -3px buttonColor;
+  	outline: none;
 }
 
 /* Display readonly inputs without special color */
@@ -1763,21 +1586,56 @@ span.v-datefield-calendarpanel-month {
     display: block;
 }
 
+.v-select,
+.v-touchkit-datepicker {
+	position:relative;
+	padding: 0;
+}
+
+.v-touchkit-datepicker>input,
+.v-select-select {
+	display: block;
+	-webkit-appearance: none;
+	border: none;
+	color: buttonColor;
+	font-size:16px;
+	padding: 0 1em 0 0;
+	margin:0;
+	background: white;
+}
+
+@if user.agent ie10 {
+select.v-select-select::-ms-expand {
+	display:none;
+}
+}
+
+.v-touchkit-datepicker:after,
+.v-select:after {
+	content:"\25b2 \0020 \25bc";
+	text-align:center;
+	position:absolute;
+	right:0;
+	top:0;
+	width:1em;
+	color: buttonColor;
+	font-size:50%;
+}
+
 .v-touchkit-componentgroup-cell > .v-select-optiongroup {
     margin: 0;
 }
 
 .v-touchkit-componentgroup-cell > .v-touchkit-navbutton {
     padding-left: listLayoutMargin;
-    margin-left: negativelistLayoutMargin;
     padding-right: navButtonPaddingRight;
-    margin-right: negativelistLayoutMargin;
+    line-height:43px;
 }
 
 .v-touchkit-verticalcomponentgroup .v-filterselect>input {
 	color: #4e64a1;
 	/*padding-top: 10px;*/
-	font-size:17px;
+	font-size:16px;
 }
 
 .v-touchkit-verticalcomponentgroup .v-slider {
@@ -1811,11 +1669,10 @@ span.v-datefield-calendarpanel-month {
 	padding-left:20px;
 	padding-top:10px;
 	margin:0;
-	font-weight: bold;
 	color: navbarButtonColor;
 	vertical-align:top;
 	line-height:normal;
-	font-size:17px;
+	font-size:16px;
 	height:30px;
 }
 
@@ -1837,7 +1694,6 @@ span.v-datefield-calendarpanel-month {
 	}
 	
 /* ...hide from the first */
-.v-touchkit-verticalcomponentgroup > *:first-child:before,
 .v-touchkit-componentgroup-cell > .v-select-optiongroup :first-child:before {
 	display: none;
 }
@@ -1868,8 +1724,8 @@ span.v-datefield-calendarpanel-month {
 }
 
 .v-formlayout-captioncell > .v-caption {
-	font-weight: bold;
-	font-size: 17px;
+	font-size: 16px;
+	color: lightText;
 	line-height: 43px;
 	height: 43px;
 	margin:0;
@@ -1886,17 +1742,16 @@ span.v-datefield-calendarpanel-month {
 .v-layout > .v-caption>div
 {
 	font-size: 16px;
-	font-weight: bold;
 	color: captionColor;
-	text-shadow: 0 1px 0 rgba(255,255,255,.7);
 	margin: listLayoutMargin;
 }
 
-
-
 .v-touchkit-componentgroup-row {
-	display: -webkit-box;
-	border-top: listBorder;
+	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+	display: -ms-flexbox;      /* TWEENER - IE 10 */
+	display: -webkit-flex;     /* NEW - Chrome */
+	display: flex; 
+  	border-top: listBorder;
 	padding: 0 listLayoutMargin;
 }
 .v-touchkit-componentgroup-row:first-child {
@@ -1908,10 +1763,11 @@ span.v-datefield-calendarpanel-month {
 }
 
 .v-touchkit-componentgroup-row > .v-caption {
-	font-size: 17px;
-	font-weight: bold;
+	font-size: 16px;
+	color: lightText;
 	padding-right: 5px;
 	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
 	white-space: nowrap;
     overflow-x: hidden;
     text-overflow: ellipsis;
@@ -1919,22 +1775,42 @@ span.v-datefield-calendarpanel-month {
 
 .v-touchkit-componentgroup-row-nocap > .v-caption {
 	display: none;
+}
+
+/* TODO figure out a better method to do this and replace further dummy all in one definitions. */
+@if user.agent safari {
+.v-touchkit-componentgroup-row-nocap > .v-caption {
 	-webkit-box-flex: 0;
+}
+} @elif user.agent ie10 {
+.v-touchkit-componentgroup-row-nocap > .v-caption {
+	-ms-flex: 0;
+}
+} @else {
+.v-touchkit-componentgroup-row-nocap > .v-caption {
+	flex: 0;
+}
 }
 
 .v-touchkit-componentgroup-row-nocap > .v-touchkit-componentgroup-cell {
     -webkit-box-flex: 1;
+    -ms-flex:1;
+    flex:1;
     width: 100%;
     padding-left: 0px;
 }
 
 .v-touchkit-componentgroup-row-cap > .v-caption {
-	-webkit-box-flex: 1;
+    -webkit-box-flex: 1;
+    -ms-flex:1;
+    flex:1;
 	width: 40%;
 }
 
 .v-touchkit-componentgroup-row-cap > .v-touchkit-componentgroup-cell {
     -webkit-box-flex: 0;
+    -ms-flex:0;
+    flex:0;
 }
 
 .v-touchkit-componentgroup-row-cap > .v-touchkit-componentgroup-cell > * {
@@ -1943,11 +1819,15 @@ span.v-datefield-calendarpanel-month {
 
 .v-touchkit-componentgroup-row-full > .v-caption {
     -webkit-box-flex: 1;
+    -ms-flex:1;
+    flex:1;
     width: 40%;
 }
 
 .v-touchkit-componentgroup-row-full > .v-touchkit-componentgroup-cell {
     -webkit-box-flex: 1;
+    -ms-flex:1;
+    flex:1;
     width: 60%;
 }
 
@@ -1973,26 +1853,12 @@ span.v-datefield-calendarpanel-month {
 	padding-top: listLayoutMargin;
 }
 
-/* Csslayout directly under navigationview, tabbarview or similar has margin by default */
-.v-touchkit-navview-wrapper>.v-csslayout,
-.v-touchkit-tabbar-wrapper>.v-csslayout,
-.v-touchkit-swipeview>.v-csslayout {
-	padding: listLayoutMargin;
-}
-
 /* ComponentGroup directly under navigationview or tabbarview has margin by default */
 .v-touchkit-navview-wrapper>.v-touchkit-verticalcomponentgroup,
 .v-touchkit-tabbar-wrapper>.v-touchkit-verticalcomponentgroup,
 .v-touchkit-swipeview>.v-touchkit-verticalcomponentgroup {
-	margin: listLayoutMargin;
 	width:auto;
 }
-
-
-/* This gludge is ONLY for testbench testing in Windows machine where there will most likely be scrollbars */
-/*.v-scrollable {
-	overflow: hidden !important;	
-}*/
 
 .v-touchkit-combobox-drop-down {
 	height: 25px;
@@ -2028,7 +1894,6 @@ span.v-datefield-calendarpanel-month {
 
 .v-touchkit-combobox.v-touchkit-popover {
 /* 	overflow: visible; */
-/* 	background: popoverGradient; */
 /* 	position: relative; */
 /* 	-webkit-box-shadow: 0 0 40px rgba(0, 0, 0, 0.6); */
 /* 	border-radius: 10px; */
@@ -2182,95 +2047,141 @@ span.v-datefield-calendarpanel-month {
  * Note that these must be after all other 
  * button styles to get properly overridden border radius etc
  */
+.v-touchkit-componentgroup-cell .v-button,
 .v-touchkit-navbar .v-button,
-.v-touchkit-horizontalbuttongroup {
-    display: inline-block;
+.v-touchkit-horizontalbuttongroup,
+.v-touchkit-navbutton-back,
+.v-touchkit-navbutton-forward {
+    display: block;
     margin: 0;
-    border: navbarButtonBorder;
-    border-radius: 5px;	
-    height: 30px;
     padding: 0;
     overflow: hidden;
     -webkit-box-sizing: border-box;
     background: transparent;
     color: navbarButtonColor;
-    text-shadow: navbarButtonTextShadow;
-    -webkit-box-shadow: navbarButtonBoxShadow;
+/*    border: thinBorder; */
+    box-shadow: none;
+    border-radius: borderRadius;
+    line-height:30px;
 }
+
+.v-touchkit-navbutton-back {
+	padding-left: listLayoutMargin;	
+	padding-right: 20px;
+}
+.v-touchkit-navbutton-back {
+	padding-left: 20px;	
+	padding-right: listLayoutMargin;
+}
+.v-touchkit-navbutton-back:after {
+	content: "\f060";
+	left: borderRadius;
+}
+
+.v-touchkit-horizontalbuttongroup .v-button {
+	display: inline-block;
+	border:0;
+	border-left: thinBorder;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	box-shadow: none;
+}
+.v-touchkit-horizontalbuttongroup .v-button:first-child {
+	border-left: none;
+	border-top-left-radius: borderRadius;
+	border-bottom-left-radius: borderRadius;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.v-touchkit-navbar .v-button,
+.v-touchkit-componentgroup-cell>.v-button,
+.v-touchkit-horizontalbuttongroup .v-button,
+.v-touchkit-navbutton-back,
+.v-touchkit-navbutton-forward {
+	margin: 0;
+    font-size: 14px;
+    font-weight:normal;
+}
+
+.v-touchkit-componentgroup-cell>.v-button {
+	margin: listLayoutMargin 0;
+	float: left;
+}
+
+.v-touchkit-componentgroup-cell>.v-button>.v-button-wrap {
+	padding:0;
+}
+
 
 .v-touchkit-navbar .v-button-wrap,
-.v-touchkit-horizontalbuttongroup {
-	background: navbarButtonGradient;
-	border-radius: 4px;
-}
-
-.v-touchkit-horizontalbuttongroup {
-    padding: 0 13px;	
-}
-
-.v-touchkit-navbar .v-button-wrap {
-    height: 28px;
+.v-touchkit-horizontalbuttongroup .v-button-wrap {
     padding: 0 listLayoutMargin;
 }
 
-.v-touchkit-navbar .v-button-caption,
-.v-touchkit-horizontalbuttongroup .v-button-caption {
-	color: navbarButtonColor;
-	text-shadow: navbarButtonTextShadow;
-	font-size: 12px;
-	-webkit-box-shadow: none;
-	/* These buttons are 28px height, make text centered */
-	line-height:28px;
-	vertical-align:top;
-	margin: 0;
-}
-
-/* .v-touchkit-navbar .v-button:active .v-button-wrap { */
-/* 	background-image: navbarButtonActiveGradient; */
-/* } */
-
 .v-touchkit-horizontalbuttongroup {
 	padding:0;
-	display:block;
-	/* Float left to "sqeeze" non used space, inline-block cannot be used to keep sizes working */
-	float:left;
+	display:inline-block;
 }
 
 .v-touchkit-componentgroup-cell>.v-touchkit-horizontalbuttongroup {
 	margin: listLayoutMargin 0;
 }
 
-.v-touchkit-navbar .v-touchkit-horizontalbuttongroup {
-	float:none;
-	display:inline-block
+/* Toolbar buttons (icons only by default) */
+
+.v-touchkit-toolbar {
+	background: white;
+	height: 48px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display:flex;
+	box-shadow: lightEmboss;
 }
 
-/* Strip some styles from buttons inside a componentgroup */
-.v-touchkit-horizontalbuttongroup .v-button {
-	border:0;
-	margin:0;
-	padding:0;
+.v-touchkit-toolbar .v-button {
+	display:block;
 	background: transparent;
-	-webkit-box-shadow: none;
-	display:inline-block;
-	border-left: navbarButtonBorder;
-	border-radius: 0;
+	box-shadow:none;
+	-webkit-box-flex:1;
+	-ms-flex: 1;
+	flex:1;
+	padding:0;
+	border-radius:0;
 }
+
+.v-touchkit-toolbar .v-button-wrap {
+	background: transparent;
+	height: auto;
+	padding: 0;
+	-webkit-box-shadow: none;
+	font-size: 10px;
+	line-height: 1;
+	color: navbarButtonColor;
+	overflow: visible;
+	display: block;
+	height:48px;
+	background: transparent;
+}
+
+.v-touchkit-toolbar .v-button-caption {
+	position:absolute;
+	bottom:4px;
+	left:0;
+	right:0;
+}
+
+.v-touchkit-toolbar .v-button .v-icon {
+	height: 24px;
+	display:inline;
+	margin-top:12px;
+}
+	
+/* Strip some styles from buttons inside a componentgroup */
 
 .v-touchkit-horizontalbuttongroup .v-button-wrap {
 	background:none;
 	border-radius:0;
-}
-
-.v-touchkit-horizontalbuttongroup .v-button:first-child {
-	border-left: none;
-	border-top-left-radius: 4px;
-	border-bottom-left-radius: 4px;
-}
-
-.v-touchkit-horizontalbuttongroup .v-button:last-child {
-	border-top-right-radius: 4px;
-	border-bottom-right-radius: 4px;
 }
 
 /* no-decoration button in navbar */
@@ -2296,23 +2207,25 @@ span.v-datefield-calendarpanel-month {
 
 .v-button-white .v-button-caption {
     color: #222;
-    text-shadow: navbarButtonTextShadow;	
 }
 
 
 .v-button.red {
 	background-color: redButtonWrapBgColor;
+	border:none;
 }
 .v-button.green {
 	background-color: greenButtonWrapBgColor;
+	border:none;
 }
 .v-button.blue {
 	background-color: blueButtonWrapBgColor;
+	border:none;
 }
 .v-button.red .v-button-wrap,
 .v-button.green .v-button-wrap,
 .v-button.blue .v-button-wrap {
-	background-image: buttonColorGradient;
+	color: white;
 }
 .v-touchkit-navbar .v-button.red .v-button-wrap,
 .v-touchkit-navbar .v-button.green .v-button-wrap,
@@ -2320,34 +2233,8 @@ span.v-datefield-calendarpanel-month {
 .v-touchkit-horizontalbuttongroup .v-button.red .v-button-wrap,
 .v-touchkit-horizontalbuttongroup .v-button.green .v-button-wrap,
 .v-touchkit-horizontalbuttongroup .v-button.blue .v-button-wrap {
-	background-image: navbarButtonGradient;
-}
-/*
 
-.v-button-red .v-button-wrap,
-.v-touchkit-navbar .v-button-red {
-	background-color: redButtonWrapBgColor;
-	background-image: buttonColorGradient;
-}
-
-.v-button-blue .v-button-wrap,
-.v-touchkit-navbar .v-button-blue {
-	background-color: blueButtonWrapBgColor;
-	background-image: buttonColorGradient;
-}
-
-.v-button-green .v-button-wrap,
-.v-touchkit-navbar .v-button-green {
-	background-color: greenButtonWrapBgColor;
-	background-image: buttonColorGradient;
-}
-
-.v-touchkit-navbar .v-button-red .v-button-wrap,
-.v-touchkit-navbar .v-button-blue .v-button-wrap,
-.v-touchkit-navbar .v-button-green .v-button-wrap {
-	background-color: transparent;
-}
-*/
+	}
 
 .v-touchkit-horizontalbuttongroup .v-button-red .v-button-caption,
 .v-touchkit-horizontalbuttongroup .v-button-blue .v-button-caption,
@@ -2355,8 +2242,7 @@ span.v-datefield-calendarpanel-month {
 .v-touchkit-navbar .v-button-red .v-button-caption,
 .v-touchkit-navbar .v-button-blue .v-button-caption,
 .v-touchkit-navbar .v-button-green .v-button-caption {
-    color: buttonColor;
-    text-shadow: buttonTextShadow;
+    color: white;
 }
 
 
@@ -2449,4 +2335,32 @@ span.v-datefield-calendarpanel-month {
     -webkit-animation-duration: 2s;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
+    animation-name: spinnerRotate;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.floatingIndex {
+	display: block;
+	position:absolute;
+	right:listLayoutMargin;
+	top:0;
+	bottom:0;
+}
+.floatingIndex>div {
+	display:table;
+	height:100%;
+}
+.floatingIndex>div>div {
+	display:table-row;
+}
+.floatingIndex>div>div>div {
+	display:table-cell;
+	vertical-align:middle;
+	text-align:center;
+	color: gray;
+	font-size: 10px;
+	font-weight: bold;
+	padding: 0 5px;
 }

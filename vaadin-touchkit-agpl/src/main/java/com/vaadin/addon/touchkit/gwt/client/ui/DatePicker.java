@@ -21,15 +21,16 @@ import com.google.gwt.i18n.client.DateTimeFormat.PredefinedFormat;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.vaadin.client.BrowserInfo;
 import com.vaadin.client.VConsole;
-import com.vaadin.client.ui.VButton;
 import com.vaadin.shared.VBrowserDetails;
 
 /**
  * DatePicker widget. Uses HTML5 date input fields to ask time values from user.
+ * 
  */
 public class DatePicker extends SimplePanel implements
         HasValueChangeHandlers<java.util.Date>, ClickHandler {
@@ -45,7 +46,7 @@ public class DatePicker extends SimplePanel implements
     private InputElement input;
     private Resolution resolution;
 
-    private VButton backUpWidget = null;
+    private Label backUpWidget = null;
     private CalendarOverlay overlay = null;
     private boolean useNative = true;
     private long overlayClosed = 0;
@@ -334,7 +335,8 @@ public class DatePicker extends SimplePanel implements
 
     private void addBackupWidget() {
         if (backUpWidget == null) {
-            backUpWidget = new VButton();
+            backUpWidget = new Label();
+            backUpWidget.setStyleName("v-select-select"); // style like native input
             add(backUpWidget);
             backUpWidget.addClickHandler(this);
             updateValue();

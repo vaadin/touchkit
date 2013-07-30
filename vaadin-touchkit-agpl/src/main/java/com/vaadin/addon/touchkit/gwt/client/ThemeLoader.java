@@ -18,16 +18,6 @@ public class ThemeLoader {
      */
     public void load() {
         VTouchKitResources.INSTANCE.css().ensureInjected();
-        /*
-         * We should use some saner method for "retina images". E.g.
-         * https://github.com/kDCYorke/RetinaImages
-         * 
-         * At least should have a permutation for high dpi and use that in css
-         * so that GWT compiler could optimized themes.
-         */
-        if (VEagerResourceLoader.isHighDPI()) {
-            VTouchKitResources.INSTANCE.highDpiCss().ensureInjected();
-        }
         
         if(ApplicationConfiguration.isDebugMode()) {
             GWT.runAsync(new RunAsyncCallback() {

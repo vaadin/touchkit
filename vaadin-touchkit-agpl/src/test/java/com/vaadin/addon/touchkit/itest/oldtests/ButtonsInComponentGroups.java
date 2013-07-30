@@ -3,6 +3,7 @@ package com.vaadin.addon.touchkit.itest.oldtests;
 import java.util.Iterator;
 
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
+import com.vaadin.addon.touchkit.gwt.client.theme.StyleNames;
 import com.vaadin.addon.touchkit.ui.HorizontalButtonGroup;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
@@ -24,7 +25,6 @@ public class ButtonsInComponentGroups extends AbstractTouchKitIntegrationTest {
         CssLayout l = new CssLayout();
 
         Button button = new Button("Button not in a component group");
-        button.setWidth("100%");
         button.addClickListener(new ClickListener() {
             @Override
             public void buttonClick(ClickEvent event) {
@@ -37,6 +37,37 @@ public class ButtonsInComponentGroups extends AbstractTouchKitIntegrationTest {
             }
         });
         l.addComponent(button);
+        
+        button = new Button("Primary button");
+        button.setStyleName(StyleNames.BUTTON_BLUE);
+        button.addClickListener(new ClickListener() {
+            @Override
+            public void buttonClick(ClickEvent event) {
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Notification.show("Clicked");
+            }
+        });
+        l.addComponent(button);
+
+        button = new Button("Danger button");
+        button.setStyleName(StyleNames.BUTTON_RED);
+        button.addClickListener(new ClickListener() {
+            @Override
+            public void buttonClick(ClickEvent event) {
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Notification.show("Clicked");
+            }
+        });
+        l.addComponent(button);
+
 
         VerticalComponentGroup verticalComponentGroup = new VerticalComponentGroup(
                 "Vertical component group");

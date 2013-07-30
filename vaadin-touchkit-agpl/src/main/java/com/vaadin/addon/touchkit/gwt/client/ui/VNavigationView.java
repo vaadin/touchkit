@@ -117,4 +117,13 @@ public class VNavigationView extends ComplexPanel {
         return addHandler(scrollHandler, ScrollEvent.getType());
     }
 
+    @Override
+    public void add(Widget child) {
+        add(child, getElement());
+    }
+
+    public Widget getContent() {
+        return content;
+    }
+
 }

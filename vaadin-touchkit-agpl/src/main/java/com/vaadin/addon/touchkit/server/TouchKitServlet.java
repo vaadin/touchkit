@@ -66,6 +66,12 @@ public class TouchKitServlet extends VaadinServlet {
         if (file.endsWith(".manifest")) {
             response.setContentType("text/cache-manifest");
             response.setHeader("Cache-Control", "max-age=1, must-revalidate");
+        } else if (file.endsWith(".otf")) {
+            response.setContentType("font/opentype");
+        } else if (file.endsWith(".ttf")) {
+            response.setContentType("font/ttf");
+        } else if (file.endsWith(".woff")) {
+            response.setContentType("application/font-woff");
         }
         super.writeStaticResourceResponse(request, response, resourceUrl);
     }

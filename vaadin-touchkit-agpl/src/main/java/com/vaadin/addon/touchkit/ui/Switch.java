@@ -10,7 +10,7 @@ import com.vaadin.ui.CheckBox;
  * @see CheckBox
  */
 public class Switch extends CheckBox {
-
+	
     /**
      * @see CheckBox#CheckBox()
      */
@@ -38,5 +38,5 @@ public class Switch extends CheckBox {
     public Switch(String caption) {
         super(caption);
     }
-
+        
 }
