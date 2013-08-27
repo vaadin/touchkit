@@ -102,10 +102,6 @@ public interface ParkingStyles extends CssResource {
     
     String relative();
     
-    String sliderBaseGradient();
-    
-    String sliderHandleGradient();
-    
     String tabbarGradient();
     
     String tableHeaderHeight();
