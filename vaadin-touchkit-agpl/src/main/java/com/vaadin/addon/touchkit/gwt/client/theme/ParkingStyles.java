@@ -52,9 +52,7 @@ public interface ParkingStyles extends CssResource {
     String datePickerWeekendLabel();
     
     String divider();
-    
-    String empty();
-    
+        
     String focused();
     
     String green();
@@ -105,8 +103,6 @@ public interface ParkingStyles extends CssResource {
     String tabbarGradient();
     
     String tableHeaderHeight();
-    
-    String touchComboBoxItemButton();
     
     @ClassName("v-app-loading")
     String vAppLoading();
@@ -328,39 +324,6 @@ public interface ParkingStyles extends CssResource {
     
     @ClassName("v-touchkit-backgroundstripes")
     String vTouchkitBackgroundstripes();
-        
-    @ClassName("v-touchkit-combobox")
-    String vTouchkitCombobox();
-    
-    @ClassName("v-touchkit-combobox-close-button")
-    String vTouchkitComboboxCloseButton();
-    
-    @ClassName("v-touchkit-combobox-drop-down")
-    String vTouchkitComboboxDropDown();
-    
-    @ClassName("v-touchkit-combobox-popup-filter")
-    String vTouchkitComboboxPopupFilter();
-    
-    @ClassName("v-touchkit-combobox-select-item")
-    String vTouchkitComboboxSelectItem();
-    
-    @ClassName("v-touchkit-componentgroup-cell")
-    String vTouchkitComponentgroupCell();
-    
-    @ClassName("v-touchkit-componentgroup-cell-fullwrapper")
-    String vTouchkitComponentgroupCellFullwrapper();
-    
-    @ClassName("v-touchkit-componentgroup-row")
-    String vTouchkitComponentgroupRow();
-    
-    @ClassName("v-touchkit-componentgroup-row-cap")
-    String vTouchkitComponentgroupRowCap();
-    
-    @ClassName("v-touchkit-componentgroup-row-full")
-    String vTouchkitComponentgroupRowFull();
-    
-    @ClassName("v-touchkit-componentgroup-row-nocap")
-    String vTouchkitComponentgroupRowNocap();
     
     @ClassName("v-touchkit-date-cancel")
     String vTouchkitDateCancel();
@@ -747,10 +710,7 @@ public interface ParkingStyles extends CssResource {
     
     @ClassName("v-filterselect-nextpage-off")
     String vFilterselectNextpageOff();
-    
-    @ClassName("v-filterselect-no-input")
-    String vFilterselectNoInput();
-    
+        
     @ClassName("v-filterselect-prevpage")
     String vFilterselectPrevpage();
     
