@@ -112,6 +112,15 @@ body {
 	-webkit-text-size-adjust: none;
 }
 
+@if user.agent ie10 {
+	body {
+		-ms-touch-action: none; /* The vaadin way, no scrolling at top level */
+	}
+	.v-app {
+		-ms-touch-action: manipulation; /* Disable useless double tap for zoom (for touch device optimized apps) -> no delay for simulated click events aka "fast button optimization". */
+	}
+}
+
 @if webkitvariant android2 {
 	body {
 		/* Disable tap highlight altogether as it will get badly misaligned at some point */
