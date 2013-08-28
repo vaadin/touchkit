@@ -1601,7 +1601,7 @@ span.v-datefield-calendarpanel-month {
 	font-size:16px;
 	padding: 0 1em 0 0;
 	margin:0;
-	background: white;
+	background: transparent;
 }
 
 @if user.agent ie10 {
@@ -1901,14 +1901,12 @@ select.v-select-select::-ms-expand {
 /* 	padding: 10px; */
 	}
 
-@def datePickerBg literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#f8f9fa), to(#f8f9fa), color-stop(.1, #e6e7e8),color-stop(.9, #e6e7e8))');
-
 .v-touchkit-datepopover {
-    background: datePickerBg;
+    background: white;
     box-shadow: 1px 1px 3px 3px rgba(0,0,0,0.25);
     cursor: default;
     min-width: 290px;
-    border-radius: 10px;
+    border-radius: borderRadius;
 }
 
 .v-touchkit-datepopover .gwt-DatePicker {
@@ -1919,12 +1917,12 @@ select.v-select-select::-ms-expand {
 .v-touchkit-datepopover table.datePickerDays {
 	border-collapse:collapse;
 	background-color: #fbfbfb;
-	width: 292px;
-    font-size: 1.4em;
+	width: 289px;
+    font-size: 18px;
 }
 
 .v-touchkit-datepopover table.datePickerDays td {
-	border: 1px solid gray;
+	border: thinBorder;
 	font-weight:bold;
     color: #54626D;
 }
@@ -1965,7 +1963,7 @@ select.v-select-select::-ms-expand {
 
 .v-touchkit-datepopover .datePickerPreviousButton,
 .v-touchkit-datepopover .datePickerNextButton {
-	color: captionColor;
+	color: buttonColor;
 	font-size:40px;
 }
 
@@ -1980,7 +1978,7 @@ select.v-select-select::-ms-expand {
 
 .v-touchkit-datepopover .datePickerWeekdayLabel,
 .v-touchkit-datepopover .datePickerWeekendLabel {
-	background-color: #DDD;
+	background-color: baseBackground;
     font-size: 0.8em;
 }
 
@@ -2005,7 +2003,7 @@ select.v-select-select::-ms-expand {
 
 .v-touchkit-date-ok, .v-touchkit-date-cancel{
 	font-size: 32px;
-	color: captionColor;
+	color: buttonColor;
 	text-align: center;
 	height: 32px;
 	padding-top:8px;
