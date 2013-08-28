@@ -156,6 +156,14 @@ public class ViewPortSettings implements BootstrapListener {
         element.attr("content", content.toString());
         head.appendChild(element);
 
+        // meta tag to disable gray tap highlights in WP8 (note, for some reason
+        // these do not appear in W8, not even RT)
+        // <meta name="msapplication-tap-highlight" content="no" />
+        element = document.createElement("meta");
+        element.attr("name", "msapplication-tap-highlight");
+        element.attr("content", "no");
+        head.appendChild(element);
+
     }
 
     private boolean addViewPortRule(StringBuilder content, boolean open,
