@@ -145,6 +145,7 @@ body {
 	user-select: none;
 	-moz-user-select: none;
 	-webkit-user-select: none;
+	-ms-user-select:none;
 	cursor: default;
 }
 
@@ -290,6 +291,8 @@ body e.v-app-loading {
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	/* TODO separate these and all user select stuff to browser permutations */
+	-ms-user-select:none;
 	
 	box-shadow: buttonBoxShadow;
 	font-size: buttonFontSize;
@@ -313,8 +316,11 @@ body e.v-app-loading {
 	background-color: rgba(0,0,0,0.3);
 	border-radius: inherit;
 	pointer-events: none;
+	/* TODO check if these are needed. Already set in .v-button */
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
+	-ms-user-select:none;
+	
 }
 
 .v-button-wrap {
@@ -450,8 +456,6 @@ a {
 
 .v-touchkit-navbutton,
 .v-button-nav {
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
 	display: block;
 	position: relative;
 	font-weight: bold;
@@ -462,6 +466,10 @@ a {
 	overflow:hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+	
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-ms-user-select:none;
 }
 
 .v-touchkit-verticalcomponentgroup .v-button-nav {
@@ -1903,6 +1911,7 @@ select.v-select-select::-ms-expand {
 .v-touchkit-datepopover .gwt-DatePicker {
 	width: 100%;
 	-webkit-user-select: none;
+	-ms-user-select:none;
 }
 
 .v-touchkit-datepopover table.datePickerDays {
