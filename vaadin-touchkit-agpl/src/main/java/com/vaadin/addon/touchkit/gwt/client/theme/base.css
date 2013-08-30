@@ -1634,16 +1634,19 @@ div.v-csslayout {
 }
 */
 
-.v-progressindicator {
+.v-progressindicator,
+.v-progressbar {
 	width: 150px;
 }
 
-.v-progressindicator-wrapper {
+.v-progressindicator-wrapper,
+.v-progressbar-wrapper {
 	height: 7px;
 	border: 1px solid #ddd;
 }
 
-.v-progressindicator-indicator {
+.v-progressindicator-indicator,
+.v-progressbar-indicator {
 	height: 7px;
 	background: #ddd;
 }
@@ -1659,7 +1662,14 @@ div.v-progressindicator-indeterminate {
 }
 */
 
-.v-progressindicator-indeterminate .v-progressindicator-wrapper, .v-progressindicator-indeterminate .v-progressindicator-indicator, .v-progressindicator-indeterminate-disabled .v-progressindicator-wrapper, .v-progressindicator-indeterminate-disabled .v-progressindicator-indicator {
+.v-progressindicator-indeterminate .v-progressindicator-wrapper, 
+.v-progressindicator-indeterminate .v-progressindicator-indicator, 
+.v-progressindicator-indeterminate-disabled .v-progressindicator-wrapper, 
+.v-progressindicator-indeterminate-disabled .v-progressindicator-indicator,
+.v-progressbar-indeterminate .v-progressbar-wrapper, 
+.v-progressbar-indeterminate .v-progressbar-indicator, 
+.v-progressbar-indeterminate-disabled .v-progressbar-wrapper, 
+.v-progressbar-indeterminate-disabled .v-progressbar-indicator {
 	display: none;
 }
 

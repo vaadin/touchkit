@@ -24,9 +24,6 @@ public interface VTouchKitResources extends ClientBundle {
     @DoNotEmbed
     DataResource fontAwesomeOtf();
 
-    @Source("theme/img/spinner.png")
-    public DataResource spinnerImage();
-
     @Source("theme/img/linen-bg.png")
     public DataResource linenBgImage();
 

@@ -1,6 +1,5 @@
 
-@external v-datefield-calendarpanel-day-disabled,blue,datePickerDay,datePickerDayIsDisabled,datePickerDayIsFiller,datePickerDayIsValue,datePickerDays,datePickerMonth,datePickerMonthSelector,datePickerNextButton,datePickerPreviousButton,datePickerWeekdayLabel,datePickerWeekendLabel,v-touchkit-datepopover-time,empty,focused,green,gwt-DatePicker,gwt-MenuItem,gwt-MenuItem-selected,html-face,icon-arrow-down,icon-arrow-left,icon-arrow-right,icon-arrow-up,no-box-drag-hints,no-horizontal-drag-hints,no-vertical-drag-hints,popupContent,red,relative,v-absolutelayout,v-absolutelayout-canvas,v-absolutelayout-margin,v-absolutelayout-wrapper,v-accordion,v-accordion-item,v-accordion-item-caption,v-accordion-item-content,v-accordion-item-open,v-align-bottom,v-align-center,v-align-middle,v-align-right,v-app,v-app-loading,v-app-loginpage,v-button,v-button-blue,v-button-caption,v-button-green,v-button-link,v-button-nextyear,v-button-no-decoration,v-button-red,v-button-selected,v-button-white,v-button-wrap,v-cache-loading-indicator,v-caption,v-caption-on-bottom,v-caption-on-left,v-caption-on-right,v-caption-on-top,v-captiontext,v-captionwrapper,v-checkbox,v-clip,v-contextmenu,v-csslayout,v-csslayout-container,v-csslayout-margin,v-csslayout-margin-bottom,v-csslayout-margin-left,v-csslayout-margin-right,v-csslayout-margin-top,v-customcomponent,v-customlayout,v-datefield,v-datefield-button,v-datefield-button-readonly,v-datefield-calendarpanel,v-datefield-calendarpanel-day,v-datefield-calendarpanel-day-focused,v-datefield-calendarpanel-day-offmonth,v-datefield-calendarpanel-day-selected,v-datefield-calendarpanel-day-today,v-datefield-calendarpanel-header,v-datefield-calendarpanel-month,v-datefield-calendarpanel-weeknumber,v-datefield-error,v-datefield-focus,v-datefield-popup,v-datefield-popupcalendar,v-datefield-prompt,v-datefield-textfield,v-datefield-time,v-ddwrapper,v-ddwrapper-over,v-ddwrapper-over-bottom,v-ddwrapper-over-left,v-ddwrapper-over-right,v-ddwrapper-over-top,v-disabled,v-drag-element,v-embedded-image,v-errorindicator,v-errormessage,v-expand,v-filterselect,v-filterselect-button,v-filterselect-focus,v-filterselect-input,v-filterselect-nextpage,v-filterselect-nextpage-off,v-filterselect-no-input,v-filterselect-prevpage,v-filterselect-prevpage-off,v-filterselect-prompt,v-filterselect-status,v-filterselect-suggestmenu,v-filterselect-suggestpopup,v-form,v-form-content,v-formlayout,v-formlayout-captioncell,v-formlayout-cell,v-formlayout-contentcell,v-formlayout-error-indicator,v-formlayout-errorcell,v-formlayout-firstrow,v-formlayout-lastrow,v-formlayout-margin-bottom,v-formlayout-margin-left,v-formlayout-margin-right,v-formlayout-margin-top,v-formlayout-row,v-formlayout-spacing,v-generated-body,v-gridlayout,v-gridlayout-margin-bottom,v-gridlayout-margin-left,v-gridlayout-margin-right,v-gridlayout-margin-top,v-gridlayout-slot,v-gridlayout-spacing,v-gridlayout-spacing-off,v-gridlayout-spacing-on,v-has-caption,v-has-height,v-has-width,v-horizontal,v-horizontallayout,v-horizontallayout-margin-bottom,v-horizontallayout-margin-left,v-horizontallayout-margin-right,v-horizontallayout-margin-top,v-horizontallayout-slot,v-horizontallayout-spacing-off,v-horizontallayout-spacing-on,v-icon,v-inline-datefield,v-inline-datefield-button,v-inline-datefield-button-readonly,v-inline-datefield-calendarpanel,v-inline-datefield-calendarpanel-day,v-inline-datefield-calendarpanel-day-disabled,v-inline-datefield-calendarpanel-day-focused,v-inline-datefield-calendarpanel-day-offmonth,v-inline-datefield-calendarpanel-day-selected,v-inline-datefield-calendarpanel-day-today,v-inline-datefield-calendarpanel-header,v-inline-datefield-calendarpanel-month,v-inline-datefield-calendarpanel-weeknumber,v-inline-datefield-popup,v-inline-datefield-popupcalendar,v-inline-datefield-prompt,v-inline-datefield-textfield,v-inline-datefield-time,v-label,v-label-grey-title,v-label-undef-w,v-layout,v-layout-margin-bottom,v-layout-margin-left,v-layout-margin-right,v-layout-margin-top,v-layout-spacing-on,v-link,v-loading-indicator,v-loading-indicator-delay,v-loading-indicator-wait,v-loginform,v-margin-bottom,v-margin-left,v-margin-right,v-margin-top,v-menubar,v-menubar-menuitem,v-menubar-menuitem-caption,v-menubar-menuitem-checked,v-menubar-menuitem-disabled,v-menubar-menuitem-selected,v-menubar-more-menuitem,v-menubar-popup,v-menubar-separator,v-menubar-submenu,v-menubar-submenu-check-column,v-menubar-submenu-indicator,v-nativebutton,v-nativebutton-caption,v-nativebutton-link,v-Notification,v-Notification-error,v-Notification-system,v-Notification-tray,v-Notification-warning,v-off,v-orderedlayout,v-orderedlayout-margin-bottom,v-orderedlayout-margin-left,v-orderedlayout-margin-right,v-orderedlayout-margin-top,v-orderedlayout-spacing-off,v-orderedlayout-spacing-on,v-overlay-container,v-panel,v-panel-caption,v-panel-caption-light,v-panel-content,v-panel-content-light,v-panel-deco,v-panel-deco-light,v-panel-light,v-panel-nocaption,v-popupview,v-popupview-loading,v-popupview-popup,v-pressed,v-progressindicator,v-progressindicator-indeterminate,v-progressindicator-indeterminate-disabled,v-progressindicator-indicator,v-progressindicator-wrapper,v-readonly,v-required-field-indicator,v-scrollable,v-select,v-select-option,v-select-optiongroup,v-select-select,v-select-twincol,v-select-twincol-buttons,v-select-twincol-caption-left,v-select-twincol-caption-right,v-select-twincol-deco,v-select-twincol-options,v-select-twincol-selections,v-selected,v-shadow,v-shadow-window,v-slider,v-slider-base,v-slider-feedback,v-slider-handle,v-slider-handle-active,v-slider-vertical,v-slot,v-spacing,v-splitpanel-horizontal,v-splitpanel-hsplitter,v-splitpanel-vertical,v-splitpanel-vsplitter,v-table,v-table-body,v-table-body-noselection,v-table-body-wrapper,v-table-caption-container,v-table-caption-container-align-center,v-table-caption-container-align-right,v-table-cell-content,v-table-cell-wrapper,v-table-cell-wrapper-align-center,v-table-cell-wrapper-align-right,v-table-column-selector,v-table-drag,v-table-focus,v-table-focus-slot-left,v-table-focus-slot-right,v-table-footer,v-table-footer-cell,v-table-footer-container,v-table-footer-wrap,v-table-generated-row,v-table-header,v-table-header-cell,v-table-header-cell-asc,v-table-header-cell-rowheader,v-table-header-cell-desc,v-table-header-drag,v-table-header-wrap,v-table-resizer,v-table-row,v-table-row-animating,v-table-row-drag-bottom,v-table-row-drag-middle,v-table-row-drag-top,v-table-row-odd,v-table-row-spacer,v-table-scrollposition,v-table-sort-indicator,v-table-table,v-tabsheet,v-tabsheet-caption-close,v-tabsheet-content,v-tabsheet-deco,v-tabsheet-hidetabs,v-tabsheet-scroller,v-tabsheet-scrollerNext,v-tabsheet-scrollerNext-disabled,v-tabsheet-scrollerPrev,v-tabsheet-scrollerPrev-disabled,v-tabsheet-spacertd,v-tabsheet-tabcontainer,v-tabsheet-tabitem,v-tabsheet-tabitem-selected,v-tabsheet-tabitemcell,v-tabsheet-tabitemcell-disabled,v-tabsheet-tabs,v-textarea,v-textarea-prompt,v-textarea-readonly,v-textfield,v-textfield-prompt,v-textfield-readonly,v-tk,v-tooltip,v-tooltip-text,v-touchkit-backgroundstripes,v-touchkit-componentgroup-cell,v-touchkit-componentgroup-cell-fullwrapper,v-touchkit-componentgroup-row,v-touchkit-componentgroup-row-cap,v-touchkit-componentgroup-row-full,v-touchkit-componentgroup-row-nocap,v-touchkit-date-cancel,v-touchkit-date-ok,v-touchkit-datepopover,v-touchkit-datepopover-hidedays,v-touchkit-datepopover-nonext,v-touchkit-datepopover-noprev,v-touchkit-fullscreen,v-touchkit-horizontalbuttongroup,v-touchkit-navbar,v-touchkit-navbar-caption,v-touchkit-navbar-left,v-touchkit-navbar-right,v-touchkit-navbutton,v-touchkit-navbutton-back,v-touchkit-navbutton-desc,v-touchkit-navbutton-emphasis,v-touchkit-navbutton-forward,v-touchkit-navbutton-pill,v-touchkit-navpanel,v-touchkit-navpanel-container,v-touchkit-navpanel-notransit,v-touchkit-navpanel-placeholder,v-touchkit-navpanel-wrapper,v-touchkit-navview,v-touchkit-navview-notoolbar,v-touchkit-navview-toolbar,v-touchkit-navview-wrapper,v-touchkit-numberfield,v-touchkit-offlinemode,v-touchkit-offlinemode-panel,v-touchkit-opacity-transition,v-touchkit-plain,v-touchkit-popover,v-touchkit-popover-pointer,v-touchkit-popover-pointer-bottom,v-touchkit-relative,v-touchkit-sadface,v-touchkit-smallscreen,v-touchkit-swipeview,v-touchkit-switch-wrapper, v-touchkit-switch-off, v-touchkit-switch,v-touchkit-switch-focus,v-touchkit-switch-slider,v-touchkit-tabbar,v-touchkit-tabbar-toolbar,v-touchkit-tabbar-wrapper,v-touchkit-toolbar,v-touchkit-verticalcomponentgroup,v-tree,v-tree-node,v-tree-node-caption,v-tree-node-caption-drag-center,v-tree-node-children,v-tree-node-drag-bottom,v-tree-node-drag-top,v-tree-node-expanded,v-tree-node-leaf,v-tree-node-selected,v-treetable,v-treetable-animation-clone,v-treetable-animation-clone-wrapper,v-treetable-node-closed,v-treetable-node-open,v-treetable-treespacer,v-ui,v-ui-embedded,v-upload,v-upload-immediate,v-vertical,v-verticallayout,v-verticallayout-margin-bottom,v-verticallayout-margin-left,v-verticallayout-margin-right,v-verticallayout-margin-top,v-verticallayout-slot,v-verticallayout-spacing-off,v-verticallayout-spacing-on,v-widget,v-window,v-window-closebox,v-window-contents,v-window-draggingCurtain,v-window-footer,v-window-footer-noresize,v-window-header,v-window-modalitycurtain,v-window-outerheader,v-window-resizebox,v-window-resizebox-disabled,v-window-resizingCurtain,v-window-wrap,v-button-nav,v-touchkit-datepicker;
-
+@external v-datefield-calendarpanel-day-disabled,blue,datePickerDay,datePickerDayIsDisabled,datePickerDayIsFiller,datePickerDayIsValue,datePickerDays,datePickerMonth,datePickerMonthSelector,datePickerNextButton,datePickerPreviousButton,datePickerWeekdayLabel,datePickerWeekendLabel,v-touchkit-datepopover-time,empty,focused,green,gwt-DatePicker,gwt-MenuItem,gwt-MenuItem-selected,html-face,icon-arrow-down,icon-arrow-left,icon-arrow-right,icon-arrow-up,no-box-drag-hints,no-horizontal-drag-hints,no-vertical-drag-hints,popupContent,red,relative,v-absolutelayout,v-absolutelayout-canvas,v-absolutelayout-margin,v-absolutelayout-wrapper,v-accordion,v-accordion-item,v-accordion-item-caption,v-accordion-item-content,v-accordion-item-open,v-align-bottom,v-align-center,v-align-middle,v-align-right,v-app,v-app-loading,v-app-loginpage,v-button,v-button-blue,v-button-caption,v-button-green,v-button-link,v-button-nextyear,v-button-no-decoration,v-button-red,v-button-selected,v-button-white,v-button-wrap,v-cache-loading-indicator,v-caption,v-caption-on-bottom,v-caption-on-left,v-caption-on-right,v-caption-on-top,v-captiontext,v-captionwrapper,v-checkbox,v-clip,v-contextmenu,v-csslayout,v-csslayout-container,v-csslayout-margin,v-csslayout-margin-bottom,v-csslayout-margin-left,v-csslayout-margin-right,v-csslayout-margin-top,v-customcomponent,v-customlayout,v-datefield,v-datefield-button,v-datefield-button-readonly,v-datefield-calendarpanel,v-datefield-calendarpanel-day,v-datefield-calendarpanel-day-focused,v-datefield-calendarpanel-day-offmonth,v-datefield-calendarpanel-day-selected,v-datefield-calendarpanel-day-today,v-datefield-calendarpanel-header,v-datefield-calendarpanel-month,v-datefield-calendarpanel-weeknumber,v-datefield-error,v-datefield-focus,v-datefield-popup,v-datefield-popupcalendar,v-datefield-prompt,v-datefield-textfield,v-datefield-time,v-ddwrapper,v-ddwrapper-over,v-ddwrapper-over-bottom,v-ddwrapper-over-left,v-ddwrapper-over-right,v-ddwrapper-over-top,v-disabled,v-drag-element,v-embedded-image,v-errorindicator,v-errormessage,v-expand,v-filterselect,v-filterselect-button,v-filterselect-focus,v-filterselect-input,v-filterselect-nextpage,v-filterselect-nextpage-off,v-filterselect-no-input,v-filterselect-prevpage,v-filterselect-prevpage-off,v-filterselect-prompt,v-filterselect-status,v-filterselect-suggestmenu,v-filterselect-suggestpopup,v-form,v-form-content,v-formlayout,v-formlayout-captioncell,v-formlayout-cell,v-formlayout-contentcell,v-formlayout-error-indicator,v-formlayout-errorcell,v-formlayout-firstrow,v-formlayout-lastrow,v-formlayout-margin-bottom,v-formlayout-margin-left,v-formlayout-margin-right,v-formlayout-margin-top,v-formlayout-row,v-formlayout-spacing,v-generated-body,v-gridlayout,v-gridlayout-margin-bottom,v-gridlayout-margin-left,v-gridlayout-margin-right,v-gridlayout-margin-top,v-gridlayout-slot,v-gridlayout-spacing,v-gridlayout-spacing-off,v-gridlayout-spacing-on,v-has-caption,v-has-height,v-has-width,v-horizontal,v-horizontallayout,v-horizontallayout-margin-bottom,v-horizontallayout-margin-left,v-horizontallayout-margin-right,v-horizontallayout-margin-top,v-horizontallayout-slot,v-horizontallayout-spacing-off,v-horizontallayout-spacing-on,v-icon,v-inline-datefield,v-inline-datefield-button,v-inline-datefield-button-readonly,v-inline-datefield-calendarpanel,v-inline-datefield-calendarpanel-day,v-inline-datefield-calendarpanel-day-disabled,v-inline-datefield-calendarpanel-day-focused,v-inline-datefield-calendarpanel-day-offmonth,v-inline-datefield-calendarpanel-day-selected,v-inline-datefield-calendarpanel-day-today,v-inline-datefield-calendarpanel-header,v-inline-datefield-calendarpanel-month,v-inline-datefield-calendarpanel-weeknumber,v-inline-datefield-popup,v-inline-datefield-popupcalendar,v-inline-datefield-prompt,v-inline-datefield-textfield,v-inline-datefield-time,v-label,v-label-grey-title,v-label-undef-w,v-layout,v-layout-margin-bottom,v-layout-margin-left,v-layout-margin-right,v-layout-margin-top,v-layout-spacing-on,v-link,v-loading-indicator,v-loading-indicator-delay,v-loading-indicator-wait,v-loginform,v-margin-bottom,v-margin-left,v-margin-right,v-margin-top,v-menubar,v-menubar-menuitem,v-menubar-menuitem-caption,v-menubar-menuitem-checked,v-menubar-menuitem-disabled,v-menubar-menuitem-selected,v-menubar-more-menuitem,v-menubar-popup,v-menubar-separator,v-menubar-submenu,v-menubar-submenu-check-column,v-menubar-submenu-indicator,v-nativebutton,v-nativebutton-caption,v-nativebutton-link,v-Notification,v-Notification-error,v-Notification-system,v-Notification-tray,v-Notification-warning,v-off,v-orderedlayout,v-orderedlayout-margin-bottom,v-orderedlayout-margin-left,v-orderedlayout-margin-right,v-orderedlayout-margin-top,v-orderedlayout-spacing-off,v-orderedlayout-spacing-on,v-overlay-container,v-panel,v-panel-caption,v-panel-caption-light,v-panel-content,v-panel-content-light,v-panel-deco,v-panel-deco-light,v-panel-light,v-panel-nocaption,v-popupview,v-popupview-popup,v-pressed,v-progressindicator,v-progressindicator-indeterminate,v-progressindicator-indeterminate-disabled,v-progressindicator-indicator,v-progressindicator-wrapper,v-readonly,v-required-field-indicator,v-scrollable,v-select,v-select-option,v-select-optiongroup,v-select-select,v-select-twincol,v-select-twincol-buttons,v-select-twincol-caption-left,v-select-twincol-caption-right,v-select-twincol-deco,v-select-twincol-options,v-select-twincol-selections,v-selected,v-shadow,v-shadow-window,v-slider,v-slider-base,v-slider-feedback,v-slider-handle,v-slider-handle-active,v-slider-vertical,v-slot,v-spacing,v-splitpanel-horizontal,v-splitpanel-hsplitter,v-splitpanel-vertical,v-splitpanel-vsplitter,v-table,v-table-body,v-table-body-noselection,v-table-body-wrapper,v-table-caption-container,v-table-caption-container-align-center,v-table-caption-container-align-right,v-table-cell-content,v-table-cell-wrapper,v-table-cell-wrapper-align-center,v-table-cell-wrapper-align-right,v-table-column-selector,v-table-drag,v-table-focus,v-table-focus-slot-left,v-table-focus-slot-right,v-table-footer,v-table-footer-cell,v-table-footer-container,v-table-footer-wrap,v-table-generated-row,v-table-header,v-table-header-cell,v-table-header-cell-asc,v-table-header-cell-rowheader,v-table-header-cell-desc,v-table-header-drag,v-table-header-wrap,v-table-resizer,v-table-row,v-table-row-animating,v-table-row-drag-bottom,v-table-row-drag-middle,v-table-row-drag-top,v-table-row-odd,v-table-row-spacer,v-table-scrollposition,v-table-sort-indicator,v-table-table,v-tabsheet,v-tabsheet-caption-close,v-tabsheet-content,v-tabsheet-deco,v-tabsheet-hidetabs,v-tabsheet-scroller,v-tabsheet-scrollerNext,v-tabsheet-scrollerNext-disabled,v-tabsheet-scrollerPrev,v-tabsheet-scrollerPrev-disabled,v-tabsheet-spacertd,v-tabsheet-tabcontainer,v-tabsheet-tabitem,v-tabsheet-tabitem-selected,v-tabsheet-tabitemcell,v-tabsheet-tabitemcell-disabled,v-tabsheet-tabs,v-textarea,v-textarea-prompt,v-textarea-readonly,v-textfield,v-textfield-prompt,v-textfield-readonly,v-tk,v-tooltip,v-tooltip-text,v-touchkit-backgroundstripes,v-touchkit-componentgroup-cell,v-touchkit-componentgroup-cell-fullwrapper,v-touchkit-componentgroup-row,v-touchkit-componentgroup-row-cap,v-touchkit-componentgroup-row-full,v-touchkit-componentgroup-row-nocap,v-touchkit-date-cancel,v-touchkit-date-ok,v-touchkit-datepopover,v-touchkit-datepopover-hidedays,v-touchkit-datepopover-nonext,v-touchkit-datepopover-noprev,v-touchkit-fullscreen,v-touchkit-horizontalbuttongroup,v-touchkit-navbar,v-touchkit-navbar-caption,v-touchkit-navbar-left,v-touchkit-navbar-right,v-touchkit-navbutton,v-touchkit-navbutton-back,v-touchkit-navbutton-desc,v-touchkit-navbutton-emphasis,v-touchkit-navbutton-forward,v-touchkit-navbutton-pill,v-touchkit-navpanel,v-touchkit-navpanel-container,v-touchkit-navpanel-notransit,v-touchkit-navpanel-placeholder,v-touchkit-navpanel-wrapper,v-touchkit-navview,v-touchkit-navview-notoolbar,v-touchkit-navview-toolbar,v-touchkit-navview-wrapper,v-touchkit-numberfield,v-touchkit-offlinemode,v-touchkit-offlinemode-panel,v-touchkit-opacity-transition,v-touchkit-plain,v-touchkit-popover,v-touchkit-popover-pointer,v-touchkit-popover-pointer-bottom,v-touchkit-relative,v-touchkit-sadface,v-touchkit-smallscreen,v-touchkit-swipeview,v-touchkit-switch-wrapper, v-touchkit-switch-off, v-touchkit-switch,v-touchkit-switch-focus,v-touchkit-switch-slider,v-touchkit-tabbar,v-touchkit-tabbar-toolbar,v-touchkit-tabbar-wrapper,v-touchkit-toolbar,v-touchkit-verticalcomponentgroup,v-tree,v-tree-node,v-tree-node-caption,v-tree-node-caption-drag-center,v-tree-node-children,v-tree-node-drag-bottom,v-tree-node-drag-top,v-tree-node-expanded,v-tree-node-leaf,v-tree-node-selected,v-treetable,v-treetable-animation-clone,v-treetable-animation-clone-wrapper,v-treetable-node-closed,v-treetable-node-open,v-treetable-treespacer,v-ui,v-ui-embedded,v-upload,v-upload-immediate,v-vertical,v-verticallayout,v-verticallayout-margin-bottom,v-verticallayout-margin-left,v-verticallayout-margin-right,v-verticallayout-margin-top,v-verticallayout-slot,v-verticallayout-spacing-off,v-verticallayout-spacing-on,v-widget,v-window,v-window-closebox,v-window-contents,v-window-draggingCurtain,v-window-footer,v-window-footer-noresize,v-window-header,v-window-modalitycurtain,v-window-outerheader,v-window-resizebox,v-window-resizebox-disabled,v-window-resizingCurtain,v-window-wrap,v-button-nav,v-touchkit-datepicker,v-progressbar-indeterminate-disabled,v-progressbar-wrapper,v-progressbar-indeterminate,v-progressbar-indicator,v-progressbar;
 
 @url fontAwesome fontAwesome;
 
@@ -185,68 +184,37 @@ body {
 }
 
 
-/* Loading indicator */
-@url spinner spinnerImage ;
 .v-loading-indicator,
 .v-loading-indicator-delay,
 .v-loading-indicator-wait {
 	pointer-events: none;
 	position: absolute;
 	z-index: 30000;
-	background: spinner no-repeat 50%;
 	opacity: 1;
-	top: 0;
+	top: 20%;
 	left: 25%;
 	right: 25%;
-	bottom: 0;
-	margin: 0;
-	height: 50%;
-	overflow: hidden;
-	-webkit-animation-name: spinnerRotate;
-	-webkit-animation-duration: 2s;
-	-webkit-animation-iteration-count: infinite;
-	-webkit-animation-timing-function: linear;
-	animation-name: spinnerRotate;
-	animation-duration: 2s;
-	animation-iteration-count: infinite;
-	animation-timing-function: linear;
-	}
-	
-.v-popupview-loading {
-    width: 30px;
-    height: 30px;
-    background: spinner no-repeat 50%;
-    -webkit-animation-name: spinnerRotate;
-    -webkit-animation-duration: 2s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-    animation-name: spinnerRotate;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
+	margin: 0;	
 }
 
-div.v-progressindicator-indeterminate {
-    height: 20px;
+div.v-progressindicator-indeterminate,
+div.v-progressbar-indeterminate {
     width: 20px;
-    background: spinner no-repeat 50%;
-    -webkit-animation-name: spinnerRotate;
-    -webkit-animation-duration: 2s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-    animation-name: spinnerRotate;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
 }
 
-body e.v-app-loading {
-    background-image: spinner;
-    background-repeat: no-repeat;
-    background-position: 50%;
-    width: 100%;
-    height: 100%;
+/* Meta element to inject refresh/loading icon font */
+div.v-progressindicator-indeterminate:after,
+div.v-progressbar-indeterminate:after,
+.v-app-loading:after,
+.v-cache-loading-indicator:after,
+.v-loading-indicator:after {
+	font-family: "TkIcons";
+	content: "\f021";
+	color: gray;
+	font-size:20px;
 }
+
+/* rule to make refresh/loading icon sping */
 
 @-webkit-keyframes spinnerRotate {
 	from {
@@ -264,6 +232,35 @@ body e.v-app-loading {
 	to {
 		transform:rotate(360deg);
 	}
+}
+
+.v-app-loading,
+.v-cache-loading-indicator,
+.v-loading-indicator,
+.v-loading-indicator-delay,
+.v-loading-indicator-wait,
+div.v-progressindicator-indeterminate,
+div.v-progressbar-indeterminate {
+	/* center the font icon character from meta element */
+	text-align:center;
+	/* TODO move these to browser permutations */
+    -webkit-animation-name: spinnerRotate;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    animation-name: spinnerRotate;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.v-app-loading {
+	margin-top:25%;
+}
+
+.v-app-loading:after,
+.v-loading-indicator:after {
+	font-size:50px;
 }
 
 .v-loading-indicator {
@@ -2322,21 +2319,12 @@ select.v-select-select::-ms-expand {
 
 /* Styles for CacheManifestLoadingIndicator */
 .v-cache-loading-indicator {
-    background: spinner no-repeat;
-    background-size: 10px 10px;
     position: absolute;
     right: 5px;
     top: 5px;
-    width: 10px;
-    height: 10px;
-    -webkit-animation-name: spinnerRotate;
-    -webkit-animation-duration: 2s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-    animation-name: spinnerRotate;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
+}
+.v-cache-loading-indicator:after {
+	font-size:10px;	
 }
 
 .floatingIndex {

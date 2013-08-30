@@ -222,15 +222,11 @@ public interface ParkingStyles extends CssResource {
     @ClassName("v-orderedlayout-spacing-on")
     String vOrderedlayoutSpacingOn();
     
-    @ClassName("v-popupview-loading")
-    String vPopupviewLoading();
-        
     @ClassName("v-pressed")
     String vPressed();
         
     @ClassName("v-selected")
     String vSelected();
-    
     
     @ClassName("v-shadow-window")
     String vShadowWindow();
