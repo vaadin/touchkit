@@ -15,6 +15,7 @@ import com.vaadin.ui.DateField;
 import com.vaadin.ui.InlineDateField;
 import com.vaadin.ui.NativeSelect;
 import com.vaadin.ui.Slider;
+import com.vaadin.ui.TabSheet.Tab;
 import com.vaadin.ui.Table;
 
 public class Tabsheet extends AbstractTouchKitIntegrationTest {
@@ -28,9 +29,9 @@ public class Tabsheet extends AbstractTouchKitIntegrationTest {
                 "../runo/icons/64/document.png"));
         tabBarView.addTab(getComboBox(), "Third", new ThemeResource(
                 "../runo/icons/64/document-pdf.png"));
-        tabBarView.addTab(getFields(), "4th", new ThemeResource(
+        Tab tab = tabBarView.addTab(getFields(), "4th", new ThemeResource(
                 "../runo/icons/64/email.png"));
-        
+        tabBarView.setSelectedTab(tab);
         
         makeSmallTabletSize(tabBarView);
         addComponent(tabBarView);
@@ -54,11 +55,19 @@ public class Tabsheet extends AbstractTouchKitIntegrationTest {
         
         NativeSelect nativeSelect = new NativeSelect();
         nativeSelect.setCaption("Native select");
-        nativeSelect.addItem("One");
-        nativeSelect.addItem("Two");
-        nativeSelect.addItem("Three");
+        for(int i = 0; i < 10; i++) {
+            nativeSelect.addItem(i + "One");
+            nativeSelect.addItem(i + "Two");
+            nativeSelect.addItem(i+ "Three");
+        }
         nativeSelect.setImmediate(true);
         verticalComponentGroup.addComponent(nativeSelect);
+        
+        verticalComponentGroup.addComponent(new ComboBox("Combo", nativeSelect));
+        
+        
+        
+        
         
         cssLayout.addComponent(verticalComponentGroup);
         return cssLayout;

@@ -157,13 +157,7 @@ public interface ParkingStyles extends CssResource {
     
     @ClassName("v-datefield-error")
     String vDatefieldError();
-    
-    @ClassName("v-datefield-focus")
-    String vDatefieldFocus();
-    
-    @ClassName("v-filterselect-focus")
-    String vFilterselectFocus();
-    
+        
     @ClassName("v-horizontallayout-margin-bottom")
     String vHorizontallayoutMarginBottom();
     
@@ -314,9 +308,6 @@ public interface ParkingStyles extends CssResource {
     
     @ClassName("v-table-sort-indicator")
     String vTableSortIndicator();
-    
-    @ClassName("v-tk")
-    String vTk();
     
     @ClassName("v-touchkit-backgroundstripes")
     String vTouchkitBackgroundstripes();
