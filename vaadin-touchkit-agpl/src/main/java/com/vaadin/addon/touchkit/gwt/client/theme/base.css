@@ -923,7 +923,7 @@ div.v-csslayout {
 }
 
 .v-datefield-calendarpanel td {
-	padding: 0;
+	padding: 2px;
 	margin: 0;
 }
 
@@ -965,12 +965,13 @@ div.v-csslayout {
 
 .v-datefield-calendarpanel-day-selected {
 	cursor: default;
-	background: #333;
+	background: buttonColor;
 	color: #fff;
+	display:block;
 }
 
 .v-datefield-calendarpanel-day-focused {
-	outline: 1px dotted black;
+	
 }
 
 .v-datefield-calendarpanel-day-offmonth {
@@ -1033,7 +1034,7 @@ div.v-csslayout {
 }
 
 .v-inline-datefield-calendarpanel td {
-	padding: 0;
+	padding: 2px;
 	margin: 0;
 }
 
@@ -1075,12 +1076,12 @@ div.v-csslayout {
 
 .v-inline-datefield-calendarpanel-day-selected {
 	cursor: default;
-	background: #333;
+	background: buttonColor;
 	color: #fff;
+	display:block;
 }
 
 .v-inline-datefield-calendarpanel-day-focused {
-	outline: 1px dotted black;
 }
 
 .v-inline-datefield-calendarpanel-day-offmonth {

@@ -1462,60 +1462,56 @@ vertical-align: middle;
 	border: 2px solid rgba(250,40,0,.6);
 	}
 
-.v-datefield-calendarpanel {
+.v-datefield-calendarpanel,
+.v-inline-datefield-calendarpanel  {
 	background: #fff;
-}
-
-.v-datefield-calendarpanel {
 	border: none;
 }
 
-.v-datefield-calendarpanel button {
+.v-datefield-calendarpanel button,
+.v-inline-datefield-calendarpanel button {
 	-webkit-appearance: none;
 	background:transparent;
 	display: block;
 	border: none;
 	margin: 0;
 	padding:0;
-}
-.v-datefield-calendarpanel-header td {
-	background: literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#e5e5e6), to(#b4b6b8))');
-	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3), inset 0 -1px 0 rgba(255,255,255,.15);
-	text-shadow: 0 1px 0 rgba(255,255,255,.7);
-	line-height: 19px;
-	height: 25px;
-	font-size: 20px;
-	font-weight: bold;
-}
-
-.v-datefield-calendarpanel button {
 	/* Needed to make < and << look proper  */
 	font-family: arial;
 	font-size: 20px;
 	font-weight: bold;
 }
-
-/* Fix the month width, otherwise jumpy when changing month */
-.v-datefield-calendarpanel-header td {
+.v-datefield-calendarpanel-header td,
+.v-inline-datefield-calendarpanel-header td {
+	background: baseBackground;
+	line-height: 19px;
+	height: 25px;
+	font-size: 20px;
+	font-weight: bold;
 	width: 1px;
 	border-right: 1px solid rgba(0,0,0,.25);
 	border-bottom: 1px solid rgba(0,0,0,.5);
 	padding: 0 6px 3px;
-}	
-.v-datefield-calendarpanel-header td.v-datefield-calendarpanel-month {
+}
+
+.v-datefield-calendarpanel-header td.v-datefield-calendarpanel-month,
+.v-inline-datefield-calendarpanel-header td.v-inline-datefield-calendarpanel-month {
 	width:auto;
 	min-width:140px;
 }
-span.v-datefield-calendarpanel-month {
+span.v-datefield-calendarpanel-month,
+span.v-inline-datefield-calendarpanel-month {
 	line-height:26px;
 	font-size: 15px;
 }
 
-.v-datefield-calendarpanel .v-button-nextyear {
+.v-datefield-calendarpanel .v-button-nextyear,
+.v-inline-datefield-calendarpanel .v-button-nextyear {
 	border-right: none;
 }
 
 .v-datefield-calendarpanel table,
+.v-inline-datefield-calendarpanel table,
 .v-datefield-time {
 	padding: 0 10px;
 }
@@ -1523,7 +1519,8 @@ span.v-datefield-calendarpanel-month {
 	padding-bottom: 10px;
 }
 
-.v-datefield-calendarpanel td {
+.v-datefield-calendarpanel td,
+.v-inline-datefield-calendarpanel td {
 	text-align: center;
 }
 
@@ -2149,6 +2146,9 @@ select.v-select-select::-ms-expand {
 	height: 24px;
 	display:inline;
 	margin-top:12px;
+}
+.v-touchkit-tabbar-toolbar .v-button .v-icon {
+	margin-top: 8px;
 }
 	
 /* Strip some styles from buttons inside a componentgroup */
