@@ -111,6 +111,15 @@ body {
 	-webkit-text-size-adjust: none;
 }
 
+.v-assistive-device-only {
+	position: absolute;
+	top: -2000px;
+	left: -2000px;
+	width: 10px;
+	height: 10px;
+	overflow: hidden;
+}
+
 @if user.agent ie10 {
 	body {
 		-ms-touch-action: none; /* The vaadin way, no scrolling at top level */
@@ -1267,16 +1276,7 @@ vertical-align: middle;
 	min-width: 80px;
 	}
 
-.v-app .v-filterselect-input,
-.v-window .v-filterselect-input,
-.v-popupview-popup .v-filterselect-input {
-	-webkit-appearance: none;
-	border: none;
-	background: transparent;
-	margin: 0;
-	color: buttonColor;
-	font-size:18px;
-	border:0;
+.v-filterselect-input {
 	}
 
 .v-filterselect-input:focus,
@@ -1564,13 +1564,15 @@ span.v-datefield-calendarpanel-month {
 }
 
 
+/* TODO consider input fields to be borderless everywhere, not just in vcg */
+
 .v-touchkit-verticalcomponentgroup .v-textfield,
 .v-touchkit-verticalcomponentgroup .v-textarea,
 .v-touchkit-verticalcomponentgroup .v-touchkit-numberfield,
-.v-touchkit-verticalcomponentgroup .v-datefield {
+.v-touchkit-verticalcomponentgroup .v-datefield,
+.v-filterselect-input {
 	-webkit-appearance: none;
 	border:0;
-	border-radius:0;
 	background: transparent;
 	color: buttonColor;
 	font-size:16px;
@@ -1616,14 +1618,14 @@ span.v-datefield-calendarpanel-month {
 
 .v-touchkit-datepicker>input,
 .v-select-select {
-	display: block;
 	-webkit-appearance: none;
 	border: none;
 	color: buttonColor;
 	font-size:16px;
-	padding: 0 1em 0 0;
-	margin:0;
 	background: transparent;
+	margin:0;
+	display: block;
+	padding: 0 1em 0 0;
 }
 
 @if user.agent ie10 {
