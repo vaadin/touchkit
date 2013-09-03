@@ -102,6 +102,7 @@ public class TouchkitTestUI extends UI {
             }
         });
         table.setSizeFull();
+        table.setColumnCollapsingAllowed(true);
         debugmode.setValue(false);
         HorizontalLayout options = new HorizontalLayout();
         options.addComponent(debugmode);

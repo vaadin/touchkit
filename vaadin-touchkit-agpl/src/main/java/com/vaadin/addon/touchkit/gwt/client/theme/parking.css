@@ -373,49 +373,40 @@ a {
 	color: buttonColor;
 }
 
-/* Navbar custom icon buttons */
-@url navbarArrowUp navbarArrowUpImage;
+/* Navbar arrow icon buttons */
+.icon-arrow-up .v-button-wrap:before,
+.icon-arrow-down .v-button-wrap:before,
+.icon-arrow-left .v-button-wrap:before,
+.icon-arrow-right .v-button-wrap:before {
+	font-family: "TkIcons";
+	color: buttonColor;
+	content: "\F111";
+	font-size: 28px;
+}
+
+.icon-arrow-up .v-button-wrap:before {
+	content: "\F0AA";
+}
+
+.icon-arrow-down .v-button-wrap:before {
+	content: "\F0AB";
+}
+
+.icon-arrow-left .v-button-wrap:before {
+	content: "\F0A8";
+}
+
+.icon-arrow-right .v-button-wrap:before {
+	content: "\F0A9";
+}
+
 .v-touchkit-navbar .icon-arrow-up .v-button-caption,
 .v-touchkit-navbar .icon-arrow-down .v-button-caption,
 .v-touchkit-navbar .icon-arrow-left .v-button-caption,
 .v-touchkit-navbar .icon-arrow-right .v-button-caption {
-	display: inline-block;
-	padding-top: 0px;
-	padding-bottom: 0px;
-	width: 18px;
-	height: 28px;
-	text-indent: -999px;
-	overflow: hidden;
-	background: navbarArrowUp no-repeat 50%;
-	}
-
-.v-touchkit-navbar .icon-arrow-left .v-button-wrap,
-.v-touchkit-navbar .icon-arrow-right .v-button-wrap {
-	padding: 0 10px;
-	}
-
-.v-touchkit-navbar .icon-arrow-left .v-button-caption,
-.v-touchkit-navbar .icon-arrow-right .v-button-caption {
-	width: 19px;
-	}
-
-@url navbarArrowDown navbarArrowDownImage;
-.v-touchkit-navbar .icon-arrow-down .v-button-caption {
-	background-image: navbarArrowDown;
-	background-position: 0 60%;
-	}
-
-@url navbarArrowLeft navbarArrowLeftImage;
-.v-touchkit-navbar .icon-arrow-left .v-button-caption {
-	background-image: navbarArrowLeft;
-	margin-left: -2px;
-	}
-
-@url navbarArrowRight navbarArrowRightImage;
-.v-touchkit-navbar .icon-arrow-right .v-button-caption {
-	background-image: navbarArrowRight;
-	margin-right: -2px;
-	}
+	/* For backwards compatibility, has been hidden before */
+	display:none;
+}
 
 .v-touchkit-navpanel {
 	position: relative;
@@ -1244,14 +1235,23 @@ text-align: center;
 vertical-align: middle;
 }
 
-@sprite .v-table-column-selector {
-	gwt-image: "columnSelector";
-	margin-top: -30px;
-	width:15px;
+.v-table-column-selector {
+	margin-top: -27px;
+	width:20px;
     float: right;
     height: 1.2em;
     position: relative;
     cursor: pointer;
+    line-height:8px;
+    font-size:6px;
+    text-align:center
+}
+
+.v-table-column-selector:after {
+	content:"\F111 \A \F111 \A \F111";
+	font-family: "TkIcons";
+	color: buttonColor;
+	white-space:pre;
 }
 
 .v-table-header-cell-asc .v-table-sort-indicator:before {
@@ -1997,21 +1997,24 @@ select.v-select-select::-ms-expand {
 	display: none;
 }
 
-@url clock clockImage;
 .v-touchkit-datepopover-time {
-    background: white;
-    background-image: clock;
-    background-repeat: no-repeat;
-    background-position: 95px 1px;
     border-bottom: 1px solid gray;
+}
+
+.v-touchkit-datepopover-time:before {
+	content: "\F017";
+	font-family: "TkIcons";
+	color: gray;
+    margin-left: 115px;
+    margin-right:5px;
+    font-size: 18px;
 }
 
 .v-touchkit-datepopover-time input {
     border: none;
-    width: 167px;
+    width: 150px;
     height: 100%;
-    font-size: 1.4em;
-    margin-left: 125px;
+    font-size: 18px;
 }
 
 /* Navbar buttons and horizontal button group.
@@ -2219,51 +2222,54 @@ select.v-select-select::-ms-expand {
     color: white;
 }
 
-
 .v-treetable-treespacer {
     display: inline-block;
-    background: transparent;
     height: 19px;
     width: 18px;
     position: absolute;
     left: 0;
     top: 5px;
+    text-align: right;
+    margin-right: 4px;
 }
 
-@url arrowRightUrl arrowRightImage;
-.v-treetable-node-closed,
-.v-tree-node {
-    background-image: arrowRightUrl;
-}    
-
-.v-treetable-node-closed {
-    background-position: right 10%;
-    background-repeat: no-repeat;
-    background-size: auto 80%;
+.v-treetable-node-closed:after,
+.v-tree-node:after {
+	content: "\25B6";
 }
 
 .v-tree-node {
-    background-position: 10px 8px;
-    background-size: auto 16px;
-    background-repeat: no-repeat;
-    padding: 1px 0;
-    
+	position:relative;    
 }
 
-@url arrowDownUrl arrowDownImage;
-.v-treetable-node-open,
-.v-tree-node-expanded {
-    background-image: arrowDownUrl;
+.v-treetable-node-open:after,
+.v-tree-node-expanded:after {
+	content: "\25BC";
 }	
 
-.v-treetable-node-open {
-	background-position: right 10%;
-	background-repeat: no-repeat;
-	background-size: auto 80%;
+.v-tree-node-leaf:after {
+	content: "";
 }
 
-@sprite .v-menubar-submenu .v-menubar-menuitem-checked .v-menubar-menuitem-caption {
-	gwt-image: "check";
+.v-tree-node:after,
+.v-tree-node-expanded:after {
+	position:absolute;
+	top:12px;
+	left:6px;	
+}
+
+.v-treetable-node-closed::after,
+.v-treetable-node-open::after {
+	margin-right: 4px;	
+}
+
+.v-treetable-node-open {
+	
+}
+
+.v-menubar-submenu .v-menubar-menuitem-checked .v-menubar-menuitem-caption:after {
+	content: "X";
+	color:buttonColor;
 }
 
 @url dragSlotDotUrl dragSlotDotImage;
