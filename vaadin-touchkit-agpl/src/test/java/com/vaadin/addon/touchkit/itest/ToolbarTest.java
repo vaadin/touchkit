@@ -18,7 +18,7 @@ public class ToolbarTest extends AbstractTouchKitIntegrationTest {
         for (int loop = 0; loop < 10; loop++) {
             Button button = new Button();
             if(loop%2==0) {
-            	TouchKitIcon.home.add(button);
+            	TouchKitIcon.home.addTo(button);
             } else {
                 button.setIcon(new ThemeResource("../runo/icons/64/folder.png"));
             }

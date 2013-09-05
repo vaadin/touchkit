@@ -41,7 +41,8 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
             return getLastChild().cast();
         }
 
-        public final boolean setCaption(String caption, String iconUrl) {
+        public final boolean setCaption(String caption, String iconUrl,
+                String captionStyleName) {
             DivElement captionElement = getFirstChildElement().cast();
 
             boolean hasIcon = iconUrl != null;
@@ -54,6 +55,8 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
                 captionHtml += caption == null ? "" : caption;
                 captionElement.setInnerHTML(captionHtml);
                 captionElement.getStyle().setProperty("display", null);
+                // copy v-caption prefixed styles from widget to caption
+                captionElement.setClassName(captionStyleName);
                 setClassName(ROW_CLASSNAME + " " + ROW_WITH_CAPTION_STYLENAME);
             } else {
                 setClassName(ROW_CLASSNAME + " "
@@ -179,9 +182,9 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
     }
 
     public void updateCaption(Widget child, String caption, String url,
-            String width) {
+            String width, String captionStyleName) {
         WidgetWrapper row = getWidgetWrapper(child);
-        boolean hasCaptionOrIcon = row.setCaption(caption, url);
+        boolean hasCaptionOrIcon = row.setCaption(caption, url, captionStyleName);
         row.setFullSizeWidget(hasCaptionOrIcon && "100.0%".equals(width));
     }
 

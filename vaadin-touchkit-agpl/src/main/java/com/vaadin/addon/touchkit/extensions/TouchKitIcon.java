@@ -1,11 +1,10 @@
 package com.vaadin.addon.touchkit.extensions;
 
-import org.apache.commons.lang.RandomStringUtils;
-
 import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.server.Page;
 import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.TabSheet.Tab;
 
 /**
  * This set includes some icons bundled in TouchKit that can be used to decorate
@@ -118,16 +117,35 @@ public enum TouchKitIcon {
         this.utf = utfcode;
     };
 
-    public void add(AbstractComponent c) {
+    public void addTo(Tab t) {
+        if (t instanceof AbstractComponent) {
+            addTo((AbstractComponent) t);
+        } else {
+            throw new IllegalArgumentException(
+                    "Only TabBarView Tabs are currently supported.");
+        }
+    }
+
+    public void addTo(AbstractComponent c) {
         // TODO consider creating an addon that handles this stuff on cliet
         // side, same rules would be introduced just once
-        
-        // TODO add support for generic captions at least in VerticalComponenGroup
 
-        String stylename = "fa-" + RandomStringUtils.randomAlphabetic(4);
+        String stylename = "fa-" + name();
         c.addStyleName(stylename);
         StringBuilder sb = new StringBuilder(".");
+        if (!hasInternalCaption(c)) {
+            sb.append("v-caption-");
+        } else {
+            if (c instanceof NavigationButton) {
+                sb.append("v-touchkit-navbutton-");
+            } else if (c instanceof Button) {
+                sb.append("v-button-");
+            } else {
+                throw new IllegalArgumentException("Given component is not supported by " + getClass().getSimpleName());
+            }
+        }
         sb.append(stylename);
+
         if (c instanceof Button) {
             sb.append(" .v-button-wrap");
         }
@@ -135,11 +153,20 @@ public enum TouchKitIcon {
         sb.append(" { font-family: 'TkIcons' ;content:\"\\");
         sb.append(utf);
         sb.append("\";");
-        if (c instanceof NavigationButton) {
-            sb.append("font-size:20px;font-weight:normal; vertical-align:middle; margin-right:5px;");
-        } else if (c instanceof Button) {
-            sb.append("font-size:24px;font-weight:normal; line-height:45px;");
+        if (hasInternalCaption(c)) {
+            if (c instanceof NavigationButton) {
+                sb.append("font-size:20px;font-weight:normal; vertical-align:middle; line-height:1; margin-right:10px;");
+            } else if (c instanceof Button) {
+                sb.append("font-size:24px;font-weight:normal; line-height:45px;");
+            }
+        } else {
+            sb.append("margin-left:10px;font-size:20px;");
         }
+        sb.append("}");
+        sb.append(".v-touchkit-componentgroup-row>.v-caption-");
+        sb.append(stylename);
+        sb.append(":before {");
+        sb.append("margin-right:10px;margin-left:0;");
         sb.append("}");
         if (c instanceof Button) {
             sb.append(" .v-touchkit-navbar ");
@@ -151,5 +178,15 @@ public enum TouchKitIcon {
         }
 
         Page.getCurrent().getStyles().add(sb.toString());
+    }
+
+    private boolean hasInternalCaption(AbstractComponent c) {
+        if (c instanceof Button) {
+            return true;
+        }
+        if (c instanceof NavigationButton) {
+            return true;
+        }
+        return false;
     }
 }

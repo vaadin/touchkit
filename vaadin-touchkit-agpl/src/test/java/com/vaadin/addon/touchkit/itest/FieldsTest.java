@@ -59,7 +59,7 @@ public class FieldsTest extends AbstractTouchKitIntegrationTest implements Click
 		NavigationButton navigationButton = new NavigationButton("Navi button");
 		navigationButton.setDescription("Stuff that matters");
 		g.addComponent(navigationButton);
-		TouchKitIcon.home.add(navigationButton);
+		TouchKitIcon.home.addTo(navigationButton);
 		
 		textField = new TextField("Notification title");
 		textField.setWidth("100%");
@@ -113,20 +113,20 @@ public class FieldsTest extends AbstractTouchKitIntegrationTest implements Click
 		toolbar = new Toolbar();
 		
 		button = new Button();
-		TouchKitIcon.home.add(button);
+		TouchKitIcon.home.addTo(button);
 		toolbar.addComponent(button);
 
 		button = new Button(null,this);
-		TouchKitIcon.save.add(button);
+		TouchKitIcon.save.addTo(button);
 		toolbar.addComponent(button);
 		button = new Button();
-		TouchKitIcon.share.add(button);
+		TouchKitIcon.share.addTo(button);
 		toolbar.addComponent(button);
 		button = new Button();
-		TouchKitIcon.print.add(button);
+		TouchKitIcon.print.addTo(button);
 		toolbar.addComponent(button);
 		button = new Button();
-		TouchKitIcon.sitemap.add(button);
+		TouchKitIcon.sitemap.addTo(button);
 		toolbar.addComponent(button);
 
 		navigationView.setToolbar(toolbar);
