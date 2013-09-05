@@ -199,7 +199,7 @@ public class CacheManifestLinker extends AbstractLinker {
     }
 
     List<String> acceptedFileExtensions = Arrays.asList(".html", ".js", ".css",
-            ".png", ".jpg", ".gif", ".ico");
+            ".png", ".jpg", ".gif", ".ico", ".woff");
 
     protected boolean acceptCachedResource(String filename) {
         if (filename.startsWith("compile-report/")) {

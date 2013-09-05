@@ -3,7 +3,7 @@ package com.vaadin.addon.touchkit.itest;
 import java.util.Date;
 
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.extensions.FontAwesomeIcon;
+import com.vaadin.addon.touchkit.extensions.TouchKitIcon;
 import com.vaadin.addon.touchkit.gwt.client.theme.StyleNames;
 import com.vaadin.addon.touchkit.ui.DatePicker;
 import com.vaadin.addon.touchkit.ui.HorizontalButtonGroup;
@@ -59,7 +59,7 @@ public class FieldsTest extends AbstractTouchKitIntegrationTest implements Click
 		NavigationButton navigationButton = new NavigationButton("Navi button");
 		navigationButton.setDescription("Stuff that matters");
 		g.addComponent(navigationButton);
-		FontAwesomeIcon.HOME.add(navigationButton);
+		TouchKitIcon.home.add(navigationButton);
 		
 		textField = new TextField("Notification title");
 		textField.setWidth("100%");
@@ -113,20 +113,20 @@ public class FieldsTest extends AbstractTouchKitIntegrationTest implements Click
 		toolbar = new Toolbar();
 		
 		button = new Button();
-		FontAwesomeIcon.HOME.add(button);
+		TouchKitIcon.home.add(button);
 		toolbar.addComponent(button);
 
 		button = new Button(null,this);
-		FontAwesomeIcon.SAVE.add(button);
+		TouchKitIcon.save.add(button);
 		toolbar.addComponent(button);
 		button = new Button();
-		FontAwesomeIcon.SHARE.add(button);
+		TouchKitIcon.share.add(button);
 		toolbar.addComponent(button);
 		button = new Button();
-		FontAwesomeIcon.PRINT.add(button);
+		TouchKitIcon.print.add(button);
 		toolbar.addComponent(button);
 		button = new Button();
-		FontAwesomeIcon.SITEMAP.add(button);
+		TouchKitIcon.sitemap.add(button);
 		toolbar.addComponent(button);
 
 		navigationView.setToolbar(toolbar);

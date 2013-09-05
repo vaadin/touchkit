@@ -3,16 +3,12 @@
 
 @url fontAwesome fontAwesome;
 
-/* FIXME, this breaks everything for some reason. All permutations get these.
-@if webkitvariant android2 {
-	@url fontAwesome fontAwesomeOtf;
-	@def fontformat format('otf');
-}
-*/;
+@url fontAwesomeOtf fontAwesomeOtf;
 
 @font-face {
 	font-family: "TkIcons";
-	src: fontAwesome;
+	/* woff by default (smallest size), android needs a fallback as otf  */
+	src: fontAwesome format("woff"), fontAwesomeOtf format("opentype");
 	font-weight: normal;
 	font-style: normal;
 }
@@ -218,7 +214,7 @@ div.v-progressbar-indeterminate:after,
 .v-cache-loading-indicator:after,
 .v-loading-indicator:after {
 	font-family: "TkIcons";
-	content: "\f021";
+	content: fa-icon-refresh;
 	color: gray;
 	font-size:20px;
 }
@@ -380,24 +376,24 @@ a {
 .icon-arrow-right .v-button-wrap:before {
 	font-family: "TkIcons";
 	color: buttonColor;
-	content: "\F111";
+	content: fa-icon-circle;
 	font-size: 28px;
 }
 
 .icon-arrow-up .v-button-wrap:before {
-	content: "\F0AA";
+	content: fa-icon-circle-arrow-up;
 }
 
 .icon-arrow-down .v-button-wrap:before {
-	content: "\F0AB";
+	content: fa-icon-circle-arrow-down;
 }
 
 .icon-arrow-left .v-button-wrap:before {
-	content: "\F0A8";
+	content: fa-icon-circle-arrow-left;
 }
 
 .icon-arrow-right .v-button-wrap:before {
-	content: "\F0A9";
+	content: fa-icon-circle-arrow-right;
 }
 
 .v-touchkit-navbar .icon-arrow-up .v-button-caption,
@@ -554,7 +550,7 @@ a {
 
 .v-touchkit-navbutton:after {
 	font-family: "TkIcons";
-	content: "\f061";
+	content: fa-icon-arrow-right;
 	position: absolute;
 	right: listLayoutMargin;
 	top: 0;
@@ -1451,11 +1447,10 @@ vertical-align: middle;
 }
 
 .v-datefield-button:after {
-	content: "\f073";
 	font-family: "TkIcons";
-	src: fontAwesome;
 	font-size:18px;
 	color:buttonColor;
+	content: fa-icon-calendar;
 }
 
 .v-datefield-error {
@@ -2002,7 +1997,7 @@ select.v-select-select::-ms-expand {
 }
 
 .v-touchkit-datepopover-time:before {
-	content: "\F017";
+	content: fa-icon-time;
 	font-family: "TkIcons";
 	color: gray;
     margin-left: 115px;

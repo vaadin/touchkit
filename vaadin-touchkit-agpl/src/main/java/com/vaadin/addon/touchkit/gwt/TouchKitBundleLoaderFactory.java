@@ -7,6 +7,7 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.vaadin.client.ServerConnector;
 import com.vaadin.client.ui.absolutelayout.AbsoluteLayoutConnector;
 import com.vaadin.client.ui.accordion.AccordionConnector;
+import com.vaadin.client.ui.calendar.CalendarConnector;
 import com.vaadin.client.ui.combobox.ComboBoxConnector;
 import com.vaadin.client.ui.customlayout.CustomLayoutConnector;
 import com.vaadin.client.ui.gridlayout.GridLayoutConnector;
@@ -18,11 +19,14 @@ import com.vaadin.client.ui.popupview.PopupViewConnector;
 import com.vaadin.client.ui.richtextarea.RichTextAreaConnector;
 import com.vaadin.client.ui.splitpanel.HorizontalSplitPanelConnector;
 import com.vaadin.client.ui.splitpanel.VerticalSplitPanelConnector;
+import com.vaadin.client.ui.table.TableConnector;
 import com.vaadin.client.ui.tabsheet.TabsheetConnector;
+import com.vaadin.client.ui.treetable.TreeTableConnector;
 import com.vaadin.client.ui.twincolselect.TwinColSelectConnector;
 import com.vaadin.client.ui.window.WindowConnector;
 import com.vaadin.server.widgetsetutils.ConnectorBundleLoaderFactory;
 import com.vaadin.shared.ui.Connect.LoadStyle;
+import com.vaadin.ui.Calendar;
 
 /**
  * TouchKitWidgetMapGenerator enables lazy loading of some heavy widget classes
@@ -70,6 +74,9 @@ public class TouchKitBundleLoaderFactory extends ConnectorBundleLoaderFactory {
         lazyComponents.add(TwinColSelectConnector.class);
         lazyComponents.add(CustomLayoutConnector.class);
         lazyComponents.add(PopupViewConnector.class);
+        lazyComponents.add(CalendarConnector.class);
+        lazyComponents.add(TableConnector.class);
+        lazyComponents.add(TreeTableConnector.class);
     }
 
     @Override

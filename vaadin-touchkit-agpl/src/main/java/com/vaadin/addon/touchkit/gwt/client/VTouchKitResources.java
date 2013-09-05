@@ -13,7 +13,7 @@ public interface VTouchKitResources extends ClientBundle {
     public static final VTouchKitResources INSTANCE = GWT
             .create(VTouchKitResources.class);
 
-    @Source({"theme/base.css","theme/parking.css"})
+    @Source({"theme/base.css","theme/icon-defs.css","theme/parking.css"})
     public ParkingStyles css();
     
     @Source("theme/FontAwesome.woff")
