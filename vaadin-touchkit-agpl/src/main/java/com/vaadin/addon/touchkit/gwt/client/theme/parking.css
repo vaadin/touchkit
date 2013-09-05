@@ -191,7 +191,8 @@ body {
 
 .v-loading-indicator,
 .v-loading-indicator-delay,
-.v-loading-indicator-wait {
+.v-loading-indicator-wait,
+.v-app-loading {
 	pointer-events: none;
 	position: absolute;
 	z-index: 30000;
@@ -199,7 +200,7 @@ body {
 	top: 20%;
 	left: 25%;
 	right: 25%;
-	margin: 0;	
+	margin: 0;
 }
 
 div.v-progressindicator-indeterminate,
@@ -217,6 +218,7 @@ div.v-progressbar-indeterminate:after,
 	content: fa-icon-refresh;
 	color: gray;
 	font-size:20px;
+	line-height:1em;
 }
 
 /* rule to make refresh/loading icon sping */
@@ -257,10 +259,6 @@ div.v-progressbar-indeterminate {
     animation-duration: 2s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
-}
-
-.v-app-loading {
-	margin-top:25%;
 }
 
 .v-app-loading:after,
