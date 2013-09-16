@@ -21,6 +21,7 @@ import com.google.gwt.i18n.client.DateTimeFormat.PredefinedFormat;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
+import com.google.gwt.user.client.ui.HasEnabled;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -33,7 +34,7 @@ import com.vaadin.shared.VBrowserDetails;
  * 
  */
 public class DatePicker extends SimplePanel implements
-        HasValueChangeHandlers<java.util.Date>, ClickHandler {
+        HasValueChangeHandlers<java.util.Date>, ClickHandler, HasEnabled {
 
     private static final String CLASSNAME = "v-touchkit-datepicker";
     private final static String MONTH_FORMAT = "yyyy-MM";
@@ -50,6 +51,8 @@ public class DatePicker extends SimplePanel implements
     private CalendarOverlay overlay = null;
     private boolean useNative = true;
     private long overlayClosed = 0;
+
+    private boolean enabled = true;
 
     /**
      * Resolution of widget
@@ -336,7 +339,8 @@ public class DatePicker extends SimplePanel implements
     private void addBackupWidget() {
         if (backUpWidget == null) {
             backUpWidget = new Label();
-            backUpWidget.setStyleName("v-select-select"); // style like native input
+            backUpWidget.setStyleName("v-select-select"); // style like native
+                                                          // input
             add(backUpWidget);
             backUpWidget.addClickHandler(this);
             updateValue();
@@ -382,14 +386,16 @@ public class DatePicker extends SimplePanel implements
 
     @Override
     public void onClick(ClickEvent event) {
-        if (backUpWidget == null) {
-            return;
-        }
+        if (enabled) {
+            if (backUpWidget == null) {
+                return;
+            }
 
-        if (overlay != null) {
-            closeCalendar();
-        } else if ((new Date().getTime() - overlayClosed) > 250) {
-            openCalendar();
+            if (overlay != null) {
+                closeCalendar();
+            } else if ((new Date().getTime() - overlayClosed) > 250) {
+                openCalendar();
+            }
         }
     }
 
@@ -443,6 +449,19 @@ public class DatePicker extends SimplePanel implements
             } else {
                 input.removeAttribute("max");
             }
+        }
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+        if (input != null) {
+            input.setDisabled(!enabled);
         }
     }
 

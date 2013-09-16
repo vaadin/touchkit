@@ -71,6 +71,14 @@ public class DatePickerTest extends AbstractTouchKitIntegrationTest {
 
         });
 
+        addComponent(new Button("Toggle enabled state", new ClickListener() {
+
+            @Override
+            public void buttonClick(ClickEvent event) {
+                pickerA.setEnabled(!pickerA.isEnabled());
+            }
+        }));
+
         HorizontalLayout buttonLayout = new HorizontalLayout();
         buttonLayout.setWidth("100%");
         buttonLayout.setCaption("Set date value");
