@@ -78,14 +78,13 @@ public class VSwipeView extends SimplePanel {
     }
 
     protected void initHandlers() {
-        getElement().getStyle().setProperty("msTouchAction", "pan-y");
         addHandler(new TouchStartHandler() {
             public void onTouchStart(TouchStartEvent event) {
                 dragStartEvent = event;
                 dragStart(event);
             }
         }, TouchStartEvent.getType());
-        
+
         addHandler(new MouseDownHandler() {
 
             public void onMouseDown(MouseDownEvent event) {
@@ -108,7 +107,7 @@ public class VSwipeView extends SimplePanel {
                 dragMove(event);
             }
         }, TouchMoveEvent.getType());
-        
+
         addHandler(new MouseUpHandler() {
 
             public void onMouseUp(MouseUpEvent event) {
@@ -122,10 +121,10 @@ public class VSwipeView extends SimplePanel {
                 dragEnd(event);
             }
         }, TouchEndEvent.getType());
-        
-	}
 
-	public boolean isEnabled() {
+    }
+
+    public boolean isEnabled() {
         return enabled;
     }
 
@@ -183,27 +182,31 @@ public class VSwipeView extends SimplePanel {
             if (swiping) {
                 VConsole.log("Swipe move " + deltaX);
                 np.setHorizontalOffset(deltaX, false);
+                ne.preventDefault(); // prevent page scroll
             } else if (dragging) {
                 Event.setCapture(getElement());
                 int dragY = dragstartY - y;
                 if (Math.abs(deltaX / (double) dragY) > 2) {
                     swiping = true;
                     np.setHorizontalOffset(deltaX, false);
+                    ne.preventDefault(); // prevent page scroll
                 }
-                if (Math.abs(deltaX / (double) dragY) < 0.5) {
-                    if (Event.as(event.getNativeEvent()).getTypeInt() == Event.ONTOUCHMOVE) {
-                        /*
-                         * We'll "lazyly" activate touchScrollDelegate if the
-                         * direction is enough down.
-                         */
-                        dragStartEvent.setNativeEvent(event.getNativeEvent());
-                        touchScrollDelegate.onTouchStart(dragStartEvent);
-                        VConsole.log("Lazy started");
-                        dragging = false;
+                if (BrowserInfo.get().requiresTouchScrollDelegate()) {
+                    if (Math.abs(deltaX / (double) dragY) < 0.5) {
+                        if (Event.as(event.getNativeEvent()).getTypeInt() == Event.ONTOUCHMOVE) {
+                            /*
+                             * We'll "lazyly" activate touchScrollDelegate if
+                             * the direction is enough down.
+                             */
+                            dragStartEvent.setNativeEvent(event
+                                    .getNativeEvent());
+                            touchScrollDelegate.onTouchStart(dragStartEvent);
+                            VConsole.log("Lazy started");
+                            dragging = false;
+                        }
                     }
                 }
             }
-            ne.preventDefault(); // prevent page scroll
         }
     }
 

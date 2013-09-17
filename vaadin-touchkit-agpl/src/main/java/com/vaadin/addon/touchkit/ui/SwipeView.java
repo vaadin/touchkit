@@ -4,7 +4,6 @@ import com.vaadin.addon.touchkit.gwt.client.vcom.SwipeViewRpc;
 import com.vaadin.addon.touchkit.gwt.client.vcom.SwipeViewSharedState;
 import com.vaadin.ui.AbstractSingleComponentContainer;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.CssLayout;
 
 /**
  * The SwipeView is a simple layout which has a scrollable content area. It is
@@ -48,8 +47,7 @@ public class SwipeView extends AbstractSingleComponentContainer {
     }
 
     /**
-     * Constructs a SwipeView with the given caption and an empty
-     * {@link CssLayout} as its content.
+     * Constructs a SwipeView with the given caption.
      * 
      * @param caption
      *            the caption
@@ -57,6 +55,15 @@ public class SwipeView extends AbstractSingleComponentContainer {
     public SwipeView(String caption) {
         this();
         setCaption(caption);
+    }
+
+    /**
+     * Constructs a SwipeView with the given {@link Component} as its content.
+     * 
+     * @param content the component to be wrapped in SwipeView
+     */
+    public SwipeView(Component content) {
+        setContent(content);
     }
 
     /**
