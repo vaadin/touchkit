@@ -89,6 +89,7 @@ public class VNavigationManager extends ComplexPanel {
         getElement().appendChild(wrapper);
         hookTransitionEndListener(Css3Propertynames.transitionEnd(),
                 wrapper);
+        getElement().setTabIndex(-1);
     }
 
     private void add(Widget child, int pos) {
@@ -272,6 +273,8 @@ public class VNavigationManager extends ComplexPanel {
     }
 
     private void prepareForAnimation() {
+        // ensure focus is removed from possibly focused fields
+        getElement().focus();
         if (needsIos6ScrollingWorkaround && !preparedForTranslation3d) {
             prepareForAnimation(prevView);
             prepareForAnimation(nextView);

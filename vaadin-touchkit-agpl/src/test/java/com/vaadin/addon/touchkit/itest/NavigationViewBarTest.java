@@ -7,6 +7,7 @@ import com.vaadin.addon.touchkit.ui.NavigationManager;
 import com.vaadin.addon.touchkit.ui.NavigationManager.NavigationEvent;
 import com.vaadin.addon.touchkit.ui.NavigationManager.NavigationListener;
 import com.vaadin.addon.touchkit.ui.NavigationView;
+import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.ui.Button;
@@ -15,6 +16,7 @@ import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.NativeSelect;
 import com.vaadin.ui.Notification;
+import com.vaadin.ui.TextField;
 
 public class NavigationViewBarTest extends AbstractTouchKitIntegrationTest {
 
@@ -87,6 +89,13 @@ public class NavigationViewBarTest extends AbstractTouchKitIntegrationTest {
             }
         });
 
+        
+        VerticalComponentGroup verticalComponentGroup = new VerticalComponentGroup("Textifedf");
+        
+        verticalComponentGroup.addComponent(new TextField("Böö"));
+        
+        layout.addComponent(verticalComponentGroup);
+        
         layout.addComponent(nativeSelect);
 
         layout.setId(debugId);
