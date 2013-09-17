@@ -807,7 +807,7 @@ a {
 	border: 1px solid rgba(0,0,0,0.15);
 	overflow:hidden;
 	font-weight: 700;
-	box-shadow: inset 0px 1px 2px 0px rgba(0,0,0,0.1);
+	box-shadow: inset 0px 1px 1px 0px rgba(0,0,0,0.1);
 	line-height: 1;
 }
 .v-touchkit-switch-off {
@@ -847,17 +847,19 @@ a {
 	box-sizing:border-box;
 }
 .v-touchkit-switch-slider:after {
-	content: "III";
+	content: "| | |";
 	position:absolute;
 	background: #dcdbd0;
-	box-shadow: inset 0px 2px 2px 0px rgba(255,255,255,0.3),inset 0px -2px 2px 0px rgba(0,0,0,0.1);
-	text-shadow: 1px 1px 2px rgba(255,255,255, 0.5);
+	box-shadow: inset 0px 1px 2px 0px rgba(255,255,255,0.3), 0px 1px 2px 0px rgba(0,0,0,0.3);
+	text-shadow: 0px 1px 1px rgba(255,255,255, 1);
 	border-radius: 1px;
 	left:0px;
 	right:0px;
 	top:0px;
 	bottom:0px;
 	margin:2px 5px;
+	font-size: 10px;
+	line-height:16px;
 }
 
 .v-touchkit-switch-focus{}
