@@ -14,7 +14,6 @@ public class VerticalComponentGroupTest2 extends AbstractTouchKitIntegrationTest
 
         TextField tf = new TextField(
                 "A TextField with long caption text and 100% width textfield component");
-        tf.setWidth("100%");
         verticalComponentGroup.addComponent(tf);
 
         addComponent(verticalComponentGroup);

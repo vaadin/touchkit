@@ -1,23 +1,28 @@
 package com.vaadin.addon.touchkit.ui;
 
+import com.vaadin.ui.Component;
+import com.vaadin.ui.Field;
+
 /**
- * The VerticalComponentGroup is a layout to group controls vertically. Items in
- * a VerticalComponentGroup have a white background, margins and rounded corners
- * by default.
+ * The VerticalComponentGroup is a layout to group controls vertically. Unlike
+ * with default layouts, Components in a VerticalComponentGroup are visually
+ * decorated from other parts of the UI.
  * <p>
  * Captions are rendered on the same row as the component. Relative widths are
  * relative to the {@link VerticalComponentGroup} width except if the component
  * has a caption, in which case a relative width is relative to the remaining
  * available space.
  * <p>
- * Due to the styling, VerticalComponentGroup is more flexible than
- * {@link HorizontalButtonGroup} and it can accommodate many components.
+ * Most commonly {@link Field}s in {@link VerticalComponentGroup} should be full
+ * width, so {@link VerticalComponentGroup} automatically sets width to 100%
+ * when {@link Field}s are added to it, unless they have an explicit width
+ * defined.
  */
 @SuppressWarnings("serial")
 public class VerticalComponentGroup extends AbstractComponentGroup {
 
     /**
-     * Constructs a vertical component group with 100% width.
+     * Constructs a vertical component group.
      */
     public VerticalComponentGroup() {
         super(null);
@@ -31,6 +36,25 @@ public class VerticalComponentGroup extends AbstractComponentGroup {
      */
     public VerticalComponentGroup(String caption) {
         super(caption);
+    }
+
+    /**
+     * In addition to normal component addition, as a side effect this method
+     * ensures {@link Field}s have sane width set.
+     * 
+     * @see com.vaadin.addon.touchkit.ui.AbstractComponentGroup#addComponent(com.vaadin.ui.Component,
+     *      int)
+     */
+    @Override
+    public void addComponent(Component component, int index) {
+        verifySaneFieldWidth(component);
+        super.addComponent(component, index);
+    }
+
+    private void verifySaneFieldWidth(Component component) {
+        if ((component instanceof Field) && component.getWidth() < 0) {
+            component.setWidth("100%");
+        }
     }
 
 }

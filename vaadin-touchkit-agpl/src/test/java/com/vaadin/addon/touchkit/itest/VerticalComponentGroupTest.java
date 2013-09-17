@@ -28,7 +28,6 @@ public class VerticalComponentGroupTest extends AbstractTouchKitIntegrationTest 
         verticalComponentGroup.addComponent(new Button("Button"));
         TextField tf = new TextField(
                 "A TextField with long caption text and 100% width textfield component");
-        tf.setWidth("100%");
         verticalComponentGroup.addComponent(tf);
 
         Link link = new Link("link caption", new ExternalResource(
@@ -38,7 +37,6 @@ public class VerticalComponentGroupTest extends AbstractTouchKitIntegrationTest 
         verticalComponentGroup.addComponent(link);
         verticalComponentGroup.addComponent(new Switch("Switch"));
         NumberField numberField = new NumberField("numberfield");
-        numberField.setWidth("100%");
         verticalComponentGroup.addComponent(numberField);
 
         NavigationButton one = new NavigationButton("Navigation button");
