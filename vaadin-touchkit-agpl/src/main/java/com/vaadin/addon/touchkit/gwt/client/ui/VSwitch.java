@@ -6,6 +6,7 @@ import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Node;
 import com.google.gwt.dom.client.Touch;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
@@ -31,6 +32,9 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.Event.NativePreviewEvent;
+import com.google.gwt.user.client.Event.NativePreviewHandler;
 import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.HasValue;
 import com.vaadin.client.ApplicationConnection;
@@ -46,7 +50,7 @@ import com.vaadin.client.ui.Field;
 public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
         KeyUpHandler, MouseDownHandler, MouseUpHandler, MouseMoveHandler,
         TouchStartHandler, TouchMoveHandler, TouchEndHandler,
-        TouchCancelHandler, FocusHandler, BlurHandler {
+        TouchCancelHandler, FocusHandler, BlurHandler, NativePreviewHandler {
 
     /** Set the CSS class name to allow styling. */
     public static final String CLASSNAME = "v-touchkit-switch";
@@ -68,6 +72,7 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
     private int dragStart;
     private int sliderOffsetLeft;
     private boolean dragging;
+    private HandlerRegistration previewHandler;
 
     /**
      * The constructor should first call super() to initialize the component and
@@ -170,6 +175,8 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
                         }
 
                         protected void onComplete() {
+                            mainElement.getStyle().setProperty("left",
+                                    targetLeft + "px");
                         };
                     };
                     a.run(ANIMATION_DURATION_MS);
@@ -217,7 +224,21 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
         mouseDown = true;
         dragStart = clientX;
         sliderOffsetLeft = getCurrentPosition();
+        previewHandler = Event.addNativePreviewHandler(this);
     }
+    
+    @Override
+    public void onPreviewNativeEvent(NativePreviewEvent event) {
+        String type = event.getNativeEvent().getType();
+        if(!getElement().isOrHasChild((Node) event.getNativeEvent().getEventTarget().cast())) {
+            if(type.contains("up") || type.contains("end") || type.contains("cancel")) {
+                if(isEnabled()) {
+                    handleMouseUp();
+                }
+            }
+        }
+    }
+
 
     public void onMouseUp(MouseUpEvent event) {
         if (isEnabled()) {
@@ -240,6 +261,10 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
 
         mouseDown = false;
         dragging = false; // not dragging anymore
+        if(previewHandler != null) {
+            previewHandler.removeHandler();
+            previewHandler = null;
+        }
     }
 
     public void onMouseMove(MouseMoveEvent event) {
