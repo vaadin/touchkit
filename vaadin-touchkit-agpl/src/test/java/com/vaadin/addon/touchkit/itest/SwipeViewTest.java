@@ -21,6 +21,7 @@ import com.vaadin.server.RequestHandler;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinResponse;
 import com.vaadin.server.VaadinSession;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
@@ -168,6 +169,8 @@ public class SwipeViewTest extends AbstractTouchKitIntegrationTest {
             @SuppressWarnings("deprecation")
             public SwipeViewWithNormalContent() {
                 CssLayout cssLayout = new CssLayout();
+                
+                cssLayout.addComponent(new Button("Button"));
                 Form form = new Form();
                 FormLayout layout = (FormLayout) form.getLayout();
                 layout.setMargin(false);

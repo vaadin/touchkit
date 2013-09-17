@@ -23,6 +23,7 @@ import com.google.gwt.event.dom.client.TouchStartHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.client.BrowserInfo;
@@ -151,6 +152,15 @@ public class VSwipeView extends SimplePanel {
                     ne.preventDefault();
                 }
             }
+            new Timer() {
+                @Override
+                public void run() {
+                    // Swipe must start soon or drag start will be ignored
+                    if(!swiping) {
+                        dragging = false;
+                    }
+                }
+            }.schedule(200);;
         }
     }
 
