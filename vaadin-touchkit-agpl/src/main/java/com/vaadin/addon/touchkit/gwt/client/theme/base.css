@@ -542,6 +542,9 @@ e.v-app select, .v-window select {
 }
 
 .v-tooltip {
+	display: none; /* Floating tooltips are useless on touch devices */
+}
+/*.v-tooltip {
 	cursor: default;
 	background: #fff;
 }
@@ -553,7 +556,7 @@ e.v-app select, .v-window select {
 .v-tooltip .v-errormessage {
 	overflow: auto;
 }
-
+*/
 /* also in touchkit
 .v-contextmenu {
 	background: #fff;

@@ -117,7 +117,7 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
     @Override
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
-
+        setStyleName(mainElement.getParentElement(), "v-disabled", !enabled);
         if (!enabled) {
             super.setTabIndex(-1);
         } else {

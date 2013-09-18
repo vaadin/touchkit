@@ -677,9 +677,6 @@ public interface ParkingStyles extends CssResource {
     @ClassName("v-errorindicator")
     String vErrorindicator();
     
-    @ClassName("v-errormessage")
-    String vErrormessage();
-    
     @ClassName("v-expand")
     String vExpand();
     
@@ -1204,9 +1201,6 @@ public interface ParkingStyles extends CssResource {
     
     @ClassName("v-tooltip")
     String vTooltip();
-    
-    @ClassName("v-tooltip-text")
-    String vTooltipText();
     
     @ClassName("v-tree")
     String vTree();

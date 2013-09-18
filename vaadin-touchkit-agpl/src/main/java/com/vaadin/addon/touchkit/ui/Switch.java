@@ -11,11 +11,14 @@ import com.vaadin.ui.CheckBox;
  */
 public class Switch extends CheckBox {
 	
+    private static final String STYLENAME = "v-touchkit-switch-widget";
+
     /**
      * @see CheckBox#CheckBox()
      */
     public Switch() {
         super();
+        setPrimaryStyleName(STYLENAME);
     }
 
     /**
@@ -23,6 +26,7 @@ public class Switch extends CheckBox {
      */
     public Switch(String caption, boolean initialState) {
         super(caption, initialState);
+        setPrimaryStyleName(STYLENAME);
     }
 
     /**
@@ -30,6 +34,7 @@ public class Switch extends CheckBox {
      */
     public Switch(String caption, Property<Boolean> dataSource) {
         super(caption, dataSource);
+        setPrimaryStyleName(STYLENAME);
     }
 
     /**
@@ -37,6 +42,7 @@ public class Switch extends CheckBox {
      */
     public Switch(String caption) {
         super(caption);
+        setPrimaryStyleName(STYLENAME);
     }
         
 }
