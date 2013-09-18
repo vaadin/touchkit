@@ -14,6 +14,7 @@
 }
 
 @def baseBackground #F5F5F2;
+@def veryLightBackground #f9f9f8; /* ios7 #f7f8f8 */
 @def lightText #5E5D55;
 @def darkText #43423D; /*#64635a*/
 @def darkBackground lightText; /*76756c*/
@@ -27,6 +28,8 @@
 @def divider thinBorder;
 @def lightDivider thinBorder;
 @def listBorder thinBorder;
+@def windowBorder 1px solid #d1d1ce;
+
 @def borderRadius 3px;
 
 /**
@@ -594,11 +597,10 @@ a {
 	display: block;
 	height: 43px;
 	font-size: 20px;
-	border-bottom: divider;
+	border-bottom: windowBorder;
 	text-align: center;
 	position: relative;
-	background: white;
-	box-shadow: lightEmboss;
+	background: veryLightBackground;
 }
 
 .v-touchkit-navbar .v-touchkit-navbar-caption, 
@@ -678,7 +680,7 @@ a {
 	bottom: 0;
 	left: 0;
 	right: 0;
-	border-top: divider;
+	border-top: windowBorder;
 }
 
 .v-touchkit-navview-notoolbar .v-touchkit-navview-toolbar {
@@ -731,7 +733,7 @@ a {
 	}
 
 .v-window-modalitycurtain.relative {
-	opacity: 0.2;
+	opacity: 0.02;
 	}
 
 /* popover that is not relative to component, nor fullscreen */
@@ -758,7 +760,7 @@ a {
 	overflow: visible;
 	background: transparent;
 	position: relative;
-	border: thinBorder;
+	border: windowBorder;
 }
 
 .v-touchkit-popover.v-touchkit-relative.v-touchkit-smallscreen .v-window-wrap,
@@ -903,7 +905,7 @@ a {
 	bottom: 0;
 	left: 0;
 	right: 0;
-	border-top: thinBorder;
+	border-top: windowBorder;
 }
 
 .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-selected {
@@ -1364,7 +1366,7 @@ vertical-align: middle;
 	position: absolute;
 }
 .v-filterselect-button:before {
-	content: "\F078";
+	content: fa-icon-chevron-down;
 	font-family: "TkIcons";
 	color: buttonColor;
 	margin-left: 5px;
@@ -1395,12 +1397,12 @@ vertical-align: middle;
 }
 .v-filterselect-nextpage:before,
 .v-filterselect-nextpage-off:before {
-	content: "\F078";
+	content: fa-icon-chevron-down;
 }
 
 .v-filterselect-prevpage:before,
 .v-filterselect-prevpage-off:before {
-	content: "\F077";
+	content: fa-icon-chevron-up;
 }
 
 .v-filterselect-nextpage-off:before,
@@ -1565,6 +1567,7 @@ span.v-inline-datefield-calendarpanel-month {
 .v-filterselect-input {
 	-webkit-appearance: none;
 	border:0;
+	border-radius:0;
 	background: transparent;
 	color: buttonColor;
 	font-size:16px;
@@ -1617,7 +1620,8 @@ span.v-inline-datefield-calendarpanel-month {
 	background: transparent;
 	margin:0;
 	display: block;
-	padding: 0 1em 0 0;
+	padding: 0 1.5em 0 0;
+	min-height:22px;
 }
 
 @if user.agent ie10 {
@@ -1628,16 +1632,22 @@ select.v-select-select::-ms-expand {
 
 .v-touchkit-datepicker:after,
 .v-select:after {
-	content:"\25b2 \0020 \25bc";
+	content: fa-icon-chevron-down;
 	text-align:center;
 	position:absolute;
 	right:0;
 	top:0;
 	width:1em;
 	color: buttonColor;
-	font-size:50%;
 	pointer-events: none;
+	font-size:18px;
+	font-family: "TkIcons";
 }
+
+.v-touchkit-datepicker:after {
+	content: fa-icon-calendar;
+}
+
 
 .v-touchkit-componentgroup-cell > .v-select-optiongroup {
     margin: 0;
@@ -2100,12 +2110,11 @@ select.v-select-select::-ms-expand {
 /* Toolbar buttons (icons only by default) */
 
 .v-touchkit-toolbar {
-	background: white;
+	background: veryLightBackground;
 	height: 48px;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display:flex;
-	box-shadow: lightEmboss;
 }
 
 .v-touchkit-toolbar .v-button {
