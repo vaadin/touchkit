@@ -1627,12 +1627,19 @@ span.v-inline-datefield-calendarpanel-month {
 	display: block;
 	padding: 0 1.5em 0 0;
 	min-height:22px;
+	min-width: 80px;
 }
 
 @if user.agent ie10 {
 select.v-select-select::-ms-expand {
 	display:none;
 }
+}
+
+.v-touchkit-datepicker>input {
+	/* Full width native date picker needs to be 100% width, 
+	 * especially important when empty in VCG (else ~20px wide) */
+	width:100%;
 }
 
 .v-touchkit-datepicker:after,
