@@ -115,7 +115,7 @@ public class WebAppSettings implements BootstrapListener {
         if (getStatusBarStyle() != null) {
             element = document.createElement("meta");
             element.attr("name", "apple-mobile-web-app-status-bar-style");
-            element.attr("content", "black");
+            element.attr("content", getStatusBarStyle());
             head.appendChild(element);
         }
 
