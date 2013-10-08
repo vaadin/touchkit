@@ -921,12 +921,25 @@ a {
 	border-top: windowBorder;
 }
 
-.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-selected {
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button {
 	background: baseBackground;
+	border-left: thinBorder;
+}
+
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button:first-child {
+	border: none;
+}
+
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-selected {
+	background: transparent;
+}
+
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-wrap {
+    color: lightText;
 }
 
 .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-selected .v-button-wrap {
-	color: darkText;
+	color: navbarButtonColor;
 }
 
 /* Layout margins */
