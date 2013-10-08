@@ -820,7 +820,7 @@ a {
 	border: 1px solid rgba(0,0,0,0.15);
 	overflow:hidden;
 	font-weight: 700;
-	box-shadow: inset 0px 1px 1px 0px rgba(0,0,0,0.1);
+	box-shadow: inset 0px 1px 1px 0px rgba(0,0,0,0.05);
 	line-height: 1;
 	float:right;
 }
@@ -871,9 +871,10 @@ a {
 	right:0px;
 	top:0px;
 	bottom:0px;
-	margin:2px 5px;
-	font-size: 10px;
+	margin:2px;
+	font-size: 8px;
 	line-height:16px;
+	word-spacing: 1px;
 }
 
 .v-touchkit-switch-focus{}
