@@ -604,6 +604,12 @@ a {
 	background: veryLightBackground;
 }
 
+.v-touchkit-navbar {
+	z-index: 1;
+	background: white;
+	box-shadow:  0 0 2px 1px rgba(0,0,0,0.1);
+}
+
 .v-touchkit-navbar .v-touchkit-navbar-caption, 
 .v-touchkit-navpanel-placeholder > div,
 .v-touchkit-popover.v-touchkit-fullscreen .v-touchkit-navpanel-placeholder > div {
@@ -661,7 +667,7 @@ a {
 
 .v-touchkit-navview-wrapper {
 	position: absolute;
-	top: 44px;
+	top: 43px;
 	bottom: 44px;
 	left: 0;
 	right: 0;	
