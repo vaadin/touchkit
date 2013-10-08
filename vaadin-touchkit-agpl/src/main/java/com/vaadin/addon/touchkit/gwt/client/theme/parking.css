@@ -1754,8 +1754,6 @@ select.v-select-select::-ms-expand {
 	left: 0;
 	right: 0;
 	border-top: listBorder;
-    left: negativeListLayoutMargin;
-    right: negativeListLayoutMargin;
 	}
 	
 /* ...hide from the first */
@@ -1812,16 +1810,30 @@ select.v-select-select::-ms-expand {
 }
 
 .v-touchkit-componentgroup-row {
+	position: relative;
 	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
 	display: -ms-flexbox;      /* TWEENER - IE 10 */
 	display: -webkit-flex;     /* NEW - Chrome */
 	display: flex; 
-  	border-top: listBorder;
 	padding: 0 listLayoutMargin;
 }
 .v-touchkit-componentgroup-row:first-child {
 	border-top: none;
 }
+.v-touchkit-componentgroup-row:before {
+	content: "";
+	display: block;
+	border-top: listBorder;
+	position: absolute;
+	top: 0;
+	left: 10px;
+	right: 10px;
+}
+
+.v-touchkit-componentgroup-row:first-child:before {
+	display: none;
+}
+
 .v-touchkit-componentgroup-row-cap {
     -webkit-box-align: center;
     min-height: 42px;
