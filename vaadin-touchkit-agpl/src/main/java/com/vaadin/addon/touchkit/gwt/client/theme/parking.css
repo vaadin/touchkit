@@ -1078,7 +1078,7 @@ width: 2px;
 }
 
 .v-table-caption-container {
-height: 16px;
+height: 26px;
 margin-left: 6px;
 overflow: hidden;
 padding-right: 4px;
@@ -1219,6 +1219,12 @@ margin-top: -1px;
 	color: white;
 	height: tableHeaderHeight;
 	overflow: hidden;
+}
+
+.v-table-header-wrap {
+	position: relative;
+	z-index: 1;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.25);
 }
 
 .v-table-footer-wrap {
