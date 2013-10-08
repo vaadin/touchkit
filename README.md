@@ -20,6 +20,6 @@ The issues for this add-on are tracked using [The Vaadin issue tracker](http://d
 
 For information about how you can contribute to the project, see https://vaadin.com/contribute
 
-## License & Author
+## License
 
 This add-on is distributed under [AGPL 3.0](http://www.gnu.org/licenses/agpl-3.0.html) and [CVAL 2.0](https://vaadin.com/license/cval-2.0).
