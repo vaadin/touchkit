@@ -50,7 +50,7 @@
  */
 @def buttonInsetBoxShadow inset 0 1px 2px rgba(0,0,0,.5);
 @def buttonInsetBackground rgba(37,38,40,.6);
-@def buttonBoxShadow 0 1px 2px rgba(0,0,0,.5);
+@def buttonBoxShadow  0 2px rgba(0,0,0,.1);
 @def buttonTextShadow 0 -1px 0 rgba(0,0,0,.75);
 @def buttonColor #3797BD; /*VaadinMagenta: #e61e6e Other cyans #3797BD 2E85A8 #00a1d8;*/
 @def buttonFontSize 16px;
@@ -292,6 +292,7 @@ div.v-progressbar-indeterminate {
 	padding: 3px;
 	text-align: center;
 	position:relative;
+	overflow: hidden;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -2120,16 +2121,17 @@ select.v-select-select::-ms-expand {
 	display: inline-block;
 	border:0;
 	border-left: thinBorder;
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0;
-	box-shadow: none;
+	border-radius: 0;
 }
 .v-touchkit-horizontalbuttongroup .v-button:first-child {
 	border-left: none;
 	border-top-left-radius: borderRadius;
 	border-bottom-left-radius: borderRadius;
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
+}
+
+.v-touchkit-horizontalbuttongroup .v-button:last-child {
+	border-top-right-radius: borderRadius;
+	border-bottom-right-radius: borderRadius;
 }
 
 .v-touchkit-navbar .v-button,
@@ -2160,6 +2162,7 @@ select.v-select-select::-ms-expand {
 .v-touchkit-horizontalbuttongroup {
 	padding:0;
 	display:inline-block;
+	overflow: visible;
 }
 
 .v-touchkit-componentgroup-cell>.v-touchkit-horizontalbuttongroup {
