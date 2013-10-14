@@ -1827,6 +1827,8 @@ select.v-select-select::-ms-expand {
 	font-size: 16px;
 	color: captionColor;
 	margin: listLayoutMargin;
+	margin-top: 15px;
+	margin-bottom: 5px;
 }
 
 .v-touchkit-componentgroup-row {
