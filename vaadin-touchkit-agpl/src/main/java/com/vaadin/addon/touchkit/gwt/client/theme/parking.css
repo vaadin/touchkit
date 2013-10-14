@@ -553,14 +553,19 @@ a {
 
 .v-touchkit-navbutton:after {
 	font-family: "TkIcons";
-	content: fa-icon-arrow-right;
+	content: fa-icon-chevron-right;
+	color: navbarButtonColor;
 	position: absolute;
-	right: listLayoutMargin;
+	right: navButtonPaddingRight;
 	top: 0;
 	bottom: 0;
 	width: 10px;
 	margin-right: -1px;
-	}
+}
+
+.v-touchkit-navbutton:active:after {
+	color: white;
+}
 
 .v-touchkit-navbutton:active:after {
 }
