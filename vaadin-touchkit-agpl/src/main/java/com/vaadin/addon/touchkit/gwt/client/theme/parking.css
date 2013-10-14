@@ -1601,7 +1601,7 @@ span.v-inline-datefield-calendarpanel-month {
 	width: 100%;
 	margin: 0;
 	border-top: listBorder;
-	border-bottom: listBorder;
+	border-bottom: 1px solid #CCC;
 	background: white;
 	-webkit-box-sizing: border-box;
 	box-shadow: 0 1px rgba(0,0,0,0.1);
