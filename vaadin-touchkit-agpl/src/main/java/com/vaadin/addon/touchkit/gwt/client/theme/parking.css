@@ -1970,7 +1970,7 @@ select.v-select-select::-ms-expand {
     background: white;
     box-shadow: 1px 1px 3px 3px rgba(0,0,0,0.25);
     cursor: default;
-    min-width: 290px;
+    width: 290px;
     border-radius: borderRadius;
 }
 
@@ -2106,7 +2106,8 @@ select.v-select-select::-ms-expand {
 .v-touchkit-datepopover-time input {
     border: none;
     width: 150px;
-    height: 100%;
+	padding: 0;
+	height: 40px;
     font-size: 18px;
 }
 
