@@ -1,10 +1,7 @@
 package com.vaadin.addon.touchkit.gwt.client.ui;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.InputElement;
@@ -34,16 +31,15 @@ import com.vaadin.shared.VBrowserDetails;
  * 
  */
 public class DatePicker extends SimplePanel implements
-        HasValueChangeHandlers<java.util.Date>, ClickHandler, HasEnabled {
+        HasValueChangeHandlers<String>, ClickHandler, HasEnabled {
 
     private static final String CLASSNAME = "v-touchkit-datepicker";
-    private final static String MONTH_FORMAT = "yyyy-MM";
     private final static String DAY_FORMAT = "yyyy-MM-dd";
-    private final static String TIME_MINUTES_FORMAT = "yyyy-MM-dd'T'HH:mm'Z'";
-    private final static String TIME_SECONDS_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'";
-    private Date date;
-    private Date min;
-    private Date max;
+    private final static String MONTH_FORMAT = "yyyy-MM";
+    private final static String TIME_FORMAT = "yyyy-MM-dd'T'HH:mm";
+    private String date;
+    private String min;
+    private String max;
     private InputElement input;
     private Resolution resolution;
 
@@ -61,7 +57,7 @@ public class DatePicker extends SimplePanel implements
         /**
          * Resolution in time (usually minutes)
          */
-        TIME("datetime", PredefinedFormat.DATE_TIME_SHORT),
+        TIME("datetime-local", PredefinedFormat.DATE_TIME_SHORT),
         /**
          * Resolution in days
          */
@@ -98,7 +94,7 @@ public class DatePicker extends SimplePanel implements
      */
     public DatePicker() {
         super();
-        changeResolution(Resolution.DAY);
+//        changeResolution(Resolution.DAY);
         setStyleName(CLASSNAME);
     }
 
@@ -109,43 +105,25 @@ public class DatePicker extends SimplePanel implements
 
         @Override
         public void onBrowserEvent(com.google.gwt.user.client.Event event) {
-            String value = input.getValue();
-            Date newDate = stringToDate(value);
-            if (newDate == null) {
-                setDate(date, true, false);
+            String newDate = input.getValue();
+            if (newDate == null || newDate.isEmpty()) {
+                setDate(newDate, true, false);
             } else if (!newDate.equals(date)) {
                 setDate(newDate, false, true);
             }
         }
     };
 
-    /**
-     * Get formats based on current resolution
-     * 
-     * @return Formats used to parse String value
-     */
-    private List<DateTimeFormat> getCurrentFormats() {
-        List<DateTimeFormat> ret = new ArrayList<DateTimeFormat>();
-
+    private DateTimeFormat getFormat() {
         switch (resolution) {
-        case DAY:
-            ret.add(DateTimeFormat.getFormat(DAY_FORMAT));
-            break;
         case MONTH:
-            ret.add(DateTimeFormat.getFormat(MONTH_FORMAT));
-            break;
+            return DateTimeFormat.getFormat(MONTH_FORMAT);
+        case DAY:
+            return DateTimeFormat.getFormat(DAY_FORMAT);
         case TIME:
-            ret.add(DateTimeFormat
-                    .getFormat(DateTimeFormat.PredefinedFormat.ISO_8601));
-            ret.add(DateTimeFormat.getFormat(TIME_MINUTES_FORMAT));
-            ret.add(DateTimeFormat.getFormat(TIME_SECONDS_FORMAT));
-            break;
         default:
-            ret.add(DateTimeFormat
-                    .getFormat(DateTimeFormat.PredefinedFormat.ISO_8601));
+            return DateTimeFormat.getFormat(TIME_FORMAT);
         }
-
-        return ret;
     }
 
     /**
@@ -159,8 +137,7 @@ public class DatePicker extends SimplePanel implements
         if (date == null) {
             return "";
         }
-
-        return getCurrentFormats().get(0).format(date);
+        return getFormat().format(date);
     }
 
     /**
@@ -171,45 +148,56 @@ public class DatePicker extends SimplePanel implements
      * @return Date value or null if failure
      */
     private Date stringToDate(String string) {
-        VConsole.log("input: " + string);
         Date date = null;
-        List<DateTimeFormat> formats = getCurrentFormats();
+        // List<DateTimeFormat> formats = getCurrentFormats();
+        //
+        // // Iterate all formats until success
+        // for (DateTimeFormat format : formats) {
+        try {
+            date = getFormat().parse(string);
 
-        // Iterate all formats until success
-        for (DateTimeFormat format : formats) {
-            try {
-                date = format.parse(string);
-
-                // Convert no timezoned times back to local time when iOS
-                if (BrowserInfo.get().isIOS() && string.endsWith("Z")) {
-                    @SuppressWarnings("deprecation")
-                    int minOffset = date.getTimezoneOffset();
-                    date.setTime(date.getTime() - minOffset * 60000);
-                }
-
-                break;
-
-            } catch (Exception e) {
-                // Doesn't matter
+            // Convert no timezoned times back to local time when iOS
+            if (BrowserInfo.get().isIOS() && string.endsWith("Z")) {
+                @SuppressWarnings("deprecation")
+                int minOffset = date.getTimezoneOffset();
+                date.setTime(date.getTime() - minOffset * 60000);
             }
+
+            // break;
+
+        } catch (Exception e) {
+            // Doesn't matter
         }
+        // }
 
         if (date == null) {
-            GWT.log("Failed to parse: " + string);
+            VConsole.error("Failed to parse: " + string);
         }
 
         return date;
     }
 
     /**
-     * Set date value of this DatePicker. Some parts of date will be ignored
+     * Set date value of this DatePicker. Some parts of date may be ignored
      * based on current resolution.
      * 
      * @param newDate
      *            New date value
      */
     public void setDate(Date newDate) {
-        setDate(newDate, date == null || !date.equals(newDate), false);
+        String newDateStr = dateToString(newDate);
+        setDate(newDateStr);
+    }
+
+    /**
+     * Set date value of this DatePicker. Some parts of date may be ignored
+     * based on current resolution.
+     * 
+     * @param newDate
+     *            New date value as yyyy-MM-ddTHH:mm:ss
+     */
+    public void setDate(String newDateStr) {
+        setDate(newDateStr, date == null || !date.equals(newDateStr), false);
     }
 
     /**
@@ -222,7 +210,7 @@ public class DatePicker extends SimplePanel implements
      * @param fire
      *            If change event should be fired
      */
-    protected void setDate(Date newDate, boolean updateInput, boolean fire) {
+    protected void setDate(String newDate, boolean updateInput, boolean fire) {
         if (date == null || !date.equals(newDate)) {
             closeCalendar();
             date = newDate;
@@ -239,20 +227,22 @@ public class DatePicker extends SimplePanel implements
 
     protected void updateValue() {
         if (input != null) {
-            input.setValue(dateToString(date));
+            input.setValue(date);
         } else if (backUpWidget != null) {
-            if (date == null) {
+            Date stringToDate = stringToDate(date);
+            if (stringToDate == null) {
                 backUpWidget.setText("");
             } else {
                 backUpWidget.setText(DateTimeFormat.getFormat(
-                        resolution.getPredefinedFormat()).format(date));
+                        resolution.getPredefinedFormat()).format(
+                        stringToDate));
             }
         }
     }
 
     @Override
     public HandlerRegistration addValueChangeHandler(
-            ValueChangeHandler<java.util.Date> handler) {
+            ValueChangeHandler<String> handler) {
 
         return addHandler(handler, ValueChangeEvent.getType());
     }
@@ -309,10 +299,10 @@ public class DatePicker extends SimplePanel implements
         if (input == null) {
             input = Document.get().createTextInputElement();
             if (min != null) {
-                input.setAttribute("min", dateToString(min));
+                input.setAttribute("min", min);
             }
             if (max != null) {
-                input.setAttribute("max", dateToString(max));
+                input.setAttribute("max", max);
             }
             getElement().appendChild(input);
             com.google.gwt.user.client.Element userElement = (com.google.gwt.user.client.Element) Element
@@ -350,19 +340,20 @@ public class DatePicker extends SimplePanel implements
     protected void openCalendar() {
         closeCalendar();
 
-        overlay = new CalendarOverlay(resolution, min, max);
+        overlay = new CalendarOverlay(resolution, stringToDate(min),
+                stringToDate(max));
         overlay.setOwner(DatePicker.this);
         // overlay.showRelativeTo(this);
         overlay.center();
         if (date != null) {
-            overlay.setDate(date);
+            overlay.setDate(stringToDate(date));
         }
 
         overlay.addValueChangeHandler(new ValueChangeHandler<Date>() {
 
             @Override
             public void onValueChange(ValueChangeEvent<Date> event) {
-                setDate(event.getValue(), true, true);
+                setDate(dateToString(event.getValue()), true, true);
             }
         });
 
@@ -418,14 +409,12 @@ public class DatePicker extends SimplePanel implements
      * @param date
      *            the first accepted date.
      */
-    public void setMin(Date date) {
+    public void setMin(String date) {
         this.min = date;
 
         if (input != null) {
             if (min != null) {
-                String value = dateToString(min);
-                VConsole.log("Set min attribute to:" + value);
-                input.setAttribute("min", value);
+                input.setAttribute("min", date);
             } else {
                 input.removeAttribute("min");
             }
@@ -438,14 +427,11 @@ public class DatePicker extends SimplePanel implements
      * @param date
      *            the last accepted date.
      */
-    public void setMax(Date date) {
+    public void setMax(String date) {
         this.max = date;
-
         if (input != null) {
             if (max != null) {
-                String value = dateToString(max);
-                VConsole.log("Set max attribute to:" + value);
-                input.setAttribute("max", value);
+                input.setAttribute("max", date);
             } else {
                 input.removeAttribute("max");
             }

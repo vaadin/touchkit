@@ -1,5 +1,7 @@
 package com.vaadin.addon.touchkit.ui;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.vaadin.addon.touchkit.gwt.client.vcom.DatePickerServerRpc;
@@ -24,6 +26,7 @@ import com.vaadin.ui.DateField;
  */
 @SuppressWarnings("serial")
 public class DatePicker extends AbstractField<Date> {
+    
 
     /**
      * Constructs a new DatePicker instance with day resolution.
@@ -48,8 +51,8 @@ public class DatePicker extends AbstractField<Date> {
     private final DatePickerServerRpc rpc = new DatePickerServerRpc() {
 
         @Override
-        public void valueChanged(Date date) {
-            DatePicker.this.setValue(date, false);
+        public void valueChanged(String date) {
+            DatePicker.this.setValue(fromStr(date), false);
         }
     };
 
@@ -67,7 +70,31 @@ public class DatePicker extends AbstractField<Date> {
     public void beforeClientResponse(boolean initial) {
         super.beforeClientResponse(initial);
 
-        getState().date = getValue();
+        getState().date = getFormat().format(getValue());
+    }
+    
+    private SimpleDateFormat getFormat() {
+        switch (getResolution()) {
+        case MONTH:
+            return new SimpleDateFormat("yyyy-MM", getLocale());
+        case DAY:
+            return new SimpleDateFormat("yyyy-MM-dd", getLocale());
+        case TIME:
+        default:
+            return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm", getLocale());
+        }
+    }
+    
+    private String toStr(Date d) {
+        return getFormat().format(d);
+    }
+    
+    private Date fromStr(String dateStr) {
+        try {
+            return getFormat().parse(dateStr);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -119,20 +146,20 @@ public class DatePicker extends AbstractField<Date> {
      */
     public void setMin(Date min) {
         if (min != null && getState().max != null) {
-            if (min.after(getState().max)) {
+            if (min.after(getMax())) {
                 throw new IllegalArgumentException("Given minimal value ("
                         + min.toString() + "), is after maximal value ("
                         + getState().max.toString() + ")");
             }
         }
-        getState().min = min;
+        getState().min = toStr(min);
     }
 
     /**
      * @return The minimum date value accepted from the user, null if undefined.
      */
     public Date getMin() {
-        return getState().min;
+        return fromStr(getState().min);
     }
 
     /**
@@ -147,19 +174,19 @@ public class DatePicker extends AbstractField<Date> {
      */
     public void setMax(Date max) {
         if (max != null && getState().min != null) {
-            if (max.before(getState().min)) {
+            if (max.before(getMin())) {
                 throw new IllegalArgumentException("Given maximal value ("
                         + max.toString() + "), is before minimal value ("
                         + getState().min.toString() + ")");
             }
         }
-        getState().max = max;
+        getState().max = toStr(max);
     }
 
     /**
      * @return The maximum date value accepted from the user, null if undefined.
      */
     public Date getMax() {
-        return getState().max;
+        return fromStr(getState().max);
     }
 }

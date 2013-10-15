@@ -1,7 +1,5 @@
 package com.vaadin.addon.touchkit.gwt.client.vcom;
 
-import java.util.Date;
-
 import com.vaadin.shared.communication.ServerRpc;
 
 /**
@@ -9,7 +7,7 @@ import com.vaadin.shared.communication.ServerRpc;
  */
 public interface DatePickerServerRpc extends ServerRpc {
   /**
-   * Value of DatePicker has changed on client side
+   * Value of DatePicker has changed on client side (yyyy-MM-dd'T'HH:mm:ss)
    */
-  public void valueChanged(Date date);
+  public void valueChanged(String date);
 }

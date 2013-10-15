@@ -1,7 +1,5 @@
 package com.vaadin.addon.touchkit.gwt.client.vcom;
 
-import java.util.Date;
-
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -17,7 +15,7 @@ import com.vaadin.shared.ui.Connect;
 @SuppressWarnings("serial")
 @Connect(com.vaadin.addon.touchkit.ui.DatePicker.class)
 public class DatePickerConnector extends AbstractFieldConnector
-implements ValueChangeHandler<java.util.Date> {
+implements ValueChangeHandler<String> {
 
     private final DatePickerServerRpc rpc = RpcProxy.create(DatePickerServerRpc.class,
             this);
@@ -30,8 +28,7 @@ implements ValueChangeHandler<java.util.Date> {
 
     @Override
     public DatePicker createWidget() {
-        DatePicker widget = GWT.create(DatePicker.class);
-        return widget;
+        return GWT.create(DatePicker.class);
     }
 
     @Override
@@ -53,14 +50,13 @@ implements ValueChangeHandler<java.util.Date> {
             DatePickerState.Resolution res) {
 
         switch (res) {
-        case TIME:
-            return DatePicker.Resolution.TIME;
         case DAY:
             return DatePicker.Resolution.DAY;
         case MONTH:
             return DatePicker.Resolution.MONTH;
+        case TIME:
         default:
-            return DatePicker.Resolution.DAY;
+            return DatePicker.Resolution.TIME;
         }
     }
 
@@ -77,7 +73,7 @@ implements ValueChangeHandler<java.util.Date> {
     }
 
     @Override
-    public void onValueChange(ValueChangeEvent<Date> event) {
+    public void onValueChange(ValueChangeEvent<String> event) {
         rpc.valueChanged(event.getValue());
     }
 
