@@ -1033,7 +1033,7 @@ a {
 
 /* Notifications */
 .v-Notification {
-	background: darkBackground;
+	background: #737268;
 	padding: 30px 30px;
 	text-align: center;
 	color: #fff;
@@ -1044,11 +1044,12 @@ a {
 }
 	
 .v-Notification-error {
-	background: rgb(245,89,47);
+	background: #fa663e;
 }
 
 .v-Notification-warning {
-	background: #ee7c08;
+	background: #f5d000;
+	color: darkText;
 }
 	
 /* Table */
