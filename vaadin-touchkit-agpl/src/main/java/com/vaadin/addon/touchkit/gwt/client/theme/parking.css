@@ -88,6 +88,11 @@
 
 /* Table */
 @def tableHeaderHeight 30px;
+@def tableHeaderBackground #78776d;
+@def tableHeaderSeparatorColor #acaba5;
+@def tableHeaderSeparator 1px solid tableHeaderSeparatorColor;
+@def tableSortIndicatorColor #c8c7b5;
+
 
 
 /* CssLayouts don't need to be overflow: hidden in webkit */
@@ -1088,7 +1093,7 @@ white-space: nowrap;
 
 .v-table-resizer {
 background: transparent;
-border-right: 1px solid #c2c3c4;
+border-right: tableHeaderSeparator;
 cursor: col-resize;
 display: block;
 float: right;
@@ -1113,6 +1118,7 @@ text-align: right;
 
 .v-table-sort-indicator {
 background: transparent;
+color: tableSortIndicatorColor;
 float: right;
 height: tableHeaderHeight;
 width: 0;
@@ -1235,7 +1241,7 @@ margin-top: -1px;
 
 .v-table-header-wrap,
 .v-table-footer-wrap {
-	background: darkBackground;
+	background: tableHeaderBackground;
 	color: white;
 	height: tableHeaderHeight;
 	overflow: hidden;
