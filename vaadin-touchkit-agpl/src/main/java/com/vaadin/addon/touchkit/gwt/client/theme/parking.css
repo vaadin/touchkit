@@ -2144,6 +2144,7 @@ select.v-select-select::-ms-expand {
 .v-touchkit-navbutton-back:after {
 	content: "\f060";
 	left: borderRadius;
+	color: inherit !important;
 }
 
 .v-touchkit-horizontalbuttongroup .v-button {
