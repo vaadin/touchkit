@@ -16,6 +16,7 @@
 @def baseBackground #F5F5F2;
 @def veryLightBackground #f9f9f8; /* ios7 #f7f8f8 */
 @def lightText #5E5D55;
+@def veryLightText #7d7d6e;
 @def darkText #43423D; /*#64635a*/
 @def darkBackground lightText; /*76756c*/
 @def redText #ed5931;
@@ -36,7 +37,7 @@
 /**
  * Caption color
  */
-@def captionColor lightText;
+@def captionColor veryLightText;
 
 
 /**
