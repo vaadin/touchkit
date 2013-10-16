@@ -1599,7 +1599,7 @@ div.v-csslayout {
 .v-panel-caption {
 	white-space: nowrap;
 	overflow: hidden;
-	font-weight: bold;
+	font-weight: 500;
 }
 
 .v-panel-nocaption {
@@ -1715,7 +1715,7 @@ div.v-progressindicator-indeterminate-disabled {
 }
 
 .v-select-twincol-selections {
-	font-weight: bold;
+	font-weight: 500;
 }
 
 .v-select-twincol-caption-right {
@@ -1894,7 +1894,7 @@ div.v-progressindicator-indeterminate-disabled {
 	color: #fff;
 	font-size: 11px;
 	line-height: 13px;
-	font-weight: bold;
+	font-weight: 500;
 	font-family: Arial, Helvetica, sans-serif;
 	border-radius: 4px;
 	-webkit-border-radius: 4px;
@@ -2512,7 +2512,7 @@ div table.v-treetable-animation-clone tr.v-table-row, div table.v-treetable-anim
 }
 
 .v-window-header {
-	font-weight: bold;
+	font-weight: 500;
 }
 
 div.v-window-header {

@@ -460,7 +460,7 @@ a {
 .v-button-nav {
 	display: block;
 	position: relative;
-	font-weight: bold;
+	font-weight: 500;
 	color: darkText;
 	line-height: 2;
 	margin: 0;
@@ -1641,7 +1641,7 @@ span.v-inline-datefield-calendarpanel-month {
 	border-radius:0;
 	background: transparent;
 	color: darkText;
-	font-weight: bold;
+	font-weight: 500;
 	font-size:16px;
 	margin:0;
 }
@@ -1692,7 +1692,7 @@ span.v-inline-datefield-calendarpanel-month {
 	-webkit-appearance: none;
 	border: none;
 	color: darkText;
-	font-weight: bold;
+	font-weight: 500;
 	font-size:16px;
 	background: transparent;
 	margin:0;
@@ -1772,7 +1772,7 @@ select.v-select-select::-ms-expand {
 	padding-top:10px;
 	margin:0;
 	color: darkText;
-	font-weight: bold;
+	font-weight: 500;
 	vertical-align:top;
 	line-height:normal;
 	font-size:16px;
