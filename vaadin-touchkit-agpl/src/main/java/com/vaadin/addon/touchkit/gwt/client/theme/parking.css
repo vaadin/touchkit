@@ -23,6 +23,8 @@
 
 @def lightEmboss inset 0 -10px 10px #f6f6f6;
 
+@def fieldTextSize 16px;
+
 /**
  * General borders
  */
@@ -1654,7 +1656,7 @@ span.v-inline-datefield-calendarpanel-month {
 	background: transparent;
 	color: darkText;
 	font-weight: 500;
-	font-size:16px;
+	font-size: fieldTextSize;
 	margin:0;
 }
 
@@ -1705,7 +1707,7 @@ span.v-inline-datefield-calendarpanel-month {
 	border: none;
 	color: darkText;
 	font-weight: 500;
-	font-size:16px;
+	font-size:fieldTextSize;
 	background: transparent;
 	margin:0;
 	display: block;
@@ -1787,7 +1789,7 @@ select.v-select-select::-ms-expand {
 	font-weight: 500;
 	vertical-align:top;
 	line-height:normal;
-	font-size:16px;
+	font-size:fieldTextSize;
 	height:30px;
 }
 
@@ -1837,7 +1839,7 @@ select.v-select-select::-ms-expand {
 }
 
 .v-formlayout-captioncell > .v-caption {
-	font-size: 16px;
+	font-size: fieldTextSize;
 	color: lightText;
 	line-height: 43px;
 	height: 43px;
@@ -1854,7 +1856,7 @@ select.v-select-select::-ms-expand {
 .v-label-grey-title, 
 .v-layout > .v-caption>div
 {
-	font-size: 16px;
+	font-size: fieldTextSize;
 	color: captionColor;
 	margin: listLayoutMargin;
 	margin-top: 15px;
@@ -1892,7 +1894,7 @@ select.v-select-select::-ms-expand {
 }
 
 .v-touchkit-componentgroup-row > .v-caption {
-	font-size: 16px;
+	font-size: fieldTextSize;
 	color: lightText;
 	padding-right: 5px;
 	-webkit-box-sizing: border-box;
@@ -2223,6 +2225,8 @@ select.v-select-select::-ms-expand {
 }
 
 .v-touchkit-componentgroup-cell>.v-upload-immediate .v-button {
+	text-align:left;
+	font-size: fieldTextSize;
 	line-height:20px;
 	font-weight: 500;
 	color: darkText;
