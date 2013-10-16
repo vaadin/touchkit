@@ -32,8 +32,7 @@ public class VNavigationView extends ComplexPanel {
         getElement().appendChild(toolbarDiv);
 
         TouchScrollHandler touchScrollHandler = TouchScrollDelegate
-                .enableTouchScrolling(this);
-        touchScrollHandler.addElement(wrapper);
+                .enableTouchScrolling(this, wrapper);
         DOM.sinkEvents(wrapper, Event.ONSCROLL);
     }
 
