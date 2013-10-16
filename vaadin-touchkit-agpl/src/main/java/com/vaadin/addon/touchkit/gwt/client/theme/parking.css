@@ -941,7 +941,12 @@ a {
 
 .v-touchkit-tabbar-wrapper {
 	overflow: auto;
-	height: 100%;
+	-webkit-overflow-scrolling: touch;
+	right: 0;
+	left: 0;
+	top: 0;
+	bottom: 48px;
+	position: absolute;
 }
 
 .v-touchkit-tabbar-toolbar .v-touchkit-toolbar {
