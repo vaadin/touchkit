@@ -207,7 +207,6 @@ body {
 	pointer-events: none;
 	position: absolute;
 	z-index: 30000;
-	opacity: 1;
 	top: 20%;
 	left: 25%;
 	right: 25%;
@@ -278,12 +277,15 @@ div.v-progressbar-indeterminate {
 }
 
 .v-loading-indicator {
-	opacity: .5;
-	}
+	opacity: .02;
+}
 
 .v-loading-indicator-delay {
-	opacity: .7;
-	}
+	opacity: .5;
+}
+.v-loading-indicator-wait {
+	opacity: 1;
+}
 
 /* Clear Vaadin core theme styles from buttons */
 /* TODO clearing shouldn't be neede anymore!! */
