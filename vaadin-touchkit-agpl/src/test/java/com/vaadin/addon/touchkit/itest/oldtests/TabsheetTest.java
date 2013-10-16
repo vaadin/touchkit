@@ -2,6 +2,7 @@ package com.vaadin.addon.touchkit.itest.oldtests;
 
 import org.junit.Ignore;
 
+import com.vaadin.addon.touchkit.extensions.TouchKitIcon;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.addon.touchkit.ui.NavigationButton.NavigationButtonClickEvent;
 import com.vaadin.addon.touchkit.ui.NavigationButton.NavigationButtonClickListener;
@@ -56,13 +57,16 @@ public class TabsheetTest extends TabBarView implements
 
         Tab tab = addTab(tab1);
         // tab.setIcon(TouchKitUI.getRndRunoIconResource());
+        TouchKitIcon.android.addTo(tab);
         tab.setCaption("Playlists");
 
         tab = addTab(tab2);
+        TouchKitIcon.phone.addTo(tab);
 
         // tab = addTab(tab3, "Vaadin", TouchKitUI.getRndRunoIconResource());
 
         tab = addTab(tab4, "IT Mill");
+        TouchKitIcon.compass.addTo(tab);
 
         NavigationManager navigationManager = new NavigationManager();
 
@@ -86,6 +90,8 @@ public class TabsheetTest extends TabBarView implements
 
         Tab addTab = addTab(navigationManager);
         addTab.setCaption("Option");
+        TouchKitIcon.adjust.addTo(addTab);
+
         // addTab.setIcon(TouchKitUI.getRndRunoIconResource());
 
         setSelectedTab(tab2);

@@ -961,6 +961,7 @@ a {
 .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button {
 	background: baseBackground;
 	border-left: thinBorder;
+	color: lightText;
 }
 
 .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button:first-child {
@@ -968,14 +969,13 @@ a {
 }
 
 .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-selected {
-	background: transparent;
+	background: white;
 }
 
 .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-wrap {
-    color: lightText;
 }
 
-.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-selected .v-button-wrap {
+.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-selected {
 	color: navbarButtonColor;
 }
 
@@ -2242,6 +2242,7 @@ select.v-select-select::-ms-expand {
 	flex:1;
 	padding:0;
 	border-radius:0;
+	color: navbarButtonColor;
 }
 
 .v-touchkit-toolbar .v-button-wrap {
@@ -2251,7 +2252,6 @@ select.v-select-select::-ms-expand {
 	-webkit-box-shadow: none;
 	font-size: 10px;
 	line-height: 1;
-	color: navbarButtonColor;
 	overflow: visible;
 	display: block;
 	height:48px;

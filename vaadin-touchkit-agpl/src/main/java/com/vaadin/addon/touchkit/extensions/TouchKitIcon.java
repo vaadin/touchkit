@@ -1,6 +1,7 @@
 package com.vaadin.addon.touchkit.extensions;
 
 import com.vaadin.addon.touchkit.ui.NavigationButton;
+import com.vaadin.addon.touchkit.ui.TabBarView;
 import com.vaadin.server.Page;
 import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.Button;
@@ -157,7 +158,12 @@ public enum TouchKitIcon {
             if (c instanceof NavigationButton) {
                 sb.append("font-size:20px;font-weight:normal; vertical-align:middle; line-height:1; margin-right:10px;");
             } else if (c instanceof Button) {
-                sb.append("font-size:24px;font-weight:normal; line-height:45px;");
+                sb.append("font-size:24px;font-weight:normal;");
+                if(isTabBarButton(c)) {
+                    sb.append("line-height:40px;");
+                } else {
+                    sb.append("line-height:45px;");
+                }
             }
         } else {
             sb.append("margin-left:10px;font-size:20px;");
@@ -178,6 +184,14 @@ public enum TouchKitIcon {
         }
 
         Page.getCurrent().getStyles().add(sb.toString());
+    }
+
+    private boolean isTabBarButton(AbstractComponent c) {
+        try {
+            return c.getParent().getParent() instanceof TabBarView;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     private boolean hasInternalCaption(AbstractComponent c) {
