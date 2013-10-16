@@ -1116,12 +1116,11 @@ width: 2px;
 }
 
 .v-table-caption-container {
-height: 26px;
 margin-left: 6px;
 overflow: hidden;
 padding-right: 4px;
-padding-top: 4px;
 white-space: nowrap;
+line-height:tableHeaderHeight;
 }
 
 .v-table-caption-container-align-right {
