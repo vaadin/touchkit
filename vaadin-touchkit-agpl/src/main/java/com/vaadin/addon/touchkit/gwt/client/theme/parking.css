@@ -53,7 +53,7 @@
 @def buttonInsetBackground rgba(37,38,40,.6);
 @def buttonBoxShadow  0 2px rgba(0,0,0,.1);
 @def buttonTextShadow 0 -1px 0 rgba(0,0,0,.75);
-@def buttonColor #3797BD; /*VaadinMagenta: #e61e6e Other cyans #3797BD 2E85A8 #00a1d8;*/
+@def buttonColor #00a3e8; /*Note, color is choosen by Jouni K, not a "vaadin color" VaadinMagenta: #e61e6e Other cyans #3797BD 2E85A8 #00a1d8;*/
 @def buttonFontSize 16px;
 @def buttonGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(246,246,246,.46)), to(rgba(145,149,159,.46)), color-stop(.49, rgba(160,162,167,.46)), color-stop(.51, rgba(130,133,142,.46)))');
 @def buttonColorGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(246,246,246,.26)), to(rgba(145,149,159,.26)), color-stop(.49, rgba(160,162,167,.26)), color-stop(.51, rgba(130,133,142,.26)))');
