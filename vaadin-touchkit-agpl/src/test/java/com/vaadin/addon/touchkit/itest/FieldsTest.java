@@ -20,6 +20,7 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.CssLayout;
+import com.vaadin.ui.DateField;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.NativeSelect;
 import com.vaadin.ui.Notification;
@@ -76,7 +77,11 @@ public class FieldsTest extends AbstractTouchKitIntegrationTest implements
 
         DatePicker datePicker = new DatePicker("Html5Date");
         datePicker.setValue(new Date());
-        g.addComponents(textField, textArea, numberField, datePicker);
+        
+        DateField dateField = new DateField("Amaz VaadinDF");
+        dateField.setValue(new Date());
+        
+        g.addComponents(textField, textArea, numberField, datePicker, dateField);
 
         Upload upload = new Upload();
         upload.setImmediate(true);

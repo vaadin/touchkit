@@ -1520,6 +1520,8 @@ vertical-align: middle;
 	margin:0;
 	padding:0;
 	margin-left: -25px;
+	width:25px;
+	text-align:right;
 }
 
 .v-datefield-button:after {
@@ -1720,7 +1722,7 @@ select.v-select-select::-ms-expand {
 .v-touchkit-datepicker:after,
 .v-select:after {
 	content: fa-icon-chevron-down;
-	text-align:center;
+	text-align:right;
 	position:absolute;
 	right:0;
 	top:0;
