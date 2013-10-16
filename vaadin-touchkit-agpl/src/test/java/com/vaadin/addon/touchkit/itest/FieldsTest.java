@@ -18,6 +18,7 @@ import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.NativeSelect;
@@ -99,8 +100,11 @@ public class FieldsTest extends AbstractTouchKitIntegrationTest implements
         NativeSelect select = new NativeSelect("Different type");
         select.setContainerDataSource(optionGroup);
         select.setPropertyDataSource(optionGroup);
+        
+        ComboBox comboBox = new ComboBox("Combodough");
+        comboBox.setContainerDataSource(optionGroup);
 
-        g2.addComponent(select);
+        g2.addComponents(select,comboBox);
 
         Label label = new Label("This is some example text that is "
                 + "written here for demonstration purposes only.");
