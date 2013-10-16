@@ -109,6 +109,7 @@
 /* Fonts */
 body, input, textarea, select, option {
 	font-family: "Helvetica Neue", Helvetica, Arial, Tahoma, Verdana;
+	color: lightText;
 }
 
 body {
@@ -2208,6 +2209,15 @@ select.v-select-select::-ms-expand {
 
 .v-touchkit-componentgroup-cell>.v-touchkit-horizontalbuttongroup {
 	margin: listLayoutMargin 0;
+}
+
+.v-touchkit-componentgroup-cell>.v-upload-immediate .v-button {
+	line-height:20px;
+	font-weight: 500;
+	color: darkText;
+}
+.v-touchkit-componentgroup-cell>.v-upload-immediate .v-button-wrap {
+	padding:0;
 }
 
 /* Toolbar buttons (icons only by default) */
