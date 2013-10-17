@@ -96,6 +96,11 @@
 @def tableHeaderSeparator 1px solid tableHeaderSeparatorColor;
 @def tableSortIndicatorColor #c8c7b5;
 
+/* Notification */
+@def notificationBackground #737268;
+@def notificationErrorBackground #fa663e;
+@def notificationWarningBackground #f5d000;
+
 
 
 /* CssLayouts don't need to be overflow: hidden in webkit */
@@ -1048,7 +1053,7 @@ a {
 
 /* Notifications */
 .v-Notification {
-	background: #737268;
+	background: notificationBackground;
 	padding: 30px 30px;
 	text-align: center;
 	color: #fff;
@@ -1060,11 +1065,11 @@ a {
 }
 	
 .v-Notification-error {
-	background: #fa663e;
+	background: notificationErrorBackground;
 }
 
 .v-Notification-warning {
-	background: #f5d000;
+	background: notificationWarningBackground;
 	color: darkText;
 }
 
