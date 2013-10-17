@@ -312,7 +312,7 @@ div.v-progressbar-indeterminate {
 	
 	box-shadow: buttonBoxShadow;
 	font-size: buttonFontSize;
-	font-weight: medium;
+	font-weight: 500;
 	line-height:2;
 	color: buttonColor;
 	
