@@ -100,8 +100,6 @@ public interface ParkingStyles extends CssResource {
     
     String relative();
     
-    String tabbarGradient();
-    
     String tableHeaderHeight();
     
     @ClassName("v-app-loading")

@@ -21,8 +21,6 @@
 @def darkBackground lightText; /*76756c*/
 @def redText #ed5931;
 
-@def lightEmboss inset 0 -10px 10px #f6f6f6;
-
 @def fieldTextSize 16px;
 
 /**
@@ -34,7 +32,14 @@
 @def listBorder thinBorder;
 @def windowBorder 1px solid #d1d1ce;
 
+/* Drop shadows for "floating" elements */
+@def dropShadowColor rgba(209,209,206,0.5);
+@def dropShadow 0 2px dropShadowColor;
+@def upperDropShadow 0 -2px dropShadowColor;
+
 @def borderRadius 3px;
+
+@def toolbarHeight 48px;
 
 /**
  * Caption color
@@ -76,10 +81,6 @@
 @def navbarButtonBoxShadow none;
 
 
-/* Tabbar */
-@def tabbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#48494b), to(#222324), color-stop(0.49, #333435), color-stop(0.51, #2e2f30))');
-
-
 /* Navbuttons */
 @def navButtonGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4d8cb9), to(#3e6fa8))');
 @def navButtonPaddingRight 16px;
@@ -100,10 +101,6 @@
 @def notificationBackground #737268;
 @def notificationErrorBackground #fa663e;
 @def notificationWarningBackground #f5d000;
-
-/* Toolbars */
-@def toolbarShadow 0 0 2px 1px rgba(0,0,0,0.1);
-
 
 
 /* CssLayouts don't need to be overflow: hidden in webkit */
@@ -632,7 +629,7 @@ a {
 .v-touchkit-navbar {
 	z-index: 1;
 	background: white;
-	box-shadow:  toolbarShadow;
+	box-shadow:  dropShadow;
 }
 
 .v-touchkit-navbar .v-touchkit-navbar-caption, 
@@ -693,26 +690,23 @@ a {
 .v-touchkit-navview-wrapper {
 	position: absolute;
 	top: 43px;
-	bottom: 44px;
+	bottom: toolbarHeight;
 	left: 0;
 	right: 0;	
 	overflow: auto;
 }
 .v-touchkit-navview-notoolbar .v-touchkit-navview-wrapper {
-	position:absolute;
-	top: 44px;
 	bottom: 0;
-	left: 0;
-	right: 0;	
 }
 
 .v-touchkit-navview-toolbar {
 	position: absolute;
-	height: 48px;
+	height: toolbarHeight;
 	bottom: 0;
 	left: 0;
 	right: 0;
 	border-top: windowBorder;
+	box-shadow: upperDropShadow;
 }
 
 .v-touchkit-navview-notoolbar .v-touchkit-navview-toolbar {
@@ -943,7 +937,7 @@ a {
 .v-touchkit-tabbar {
 	overflow: hidden;
 	position:relative;
-	padding-bottom: 46px;
+	padding-bottom: toolbarHeight;
 }
 
 .v-touchkit-tabbar .v-csslayout-container,
@@ -958,7 +952,7 @@ a {
 	right: 0;
 	left: 0;
 	top: 0;
-	bottom: 48px;
+	bottom: toolbarHeight;
 	position: absolute;
 }
 
@@ -968,6 +962,7 @@ a {
 	left: 0;
 	right: 0;
 	border-top: windowBorder;
+	box-shadow: upperDropShadow;
 }
 
 .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button {
@@ -1059,7 +1054,7 @@ a {
 	overflow: hidden;
 	width: 100%;
 	box-sizing:border-box;
-	box-shadow: 0 1px 2px rgba(0,0,0,0.25);
+	box-shadow: dropShadow;
 }
 	
 .v-Notification-error {
@@ -1275,7 +1270,7 @@ margin-top: -1px;
 .v-table-header-wrap {
 	position: relative;
 	z-index: 1;
-	box-shadow: 0 1px 2px rgba(0,0,0,0.25);
+	box-shadow: dropShadow;
 }
 
 .v-table-footer-wrap {
@@ -1389,7 +1384,6 @@ vertical-align: middle;
 
 .v-filterselect-suggestpopup,
 .v-datefield-calendarpanel {
-	-webkit-box-shadow: 0 1px 10px 1px rgba(0,0,0,.5);
 	border-radius: 4px;
 	margin-top: 4px !important;
 	overflow: hidden;
@@ -1639,7 +1633,7 @@ span.v-inline-datefield-calendarpanel-month {
 	border-bottom: 1px solid #CCC;
 	background: white;
 	-webkit-box-sizing: border-box;
-	box-shadow: 0 1px rgba(0,0,0,0.1);
+	box-shadow: 0 1px dropShadowColor;
 	overflow: hidden;
 	position: relative;
 	margin-bottom: listLayoutMargin;
@@ -2245,11 +2239,11 @@ select.v-select-select::-ms-expand {
 
 .v-touchkit-toolbar {
 	background: veryLightBackground;
-	height: 48px;
+	height: toolbarHeight;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display:flex;
-	box-shadow: toolbarShadow;
+	box-shadow: dropShadow;
 }
 
 .v-touchkit-toolbar .v-button {
