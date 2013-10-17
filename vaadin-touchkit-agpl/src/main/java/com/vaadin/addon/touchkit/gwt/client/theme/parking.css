@@ -101,6 +101,9 @@
 @def notificationErrorBackground #fa663e;
 @def notificationWarningBackground #f5d000;
 
+/* Toolbars */
+@def toolbarShadow 0 0 2px 1px rgba(0,0,0,0.1);
+
 
 
 /* CssLayouts don't need to be overflow: hidden in webkit */
@@ -629,7 +632,7 @@ a {
 .v-touchkit-navbar {
 	z-index: 1;
 	background: white;
-	box-shadow:  0 0 2px 1px rgba(0,0,0,0.1);
+	box-shadow:  toolbarShadow;
 }
 
 .v-touchkit-navbar .v-touchkit-navbar-caption, 
@@ -969,12 +972,7 @@ a {
 
 .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button {
 	background: baseBackground;
-	border-left: thinBorder;
 	color: lightText;
-}
-
-.v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button:first-child {
-	border: none;
 }
 
 .v-touchkit-tabbar-toolbar .v-touchkit-toolbar .v-button-selected {
@@ -2251,18 +2249,24 @@ select.v-select-select::-ms-expand {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display:flex;
+	box-shadow: toolbarShadow;
 }
 
 .v-touchkit-toolbar .v-button {
 	display:block;
-	background: transparent;
+	background: white;
 	box-shadow:none;
 	-webkit-box-flex:1;
 	-ms-flex: 1;
 	flex:1;
 	padding:0;
+	border-left: thinBorder;
 	border-radius:0;
 	color: navbarButtonColor;
+}
+
+.v-touchkit-toolbar .v-button:first-child {
+	border: none;
 }
 
 .v-touchkit-toolbar .v-button-wrap {
