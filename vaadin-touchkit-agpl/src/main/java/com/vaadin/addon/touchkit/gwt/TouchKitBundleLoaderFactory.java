@@ -26,7 +26,6 @@ import com.vaadin.client.ui.twincolselect.TwinColSelectConnector;
 import com.vaadin.client.ui.window.WindowConnector;
 import com.vaadin.server.widgetsetutils.ConnectorBundleLoaderFactory;
 import com.vaadin.shared.ui.Connect.LoadStyle;
-import com.vaadin.ui.Calendar;
 
 /**
  * TouchKitWidgetMapGenerator enables lazy loading of some heavy widget classes
