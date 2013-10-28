@@ -174,6 +174,7 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
                                     newLeft + "px");
                         }
 
+                        @Override
                         protected void onComplete() {
                             mainElement.getStyle().setProperty("left",
                                     targetLeft + "px");
@@ -226,19 +227,20 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
         sliderOffsetLeft = getCurrentPosition();
         previewHandler = Event.addNativePreviewHandler(this);
     }
-    
+
     @Override
     public void onPreviewNativeEvent(NativePreviewEvent event) {
         String type = event.getNativeEvent().getType();
-        if(!getElement().isOrHasChild((Node) event.getNativeEvent().getEventTarget().cast())) {
-            if(type.contains("up") || type.contains("end") || type.contains("cancel")) {
-                if(isEnabled()) {
+        if (!getElement().isOrHasChild(
+                (Node) event.getNativeEvent().getEventTarget().cast())) {
+            if (type.contains("up") || type.contains("end")
+                    || type.contains("cancel")) {
+                if (isEnabled()) {
                     handleMouseUp();
                 }
             }
         }
     }
-
 
     public void onMouseUp(MouseUpEvent event) {
         if (isEnabled()) {
@@ -261,7 +263,7 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
 
         mouseDown = false;
         dragging = false; // not dragging anymore
-        if(previewHandler != null) {
+        if (previewHandler != null) {
             previewHandler.removeHandler();
             previewHandler = null;
         }
