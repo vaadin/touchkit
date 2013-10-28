@@ -24,6 +24,7 @@ import com.google.gwt.event.dom.client.TouchCancelEvent;
 import com.google.gwt.event.dom.client.TouchCancelHandler;
 import com.google.gwt.event.dom.client.TouchEndEvent;
 import com.google.gwt.event.dom.client.TouchEndHandler;
+import com.google.gwt.event.dom.client.TouchEvent;
 import com.google.gwt.event.dom.client.TouchMoveEvent;
 import com.google.gwt.event.dom.client.TouchMoveHandler;
 import com.google.gwt.event.dom.client.TouchStartEvent;
@@ -69,9 +70,11 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
     private int unvisiblePartWidth;
 
     private int tabIndex;
-    private int dragStart;
+    private int dragStartX;
+    private int dragStartY;
     private int sliderOffsetLeft;
     private boolean dragging;
+    private boolean scrolling;
     private HandlerRegistration previewHandler;
 
     /**
@@ -103,15 +106,18 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
 
     private void addHandlers() {
         addDomHandler(this, KeyUpEvent.getType());
-        addDomHandler(this, MouseDownEvent.getType());
-        addDomHandler(this, MouseUpEvent.getType());
-        addDomHandler(this, MouseMoveEvent.getType());
+        if (TouchEvent.isSupported()) {
+            addDomHandler(this, TouchStartEvent.getType());
+            addDomHandler(this, TouchMoveEvent.getType());
+            addDomHandler(this, TouchEndEvent.getType());
+            addDomHandler(this, TouchCancelEvent.getType());
+        } else {
+            addDomHandler(this, MouseDownEvent.getType());
+            addDomHandler(this, MouseUpEvent.getType());
+            addDomHandler(this, MouseMoveEvent.getType());
+        }
         addDomHandler(this, FocusEvent.getType());
         addDomHandler(this, BlurEvent.getType());
-        addDomHandler(this, TouchStartEvent.getType());
-        addDomHandler(this, TouchMoveEvent.getType());
-        addDomHandler(this, TouchEndEvent.getType());
-        addDomHandler(this, TouchCancelEvent.getType());
     }
 
     @Override
@@ -216,14 +222,15 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
 
     public void onMouseDown(MouseDownEvent event) {
         if (isEnabled()) {
-            handleMouseDown(event.getScreenX());
+            handleMouseDown(event.getScreenX(), event.getScreenY());
             event.preventDefault();
         }
     }
 
-    private void handleMouseDown(int clientX) {
+    private void handleMouseDown(int clientX, int clientY) {
         mouseDown = true;
-        dragStart = clientX;
+        dragStartX = clientX;
+        dragStartY = clientY;
         sliderOffsetLeft = getCurrentPosition();
         previewHandler = Event.addNativePreviewHandler(this);
     }
@@ -248,9 +255,11 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
         }
     }
 
-    private void handleMouseUp() {
+    private void handleMouseUp(boolean cancel) {
         if (!dragging) {
-            setValue(!value, true);
+            if (mouseDown && !scrolling && !cancel) {
+                setValue(!value, true);
+            }
         } else {
             if (getCurrentPosition() < (-getUnvisiblePartWidth() / 2)) {
                 setValue(false, true);
@@ -263,33 +272,42 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
 
         mouseDown = false;
         dragging = false; // not dragging anymore
+        scrolling = false;
         if (previewHandler != null) {
             previewHandler.removeHandler();
             previewHandler = null;
         }
     }
 
+    public void handleMouseUp() {
+        handleMouseUp(false);
+    }
+
     public void onMouseMove(MouseMoveEvent event) {
         if (isEnabled()) {
-            handleMouseMove(event.getScreenX());
+            handleMouseMove(event.getScreenX(), event.getScreenY());
         }
     }
 
-    private void handleMouseMove(int clientX) {
+    private void handleMouseMove(int clientX, int clientY) {
         if (mouseDown) {
-            int dragDistance = clientX - dragStart;
-            if (Math.abs(dragDistance) > DRAG_THRESHOLD_PIXELS) {
+            int dragXDistance = clientX - dragStartX;
+            if (!scrolling && Math.abs(dragXDistance) > DRAG_THRESHOLD_PIXELS) {
 
                 dragging = true;
                 // Use capture to catch mouse events even if user
                 // drags the mouse cursor out of the widget area.
                 DOM.setCapture((com.google.gwt.user.client.Element) mainElement);
             }
+            int dragYDistance = clientY - dragStartY;
+            if (!dragging && Math.abs(dragYDistance) > DRAG_THRESHOLD_PIXELS) {
+                scrolling = true;
+            }
 
             if (dragging) {
                 // calculate new left position and
                 // check for boundaries
-                int left = sliderOffsetLeft + dragDistance;
+                int left = sliderOffsetLeft + dragXDistance;
                 if (left < -getUnvisiblePartWidth()) {
                     left = -getUnvisiblePartWidth();
                 } else if (left > 0) {
@@ -313,28 +331,31 @@ public class VSwitch extends FocusWidget implements Field, HasValue<Boolean>,
     public void onTouchEnd(TouchEndEvent event) {
         if (isEnabled()) {
             handleMouseUp();
+            event.preventDefault();
         }
     }
 
     public void onTouchMove(TouchMoveEvent event) {
         if (isEnabled()) {
             Touch touch = event.getTouches().get(0).cast();
-            handleMouseMove(touch.getPageX());
-            event.preventDefault();
+            handleMouseMove(touch.getPageX(), touch.getPageY());
+            if (dragging) {
+                event.preventDefault();
+            }
         }
     }
 
     public void onTouchStart(TouchStartEvent event) {
         if (isEnabled()) {
             Touch touch = event.getTouches().get(0).cast();
-            handleMouseDown(touch.getPageX());
-            event.preventDefault();
+            handleMouseDown(touch.getPageX(), touch.getPageY());
+            event.stopPropagation();
         }
     }
 
     public void onTouchCancel(TouchCancelEvent event) {
         if (isEnabled()) {
-            handleMouseUp();
+            handleMouseUp(true);
         }
     }
 
