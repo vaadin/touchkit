@@ -3,11 +3,14 @@
 	<inherits name="com.vaadin.DefaultWidgetSet" />
 	<inherits name="com.google.gwt.resources.Resources" />
 
-	<define-property name="webkitvariant" values="std,android2" />
+	<define-property name="webkitvariant" values="std,ios7hswa,android2" />
 	<property-provider name="webkitvariant"><![CDATA[
 	  {
-	    var ua = window.navigator.userAgent.toLowerCase();
-	    if (ua.indexOf('android 2.') != -1) { return 'android2'; }
+	    var ua = window.navigator.userAgent;
+	    if (ua.toLowerCase().indexOf('android 2.') != -1) { return 'android2'; }
+	    if (ua.indexOf('OS 7_0') != -1 && 
+	        ua.indexOf('iP') != -1 && 
+	        ua.indexOf('Safari') == -1 ) { return 'ios7hswa'; };
 	    return 'std';
 	  }
 	]]></property-provider>
@@ -52,6 +55,12 @@
 		<when-property-is name="user.agent" value="ie10" />
 	</replace-with>
 	
+
+	<replace-with
+		class="com.vaadin.addon.touchkit.gwt.client.Ios7HomeScreenWebAppHackLoader">
+		<when-type-is class="com.vaadin.addon.touchkit.gwt.client.TouchKitPlatformHackLoader" />
+		<when-property-is name="webkitvariant" value="ios7hswa" />
+	</replace-with>
 
 	<replace-with
 		class="com.vaadin.addon.touchkit.gwt.client.offlinemode.DefaultOfflineMode">
