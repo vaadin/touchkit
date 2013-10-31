@@ -503,34 +503,26 @@ img {
 
     <h3 id="new">New in Vaadin TouchKit ${Implementation-Version}</h3>
 
-    <p>The following features and enhancements are new in Vaadin TouchKit ${Implementation-Version}:</p>
+    <p>Vaadin TouchKit ${Implementation-Version} works around issues introduced in iOS 7, 
+    particularly when an app is added to the device homescreen.</p>
     <ul>
-        <li>Vaadin 7 support</li>
-        <li>Easier creation of custom themes</li>
-        <li>UrlField - A HTML5 URL field</li>
-        <li>DatePicker - A HTML5 field for native picking of dates and times with a fallback mode for when not
-            supported
-        </li>
-        <li>Support for HTML5 local storage from the server side</li>
-        <li>Application cache handling reports when there is a new version available</li>
+        <li><a href="http://dev.vaadin.com/ticket/12795">Ticket 12795 "iOS 7 homescreen causes multiple problems"</a></li>
     </ul>
 
     <h3 id="changelog">Change Log</h3>
-
     <p>
-        For a complete list of changes in this release, please see the <a
-            href="http://dev.vaadin.com/query?status=closed&milestone=Vaadin+TouchKit+3.0.0+beta1&milestone=TouchKit+3.0.0-alpha5&group=resolution&col=id&col=summary&col=owner&col=type&col=priority&col=component&col=version&order=priority">list
-        of closed tickets</a>.
+        For details, please see the relevant 
+        <a href="http://dev.vaadin.com/changeset/17a3ba79455f87454a5cb92c1b408e9e5df56019/touchkit">changeset</a>
     </p>
 
     <h2 id="knownissues">Known Issues</h2>
     <ul>
         <li>
-            Android 2.3 maturity is still a work in progress, see
-            <a href="http://dev.vaadin.com/query?status=accepted&status=assigned&status=new&status=reopened&milestone=Vaadin+TouchKit+3.0.0&col=id&col=summary&col=status&col=type&col=priority&col=milestone&col=component&order=priority">
-                the open issues
-            </a>
-            for details.
+            The initial release of iOS 7 had broken javascript Alert, Confirm and Prompt, which iOS 7.0.3
+            has since fixed. However, if your app uses any of these, you might want to have a look at the
+            <a href="http://vaadin.com/directory#addon/ios-7-hotfixes">iOS 7 Hotfixes add-on</a> which 
+            addresses these issues. 
+
         </li>
     </ul>
 
