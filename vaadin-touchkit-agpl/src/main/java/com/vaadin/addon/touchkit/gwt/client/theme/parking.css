@@ -796,6 +796,10 @@ a {
 	border-radius: 0;
 }
 
+.v-touchkit-popover.v-touchkit-relative.v-touchkit-smallscreen {
+	box-shadow: dropShadow;
+}
+
 .v-touchkit-popover .v-window-closebox,
 .v-touchkit-popover .v-window-outerheader,
 .v-touchkit-popover .v-window-footer {
