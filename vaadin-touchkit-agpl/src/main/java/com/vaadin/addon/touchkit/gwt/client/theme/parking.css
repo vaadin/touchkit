@@ -1643,21 +1643,25 @@ span.v-inline-datefield-calendarpanel-month {
 	margin-bottom: listLayoutMargin;
 }
 
+.v-textfield,
+.v-textarea,
+.v-touchkit-numberfield,
+.v-datefield {
+	-webkit-appearance: none;
+	border:0;
+	border-radius:0;
+	color: darkText;
+	font-weight: 500;
+	font-size: fieldTextSize;
+}
 
-/* TODO consider input fields to be borderless everywhere, not just in vcg */
 
 .v-touchkit-verticalcomponentgroup .v-textfield,
 .v-touchkit-verticalcomponentgroup .v-textarea,
 .v-touchkit-verticalcomponentgroup .v-touchkit-numberfield,
 .v-touchkit-verticalcomponentgroup .v-datefield,
 .v-filterselect-input {
-	-webkit-appearance: none;
-	border:0;
-	border-radius:0;
 	background: transparent;
-	color: darkText;
-	font-weight: 500;
-	font-size: fieldTextSize;
 	margin:0;
 }
 
