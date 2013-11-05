@@ -32,13 +32,12 @@ public class PopoverConnector extends WindowConnector implements
 
     @Override
     public void onStateChanged(StateChangeEvent stateChangeEvent) {
-        super.onStateChanged(stateChangeEvent);
-
         // Related component can be null
         ComponentConnector relatedConnector = (ComponentConnector) getState()
                 .getRelatedComponent();
         getWidget().setRelatedComponent(
                 relatedConnector == null ? null : relatedConnector.getWidget());
+        super.onStateChanged(stateChangeEvent);
     }
 
     @Override
