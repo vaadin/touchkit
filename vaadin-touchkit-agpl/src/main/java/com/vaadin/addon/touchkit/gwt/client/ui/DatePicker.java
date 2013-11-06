@@ -81,11 +81,11 @@ public class DatePicker extends SimplePanel implements
          * @return Type value used in input field
          */
         public String getType() {
-            return this.type;
+            return type;
         }
 
         public PredefinedFormat getPredefinedFormat() {
-            return this.predefinedFormat;
+            return predefinedFormat;
         }
     }
 
@@ -94,7 +94,7 @@ public class DatePicker extends SimplePanel implements
      */
     public DatePicker() {
         super();
-//        changeResolution(Resolution.DAY);
+        // changeResolution(Resolution.DAY);
         setStyleName(CLASSNAME);
     }
 
@@ -178,6 +178,24 @@ public class DatePicker extends SimplePanel implements
     }
 
     /**
+     * Get the current value of this DatePicker.
+     * 
+     * @return The current value as a String
+     */
+    public String getValue() {
+        return date;
+    }
+
+    /**
+     * Get the current value of this DatePicker.
+     * 
+     * @return The current value as a Date
+     */
+    public Date getDateValue() {
+        return stringToDate(date);
+    }
+
+    /**
      * Set date value of this DatePicker. Some parts of date may be ignored
      * based on current resolution.
      * 
@@ -234,8 +252,7 @@ public class DatePicker extends SimplePanel implements
                 backUpWidget.setText("");
             } else {
                 backUpWidget.setText(DateTimeFormat.getFormat(
-                        resolution.getPredefinedFormat()).format(
-                        stringToDate));
+                        resolution.getPredefinedFormat()).format(stringToDate));
             }
         }
     }
@@ -410,7 +427,7 @@ public class DatePicker extends SimplePanel implements
      *            the first accepted date.
      */
     public void setMin(String date) {
-        this.min = date;
+        min = date;
 
         if (input != null) {
             if (min != null) {
@@ -428,7 +445,7 @@ public class DatePicker extends SimplePanel implements
      *            the last accepted date.
      */
     public void setMax(String date) {
-        this.max = date;
+        max = date;
         if (input != null) {
             if (max != null) {
                 input.setAttribute("max", date);
