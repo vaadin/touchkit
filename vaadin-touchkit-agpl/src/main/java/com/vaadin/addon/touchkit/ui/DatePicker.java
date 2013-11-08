@@ -26,7 +26,6 @@ import com.vaadin.ui.DateField;
  */
 @SuppressWarnings("serial")
 public class DatePicker extends AbstractField<Date> {
-    
 
     /**
      * Constructs a new DatePicker instance with day resolution.
@@ -70,9 +69,14 @@ public class DatePicker extends AbstractField<Date> {
     public void beforeClientResponse(boolean initial) {
         super.beforeClientResponse(initial);
 
-        getState().date = getFormat().format(getValue());
+        Date value = getValue();
+        if (value == null) {
+            getState().date = null;
+        } else {
+            getState().date = getFormat().format(getValue());
+        }
     }
-    
+
     private SimpleDateFormat getFormat() {
         switch (getResolution()) {
         case MONTH:
@@ -84,11 +88,11 @@ public class DatePicker extends AbstractField<Date> {
             return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm", getLocale());
         }
     }
-    
+
     private String toStr(Date d) {
         return getFormat().format(d);
     }
-    
+
     private Date fromStr(String dateStr) {
         try {
             return getFormat().parse(dateStr);

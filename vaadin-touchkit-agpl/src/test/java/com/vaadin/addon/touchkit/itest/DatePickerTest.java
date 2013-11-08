@@ -83,6 +83,7 @@ public class DatePickerTest extends AbstractTouchKitIntegrationTest {
         buttonLayout.setWidth("100%");
         buttonLayout.setCaption("Set date value");
         addComponent(buttonLayout);
+        buttonLayout.addComponent(new Button(NULL_VALUE, dateButtonListener));
         buttonLayout.addComponent(new Button("1982-10-25", dateButtonListener));
         buttonLayout.addComponent(new Button("2011-02-11", dateButtonListener));
         buttonLayout.addComponent(new Button("2013-01-31", dateButtonListener));
@@ -156,7 +157,12 @@ public class DatePickerTest extends AbstractTouchKitIntegrationTest {
         @Override
         public void buttonClick(ClickEvent event) {
             try {
-                pickerA.setValue(df.parse(event.getButton().getCaption()));
+                String caption = event.getButton().getCaption();
+                if (caption.equals(NULL_VALUE)) {
+                    pickerA.setValue(null);
+                } else {
+                    pickerA.setValue(df.parse(caption));
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
