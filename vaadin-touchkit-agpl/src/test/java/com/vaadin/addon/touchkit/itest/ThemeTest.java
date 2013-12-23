@@ -267,6 +267,7 @@ public class ThemeTest extends AbstractTouchKitIntegrationTest {
             layout.addComponent(new Label("A fairly long table follows"));
 
             Table tbl = new Table();
+            tbl.setSelectable(true);
             tbl.addContainerProperty("Name", String.class, "John Doe");
             tbl.addContainerProperty("Area", String.class, "A12");
             tbl.addContainerProperty("Date", String.class, "5/23/13");
