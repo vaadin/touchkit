@@ -102,6 +102,9 @@
 @def notificationErrorBackground #fa663e;
 @def notificationWarningBackground #f5d000;
 
+/* Slider */
+@def sliderMargin 17px;
+
 
 /* CssLayouts don't need to be overflow: hidden in webkit */
 .v-csslayout {
@@ -711,6 +714,10 @@ a {
 
 .v-touchkit-navview-notoolbar .v-touchkit-navview-toolbar {
 	display: none;
+}
+
+.v-touchkit-componentgroup-cell>.v-slider {
+	margin: sliderMargin 0;
 }
 
 .v-slider:focus {
