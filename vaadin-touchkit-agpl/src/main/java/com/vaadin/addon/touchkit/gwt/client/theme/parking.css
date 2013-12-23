@@ -84,6 +84,8 @@
 /* Navbuttons */
 @def navButtonGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4d8cb9), to(#3e6fa8))');
 @def navButtonPaddingRight 16px;
+@def navButtonDescRadius 7px;
+@def navButtonDescPadding 2px 5px;
 
 /* Default popover */
 @def popoverNavbarGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0)), to(rgba(0,0,0,0)), color-stop(.49, rgba(0,0,0,.2)), color-stop(.51, rgba(0,0,0,.45)))');
@@ -541,10 +543,15 @@ a {
 
 .v-touchkit-navbutton-desc {
 	color: #73787c;
+	background: baseBackground;
 	font-weight: normal;
+	line-height: normal;
 	float:right;
 	margin-right: 22px;
 	margin-left: 10px;
+	margin-top: listLayoutMargin;
+	padding: navButtonDescPadding;
+	border-radius: navButtonDescRadius;
 }
 
 .v-touchkit-navbutton-emphasis .v-touchkit-navbutton-desc {
@@ -552,7 +559,8 @@ a {
 	}
 
 .v-touchkit-navbutton:active .v-touchkit-navbutton-desc {
-	color: #fff;
+	color: buttonColor;
+	background: #fff;
 }
 
 .v-touchkit-navbutton-pill .v-touchkit-navbutton-desc {
