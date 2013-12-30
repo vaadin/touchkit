@@ -2214,12 +2214,15 @@ select.v-select-select::-ms-expand {
 
 .v-touchkit-navbar .v-button,
 .v-touchkit-componentgroup-cell>.v-button,
-.v-touchkit-horizontalbuttongroup .v-button,
 .v-touchkit-navbutton-back,
 .v-touchkit-navbutton-forward {
 	margin: 0;
     font-size: 14px;
     font-weight:normal;
+}
+
+.v-touchkit-horizontalbuttongroup .v-button {
+	font-size: 18px;
 }
 
 .v-touchkit-componentgroup-cell>.v-button {
