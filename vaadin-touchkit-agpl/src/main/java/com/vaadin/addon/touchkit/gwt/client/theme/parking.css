@@ -372,8 +372,8 @@ div.v-progressbar-indeterminate {
 	padding: 0;
 	height: auto;
 	margin: 0;
-	font-size: 14px;
-	font-weight: normal;
+	font-size: buttonFontSize;
+	font-weight: 500;
 	color: buttonColor;
 	line-height: inherit;
 	}
