@@ -1458,11 +1458,11 @@ vertical-align: middle;
 .v-filterselect-button {
 	right: 0;
 	top: 0;
-	height: 25px;
 	width: 25px;
 	position: absolute;
 	font-size:18px;
 	text-align:right;
+	line-height: 42px;
 }
 .v-filterselect-button:before {
 	content: fa-icon-chevron-down;
@@ -1661,7 +1661,8 @@ span.v-inline-datefield-calendarpanel-month {
 .v-textfield,
 .v-textarea,
 .v-touchkit-numberfield,
-.v-datefield {
+.v-datefield,
+.v-filterselect-input {
 	-webkit-appearance: none;
 	border:0;
 	border-radius:0;
@@ -1675,19 +1676,23 @@ span.v-inline-datefield-calendarpanel-month {
 .v-touchkit-verticalcomponentgroup .v-textarea,
 .v-touchkit-verticalcomponentgroup .v-touchkit-numberfield,
 .v-touchkit-verticalcomponentgroup .v-datefield,
-.v-filterselect-input {
+.v-touchkit-verticalcomponentgroup .v-filterselect,
+.v-touchkit-verticalcomponentgroup .v-filterselect-input {
 	background: transparent;
 	margin:0;
 }
 
 .v-touchkit-verticalcomponentgroup .v-textfield,
-.v-touchkit-verticalcomponentgroup .v-touchkit-numberfield {
+.v-touchkit-verticalcomponentgroup .v-touchkit-numberfield,
+.v-touchkit-verticalcomponentgroup .v-filterselect,
+.v-touchkit-verticalcomponentgroup .v-filterselect-input {
 	height: 42px;
 }
 
 .v-touchkit-verticalcomponentgroup .v-textfield:focus,
 .v-touchkit-verticalcomponentgroup .v-textarea:focus,
-.v-touchkit-verticalcomponentgroup .v-touchkit-numberfield:focus {
+.v-touchkit-verticalcomponentgroup .v-touchkit-numberfield:focus,
+.v-touchkit-verticalcomponentgroup .v-filterselect-input:focus {
 	box-shadow: inset 0px -3px buttonColor;
   	outline: none;
 }
