@@ -21,7 +21,7 @@ import com.vaadin.server.BootstrapPageResponse;
 public class WebAppSettings implements BootstrapListener {
 
     private boolean webAppCapable = true;
-    private String statusBarStyle;
+    private String statusBarStyle = "black";
     private String startupImage;
 
     /**
