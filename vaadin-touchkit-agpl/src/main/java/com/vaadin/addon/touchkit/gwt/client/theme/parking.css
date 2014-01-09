@@ -2192,7 +2192,7 @@ select.v-select-select::-ms-expand {
 	padding-right: listLayoutMargin;
 }
 .v-touchkit-navbutton-back:after {
-	content: "\f060";
+	content: fa-icon-chevron-left;
 	left: borderRadius;
 }
 
