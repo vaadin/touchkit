@@ -321,6 +321,7 @@ public class DatePicker extends SimplePanel implements
             if (max != null) {
                 input.setAttribute("max", max);
             }
+            input.setDisabled(!enabled);
             getElement().appendChild(input);
             com.google.gwt.user.client.Element userElement = (com.google.gwt.user.client.Element) Element
                     .as(input);
