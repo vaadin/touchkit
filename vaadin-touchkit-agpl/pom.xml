@@ -150,7 +150,7 @@
 
 		<!-- May be overridden by the build system -->
 		<license.short.name>agpl</license.short.name>
-		<vaadin.version.maven>7.1-SNAPSHOT</vaadin.version.maven>
+		<vaadin.version.maven>7.2-SNAPSHOT</vaadin.version.maven>
 		<gpg.passphrase.file>empty.properties</gpg.passphrase.file>
 		<gpg.skip>true</gpg.skip>
 		<snapshot.repository.url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</snapshot.repository.url>
@@ -379,6 +379,12 @@
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-webapp</artifactId>
 			<version>${jetty.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>LATEST</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

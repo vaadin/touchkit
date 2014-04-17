@@ -277,6 +277,16 @@ public class TabBarView extends AbstractComponentContainer {
             return relatedComponent;
         }
 
+        @Override
+        public void setDefaultFocusComponent(Focusable component) {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
+
+        @Override
+        public Focusable getDefaultFocusComponent() {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
+
     }
 
     private static final Method SELECTED_TAB_CHANGE_METHOD;

@@ -60,21 +60,21 @@ class NavViewWithButtonsT extends NavigationView implements ClickListener {
 
         Toolbar toolbar = new Toolbar();
 
-        button2 = new Button(null);
+        button2 = new Button();
         button2.setIcon(new ThemeResource("../runo/icons/64/document-web.png"));
         toolbar.addComponent(button2);
 
-        button2 = new Button(null);
+        button2 = new Button();
         button2.setIcon(new ThemeResource(
                 "../runo/icons/64/document-delete.png"));
         toolbar.addComponent(button2);
-        button2 = new Button(null);
+        button2 = new Button();
         button2.setIcon(new ThemeResource("../runo/icons/64/document-edit.png"));
         toolbar.addComponent(button2);
-        button2 = new Button(null);
+        button2 = new Button();
         button2.setIcon(new ThemeResource("../runo/icons/64/document-doc.png"));
         toolbar.addComponent(button2);
-        button2 = new Button(null);
+        button2 = new Button();
         button2.setIcon(new ThemeResource("../runo/icons/64/document-ppt.png"));
         toolbar.addComponent(button2);
 

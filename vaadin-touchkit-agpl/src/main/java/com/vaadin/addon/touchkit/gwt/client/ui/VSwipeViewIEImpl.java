@@ -1,11 +1,11 @@
 package com.vaadin.addon.touchkit.gwt.client.ui;
 
-import com.google.gwt.event.dom.client.MsPointerDownEvent;
-import com.google.gwt.event.dom.client.MsPointerDownHandler;
-import com.google.gwt.event.dom.client.MsPointerMoveEvent;
-import com.google.gwt.event.dom.client.MsPointerMoveHandler;
-import com.google.gwt.event.dom.client.MsPointerUpEvent;
-import com.google.gwt.event.dom.client.MsPointerUpHandler;
+import com.vaadin.client.event.PointerDownEvent;
+import com.vaadin.client.event.PointerDownHandler;
+import com.vaadin.client.event.PointerMoveEvent;
+import com.vaadin.client.event.PointerMoveHandler;
+import com.vaadin.client.event.PointerUpEvent;
+import com.vaadin.client.event.PointerUpHandler;
 
 public class VSwipeViewIEImpl extends VSwipeView {
 
@@ -13,29 +13,29 @@ public class VSwipeViewIEImpl extends VSwipeView {
     protected void initHandlers() {
         super.initHandlers();
         getElement().getStyle().setProperty("msTouchAction", "pan-y");
-        addDomHandler(new MsPointerDownHandler() {
+        addDomHandler(new PointerDownHandler() {
 
             @Override
-            public void onPointerDown(MsPointerDownEvent event) {
+            public void onPointerDown(PointerDownEvent event) {
                 dragStart(event);
             }
-        }, MsPointerDownEvent.getType());
+        }, PointerDownEvent.getType());
 
-        addDomHandler(new MsPointerMoveHandler() {
+        addDomHandler(new PointerMoveHandler() {
 
             @Override
-            public void onPointerMove(MsPointerMoveEvent event) {
+            public void onPointerMove(PointerMoveEvent event) {
                 dragMove(event);
             }
-        }, MsPointerMoveEvent.getType());
+        }, PointerMoveEvent.getType());
 
-        addHandler(new MsPointerUpHandler() {
+        addHandler(new PointerUpHandler() {
 
             @Override
-            public void onPointerUp(MsPointerUpEvent event) {
+            public void onPointerUp(PointerUpEvent event) {
                 dragEnd(event);
             }
-        }, MsPointerUpEvent.getType());
+        }, PointerUpEvent.getType());
 
     }
 
