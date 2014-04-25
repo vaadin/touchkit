@@ -56,6 +56,11 @@ public class TestServer {
         // Constants.DEFAULT_WIDGETSET);
 
         File file = new File("./target/testwebapp");
+        if (!file.isDirectory()) {
+            System.err.println("Oops: " + file + " does not seem to exist!");
+            System.err.println("Did you remember to mvn vaadin:compile?");
+            return;
+        }
         context.setWar(file.getPath());
         context.setContextPath("/");
         context.addServlet(servletHolder, "/*");
@@ -67,6 +72,6 @@ public class TestServer {
 
         server.start();
         server.join();
-    }
 
+    }
 }

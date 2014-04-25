@@ -160,7 +160,7 @@
 		<Implementation-Title>Vaadin TouchKit</Implementation-Title>
 		<Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
 		<Vaadin-Addon>vaadin-touchkit-${license.short.name}-${project.version}.jar</Vaadin-Addon>
-		<jetty.version>8.1.7.v20120910</jetty.version>
+		<jetty.version>8.1.12.v20130726</jetty.version>
 	</properties>
 
 	<distributionManagement>
@@ -400,7 +400,6 @@
 			<version>2.1.v20100127</version>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

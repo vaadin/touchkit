@@ -1,25 +1,28 @@
 Development instructions for TouchKit add-on
 
-Coding convetions are the same as in core Vaadin.
+The project as checked out from git has two maven sub-projects; cval, agpl. 
+You can import these separately into Eclipse in addition to the root project.
 
-Actual add-on  code lives in  vaadin-touchkit-agpl project. That is  also mainly
-used  for development.  Integration test  apps are  in src/test/java  directory.
-TestServer has  main method  that can  be run  during development  straight from
-IDE. TestServer is embedded jetty that uses port 7777
+In the root, you can use
+% mvn package (produces jar/zip for agpl/cval in respective 'target' folders)
 
-Tests that  implement AbstractTouchKitTest  are listed automatically  on default
-screen and  can be  started by their  name (e.g. fully  qualified class  name or
-short name without com.vaadin.addon.touchkit.itest)
+Development is mainly done in the agpl project. There you can run
+% mvn vaadin:compile (compile the widgetset, must before running TestServer)
+% mvn install (installs the package in your local maven repo)
+% mvn vaadin:debug (starts gwt hosted mode, waits for remote debugger)
+% mvn vaadin:run-codeserver (starts "superdevmode" server)
 
-Essential maven targets that are needed during development:
+The TestServer class can be run as a Java application. It will start a Jetty
+server on http://localhost:7777 for testing and development.
 
-mvn install // builds a snapshot release of the addon to your local repo
-mvn gwt:compile // compiles widgetset for testing
-mvn gwt:debug // starts gwt hosted mode and waits for remote debugger to be attached
-mvn gwt:run-codeserver // starts "superdevmode" server
+Note that you must do mvn vaadin:compile before running the TestServer.
 
-Automated    integration   tests    are    kept   in    a   separate    project:
-vaadin-touchkit-integrationt-tests.  It builds  a  war file  and during  install
-phase also executes interation  test scripts automatically. TestBench (WebDriver
+Tests that implement AbstractTouchKitTest are listed automatically on default
+screen and can be started by their name (fully qualified or short name).
+
+Automated integration tests are kept in a separate project:
+vaadin-touchkit-integration-tests. It builds a war file and during install
+phase also executes integration test scripts automatically. TestBench (WebDriver
 based) is used to execute tests. See README in that project for more details.
 
+Coding conventions are the same as in core Vaadin.
