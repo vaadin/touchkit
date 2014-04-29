@@ -32,11 +32,17 @@ public class TestServer {
 
         WebAppContext context = new WebAppContext();
 
-        ServletHolder servletHolder = new ServletHolder(
-                TouchKitServlet.class);
+        ServletHolder servletHolder = new ServletHolder(TouchKitServlet.class);
         servletHolder.setInitParameter("UI", TouchkitTestUI.class.getName());
         servletHolder.setInitParameter("widgetset",
                 "com.vaadin.addon.touchkit.gwt.TouchKitWidgetSet");
+
+        // check for production mode argument
+        for (String arg : args) {
+            if ("productionMode".equalsIgnoreCase(arg)) {
+                servletHolder.setInitParameter("productionMode", "true");
+            }
+        }
 
         MimeTypes mimeTypes = context.getMimeTypes();
         mimeTypes.addMimeMapping("appcache", "text/cache-manifest");
@@ -53,12 +59,10 @@ public class TestServer {
         context.setWar(file.getPath());
         context.setContextPath("/");
         context.addServlet(servletHolder, "/*");
-        
-        
-        servletHolder = new ServletHolder(
-                RemoteLogger.class);
+
+        servletHolder = new ServletHolder(RemoteLogger.class);
         context.addServlet(servletHolder, "/remotelog");
-        
+
         server.setHandler(context);
 
         server.start();
