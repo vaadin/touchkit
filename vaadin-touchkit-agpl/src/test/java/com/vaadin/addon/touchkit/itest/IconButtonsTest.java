@@ -1,9 +1,9 @@
 package com.vaadin.addon.touchkit.itest;
 
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.extensions.TouchKitIcon;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Notification;
@@ -16,29 +16,27 @@ public class IconButtonsTest extends AbstractTouchKitIntegrationTest implements
     public IconButtonsTest() {
 
         setDescription("This is a button test");
-        
-        
-        
+
         VerticalComponentGroup componentGroup = new VerticalComponentGroup();
-        
+
         TextField textField = getTextFieldWithIcon();
         componentGroup.addComponent(textField);
-        
-        for(TouchKitIcon i : TouchKitIcon.values()) {
+
+        for (FontAwesome i : FontAwesome.values()) {
             NavigationButton button = new NavigationButton(i.name());
-            i.addTo(button);
+            button.setIcon(i);
             componentGroup.addComponent(button);
         }
-        
+
         addComponent(getTextFieldWithIcon());
-        
+
         addComponent(componentGroup);
-        
+
     }
 
     private TextField getTextFieldWithIcon() {
         TextField textField = new TextField();
-        TouchKitIcon.user.addTo(textField);
+        textField.setIcon(FontAwesome.USER);
         textField.setCaption("User");
         return textField;
     }

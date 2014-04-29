@@ -9,6 +9,7 @@ import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
+import com.vaadin.client.ui.Icon;
 
 public class VerticalComponentGroupWidget extends ComplexPanel {
 
@@ -41,17 +42,17 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
             return getLastChild().cast();
         }
 
-        public final boolean setCaption(String caption, String iconUrl,
+        public final boolean setCaption(String caption, Icon icon,
                 String captionStyleName) {
             DivElement captionElement = getFirstChildElement().cast();
 
-            boolean hasIcon = iconUrl != null;
+            boolean hasIcon = icon != null;
             boolean needsCaption = hasIcon
                     || (caption != null && !caption.isEmpty());
 
             if (needsCaption) {
-                String captionHtml = hasIcon ? "<img class=\"v-icon\" src=\""
-                        + iconUrl + "\"/>" : "";
+                String captionHtml = hasIcon ? icon.getElement().getString()
+                        : "";
                 captionHtml += caption == null ? "" : caption;
                 captionElement.setInnerHTML(captionHtml);
                 captionElement.getStyle().setProperty("display", null);
@@ -154,10 +155,12 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
      * 
      * @param widget
      */
+    @Override
     public void add(final Widget widget) {
         addWidget(widget, -1);
     }
 
+    @Override
     public boolean remove(Widget widget) {
         if (!widgets.contains(widget)) {
             return false;
@@ -181,10 +184,11 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
         }
     }
 
-    public void updateCaption(Widget child, String caption, String url,
+    public void updateCaption(Widget child, String caption, Icon icon,
             String width, String captionStyleName) {
         WidgetWrapper row = getWidgetWrapper(child);
-        boolean hasCaptionOrIcon = row.setCaption(caption, url, captionStyleName);
+        boolean hasCaptionOrIcon = row.setCaption(caption, icon,
+                captionStyleName);
         row.setFullSizeWidget(hasCaptionOrIcon && "100.0%".equals(width));
     }
 

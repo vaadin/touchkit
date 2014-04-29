@@ -9,7 +9,6 @@ import com.vaadin.addon.touchkit.ui.HorizontalButtonGroup;
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.ConnectorHierarchyChangeEvent;
 import com.vaadin.client.ui.AbstractComponentContainerConnector;
-import com.vaadin.shared.communication.URLReference;
 import com.vaadin.shared.ui.Connect;
 
 @Connect(HorizontalButtonGroup.class)
@@ -17,7 +16,6 @@ public class HorizontalButtonGroupConnector extends
         AbstractComponentContainerConnector {
 
     private HorizontalButtonGroupWidget theWidget;
-
 
     @Override
     public void onConnectorHierarchyChange(ConnectorHierarchyChangeEvent event) {
@@ -31,15 +29,7 @@ public class HorizontalButtonGroupConnector extends
         HorizontalButtonGroupWidget widget = (HorizontalButtonGroupWidget) getWidget();
         widget.clear();
         for (ComponentConnector connector : children) {
-            // FIXME
-            // URLReference urlRef = connector.getState().getIcon();
-            URLReference urlRef = null;
-            String caption = connector.getState().caption;
-            String url = "";
-            if (urlRef != null) {
-                url = urlRef.getURL();
-            }
-
+            // TODO #13688
             ((HorizontalButtonGroupWidget) getWidget()).add(connector
                     .getWidget());
         }

@@ -1,11 +1,352 @@
 /* This file contains essential stuff from base theme. */
+.v-assistive-device-only {
+	position: absolute;
+	top: -2000px;
+	left: -2000px;
+	width: 10px;
+	overflow: hidden;
+}
 
-.v-generated-body, .v-app {
+.v-vaadin-version:after {
+	content: "0.0.0.unversioned-development-build";
+}
+
+.v-generated-body,.v-app {
 	width: 100%;
 	height: 100%;
 	border: 0;
 	margin: 0;
 	overflow: hidden;
+}
+
+.v-modal-window-open {
+	overflow: hidden;
+}
+
+/* TouchKit has separate debug styles
+.v-debug-console {
+	background: #fff;
+	opacity: 0.9;
+	border: 1px solid #000;
+	font-family: sans-serif;
+}
+
+.v-debug-console-caption {
+	background: #000;
+	border-bottom: 1px solid grey;
+	color: white;
+	font-weight: bold;
+}
+
+.v-debug-console-content {
+	font-size: x-small;
+	overflow: auto;
+	white-space: pre;
+}
+
+.v-debug-console-content input {
+	font-size: xx-small;
+}
+
+.v-app .invalidlayout,.v-app .invalidlayout * {
+	background: #f99 !important;
+}
+
+@font-face {
+	font-family: "vdebugfont";
+	src: url(debug/fonts/font.eot);
+	src: url(debug/fonts/font.eot?#iefix) format("embedded-opentype"),
+		url(debug/fonts/font.woff) format("woff"), url(debug/fonts/font.ttf)
+		format("truetype"), url(debug/fonts/font.svg#fontawesome)
+		format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+
+.v-debugwindow [data-icon]:before,.v-debugwindow-menu [data-icon]:before
+	{
+	font-family: "vdebugfont";
+	content: attr(data-icon);
+	speak: none;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	font-style: normal;
+	vertical-align: text-bottom;
+}
+
+.v-debugwindow {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-moz-opacity: 0.8;
+	-webkit-opacity: 0.8;
+	opacity: 0.8;
+	color: #666;
+	font-family: Arial, Helvetica, Tahoma, Verdana, sans-serif;
+	font-size: 13px;
+}
+
+.v-debugwindow .v-debugwindow-handle {
+	position: absolute;
+	bottom: 0;
+	background-color: #fff;
+	-moz-opacity: 0;
+	-webkit-opacity: 0;
+	opacity: 0;
+	z-index: 1000;
+}
+
+.v-debugwindow .v-debugwindow-handle-sw {
+	width: 7px;
+	height: 7px;
+}
+
+.v-debugwindow .v-debugwindow-handle-se {
+	right: 0;
+	width: 14px;
+	height: 14px;
+}
+
+.v-debugwindow:hover {
+	-moz-opacity: 1;
+	-webkit-opacity: 1;
+	opacity: 1;
+}
+
+.v-debugwindow * {
+	font-size: inherit !important;
+}
+
+.v-debugwindow-size0,.v-debugwindow-menu .v-debugwindow-button-size0 {
+	font-size: 10px;
+}
+
+.v-debugwindow-size1,.v-debugwindow-menu .v-debugwindow-button-size1 {
+	font-size: 13px;
+}
+
+.v-debugwindow-size2,.v-debugwindow-menu .v-debugwindow-button-size2 {
+	font-size: 16px;
+}
+
+.v-debugwindow-head {
+	text-align: right;
+	background-color: transparent;
+}
+
+.v-debugwindow-tabs {
+	display: inline-block;
+	background-color: #fff;
+}
+
+.v-debugwindow-tab,.v-debugwindow-controls>* {
+	width: 2em;
+	border: none;
+	margin: 0;
+	line-height: 1.5em;
+	background-color: #fff;
+	color: #666;
+}
+
+.v-debugwindow-tab {
+	position: relative;
+	top: 1px;
+	border-width: 1px 0 1px 1px;
+	border-style: solid;
+	border-color: #666;
+	border-radius: 2px 2px 0 0;
+}
+
+.v-debugwindow-tab-selected {
+	color: #666;
+	background-color: #fff;
+	border-bottom: 1px solid #fff;
+}
+
+.v-debugwindow-controls {
+	position: relative;
+	top: 1px;
+	display: inline-block;
+	background-color: #fff;
+	border: 1px solid #666;
+	border-radius: 2px 2px 0 0;
+}
+
+.v-debugwindow-section-head {
+	text-align: left;
+	background-color: #fff;
+	border: 1px solid #666;
+	border-bottom: 1px solid #999;
+	box-shadow: 0px 0px 7px 0 rgba(55, 55, 55, 0.6);
+	min-height: 1.5em;
+	line-height: 1.5em;
+	padding-left: 5px;
+}
+
+.v-debugwindow-button {
+	border: none;
+	background-color: transparent;
+	color: #666;
+}
+
+.v-debugwindow-button:hover {
+	color: #000;
+	text-decoration: underline;
+}
+
+.v-debugwindow-button-active {
+	color: #666;
+	box-shadow: 1px 1px 3px 0 inset;
+}
+
+.v-debugwindow-content {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	box-shadow: 0px 0px 7px 0 rgba(55, 55, 55, 0.6);
+	background-color: #fff;
+	border: 1px solid #666;
+	border-top: none;
+}
+
+.v-debugwindow-menu {
+	background-color: #fff;
+	padding: 4px;
+	border: 1px solid #999;
+	border-top: none;
+	border-radius: 0 0 5px 5px;
+	box-shadow: 0px 0px 7px 0 rgba(55, 55, 55, 0.6);
+}
+
+.v-debugwindow-menu-content {
+	min-width: 100px;
+}
+
+.v-debugwindow-menu-content .v-debugwindow-button {
+	line-height: 22px;
+}
+
+.v-debugwindow-menu-content>div>.v-debugwindow-button {
+	width: 33%;
+}
+
+.v-debugwindow-row {
+	display: table-row;
+}
+
+// GWT can't parse nth-child 
+.v-debugwindow-row:nth-child(odd) {
+	background-color: rgba(0, 61, 255, 0.11);
+}
+
+.v-debugwindow-row>span {
+	display: table-cell;
+	padding: 4px;
+}
+
+.v-debugwindow-row.SEVERE {
+	color: #550000;
+	background-color: #FFC5C5;
+}
+
+.v-debugwindow-row.WARNING {
+	background-color: #FFFF99;
+}
+
+.v-debugwindow-row.FINE {
+	color: #777;
+}
+
+.v-debugwindow-row.FINER {
+	color: #888;
+}
+
+.v-debugwindow-row.FINEST {
+	color: #888;
+}
+
+.v-debugwindow-row>span.caption {
+	color: #999;
+	text-align: right;
+	white-space: nowrap;
+}
+
+.v-debugwindow-row>span.value {
+	width: 100%;
+}
+
+.v-debugwindow-selector>span.value {
+	width: 100%;
+}
+
+.v-debugwindow-selector :hover {
+	background: rgba(255, 32, 32, 0.5);
+}
+
+.v-debugwindow-log {
+	font-family: monospace;
+}
+
+.v-debugwindow-log .v-debugwindow-reset {
+	color: #fff;
+	background-color: #4C92ED;
+	padding: 4px;
+}
+
+.v-debugwindow-log .v-debugwindow-time {
+	text-align: right;
+	color: #999;
+}
+
+.v-debugwindow-log .v-debugwindow-message {
+	white-space: nowrap;
+	width: 100%;
+}
+
+.v-debugwindow-log .v-debugwindow-message:hover {
+	white-space: normal;
+	word-wrap: break-word;
+}
+
+.v-debugwindow-log .v-debugwindow-message em {
+	background-color: #C4E6F8;
+}
+
+.v-debugwindow-hierarchy .v-debugwindow-info {
+	padding: 1em;
+}
+
+.v-debugwindow-network .v-debugwindow-row {
+	display: block !important;
+}
+
+.v-debugwindow-network .v-debugwindow-row>span {
+	display: inline;
+}
+*/
+
+@font-face {
+	font-family: "FontAwesome";
+	/* paths adjusted for TouchKit */
+	src: url(VAADIN/themes/base/fonts/fontawesome-webfont.eot);
+	src: url(VAADIN/themes/base/fonts/fontawesome-webfont.eot?#iefix)
+		format("embedded-opentype"), url(VAADIN/themes/base/fonts/fontawesome-webfont.woff)
+		format("woff"), url(VAADIN/themes/base/fonts/fontawesome-webfont.ttf) format("truetype"),
+		url(VAADIN/themes/base/fonts/fontawesome-webfont.svg) format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+
+.FontAwesome {
+	font-family: "FontAwesome";
+	font-style: normal;
+	font-weight: normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	display: inline-block;
 }
 
 .v-widget {
@@ -25,17 +366,19 @@
 	overflow: hidden;
 }
 
-.v-absolutelayout-margin, .v-absolutelayout-canvas {
+.v-absolutelayout-margin,.v-absolutelayout-canvas {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
-.v-absolutelayout.v-has-height > div, .v-absolutelayout.v-has-height > div > div {
+.v-absolutelayout.v-has-height>div,.v-absolutelayout.v-has-height>div>div
+	{
 	height: 100%;
 }
 
-.v-absolutelayout.v-has-width > div, .v-absolutelayout.v-has-width > div > div {
+.v-absolutelayout.v-has-width>div,.v-absolutelayout.v-has-width>div>div
+	{
 	width: 100%;
 }
 
@@ -44,6 +387,7 @@
 	outline: none;
 	overflow: visible;
 	text-align: left;
+	font-size: 0;
 }
 
 .v-accordion-item {
@@ -73,6 +417,14 @@
 	width: 100%;
 }
 
+.v-browserframe {
+	font-size: 0;
+}
+
+.v-browserframe>span {
+	font-size: 16px;
+}
+
 /* COMMENTED OUT TO MAKE STUFF IN touchkit.css easier to implement 
 .v-button {
 	display: inline-block;
@@ -89,9 +441,11 @@
 	font: inherit;
 	font-size: 16px;
 	line-height: normal;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
 	-khtml-user-select: none;
 	-moz-user-select: none;
-	-ie-user-select: none;
+	-ms-user-select: none;
 	user-select: none;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -135,7 +489,7 @@
 	user-select: text;
 }
 
-.v-sa .v-button-link:focus {
+.v-sa  .v-button-link:focus {
 	outline-offset: -3px;
 }
 
@@ -146,7 +500,6 @@
 }
 
 */
-
 .v-nativebutton .v-icon {
 	vertical-align: middle;
 	margin-right: 3px;
@@ -213,16 +566,15 @@
 	padding-right: 1em;
 }
 
-.v-ie .v-nativebutton-link {
+.v-ie  .v-nativebutton-link {
 	padding: 0;
 }
 */
-
 .v-checkbox {
 	display: block;
 }
 
-.v-checkbox, .v-checkbox label, .v-checkbox input, .v-checkbox .v-icon {
+.v-checkbox,.v-checkbox label,.v-checkbox input,.v-checkbox .v-icon {
 	vertical-align: middle;
 	white-space: nowrap;
 }
@@ -253,7 +605,7 @@
 }
 /* TouchKit uses red ! as error indicator, base theme apparently nothing. */
 .v-errorindicator:before {
-	position:absolute;
+	position: absolute;
 	content: "!";
 	color: red;
 }
@@ -349,6 +701,7 @@
 
 .v-colorpicker-gradient .v-colorpicker-gradient-clicklayer {
 	background-color: white;
+	filter: alpha(opacity = 0);
 	opacity: 0;
 }
 
@@ -462,12 +815,379 @@
 	padding-right: 16px;
 }
 */
+/* No calendar support in TouchKit yet
+.v-calendar-nresize DIV DIV {
+	cursor: n-resize !important;
+}
 
+.v-calendar-sresize DIV DIV {
+	cursor: s-resize !important;
+}
+
+.v-calendar {
+	background-color: #fff;
+}
+
+.v-calendar-header-month,.v-calendar-header-week {
+	border-bottom: 1px solid #c1c1c1;
+}
+
+.v-calendar-header-day {
+	text-align: center;
+	color: #666;
+	font-size: 12px;
+	line-height: normal;
+}
+
+.v-calendar-header-week .v-calendar-header-day:hover {
+	cursor: pointer;
+	color: #222;
+}
+
+.v-calendar-header-day-today {
+	font-weight: bold;
+	color: #444;
+}
+
+.v-calendar-header-month td:first-child {
+	padding-left: 19px;
+}
+
+.v-calendar-header-week .v-calendar-back,.v-calendar-header-week .v-calendar-next
+	{
+	border: none;
+	padding: 0;
+	margin: 0;
+	height: 12px;
+	width: 12px;
+	overflow: hidden;
+	background: transparent url(calendar/img/arrows.png) no-repeat 50% 0;
+	opacity: 0.3;
+	//filter: alpha(opacity =   30); GWT does not like 
+	cursor: default;
+}
+
+.v-calendar-header-week .v-calendar-back:hover,.v-calendar-header-week .v-calendar-next:hover
+	{
+	opacity: 0.6;
+	//filter: alpha(opacity =   60); GWT does not like 
+}
+
+.v-calendar-header-week .v-calendar-back:active,.v-calendar-header-week .v-calendar-next:active
+	{
+	opacity: 1;
+	//filter: alpha(opacity =   100); GWT does not like
+}
+
+.v-calendar-header-week .v-calendar-next {
+	background-position: 50% -12px;
+}
+
+.v-calendar-month {
+	outline: none;
+}
+
+.v-calendar-week-numbers {
+	width: 20px;
+	border-right: 1px solid #ccc;
+}
+
+.v-calendar-week-number {
+	border: none;
+	background: transparent;
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
+	opacity: 0.5;
+	width: 20px;
+	text-align: center;
+	border-bottom: 1px solid #ddd;
+}
+
+.v-calendar-week-number:hover {
+	opacity: 1;
+}
+
+.v-calendar-month-day {
+	border-bottom: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	outline: none;
+}
+
+.v-calendar-month-day-today {
+	background-color: #e7f0f5;
+}
+
+.v-calendar-month-day-selected {
+	background-color: #fffee7;
+}
+
+.v-calendar-month-day-dragemphasis {
+	background-color: #a8a8a8;
+}
+
+.v-calendar-month-day-scrollable {
+	overflow-y: scroll;
+}
+
+.v-calendar-day-number {
+	height: 18px;
+	line-height: 18px;
+	font-size: 12px;
+	text-align: right;
+	padding-right: 3px;
+	white-space: nowrap;
+}
+
+.v-calendar-day-number:hover {
+	cursor: pointer;
+	opacity: 0.6;
+	// filter: alpha(opacity =   60); GWT does not like
+}
+
+.v-calendar-month .v-calendar-spacer,.v-calendar-month .v-calendar-bottom-spacer,.v-calendar-month .v-calendar-bottom-spacer-empty
+	{
+	height: 15px;
+	font-size: 11px;
+}
+
+.v-calendar-month .v-calendar-bottom-spacer:hover {
+	cursor: pointer;
+	opacity: 0.6;
+	// filter: alpha(opacity =   60);  GWT does not like
+}
+
+.v-calendar-event {
+	line-height: 14px;
+	font-size: 11px;
+	padding: 0 0 0 4px;
+	cursor: pointer;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	outline: none;
+}
+
+.v-calendar-event-month {
+	margin-bottom: 1px;
+	white-space: nowrap;
+}
+
+.v-calendar-event-month:hover {
+	text-decoration: underline;
+}
+
+.v-calendar-event-all-day {
+	background: #999;
+	display: block;
+	margin-left: -2px;
+}
+
+div.v-calendar-event-all-day {
+	color: #fff;
+	height: 14px;
+}
+
+.v-calendar-event-continued-from {
+	margin-left: 0;
+}
+
+.v-calendar-event-start {
+	-webkit-border-top-left-radius: 6px;
+	-webkit-border-bottom-left-radius: 6px;
+	-moz-border-radius-topleft: 6px;
+	-moz-border-radius-bottomleft: 6px;
+	border-top-left-radius: 6px;
+	border-bottom-left-radius: 6px;
+	margin-left: 0;
+}
+
+.v-calendar-event-end {
+	-webkit-border-top-right-radius: 6px;
+	-webkit-border-bottom-right-radius: 6px;
+	-moz-border-radius-topright: 6px;
+	-moz-border-radius-bottomright: 6px;
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px;
+}
+
+.v-calendar-week-wrapper {
+	position: relative;
+}
+
+.v-calendar-times {
+	width: 51px;
+}
+
+.v-calendar-time {
+	padding: 0 8px 7px 0;
+	margin-top: -7px;
+	text-align: right;
+	font-size: 11px;
+	color: #666;
+	border-right: 1px solid #ccc;
+}
+
+.v-calendar-weekly-longevents {
+	border-left: 1px solid #ccc;
+	border-bottom: 2px solid #bbb;
+	margin-left: 50px;
+}
+
+.v-calendar-weekly-longevents .v-calendar-datecell {
+	border-right: 1px solid #ccc;
+	padding: 1px 0 0;
+}
+
+.v-calendar-weekly-longevents .v-calendar-event {
+	height: 14px;
+	margin-bottom: 1px;
+}
+
+.v-calendar-weekly-longevents .v-calendar-event:hover {
+	text-decoration: underline;
+}
+
+.v-calendar-day-times {
+	border-right: 1px solid #ccc;
+	outline: none;
+}
+
+.v-calendar-day-times .v-datecellslot,.v-calendar-day-times .v-datecellslot-even
+	{
+	border-bottom: 1px solid #ccc;
+}
+
+.v-calendar-day-times .v-datecellslot-even {
+	border-bottom-color: #eee;
+}
+
+.v-calendar-day-times .v-daterange {
+	background-color: #a8a8a8;
+}
+
+.v-calendar-day-times .v-reserved {
+	background-color: #FF3333;
+}
+
+.v-calendar-day-times .dragemphasis {
+	background-color: #a8a8a8;
+}
+
+.v-calendar-week-wrapper .v-calendar-event {
+	padding: 0;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	margin-top: -1px;
+}
+
+.v-calendar-event-caption {
+	position: absolute;
+	z-index: 1;
+	top: 2px;
+	left: 4px;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	line-height: normal;
+}
+
+.v-calendar-event-content {
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	border: 1px solid #777;
+	background: #eee;
+	opacity: 0.8;
+	// filter: alpha(opacity =   80); GWT does not like
+	height: 14px;
+}
+
+.v-calendar-current-time {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 1px;
+	overflow: hidden;
+	background: #5a6c86;
+	opacity: 0.6;
+	// filter: alpha(opacity =   60); GWT does not like
+	z-index: 2;
+}
+
+.v-calendar-event-resizetop {
+	position: absolute;
+	cursor: n-resize;
+	height: 5%;
+	min-height: 3px;
+	top: 0;
+	width: 100%;
+	z-index: 1;
+}
+
+.v-calendar-event-resizebottom {
+	position: absolute;
+	cursor: s-resize;
+	height: 5%;
+	min-height: 3px;
+	bottom: 0;
+	width: 100%;
+	z-index: 1;
+}
+
+.v-calendar-month-sizedheight .v-calendar-month-day {
+	height: 100px;
+}
+
+.v-calendar-month-sizedwidth .v-calendar-month-day {
+	width: 100px;
+}
+
+.v-calendar-header-month-Hsized .v-calendar-header-day {
+	width: 101px;
+}
+
+.v-calendar-header-month-Hsized td:first-child {
+	padding-left: 21px;
+}
+
+.v-calendar-header-day-Hsized {
+	width: 200px;
+}
+
+.v-calendar-week-numbers-Vsized .v-calendar-week-number {
+	height: 100px;
+	line-height: 100px;
+}
+
+.v-calendar-week-wrapper-Vsized {
+	height: 400px;
+	overflow-x: hidden !important;
+}
+
+.v-calendar-times-Vsized .v-calendar-time {
+	height: 38px;
+}
+
+.v-calendar-times-Hsized .v-calendar-time {
+	width: 42px;
+}
+
+.v-calendar-day-times-Vsized .v-datecellslot,.v-calendar-day-times-Vsized .v-datecellslot-even
+	{
+	height: 18px;
+}
+
+.v-calendar-day-times-Hsized,.v-calendar-day-times-Hsized .v-datecellslot,.v-calendar-day-times-Hsized .v-datecellslot-even
+	{
+	width: 200px;
+}
+*/
 .v-app {
 	height: 100%;
 }
 
-e.v-app, .v-window, .v-popupview-popup, .v-label, .v-caption {
+.v-app,.v-window,.v-popupview-popup,.v-label,.v-caption {
 	cursor: default;
 }
 
@@ -480,7 +1200,6 @@ body e.v-app-loading {
 	height: 100%;
 }
 */
-
 .v-ui {
 	height: 100%;
 	width: 100%;
@@ -493,16 +1212,17 @@ body e.v-app-loading {
 	border-top: 1px solid transparent;
 }
 
-.v-ui:active, .v-ui:focus {
+.v-ui:active,.v-ui:focus {
 	outline: none;
 }
 
-e.v-app select, .v-window select {
+.v-app select,.v-window select {
 	margin: 0;
 }
 
 .v-disabled {
 	opacity: 0.3;
+	/* filter: alpha(opacity = 30); GWT does not like */
 	cursor: default;
 }
 
@@ -510,11 +1230,11 @@ e.v-app select, .v-window select {
 	cursor: default;
 }
 
-* html .v-disabled {
+* html  .v-disabled {
 	zoom: 1;
 }
 
-* + html .v-disabled {
+*+html  .v-disabled {
 	zoom: 1;
 }
 
@@ -562,7 +1282,6 @@ e.v-app select, .v-window select {
 	background: #fff;
 }
 */
-
 .v-contextmenu .gwt-MenuItem {
 	cursor: pointer;
 	vertical-align: middle;
@@ -601,7 +1320,8 @@ e.v-app select, .v-window select {
 	white-space: nowrap;
 }
 
-.v-label h1, .v-label h2, .v-label h3, .v-label h4, .v-label h5, .v-label h6 {
+.v-label h1,.v-label h2,.v-label h3,.v-label h4,.v-label h5,.v-label h6
+	{
 	line-height: normal;
 }
 
@@ -634,11 +1354,15 @@ e.v-app select, .v-window select {
 }
 
 */
+input::-ms-clear {
+	display: none;
+}
 
 .v-drag-element {
 	z-index: 60000;
 	position: absolute !important;
 	opacity: 0.5;
+	/* filter: alpha(opacity = 50); GWT does not like */
 	cursor: default;
 }
 
@@ -648,8 +1372,20 @@ e.v-app select, .v-window select {
 
 .v-scrollable {
 	overflow: auto;
+	font-size: 0;
 	line-height: normal;
+}
+
+.v-ff  .v-scrollable {
+	font-size: 16px;
+}
+
+.v-ios.v-webkit  .v-scrollable {
 	-webkit-overflow-scrolling: touch;
+}
+
+.v-ios5.v-webkit  .v-scrollable {
+	-webkit-overflow-scrolling: none;
 }
 
 .v-overlay-container {
@@ -674,12 +1410,12 @@ e.v-app select, .v-window select {
 	padding-left: 12px;
 }
 */
-
 .v-gridlayout.v-layout-margin-top {
 	padding-top: 24px;
 }
 
-.v-gridlayout, .v-verticallayout, .v-horizontallayout {
+.v-gridlayout,.v-verticallayout,.v-horizontallayout {
+	font-size: 0;
 	line-height: normal;
 }
 
@@ -705,7 +1441,7 @@ e.v-app select, .v-window select {
 	height: 6px;
 }
 
-.v-vertical, .v-horizontal {
+.v-vertical,.v-horizontal {
 	display: inline-block;
 }
 
@@ -713,7 +1449,7 @@ div.v-layout.v-horizontal.v-widget {
 	white-space: nowrap;
 }
 
-.v-layout.v-vertical > .v-expand, .v-layout.v-horizontal > .v-expand {
+.v-layout.v-vertical>.v-expand,.v-layout.v-horizontal>.v-expand {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -721,13 +1457,13 @@ div.v-layout.v-horizontal.v-widget {
 	height: 100%;
 }
 
-.v-slot, .v-spacing {
+.v-slot,.v-spacing {
 	display: inline-block;
 	white-space: normal;
 	vertical-align: top;
 }
 
-.v-vertical > .v-slot:after {
+.v-vertical>.v-slot:after {
 	display: inline-block;
 	clear: both;
 	width: 0;
@@ -736,26 +1472,31 @@ div.v-layout.v-horizontal.v-widget {
 	line-height: 0;
 }
 
-.v-vertical > .v-slot, .v-vertical > .v-expand > .v-slot {
+.v-vertical>.v-slot,.v-vertical>.v-expand>.v-slot {
 	display: block;
 	clear: both;
 }
 
-.v-horizontal > .v-slot, .v-horizontal > .v-expand > .v-slot {
+.v-horizontal>.v-slot,.v-horizontal>.v-expand>.v-slot {
 	height: 100%;
 }
 
-.v-vertical > .v-spacing, .v-vertical > .v-expand > .v-spacing {
+.v-horizontal>.v-expand>.v-slot {
+	position: relative;
+}
+
+.v-vertical>.v-spacing,.v-vertical>.v-expand>.v-spacing {
 	width: 0;
 	display: block;
 	clear: both;
 }
 
-.v-horizontal > .v-spacing, .v-horizontal > .v-expand > .v-spacing {
+.v-horizontal>.v-spacing,.v-horizontal>.v-expand>.v-spacing {
 	height: 0;
 }
 
-.v-align-middle:before, .v-align-bottom:before, .v-expand > .v-align-middle:before, .v-expand > .v-align-bottom:before {
+.v-align-middle:before,.v-align-bottom:before,.v-expand>.v-align-middle:before,.v-expand>.v-align-bottom:before
+	{
 	content: "";
 	display: inline-block;
 	height: 100%;
@@ -763,19 +1504,19 @@ div.v-layout.v-horizontal.v-widget {
 	width: 0;
 }
 
-.v-align-middle, .v-align-bottom {
+.v-align-middle,.v-align-bottom {
 	white-space: nowrap;
 }
 
-.v-align-middle > .v-widget, .v-align-bottom > .v-widget {
+.v-align-middle>.v-widget,.v-align-bottom>.v-widget {
 	display: inline-block;
 }
 
-.v-align-middle, .v-align-middle > .v-widget {
+.v-align-middle,.v-align-middle>.v-widget {
 	vertical-align: middle;
 }
 
-.v-align-bottom, .v-align-bottom > .v-widget {
+.v-align-bottom,.v-align-bottom>.v-widget {
 	vertical-align: bottom;
 }
 
@@ -783,7 +1524,7 @@ div.v-layout.v-horizontal.v-widget {
 	text-align: center;
 }
 
-.v-align-center > .v-widget {
+.v-align-center>.v-widget {
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -792,11 +1533,11 @@ div.v-layout.v-horizontal.v-widget {
 	text-align: right;
 }
 
-.v-align-right > .v-widget {
+.v-align-right>.v-widget {
 	margin-left: auto;
 }
 
-.v-has-caption, .v-has-caption > .v-caption {
+.v-has-caption,.v-has-caption>.v-caption {
 	display: inline-block;
 }
 
@@ -805,32 +1546,32 @@ div.v-layout.v-horizontal.v-widget {
 	vertical-align: middle;
 }
 
-.v-caption-on-left, .v-caption-on-right {
+.v-caption-on-left,.v-caption-on-right {
 	white-space: nowrap;
 }
 
-.v-caption-on-top > .v-caption, .v-caption-on-bottom > .v-caption {
+.v-caption-on-top>.v-caption,.v-caption-on-bottom>.v-caption {
 	display: block;
 }
 
-.v-caption-on-left > .v-caption {
+.v-caption-on-left>.v-caption {
 	padding-right: 0.5em;
 }
 
-.v-caption-on-right > .v-caption {
+.v-caption-on-right>.v-caption {
 	vertical-align: top;
 }
 
-.v-caption-on-left > .v-widget, .v-caption-on-right > .v-widget {
+.v-caption-on-left>.v-widget,.v-caption-on-right>.v-widget {
 	display: inline-block;
 	vertical-align: middle;
 }
 
-.v-has-caption.v-has-width > .v-widget {
+.v-has-caption.v-has-width>.v-widget {
 	width: 100% !important;
 }
 
-.v-has-caption.v-has-height > .v-widget {
+.v-has-caption.v-has-height>.v-widget {
 	height: 100% !important;
 }
 
@@ -843,22 +1584,23 @@ div.v-layout.v-horizontal.v-widget {
 	overflow: hidden;
 }
 */
-
 div.v-csslayout {
 	display: block;
 }
 
-.v-csslayout-margin, .v-csslayout-container {
+.v-csslayout-margin,.v-csslayout-container {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
-.v-has-width > .v-csslayout-margin, .v-has-width > .v-csslayout-margin > .v-csslayout-container {
+.v-has-width>.v-csslayout-margin,.v-has-width>.v-csslayout-margin>.v-csslayout-container
+	{
 	width: 100%;
 }
 
-.v-has-height > .v-csslayout-margin, .v-has-height > .v-csslayout-margin > .v-csslayout-container {
+.v-has-height>.v-csslayout-margin,.v-has-height>.v-csslayout-margin>.v-csslayout-container
+	{
 	height: 100%;
 }
 
@@ -879,11 +1621,6 @@ div.v-csslayout {
 	padding-right: 12px;
 }
 */
-
-.v-customcomponent {
-	overflow: hidden;
-}
-
 .v-customlayout {
 	overflow: hidden;
 }
@@ -902,13 +1639,12 @@ div.v-csslayout {
 	content: "\200B";
 }
 */
-
 .v-datefield-button {
 	cursor: pointer;
 	vertical-align: top;
 }
 
-.v-has-width > input.v-datefield-textfield {
+.v-has-width>input.v-datefield-textfield {
 	width: 100%;
 }
 
@@ -926,7 +1662,7 @@ div.v-csslayout {
 }
 
 .v-datefield-calendarpanel td {
-	padding: 2px;
+	padding: 0;
 	margin: 0;
 }
 
@@ -949,7 +1685,7 @@ div.v-csslayout {
 	font-size: 11.7px;
 }
 
-.v-datefield-calendarpanel-day, .v-datefield-calendarpanel-day-today {
+.v-datefield-calendarpanel-day,.v-datefield-calendarpanel-day-today {
 	cursor: pointer;
 }
 
@@ -957,20 +1693,21 @@ div.v-csslayout {
 	border: 1px solid #ddd;
 }
 
-.v-disabled .v-datefield-calendarpanel-day, .v-disabled .v-datefield-calendarpanel-day-today {
+.v-disabled .v-datefield-calendarpanel-day,.v-disabled .v-datefield-calendarpanel-day-today,.v-disabled.v-datefield-popupcalendar .v-datefield-button
+	{
 	cursor: default;
 }
 
-.v-datefield-calendarpanel-day-disabled {
+.v-datefield-calendarpanel-day-disabled,.v-datefield-calendarpanel-day-outside-range
+	{
 	cursor: default;
 	opacity: 0.5;
 }
 
 .v-datefield-calendarpanel-day-selected {
 	cursor: default;
-	background: buttonColor;
+	background: #333;
 	color: #fff;
-	display:block;
 }
 
 .v-datefield-calendarpanel-day-focused {
@@ -1013,13 +1750,12 @@ div.v-csslayout {
 	content: "\200B";
 }
 */
-
 .v-inline-datefield-button {
 	cursor: pointer;
 	vertical-align: top;
 }
 
-.v-has-width > input.v-inline-datefield-textfield {
+.v-has-width>input.v-inline-datefield-textfield {
 	width: 100%;
 }
 
@@ -1037,7 +1773,7 @@ div.v-csslayout {
 }
 
 .v-inline-datefield-calendarpanel td {
-	padding: 2px;
+	padding: 0;
 	margin: 0;
 }
 
@@ -1060,7 +1796,8 @@ div.v-csslayout {
 	font-size: 11.7px;
 }
 
-.v-inline-datefield-calendarpanel-day, .v-inline-datefield-calendarpanel-day-today {
+.v-inline-datefield-calendarpanel-day,.v-inline-datefield-calendarpanel-day-today
+	{
 	cursor: pointer;
 }
 
@@ -1068,12 +1805,19 @@ div.v-csslayout {
 	border: 1px solid #ddd;
 }
 
-.v-disabled .v-inline-datefield-calendarpanel-day, .v-disabled .v-inline-datefield-calendarpanel-day-today {
+.v-disabled .v-inline-datefield-calendarpanel-day,.v-disabled .v-inline-datefield-calendarpanel-day-today,.v-disabled.v-inline-datefield-popupcalendar .v-inline-datefield-button
+	{
 	cursor: default;
 }
 
-.v-inline-datefield-calendarpanel-day-disabled {
+.v-inline-datefield-calendarpanel-day-disabled,.v-inline-datefield-calendarpanel-day-outside-range
+	{
 	cursor: default;
+	opacity: 0.5;
+}
+
+.v-inline-datefield-calendarpanel-prevyear button.outside-range,.v-inline-datefield-calendarpanel-nextyear button.outside-range,.v-inline-datefield-calendarpanel-prevmonth button.outside-range,.v-inline-datefield-calendarpanel-nextmonth button.outside-range
+	{
 	opacity: 0.5;
 }
 
@@ -1081,10 +1825,10 @@ div.v-csslayout {
 	cursor: default;
 	background: buttonColor;
 	color: #fff;
-	display:block;
 }
 
 .v-inline-datefield-calendarpanel-day-focused {
+	outline: 1px dotted black;
 }
 
 .v-inline-datefield-calendarpanel-day-offmonth {
@@ -1136,9 +1880,9 @@ div.v-csslayout {
 	height: 100%;
 	opacity: 0;
 	background-color: cyan;
+	filter: alpha(opacity=0);
 }
 */
-
 .v-ddwrapper-over {
 	border: 2px solid #1d9dff;
 	background-color: #bcdcff;
@@ -1155,7 +1899,8 @@ div.v-csslayout {
 	padding: 2px;
 }
 
-.v-app .v-ddwrapper-over-top, .v-window .v-ddwrapper-over-top, .v-popupview-popup .v-ddwrapper-over-top {
+.v-app .v-ddwrapper-over-top,.v-window .v-ddwrapper-over-top,.v-popupview-popup .v-ddwrapper-over-top
+	{
 	border: none;
 	border-top: 2px solid #1d9dff;
 	background-color: transparent;
@@ -1166,7 +1911,8 @@ div.v-csslayout {
 	border-radius: 0;
 }
 
-.v-app .v-ddwrapper-over-bottom, .v-window .v-ddwrapper-over-bottom, .v-popupview-popup .v-ddwrapper-over-bottom {
+.v-app .v-ddwrapper-over-bottom,.v-window .v-ddwrapper-over-bottom,.v-popupview-popup .v-ddwrapper-over-bottom
+	{
 	border: none;
 	border-bottom: 2px solid #1d9dff;
 	background-color: transparent;
@@ -1177,7 +1923,8 @@ div.v-csslayout {
 	border-radius: 0;
 }
 
-.v-app .v-ddwrapper-over-left, .v-window .v-ddwrapper-over-left, .v-popupview-popup .v-ddwrapper-over-left {
+.v-app .v-ddwrapper-over-left,.v-window .v-ddwrapper-over-left,.v-popupview-popup .v-ddwrapper-over-left
+	{
 	border: none;
 	border-left: 2px solid #1d9dff;
 	background-color: transparent;
@@ -1188,7 +1935,8 @@ div.v-csslayout {
 	border-radius: 0;
 }
 
-.v-app .v-ddwrapper-over-right, .v-window .v-ddwrapper-over-right, .v-popupview-popup .v-ddwrapper-over-right {
+.v-app .v-ddwrapper-over-right,.v-window .v-ddwrapper-over-right,.v-popupview-popup .v-ddwrapper-over-right
+	{
 	border: none;
 	border-right: 2px solid #1d9dff;
 	background-color: transparent;
@@ -1199,7 +1947,8 @@ div.v-csslayout {
 	border-radius: 0;
 }
 
-.v-ddwrapper, .v-ddwrapper-over, .v-app .v-ddwrapper-over-top, .v-window .v-ddwrapper-over-top, .v-popupview-popup .v-ddwrapper-over-top, .v-app .v-ddwrapper-over-bottom, .v-window .v-ddwrapper-over-bottom, .v-popupview-popup .v-ddwrapper-over-bottom, .v-app .v-ddwrapper-over-left, .v-window .v-ddwrapper-over-left, .v-popupview-popup .v-ddwrapper-over-left, .v-app .v-ddwrapper-over-right, .v-window .v-ddwrapper-over-right, .v-popupview-popup .v-ddwrapper-over-right {
+.v-ddwrapper,.v-ddwrapper-over,.v-app .v-ddwrapper-over-top,.v-window .v-ddwrapper-over-top,.v-popupview-popup .v-ddwrapper-over-top,.v-app .v-ddwrapper-over-bottom,.v-window .v-ddwrapper-over-bottom,.v-popupview-popup .v-ddwrapper-over-bottom,.v-app .v-ddwrapper-over-left,.v-window .v-ddwrapper-over-left,.v-popupview-popup .v-ddwrapper-over-left,.v-app .v-ddwrapper-over-right,.v-window .v-ddwrapper-over-right,.v-popupview-popup .v-ddwrapper-over-right
+	{
 	border-color: rgba(0, 109, 232, 0.6);
 }
 
@@ -1214,12 +1963,11 @@ div.v-csslayout {
 	background: transparent url(common/img/drag-slot-dot.png) no-repeat;
 }
 */
-
 .v-ddwrapper-over-bottom:after {
 	margin-top: -2px;
 }
 
-.v-ddwrapper-over-left:before, .v-ddwrapper-over-right:before {
+.v-ddwrapper-over-left:before,.v-ddwrapper-over-right:before {
 	background-position: 0 -6px;
 	margin-top: -2px;
 	margin-left: -4px;
@@ -1254,7 +2002,8 @@ div.v-csslayout {
 	border-bottom: none;
 }
 
-.no-horizontal-drag-hints .v-ddwrapper-over-left:before, .no-horizontal-drag-hints .v-ddwrapper-over-right:before, .no-vertical-drag-hints .v-ddwrapper-over-top:before, .no-vertical-drag-hints .v-ddwrapper-over-bottom:after {
+.no-horizontal-drag-hints .v-ddwrapper-over-left:before,.no-horizontal-drag-hints .v-ddwrapper-over-right:before,.no-vertical-drag-hints .v-ddwrapper-over-top:before,.no-vertical-drag-hints .v-ddwrapper-over-bottom:after
+	{
 	display: none;
 }
 
@@ -1262,11 +2011,11 @@ div.v-csslayout {
 	display: inline-block;
 }
 
-.v-formlayout.v-has-width > table {
+.v-formlayout.v-has-width>table {
 	width: 100%;
 }
 
-.v-formlayout.v-has-height > table {
+.v-formlayout.v-has-height>table {
 	height: 100%;
 }
 
@@ -1283,7 +2032,7 @@ div.v-csslayout {
 	white-space: nowrap;
 }
 
-.v-formlayout-errorcell, .v-formlayout-captioncell {
+.v-formlayout-errorcell,.v-formlayout-captioncell {
 	width: 1px;
 }
 
@@ -1291,27 +2040,33 @@ div.v-csslayout {
 	overflow: visible;
 }
 
-.v-formlayout-spacing > tbody > .v-formlayout-row > .v-formlayout-captioncell, .v-formlayout-spacing > tbody > .v-formlayout-row > .v-formlayout-contentcell, .v-formlayout-spacing > tbody > .v-formlayout-row > .v-formlayout-errorcell {
+.v-formlayout-spacing>tbody>.v-formlayout-row>.v-formlayout-captioncell,.v-formlayout-spacing>tbody>.v-formlayout-row>.v-formlayout-contentcell,.v-formlayout-spacing>tbody>.v-formlayout-row>.v-formlayout-errorcell
+	{
 	padding-top: 6px;
 }
 
-.v-formlayout-spacing > tbody > .v-formlayout-firstrow > .v-formlayout-captioncell, .v-formlayout-spacing > tbody > .v-formlayout-firstrow > .v-formlayout-contentcell, .v-formlayout-spacing > tbody > .v-formlayout-firstrow > .v-formlayout-errorcell {
+.v-formlayout-spacing>tbody>.v-formlayout-firstrow>.v-formlayout-captioncell,.v-formlayout-spacing>tbody>.v-formlayout-firstrow>.v-formlayout-contentcell,.v-formlayout-spacing>tbody>.v-formlayout-firstrow>.v-formlayout-errorcell
+	{
 	padding-top: 0;
 }
 
-.v-formlayout-margin-top > tbody > .v-formlayout-firstrow > .v-formlayout-captioncell, .v-formlayout-margin-top > tbody > .v-formlayout-firstrow > .v-formlayout-contentcell, .v-formlayout-margin-top > tbody > .v-formlayout-firstrow > .v-formlayout-errorcell {
+.v-formlayout-margin-top>tbody>.v-formlayout-firstrow>.v-formlayout-captioncell,.v-formlayout-margin-top>tbody>.v-formlayout-firstrow>.v-formlayout-contentcell,.v-formlayout-margin-top>tbody>.v-formlayout-firstrow>.v-formlayout-errorcell
+	{
 	padding-top: 12px;
 }
 
-.v-formlayout-margin-bottom > tbody > .v-formlayout-lastrow > .v-formlayout-captioncell, .v-formlayout-margin-bottom > tbody > .v-formlayout-lastrow > .v-formlayout-contentcell, .v-formlayout-margin-bottom > tbody > .v-formlayout-lastrow > .v-formlayout-errorcell {
+.v-formlayout-margin-bottom>tbody>.v-formlayout-lastrow>.v-formlayout-captioncell,.v-formlayout-margin-bottom>tbody>.v-formlayout-lastrow>.v-formlayout-contentcell,.v-formlayout-margin-bottom>tbody>.v-formlayout-lastrow>.v-formlayout-errorcell
+	{
 	padding-bottom: 12px;
 }
 
-.v-formlayout-margin-left > tbody > .v-formlayout-row > .v-formlayout-captioncell {
+.v-formlayout-margin-left>tbody>.v-formlayout-row>.v-formlayout-captioncell
+	{
 	padding-left: 12px;
 }
 
-.v-formlayout-margin-right > tbody > .v-formlayout-row > .v-formlayout-contentcell {
+.v-formlayout-margin-right>tbody>.v-formlayout-row>.v-formlayout-contentcell
+	{
 	padding-right: 12px;
 }
 
@@ -1349,7 +2104,7 @@ div.v-csslayout {
 	overflow: hidden;
 }
 
-.v-gridlayout-spacing, .v-gridlayout-spacing-off {
+.v-gridlayout-spacing,.v-gridlayout-spacing-off {
 	padding-left: 0;
 	padding-top: 0;
 }
@@ -1394,7 +2149,7 @@ div.v-csslayout {
 	width: 200px;
 }
 
-.v-app-loginpage .v-button, .v-app-loginpage .v-button {
+.v-app-loginpage .v-button,.v-app-loginpage .v-button {
 	float: left;
 }
 
@@ -1438,7 +2193,8 @@ div.v-csslayout {
 	display: block;
 }
 
-.v-menubar-submenu .v-menubar-menuitem *, .v-menubar-submenu .v-menubar-menuitem-caption * {
+.v-menubar-submenu .v-menubar-menuitem *,.v-menubar-submenu .v-menubar-menuitem-caption *
+	{
 	white-space: nowrap;
 }
 
@@ -1456,7 +2212,8 @@ div.v-csslayout {
 	font-size: 11.7px;
 }
 
-.v-menubar-menuitem-disabled, .v-menubar span.v-menubar-menuitem-disabled:hover, .v-menubar span.v-menubar-menuitem-disabled:focus, .v-menubar span.v-menubar-menuitem-disabled:active {
+.v-menubar-menuitem-disabled,.v-menubar span.v-menubar-menuitem-disabled:hover,.v-menubar span.v-menubar-menuitem-disabled:focus,.v-menubar span.v-menubar-menuitem-disabled:active
+	{
 	color: #999;
 }
 
@@ -1478,11 +2235,12 @@ div.v-csslayout {
 	overflow: hidden;
 }
 
-.v-menubar .v-icon, .v-menubar-submenu .v-icon {
+.v-menubar .v-icon,.v-menubar-submenu .v-icon {
 	margin-right: 3px;
 }
 
-.v-menubar:focus, .v-menubar-popup:focus, .v-menubar-popup .popupContent:focus, .v-menubar-popup .popupContent .v-menubar-submenu:focus {
+.v-menubar:focus,.v-menubar-popup:focus,.v-menubar-popup .popupContent:focus,.v-menubar-popup .popupContent .v-menubar-submenu:focus
+	{
 	outline: none;
 }
 
@@ -1510,9 +2268,10 @@ div.v-csslayout {
 	max-width: 85%;
 }
 */
-
-.v-Notification h1, .v-Notification p, .v-Notification-error h1, .v-Notification-error p, .v-Notification-warning h1, .v-Notification-warning p {
-	margin: 0 1em;
+.v-Notification h1,.v-Notification p,.v-Notification-error h1,.v-Notification-error p,.v-Notification-warning h1,.v-Notification-warning p
+	{
+	display: inline;
+	margin: 0 0.5em 0 0;
 }
 
 .v-Notification-warning {
@@ -1534,6 +2293,7 @@ div.v-csslayout {
 .v-Notification-system {
 	background-color: red;
 	opacity: 0.7;
+	/* filter: alpha(opacity = 70); GWT does not like */
 }
 
 .v-Notification-system h1 {
@@ -1541,7 +2301,7 @@ div.v-csslayout {
 	margin: 0;
 }
 
-.v-orderedlayout, .v-horizontallayout, .v-verticallayout {
+.v-orderedlayout,.v-horizontallayout,.v-verticallayout {
 	position: relative;
 }
 
@@ -1567,17 +2327,18 @@ div.v-csslayout {
 	padding-left: 6px;
 }
 */
-
-.v-orderedlayout-spacing-off, .v-horizontallayout-spacing-off, .v-verticallayout-spacing-off {
+.v-orderedlayout-spacing-off,.v-horizontallayout-spacing-off,.v-verticallayout-spacing-off
+	{
 	padding-top: 0;
 	padding-left: 0;
 }
 
-.v-horizontallayout-slot, .v-verticallayout-slot {
+.v-horizontallayout-slot,.v-verticallayout-slot {
 	position: absolute;
 }
 
-.v-panel, .v-panel-caption, .v-panel-content, .v-panel-deco, .v-panel-light, .v-panel-caption-light, .v-panel-content-light, .v-panel-deco-light {
+.v-panel,.v-panel-caption,.v-panel-content,.v-panel-deco,.v-panel-light,.v-panel-caption-light,.v-panel-content-light,.v-panel-deco-light
+	{
 	outline: none;
 	text-align: left;
 }
@@ -1599,7 +2360,7 @@ div.v-csslayout {
 .v-panel-caption {
 	white-space: nowrap;
 	overflow: hidden;
-	font-weight: 500;
+	font-weight: bold;
 }
 
 .v-panel-nocaption {
@@ -1612,11 +2373,11 @@ div.v-csslayout {
 	box-sizing: border-box;
 }
 
-.v-panel.v-has-width > .v-panel-content {
+.v-panel.v-has-width>.v-panel-content {
 	width: 100%;
 }
 
-.v-panel.v-has-height > .v-panel-content {
+.v-panel.v-has-height>.v-panel-content {
 	height: 100%;
 }
 
@@ -1637,20 +2398,50 @@ div.v-csslayout {
 	background: transparent url(common/img/ajax-loader-medium.gif) no-repeat 50%;
 }
 */
-
-.v-progressindicator,
 .v-progressbar {
 	width: 150px;
 }
 
-.v-progressindicator-wrapper,
 .v-progressbar-wrapper {
 	height: 7px;
 	border: 1px solid #ddd;
 }
 
-.v-progressindicator-indicator,
 .v-progressbar-indicator {
+	height: 7px;
+	background: #ddd;
+}
+
+div.v-progressbar-indeterminate {
+	height: 20px;
+	width: 20px;
+	background: #fff url(common/img/ajax-loader-medium.gif) no-repeat 50%;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+}
+
+.v-progressbar-indeterminate .v-progressbar-wrapper,.v-progressbar-indeterminate .v-progressbar-indicator,.v-progressbar-indeterminate-disabled .v-progressbar-wrapper,.v-progressbar-indeterminate-disabled .v-progressbar-indicator
+	{
+	display: none;
+}
+
+div.v-progressbar-indeterminate-disabled {
+	height: 20px;
+	width: 20px;
+	background: transparent;
+}
+
+.v-progressindicator {
+	width: 150px;
+}
+
+.v-progressindicator-wrapper {
+	height: 7px;
+	border: 1px solid #ddd;
+}
+
+.v-progressindicator-indicator {
 	height: 7px;
 	background: #ddd;
 }
@@ -1665,15 +2456,8 @@ div.v-progressindicator-indeterminate {
 	-moz-border-radius: 4px;
 }
 */
-
-.v-progressindicator-indeterminate .v-progressindicator-wrapper, 
-.v-progressindicator-indeterminate .v-progressindicator-indicator, 
-.v-progressindicator-indeterminate-disabled .v-progressindicator-wrapper, 
-.v-progressindicator-indeterminate-disabled .v-progressindicator-indicator,
-.v-progressbar-indeterminate .v-progressbar-wrapper, 
-.v-progressbar-indeterminate .v-progressbar-indicator, 
-.v-progressbar-indeterminate-disabled .v-progressbar-wrapper, 
-.v-progressbar-indeterminate-disabled .v-progressbar-indicator {
+.v-progressindicator-indeterminate .v-progressindicator-wrapper,.v-progressindicator-indeterminate .v-progressindicator-indicator,.v-progressindicator-indeterminate-disabled .v-progressindicator-wrapper,.v-progressindicator-indeterminate-disabled .v-progressindicator-indicator
+	{
 	display: none;
 }
 
@@ -1681,6 +2465,10 @@ div.v-progressindicator-indeterminate-disabled {
 	height: 20px;
 	width: 20px;
 	background: transparent;
+}
+
+.v-select {
+	text-align: left;
 }
 
 .v-select-optiongroup .v-select-option {
@@ -1699,6 +2487,9 @@ div.v-progressindicator-indeterminate-disabled {
 	zoom: 1;
 }
 */
+.v-select-select {
+	display: block;
+}
 
 .v-select-twincol {
 	white-space: nowrap;
@@ -1715,7 +2506,7 @@ div.v-progressindicator-indeterminate-disabled {
 }
 
 .v-select-twincol-selections {
-	font-weight: 500;
+	font-weight: bold;
 }
 
 .v-select-twincol-caption-right {
@@ -1745,6 +2536,108 @@ div.v-progressindicator-indeterminate-disabled {
 
 .v-select-twincol-buttons .v-button {
 	float: none;
+}
+
+.v-filterselect {
+	white-space: nowrap;
+	text-align: left;
+	display: inline-block;
+	padding-right: 1em;
+}
+
+.v-filterselect .v-icon {
+	float: left;
+}
+
+.v-app .v-filterselect-input,.v-window .v-filterselect-input,.v-popupview-popup .v-filterselect-input
+	{
+	margin: 0;
+	float: left;
+	-webkit-border-radius: 0px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.v-filterselect-prompt .v-filterselect-input {
+	color: #999;
+	font-style: italic;
+}
+
+.v-filterselect-button {
+	display: inline-block;
+	cursor: pointer;
+	width: 1em;
+	margin-right: -1em;
+	height: 1em;
+	background: transparent url(common/img/sprites.png) no-repeat -5px -8px;
+}
+
+.v-filterselect.v-readonly .v-filterselect-button {
+	display: none;
+}
+
+.v-filterselect.v-readonly,.v-filterselect.v-readonly .v-filterselect-input
+	{
+	background: transparent;
+}
+
+.v-filterselect-suggestpopup {
+	background: #fff;
+	border: 1px solid #eee;
+}
+
+.v-filterselect-suggestmenu table {
+	border-collapse: collapse;
+	border: none;
+	vertical-align: top;
+}
+
+.v-filterselect-suggestmenu .gwt-MenuItem {
+	white-space: nowrap;
+}
+
+.v-filterselect-suggestmenu .gwt-MenuItem .v-icon {
+	margin-right: 3px;
+	vertical-align: middle;
+}
+
+.v-filterselect-suggestmenu .gwt-MenuItem span {
+	vertical-align: middle;
+}
+
+.v-filterselect-suggestmenu .gwt-MenuItem-selected {
+	background: #333;
+	color: #fff;
+}
+
+.v-filterselect-nextpage,.v-filterselect-nextpage-off,.v-filterselect-prevpage-off,.v-filterselect-prevpage
+	{
+	width: 100%;
+	background: #aaa;
+	text-align: center;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.v-filterselect-nextpage-off,.v-filterselect-prevpage-off {
+	color: #666;
+	opacity: 0.5;
+	/* filter: alpha(opacity = 50);  GWT does not like */
+	cursor: default;
+}
+
+.v-filterselect-nextpage-off span,.v-filterselect-prevpage-off span {
+	cursor: default;
+}
+
+.v-filterselect-status {
+	white-space: nowrap;
+	text-align: center;
+}
+
+.v-filterselect-no-input .v-filterselect-input {
+	cursor: default;
 }
 
 .v-shadow {
@@ -1843,7 +2736,6 @@ div.v-progressindicator-indeterminate-disabled {
 	background: transparent url(shadow/img/bottom-right.png);
 }
 */
-
 .v-slider {
 	margin: 5px 0;
 }
@@ -1865,7 +2757,6 @@ div.v-progressindicator-indeterminate-disabled {
 	font-size: 0;
 }
 */
-
 .v-slider-vertical {
 	width: 2px;
 	height: auto;
@@ -1894,7 +2785,7 @@ div.v-progressindicator-indeterminate-disabled {
 	color: #fff;
 	font-size: 11px;
 	line-height: 13px;
-	font-weight: 500;
+	font-weight: bold;
 	font-family: Arial, Helvetica, sans-serif;
 	border-radius: 4px;
 	-webkit-border-radius: 4px;
@@ -1903,7 +2794,7 @@ div.v-progressindicator-indeterminate-disabled {
 	text-shadow: 0 1px 0 #000;
 }
 
-.v-splitpanel-horizontal, .v-splitpanel-vertical {
+.v-splitpanel-horizontal,.v-splitpanel-vertical {
 	overflow: hidden;
 }
 
@@ -1938,6 +2829,256 @@ div.v-progressindicator-indeterminate-disabled {
 
 .v-disabled .v-splitpanel-vsplitter div {
 	cursor: default;
+}
+
+.v-table {
+	overflow: hidden;
+	text-align: left;
+}
+
+.v-table-header-wrap {
+	overflow: hidden;
+	border: 1px solid #aaa;
+	border-bottom: none;
+	background: #efefef;
+}
+
+.v-table-header table,.v-table-table {
+	border-spacing: 0;
+	border-collapse: separate;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.v-table-table {
+	font-size: 16px;
+}
+
+.v-table-header td {
+	padding: 0;
+}
+
+.v-table-header-cell,.v-table-header-cell-asc,.v-table-header-cell-desc
+	{
+	cursor: pointer;
+}
+
+.v-table.v-disabled .v-table-header-cell,.v-table.v-disabled .v-table-header-cell-asc,.v-table.v-disabled .v-table-header-cell-desc
+	{
+	cursor: default;
+}
+
+.v-table-footer-wrap {
+	overflow: hidden;
+	border: 1px solid #aaa;
+	border-top: none;
+	background: #efefef;
+}
+
+.v-table-footer table {
+	border-spacing: 0;
+	border-collapse: collapse;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.v-table-footer td {
+	padding: 0;
+	border-right: 1px solid #aaa;
+}
+
+.v-table-footer-cell {
+	cursor: pointer;
+}
+
+.v-table-footer-container {
+	float: right;
+	padding-right: 6px;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.v-table-resizer {
+	display: block;
+	height: 1.2em;
+	float: right;
+	background: #aaa;
+	cursor: e-resize;
+	cursor: col-resize;
+	width: 1px;
+	overflow: hidden;
+}
+
+.v-table.v-disabled .v-table-resizer {
+	cursor: default;
+}
+
+.v-table-caption-container {
+	overflow: hidden;
+	white-space: nowrap;
+	margin-left: 6px;
+}
+
+.v-table-caption-container-align-right {
+	float: right;
+}
+
+.v-table-sort-indicator {
+	width: 0px;
+	height: 1.2em;
+	float: right;
+}
+
+.v-table-header-cell-asc .v-table-sort-indicator,.v-table-header-cell-desc .v-table-sort-indicator
+	{
+	width: 16px;
+	height: 1.2em;
+	float: right;
+}
+
+.v-table-header-cell-asc .v-table-sort-indicator {
+	background: transparent url(common/img/sprites.png) no-repeat right 6px;
+}
+
+.v-table-header-cell-desc .v-table-sort-indicator {
+	background: transparent url(common/img/sprites.png) no-repeat right
+		-10px;
+}
+
+.v-table-caption-container-align-center {
+	text-align: center;
+}
+
+.v-table-caption-container-align-right {
+	text-align: right;
+}
+
+.v-table-caption-container .v-icon,.v-table-header-drag .v-icon {
+	vertical-align: middle;
+}
+
+.v-table-body {
+	border: 1px solid #aaa;
+}
+
+.v-table-row-spacer {
+	height: 10px;
+	overflow: hidden;
+}
+
+.v-table-row,.v-table-row-odd {
+	background: #fff;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+}
+
+.v-table-generated-row {
+	background: #efefef;
+}
+
+.v-table-body-noselection .v-table-row,.v-table-body-noselection .v-table-row-odd
+	{
+	cursor: default;
+}
+
+.v-table .v-selected {
+	background: #999;
+	color: #fff;
+}
+
+.v-table-cell-content {
+	white-space: nowrap;
+	overflow: hidden;
+	padding: 0 6px;
+	border-right: 1px solid #aaa;
+}
+
+.v-table-cell-wrapper {
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.v-table-cell-wrapper-align-center {
+	text-align: center;
+}
+
+.v-table-cell-wrapper-align-right {
+	text-align: right;
+}
+
+.v-table-column-selector {
+	float: right;
+	background: transparent url(common/img/sprites.png) no-repeat 4px -37px;
+	margin: -1.2em 0 0 0;
+	height: 1.2em;
+	width: 14px;
+	position: relative;
+	cursor: pointer;
+}
+
+.v-table.v-disabled .v-table-column-selector {
+	cursor: default;
+}
+
+.v-table-focus-slot-left {
+	border-left: 2px solid #999;
+	float: none;
+	margin-bottom: -1.2em;
+	width: auto;
+	background: transparent;
+	border-right: 1px solid #aaa;
+}
+
+.v-table-focus-slot-right {
+	border-right: 2px solid #999;
+	margin-left: -2px;
+}
+
+.v-table-header-drag {
+	position: absolute;
+	background: #efefef;
+	border: 1px solid #eee;
+	opacity: 0.9;
+	/* filter: alpha(opacity = 90); GWT does not like */
+	margin-top: 20px;
+	z-index: 30000;
+}
+
+.v-table-header-drag .v-icon {
+	vertical-align: middle;
+}
+
+.v-table-scrollposition {
+	width: 160px;
+	background: #eee;
+	border: 1px solid #aaa;
+}
+
+.v-table-scrollposition span {
+	display: block;
+	text-align: center;
+}
+
+.v-table-body:focus,.v-table-body-wrapper:focus {
+	outline: none;
+}
+
+.v-table-body.focused {
+	border-color: #388ddd;
+}
+
+.v-table-focus .v-table-cell-content {
+	border-top: 1px dotted #0066bd;
+	border-bottom: 1px dotted #0066bd;
+}
+
+.v-table-focus .v-table-cell-wrapper {
+	margin-top: -1px;
+	margin-bottom: -1px;
 }
 
 .v-off {
@@ -1986,8 +3127,7 @@ div.v-progressindicator-indeterminate-disabled {
 	margin-top: -2px;
 }
 */
-
-.v-tabsheet, .v-tabsheet-content, .v-tabsheet-deco {
+.v-tabsheet,.v-tabsheet-content,.v-tabsheet-deco {
 	outline: none;
 	text-align: left;
 }
@@ -2006,7 +3146,7 @@ div.v-progressindicator-indeterminate-disabled {
 	outline: none;
 }
 
-.v-tabsheet-tabitemcell, .v-tabsheet-spacertd {
+.v-tabsheet-tabitemcell,.v-tabsheet-spacertd {
 	margin: 0;
 	padding: 0;
 	vertical-align: bottom;
@@ -2023,7 +3163,7 @@ div.v-progressindicator-indeterminate-disabled {
 	padding: 0.2em 0;
 }
 
-.v-tabsheet-hidetabs > .v-tabsheet-tabcontainer {
+.v-tabsheet-hidetabs>.v-tabsheet-tabcontainer {
 	display: none;
 }
 
@@ -2037,7 +3177,8 @@ div.v-progressindicator-indeterminate-disabled {
 	display: none;
 }
 
-.v-tabsheet-scrollerPrev, .v-tabsheet-scrollerNext, .v-tabsheet-scrollerPrev-disabled, .v-tabsheet-scrollerNext-disabled {
+.v-tabsheet-scrollerPrev,.v-tabsheet-scrollerNext,.v-tabsheet-scrollerPrev-disabled,.v-tabsheet-scrollerNext-disabled
+	{
 	border: 1px solid #aaa;
 	background: #fff;
 	width: 12px;
@@ -2045,12 +3186,12 @@ div.v-progressindicator-indeterminate-disabled {
 	cursor: pointer;
 }
 
-.v-tabsheet-scrollerPrev-disabled, .v-tabsheet-scrollerNext-disabled {
+.v-tabsheet-scrollerPrev-disabled,.v-tabsheet-scrollerNext-disabled {
 	opacity: 0.5;
 	cursor: default;
 }
 
-.v-tabsheet-tabs .v-caption, .v-tabsheet-tabs .v-caption span {
+.v-tabsheet-tabs .v-caption,.v-tabsheet-tabs .v-caption span {
 	white-space: nowrap;
 }
 
@@ -2091,7 +3232,8 @@ div.v-progressindicator-indeterminate-disabled {
 	cursor: inherit;
 }
 
-.v-tabsheet.v-disabled .v-tabsheet-tabitem, .v-tabsheet-tabitemcell-disabled .v-tabsheet-tabitem {
+.v-tabsheet.v-disabled .v-tabsheet-tabitem,.v-tabsheet-tabitemcell-disabled .v-tabsheet-tabitem
+	{
 	cursor: default;
 }
 
@@ -2102,6 +3244,14 @@ div.v-progressindicator-indeterminate-disabled {
 
 .v-tabsheet-tabitem-selected .v-caption {
 	cursor: default;
+}
+
+.v-tabsheet-tabitem-focus .v-captiontext {
+	text-decoration: underline;
+}
+
+.v-tabsheet-tabitem-selected.v-tabsheet-tabitem-focus .v-captiontext {
+	text-decoration: inherit;
 }
 
 .v-tabsheet-content {
@@ -2134,26 +3284,26 @@ div.v-progressindicator-indeterminate-disabled {
 	white-space: pre-wrap;
 }
 
-input.v-textfield-prompt, textarea.v-textarea-prompt {
+input.v-textfield-prompt,textarea.v-textarea-prompt {
 	color: #999;
 	font-style: italic;
 }
 
-input.v-textfield-readonly, textarea.v-textarea-readonly {
+input.v-textfield-readonly,textarea.v-textarea-readonly {
 	background: transparent;
 	border: none;
 	resize: none;
 }
 
-input.v-disabled, textarea.v-disabled {
+input.v-disabled,textarea.v-disabled {
 	resize: none;
 }
 
-input.v-textfield-readonly:focus, textarea.v-textarea-readonly:focus {
+input.v-textfield-readonly:focus,textarea.v-textarea-readonly:focus {
 	outline: none;
 }
 
-input:focus, textarea:focus {
+.v-sa  input:focus,.v-sa  textarea:focus {
 	outline-width: medium;
 }
 
@@ -2219,7 +3369,6 @@ input:focus, textarea:focus {
 }
 
 */
-
 .v-tree {
 	text-align: left;
 	padding: 1px 0;
@@ -2232,7 +3381,6 @@ input:focus, textarea:focus {
 	padding: 1px 0;
 }
 */
-
 .v-tree-node-caption:focus {
 	outline: none;
 }
@@ -2246,7 +3394,6 @@ div.v-tree-node-leaf {
 	background: transparent url(common/img/sprites.png) no-repeat -5px -10px;
 }
 */
-
 .v-tree-node-caption {
 	margin-left: 1em;
 }
@@ -2259,7 +3406,7 @@ div.v-tree-node-leaf {
 	white-space: nowrap;
 }
 
-.v-tree-node-caption span, .v-tree-node-caption .v-icon {
+.v-tree-node-caption span,.v-tree-node-caption .v-icon {
 	vertical-align: middle;
 }
 
@@ -2294,7 +3441,6 @@ div.v-tree-node-leaf {
 	background: transparent url(common/img/drag-slot-dot.png);
 }
 */
-
 .v-tree .v-tree-node-drag-bottom:after {
 	margin-top: -2px;
 }
@@ -2309,7 +3455,6 @@ div.v-tree-node-leaf {
 	margin-top: -2px;
 }
 */
-
 .v-tree .v-tree-node-drag-top {
 	background-position: 5px -38px;
 }
@@ -2331,7 +3476,8 @@ div.v-tree-node-leaf {
 	background-color: rgba(169, 209, 255, 0.6);
 }
 
-.v-tree .v-tree-node-caption-drag-center div, .v-tree .v-tree-node-drag-top, .v-tree .v-tree-node-drag-bottom {
+.v-tree .v-tree-node-caption-drag-center div,.v-tree .v-tree-node-drag-top,.v-tree .v-tree-node-drag-bottom
+	{
 	border-color: rgba(0, 109, 232, 0.6);
 }
 
@@ -2402,13 +3548,13 @@ div.v-tree-node-leaf {
 	background: url(treetable/img/arrow-down.png) right top no-repeat;
 }
 */
-
 .v-treetable .v-checkbox {
 	display: inline-block;
 	padding-bottom: 4px;
 }
 
-.v-treetable .v-table-row .v-table-cell-content, .v-treetable .v-table-row-odd .v-table-cell-content {
+.v-treetable .v-table-row .v-table-cell-content,.v-treetable .v-table-row-odd .v-table-cell-content
+	{
 	position: relative;
 	z-index: 10;
 }
@@ -2422,7 +3568,8 @@ div.v-tree-node-leaf {
 	z-index: 1;
 }
 
-.v-treetable .v-table-body .v-table-table .v-table-row-animating, .v-treetable .v-table-body .v-table-table .v-table-row-animating .v-table-cell-content {
+.v-treetable .v-table-body .v-table-table .v-table-row-animating,.v-treetable .v-table-body .v-table-table .v-table-row-animating .v-table-cell-content
+	{
 	background: transparent;
 }
 
@@ -2437,11 +3584,13 @@ div.v-treetable-animation-clone-wrapper {
 	background-color: #fff;
 }
 
-div.v-treetable-animation-clone-wrapper table.v-treetable-animation-clone {
+div.v-treetable-animation-clone-wrapper table.v-treetable-animation-clone
+	{
 	background-color: #fff;
 }
 
-div table.v-treetable-animation-clone tr.v-table-row, div table.v-treetable-animation-clone tr.v-table-row-odd, div table.v-treetable-animation-clone tr.v-table-row td.v-table-cell-content, div table.v-treetable-animation-clone tr.v-table-row-odd td.v-table-cell-content {
+div table.v-treetable-animation-clone tr.v-table-row,div table.v-treetable-animation-clone tr.v-table-row-odd,div table.v-treetable-animation-clone tr.v-table-row td.v-table-cell-content,div table.v-treetable-animation-clone tr.v-table-row-odd td.v-table-cell-content
+	{
 	visibility: visible;
 }
 
@@ -2460,9 +3609,9 @@ div table.v-treetable-animation-clone tr.v-table-row, div table.v-treetable-anim
 	display: inline-block;
 }
 */
-
 .v-upload-immediate input {
 	opacity: 0;
+	/* filter: alpha(opacity = 0); GWT does not like */
 	z-index: 2;
 	position: absolute;
 	right: 0;
@@ -2490,11 +3639,13 @@ div table.v-treetable-animation-clone tr.v-table-row, div table.v-treetable-anim
 	box-sizing: border-box;
 }
 
-.v-window.v-has-width > div.popupContent, .v-window.v-has-width .v-window-wrap, .v-window.v-has-width .v-window-contents, .v-window.v-has-width .v-window-contents > div {
+.v-window.v-has-width>div.popupContent,.v-window.v-has-width .v-window-wrap,.v-window.v-has-width .v-window-contents,.v-window.v-has-width .v-window-contents>div
+	{
 	width: 100%;
 }
 
-.v-window.v-has-height > div.popupContent, .v-window.v-has-height .v-window-wrap, .v-window.v-has-height .v-window-contents, .v-window.v-has-height .v-window-contents > div {
+.v-window.v-has-height>div.popupContent,.v-window.v-has-height .v-window-wrap,.v-window.v-has-height .v-window-contents,.v-window.v-has-height .v-window-contents>div
+	{
 	height: 100%;
 }
 
@@ -2507,12 +3658,16 @@ div table.v-treetable-animation-clone tr.v-table-row, div table.v-treetable-anim
 	box-sizing: border-box;
 }
 
-.v-window-outerheader, .v-window-draggingCurtain {
+.v-window-outerheader,.v-window-draggingCurtain {
 	cursor: move;
 }
 
 .v-window-header {
-	font-weight: 500;
+	font-weight: bold;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ie-user-select: none;
+	user-select: none;
 }
 
 div.v-window-header {
@@ -2527,7 +3682,7 @@ div.v-window-header {
 	vertical-align: middle;
 }
 
-.v-window-contents > div {
+.v-window-contents>div {
 	outline: none;
 }
 
@@ -2548,7 +3703,7 @@ div.v-window-header {
 	right: 0;
 }
 
-.v-window-resizebox, .v-window-resizingCurtain {
+.v-window-resizebox,.v-window-resizingCurtain {
 	cursor: se-resize;
 }
 
@@ -2556,20 +3711,36 @@ div.v-window-header {
 	height: 0;
 }
 
-.v-window-resizebox-disabled {
+.v-window-resizebox-disabled,.v-window-restorebox-disabled,.v-window-maximizebox-disabled
+	{
 	cursor: default;
 	display: none;
 }
 
-.v-window-closebox {
+.v-window-closebox,.v-window-restorebox,.v-window-maximizebox {
 	position: absolute;
 	top: 0;
 	right: 0;
 	width: 1em;
 	height: 1em;
-	background: red;
 	cursor: pointer;
 	overflow: hidden;
+}
+
+.v-window-maximizebox,.v-window-restorebox {
+	right: 1.1em;
+}
+
+.v-window-closebox {
+	background: red;
+}
+
+.v-window-maximizebox {
+	background: blue;
+}
+
+.v-window-restorebox {
+	background: yellow;
 }
 
 .v-window-modalitycurtain {
@@ -2580,6 +3751,7 @@ div.v-window-header {
 	position: fixed;
 	width: 100%;
 	height: 100%;
+	/* filter: alpha(opacity = 50); GWT does not like */
 }
 
 /* add modern CSS version (#11458)

@@ -3,10 +3,8 @@ package com.vaadin.addon.touchkit.ui;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 
-import com.vaadin.addon.touchkit.gwt.client.theme.StyleNames;
 import com.vaadin.addon.touchkit.gwt.client.vcom.navigation.NavigationButtonRpc;
 import com.vaadin.addon.touchkit.gwt.client.vcom.navigation.NavigationButtonSharedState;
-import com.vaadin.server.Resource;
 import com.vaadin.shared.Connector;
 import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.Button;
@@ -229,25 +227,6 @@ public class NavigationButton extends AbstractComponent {
     public void setTargetViewCaption(String targetViewCaption) {
         getState().setTargetViewCaption(targetViewCaption);
         markAsDirty();
-    }
-
-    /**
-     * Sets the icon for the button
-     * 
-     * @param icon
-     *            the icon
-     */
-    public void setIcon(Resource icon) {
-        getState();
-        setResource(NavigationButtonSharedState.MY_ICON_RESOURCE, icon);
-    }
-
-    /**
-     * @return the icon for the button or null if none set.
-     */
-    public Resource getIcon() {
-        getState();
-        return getResource(NavigationButtonSharedState.MY_ICON_RESOURCE);
     }
 
     /**

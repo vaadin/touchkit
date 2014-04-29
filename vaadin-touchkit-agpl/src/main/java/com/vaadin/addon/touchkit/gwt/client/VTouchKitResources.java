@@ -3,7 +3,6 @@ package com.vaadin.addon.touchkit.gwt.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.DataResource;
-import com.google.gwt.resources.client.DataResource.DoNotEmbed;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.resources.client.ImageResource.ImageOptions;
 import com.google.gwt.resources.client.ImageResource.RepeatStyle;
@@ -13,16 +12,8 @@ public interface VTouchKitResources extends ClientBundle {
     public static final VTouchKitResources INSTANCE = GWT
             .create(VTouchKitResources.class);
 
-    @Source({"theme/base.css","theme/icon-defs.css","theme/parking.css"})
+    @Source({ "theme/base.css", "theme/icon-defs.css", "theme/parking.css" })
     public ParkingStyles css();
-    
-    @Source("theme/FontAwesome.woff")
-    @DoNotEmbed
-    DataResource fontAwesome();
-
-    @Source("theme/FontAwesome.otf")
-    @DoNotEmbed
-    DataResource fontAwesomeOtf();
 
     /*
      * Popover images
@@ -40,5 +31,5 @@ public interface VTouchKitResources extends ClientBundle {
      */
     @Source("theme/img/drag-slot-dot.png")
     public DataResource dragSlotDotImage();
-    
+
 }

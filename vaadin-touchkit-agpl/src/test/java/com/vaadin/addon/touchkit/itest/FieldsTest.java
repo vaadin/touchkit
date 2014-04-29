@@ -3,7 +3,6 @@ package com.vaadin.addon.touchkit.itest;
 import java.util.Date;
 
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.extensions.TouchKitIcon;
 import com.vaadin.addon.touchkit.gwt.client.theme.StyleNames;
 import com.vaadin.addon.touchkit.ui.DatePicker;
 import com.vaadin.addon.touchkit.ui.EmailField;
@@ -15,6 +14,7 @@ import com.vaadin.addon.touchkit.ui.Popover;
 import com.vaadin.addon.touchkit.ui.Switch;
 import com.vaadin.addon.touchkit.ui.Toolbar;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -34,11 +34,11 @@ import com.vaadin.ui.Upload;
 public class FieldsTest extends AbstractTouchKitIntegrationTest implements
         ClickListener {
 
-    private Switch switchComponent;
-    private OptionGroup optionGroup;
-    private TextField textField;
-    private TextArea textArea;
-    private Toolbar toolbar;
+    private final Switch switchComponent;
+    private final OptionGroup optionGroup;
+    private final TextField textField;
+    private final TextArea textArea;
+    private final Toolbar toolbar;
 
     public FieldsTest() {
         setDescription("Test various fields in typical setup.");
@@ -64,7 +64,7 @@ public class FieldsTest extends AbstractTouchKitIntegrationTest implements
         NavigationButton navigationButton = new NavigationButton("Navi button");
         navigationButton.setDescription("Stuff that matters");
         g.addComponent(navigationButton);
-        TouchKitIcon.home.addTo(navigationButton);
+        navigationButton.setIcon(FontAwesome.HOME);
 
         textField = new TextField("Notification title");
         textField.setWidth("100%");
@@ -77,10 +77,10 @@ public class FieldsTest extends AbstractTouchKitIntegrationTest implements
 
         DatePicker datePicker = new DatePicker("Html5Date");
         datePicker.setValue(new Date());
-        
+
         DateField dateField = new DateField("Amaz VaadinDF");
         dateField.setValue(new Date());
-        
+
         g.addComponents(textField, textArea, numberField, datePicker, dateField);
 
         Upload upload = new Upload();
@@ -105,16 +105,16 @@ public class FieldsTest extends AbstractTouchKitIntegrationTest implements
         NativeSelect select = new NativeSelect("Different type");
         select.setContainerDataSource(optionGroup);
         select.setPropertyDataSource(optionGroup);
-        
+
         ComboBox comboBox = new ComboBox("Combodough");
         comboBox.setContainerDataSource(optionGroup);
 
-        g2.addComponents(select,comboBox);
+        g2.addComponents(select, comboBox);
 
         Label label = new Label("This is some example text that is "
                 + "written here for demonstration purposes only.");
         g.addComponent(label);
-        
+
         CssLayout cssLayout = new CssLayout(g, g2);
 
         group = new HorizontalButtonGroup();
@@ -134,20 +134,20 @@ public class FieldsTest extends AbstractTouchKitIntegrationTest implements
         toolbar = new Toolbar();
 
         button = new Button();
-        TouchKitIcon.home.addTo(button);
+        button.setIcon(FontAwesome.HOME);
         toolbar.addComponent(button);
 
         button = new Button(null, this);
-        TouchKitIcon.save.addTo(button);
+        button.setIcon(FontAwesome.FLOPPY_O);
         toolbar.addComponent(button);
         button = new Button();
-        TouchKitIcon.share.addTo(button);
+        button.setIcon(FontAwesome.SHARE);
         toolbar.addComponent(button);
         button = new Button();
-        TouchKitIcon.print.addTo(button);
+        button.setIcon(FontAwesome.PRINT);
         toolbar.addComponent(button);
         button = new Button();
-        TouchKitIcon.sitemap.addTo(button);
+        button.setIcon(FontAwesome.SITEMAP);
         toolbar.addComponent(button);
 
         navigationView.setToolbar(toolbar);

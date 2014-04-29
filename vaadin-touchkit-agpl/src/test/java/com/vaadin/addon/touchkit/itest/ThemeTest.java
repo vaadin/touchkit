@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.Locale;
 
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.extensions.TouchKitIcon;
 import com.vaadin.addon.touchkit.gwt.client.theme.StyleNames;
 import com.vaadin.addon.touchkit.ui.HorizontalButtonGroup;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
@@ -17,6 +16,7 @@ import com.vaadin.addon.touchkit.ui.SwipeView;
 import com.vaadin.addon.touchkit.ui.Switch;
 import com.vaadin.addon.touchkit.ui.TabBarView;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Page;
 import com.vaadin.server.UserError;
 import com.vaadin.shared.ui.datefield.Resolution;
@@ -60,16 +60,16 @@ public class ThemeTest extends AbstractTouchKitIntegrationTest {
         public TabView() {
 
             Tab t = addTab(mainManager);
-            TouchKitIcon.fileText.addTo(t);
+            t.setIcon(FontAwesome.FILE_TEXT);
 
             t = addTab(new Components());
-            TouchKitIcon.calendar.addTo(t);
+            t.setIcon(FontAwesome.CALENDAR);
 
             t = addTab(new Notifications());
-            TouchKitIcon.warningSign.addTo(t);
+            t.setIcon(FontAwesome.EXCLAMATION_TRIANGLE);
 
             t = addTab(new TableThing());
-            TouchKitIcon.list.addTo(t);
+            t.setIcon(FontAwesome.LIST);
         }
     }
 
@@ -113,13 +113,12 @@ public class ThemeTest extends AbstractTouchKitIntegrationTest {
                 Button b = new Button("Link button...");
                 b.setStyleName(StyleNames.BUTTON_LINK);
                 group.addComponent(b);
-                TouchKitIcon.camera.addTo(b);
+                group.setIcon(FontAwesome.CAMERA);
 
                 b = new Button("Remove");
                 group.addComponent(b);
                 b.setStyleName(StyleNames.BUTTON_LINK);
-                TouchKitIcon.trash.addTo(b);
-
+                b.setIcon(FontAwesome.TRASH_O);
             }
 
             {

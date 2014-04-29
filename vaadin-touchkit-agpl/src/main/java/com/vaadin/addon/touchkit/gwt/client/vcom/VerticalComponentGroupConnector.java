@@ -10,6 +10,7 @@ import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.ConnectorHierarchyChangeEvent;
 import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.AbstractLayoutConnector;
+import com.vaadin.client.ui.Icon;
 import com.vaadin.shared.ComponentConstants;
 import com.vaadin.shared.communication.URLReference;
 import com.vaadin.shared.ui.ComponentStateUtil;
@@ -18,7 +19,6 @@ import com.vaadin.shared.ui.Connect;
 @SuppressWarnings("serial")
 @Connect(VerticalComponentGroup.class)
 public class VerticalComponentGroupConnector extends AbstractLayoutConnector {
-
 
     @Override
     public void onStateChanged(StateChangeEvent stateChangeEvent) {
@@ -64,7 +64,10 @@ public class VerticalComponentGroupConnector extends AbstractLayoutConnector {
     public void updateCaption(ComponentConnector connector) {
         URLReference urlReference = connector.getState().resources
                 .get(ComponentConstants.ICON_RESOURCE);
-        String url = urlReference == null ? null : urlReference.getURL();
+        Icon icon = null;
+        if (urlReference != null) {
+            icon = getConnection().getIcon(urlReference.getURL());
+        }
         Widget child = connector.getWidget();
         String style = "v-caption";
         if (ComponentStateUtil.hasStyles(connector.getState())) {
@@ -72,7 +75,7 @@ public class VerticalComponentGroupConnector extends AbstractLayoutConnector {
                 style += " " + "v-caption-" + customStyle;
             }
         }
-        getWidget().updateCaption(child, connector.getState().caption, url,
+        getWidget().updateCaption(child, connector.getState().caption, icon,
                 connector.getState().width, style);
     }
 }

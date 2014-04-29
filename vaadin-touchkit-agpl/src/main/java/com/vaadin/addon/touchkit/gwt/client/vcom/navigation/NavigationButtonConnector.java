@@ -12,6 +12,8 @@ import com.vaadin.client.VConsole;
 import com.vaadin.client.communication.RpcProxy;
 import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.AbstractComponentConnector;
+import com.vaadin.client.ui.Icon;
+import com.vaadin.shared.ComponentConstants;
 import com.vaadin.shared.Connector;
 import com.vaadin.shared.ui.Connect;
 
@@ -50,11 +52,9 @@ public class NavigationButtonConnector extends AbstractComponentConnector {
         getWidget().setText(caption);
         getWidget().setEnabled(getState().enabled);
 
-        if (getResourceUrl(NavigationButtonSharedState.MY_ICON_RESOURCE) != null) {
-            getWidget()
-                    .setIcon(
-                            getResourceUrl(NavigationButtonSharedState.MY_ICON_RESOURCE));
-        }
+        Icon icon = getConnection().getIcon(
+                getResourceUrl(ComponentConstants.ICON_RESOURCE));
+        getWidget().setIcon(icon);
 
         String description = getState().description;
         getWidget().setDescription(description);
@@ -74,14 +74,15 @@ public class NavigationButtonConnector extends AbstractComponentConnector {
                         if (getTargetWidget().getParent() == panel) {
                             panel.setCurrentWidget(getTargetWidget());
                         } else {
-                            
+
                             NavigationManagerConnector navigationManager;
                             ServerConnector parent2 = getParent();
-                            while(parent2 != null && !(parent2 instanceof NavigationManagerConnector)) {
+                            while (parent2 != null
+                                    && !(parent2 instanceof NavigationManagerConnector)) {
                                 parent2 = parent2.getParent();
                             }
                             navigationManager = (NavigationManagerConnector) parent2;
-                            
+
                             AbstractComponentConnector previousComponent = (AbstractComponentConnector) navigationManager
                                     .getState().getPreviousComponent();
                             AbstractComponentConnector nextComponent = (AbstractComponentConnector) navigationManager

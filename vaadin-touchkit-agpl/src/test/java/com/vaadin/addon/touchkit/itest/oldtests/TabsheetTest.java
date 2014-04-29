@@ -2,7 +2,6 @@ package com.vaadin.addon.touchkit.itest.oldtests;
 
 import org.junit.Ignore;
 
-import com.vaadin.addon.touchkit.extensions.TouchKitIcon;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.addon.touchkit.ui.NavigationButton.NavigationButtonClickEvent;
 import com.vaadin.addon.touchkit.ui.NavigationButton.NavigationButtonClickListener;
@@ -10,6 +9,7 @@ import com.vaadin.addon.touchkit.ui.NavigationManager;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.TabBarView;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
@@ -57,16 +57,16 @@ public class TabsheetTest extends TabBarView implements
 
         Tab tab = addTab(tab1);
         // tab.setIcon(TouchKitUI.getRndRunoIconResource());
-        TouchKitIcon.android.addTo(tab);
+        tab.setIcon(FontAwesome.ANDROID);
         tab.setCaption("Playlists");
 
         tab = addTab(tab2);
-        TouchKitIcon.phone.addTo(tab);
+        tab.setIcon(FontAwesome.PHONE);
 
         // tab = addTab(tab3, "Vaadin", TouchKitUI.getRndRunoIconResource());
 
         tab = addTab(tab4, "IT Mill");
-        TouchKitIcon.compass.addTo(tab);
+        tab.setIcon(FontAwesome.COMPASS);
 
         NavigationManager navigationManager = new NavigationManager();
 
@@ -90,7 +90,7 @@ public class TabsheetTest extends TabBarView implements
 
         Tab addTab = addTab(navigationManager);
         addTab.setCaption("Option");
-        TouchKitIcon.adjust.addTo(addTab);
+        addTab.setIcon(FontAwesome.ADJUST);
 
         // addTab.setIcon(TouchKitUI.getRndRunoIconResource());
 

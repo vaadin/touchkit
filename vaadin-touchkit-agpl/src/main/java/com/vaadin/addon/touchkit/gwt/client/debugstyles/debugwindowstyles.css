@@ -58,11 +58,13 @@
 	background: #f99 !important;
 }
 
-@url iconFont iconFont;
-
 @font-face {
 	font-family: "vdebugfont";
-	src: iconFont;
+	src: url(VAADIN/themes/base/debug/fonts/font.eot);
+	src: url(VAADIN/themes/base/debug/fonts/font.eot?#iefix) format("embedded-opentype"),
+		url(VAADIN/themes/base/debug/fonts/font.woff) format("woff"), url(VAADIN/themes/base/debug/fonts/font.ttf)
+		format("truetype"), url(VAADIN/themes/base/debug/fonts/font.svg#fontawesome)
+		format("svg");
 	font-weight: normal;
 	font-style: normal;
 }
