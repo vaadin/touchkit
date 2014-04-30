@@ -204,7 +204,7 @@
 	<build>
 
 		<resources>
-			<!-- These are also needed for the sources required by the GWT compiler 
+			<!-- These are also needed for the sources required by the GWT compiler
 				to be included in the produced JARs -->
 			<resource>
 				<directory>src/main/java</directory>
@@ -241,14 +241,15 @@
 						<index>true</index>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<!-- Implementation-Title and Implementation-Version come from the 
+							<!-- Implementation-Title and Implementation-Version come from the
 								POM by default -->
 							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 						</manifest>
 						<manifestEntries>
 							<!-- Package format version - do not change -->
 							<Vaadin-Package-Version>1</Vaadin-Package-Version>
-
+							<AdVaaLicen>${license.short.name}</AdVaaLicen>
+							<AdVaaName>vaadin-touchkit</AdVaaName>
 							<!-- Comma-separated list of widgetsets in the package -->
 							<Vaadin-Widgetsets>com.vaadin.addon.touchkit.gwt.TouchKitWidgetSet</Vaadin-Widgetsets>
 						</manifestEntries>
@@ -284,7 +285,7 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
+				<!--This plugin's configuration is used to store Eclipse m2e settings
 					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
@@ -406,7 +407,6 @@
 			<version>4.10</version>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 
 </project>

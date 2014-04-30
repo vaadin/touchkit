@@ -59,7 +59,7 @@
 	</properties>
 
 	<description>Provides components and features for mobile devices.</description>
-	
+
 		<pluginRepositories>
 		<pluginRepository>
 			<id>vaadin-snapshots</id>
@@ -76,12 +76,12 @@
 			<url>https://raw.github.com/zch/maven/releases/</url>
 		</pluginRepository>
 	</pluginRepositories>
-	
+
 	<build>
 		<sourceDirectory>../vaadin-touchkit-agpl/src/main/java</sourceDirectory>
 
 		<resources>
-			<!-- Use sources from a sister project. These are also needed for the 
+			<!-- Use sources from a sister project. These are also needed for the
 				sources required by the GWT compiler to be included in the produced JARs -->
 			<resource>
 				<directory>../vaadin-touchkit-agpl/src/main/java</directory>
@@ -151,14 +151,16 @@
 						<index>true</index>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<!-- Implementation-Title and Implementation-Version come from the 
+							<!-- Implementation-Title and Implementation-Version come from the
 								POM by default -->
 							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 						</manifest>
 						<manifestEntries>
 							<!-- Package format version - do not change -->
 							<Vaadin-Package-Version>1</Vaadin-Package-Version>
-
+							<!-- License agpl, cval, empty means apache -->
+							<AdVaaLicen>${license.short.name}</AdVaaLicen>
+							<AdVaaName>vaadin-touchkit</AdVaaName>
 							<!-- Comma-separated list of widgetsets in the package -->
 							<Vaadin-Widgetsets>com.vaadin.addon.touchkit.gwt.TouchKitWidgetSet</Vaadin-Widgetsets>
 						</manifestEntries>
@@ -196,10 +198,10 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-dependency-plugin</artifactId> 
-				<executions> <execution> <id>copy-dependencies</id> <phase>package</phase> 
-				<goals> <goal>copy-dependencies</goal> </goals> <configuration> <includeScope>runtime</includeScope> 
-				<outputDirectory>target/libs</outputDirectory> </configuration> </execution> 
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-dependency-plugin</artifactId>
+				<executions> <execution> <id>copy-dependencies</id> <phase>package</phase>
+				<goals> <goal>copy-dependencies</goal> </goals> <configuration> <includeScope>runtime</includeScope>
+				<outputDirectory>target/libs</outputDirectory> </configuration> </execution>
 				</executions> </plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
