@@ -6,14 +6,14 @@ import com.google.gwt.resources.client.DataResource;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.resources.client.ImageResource.ImageOptions;
 import com.google.gwt.resources.client.ImageResource.RepeatStyle;
-import com.vaadin.addon.touchkit.gwt.client.theme.ParkingStyles;
+import com.vaadin.addon.touchkit.gwt.client.theme.TouchKitStyles;
 
 public interface VTouchKitResources extends ClientBundle {
     public static final VTouchKitResources INSTANCE = GWT
             .create(VTouchKitResources.class);
 
-    @Source({ "theme/base.css", "theme/icon-defs.css", "theme/parking.css" })
-    public ParkingStyles css();
+    @Source({ "theme/base.css", "theme/icon-defs.css", "theme/touchkit.css" })
+    public TouchKitStyles css();
 
     /*
      * Popover images

@@ -2,7 +2,7 @@ package com.vaadin.addon.touchkit.gwt.client.theme;
 
 import com.google.gwt.resources.client.CssResource;
 
-public interface ParkingStyles extends CssResource {
+public interface TouchKitStyles extends CssResource {
 
     // Selector names
 
