@@ -10,7 +10,7 @@
 @def redText #ed5931;
 
 @def fieldTextSize 16px;
-
+ 
 /**
  * General borders
  */
@@ -393,19 +393,19 @@ a {
 }
 
 .icon-arrow-up .v-button-wrap:before {
-	content: fa-icon-circle-arrow-up;
+	content: fa-icon-arrow-circle-up;
 }
 
 .icon-arrow-down .v-button-wrap:before {
-	content: fa-icon-circle-arrow-down;
+	content: fa-icon-arrow-circle-down;
 }
 
 .icon-arrow-left .v-button-wrap:before {
-	content: fa-icon-circle-arrow-left;
+	content: fa-icon-arrow-circle-left;
 }
 
 .icon-arrow-right .v-button-wrap:before {
-	content: fa-icon-circle-arrow-right;
+	content: fa-icon-arrow-circle-right;
 }
 
 .v-touchkit-navbar .icon-arrow-up .v-button-caption,
@@ -2138,7 +2138,7 @@ select.v-select-select::-ms-expand {
 }
 
 .v-touchkit-datepopover-time:before {
-	content: fa-icon-time;
+	content: fa-icon-clock-o;
 	font-family: "FontAwesome";
 	color: gray;
     margin-left: 115px;
