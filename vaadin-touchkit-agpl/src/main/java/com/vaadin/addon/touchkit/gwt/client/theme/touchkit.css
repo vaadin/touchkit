@@ -95,6 +95,10 @@
 /* Slider */
 @def sliderMargin 17px;
 
+/* Tooltip following cursor makes field un-focusable w/ touch */
+.v-tooltip {
+	pointer-events: none;
+}
 
 /* CssLayouts don't need to be overflow: hidden in webkit */
 .v-csslayout {
