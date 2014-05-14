@@ -1,5 +1,8 @@
 package com.vaadin.addon.touchkit.gwt.client.offlinemode;
 
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
+
 /**
  * Applications that need to have an advanced offline mode use this interface to
  * connect to TouchKit. By default the framework uses an instance of
@@ -18,34 +21,55 @@ package com.vaadin.addon.touchkit.gwt.client.offlinemode;
  */
 public interface OfflineMode {
 
-    public enum ActivationReason {
+    /**
+     * A set of activation reasons for setting the connection offline or online.
+     */
+    public static enum ActivationReason {
+        // The device has a network connection
+        NETWORK_ONLINE("The network is online."),
+        // Server is accessible
+        SERVER_AVAILABLE("The server is available."),
+        // The device has no network connection
+        NO_NETWORK("There was a network failure."),
+        // The server responded, but the response couldn't be parsed.
+        RESPONSE_TIMEOUT("The response from the server seems to take a very long time."
+                + " Either the server is down or there's a network issue."),
+        // The offline mode activation was requested by server or in console.
+        FORCE_OFFLINE("Forced offline mode started by server or by a developer request."),
+        // The offline mode activation was finished.
+        FORCE_ONLINE("Forced offline mode finished."),
+        // The reason is unknown.
+        BAD_RESPONSE("The server is unreachable."),
+        // The online app is still starting
+        APP_STARTING("Loading the application."),
+        // The online app never started
+        ONLINE_APP_NOT_STARTED("The application didn't start properly."),
+        // Unknown
+        UNKNOWN("");
+
+        String message;
+        ActivationReason(String msg) {
+            message = msg;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
         /**
-         * The device has no network connection
+         * Use this method to change or internationalize the message.
          */
-        NO_NETWORK,
-        /**
-         * The server responded, but the response couldn't be parsed.
-         */
-        BAD_RESPONSE,
-        /**
-         * The offline mode activation was requested by the server side
-         * application.
-         */
-        ACTIVATED_BY_SERVER,
-        /**
-         * The reason is unknown.
-         */
-        UNKNOWN,
-        /**
-         * The online app is not started.
-         */
-        ONLINE_APP_NOT_STARTED
+        public ActivationReason setMessage(String msg) {
+            message = msg;
+            return this;
+        }
     }
 
     /**
      * Holds the reason for why the offline mode was activated. Passed to the
      * {@link #activate(ActivationEvent)} method.
      */
+    @Deprecated
     public interface ActivationEvent {
 
         /**
@@ -59,7 +83,58 @@ public interface OfflineMode {
          *         activated.
          */
         ActivationReason getActivationReason();
+    }
 
+    /**
+     * Event triggered when the application goes online
+     */
+    public static class OnlineEvent extends GwtEvent<OnlineEvent.OnlineHandler> {
+        public static interface OnlineHandler extends EventHandler {
+            public void onOnline(OnlineEvent event);
+        }
+
+        public final static Type<OnlineHandler> TYPE = new Type<OnlineHandler>();
+
+        @Override
+        public Type<OnlineHandler> getAssociatedType() {
+            return TYPE;
+        }
+
+        @Override
+        protected void dispatch(OnlineHandler handler) {
+            handler.onOnline(this);
+        }
+    }
+
+    /**
+     * Event triggered when the device goes off-line
+     */
+    public static class OfflineEvent extends GwtEvent<OfflineEvent.OfflineHandler> {
+        public static interface OfflineHandler extends EventHandler {
+            public void onOffline(OfflineEvent event);
+        }
+
+        private ActivationReason reason;
+
+        public ActivationReason getReason() {
+            return reason;
+        }
+
+        public final static Type<OfflineHandler> TYPE = new Type<OfflineHandler>();
+
+        public OfflineEvent(ActivationReason reason) {
+            this.reason = reason;
+        }
+
+        @Override
+        public Type<OfflineHandler> getAssociatedType() {
+            return TYPE;
+        }
+
+        @Override
+        protected void dispatch(OfflineHandler handler) {
+            handler.onOffline(this);
+        }
     }
 
     /**
@@ -68,23 +143,23 @@ public interface OfflineMode {
      * Offline mode can also be activated e.g. due to an inaccessible server,
      * bad responses or as the result of a request by the server side
      * application.
-     * 
+     *
      * @param event
      *            Details about the activation.
      */
-    public abstract void activate(ActivationEvent event);
+    public abstract void activate(ActivationReason event);
 
     /**
      * This method is called when TouchKit detects that it might be possible to
      * go online again (e.g. the network connection has returned). The
      * implementation should e.g. remove or hide offline related elements from
      * the document.
-     * 
+     *
      * <p>
      * If you have implemented a more advanced offline mode, override this
      * method and gracefully return to normal operation. In that case return
      * false
-     * 
+     *
      * @return true if offline mode was shut down, false if offline mode was not
      *         shut down
      */
@@ -94,5 +169,4 @@ public interface OfflineMode {
      * @return true if offline mode is currently active
      */
     public abstract boolean isActive();
-
 }

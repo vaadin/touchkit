@@ -1,60 +1,64 @@
 package com.vaadin.addon.touchkit.gwt.client.vcom;
 
+import static com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineMode.ActivationReason.FORCE_OFFLINE;
+import static com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineMode.ActivationReason.FORCE_ONLINE;
+import static com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineMode.ActivationReason.RESPONSE_TIMEOUT;
+
 import java.util.Date;
 
-import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.Window.Location;
 import com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineMode;
-import com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineModeActivationEventImpl;
 import com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineModeEntrypoint;
-import com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineMode.ActivationEvent;
-import com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineMode.ActivationReason;
-import com.vaadin.client.ApplicationConnection.CommunicationErrorHandler;
 import com.vaadin.client.ApplicationConnection.CommunicationHandler;
 import com.vaadin.client.ApplicationConnection.RequestStartingEvent;
 import com.vaadin.client.ApplicationConnection.ResponseHandlingEndedEvent;
 import com.vaadin.client.ApplicationConnection.ResponseHandlingStartedEvent;
 import com.vaadin.client.ServerConnector;
-import com.vaadin.client.VConsole;
 import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.extensions.AbstractExtensionConnector;
 import com.vaadin.shared.ui.Connect;
 
+/**
+ * This class is thought for interacting with the online/off-line mode of a
+ * TouchKit application. Only a few operations can be set from server side like
+ * forcing off-line or changing the timeout to consider that the server is
+ * unreachable.
+ * 
+ * Might be you could be interested on extending this class for doing certain
+ * things when the app goes off-line, if so consider to use
+ * {@link OfflineMode.OfflineEvent} and {@link OfflineMode.OnlineEvent}
+ */
+@SuppressWarnings("serial")
 @Connect(com.vaadin.addon.touchkit.extensions.OfflineMode.class)
 public class OfflineModeConnector extends AbstractExtensionConnector implements
-        CommunicationHandler, CommunicationErrorHandler {
+        CommunicationHandler {
+
     private static final String SESSION_COOKIE = "JSESSIONID";
-    private static final int MAX_SUSPENDED_TIMEOUT = 5000;
-    boolean online = isNetworkOnline();
-    boolean forcedOffline = false;
+
     private Timer requestTimeoutTracker = new Timer() {
         @Override
         public void run() {
-            goOffline(new OfflineModeActivationEventImpl(
-                    "The response from the server seems to take a very long time. "
-                            + "Either the server is down or there's a network issue.",
-                    ActivationReason.BAD_RESPONSE));
+            offlineEntrypoint.dispatch(RESPONSE_TIMEOUT);
         }
     };
 
     private int offlineTimeoutMillis;
     private boolean applicationStarted = false;
     private boolean persistenCookieSet;
+    private static OfflineModeEntrypoint offlineEntrypoint;
 
     public OfflineModeConnector() {
         super();
         registerRpc(OfflineModeClientRpc.class, new OfflineModeClientRpc() {
             @Override
             public void goOffline() {
-                forcedOffline = true;
-                OfflineModeConnector.this
-                        .goOffline(new OfflineModeActivationEventImpl(
-                                "Offline mode started by a request",
-                                ActivationReason.ACTIVATED_BY_SERVER));
+                offlineEntrypoint.dispatch(FORCE_OFFLINE);
+            }
+
+            @Override
+            public void goOnline() {
+                offlineEntrypoint.dispatch(FORCE_ONLINE);
             }
         });
     }
@@ -66,11 +70,12 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
 
     @Override
     protected void init() {
+        offlineEntrypoint = OfflineModeEntrypoint.get();
+        offlineEntrypoint.setOfflineModeConnector(this);
         offlineTimeoutMillis = getState().offlineModeTimeout * 1000;
         getConnection().addHandler(RequestStartingEvent.TYPE, this);
         getConnection().addHandler(ResponseHandlingStartedEvent.TYPE, this);
         getConnection().addHandler(ResponseHandlingEndedEvent.TYPE, this);
-        getConnection().setCommunicationErrorDelegate(this);
     }
 
     @Override
@@ -79,80 +84,25 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
         offlineTimeoutMillis = getState().offlineModeTimeout * 1000;
     }
 
+    /**
+     * @deprecated use {@link OfflineModeEntrypoint.getOfflineMode()}
+     */
     public OfflineMode getOfflineApp() {
         return OfflineModeEntrypoint.getOfflineMode();
     }
 
-    public void goOffline(ActivationEvent event) {
-        online = false;
-        getConnection().setApplicationRunning(false);
-        if (!getOfflineApp().isActive()) {
-            getOfflineApp().activate(event);
-            if (!isNetworkOnline()) {
-                Scheduler.get()
-                        .scheduleFixedPeriod(new CheckForNetwork(), 1000);
-            }
-        }
-    }
-
-    public void resume() {
-        getConnection().setApplicationRunning(true);
-    }
-
-    public void reload() {
-        Window.Location.reload();
-    }
-
-    public static boolean isNetworkOnline() {
-        String host = Location.getHost();
-        if (host.startsWith("127.0.0.1") || host.startsWith("localhost")) {
-            return true;
-        }
-        return isNavigatorOnline();
-    }
-
-    private static native boolean isNavigatorOnline()
-    /*-{
-        if($wnd.navigator.onLine != undefined) {
-            return $wnd.navigator.onLine;
-        }
-        return true;
-    }-*/;
-
     /**
-     * Polls whether network connection has returned
+     * @deprecated use {@link
+     *             OfflineModeEntrypoint.get().getNetworkStatus().isAppOnline()}
      */
-    public class CheckForNetwork implements RepeatingCommand {
-        public boolean execute() {
-            boolean networkOnline = isNetworkOnline();
-
-            if (networkOnline) {
-                VConsole.log("The network connection returned, going back online.");
-                getOfflineApp().deactivate();
-            }
-            return !networkOnline;
-        }
-
-    }
-
-    @Override
-    public boolean onError(String details, int statusCode) {
-        VConsole.log("Going offline due to communication error");
-        goOffline(new OfflineModeActivationEventImpl(
-                "Goind offline due to a communication error.",
-                ActivationReason.BAD_RESPONSE));
-        return true;
+    @Deprecated
+    public static boolean isNetworkOnline() {
+        return OfflineModeEntrypoint.get().getNetworkStatus().isAppOnline();
     }
 
     @Override
     public void onRequestStarting(RequestStartingEvent e) {
         if (!applicationStarted) {
-            if (isNetworkOnline()) {
-                online = true;
-            } else {
-                goOffline(new OfflineModeActivationEventImpl(
-                        "No network connection", ActivationReason.NO_NETWORK));
-            }
             applicationStarted = true;
         } else if (persistenCookieSet && getSessionCookie() == null) {
             // Session expired, add fake id -> server side visit will cause
@@ -170,26 +120,11 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
     @Override
     public void onResponseHandlingStarted(ResponseHandlingStartedEvent e) {
         requestTimeoutTracker.cancel();
-        if (forcedOffline && !getOfflineApp().isActive()) {
-            forcedOffline = false;
-        }
-        deactivateOfflineAppIfOnline();
     }
 
     @Override
     public void onResponseHandlingEnded(ResponseHandlingEndedEvent e) {
-        requestTimeoutTracker.cancel();
         updateSessionCookieExpiration();
-    }
-
-    private void deactivateOfflineAppIfOnline() {
-        if (!online && !forcedOffline) {
-            // We got a response although we were supposed to be offline.
-            // Possibly a very sluggish xhr finally arrived. Skip paint phase as
-            // resuming will repaint the screen anyways.
-            VConsole.log("Recieved a response while offline, going back online");
-            getOfflineApp().deactivate();
-        }
     }
 
     private void updateSessionCookieExpiration() {
@@ -208,6 +143,10 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
 
     private String getSessionCookie() {
         return Cookies.getCookie(SESSION_COOKIE);
+    }
+
+    public int getOfflineModeTimeout() {
+        return offlineTimeoutMillis;
     }
 
     @Override

@@ -22,6 +22,7 @@ import com.vaadin.server.VaadinServlet;
  * developers should manually create and bind a {@link TouchKitSettings}
  * instance.
  */
+@SuppressWarnings("serial")
 public class TouchKitServlet extends VaadinServlet {
 
     /** The TouchKitSettings instance used */
@@ -29,7 +30,7 @@ public class TouchKitServlet extends VaadinServlet {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see com.vaadin.server.VaadinServlet#servletInitialized()
      */
     @Override
@@ -50,13 +51,16 @@ public class TouchKitServlet extends VaadinServlet {
     protected void service(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
         String pathInfo = request.getPathInfo();
-        if (pathInfo != null
-                && request.getPathInfo().startsWith(
-                        "/VAADIN/themes/touchkit/styles.css")) {
-            serveDummyFile(response);
-        } else {
-            super.service(request, response);
+        if (pathInfo != null) {
+            if (pathInfo.startsWith("/VAADIN/themes/touchkit/styles.css")) {
+                serveDummyFile(response, "max-age=1000000");
+                return;
+            } else if (pathInfo.startsWith("/PING")) {
+                serveDummyFile(response, "no-store, no-cache, max-age=0, must-revalidate");
+                return;
+            }
         }
+        super.service(request, response);
     }
 
     @Override
@@ -76,11 +80,10 @@ public class TouchKitServlet extends VaadinServlet {
         super.writeStaticResourceResponse(request, response, resourceUrl);
     }
 
-    private void serveDummyFile(HttpServletResponse response)
+    private void serveDummyFile(HttpServletResponse response, String cacheControl)
             throws IOException {
         response.setContentType("text/css");
-        response.setHeader("Cache-Control", "max-age=1000000");
+        response.setHeader("Cache-Control", cacheControl);
         response.getOutputStream().write("\n".getBytes());
     }
-
 }
