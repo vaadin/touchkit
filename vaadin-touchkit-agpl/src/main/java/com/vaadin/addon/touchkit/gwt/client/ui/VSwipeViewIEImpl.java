@@ -13,6 +13,7 @@ public class VSwipeViewIEImpl extends VSwipeView {
     protected void initHandlers() {
         super.initHandlers();
         getElement().getStyle().setProperty("msTouchAction", "pan-y");
+        getElement().getStyle().setProperty("msScrollChaining", "none");
         addDomHandler(new PointerDownHandler() {
 
             @Override
