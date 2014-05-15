@@ -387,7 +387,7 @@
 	outline: none;
 	overflow: visible;
 	text-align: left;
-	font-size: 0;
+	/* font-size: 0; IE hack, not necessary in TK */
 }
 
 .v-accordion-item {
@@ -1372,7 +1372,7 @@ input::-ms-clear {
 
 .v-scrollable {
 	overflow: auto;
-	font-size: 0;
+	/* font-size: 0; IE hack, not necessary in TK */
 	line-height: normal;
 }
 
@@ -1415,7 +1415,7 @@ input::-ms-clear {
 }
 
 .v-gridlayout,.v-verticallayout,.v-horizontallayout {
-	font-size: 0;
+	/* font-size: 0; IE hack, not necessary in TK */
 	line-height: normal;
 }
 
