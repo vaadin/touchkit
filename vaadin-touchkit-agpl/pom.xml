@@ -370,11 +370,9 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<!-- Some of our tests use icons from themes -->
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-themes</artifactId>
 			<version>${vaadin.version.maven}</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
