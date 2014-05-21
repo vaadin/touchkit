@@ -96,8 +96,12 @@ public class CacheManifestLinker extends AbstractLinker {
                 }
             }
 
-            for (String ua: userAgents) {
-                generatedManifestResources.put(ua, hashSet);
+            for (String ua : userAgents) {
+                if (generatedManifestResources.containsKey(ua)) {
+                    generatedManifestResources.get(ua).addAll(hashSet);
+                } else {
+                    generatedManifestResources.put(ua, hashSet);
+                }
             }
 
         } else {
@@ -116,9 +120,11 @@ public class CacheManifestLinker extends AbstractLinker {
                 }
             }
 
-            for (Entry<String, Set<String>> e : generatedManifestResources.entrySet()) {
+            for (Entry<String, Set<String>> e : generatedManifestResources
+                    .entrySet()) {
                 e.getValue().addAll(cachedArtifacts);
-                newArtifacts.add(createCacheManifest(context, logger, e.getValue(), e.getKey()));
+                newArtifacts.add(createCacheManifest(context, logger,
+                        e.getValue(), e.getKey()));
             }
         }
 
@@ -128,7 +134,7 @@ public class CacheManifestLinker extends AbstractLinker {
     /**
      * Traverses directories specified in gwt modules to be added to cache
      * manifests. E.g. themes.
-     *
+     * 
      * @param context
      */
     private void loadTouchKitWidgetSetResources(LinkerContext context) {
