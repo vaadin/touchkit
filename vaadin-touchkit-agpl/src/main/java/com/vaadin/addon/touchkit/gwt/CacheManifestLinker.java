@@ -101,12 +101,26 @@ public class CacheManifestLinker extends AbstractLinker {
                 }
             }
 
+            // Create manifest file names based on UA values
+            Set<String> manifestNames = new HashSet<String>();
             for (String ua : userAgents) {
-                if (generatedManifestResources.containsKey(ua)) {
-                    generatedManifestResources.get(ua).addAll(hashSet);
-                } else {
-                    generatedManifestResources.put(ua, hashSet);
+                manifestNames.add(ua);
+                if ("safari".equals(ua)) {
+                    // custom manifest for pre-KitKat Android
+                    manifestNames.add("aosp");
                 }
+            }
+
+            for (String name : manifestNames) {
+                Set<String> manifestResources = generatedManifestResources
+                        .get(name);
+                if (manifestResources == null) {
+                    manifestResources = new TreeSet<String>(hashSet);
+                    generatedManifestResources.put(name, manifestResources);
+                } else {
+                    manifestResources.addAll(hashSet);
+                }
+                manifestResources.addAll(getManifestSpecificResources(name));
             }
 
         } else {
@@ -134,6 +148,14 @@ public class CacheManifestLinker extends AbstractLinker {
         }
 
         return newArtifacts;
+    }
+
+    private Set<String> getManifestSpecificResources(String name) {
+        SortedSet<String> resources = new TreeSet<String>();
+        String fontAwesome = "../../../VAADIN/themes/base/fonts/fontawesome-webfont";
+        String fontExtension = "aosp".equals(name) ? ".ttf" : ".woff";
+        resources.add(fontAwesome + fontExtension);
+        return resources;
     }
 
     /**

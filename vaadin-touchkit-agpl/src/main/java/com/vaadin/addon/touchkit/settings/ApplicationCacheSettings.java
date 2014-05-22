@@ -17,6 +17,7 @@ import com.vaadin.server.UICreateEvent;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinService;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.shared.VBrowserDetails;
 
 /**
  * This class is used to control HTML5 application cache settings.
@@ -74,7 +75,8 @@ public class ApplicationCacheSettings implements BootstrapListener {
             // Issue #13789: When the manifestUrl is local, we will serve it
             // with the TouchKitServlet, so we check whether the file exists
             // in our classpath to avoid the client asking for a not-found file.
-            // Normally this happens when we have fallback UIs not using TK widgetset.
+            // Normally this happens when we have fallback UIs not using TK
+            // widgetset.
             if (manifestUrl.startsWith("./")) {
                 try {
                     URL resource = VaadinServlet.getCurrent()
@@ -102,9 +104,30 @@ public class ApplicationCacheSettings implements BootstrapListener {
      * @return The manifest file name, eg. "safari.manifest".
      */
     protected String generateManifestFileName(BootstrapPageResponse response) {
-        // Default implementation of TouchKit only supports webkit (safari)
-        // browsers for now.
-        return "safari.manifest";
+        VBrowserDetails browser = new VBrowserDetails(response.getRequest()
+                .getHeader("user-agent"));
+
+        if (browser.isFirefox()) {
+            return "gecko1_8.manifest";
+        } else if (browser.isChrome()) {
+            return "safari.manifest";
+        } else if (browser.isIE()) {
+            if (browser.getBrowserMajorVersion() > 10) {
+                return "gecko1_8.manifest";
+            } else {
+                return "ie10.manifest";
+            }
+        } else if (browser.isAndroid()) {
+            int major = browser.getOperatingSystemMajorVersion();
+            int minor = browser.getOperatingSystemMinorVersion();
+            if (major < 4 || (major == 4 && minor < 4)) {
+                return "aosp.manifest";
+            } else {
+                return "safari.manifest";
+            }
+        } else {
+            return "safari.manifest";
+        }
     }
 
     /**
