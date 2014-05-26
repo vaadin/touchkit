@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.SortedSet;
@@ -66,7 +67,8 @@ public class CacheManifestLinker extends AbstractLinker {
         ArtifactSet newArtifacts = new ArtifactSet(artifacts);
 
         if (onePermutation) {
-            String userAgent = "";
+            Set<String> userAgents = new HashSet<String>();
+
             for (CompilationResult result : artifacts
                     .find(CompilationResult.class)) {
                 SortedSet<SortedMap<SelectionProperty, String>> propertiesMap = result
@@ -75,22 +77,16 @@ public class CacheManifestLinker extends AbstractLinker {
                     Set<SelectionProperty> keySet = sm.keySet();
                     for (SelectionProperty selectionProperty : keySet) {
                         if ("user.agent".equals(selectionProperty.getName())) {
-                            userAgent = sm.get(selectionProperty);
-                            break;
+                            userAgents.add(sm.get(selectionProperty));
                         }
                     }
-                    if (userAgent != null) {
-                        break;
-                    }
-                }
-                if (userAgent != null) {
-                    break;
                 }
             }
 
-            if (userAgent == null || userAgent.equals("")) {
-                // If only one permutation, expect safari
-                userAgent = "safari";
+            // If it is only one permutation in the module, this is never
+            // visited.
+            if (userAgents.isEmpty()) {
+                userAgents.add("safari");
             }
 
             SortedSet<String> hashSet = new TreeSet<String>();
@@ -106,7 +102,14 @@ public class CacheManifestLinker extends AbstractLinker {
                 }
             }
 
-            generatedManifestResources.put(userAgent, hashSet);
+            for (String ua : userAgents) {
+                if (generatedManifestResources.containsKey(ua)) {
+                    generatedManifestResources.get(ua).addAll(hashSet);
+                } else {
+                    generatedManifestResources.put(ua, hashSet);
+                }
+            }
+
         } else {
 
             for (Artifact artifact : artifacts) {
@@ -123,13 +126,12 @@ public class CacheManifestLinker extends AbstractLinker {
                 }
             }
 
-            Set<String> keySet = generatedManifestResources.keySet();
-            for (String ua : keySet) {
-                Set<String> set = generatedManifestResources.get(ua);
-                set.addAll(cachedArtifacts);
-                newArtifacts.add(createCacheManifest(context, logger, set, ua));
+            for (Entry<String, Set<String>> e : generatedManifestResources
+                    .entrySet()) {
+                e.getValue().addAll(cachedArtifacts);
+                newArtifacts.add(createCacheManifest(context, logger,
+                        e.getValue(), e.getKey()));
             }
-
         }
 
         return newArtifacts;
@@ -199,7 +201,7 @@ public class CacheManifestLinker extends AbstractLinker {
     }
 
     List<String> acceptedFileExtensions = Arrays.asList(".html", ".js", ".css",
-            ".png", ".jpg", ".gif", ".ico");
+            ".png", ".jpg", ".gif", ".ico", ".woff");
 
     protected boolean acceptCachedResource(String filename) {
         if (filename.startsWith("compile-report/")) {
