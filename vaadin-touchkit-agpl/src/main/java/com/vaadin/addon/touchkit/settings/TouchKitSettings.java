@@ -1,5 +1,6 @@
 package com.vaadin.addon.touchkit.settings;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.vaadin.addon.touchkit.server.TouchKitServlet;
@@ -30,7 +31,7 @@ public class TouchKitSettings implements BootstrapListener,
      * Interface to select different settings for different kind of devices
      * based on e.g. HTTP header inspection.
      */
-    interface SettingSelector<T> {
+    interface SettingSelector<T> extends Serializable {
         /**
          * @param response
          * @return used settings or null if settings shouldn't be used for this
@@ -145,14 +146,18 @@ public class TouchKitSettings implements BootstrapListener,
     @Override
     public void modifyBootstrapPage(BootstrapPageResponse response) {
         ViewPortSettings viewPortSettings2 = selectViewPortSettings(response);
-        if (viewPortSettings2 != null)
+        if (viewPortSettings2 != null) {
             viewPortSettings2.modifyBootstrapPage(response);
-        if (getWebAppSettings() != null)
+        }
+        if (getWebAppSettings() != null) {
             getWebAppSettings().modifyBootstrapPage(response);
-        if (getApplicationIcons() != null)
+        }
+        if (getApplicationIcons() != null) {
             getApplicationIcons().modifyBootstrapPage(response);
-        if (getApplicationCacheSettings() != null)
+        }
+        if (getApplicationCacheSettings() != null) {
             getApplicationCacheSettings().modifyBootstrapPage(response);
+        }
     }
 
     @Override
@@ -196,7 +201,7 @@ public class TouchKitSettings implements BootstrapListener,
      * @see #addViewPortSettings(SettingSelector)
      */
     public void setViewPortSettings(ViewPortSettings viewPortSettings) {
-        this.defaultViewPortSettings = viewPortSettings;
+        defaultViewPortSettings = viewPortSettings;
     }
 
     /**
@@ -217,7 +222,7 @@ public class TouchKitSettings implements BootstrapListener,
      *            the {@link WebAppSettings} instance to use.
      */
     public void setWebAppSettings(WebAppSettings iosWebAppSettings) {
-        this.webAppSettings = iosWebAppSettings;
+        webAppSettings = iosWebAppSettings;
     }
 
     @Override
