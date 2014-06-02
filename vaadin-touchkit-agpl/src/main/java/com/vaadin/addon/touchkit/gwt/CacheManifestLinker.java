@@ -83,6 +83,11 @@ public class CacheManifestLinker extends AbstractLinker {
                 }
             }
 
+            // This happens when we compile the widgetset for one browser only.
+            if (userAgents.size() == 0) {
+                userAgents.add("safari");
+            }
+
             SortedSet<String> hashSet = new TreeSet<String>();
 
             for (Artifact artifact : artifacts) {
