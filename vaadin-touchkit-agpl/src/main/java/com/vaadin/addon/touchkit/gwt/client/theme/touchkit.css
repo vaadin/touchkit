@@ -814,9 +814,10 @@ a {
 
 .v-touchkit-popover .v-window-closebox,
 .v-touchkit-popover .v-window-outerheader,
-.v-touchkit-popover .v-window-footer {
+.v-touchkit-popover .v-window-footer,
+.v-touchkit-popover .v-window-maximizebox {
 	display: none;
-	}
+}
 
 .v-touchkit-opacity-transition {
 	-webkit-transition: opacity 0.1s linear;

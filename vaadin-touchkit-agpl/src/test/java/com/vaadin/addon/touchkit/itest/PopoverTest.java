@@ -5,6 +5,7 @@ import com.vaadin.addon.touchkit.ui.Popover;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Label;
 
 @SuppressWarnings("serial")
 public class PopoverTest extends AbstractTouchKitIntegrationTest {
@@ -63,5 +64,20 @@ public class PopoverTest extends AbstractTouchKitIntegrationTest {
             }
         });
         addComponent(button);
+        
+        button = new Button("Just label");
+        button.addClickListener(new ClickListener() {
+            public void buttonClick(ClickEvent event) {
+                Popover popover = new Popover();
+                popover.setWidth("360px");
+                popover.setHeight("400px");
+
+                popover.setContent(new Label("Foobar"));
+
+                popover.showRelativeTo(event.getButton());
+            }
+        });
+        addComponent(button);
+
     }
 }
