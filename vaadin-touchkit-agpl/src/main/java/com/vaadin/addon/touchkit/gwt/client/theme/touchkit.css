@@ -1753,7 +1753,7 @@ select.v-select-select::-ms-expand {
 
 .v-touchkit-datepicker:after,
 .v-select:after {
-	content: fa-chevron-down;
+	content: fa-icon-chevron-down;
 	text-align:right;
 	position:absolute;
 	right:0;
