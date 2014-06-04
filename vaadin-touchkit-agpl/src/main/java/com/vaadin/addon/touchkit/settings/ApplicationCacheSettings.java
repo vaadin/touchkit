@@ -1,9 +1,5 @@
 package com.vaadin.addon.touchkit.settings;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.logging.Logger;
-
 import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -16,17 +12,14 @@ import com.vaadin.server.BootstrapPageResponse;
 import com.vaadin.server.UICreateEvent;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinService;
-import com.vaadin.server.VaadinServlet;
 import com.vaadin.shared.VBrowserDetails;
 
 /**
  * This class is used to control HTML5 application cache settings.
  */
-@SuppressWarnings("serial")
 public class ApplicationCacheSettings implements BootstrapListener {
 
     private boolean cacheManifestEnabled = true;
-    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     @Override
     public void modifyBootstrapFragment(BootstrapFragmentResponse response) {
@@ -67,32 +60,11 @@ public class ApplicationCacheSettings implements BootstrapListener {
             scriptTag.appendChild(new DataNode(script.replace("\n});", String
                     .format(",\n    \"widgetsetUrl\": \"%s\"\n});",
                             widgetsetUrl)), scriptTag.baseUri()));
-
             // Add cache manifest attribute to html tag
-            boolean writeManifestAttr = true;
-            String manifestUrl = vaadinDir + "widgetsets/" + widgetset + "/"
-                    + generateManifestFileName(response);
-            // Issue #13789: When the manifestUrl is local, we will serve it
-            // with the TouchKitServlet, so we check whether the file exists
-            // in our classpath to avoid the client asking for a not-found file.
-            // Normally this happens when we have fallback UIs not using TK
-            // widgetset.
-            if (manifestUrl.startsWith("./")) {
-                try {
-                    URL resource = VaadinServlet.getCurrent()
-                            .getServletContext()
-                            .getResource(manifestUrl.substring(1));
-
-                    writeManifestAttr = resource != null;
-                } catch (MalformedURLException e) {
-                    writeManifestAttr = false;
-                    logger.severe("Not writting html manifest attribute because the resource is unavailable: "
-                            + e.getMessage());
-                }
-            }
-            if (writeManifestAttr) {
-                document.getElementsByTag("html").attr("manifest", manifestUrl);
-            }
+            document.getElementsByTag("html").attr(
+                    "manifest",
+                    vaadinDir + "widgetsets/" + widgetset + "/"
+                            + generateManifestFileName(response));
         }
     }
 
