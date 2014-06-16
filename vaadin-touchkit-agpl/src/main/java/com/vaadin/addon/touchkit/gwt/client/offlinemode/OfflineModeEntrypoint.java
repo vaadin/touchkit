@@ -95,7 +95,7 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
      * available. Normally when starting it with network off-line.
      */
     private final Timer pingToServer = new Timer() {
-        final String url = GWT.getHostPageBaseURL() + "PING";
+        final String url = computePingUrl();
 
         @Override
         public void run() {
@@ -109,13 +109,40 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
                 onError(null, e);
             }
         }
+        private String computePingUrl() {
+            String url = getVaadinServiceUrl();
+            if (url == null) {
+                url = GWT.getHostPageBaseURL();
+            }
+            url += "/PING";
+            logger.info("Ping URL " + url);
+            return url;
+        }
+
+        // Try to find the serviceUrl. When the device is
+        // off-line and the app has not been initialized yet.
+        // Only needed when widgetset is local or it is in a CDN.
+        private native String getVaadinServiceUrl() /*-{
+          // When vaadin.initApplication is called, it changes
+          // the window name by: appId-random_number.
+          var appId = $wnd.name.replace(/-[\d.]+?$/, '');
+          var app = $wnd.vaadin.getApp(appId);
+          if (!app) {
+            // If window name is not set, try to get the appId
+            // from the application container
+            var elms = $doc.querySelectorAll('.v-app');
+            appId = elms && elms[0] && elms[0].id;
+            app = $wnd.vaadin.getApp(appId);
+          }
+          return app && app.getConfig('serviceUrl') || null;
+        }-*/;
     };
 
     /**
      * @return the singletone instance of the OfflineModeEntrypoint
      */
     public static OfflineModeEntrypoint get() {
-        // Shoulden't happen unless someone does not inherits TK module
+        // Shouldn't happen unless someone does not inherits TK module
         if (instance == null) {
             new OfflineModeEntrypoint().onModuleLoad();
         }
