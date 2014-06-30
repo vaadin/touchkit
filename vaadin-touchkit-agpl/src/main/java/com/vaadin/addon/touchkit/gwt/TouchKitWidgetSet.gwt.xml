@@ -3,14 +3,13 @@
 	<inherits name="com.vaadin.DefaultWidgetSet" />
 	<inherits name="com.google.gwt.resources.Resources" />
 
-	<define-property name="webkitvariant" values="std,ios7hswa,android2" />
+	<define-property name="webkitvariant" values="std,ios7hswa,android2,ios7safari" />
 	<property-provider name="webkitvariant"><![CDATA[
 	  {
 	    var ua = window.navigator.userAgent;
-	    if (ua.toLowerCase().indexOf('android 2.') != -1) { return 'android2'; }
-	    if (ua.indexOf('OS 7_0') != -1 && 
-	        ua.indexOf('iP') != -1 && 
-	        ua.indexOf('Safari') == -1 ) { return 'ios7hswa'; };
+	    if (/android 2\./i.test(ua)) return 'android2';
+	    if (/iP.+OS 7_0(?!.+Safari)/.test(ua)) return 'ios7hswa';
+	    if (/iP.+OS 7_.+Safari/.test(ua)) return 'ios7safari';
 	    return 'std';
 	  }
 	]]></property-provider>
@@ -63,6 +62,12 @@
 		class="com.vaadin.addon.touchkit.gwt.client.Ios7HomeScreenWebAppHackLoader">
 		<when-type-is class="com.vaadin.addon.touchkit.gwt.client.TouchKitPlatformHackLoader" />
 		<when-property-is name="webkitvariant" value="ios7hswa" />
+	</replace-with>
+	
+	<replace-with
+		class="com.vaadin.addon.touchkit.gwt.client.Ios7SafariHackLoader">
+		<when-type-is class="com.vaadin.addon.touchkit.gwt.client.TouchKitPlatformHackLoader" />
+		<when-property-is name="webkitvariant" value="ios7safari" />
 	</replace-with>
 
 	<replace-with

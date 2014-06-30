@@ -17,6 +17,7 @@
 	border: 0;
 	margin: 0;
 	overflow: hidden;
+	position: fixed;
 }
 
 .v-modal-window-open {
