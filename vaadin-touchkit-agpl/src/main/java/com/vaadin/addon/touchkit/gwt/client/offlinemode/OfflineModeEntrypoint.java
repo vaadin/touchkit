@@ -38,13 +38,13 @@ import com.vaadin.client.ApplicationConnection.ResponseHandlingStartedEvent;
 
 /**
  * When this entry point starts an OfflineMode application is started.
- *
+ * 
  * When the online application goes available, it deactivates the offline
  * application.
- *
+ * 
  * It listen for HTML5 and Cordova online/off-line events
  * activating/deactivating the offline app.
- *
+ * 
  * It also observes any request to check whether the server goes unreachable,
  * and reconfigures heartbeat intervals depending on the connection status.
  */
@@ -53,7 +53,7 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
 
     /**
      * We maintain three flags for defining application statuses.
-     *
+     * 
      * To know whether the app is online anywhere, use {@link
      * OfflineModeEntrypoint.get().getNetworkStatus().isAppOnline()}
      */
@@ -109,6 +109,7 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
                 onError(null, e);
             }
         }
+
         private String computePingUrl() {
             String url = getVaadinServiceUrl();
             if (url == null) {
@@ -122,7 +123,8 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
         // Try to find the serviceUrl. When the device is
         // off-line and the app has not been initialized yet.
         // Only needed when widgetset is local or it is in a CDN.
-        private native String getVaadinServiceUrl() /*-{
+        private native String getVaadinServiceUrl()
+        /*-{
           // When vaadin.initApplication is called, it changes
           // the window name by: appId-random_number.
           var appId = $wnd.name.replace(/-[\d.]+?$/, '');
@@ -170,6 +172,7 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
         // in server side. It seems there is not other way to do this.
         Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
             int counter = 0;
+
             @Override
             public boolean execute() {
                 if (!ApplicationConfiguration.getRunningApplications()
@@ -186,9 +189,9 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
     }
 
     /**
-     * Return a network status object, so as other part of the
-     * app could have info about whether the device network is online
-     * and the Vaadin server is reachable.
+     * Return a network status object, so as other part of the app could have
+     * info about whether the device network is online and the Vaadin server is
+     * reachable.
      */
     public NetworkStatus getNetworkStatus() {
         return status;
@@ -219,6 +222,7 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
                     this);
             applicationConnection.addHandler(ConnectionStatusEvent.TYPE, this);
             applicationConnection.setCommunicationErrorDelegate(this);
+            dispatch(SERVER_AVAILABLE);
         }
     }
 
@@ -272,7 +276,8 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
             if (offlineModeConnector != null
                     && offlineModeConnector.getOfflineModeTimeout() > -1) {
                 // This parameter is configurable from server via connector
-                offlinePingInterval = offlineModeConnector.getOfflineModeTimeout();
+                offlinePingInterval = offlineModeConnector
+                        .getOfflineModeTimeout();
             }
             setHeartBeatInterval(offlinePingInterval);
         }
@@ -408,19 +413,21 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
     }
 
     /*
-     * Using this JSNI block in order to listen to certain DOM events not available
-     * in GWT: HTML-5 and Cordova online/offline.
-     *
-     * We also listen to hash fragment changes and window post-messages, so as the app
-     * is notified with offline events from the parent when it is embedded in an iframe.
-     *
+     * Using this JSNI block in order to listen to certain DOM events not
+     * available in GWT: HTML-5 and Cordova online/offline.
+     * 
+     * We also listen to hash fragment changes and window post-messages, so as
+     * the app is notified with offline events from the parent when it is
+     * embedded in an iframe.
+     * 
      * This block has a couple of hacks to make the app or network go off-line:
-     *   tkGoOffline() tkGoOnline() tkServerDown() tkServerUp()
-     *
-     * NOTE: Most code here is for fixing android bugs firing wrong events and setting
-     * erroneously online flags when it is inside webview.
+     * tkGoOffline() tkGoOnline() tkServerDown() tkServerUp()
+     * 
+     * NOTE: Most code here is for fixing android bugs firing wrong events and
+     * setting erroneously online flags when it is inside webview.
      */
-    private native void configureApplicationOfflineEvents() /*-{
+    private native void configureApplicationOfflineEvents()
+    /*-{
         var _this = this;
         var hasCordovaEvents = false;
 
@@ -492,7 +499,7 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
         // This fixes the issue of android inside phonegap returning erroneus values.
         // It allows old vaadin apps based on testing 'onLine' flag continuing working.
         // Note: Safari disallows changing the 'online' property of the $wnd.
-        if ($wnd.Object.getOwnPropertyDescriptor($wnd.navigator, 'onLine').configurable) {
+        if (!$wnd.navigator.hasOwnProperty('onLine') || $wnd.Object.getOwnPropertyDescriptor($wnd.navigator, 'onLine').configurable) {
           Object.defineProperty($wnd.navigator, 'onLine', {
             set: function() {},
             get: function() {
