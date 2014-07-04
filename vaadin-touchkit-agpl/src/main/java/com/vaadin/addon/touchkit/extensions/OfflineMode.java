@@ -11,7 +11,7 @@ import com.vaadin.ui.UI;
  * The OfflineMode extension adds offline support for the application. Settings
  * for offline mode can be accessed through this class and offline mode can be
  * triggered even though the network connection is still online.
- *
+ * 
  * @author Vaadin Ltd
  */
 public class OfflineMode extends AbstractExtension {
@@ -21,29 +21,6 @@ public class OfflineMode extends AbstractExtension {
     @Override
     protected OfflineModeState getState() {
         return (OfflineModeState) super.getState();
-    }
-
-    /**
-     * @return true if offline mode is enabled for the application.
-     */
-    public boolean isOfflineModeEnabled() {
-        return getState().offlineModeTimeout == -1;
-    }
-
-    /**
-     * Enable or disable offline mode for the application.
-     *
-     * @param offlineModeEnabled
-     *            true to enable, false to disable.
-     */
-    public void setOfflineModeEnabled(boolean offlineModeEnabled) {
-        if (isOfflineModeEnabled() != offlineModeEnabled) {
-            if (offlineModeEnabled) {
-                getState().offlineModeTimeout = OfflineModeState.DEFAULT_OFFLINE_MODE_DELAY;
-            } else {
-                getState().offlineModeTimeout = -1;
-            }
-        }
     }
 
     /**
@@ -60,7 +37,7 @@ public class OfflineMode extends AbstractExtension {
      * Sets the timeout for how long the client side waits for the server to
      * respond before falling back to offline mode. If the value is set to -1,
      * the client side waits forever.
-     *
+     * 
      * @param offlineModeTimeout
      *            timeout in seconds, -1 to disable the timeout.
      */
@@ -77,7 +54,7 @@ public class OfflineMode extends AbstractExtension {
      * <p>
      * The persistent session cookie is on by default if the UI uses the
      * {@link PreserveOnRefresh} annotation.
-     *
+     * 
      * @return true if the session cookie will be made persistent when closing
      *         the browser application
      */
@@ -108,10 +85,10 @@ public class OfflineMode extends AbstractExtension {
      * {@link PreserveOnRefresh} annotation. It is suggested to be used with
      * TouchKit applications that might be used as home screen apps.
      * <p>
-     *
+     * 
      * Note that the normal session lifetime is still respected although
      * persistent cookies are in use.
-     *
+     * 
      * @param persistentSessionCookie
      *            true if persistent session cookies should be used
      */
