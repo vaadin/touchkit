@@ -68,6 +68,9 @@ public class NavigationButtonConnector extends AbstractComponentConnector {
 
             @Override
             public void onClick(ClickEvent event) {
+                if (!getWidget().isEnabled()) {
+                    return;
+                }
                 VNavigationManager panel = getWidget().findNavigationPanel();
                 if (panel != null) {
                     if (getTargetWidget() != null) {

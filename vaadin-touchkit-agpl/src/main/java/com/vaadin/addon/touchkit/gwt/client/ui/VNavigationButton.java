@@ -154,4 +154,8 @@ public class VNavigationButton extends HTML implements TouchStartHandler,
         this.enabled = enabled;
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
+
 }
