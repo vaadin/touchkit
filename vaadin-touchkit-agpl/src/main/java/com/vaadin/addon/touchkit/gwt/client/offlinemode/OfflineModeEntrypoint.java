@@ -54,8 +54,10 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
     /**
      * We maintain three flags for defining application statuses.
      * 
-     * To know whether the app is online anywhere, use {@link
-     * OfflineModeEntrypoint.get().getNetworkStatus().isAppOnline()}
+     * To know whether the app is online anywhere, use: 
+     * <code>
+     * OfflineModeEntrypoint.get().getNetworkStatus().isAppOnline()
+     * </code>
      */
     public class NetworkStatus {
         private boolean forcedOffline = false;

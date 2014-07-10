@@ -38,7 +38,7 @@ public class Html5InputSettings extends AbstractExtension {
 
     /**
      * See <a href=
-     * "https://developer.apple.com/library/safari/#documentation/AppleApplications/Reference/SafariHTMLRef/Articles/Attributes.html#//apple_ref/html/attribute/autocapitalize"
+     * "https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/Attributes.html#//apple_ref/html/attribute/autocapitalize"
      * >Apple ios developer docs</a>.
      * 
      * @param value

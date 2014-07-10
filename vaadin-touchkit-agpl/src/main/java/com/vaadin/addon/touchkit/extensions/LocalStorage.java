@@ -27,7 +27,7 @@ import com.vaadin.ui.UI;
  * <p>
  * As the values are behind network, retrieving a value must be done using
  * asynchronous AP. E.g. like this:
- * <code><pre>
+ * <code>
 LocalStorage.detectValue("myproperty",
         new LocalStorageCallback() {
             public void onSuccess(String value) {
@@ -38,7 +38,7 @@ LocalStorage.detectValue("myproperty",
                 Notification.show("Value retrieval failed: " + error.getMessage());
             }
         });
- * </pre></code>
+ * </code>
  * 
  */
 @SuppressWarnings("serial")

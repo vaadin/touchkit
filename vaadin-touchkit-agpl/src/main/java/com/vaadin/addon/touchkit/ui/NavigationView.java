@@ -8,6 +8,7 @@ import com.vaadin.addon.touchkit.gwt.client.vcom.navigation.NavigationViewState;
 import com.vaadin.ui.AbstractComponentContainer;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
+import com.vaadin.ui.Panel;
 
 /**
  * The NavigationView is a component container which integrates well with the

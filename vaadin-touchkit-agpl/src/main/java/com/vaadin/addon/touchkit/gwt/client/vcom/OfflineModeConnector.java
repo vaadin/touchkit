@@ -85,15 +85,15 @@ public class OfflineModeConnector extends AbstractExtensionConnector implements
     }
 
     /**
-     * @deprecated use {@link OfflineModeEntrypoint.getOfflineMode()}
+     * @deprecated use {@link OfflineModeEntrypoint#getOfflineMode()}
      */
     public OfflineMode getOfflineApp() {
         return OfflineModeEntrypoint.getOfflineMode();
     }
 
     /**
-     * @deprecated use {@link
-     *             OfflineModeEntrypoint.get().getNetworkStatus().isAppOnline()}
+     * @deprecated use
+     *             <code>OfflineModeEntrypoint.getOfflineMode().getNetworkStatus().isAppOnline()</code>
      */
     @Deprecated
     public static boolean isNetworkOnline() {

@@ -211,7 +211,7 @@ public class DatePicker extends SimplePanel implements
      * Set date value of this DatePicker. Some parts of date may be ignored
      * based on current resolution.
      * 
-     * @param newDate
+     * @param newDateStr
      *            New date value as yyyy-MM-ddTHH:mm:ss
      */
     public void setDate(String newDateStr) {

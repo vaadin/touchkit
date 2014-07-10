@@ -10,13 +10,13 @@ import com.google.gwt.event.shared.GwtEvent;
  * the online app cannot be used.
  * <p>
  * Add a GWT deferred binding rule in your widgetset to replace this with your
- * own implementation. An example: <code><pre>
-        <replace-with
-                class="com.example.widgetset.client.MyOfflineMode">
-                <when-type-is
-                        class="com.vaadin.addon.touchkit.gwt.client.OfflineMode" />
-        </replace-with>
- * </pre></code>
+ * own implementation. An example: <code>
+        &lt;replace-with
+                class="com.example.widgetset.client.MyOfflineMode"&gt;
+                &lt;when-type-is
+                        class="com.vaadin.addon.touchkit.gwt.client.OfflineMode" /&gt;
+        &lt;/replace-with&gt;
+ * </code>
  * <p>
  */
 public interface OfflineMode {
@@ -67,7 +67,7 @@ public interface OfflineMode {
 
     /**
      * Holds the reason for why the offline mode was activated. Passed to the
-     * {@link #activate(ActivationEvent)} method.
+     * {@link #activate(ActivationReason)} method.
      */
     @Deprecated
     public interface ActivationEvent {

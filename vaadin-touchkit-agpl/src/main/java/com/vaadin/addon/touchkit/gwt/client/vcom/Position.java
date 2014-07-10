@@ -97,7 +97,7 @@ public class Position implements Serializable {
 
     /**
      * @return denotes the direction of travel of the hosting device and is
-     *         specified in degrees, where 0° ≤ heading < 360°, counting
+     *         specified in degrees, where 0° ≤ heading &lt; 360°, counting
      *         clockwise relative to the true north. Null if device don't
      *         support it or it is not moving.
      */

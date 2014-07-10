@@ -94,12 +94,6 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
 
     /**
      * Add or move widget to given position
-     * 
-     * @param widget
-     * @param index
-     * @param componentWidth
-     * @param caption
-     * @param iconUrl
      */
     public void addOrMove(final Widget widget, int index) {
         if (widgets.contains(widget)) {
@@ -124,12 +118,6 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
 
     /**
      * Add widget to given position
-     * 
-     * @param widget
-     * @param index
-     * @param componentWidth
-     * @param caption
-     * @param iconUrl
      */
     public void addWidget(final Widget widget, int index) {
         if (widgets.contains(widget)) {
@@ -152,8 +140,6 @@ public class VerticalComponentGroupWidget extends ComplexPanel {
 
     /**
      * Adds Widget to group
-     * 
-     * @param widget
      */
     @Override
     public void add(final Widget widget) {

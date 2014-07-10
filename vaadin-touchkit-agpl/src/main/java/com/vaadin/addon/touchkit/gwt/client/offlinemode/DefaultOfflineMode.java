@@ -89,14 +89,14 @@ public class DefaultOfflineMode implements OfflineMode {
 
     /**
      * @return The activation message passed to us in the parameter for the
-     *         {@link #activate(ActivationEvent)} method.
+     *         {@link #activate(ActivationReason)} method.
      */
     public String getActivationMessage() {
         return activationEvent.getMessage();
     }
 
     /**
-     * This method is called by the default {@link #activate(ActivationEvent)}
+     * This method is called by the default {@link #activate(ActivationReason)}
      * implementation to build the contents of the offline mode each time it is
      * activated. The simplest method to customize offline mode is to override
      * this method and add a custom app to the panel returned by the
