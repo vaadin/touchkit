@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.http.client.Request;
@@ -54,7 +55,7 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
     /**
      * We maintain three flags for defining application statuses.
      * 
-     * To know whether the app is online anywhere, use: 
+     * To know whether the app is online anywhere, use:
      * <code>
      * OfflineModeEntrypoint.get().getNetworkStatus().isAppOnline()
      * </code>
@@ -79,6 +80,7 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
 
     private static OfflineModeEntrypoint instance = null;
     private static OfflineMode offlineModeApp;
+    private static JavaScriptObject appConf = null;
 
     private NetworkStatus status = new NetworkStatus();
 
@@ -113,7 +115,9 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
         }
 
         private String computePingUrl() {
-            String url = getVaadinServiceUrl();
+            // Try to find the serviceUrl.
+            // Only needed when widgetset is local or it is in a CDN.
+            String url = getVaadinConfValue(getVaadinConf(), "serviceUrl");
             if (url == null) {
                 url = GWT.getHostPageBaseURL();
             }
@@ -121,25 +125,6 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
             logger.info("Ping URL " + url);
             return url;
         }
-
-        // Try to find the serviceUrl. When the device is
-        // off-line and the app has not been initialized yet.
-        // Only needed when widgetset is local or it is in a CDN.
-        private native String getVaadinServiceUrl()
-        /*-{
-          // When vaadin.initApplication is called, it changes
-          // the window name by: appId-random_number.
-          var appId = $wnd.name.replace(/-[\d.]+?$/, '');
-          var app = $wnd.vaadin.getApp(appId);
-          if (!app) {
-            // If window name is not set, try to get the appId
-            // from the application container
-            var elms = $doc.querySelectorAll('.v-app');
-            appId = elms && elms[0] && elms[0].id;
-            app = $wnd.vaadin.getApp(appId);
-          }
-          return app && app.getConfig('serviceUrl') || null;
-        }-*/;
     };
 
     /**
@@ -160,6 +145,18 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
             return;
         }
         instance = this;
+
+        // If application is not extending TK servlet offline-mode is not reliable
+        if (!isTouchKitServlet()) {
+            logger.severe("Application Servlet is not extending TouchKitServlet, hence offlineMode has been disabled.");
+            return;
+        }
+
+        // Application can disable offline.
+        if (!isOfflineModeEnabled()) {
+            logger.info("OfflineMode is disabled by server configuration.");
+            return;
+        }
 
         // Configure HTML5 off-line listeners
         configureApplicationOfflineEvents();
@@ -270,7 +267,7 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
      * is not ready we use a timer instead.
      */
     private void configureHeartBeat() {
-        if (status.isAppOnline()) {
+        if (status.isAppOnline() || !isOfflineModeEnabled()) {
             setHeartBeatInterval(onlinePingInterval);
         } else if (!status.isNetworkOnline()) {
             stopHeartBeat();
@@ -347,6 +344,9 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
      */
     private void goOffline(ActivationReason reason) {
         logger.info("Network OFFLINE (" + reason + ")");
+        if (!isOfflineModeEnabled()) {
+            return;
+        }
         lastReason = reason;
         getOfflineMode().activate(reason);
         if (applicationConnection != null) {
@@ -550,4 +550,47 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
           $wnd.parent.window.postMessage("touchkit-ready", "*");
         }
     }-*/;
+
+    // Try to find the vaadin config js-object when the app is
+    // off-line and it has not been initialized yet
+    private static native JavaScriptObject getVaadinConf()
+    /*-{
+      var app = @com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineModeEntrypoint::appConf;
+      if (app == null) {
+        // When vaadin.initApplication is called, it changes
+        // the window name by: appId-random_number.
+        var appId = $wnd.name.replace(/-[\d.]+?$/, '');
+        var app = $wnd.vaadin.getApp(appId);
+        if (!app) {
+          // If window name is not set, try to get the appId
+          // from the application container
+          var elms = $doc.querySelectorAll('.v-app');
+          appId = elms && elms[0] && elms[0].id;
+          app = $wnd.vaadin.getApp(appId);
+        }
+        @com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineModeEntrypoint::appConf = app;
+      }
+      return app;
+    }-*/;
+
+    // Get a vaadin config value
+    private static native String getVaadinConfValue(JavaScriptObject app, String key)
+    /*-{
+      var r = app && app.getConfig(key);
+      // return null only in the case the value does not exist
+      // otherwise return the string representation of the value.
+      return r == null ? null : ('' + r);
+    }-*/;
+
+    // Return true if offline mode is enabled in this app.
+    // When true we never show the offline UI when the server is unreachable.
+    private static boolean isOfflineModeEnabled() {
+        return Boolean.valueOf(getVaadinConfValue(getVaadinConf(), "offlineEnabled"));
+    }
+
+    // Return true if servlet is extending TouchKitServlet.
+    //'widgetsetUrl' config attribute is set by TK servlet.
+    private static boolean isTouchKitServlet() {
+        return getVaadinConfValue(getVaadinConf(), "widgetsetUrl") != null;
+    }
 }

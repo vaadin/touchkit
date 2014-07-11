@@ -3,6 +3,8 @@ package com.vaadin.addon.touchkit.settings;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import com.vaadin.addon.touchkit.annotations.CacheManifestEnabled;
+import com.vaadin.addon.touchkit.annotations.OfflineModeEnabled;
 import com.vaadin.addon.touchkit.server.TouchKitServlet;
 import com.vaadin.server.BootstrapFragmentResponse;
 import com.vaadin.server.BootstrapListener;
@@ -15,6 +17,7 @@ import com.vaadin.server.SystemMessages;
 import com.vaadin.server.SystemMessagesInfo;
 import com.vaadin.server.SystemMessagesProvider;
 import com.vaadin.server.VaadinService;
+import com.vaadin.server.VaadinServletService;
 
 /**
  * TouchKitSettings is a collection of tools that help modify various touch
@@ -24,6 +27,7 @@ import com.vaadin.server.VaadinService;
  * This class should be instantiated by and used through the servlet class,
  * which is {@link TouchKitServlet} by default.
  */
+@SuppressWarnings("serial")
 public class TouchKitSettings implements BootstrapListener,
         SessionInitListener, SystemMessagesProvider {
 
@@ -58,7 +62,7 @@ public class TouchKitSettings implements BootstrapListener,
     /**
      * Creates a new instance of TouchKitSettings and binds it to the given
      * {@link VaadinService}.
-     * 
+     *
      * @param vaadinService
      *            the vaadin service to which the new instance should be bound.
      */
@@ -70,7 +74,7 @@ public class TouchKitSettings implements BootstrapListener,
          * default settings). Without these custom values pixel size is huge in
          * landscape mode. With these values iphone5 goes to letter box when on
          * home screen.
-         * 
+         *
          * @viewport css rule will replace meta tags in the future and there is
          * a prefixed version in MobileIE10, but it is buggy (landscape mode
          * don't change "device-width").
@@ -95,14 +99,13 @@ public class TouchKitSettings implements BootstrapListener,
         setApplicationIcons(new ApplicationIcons());
         setApplicationCacheSettings(new ApplicationCacheSettings());
         vaadinService.addSessionInitListener(this);
-
         vaadinService.setSystemMessagesProvider(this);
     }
 
     /**
      * Selects viewport settings to be used for given bootstrap
      * request/response.
-     * 
+     *
      * @param response
      * @return The {@link ViewPortSettings}
      */
@@ -145,6 +148,7 @@ public class TouchKitSettings implements BootstrapListener,
 
     @Override
     public void modifyBootstrapPage(BootstrapPageResponse response) {
+
         ViewPortSettings viewPortSettings2 = selectViewPortSettings(response);
         if (viewPortSettings2 != null) {
             viewPortSettings2.modifyBootstrapPage(response);
@@ -156,6 +160,29 @@ public class TouchKitSettings implements BootstrapListener,
             getApplicationIcons().modifyBootstrapPage(response);
         }
         if (getApplicationCacheSettings() != null) {
+            OfflineModeEnabled offline = null;
+            CacheManifestEnabled manifest = null;
+
+            Class<?> clazz = response.getUiClass();
+            if (clazz != null) {
+                offline = clazz.getAnnotation(OfflineModeEnabled.class);
+                manifest = clazz.getAnnotation(CacheManifestEnabled.class);
+            }
+            if (response.getSession().getService() instanceof VaadinServletService) {
+                clazz = ((VaadinServletService) response.getSession()
+                        .getService()).getServlet().getClass();
+                if (offline == null) {
+                    offline = clazz.getAnnotation(OfflineModeEnabled.class);
+                }
+                if (manifest == null) {
+                    manifest = clazz.getAnnotation(CacheManifestEnabled.class);
+                }
+            }
+
+            getApplicationCacheSettings().setCacheManifestEnabled(
+                    manifest == null || manifest.value());
+            getApplicationCacheSettings().setOfflineModeEnabled(
+                    manifest == null || manifest.value());
             getApplicationCacheSettings().modifyBootstrapPage(response);
         }
     }
@@ -174,7 +201,7 @@ public class TouchKitSettings implements BootstrapListener,
 
     /**
      * Sets the {@link ApplicationCacheSettings} instance to use.
-     * 
+     *
      * @param applicationCacheSettings
      *            the {@link ApplicationCacheSettings} instance to use.
      */
@@ -185,7 +212,7 @@ public class TouchKitSettings implements BootstrapListener,
 
     /**
      * Sets the {@link ApplicationIcons} instance to use.
-     * 
+     *
      * @param applicationIcons
      *            the {@link ApplicationIcons} instance to use.
      */
@@ -195,7 +222,7 @@ public class TouchKitSettings implements BootstrapListener,
 
     /**
      * Sets the {@link ViewPortSettings} instance to use by default.
-     * 
+     *
      * @param viewPortSettings
      *            the {@link ViewPortSettings} instance to use.
      * @see #addViewPortSettings(SettingSelector)
@@ -207,7 +234,7 @@ public class TouchKitSettings implements BootstrapListener,
     /**
      * Adds a request dependent view port settings. If selector returns
      * settings, it will override default view port setting.
-     * 
+     *
      * @param viewPortSettingSelector
      */
     public void addViewPortSettings(
@@ -217,7 +244,7 @@ public class TouchKitSettings implements BootstrapListener,
 
     /**
      * Sets the {@link WebAppSettings} instance to use.
-     * 
+     *
      * @param iosWebAppSettings
      *            the {@link WebAppSettings} instance to use.
      */
