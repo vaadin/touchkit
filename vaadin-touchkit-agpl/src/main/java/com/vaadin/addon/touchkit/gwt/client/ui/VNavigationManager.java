@@ -374,28 +374,40 @@ public class VNavigationManager extends ComplexPanel {
     }
 
     public void setCurrentWidget(Widget w) {
-        if (nextView == w) {
+        if (currentView == null) {
+            // No currentView => no animation,
+            // = placeholder navigation done, or this is the first view
+            if (w == nextView) {
+                // turns out we're actually going to show the nextView
+                // null to avoid problems, we're going to show it w/o animation
+                setNextWidget(null);
+            } else if (w == prevView) {
+                // turns out we're actually going to show the prevView
+                // null to avoid problems, we're going to show it w/o animation
+                setPreviousWidget(null);
+            }
+
+            Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+                @Override
+                public void execute() {
+                    initIosScroollHack();
+
+                }
+            });
+            add(w, -currentWrapperPos);
+            currentView = w;
+        } else if (nextView == w) {
             navigateForward();
         } else if (prevView == w) {
             navigateBackward();
         } else {
-            // replace current with given
-            if (currentView != null) {
-                if (currentView == w) {
-                    return;
-                }
-                remove(currentView);
-            } else {
-                Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-                    @Override
-                    public void execute() {
-                        initIosScroollHack();
-
-                    }
-                });
+            if (currentView == w) {
+                return;
             }
-            add(w, -currentWrapperPos);
-            currentView = w;
+            // We'll navigate forward since we don't know better -
+            // explicit direction should be added to the API
+            setNextWidget(w);
+            navigateForward();
         }
     }
 
