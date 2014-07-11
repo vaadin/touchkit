@@ -22,6 +22,11 @@ import com.vaadin.util.ReflectTools;
  * client side, the {@link NavigationManager} will start animation immediately
  * when clicked, while the client is waiting for a response from the server.
  * <p>
+ * If the button does not have a target view, {@link NavigationButton} will
+ * still cause a immediate client-side animation, and in this case you MUST make
+ * sure to navigate to a view in the {@link NavigationButtonClickListener},
+ * otherwise the user will be stuck on an empty view.
+ * <p>
  * Note that navigation will only work when the button is used inside a
  * {@link NavigationManager}, otherwise it will work as a regular {@link Button}.
  */
@@ -31,6 +36,11 @@ public class NavigationButton extends AbstractComponent {
 
     /**
      * Constructs a new NavigationButton with the given caption.
+     * <p>
+     * NOTE that if you do not specify a target view later with
+     * {@link #setTargetView(Component)}, OR navigate to a view when the button
+     * is clicked (in a {@link NavigationButtonClickListener}, the user will be
+     * stuck on a empty view.
      * 
      * @param caption
      *            the caption
@@ -68,6 +78,11 @@ public class NavigationButton extends AbstractComponent {
 
     /**
      * Creates a navigation button without any caption nor target view.
+     * <p>
+     * NOTE that if you do not specify a target view later with
+     * {@link #setTargetView(Component)}, OR navigate to a view when the button
+     * is clicked (in a {@link NavigationButtonClickListener}, the user will be
+     * stuck on a empty view.
      */
     public NavigationButton() {
         registerRpc(new NavigationButtonRpc() {
