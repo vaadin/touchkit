@@ -212,6 +212,17 @@
 			<resource>
 				<directory>src/main/resources</directory>
 			</resource>
+			<resource>
+				<directory>./</directory>
+				<includes><include>license-agpl-3.0.txt</include></includes>
+			</resource>
+			<resource>
+				<directory>../</directory>
+				<includes>
+					<include>license.html</include>
+					<include>assets/**</include>
+				</includes>
+			</resource>
 		</resources>
 
 		<plugins>
@@ -258,6 +269,9 @@
 					<includes>
 						<include>META-INF/maven/${project.groupId}/${project.artifactId}/**</include>
 						<include>com/**</include>
+						<include>*.txt</include>
+						<include>*.html</include>
+						<include>assets/**</include>
 					</includes>
 				</configuration>
 			</plugin>

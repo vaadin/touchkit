@@ -89,6 +89,17 @@
 			<resource>
 				<directory>../vaadin-touchkit-agpl/src/main/resources</directory>
 			</resource>
+			<resource>
+				<directory>./</directory>
+				<includes><include>license-cval-3.txt</include></includes>
+			</resource>
+			<resource>
+				<directory>../</directory>
+				<includes>
+					<include>license.html</include>
+					<include>assets/**</include>
+				</includes>
+			</resource>
 
 			<!-- What is this?? -->
 			<resource>
@@ -169,6 +180,9 @@
 					<includes>
 						<include>META-INF/maven/${project.groupId}/${project.artifactId}/**</include>
 						<include>com/**</include>
+						<include>*.txt</include>
+						<include>*.html</include>
+						<include>assets/**</include>
 					</includes>
 				</configuration>
 			</plugin>
