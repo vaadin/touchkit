@@ -46,10 +46,10 @@
     </licenses>
 
     <properties>
-        
-       	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		
+
+           <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
         <!-- May be overridden by the build system when creating CVAL licensed packages -->
         <license.short.name>agpl</license.short.name>
 
@@ -58,7 +58,7 @@
         <Implementation-Title>Vaadin TouchKit</Implementation-Title>
         <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
         <Vaadin-Addon>vaadin-touchkit-${license.short.name}-${project.version}.jar</Vaadin-Addon>
-        
+
         <snapshot.repository.url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</snapshot.repository.url>
     </properties>
 
@@ -69,7 +69,7 @@
 <!--         <module>vaadin-touchkit-integration-tests</module> -->
 <!--         <module>vaadin-touchkit-offline-tests</modules> -->
     </modules>
-    
+
     <build>
         <pluginManagement>
             <plugins>
@@ -81,7 +81,7 @@
                         <skipAssembly>true</skipAssembly>
                     </configuration>
                 </plugin>
-        
+
                 <plugin>
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>2.5</version>
