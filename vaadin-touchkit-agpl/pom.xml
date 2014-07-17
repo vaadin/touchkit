@@ -272,6 +272,7 @@
 						<include>*.txt</include>
 						<include>*.html</include>
 						<include>assets/**</include>
+						<include>VAADIN/widgetsets/com.vaadin.addon.touchkit.gwt.TouchKitWidgetSet/**</include>
 					</includes>
 				</configuration>
 			</plugin>
@@ -281,20 +282,28 @@
 				<artifactId>vaadin-maven-plugin</artifactId>
 				<version>7.1.1</version>
 				<configuration>
-					<webappDirectory>${project.build.directory}/testwebapp/VAADIN/widgetsets</webappDirectory>
+					<webappDirectory>target/classes/VAADIN/widgetsets</webappDirectory>
 					<modules>
 						<module>com.vaadin.addon.touchkit.gwt.TouchKitWidgetSet</module>
 					</modules>
 					<extraJvmArgs>-Xmx1024M -Xss4024k</extraJvmArgs>
 					<runTarget>http://localhost:7777/</runTarget>
 					<hostedWebapp>${project.build.directory}/${project.build.finalName}</hostedWebapp>
-					<noServer>true</noServer>
 					<soyc>false</soyc>
-					<draftCompile>true</draftCompile>
+					<draftCompile>false</draftCompile>
 					<strict>true</strict>
 					<style>OBF</style>
 					<force>true</force>
+					<!-- not enabling it right now, until issue #13801 is fixed -->
+					<closureCompiler>false</closureCompiler>
 				</configuration>
+                                <executions>
+                                        <execution>
+                                                <goals>
+                                                        <goal>compile</goal>
+                                                </goals>
+                                        </execution>
+                                </executions>
 			</plugin>
 		</plugins>
 		<pluginManagement>

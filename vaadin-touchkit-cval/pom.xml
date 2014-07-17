@@ -120,6 +120,11 @@
 				<groupId>com.github.zch</groupId>
 				<artifactId>pdfsplit-maven-plugin</artifactId>
 				<version>1.0.1</version>
+				<configuration>
+					<inputUrl>http://vaadin.com/download/book-of-vaadin/vaadin-7/pdf/book-of-vaadin.pdf</inputUrl>
+					<chapter>Chapter 20. Mobile Applications with TouchKit</chapter>
+					<outFile>${project.build.directory}/vaadin-touchkit-manual.pdf</outFile>
+				</configuration>
 				<executions>
 					<execution>
 						<id>pdfsplit</id>
@@ -127,11 +132,6 @@
 						<goals>
 							<goal>split</goal>
 						</goals>
-						<configuration>
-							<inputUrl>https://vaadin.com/download/book-of-vaadin/vaadin-7/pdf/book-of-vaadin.pdf</inputUrl>
-							<chapter>Chapter 22. Mobile Applications with TouchKit</chapter>
-							<outFile>${project.build.directory}/vaadin-touchkit-manual.pdf</outFile>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>
@@ -183,6 +183,7 @@
 						<include>*.txt</include>
 						<include>*.html</include>
 						<include>assets/**</include>
+						<include>VAADIN/widgetsets/com.vaadin.addon.touchkit.gwt.TouchKitWidgetSet/**</include>
 					</includes>
 				</configuration>
 			</plugin>
@@ -223,6 +224,7 @@
 				<version>2.2.1</version>
 				<configuration>
 					<appendAssemblyId>false</appendAssemblyId>
+                                        <attach>false</attach>
 					<descriptors>
 						<descriptor>../vaadin-touchkit-agpl/assembly/assembly.xml</descriptor>
 					</descriptors>
@@ -237,7 +239,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 		</plugins>
 
 		<pluginManagement>
@@ -316,5 +317,4 @@
 		</dependency>
 
 	</dependencies>
-
 </project>
