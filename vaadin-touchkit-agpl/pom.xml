@@ -150,7 +150,7 @@
 
         <!-- May be overridden by the build system -->
         <license.short.name>agpl</license.short.name>
-        <vaadin.version.maven>7.2.1</vaadin.version.maven>
+        <vaadin.version.maven>[7.2.1,7.2.9999],[7.3.0.beta1,7.3.0.rc99],[7.3.0,7.3.9999]</vaadin.version.maven>
         <gpg.passphrase.file>empty.properties</gpg.passphrase.file>
         <gpg.skip>true</gpg.skip>
         <snapshot.repository.url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</snapshot.repository.url>
@@ -379,6 +379,7 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-server</artifactId>
             <version>${vaadin.version.maven}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -396,6 +397,7 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-themes</artifactId>
             <version>${vaadin.version.maven}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
