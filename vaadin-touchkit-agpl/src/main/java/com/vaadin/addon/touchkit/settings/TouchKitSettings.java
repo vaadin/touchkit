@@ -182,7 +182,7 @@ public class TouchKitSettings implements BootstrapListener,
             getApplicationCacheSettings().setCacheManifestEnabled(
                     manifest == null || manifest.value());
             getApplicationCacheSettings().setOfflineModeEnabled(
-                    manifest == null || manifest.value());
+                    offline == null || offline.value());
             getApplicationCacheSettings().modifyBootstrapPage(response);
         }
     }
