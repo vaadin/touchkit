@@ -1,5 +1,6 @@
 package com.vaadin.addon.touchkit.extensions;
 
+import com.vaadin.addon.touchkit.annotations.OfflineModeEnabled;
 import com.vaadin.addon.touchkit.gwt.client.vcom.OfflineModeClientRpc;
 import com.vaadin.addon.touchkit.gwt.client.vcom.OfflineModeState;
 import com.vaadin.annotations.PreserveOnRefresh;
@@ -21,6 +22,26 @@ public class OfflineMode extends AbstractExtension {
     @Override
     protected OfflineModeState getState() {
         return (OfflineModeState) super.getState();
+    }
+
+    /**
+     * This method has been deprecated in favor of the
+     * {@link OfflineModeEnabled} annotation.
+     * 
+     * @return always true
+     */
+    @Deprecated
+    public boolean isOfflineModeEnabled() {
+        return true;
+    }
+
+    /**
+     * This method has been deprecated in favor of the
+     * {@link OfflineModeEnabled} annotation and is a no-op.
+     */
+    @Deprecated
+    public void setOfflineModeEnabled(boolean offlineModeEnabled) {
+        // NOP
     }
 
     /**
