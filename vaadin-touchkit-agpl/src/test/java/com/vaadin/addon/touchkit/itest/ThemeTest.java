@@ -295,15 +295,15 @@ public class ThemeTest extends AbstractTouchKitIntegrationTest {
             previous.setStyleName(StyleNames.NAVIGATION_BUTTON_BACK);
             tab.setLeftComponent(previous);
 
-            tab.setRightComponent(new Button("Button",
-                    new Button.ClickListener() {
-
-                        @Override
-                        public void buttonClick(ClickEvent event) {
-                            Notification
-                                    .show("Yeah, this is another notification. You clicked the button.");
-                        }
-                    }));
+            Button button = new Button(FontAwesome.BARS);
+            button.addClickListener(new Button.ClickListener() {
+                @Override
+                public void buttonClick(ClickEvent event) {
+                    Notification
+                            .show("Yeah, this is another notification. You clicked the button.");
+                }
+            });
+            tab.setRightComponent(button);
         }
     }
 

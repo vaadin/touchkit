@@ -675,8 +675,9 @@ a {
 /*FIXME should be for horizontal component group as well*/
 .v-touchkit-navbar .v-button .v-icon {
 	height: 20px;
-	/* 28px height button conten, center */
-	margin: 4px 0 0 0;
+	line-height: 20px;
+	/* 30px height button content, center */
+	margin: 5px 0 0 0;
 	vertical-align:top;
 }
 
