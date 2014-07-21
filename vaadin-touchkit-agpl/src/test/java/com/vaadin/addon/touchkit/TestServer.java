@@ -55,9 +55,10 @@ public class TestServer {
         // servletHolder.setInitParameter("fallbackWidgetset",
         // Constants.DEFAULT_WIDGETSET);
 
-        File file = new File("./target/testwebapp");
-        if (!file.isDirectory()) {
-            System.err.println("Oops: " + file + " does not seem to exist!");
+        File file = new File("./target/classes");
+        if (!file.isDirectory() || !new File(file, "VAADIN").isDirectory()) {
+            System.err.println("Oops: " + file
+                    + "/VAADIN does not seem to exist!");
             System.err.println("Did you remember to mvn vaadin:compile?");
             return;
         }
