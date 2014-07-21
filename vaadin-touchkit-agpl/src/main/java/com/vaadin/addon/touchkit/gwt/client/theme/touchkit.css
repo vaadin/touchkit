@@ -71,7 +71,8 @@
 
 /* Navbuttons */
 @def navButtonGradient literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4d8cb9), to(#3e6fa8))');
-@def navButtonPaddingRight 16px;
+@def navButtonPaddingRight 36px;
+@def navButtonIconOffsetRight 16px;
 @def navButtonDescRadius 7px;
 @def navButtonDescPadding 2px 5px;
 
@@ -544,7 +545,6 @@ a {
 	font-weight: normal;
 	line-height: normal;
 	float:right;
-	margin-right: 22px;
 	margin-left: 10px;
 	margin-top: listLayoutMargin;
 	padding: navButtonDescPadding;
@@ -580,7 +580,7 @@ a {
 	content: fa-icon-chevron-right;
 	color: navbarButtonColor;
 	position: absolute;
-	right: navButtonPaddingRight;
+	right: navButtonIconOffsetRight;
 	top: 0;
 	bottom: 0;
 	width: 10px;
