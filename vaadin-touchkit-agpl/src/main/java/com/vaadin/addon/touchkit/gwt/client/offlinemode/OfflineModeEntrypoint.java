@@ -80,6 +80,7 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
 
     private static OfflineModeEntrypoint instance = null;
     private static OfflineMode offlineModeApp;
+
     private static JavaScriptObject appConf = null;
 
     private NetworkStatus status = new NetworkStatus();
@@ -99,11 +100,11 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
      * available. Normally when starting it with network off-line.
      */
     private final Timer pingToServer = new Timer() {
-        final String url = computePingUrl();
+        String url;
 
         @Override
         public void run() {
-            RequestBuilder rq = new RequestBuilder(RequestBuilder.POST, url);
+            RequestBuilder rq = new RequestBuilder(RequestBuilder.POST, getPingUrl());
             rq.setTimeoutMillis(offlinePingInterval);
             rq.setCallback(OfflineModeEntrypoint.this);
             try {
@@ -114,15 +115,17 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
             }
         }
 
-        private String computePingUrl() {
-            // Try to find the serviceUrl.
-            // Only needed when widgetset is local or it is in a CDN.
-            String url = getVaadinConfValue(getVaadinConf(), "serviceUrl");
+        private String getPingUrl() {
             if (url == null) {
-                url = GWT.getHostPageBaseURL();
+                // Try to find the serviceUrl.
+                // Only needed when widgetset is local or it is in a CDN.
+                url = getVaadinConfValue("serviceUrl");
+                if (url == null) {
+                    url = GWT.getHostPageBaseURL();
+                }
+                url += "/PING";
+                logger.info("Ping URL " + url);
             }
-            url += "/PING";
-            logger.info("Ping URL " + url);
             return url;
         }
     };
@@ -146,24 +149,27 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
         }
         instance = this;
 
+        // Read the Javascript object with the vaadin root configuration
+        appConf = getVaadinConf();
+
         // If application is not extending TK servlet offline-mode is not reliable
         if (!isTouchKitServlet()) {
-            logger.severe("Application Servlet is not extending TouchKitServlet, hence offlineMode has been disabled.");
+            logger.severe("OfflineMode disabled because Servlet is not extending TouchKitServlet.");
             return;
         }
 
         // Application can disable offline.
         if (!isOfflineModeEnabled()) {
-            logger.info("OfflineMode is disabled by server configuration.");
+            logger.info("OfflineMode disabled because of server configuration.");
             return;
         }
-
-        // Configure HTML5 off-line listeners
-        configureApplicationOfflineEvents();
 
         // We always go off-line at the beginning until we receive
         // a Vaadin online response
         dispatch(APP_STARTING);
+
+        // Configure HTML5 off-line listeners
+        configureApplicationOfflineEvents();
 
         // Loop until vaadin application connection is loaded.
         // Normally it should be done when the OfflineModeConnector is
@@ -230,6 +236,12 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
      * flags and going Off-line or On-line in case.
      */
     public void dispatch(ActivationReason reason) {
+        // If server failed when returning the widgetset configuration, we do nothing
+        if (getRootResponseStatus() >= 400) {
+            logger.severe("OfflineMode disabled because a bad response when fetching root configuration.");
+            return;
+        }
+        // Only dispatch events when something changes
         if (lastReason != reason) {
             logger.info("Dispatching: " + lastReason + " -> " + reason
                     + " flags=" + status.forcedOffline + " "
@@ -330,6 +342,10 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
                 applicationConnection.setApplicationRunning(true);
                 applicationConnection.fireEvent(new OnlineEvent());
             } else {
+                // TODO(manolo), we can call fetchRootConfiguration instead of
+                // making the user reload the app since patch to bootstrap.js
+                // exports a reference to the function.
+
                 // Notify offline UI that the user has to reload the app.
                 lastReason = ONLINE_APP_NOT_STARTED;
                 getOfflineMode().activate(lastReason);
@@ -555,27 +571,13 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
     // off-line and it has not been initialized yet
     private static native JavaScriptObject getVaadinConf()
     /*-{
-      var app = @com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineModeEntrypoint::appConf;
-      if (app == null) {
-        // When vaadin.initApplication is called, it changes
-        // the window name by: appId-random_number.
-        var appId = $wnd.name.replace(/-[\d.]+?$/, '');
-        var app = $wnd.vaadin.getApp(appId);
-        if (!app) {
-          // If window name is not set, try to get the appId
-          // from the application container
-          var elms = $doc.querySelectorAll('.v-app');
-          appId = elms && elms[0] && elms[0].id;
-          app = $wnd.vaadin.getApp(appId);
-        }
-        @com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineModeEntrypoint::appConf = app;
-      }
-      return app;
+      return $wnd.vaadin.getApp($wnd.vaadin.getAppIds()[0]);
     }-*/;
 
     // Get a vaadin config value
-    private static native String getVaadinConfValue(JavaScriptObject app, String key)
+    private static native String getVaadinConfValue(String key)
     /*-{
+      var app = @com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineModeEntrypoint::appConf;
       var r = app && app.getConfig(key);
       // return null only in the case the value does not exist
       // otherwise return the string representation of the value.
@@ -584,13 +586,19 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
 
     // Return true if offline mode is enabled in this app.
     // When true we never show the offline UI when the server is unreachable.
-    private static boolean isOfflineModeEnabled() {
-        return Boolean.valueOf(getVaadinConfValue(getVaadinConf(), "offlineEnabled"));
+    private boolean isOfflineModeEnabled() {
+        return Boolean.valueOf(getVaadinConfValue("offlineEnabled"));
     }
 
     // Return true if servlet is extending TouchKitServlet.
-    //'widgetsetUrl' config attribute is set by TK servlet.
+    // the 'widgetsetUrl'  attribute is set by TK servlet.
     private static boolean isTouchKitServlet() {
-        return getVaadinConfValue(getVaadinConf(), "widgetsetUrl") != null;
+        return getVaadinConfValue("widgetsetUrl") != null;
+    }
+
+    // Return the http status of the fetchRootConfiguration call
+    private static int getRootResponseStatus() {
+        String code = getVaadinConfValue("rootResponseStatus");
+        return code == null ? -1 : Integer.valueOf(code);
     }
 }
