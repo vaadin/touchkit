@@ -447,7 +447,15 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
     private native void configureApplicationOfflineEvents()
     /*-{
         var _this = this;
-        var hasCordovaEvents = false;
+        // Cordova installed in current window
+        var hasCordovaEvents = $wnd.navigator.network && $wnd.navigator.network.connection && $wnd.Connection;
+        // Cordova installed in parent window sending network events via postMessage
+        var maybeCordova = !hasCordovaEvents && $wnd.parent !== $wnd && $wnd.postMessage;
+        // Use html5 online events as the last resource because of bugs in
+        // android webview which sends unexpected online/offline events when actually
+        // there weren't real network changes we have detected these issues when rotating
+        // the screen, hiding the keyboard, focusing an input text, etc.
+        var useHtml5Events = !hasCordovaEvents && $wnd.navigator.onLine != undefined;
 
         function offline() {
           console.log(">>> Network flag is offline.");
@@ -496,41 +504,43 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
           }
         }
 
-        // Listen to HTML5 offline-online events
-        if ($wnd.navigator.onLine != undefined) {
-          // android webview sends online/offline events when actually
-          // there weren't real network changes like rotate the
-          // screen, hide the keyboard, etc. So if we have detected that
-          // cordova is available, we ignore html5 network events.
-          $wnd.addEventListener("offline", function() {
-            if (!hasCordovaEvents) offline();
-          }, false);
-          $wnd.addEventListener("online", function() {
-            if (!hasCordovaEvents) online();
-          }, false);
-          // use HTML5 to test whether connection is available when the app starts
-          if (!$wnd.navigator.onLine) {
-            offline();
-          }
-        }
-        // Redefine the HTML-5 onLine indicator.
-        // This fixes the issue of android inside phonegap returning erroneus values.
-        // It allows old vaadin apps based on testing 'onLine' flag continuing working.
-        // Note: Safari disallows changing the 'online' property of the $wnd.
-        if (!$wnd.navigator.hasOwnProperty('onLine') || $wnd.Object.getOwnPropertyDescriptor($wnd.navigator, 'onLine').configurable) {
-          Object.defineProperty($wnd.navigator, 'onLine', {
-            set: function() {},
-            get: function() {
-              var sts = _this.@com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineModeEntrypoint::getNetworkStatus()();
-              return sts.@com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineModeEntrypoint.NetworkStatus::isAppOnline()();
+        // Listen to HTML5 offline-online events.
+        if (useHtml5Events) {
+          // Delay so as we know whether cordova is sending events.
+          setTimeout(function() {
+            // If we have cordova ignore html5 network events at all.
+            if (hasCordovaEvents) return;
+
+            $wnd.addEventListener("offline", function() {
+              offline();
+            }, false);
+            $wnd.addEventListener("online", function() {
+              online();
+            }, false);
+            // use HTML5 to test whether connection is available when the app starts
+            if (!$wnd.navigator.onLine) {
+              offline();
             }
-          });
+          }, maybeCordova ? 50 : 0);
+
+          // Redefine the HTML-5 onLine indicator.
+          // This fixes the issue of android inside phonegap returning erroneus values.
+          // It allows old vaadin apps based on testing 'onLine' flag continuing working.
+          // Note: Safari disallows changing the 'online' property of the $wnd.
+          if (!$wnd.navigator.hasOwnProperty('onLine') || $wnd.Object.getOwnPropertyDescriptor($wnd.navigator, 'onLine').configurable) {
+            Object.defineProperty($wnd.navigator, 'onLine', {
+              set: function() {},
+              get: function() {
+                var sts = _this.@com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineModeEntrypoint::getNetworkStatus()();
+                return sts.@com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineModeEntrypoint.NetworkStatus::isAppOnline()();
+              }
+            });
+          }
         }
 
         // Listen to Cordova specific online/off-line stuff
         // this needs cordova.js to be loaded in the current page.
-        if ($wnd.navigator.network && $wnd.navigator.network.connection && $wnd.Connection) {
-          hasCordovaEvents = true;
+        if (hasCordovaEvents) {
           $doc.addEventListener("offline", offline, false);
           $doc.addEventListener("online", online, false);
           $doc.addEventListener("pause", pause, false);
@@ -542,9 +552,8 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
         }
 
         // Use postMessage approach to go online-offline, useful when the
-        // application is embedded in a Cordova iframe, so as it
-        // can pass network status messages to the iframe.
-        if ($wnd.postMessage) {
+        // application is embedded in a Cordova iframe.
+        if (maybeCordova) {
           $wnd.addEventListener("message", function(ev) {
             var msg = ev.data;
             console.log(">>> received window message " + msg);
