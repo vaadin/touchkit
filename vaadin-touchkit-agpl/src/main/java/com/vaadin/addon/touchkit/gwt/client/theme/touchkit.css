@@ -381,6 +381,10 @@ div.v-progressbar-indeterminate {
 	text-decoration: none;
 	line-height: 1;
 	}
+
+.v-button .v-icon {
+	margin-right: 5px;
+}
 	
 a {
 	color: buttonColor;
@@ -1885,6 +1889,10 @@ select.v-select-select::-ms-expand {
 	margin: listLayoutMargin;
 	margin-top: 15px;
 	margin-bottom: 5px;
+}
+
+.v-layout>.v-caption>.v-icon {
+	margin: 15px -5px 5px listLayoutMargin;
 }
 
 .v-touchkit-componentgroup-row {
