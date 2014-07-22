@@ -1968,6 +1968,7 @@ select.v-select-select::-ms-expand {
     -ms-flex:1;
     flex:1;
 	width: 40%;
+    line-height: 22px;
 }
 
 .v-touchkit-componentgroup-row-cap > .v-touchkit-componentgroup-cell {
