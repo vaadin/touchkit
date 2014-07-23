@@ -47,6 +47,7 @@ public class VPopover extends com.vaadin.client.ui.VWindow {
         }
 
         setPopupPosition(0, top);
+        hideReferenceArrow();
     }
 
     private Element getWrapperElement() {
@@ -63,30 +64,26 @@ public class VPopover extends com.vaadin.client.ui.VWindow {
         // attach arrow, we need to measure it during calculations
         attachReferenceArrow();
 
-        int top, left = 0;
-
         final int centerOfReferencComponent = paintable.getAbsoluteLeft()
                 + paintable.getOffsetWidth() / 2 - Window.getScrollLeft();
         /*
-         * We prefer setting the popup on top as users hand does not hide it
-         * there
+         * Arrow below the popup takes precedence, since that way around the
+         * user's hand doesn't get in the way.
          */
-        boolean onTop = true;
-        if (alignToTop(paintable)) {
-            top = paintable.getAbsoluteTop() - getOffsetHeight();
-        } else {
-            onTop = false;
-            top = paintable.getAbsoluteTop() + paintable.getOffsetHeight();
-        }
+        boolean arrowBelow = fitsAbove(paintable);
+        boolean arrowAbove = !arrowBelow && fitsBelow(paintable);
 
         /*
          * show arrow that shows related component (similar to ios on ipad),
          * unless we needed to draw on top of the related widget.
          */
-        showReferenceArrow(onTop, centerOfReferencComponent, paintable);
+        if (arrowAbove || arrowBelow) {
+            showReferenceArrow(arrowBelow, centerOfReferencComponent, paintable);
+        } else {
+            hideReferenceArrow();
+        }
 
-        // fix by scroll offset
-        top -= Window.getScrollTop();
+        int left = 0;
 
         if (getOffsetWidth() < Window.getClientWidth()) {
             left = centerOfReferencComponent - getOffsetWidth() / 2;
@@ -103,11 +100,18 @@ public class VPopover extends com.vaadin.client.ui.VWindow {
 
         }
 
-        if (onTop) {
+        int top = paintable.getAbsoluteTop() - Window.getScrollTop();
+
+        if (arrowAbove) {
+            top += paintable.getOffsetHeight();
+            top += arrowElement.getOffsetHeight();
+        } else if (arrowBelow) {
+            top -= getOffsetHeight();
             top -= arrowElement.getOffsetHeight();
         } else {
-            top += arrowElement.getOffsetHeight();
+            top = 0;
         }
+
         setPopupPosition(left, top);
 
     }
@@ -141,6 +145,12 @@ public class VPopover extends com.vaadin.client.ui.VWindow {
 
     }
 
+    private void hideReferenceArrow() {
+        if (arrowElement != null && arrowElement.getParentElement() != null) {
+            arrowElement.removeFromParent();
+        }
+    }
+
     private void attachReferenceArrow() {
         if (arrowElement == null) {
             arrowElement = Document.get().createDivElement();
@@ -159,24 +169,21 @@ public class VPopover extends com.vaadin.client.ui.VWindow {
         }
     }
 
-    /**
-     * @param paintable
-     *            the reference aside which the window should be positioned to
-     * @return true if there is enough on top of the page from the component or
-     *         if the component don't fit on below either
-     */
-    private boolean alignToTop(Widget paintable) {
+    private boolean fitsBelow(Widget paintable) {
+        final int spaceBelow = Window.getClientHeight()
+                - (paintable.getAbsoluteTop() + paintable.getOffsetHeight() - Window
+                        .getScrollTop());
+        final int requiredHeight = getOffsetHeight()
+                + arrowElement.getOffsetHeight();
+        return spaceBelow > requiredHeight;
+    }
+
+    private boolean fitsAbove(Widget paintable) {
         final int spaceOntop = paintable.getAbsoluteTop()
                 - Window.getScrollTop();
         final int requiredHeight = getOffsetHeight()
                 + arrowElement.getOffsetHeight();
-        if (spaceOntop > requiredHeight) {
-            return true;
-        }
-        final int spaceBelow = Window.getClientHeight()
-                - (paintable.getAbsoluteTop() + paintable.getOffsetHeight() - Window
-                        .getScrollTop());
-        return spaceBelow < requiredHeight;
+        return spaceOntop > requiredHeight;
     }
 
     public static boolean isSmallScreenDevice() {

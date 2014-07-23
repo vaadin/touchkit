@@ -41,6 +41,43 @@ public class PopoverConnector extends WindowConnector implements
     }
 
     @Override
+    protected void updateComponentSize() {
+        super.updateComponentSize();
+
+        if (getState().isFullscreen()) {
+            getWidget().setPopupPosition(0, 0);
+        } else {
+            /*
+             * fade in the modality curtain unless in fullscreen mode.
+             */
+            com.google.gwt.user.client.Element modalityCurtain = getWidget()
+                    .getModalityCurtain();
+            modalityCurtain.removeClassName("v-touchkit-opacity-transition");
+            DOM.sinkEvents(modalityCurtain, Event.TOUCHEVENTS);
+            final Style style = modalityCurtain.getStyle();
+            style.setOpacity(0);
+            Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+                public void execute() {
+                    getWidget().getModalityCurtain().addClassName(
+                            "v-touchkit-opacity-transition");
+                    /* Final value from the theme */
+                    style.setProperty("opacity", "");
+                }
+            });
+
+            if (VPopover.isSmallScreenDevice()) {
+                getWidget().slideIn();
+            } else if (getState().getRelatedComponent() != null) {
+                getWidget().showNextTo(
+                        ((ComponentConnector) getState().getRelatedComponent())
+                                .getWidget());
+            }
+        }
+
+        updateWidgetStyleNames();
+    }
+
+    @Override
     public VPopover getWidget() {
         return (VPopover) super.getWidget();
     }
@@ -72,48 +109,9 @@ public class PopoverConnector extends WindowConnector implements
     }
 
     private final ElementResizeListener resizeListener = new ElementResizeListener() {
-        private boolean specialPositioningRunning;
-
         @Override
         public void onElementResize(ElementResizeEvent e) {
-            /*
-             * FIXME this is currently called twice when the window is opened,
-             * from setWidth/height and finally from the super.updateFromUidl
-             */
-            if (!specialPositioningRunning) {
-                specialPositioningRunning = true;
-                if (getState().isFullscreen()) {
-                    getWidget().setPopupPosition(0, 0);
-                } else {
-                    /*
-                     * fade in the modality curtain unless in fullscreen mode.
-                     */
-                    com.google.gwt.user.client.Element modalityCurtain = getWidget()
-                            .getModalityCurtain();
-                    modalityCurtain
-                            .removeClassName("v-touchkit-opacity-transition");
-                    DOM.sinkEvents(modalityCurtain, Event.TOUCHEVENTS);
-                    final Style style = modalityCurtain.getStyle();
-                    style.setOpacity(0);
-                    Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-                        public void execute() {
-                            getWidget().getModalityCurtain().addClassName(
-                                    "v-touchkit-opacity-transition");
-                            /* Final value from the theme */
-                            style.setProperty("opacity", "");
-                        }
-                    });
-
-                    if (VPopover.isSmallScreenDevice()) {
-                        getWidget().slideIn();
-                    } else if (getState().getRelatedComponent() != null) {
-                        getWidget().showNextTo(
-                                ((ComponentConnector) getState()
-                                        .getRelatedComponent()).getWidget());
-                    }
-                }
-                specialPositioningRunning = false;
-            }
+            updateComponentSize();
         }
     };
 
@@ -124,6 +122,9 @@ public class PopoverConnector extends WindowConnector implements
         previewHandler = Event.addNativePreviewHandler(this);
         getLayoutManager().addElementResizeListener(getWidget().getElement(),
                 resizeListener);
+        getLayoutManager().addElementResizeListener(
+                getConnection().getUIConnector().getWidget().getElement(),
+                resizeListener);
     }
 
     @Override
@@ -133,29 +134,34 @@ public class PopoverConnector extends WindowConnector implements
         previewHandler.removeHandler();
         getLayoutManager().removeElementResizeListener(
                 getWidget().getElement(), resizeListener);
+        getLayoutManager().removeElementResizeListener(
+                getConnection().getUIConnector().getWidget().getElement(),
+                resizeListener);
     }
 
     @Override
-    protected void setWidgetStyleName(String styleName, boolean add) {
-        if (getState().isFullscreen()) {
-            // fullscreen window
-            super.setWidgetStyleName(
-                    "v-touchkit-popover v-touchkit-fullscreen", true);
-            getWidget().getModalityCurtain().addClassName("fullscreen");
-        } else if (getState().getRelatedComponent() != null) {
-            // real popover (black)
-            super.setWidgetStyleName("v-touchkit-popover v-touchkit-relative",
-                    true);
-            getWidget().getModalityCurtain().addClassName("relative");
-        } else {
-            // regular (white)
-            super.setWidgetStyleName("v-touchkit-popover v-touchkit-plain",
-                    true);
-        }
-        if (VPopover.isSmallScreenDevice()) {
-            super.setWidgetStyleName("v-touchkit-smallscreen", true);
-        }
-        super.setWidgetStyleName(styleName, add);
+    protected void updateWidgetStyleNames() {
+        boolean fullscreen = getState().isFullscreen();
+        boolean relative = getState().getRelatedComponent() != null;
+        boolean smallScreen = VPopover.isSmallScreenDevice();
+
+        setWidgetStyleName("v-touchkit-popover", true);
+        setWidgetStyleName("v-touchkit-fullscreen", fullscreen);
+        setWidgetStyleName("v-touchkit-relative", !fullscreen && relative);
+        setWidgetStyleName("v-touchkit-plain", !fullscreen && !relative);
+        setWidgetStyleName("v-touchkit-smallscreen", smallScreen);
+
+        setModalityCurtainStyleName("fullscreen", fullscreen);
+        setModalityCurtainStyleName("relative", !fullscreen && relative);
+
+        super.updateWidgetStyleNames();
     }
 
+    private void setModalityCurtainStyleName(String styleName, boolean add) {
+        if (add) {
+            getWidget().getModalityCurtain().addClassName(styleName);
+        } else {
+            getWidget().getModalityCurtain().removeClassName(styleName);
+        }
+    }
 }
