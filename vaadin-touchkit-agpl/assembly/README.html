@@ -3,9 +3,149 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Vaadin TouchKit ${Implementation-Version}</title>
+<style type="text/css">
+html {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+body {
+    background-color: #fff;
+    font: normal 14px/20px Helvetica, "Lucida Grande", Arial, Verdana, sans-serif;
+    color: #464440;
+    padding: 0;
+    min-width: 980px;
+    text-align: left;
+    margin: 0 auto;
+}
+
+h1, h2, h3, h4 {
+    color: #000;
+    font-weight: normal;
+    line-height: normal;
+}
+
+h1 {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 23px;
+}
+
+h4 {
+    font-size: 18px;
+    margin-bottom: .8em;
+}
+
+p {
+    margin: 0 0 1em;
+}
+
+a {
+    text-decoration: none;
+    padding: 0 3px;
+    margin: 0 -3px;
+    border-radius: 2px;
+}
+
+a:link {
+    color: #00a2d8;
+}
+
+a:visited {
+    color: #00a248;
+}
+
+a:hover {
+    background: #e4e3da;
+    color: #505048;
+}
+
+a:active {
+    color: #000;
+    background: #a09f91;
+}
+
+ul {
+    list-style-type: square;
+    padding-left: 1.3em;
+}
+
+#header {
+    height: 93px;
+    position: relative;
+}
+
+#header h1 {
+    width: 393px;
+    height: 86px;
+    background: transparent url(assets/touchkit-logo.png) no-repeat;
+    position: absolute;
+    top: 23px;
+    left: 50%;
+    margin: 0;
+    margin-left: -484px;
+    text-indent: -9999px;
+}
+
+#version {
+    position: absolute;
+    left: 50%;
+    top: 38px;
+    color: #000;
+    text-align: right;
+    width: 484px;
+}
+#footer {
+    margin: 0 auto;
+    width: 968px;
+    height: 60px;
+    color: #000;
+    font-size: 11px;
+}
+
+#footer a {
+    float: right;
+}
+
+#footer strong {
+    font-size: 13px;
+}
+
+#footer strong em {
+    color: #00b4f0;
+    font-style: normal;
+    margin: 0 0.2em 0 -0.15em;
+}
+
+#content {
+    position: relative;
+    margin: 0 0 56px -484px;
+    left: 50%;
+    width: 968px;
+    overflow: hidden;
+}
+</style>
 </head>
 <body>
-	<h1>Vaadin TouchKit ${Implementation-Version}</h1>
+<div id="header">
+    <h1>Vaadin TouchKit</h1>
+    <div id="version">
+        <strong>Vaadin TouchKit ${Implementation-Version}</strong>
+    </div>
+</div>
+<div id='content'>
+	<h2>Vaadin TouchKit ${Implementation-Version}</h2>
 
 	<p>
 		<a href="https://vaadin.com/add-ons/touchkit">Vaadin TouchKit</a> is
@@ -20,7 +160,7 @@
 		minor versions.
 		</p>
 
-	<h2>Installation</h2>
+	<h3>Installation</h3>
 
 	<p>This add-on is installed just like any other Vaadin Add-on.
 	For instructions on using Vaadin Add-ons in your project please read the   
@@ -31,7 +171,7 @@
 	 Note that the package also has client side extensions, so make sure that you compile
 	  your widgetset after installation!</p>
 	
-	<h3>Maven</h3>
+	<h4>Maven</h4>
 	
 	<p>Usage of modern build systems like Maven, that supports
 		transient dependencies, is highly encouraged. Include Vaadin TouchKit
@@ -49,7 +189,7 @@
 &lt;/dependency&gt;			
 </pre>
 	
-	<h3>IVY</h3>
+	<h4>IVY</h4>
 	
 	<p>
 		Dependency snippet:
@@ -57,13 +197,13 @@
 <pre>
 &lt;dependency org="com.vaadin.addon" name="vaadin-touchkit-${license.short.name}" rev="${project.version}" conf="default->default" /&gt;
 </pre>
-	<h3>Without a dependency system</h3>
+	<h4>Without a dependency system</h4>
 	<p>
 		For using Vaadin TouchKit in projects not using any build automation, just add the JAR to your project's classpath.
 		The TouchKit JAR should be put in the WEB-INF/lib folder of the web application.
 	</p>
 	
-	<h2>Licensing</h2>
+	<h3>Licensing</h3>
 	
 	<p>
 		Vaadin TouchKit is a dual licensed product. The available licensing models are:
@@ -81,7 +221,7 @@
 	
 	<p>Please read carefully through both the license agreements to determine which license fits your needs.</p>
 	
-	<h3>Obtaining a commercial license</h3>
+	<h4>Obtaining a commercial license</h4>
 	
 	<p>
 		You may obtain a commercial license by subscribing to <a href="https://vaadin.com/pro">
@@ -90,7 +230,7 @@
 		<a href="https://vaadin.com/addon/vaadin-touchkit">Vaadin Directory</a>.
 	</p>
 
-	<h3>Registering a commercial license</h3>
+	<h4>Registering a commercial license</h4>
 	
 	<p>
 		Register your copy of Vaadin TouchKit by creating a file named
@@ -99,7 +239,7 @@
 		system property to disable license warning message.
 	</p>
 
-	<h2>Links</h2>
+	<h3>Links</h3>
 	<p>
 		Product homepage:<br/>
 		<a href="https://vaadin.com/add-ons/touchkit">https://vaadin.com/add-ons/touchkit</a>
@@ -132,5 +272,9 @@
 		<li><a href="http://dev.vaadin.com/svn/branches/mobilemail3/">Mobilemail (SVN)</a></li>
 		</ul>
 	</p>
+</div>
+<div id="footer">
+	<span class="slogan"><strong>vaadin <em>}></em> </strong>thinking of U and I</span>
+</div>
 </body>
 </html>

@@ -21,13 +21,7 @@ body {
     margin: 0 auto;
 }
 
-.clearer {
-    height: 0;
-    overflow: hidden;
-    clear: both;
-}
-
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3 {
     color: #000;
     font-weight: normal;
     line-height: normal;
@@ -49,21 +43,6 @@ h3 {
     margin-bottom: 23px;
 }
 
-h4 {
-    font-size: 18px;
-    margin-bottom: .8em;
-}
-
-h5 {
-    font-size: 16px;
-    margin-bottom: .5em;
-}
-
-h6 {
-    font-size: 14px;
-    margin: .6em 0 .1em;
-}
-
 p {
     margin: 0 0 1em;
 }
@@ -72,8 +51,6 @@ a {
     text-decoration: none;
     padding: 0 3px;
     margin: 0 -3px;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
     border-radius: 2px;
 }
 
@@ -99,22 +76,6 @@ ul {
     list-style-type: square;
 }
 
-.codeblock {
-    background: #f0efea;
-    padding: 1em;
-    margin: 1em 0;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-}
-
-.codeblock h4 {
-    margin-top: 0;
-}
-
-    /***************************************************
-     * Furniture
-     ***************************************************/
-
 #header {
     height: 93px;
     position: relative;
@@ -122,8 +83,8 @@ ul {
 
 #header h1 {
     width: 393px;
-    height: 46px;
-    background: transparent url(../img/vaadin-logo.png) no-repeat;
+    height: 86px;
+    background: transparent url(assets/touchkit-logo.png) no-repeat;
     position: absolute;
     top: 23px;
     left: 50%;
@@ -139,92 +100,6 @@ ul {
     color: #000;
     text-align: right;
     width: 484px;
-}
-
-#version a {
-    color: #78776d;
-    display: inline-block;
-    zoom: 1;
-    padding: 1px 12px;
-    font-size: 12px;
-    background: #e4e3da;
-    -moz-border-radius: 9px;
-    -webkit-border-radius: 9px;
-    border-radius: 9px;
-}
-
-#version a:hover {
-    border: none;
-    background: #a09f91;
-    color: #fff;
-}
-
-#version .release-notes {
-    margin-left: 10px;
-}
-
-#subheader {
-    position: relative;
-    height: 38px;
-    line-height: 38px;
-    background: #000;
-}
-
-#menu,
-#links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-#subheader li {
-    display: inline;
-    float: left;
-    padding: 0;
-}
-
-#menu {
-    position: absolute;
-    left: 50%;
-    width: 650px;
-    margin-left: -483px;
-    font-weight: bold;
-    white-space: nowrap;
-    z-index: 2;
-}
-
-#menu li {
-    margin: 0 .3em;
-}
-
-#menu li,
-#menu a {
-    color: #d9d8cb;
-}
-
-#links {
-    width: 484px;
-    position: absolute;
-    top: 2px;
-    left: 50%;
-    z-index: 1;
-}
-
-#links li {
-    float: right;
-}
-
-#links a {
-    font-size: 12px;
-    line-height: 34px;
-    color: #a09f91;
-    margin-left: 14px;
-    white-space: nowrap;
-}
-
-#subheader a:hover {
-    background: transparent;
-    color: #fff;
 }
 
 ul {
@@ -253,10 +128,6 @@ ul {
     margin: 0 0.2em 0 -0.15em;
 }
 
-    /***************************************************
-     * Content wrapper
-     ***************************************************/
-
 #content {
     position: relative;
     margin: 0 0 56px -484px;
@@ -264,203 +135,12 @@ ul {
     width: 968px;
     overflow: hidden;
 }
-
-    /***************************************************
-     * Vertical tabs
-     ***************************************************/
-#tabs {
-    float: left;
-    width: 196px;
-}
-
-#tabs .tab {
-    font-size: 18px;
-    cursor: pointer;
-    padding: 8px 14px;
-    background: #fff;
-    color: #a09f91;
-    -webkit-transition: linear .2s color;
-}
-
-#tabs .tab * {
-    vertical-align: middle;
-}
-
-#tabs .tab a {
-    margin: 0;
-    padding: 0;
-    color: #00a2d8;
-    -webkit-transition: linear .2s color;
-}
-
-#tabs .tab:hover a,
-#tabs .tab a:focus {
-    background: transparent;
-    margin: 0;
-    padding: 0;
-    color: #464440;
-}
-
-#tabs .tab:hover {
-    color: #464440;
-}
-
-#tabs .tab span {
-    font-size: 9px;
-    margin-left: .7em;
-}
-
-#tabs .selected,
-#tabs .selected:hover,
-#tabs .selected:hover a,
-#tabs .selected a,
-#tabs .selected a:hover,
-#tabs .selected a:focus {
-    color: #000;
-    cursor: default;
-    -webkit-transition: linear .2s color;
-    font-weight: bold;
-}
-
-#tabs .first {
-    margin-top: 0;
-}
-
-h3.reasons {
-    color: #78776d;
-    margin: 0 0 40px;
-    height: 30px;
-}
-
-#reasons {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-#reasons.js {
-    float: left;
-    width: 769px;
-}
-
-#reasons .tab {
-    display: block;
-    margin: 0 0 1em;
-    padding: 20px 40px;
-    background: #efeee9;
-    -webkit-border-radius: 9px;
-    -moz-border-radius: 9px;
-    border-radius: 9px;
-    clear: left;
-    overflow: hidden;
-}
-
-#reasons.js .tab {
-    width: 689px;
-}
-
-#reasons .tab h4 {
-    font-weight: bold;
-    font-size: 24px;
-    margin: 14px 0 24px;
-}
-
-#reasons .tab .col {
-    width: 22.8%;
-    margin-right: 2%;
-    float: left;
-    margin-bottom: 2em;
-}
-
-#reasons .tab .col2 {
-    width: 47.8%;
-    margin-right: 2%;
-    float: left;
-    margin-bottom: 2em;
-}
-
-#reasons .tab .col3 {
-    width: 72.8%;
-    margin-right: 2%;
-    float: left;
-    margin-bottom: 2em;
-}
-
-#reasons .tab .col4 {
-    clear: left;
-    margin-bottom: 2em;
-}
-
-#reasons .tab .newline {
-    clear: left;
-}
-
-#reasons .tab p:last-child {
-    margin: 0;
-}
-
-#reasons .tab h5 {
-    margin-top: 0;
-}
-
-    /***************************************************
-     * Section specific styles
-     ***************************************************/
-img {
-    border: none;
-}
-
-.book {
-    overflow: hidden;
-}
-
-.book h5 {
-    font-weight: bold;
-    font-size: 18px;
-}
-
-.book h6 {
-    margin: -0.7em 0 .7em;
-    color: #464440;
-    font-size: 13px;
-    font-style: italic;
-    color: #736f5e;
-}
-
-.book img {
-    float: left;
-    margin-right: 1.2em;
-}
-
-.dzone img,
-.tutorial img {
-    float: left;
-    margin: 0 1em 2em 0;
-}
-
-.tools img {
-    margin: 0em 2em .8em 2em;
-    float: right;
-}
-
-.nested-list ol {
-    counter-reset: item
-}
-
-.nested-list li {
-    display: block
-}
-
-.nested-list li:before {
-    content: counters(item, ".") ". ";
-    counter-increment: item
-}
 </style>
 </head>
 
 <body>
 <div id="header">
-    <h1>Vaadin &ndash; thinking of U and I</h1>
+    <h1>Vaadin TouchKit</h1>
 
     <div id="version">
         <strong>Vaadin TouchKit ${Implementation-Version}</strong>
@@ -507,14 +187,26 @@ img {
     <ul>
         <li>Windows Phone 8 support</li>
         <li>Internet Explorer 10 support</li>
-        <li>New multi-platform theme</li>
+        <li>New multi-platform theme replacing old iOS 6 like one</li>
+        <li>More reliable Offline/Online detection</li>
+        <ul>
+		<li>Added polling for knowing whether server is reachable</li>
+		<li>Support for Cordova network events</li>
+		<li>Use @OfflineModeEnabled UI annotation to enable/disable offline mode instead of
+                    using the OfflineMode.setOfflineMode() method which becomes deprecated.</li>
+		<li>Disable offline mode if servlet is not extending the TouchKitServlet class</li>
+		<li>Changes in the API of the OfflineMode.activate(reason) method which now accepts
+                    an ActivationReason enumeration in order to know more accurately why the app went offline</li>
+		<li>Use @CacheManifestEnabled UI annotation to disable cache-manifest</li>
+		<li>Many improvements in application cache manifest</li>
+        </ul>
     </ul>
 
     <h3 id="changelog">Change Log</h3>
 
     <p>
         For a complete list of changes in this release, please see the <a
-            href="http://dev.vaadin.com/query?status=closed&milestone=Vaadin+TouchKit+${Implementation-Version}&group=resolution&col=id&col=summary&col=owner&col=type&col=priority&col=component&col=version&order=priority">list
+            href="http://dev.vaadin.com/query?status=closed&milestone=Vaadin+TouchKit+4.0.0.rc1&or&status=closed&milestone=4.0.0-beta1&or&status=closed&milestone=4.0.0-beta2&group=milestone&order=priority">
         of closed tickets</a>.
     </p>
 
@@ -554,7 +246,7 @@ img {
 
 <div id="footer">
 		<span class="slogan"><strong>vaadin <em>}></em> </strong>
-			thinking of U and I<span> <a href="#top">&uarr; Back to
+			thinking of U and I</span> <a href="#top">&uarr; Back to
                 top</a>
 </div>
 <!-- /footer -->
