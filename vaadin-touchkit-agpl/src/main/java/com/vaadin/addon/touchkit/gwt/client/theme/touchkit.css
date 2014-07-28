@@ -2181,10 +2181,12 @@ select.v-select-select::-ms-expand {
 .v-touchkit-navbar .v-button,
 .v-touchkit-horizontalbuttongroup,
 .v-touchkit-navbutton-back,
-.v-touchkit-navbutton-forward {
+.v-touchkit-navbutton-forward,
+.v-touchkit-navbar .v-touchkit-navbutton {
     display: block;
     margin: 0;
-    padding: 0;
+    padding-top: 0;
+    padding-bottom: 0;
     overflow: hidden;
     -webkit-box-sizing: border-box;
     background: transparent;
@@ -2233,7 +2235,8 @@ select.v-select-select::-ms-expand {
 .v-touchkit-navbar .v-button,
 .v-touchkit-componentgroup-cell>.v-button,
 .v-touchkit-navbutton-back,
-.v-touchkit-navbutton-forward {
+.v-touchkit-navbutton-forward,
+.v-touchkit-navbar .v-touchkit-navbutton {
 	margin: 0;
     font-size: 14px;
     font-weight:normal;
