@@ -2189,6 +2189,7 @@ select.v-select-select::-ms-expand {
     box-shadow: none;
     border-radius: borderRadius;
     line-height:30px;
+    min-height: 30px;
 }
 
 .v-touchkit-navbutton-back {
