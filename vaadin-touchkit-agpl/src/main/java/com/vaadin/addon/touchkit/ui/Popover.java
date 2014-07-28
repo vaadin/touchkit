@@ -2,7 +2,6 @@ package com.vaadin.addon.touchkit.ui;
 
 import com.vaadin.addon.touchkit.gwt.client.vcom.popover.PopoverRpc;
 import com.vaadin.addon.touchkit.gwt.client.vcom.popover.PopoverState;
-import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.VerticalLayout;
@@ -122,17 +121,17 @@ public class Popover extends Window {
     }
 
     /**
-     * A convenience method that adds a button to the bottom of the popover's
-     * content.
+     * A convenience method that adds a component to the popover's content
+     * container.
      * 
-     * @param b
-     *            the button to add.
+     * @param c
+     *            the component to add.
      */
-    public void addComponent(Button b) {
+    public void addComponent(Component c) {
         Component content2 = getContent();
         if (content2 instanceof ComponentContainer) {
             ComponentContainer contentPanel = (ComponentContainer) content2;
-            contentPanel.addComponent(b);
+            contentPanel.addComponent(c);
         } else {
             throw new RuntimeException(
                     "Content component is not of type ComponentContainer");
