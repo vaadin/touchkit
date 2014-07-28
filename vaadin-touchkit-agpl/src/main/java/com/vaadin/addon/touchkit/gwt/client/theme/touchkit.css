@@ -2257,6 +2257,7 @@ select.v-select-select::-ms-expand {
 	padding:0;
 	display:inline-block;
 	overflow: visible;
+	white-space: nowrap;
 }
 
 .v-touchkit-componentgroup-cell>.v-touchkit-horizontalbuttongroup {
