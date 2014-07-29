@@ -776,7 +776,7 @@ a {
 	}
 
 .v-window-modalitycurtain.relative {
-	opacity: 0.02;
+	opacity: 0.1;
 	}
 
 /* popover that is not relative to component, nor fullscreen */
