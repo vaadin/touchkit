@@ -385,6 +385,10 @@ div.v-progressbar-indeterminate {
 .v-button .v-icon {
 	margin-right: 5px;
 }
+
+.v-button .v-errorindicator {
+	float: left;
+}
 	
 a {
 	color: buttonColor;
