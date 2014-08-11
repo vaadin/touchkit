@@ -280,6 +280,7 @@ public class NavigationView extends AbstractComponentContainer {
         if (toolbar != null) {
             super.addComponent(toolbar);
         }
+        markAsDirty();
     }
 
     /**
