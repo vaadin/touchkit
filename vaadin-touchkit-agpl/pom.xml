@@ -120,9 +120,9 @@
     </organization>
     <url>http://vaadin.com/</url>
     <scm>
-        <connection>scm:svn:http://dev.vaadin.com/svn/addons/TouchKit</connection>
-        <developerConnection>scm:svn:http://dev.vaadin.com/svn/addons/TouchKit</developerConnection>
-        <url>http://dev.vaadin.com/browser/addons/TouchKit</url>
+        <connection>scm:git:git://github.com/vaadin/touchkit</connection>
+        <developerConnection>scm:git:ssh://dev.vaadin.com:29418/touchkit.git</developerConnection>
+        <url>https://github.com/vaadin/touchkit</url>
     </scm>
     <issueManagement>
         <system>trac</system>
