@@ -24,9 +24,9 @@
     </issueManagement>
     <developers>
         <developer>
-            <name>Matti Tahvonen</name>
-            <id>matti</id>
-            <email>matti at vaadin.com</email>
+            <name>Juho Nurminen</name>
+            <id>juho</id>
+            <email>juho at vaadin.com</email>
             <organization>Vaadin Ltd</organization>
             <timezone>+2</timezone>
         </developer>
