@@ -17,17 +17,11 @@
 
     <fileSets>
         <fileSet>
-            <directory>.</directory>
-            <includes>
-                <include>license-*.txt</include>
-                <include>licensing.txt</include>
-            </includes>
-        </fileSet>
-        <fileSet>
             <directory>../</directory>
             <includes>
-                <include>license.html</include>
                 <include>assets/*</include>
+                <include>licenses/apache-license-version-2-0.txt</include>
+                <include>licenses/license-${license.short.name}-${license.version}.txt</include>
             </includes>
         </fileSet>
         <fileSet>
@@ -53,6 +47,10 @@
         </file>
         <file>
             <source>../vaadin-touchkit-agpl/assembly/release-notes.html</source>
+            <filtered>true</filtered>
+        </file>
+        <file>
+            <source>../license.html</source>
             <filtered>true</filtered>
         </file>
     </files>
