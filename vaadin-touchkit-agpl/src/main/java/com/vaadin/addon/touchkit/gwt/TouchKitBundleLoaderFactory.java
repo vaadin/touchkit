@@ -50,37 +50,44 @@ import com.vaadin.shared.ui.Connect.LoadStyle;
  * <li>{@link com.vaadin.ui.TwinColSelect}</li>
  * <li>{@link com.vaadin.ui.CustomLayout}</li>
  * <li>{@link com.vaadin.ui.PopupView}</li>
+ * <li>{@link com.vaadin.ui.Calendar}</li>
+ * <li>{@link com.vaadin.ui.Table}</li>
+ * <li>{@link com.vaadin.ui.TreeTable}</li>
  * </ul>
  */
 public class TouchKitBundleLoaderFactory extends ConnectorBundleLoaderFactory {
 
-    Collection<Class<? extends ServerConnector>> lazyComponents = new HashSet<Class<? extends ServerConnector>>();
+    Collection<String> lazyComponents = new HashSet<String>();
 
     public TouchKitBundleLoaderFactory() {
-        lazyComponents.add(VerticalLayoutConnector.class);
-        lazyComponents.add(HorizontalLayoutConnector.class);
-        lazyComponents.add(GridLayoutConnector.class);
-        lazyComponents.add(AbsoluteLayoutConnector.class);
-        lazyComponents.add(HorizontalSplitPanelConnector.class);
-        lazyComponents.add(VerticalSplitPanelConnector.class);
-        lazyComponents.add(AccordionConnector.class);
-        lazyComponents.add(ComboBoxConnector.class);
-        lazyComponents.add(TabsheetConnector.class);
-        lazyComponents.add(MenuBarConnector.class);
-        lazyComponents.add(PanelConnector.class);
-        lazyComponents.add(WindowConnector.class);
-        lazyComponents.add(RichTextAreaConnector.class);
-        lazyComponents.add(TwinColSelectConnector.class);
-        lazyComponents.add(CustomLayoutConnector.class);
-        lazyComponents.add(PopupViewConnector.class);
-        lazyComponents.add(CalendarConnector.class);
-        lazyComponents.add(TableConnector.class);
-        lazyComponents.add(TreeTableConnector.class);
+        add(VerticalLayoutConnector.class);
+        add(HorizontalLayoutConnector.class);
+        add(GridLayoutConnector.class);
+        add(AbsoluteLayoutConnector.class);
+        add(HorizontalSplitPanelConnector.class);
+        add(VerticalSplitPanelConnector.class);
+        add(AccordionConnector.class);
+        add(ComboBoxConnector.class);
+        add(TabsheetConnector.class);
+        add(MenuBarConnector.class);
+        add(PanelConnector.class);
+        add(WindowConnector.class);
+        add(RichTextAreaConnector.class);
+        add(TwinColSelectConnector.class);
+        add(CustomLayoutConnector.class);
+        add(PopupViewConnector.class);
+        add(CalendarConnector.class);
+        add(TableConnector.class);
+        add(TreeTableConnector.class);
+    }
+
+    private void add(Class<? extends ServerConnector> c) {
+        lazyComponents.add(c.getCanonicalName());
     }
 
     @Override
     protected LoadStyle getLoadStyle(JClassType connectorType) {
-        if (lazyComponents.contains(connectorType)) {
+        if (lazyComponents.contains(connectorType.getQualifiedSourceName())) {
             return LoadStyle.LAZY;
         }
         LoadStyle loadStyle = super.getLoadStyle(connectorType);
