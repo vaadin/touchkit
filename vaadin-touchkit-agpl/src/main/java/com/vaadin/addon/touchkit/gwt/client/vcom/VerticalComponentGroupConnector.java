@@ -9,6 +9,7 @@ import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.ConnectorHierarchyChangeEvent;
 import com.vaadin.client.communication.StateChangeEvent;
+import com.vaadin.client.ui.AbstractFieldConnector;
 import com.vaadin.client.ui.AbstractLayoutConnector;
 import com.vaadin.client.ui.Icon;
 import com.vaadin.shared.ComponentConstants;
@@ -73,6 +74,12 @@ public class VerticalComponentGroupConnector extends AbstractLayoutConnector {
         if (ComponentStateUtil.hasStyles(connector.getState())) {
             for (String customStyle : connector.getState().styles) {
                 style += " " + "v-caption-" + customStyle;
+            }
+        }
+        if (connector instanceof AbstractFieldConnector) {
+            AbstractFieldConnector field = (AbstractFieldConnector) connector;
+            if (field.isRequired()) {
+                style += " v-caption-required";
             }
         }
         getWidget().updateCaption(child, connector.getState().caption, icon,
