@@ -357,7 +357,6 @@ div.v-progressbar-indeterminate {
 .v-button-link:active,
 .v-button-link.v-pressed,
 .v-nativebutton-link {
-	display: inline-block;
 	border-radius: 0;
 	background: transparent;
 	-webkit-box-shadow: none;
