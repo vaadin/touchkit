@@ -93,7 +93,7 @@ public class TouchKitServlet extends VaadinServlet {
                         "fetchRootConfig = function(callback)");
                 js = js.replaceFirst(
                         "r.responseText;",
-                        "r.responseText; config.rootResponseStatus = r.status;config.rootResponseText = r.responseText; callback && calback(r);");
+                        "r.responseText; config.rootResponseStatus = r.status;config.rootResponseText = r.responseText; callback && callback(r);");
             }
             response.setContentType("application/javascript");
             response.getOutputStream().print(js);
