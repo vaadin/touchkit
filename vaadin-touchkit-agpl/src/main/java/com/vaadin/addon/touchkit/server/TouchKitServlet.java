@@ -2,7 +2,6 @@ package com.vaadin.addon.touchkit.server;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Scanner;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -77,27 +76,6 @@ public class TouchKitServlet extends VaadinServlet {
             response.setContentType("font/ttf");
         } else if (file.endsWith(".woff")) {
             response.setContentType("application/font-woff");
-        } else if (file.endsWith("vaadinBootstrap.js")) {
-            // Patch bootstrap script in order to export some properties and
-            // methods to the offline entry-point.
-            // TODO: This is a temporary fix for 7.2.X and 7.3.0.betaX
-            // when 7.3.0 is released with a new version of vaadinBootstrap.js
-            // we could eventually remove this.
-            Scanner scanner = new Scanner(resourceUrl.openStream());
-            String js = scanner.useDelimiter("\\A").next();
-            if (!js.contains("rootResponseStatus")) {
-                js = js.replaceFirst("getApp:", "getAppIds: function(){return Object.keys(apps)},getApp:");
-                js = js.replaceFirst("'getConfig'",
-                        "'fetchRootConfig':fetchRootConfig,'getConfig'");
-                js = js.replaceFirst("fetchRootConfig = function\\(\\)",
-                        "fetchRootConfig = function(callback)");
-                js = js.replaceFirst(
-                        "r.responseText;",
-                        "r.responseText; config.rootResponseStatus = r.status;config.rootResponseText = r.responseText; callback && callback(r);");
-            }
-            response.setContentType("application/javascript");
-            response.getOutputStream().print(js);
-            return;
         }
         super.writeStaticResourceResponse(request, response, resourceUrl);
     }
