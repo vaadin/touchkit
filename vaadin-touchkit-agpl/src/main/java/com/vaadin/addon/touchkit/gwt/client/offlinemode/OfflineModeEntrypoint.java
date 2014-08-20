@@ -1,5 +1,6 @@
 package com.vaadin.addon.touchkit.gwt.client.offlinemode;
 
+import static com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineMode.ActivationReason.APP_STARTED;
 import static com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineMode.ActivationReason.APP_STARTING;
 import static com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineMode.ActivationReason.BAD_RESPONSE;
 import static com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineMode.ActivationReason.FORCE_OFFLINE;
@@ -12,6 +13,7 @@ import static com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineMode.Activ
 
 import java.util.logging.Logger;
 
+import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
@@ -168,16 +170,25 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
         // a Vaadin online response
         dispatch(APP_STARTING);
 
-        // Configure HTML5 off-line listeners
+        // Configure HTML5 and Cordova off-line listeners
         configureApplicationOfflineEvents();
 
-        // Loop until vaadin application connection is loaded.
-        // Normally it should be done when the OfflineModeConnector is
-        // instantiated, but there could be applications not using it
-        // in server side. It seems there is not other way to do this.
+        // Connection takes a while to be available
+        waitForConnectionAvailable();
+
+        // Realize soon that server is offline.
+        pingToServer.schedule(2000);
+    }
+
+    /*
+     * Loop until vaadin application connection is loaded.
+     * Normally it should be done when the OfflineModeConnector is
+     * instantiated, but there could be applications not using it
+     * in server side. It seems there is not other way to do this.
+     */
+    private void waitForConnectionAvailable() {
         Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
             int counter = 0;
-
             @Override
             public boolean execute() {
                 if (!ApplicationConfiguration.getRunningApplications()
@@ -188,9 +199,6 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
                 return counter++ < 50 && applicationConnection == null;
             }
         }, 100);
-
-        // Realize soon that server is offline.
-        pingToServer.schedule(2000);
     }
 
     /**
@@ -206,7 +214,7 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
      * Set the offlineModeConnector. It's optional to use it in server side.
      */
     public void setOfflineModeConnector(OfflineModeConnector oc) {
-        logger.info("Vaadin OfflineModeConnector has been started");
+        logger.info("Vaadin OfflineModeConnector has been started.");
         offlineModeConnector = oc;
         configureHandlers(oc.getConnection());
         onResponseHandlingEnded(null);
@@ -218,7 +226,7 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
      */
     private void configureHandlers(ApplicationConnection conn) {
         if (applicationConnection == null) {
-            logger.info("Vaadin online application has been started.");
+            logger.info("Vaadin ApplicationConnection has been started.");
             applicationConnection = conn;
             applicationConnection.addHandler(RequestStartingEvent.TYPE, this);
             applicationConnection.addHandler(ResponseHandlingStartedEvent.TYPE,
@@ -227,7 +235,7 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
                     this);
             applicationConnection.addHandler(ConnectionStatusEvent.TYPE, this);
             applicationConnection.setCommunicationErrorDelegate(this);
-            dispatch(SERVER_AVAILABLE);
+            dispatch(APP_STARTED);
         }
     }
 
@@ -247,9 +255,9 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
                     + " flags=" + status.forcedOffline + " "
                     + status.networkOnline + " " + status.serverReachable);
             if (reason == NETWORK_ONLINE) {
-                boolean sendPing = !status.isNetworkOnline();
-                status.networkOnline = true;
-                if (sendPing) {
+                if (!status.isNetworkOnline()) {
+                    status.networkOnline = true;
+                    configureHeartBeat();
                     ping();
                 }
             } else if (reason == NO_NETWORK) {
@@ -257,7 +265,8 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
                 if (status.isServerReachable() || lastReason == APP_STARTING) {
                     goOffline(reason);
                 }
-            } else if (reason == SERVER_AVAILABLE) {
+                status.serverReachable = false;
+            } else if (reason == SERVER_AVAILABLE || reason == APP_STARTED) {
                 status.serverReachable = true;
                 status.networkOnline = true;
                 goOnline(reason);
@@ -268,6 +277,7 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
                 status.forcedOffline = false;
                 ping();
             } else {
+                // Offline cases
                 status.serverReachable = false;
                 goOffline(reason);
             }
@@ -303,17 +313,11 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
      * instead.
      */
     private void setHeartBeatInterval(int ms) {
-        if (ms <= 0) {
-            if (applicationConnection != null) {
-                applicationConnection.getHeartbeat().setInterval(-1);
-            }
-            pingToServer.cancel();
-        } else {
-            if (applicationConnection != null) {
-                applicationConnection.getHeartbeat().setInterval(ms / 1000);
-            } else {
-                pingToServer.scheduleRepeating(ms);
-            }
+        pingToServer.cancel();
+        if (applicationConnection != null) {
+            applicationConnection.getHeartbeat().setInterval(ms > 0 ? ms / 1000 : -1);
+        } else if (ms > 0) {
+            pingToServer.scheduleRepeating(ms);
         }
     }
 
@@ -340,18 +344,30 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
                     getOfflineMode().deactivate();
                 }
                 applicationConnection.setApplicationRunning(true);
+                configureHeartBeat();
                 applicationConnection.fireEvent(new OnlineEvent());
             } else {
-                // TODO(manolo), we can call fetchRootConfiguration instead of
-                // making the user reload the app since patch to bootstrap.js
-                // exports a reference to the function.
-
-                // Notify offline UI that the user has to reload the app.
-                lastReason = ONLINE_APP_NOT_STARTED;
-                getOfflineMode().activate(lastReason);
+                retryApplicationConnection();
             }
-            configureHeartBeat();
         }
+    }
+
+    /*
+     * This method is called when the device becomes online but the
+     * app was started from cache. We rerun vaadinBootstrap in order to
+     * fetch root configuration.
+     */
+    private void retryApplicationConnection() {
+        fetchRootConfiguration(new Callback<JavaScriptObject, JavaScriptObject>() {
+            @Override
+            public void onSuccess(JavaScriptObject result) {
+                waitForConnectionAvailable();
+            }
+            @Override
+            public void onFailure(JavaScriptObject reason) {
+                goOffline(ONLINE_APP_NOT_STARTED);
+            }
+        });
     }
 
     /*
@@ -422,7 +438,6 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
      * Check whether the server is reachable setting the status on the response.
      */
     public void ping() {
-        logger.fine("Sending ping to server.");
         if (applicationConnection != null) {
             applicationConnection.getHeartbeat().send();
         } else {
@@ -506,22 +521,12 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
 
         // Listen to HTML5 offline-online events.
         if (useHtml5Events) {
-          // Delay so as we know whether cordova is sending events.
-          setTimeout(function() {
-            // If we have cordova ignore html5 network events at all.
-            if (hasCordovaEvents) return;
-
-            $wnd.addEventListener("offline", function() {
-              offline();
-            }, false);
-            $wnd.addEventListener("online", function() {
-              online();
-            }, false);
-            // use HTML5 to test whether connection is available when the app starts
-            if (!$wnd.navigator.onLine) {
-              offline();
-            }
-          }, maybeCordova ? 50 : 0);
+          $wnd.addEventListener("offline", offline, false);
+          $wnd.addEventListener("online", online, false);
+          // use HTML5 to test whether connection is available when the app starts
+          if (!$wnd.navigator.onLine) {
+            offline();
+          }
 
           // Redefine the HTML-5 onLine indicator.
           // This fixes the issue of android inside phonegap returning erroneus values.
@@ -558,6 +563,12 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
             var msg = ev.data;
             console.log(">>> received window message " + msg);
             if (/^(cordova-.+)$/.test(msg)) {
+              // Remove HTML5 events to avoid android devices sending erroneous events
+              if (!hasCordovaEvents) {
+                console.log(">>> Cordova is present, removing HTML5 events.");
+                $wnd.removeEventListener("offline", offline, false);
+                $wnd.removeEventListener("online", online, false);
+              }
               hasCordovaEvents = true;
               // Take an action depending on the message
               if (msg == 'cordova-offline') {
@@ -591,6 +602,20 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
       // return null only in the case the value does not exist
       // otherwise return the string representation of the value.
       return r == null ? null : ('' + r);
+    }-*/;
+
+    // Make vaadinBootstrap rerun the fetchRootConfiguration request.
+    private static native void fetchRootConfiguration(Callback<JavaScriptObject, JavaScriptObject> callback)
+    /*-{
+      var app = @com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineModeEntrypoint::appConf;
+      app && app.fetchRootConfig(function(r) {
+          if (callback) {
+            if (r && r.status == 200)
+              callback.@com.google.gwt.core.client.Callback::onSuccess(*)(r);
+            else
+              callback.@com.google.gwt.core.client.Callback::onFailure(*)(r);
+          }
+        });
     }-*/;
 
     // Return true if offline mode is enabled in this app.

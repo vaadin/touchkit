@@ -42,6 +42,8 @@ public interface OfflineMode {
         BAD_RESPONSE("The server is unreachable."),
         // The online app is still starting
         APP_STARTING("Loading the application."),
+        // The vaadin app was started successfully
+        APP_STARTED("Vaadin app connection has been inititalized."),
         // The online app never started
         ONLINE_APP_NOT_STARTED("The application didn't start properly."),
         // Unknown
