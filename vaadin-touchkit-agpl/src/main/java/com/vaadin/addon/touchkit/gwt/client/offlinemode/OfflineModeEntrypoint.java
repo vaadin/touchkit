@@ -66,6 +66,7 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
         private boolean forcedOffline = false;
         private boolean serverReachable = false;
         private boolean networkOnline = true;
+        private boolean paused = false;
 
         public boolean isAppOnline() {
             return !forcedOffline && networkOnline && serverReachable;
@@ -77,6 +78,10 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
 
         public boolean isServerReachable() {
             return !forcedOffline && serverReachable;
+        }
+
+        public boolean isAppRunning() {
+            return isAppOnline() && !paused;
         }
     }
 
@@ -251,15 +256,19 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
         }
         // Only dispatch events when something changes
         if (lastReason != reason) {
+            if (reason == NETWORK_ONLINE && status.isNetworkOnline()) {
+                // Avoid logging a frequent case.
+                return;
+            }
+
             logger.info("Dispatching: " + lastReason + " -> " + reason
                     + " flags=" + status.forcedOffline + " "
                     + status.networkOnline + " " + status.serverReachable);
+
             if (reason == NETWORK_ONLINE) {
-                if (!status.isNetworkOnline()) {
-                    status.networkOnline = true;
-                    configureHeartBeat();
-                    ping();
-                }
+                status.networkOnline = true;
+                configureHeartBeat();
+                ping();
             } else if (reason == NO_NETWORK) {
                 status.networkOnline = false;
                 if (status.isServerReachable() || lastReason == APP_STARTING) {
@@ -276,11 +285,15 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
             } else if (reason == FORCE_ONLINE) {
                 status.forcedOffline = false;
                 ping();
+            } else if (CacheManifestStatusIndicator.isUpdating()) {
+                // When network is slow and a new version of the app is being downloaded
+                // we could have unreachable responses, hence it's better to ignore it.
             } else {
                 // Offline cases
                 status.serverReachable = false;
                 goOffline(reason);
             }
+            lastReason = reason;
         }
     }
 
@@ -306,6 +319,16 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
 
     private void stopHeartBeat() {
         setHeartBeatInterval(-1);
+    }
+
+    private void resume() {
+        status.paused = false;
+        configureHeartBeat();
+    }
+
+    private void pause() {
+        status.paused = true;
+        stopHeartBeat();
     }
 
     /*
@@ -337,7 +360,6 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
      */
     private void goOnline(ActivationReason reason) {
         if (status.isAppOnline()) {
-            lastReason = reason;
             logger.info("Network Back ONLINE (" + reason + ")");
             if (applicationConnection != null) {
                 if (getOfflineMode().isActive()) {
@@ -379,7 +401,6 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
         if (!isOfflineModeEnabled()) {
             return;
         }
-        lastReason = reason;
         getOfflineMode().activate(reason);
         if (applicationConnection != null) {
             applicationConnection.setApplicationRunning(false);
@@ -473,20 +494,18 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
         var useHtml5Events = !hasCordovaEvents && $wnd.navigator.onLine != undefined;
 
         function offline() {
-          console.log(">>> Network flag is offline.");
           var ev = @com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineMode.ActivationReason::NO_NETWORK;
           _this.@com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineModeEntrypoint::dispatch(*)(ev);
         }
         function online() {
-          console.log(">>> Network flag is online.");
           var ev = @com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineMode.ActivationReason::NETWORK_ONLINE;
           _this.@com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineModeEntrypoint::dispatch(*)(ev);
         }
         function pause() {
-          _this.@com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineModeEntrypoint::stopHeartBeat()();
+          _this.@com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineModeEntrypoint::pause()();
         }
         function resume() {
-          _this.@com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineModeEntrypoint::configureHeartBeat()();
+          _this.@com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineModeEntrypoint::resume()();
         }
 
         // Export some functions for allowing developer to switch network and server on/off from JS console

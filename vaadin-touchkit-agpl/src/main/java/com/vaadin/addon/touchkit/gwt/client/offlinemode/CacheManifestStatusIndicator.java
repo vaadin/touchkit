@@ -1,5 +1,7 @@
 package com.vaadin.addon.touchkit.gwt.client.offlinemode;
 
+import java.util.logging.Logger;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.dom.client.Document;
@@ -27,12 +29,37 @@ public class CacheManifestStatusIndicator implements EntryPoint {
 
     private Element progressElement;
     private String updateNowMessage = "There are updates ready to be installed. Would you like to restart now?";
-    private boolean updating;
+    private static boolean updating;
+
     // Check for updates once every 30 min by default.
+    // TODO(manolo): should be configurable via offline connector
     private int updateCheckInterval = 1800000;
 
+    private static final Logger logger = Logger.getLogger(CacheManifestStatusIndicator.class.getName());
+
+    private static boolean confirmationRequired = true;
+
+    @Override
     public void onModuleLoad() {
-        new CacheManifestStatusIndicator().init();
+        // Do nothing if document has no manifest.
+        if (hasManifest()) {
+            init();
+        }
+    }
+
+    /**
+     * Let the indicator ask the user to reload the application
+     * when a new version of the app has been downloaded.
+     */
+    public static void setConfirmationRequired(boolean b) {
+        confirmationRequired = b;
+    }
+
+    /**
+     * return true if we are downloading a new version of the app.
+     */
+    public static boolean isUpdating() {
+        return updating || getStatus() == CHECKING || getStatus() == DOWNLOADING;
     }
 
     /**
@@ -65,7 +92,7 @@ public class CacheManifestStatusIndicator implements EntryPoint {
                                 hideProgress();
                                 return false;
                             case UPDATEREADY:
-                                requestUpdate(false);
+                                requestUpdate();
                                 return false;
                             default:
                                 return true;
@@ -106,7 +133,11 @@ public class CacheManifestStatusIndicator implements EntryPoint {
         Scheduler.get().scheduleFixedPeriod(new Scheduler.RepeatingCommand() {
             @Override
             public boolean execute() {
-                if (!updating) {
+                // Don't try to update cache if already updating or app is
+                // paused
+                if (!isUpdating()
+                        && OfflineModeEntrypoint.get().getNetworkStatus()
+                                .isAppRunning()) {
                     updateCache();
                 }
                 return true;
@@ -134,7 +165,7 @@ public class CacheManifestStatusIndicator implements EntryPoint {
             hideProgress();
         } else if ("updateready".equals(event.getType())) {
             hideProgress();
-            requestUpdate(false);
+            requestUpdate();
             updating = false;
         }
     }
@@ -146,7 +177,7 @@ public class CacheManifestStatusIndicator implements EntryPoint {
      *            The error event.
      */
     protected void onError(Event event) {
-        consoleLog("An error occurred");
+        logger.severe("An error occurred");
     }
 
     /**
@@ -178,9 +209,9 @@ public class CacheManifestStatusIndicator implements EntryPoint {
      * @param force
      *            true to force reloading the site without asking the user.
      */
-    protected void requestUpdate(boolean force) {
-        consoleLog("Requesting permission to update");
-        if (force || Window.confirm(updateNowMessage)) {
+    private void requestUpdate() {
+        logger.info("Application cache updated, confirmationRequired=" + confirmationRequired);
+        if (!confirmationRequired || Window.confirm(updateNowMessage)) {
             Window.Location.reload();
         }
     }
@@ -238,15 +269,9 @@ public class CacheManifestStatusIndicator implements EntryPoint {
         return $wnd.applicationCache.update();
     }-*/;
 
-    /**
-     * Logs a message to the javascript console. The message will be prefixed
-     * with "CacheManifestStatusIndicator: "
-     * 
-     * @param message
-     *            The message to log.
-     */
-    native void consoleLog(String message)
+    // Return true if the document has the manifest attribute
+    private static native boolean hasManifest()
     /*-{
-       console.log("CacheManifestStatusIndicator: " + message );
+      return $doc.documentElement.hasAttribute('manifest');
     }-*/;
 }
