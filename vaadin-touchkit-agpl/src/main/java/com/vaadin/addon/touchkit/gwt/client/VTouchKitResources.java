@@ -32,4 +32,13 @@ public interface VTouchKitResources extends ClientBundle {
     @Source("theme/img/drag-slot-dot.png")
     public DataResource dragSlotDotImage();
 
+    /*
+     * Loading indicator icon
+     */
+    @Source("theme/fonts/fontawesome-webfont-refresh.woff")
+    public DataResource faIconRefreshWoff();
+
+    @Source("theme/fonts/fontawesome-webfont-refresh.ttf")
+    public DataResource faIconRefreshTtf();
+
 }

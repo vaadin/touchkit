@@ -96,6 +96,18 @@
 /* Slider */
 @def sliderMargin 17px;
 
+/* Loading indicator icon */
+@url faIconRefreshWoffUrl faIconRefreshWoff;
+@url faIconRefreshTtfUrl faIconRefreshTtf;
+
+@font-face {
+	font-family: "FontAwesome-refresh";
+	src: faIconRefreshWoffUrl format("woff"),
+		faIconRefreshTtfUrl format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
 /* Tooltip following cursor makes field un-focusable w/ touch */
 .v-tooltip {
 	pointer-events: none;
@@ -229,7 +241,7 @@ div.v-progressbar-indeterminate:after,
 .v-app-loading:after,
 .v-cache-loading-indicator:after,
 .v-loading-indicator:after {
-	font-family: "FontAwesome";
+	font-family: "FontAwesome-refresh";
 	content: fa-icon-refresh;
 	color: gray;
 	font-size:20px;
