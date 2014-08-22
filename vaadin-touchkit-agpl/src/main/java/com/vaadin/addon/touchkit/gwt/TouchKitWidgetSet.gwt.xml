@@ -7,19 +7,13 @@
     <property-provider name="webkitvariant"><![CDATA[
       {
         var ua = window.navigator.userAgent;
+        if (/Trident/.test(ua)) return 'std';
         if (/android 2\./i.test(ua)) return 'android2';
         if (/iP.+OS 7_0(?!.+Safari)/.test(ua)) return 'ios7hswa';
         if (/iP.+OS 7_.+Safari/.test(ua)) return 'ios7safari';
         return 'std';
       }
     ]]></property-provider>
-
-    <!--  Forward compatible optimization when we begin working with IE10/mobile FF -->
-    <set-property name="webkitvariant" value="std" >
-        <none>
-            <when-property-is name="user.agent" value="safari" />
-        </none>
-    </set-property>
 
     <!-- Remove this ("soft permutation") once cache manifest linker and servlet
         properly support any permutations -->
