@@ -8,6 +8,9 @@
     <version>4.0.0-SNAPSHOT</version>
     <name>Vaadin TouchKit</name>
 
+    <!-- TODO(manolo): using maven-dependency-plugin and depending just
+         on the touckit-agpl artifact, this file should be simpler -->
+
     <organization>
         <name>Vaadin Ltd</name>
         <url>http://vaadin.com/</url>
@@ -72,10 +75,6 @@
                 <enabled>true</enabled>
             </snapshots>
         </pluginRepository>
-        <pluginRepository>
-            <id>pdfsplit-plugin</id>
-            <url>https://raw.github.com/zch/maven/releases/</url>
-        </pluginRepository>
     </pluginRepositories>
 
     <build>
@@ -115,27 +114,6 @@
         </resources>
 
         <plugins>
-
-            <!-- Extracts the TouchKit chapter from BoV -->
-            <plugin>
-                <groupId>com.github.zch</groupId>
-                <artifactId>pdfsplit-maven-plugin</artifactId>
-                <version>1.0.1</version>
-                <configuration>
-                    <inputUrl>http://vaadin.com/download/book-of-vaadin/vaadin-7/pdf/book-of-vaadin.pdf</inputUrl>
-                    <chapter>Chapter 20. Mobile Applications with TouchKit</chapter>
-                    <outFile>${project.build.directory}/vaadin-touchkit-manual.pdf</outFile>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>pdfsplit</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>split</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

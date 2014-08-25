@@ -32,6 +32,14 @@
                 <include>*.pdf</include>
             </includes>
         </fileSet>
+        <fileSet>
+            <!-- in this way works for both modules: agpl and cval -->
+            <directory>../vaadin-touchkit-agpl/target</directory>
+            <outputDirectory></outputDirectory>
+            <includes>
+                <include>*.pdf</include>
+            </includes>
+        </fileSet>
     </fileSets>
 
     <files>

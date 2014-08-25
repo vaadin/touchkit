@@ -71,6 +71,26 @@
                             </execution>
                         </executions>
                     </plugin>
+                    <!-- Extracts the TouchKit chapter from BoV -->
+                    <plugin>
+                        <groupId>com.github.zch</groupId>
+                        <artifactId>pdfsplit-maven-plugin</artifactId>
+                        <version>1.0.1</version>
+                        <executions>
+                            <execution>
+                                <id>pdfsplit</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>split</goal>
+                                </goals>
+                                <configuration>
+                                    <inputUrl>https://vaadin.com/download/book-of-vaadin/vaadin-7/pdf/book-of-vaadin.pdf</inputUrl>
+                                    <chapter>Chapter 20. Mobile Applications with TouchKit</chapter>
+                                    <outFile>${project.build.directory}/vaadin-touchkit-manual.pdf</outFile>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-assembly-plugin</artifactId>
@@ -81,32 +101,12 @@
                                 <descriptor>assembly/assembly.xml</descriptor>
                             </descriptors>
                         </configuration>
-                        <!-- <executions> -->
-                        <!-- <execution> -->
-                        <!-- <goals> -->
-                        <!-- <goal>single</goal> -->
-                        <!-- </goals> -->
-                        <!-- <phase>install</phase> -->
-                        <!-- </execution> -->
-                        <!-- </executions> -->
-                    </plugin>
-                    <!-- Extracts the TouchKit chapter from BoV -->
-                    <plugin>
-                        <groupId>com.github.zch</groupId>
-                        <artifactId>pdfsplit-maven-plugin</artifactId>
-                        <version>1.0.1</version>
                         <executions>
                             <execution>
-                                <id>pdfsplit</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>split</goal>
-                                </goals>
-                                <configuration>
-                                    <inputUrl>https://vaadin.com/download/book-of-vaadin/vaadin-7/pdf/book-of-vaadin.pdf</inputUrl>
-                                    <chapter>Chapter 20. Mobile Applications with TouchKit</chapter>
-                                    <outFile>${project.build.directory}/vaadin-touchkit-manual.pdf</outFile>
-                                </configuration>
+                               <goals>
+                               <goal>single</goal>
+                               </goals>
+                               <phase>package</phase>
                             </execution>
                         </executions>
                     </plugin>
@@ -152,6 +152,7 @@
         <license.short.name>agpl</license.short.name>
         <license.version>3.0</license.version>
         <vaadin.version.maven>[7.3.0.rc1,7.3.0.rc99],[7.3.0,7.3.9999]</vaadin.version.maven>
+        <vaadin.plugin.version>7.3.0.rc1</vaadin.plugin.version>
         <gpg.passphrase.file>empty.properties</gpg.passphrase.file>
         <gpg.skip>true</gpg.skip>
         <snapshot.repository.url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</snapshot.repository.url>
@@ -281,7 +282,7 @@
             <plugin>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-maven-plugin</artifactId>
-                <version>7.3.0.rc1</version>
+                <version>${vaadin.plugin.version}</version>
                 <configuration>
                     <webappDirectory>target/classes/VAADIN/widgetsets</webappDirectory>
                     <modules>
@@ -294,17 +295,17 @@
                     <draftCompile>false</draftCompile>
                     <strict>true</strict>
                     <style>OBF</style>
-                    <force>true</force>
+                    <force>false</force>
                     <!-- not enabling it right now, until issue #13801 is fixed -->
                     <closureCompiler>false</closureCompiler>
                 </configuration>
-                                <executions>
-                                        <execution>
-                                                <goals>
-                                                        <goal>compile</goal>
-                                                </goals>
-                                        </execution>
-                                </executions>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
         <pluginManagement>
