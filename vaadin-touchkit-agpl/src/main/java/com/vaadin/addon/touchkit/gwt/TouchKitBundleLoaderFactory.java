@@ -88,7 +88,10 @@ public class TouchKitBundleLoaderFactory extends ConnectorBundleLoaderFactory {
     @Override
     protected LoadStyle getLoadStyle(JClassType connectorType) {
         if (lazyComponents.contains(connectorType.getQualifiedSourceName())) {
-            return LoadStyle.LAZY;
+            // FIXME: see issue #14515.
+            // Do nothing right now until the issue #14512 is fixed 
+            // in Vaadin framework.
+            // return LoadStyle.LAZY;
         }
         LoadStyle loadStyle = super.getLoadStyle(connectorType);
         if (loadStyle == LoadStyle.DEFERRED) {
