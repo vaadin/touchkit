@@ -222,6 +222,7 @@
                 <directory>../</directory>
                 <includes>
                     <include>assets/**</include>
+                    <include>licenses/**</include>
                 </includes>
             </resource>
             <resource>
@@ -280,6 +281,7 @@
                         <include>*.txt</include>
                         <include>*.html</include>
                         <include>assets/**</include>
+                        <include>licenses/**</include>
                         <include>VAADIN/widgetsets/com.vaadin.addon.touchkit.gwt.TouchKitWidgetSet/**</include>
                     </includes>
                 </configuration>
