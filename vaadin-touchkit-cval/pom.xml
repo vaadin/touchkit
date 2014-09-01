@@ -47,7 +47,7 @@
 
         <license.short.name>cval</license.short.name>
         <license.version>3</license.version>
-        <vaadin.version.maven>[7.3.0.rc1,7.3.0.rc99],[7.3.0,7.3.9999]</vaadin.version.maven>
+        <vaadin.version.maven>[7.3-SNAPSHOT],[7.3.0.rc1,7.3.0.rc99],[7.3.0,7.3.9999]</vaadin.version.maven>
         <gpg.passphrase.file>empty.properties</gpg.passphrase.file>
         <gpg.skip>true</gpg.skip>
         <snapshot.repository.url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</snapshot.repository.url>
@@ -67,7 +67,7 @@
         <pluginRepositories>
         <pluginRepository>
             <id>vaadin-snapshots</id>
-            <url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+            <url>${snapshot.repository.url}</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
@@ -76,6 +76,13 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
+
+    <repositories>
+        <repository>
+            <id>vaadin-snapshots</id>
+            <url>${snapshot.repository.url}</url>
+        </repository>
+    </repositories>
 
     <build>
         <sourceDirectory>../vaadin-touchkit-agpl/src/main/java</sourceDirectory>
