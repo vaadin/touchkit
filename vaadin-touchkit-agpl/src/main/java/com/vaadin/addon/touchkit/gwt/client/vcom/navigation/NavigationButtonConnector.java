@@ -12,8 +12,6 @@ import com.vaadin.client.VConsole;
 import com.vaadin.client.communication.RpcProxy;
 import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.AbstractComponentConnector;
-import com.vaadin.client.ui.Icon;
-import com.vaadin.shared.ComponentConstants;
 import com.vaadin.shared.Connector;
 import com.vaadin.shared.ui.Connect;
 
@@ -52,9 +50,7 @@ public class NavigationButtonConnector extends AbstractComponentConnector {
         getWidget().setText(caption);
         getWidget().setEnabled(getState().enabled);
 
-        Icon icon = getConnection().getIcon(
-                getResourceUrl(ComponentConstants.ICON_RESOURCE));
-        getWidget().setIcon(icon);
+        getWidget().setIcon(getIcon());
 
         String description = getState().description;
         getWidget().setDescription(description);

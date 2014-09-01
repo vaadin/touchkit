@@ -65,24 +65,23 @@ public class VNavigationButton extends HTML implements TouchStartHandler,
         return caption;
     }
 
-    public void setIcon(Icon icon) {
-
-        if (icon == null) {
-            if (this.icon != null) {
-                getElement().removeChild(this.icon.getElement());
+    public void setIcon(Icon newIcon) {
+        if (newIcon == null) {
+            if (icon != null) {
+                getElement().removeChild(icon.getElement());
             }
-        } else if (this.icon != null) {
-            getElement()
-                    .replaceChild(this.icon.getElement(), icon.getElement());
+        } else if (icon != null
+        // icon might have been removed by a call to #setText (#14536)
+                && getElement().isOrHasChild(icon.getElement())) {
+            getElement().replaceChild(icon.getElement(), newIcon.getElement());
         } else {
-            getElement().insertFirst(icon.getElement());
+            getElement().insertFirst(newIcon.getElement());
         }
-        this.icon = icon;
+        icon = newIcon;
     }
 
     public void setDescription(String description) {
         if (description != null && !description.trim().isEmpty()) {
-
             if (descriptionElement == null) {
                 descriptionElement = Document.get().createSpanElement();
                 descriptionElement.setClassName(NAVBUTTON_CLASSNAME + "-desc");
@@ -97,7 +96,6 @@ public class VNavigationButton extends HTML implements TouchStartHandler,
             descriptionElement.setInnerHTML(description);
 
         } else if (descriptionElement != null) {
-
             descriptionElement.removeFromParent();
             descriptionElement = null;
         }
