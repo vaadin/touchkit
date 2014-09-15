@@ -72,6 +72,7 @@
                         </executions>
                     </plugin>
                     <!-- Extracts the TouchKit chapter from BoV -->
+                    <!-- Temporarily disabled until the manual has been fully updated
                     <plugin>
                         <groupId>com.github.zch</groupId>
                         <artifactId>pdfsplit-maven-plugin</artifactId>
@@ -91,6 +92,7 @@
                             </execution>
                         </executions>
                     </plugin>
+                    -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-assembly-plugin</artifactId>
