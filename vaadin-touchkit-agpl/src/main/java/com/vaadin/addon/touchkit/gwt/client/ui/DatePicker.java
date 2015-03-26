@@ -307,9 +307,9 @@ public class DatePicker extends SimplePanel implements
     private boolean isOldAndroid() {
         VBrowserDetails details = new VBrowserDetails(
                 BrowserInfo.getBrowserString());
-        return details.isAndroid()
-                && (details.getOperatingSystemMajorVersion() < 4 || details
-                        .getOperatingSystemMinorVersion() < 2);
+        int major = details.getBrowserMajorVersion();
+        int minor = details.getOperatingSystemMinorVersion();
+        return details.isAndroid() && (major < 4 || (major == 4 && minor < 2));
     }
 
     private void addHtml5Input() {
