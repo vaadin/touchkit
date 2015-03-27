@@ -740,6 +740,9 @@ a {
 	right: 0;
 	border-top: windowBorder;
 	box-shadow: upperDropShadow;
+	
+	/* workaround for a strange bug in chrome that breaks scrolling (#17251) */
+	z-index: 0;
 }
 
 .v-touchkit-navview-notoolbar .v-touchkit-navview-toolbar {
