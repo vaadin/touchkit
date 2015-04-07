@@ -183,30 +183,18 @@ ul {
 
     <h3 id="new">New in Vaadin TouchKit ${Implementation-Version}</h3>
 
-    <p>The following features and enhancements are new in Vaadin TouchKit ${Implementation-Version}:</p>
+    <p>The following bugs were fixed in Vaadin TouchKit ${Implementation-Version}:</p>
     <ul>
-        <li>Windows Phone 8 support</li>
-        <li>Internet Explorer 10 support</li>
-        <li>New multi-platform theme</li>
-        <li>More reliable Offline/Online detection</li>
-        <ul>
-		<li>Added polling for knowing whether server is reachable</li>
-		<li>Support for Cordova network events</li>
-		<li>Use @OfflineModeEnabled UI annotation to enable/disable offline mode instead of
-                    using the OfflineMode.setOfflineMode() method which becomes deprecated.</li>
-		<li>Disable offline mode if servlet is not extending the TouchKitServlet class</li>
-		<li>Changes in the API of the OfflineMode.activate(reason) method which now accepts
-                    an ActivationReason enumeration in order to know more accurately why the app went offline</li>
-		<li>Use @CacheManifestEnabled UI annotation to disable cache-manifest</li>
-		<li>Many improvements in application cache manifest</li>
-        </ul>
+        <li>Scrolling in Chrome in UIs with a VerticalLayout and a Toolbar</li>
+        <li>Correctly detect Android version in DatePicker</li>
+        <li>Fix Safari viewport height issues on iOS 8</li>
     </ul>
 
     <h3 id="changelog">Change Log</h3>
 
     <p>
         For a complete list of changes in this release, please see the <a
-            href="http://dev.vaadin.com/query?status=closed&milestone=Vaadin+TouchKit+4.0.0.rc1&or&status=closed&milestone=Vaadin+TouchKit+4.0.0.beta1&or&status=closed&milestone=Vaadin+TouchKit+4.0.0.beta2&group=milestone&order=priority">
+            href="http://dev.vaadin.com/query?status=closed&milestone=TouchKit+4.0.1&group=milestone&order=priority">
         of closed tickets</a>.
     </p>
 
@@ -221,8 +209,6 @@ ul {
     <ul>
         <li><a
         href="http://demo.vaadin.com/parking">Parking demo</a></li>
-        <li><a
-        href="http://demo.vaadin.com/mobilemail">Mobile Mail demo</a></li>
         <li><a href="http://vaadin.com/add-ons/touchkit">Vaadin TouchKit
         home</a></li>
         <li><a href="http://vaadin.com">The developer
