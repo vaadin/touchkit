@@ -25,18 +25,20 @@ public class TabsheetITCase extends AbstractTestBenchTest {
             } catch (InterruptedException e) {
             }
 
-            assertTrue(testBench
-                    .compareScreen(getReferenceImage("tabsheet/first.png")));
+            driver.findElement(By.xpath("//span[. = 'First']")).click();
+
+            boolean screenshotsPass = testBench
+                    .compareScreen(getReferenceImage("tabsheet/first.png"));
 
             driver.findElement(By.xpath("//span[. = 'Other']")).click();
 
-            assertTrue(testBench
-                    .compareScreen(getReferenceImage("tabsheet/another.png")));
+            screenshotsPass = screenshotsPass && testBench
+                    .compareScreen(getReferenceImage("tabsheet/another.png"));
 
             driver.findElement(By.xpath("//span[. = 'Third']")).click();
 
-            assertTrue(testBench
-                    .compareScreen(getReferenceImage("tabsheet/third.png")));
+            screenshotsPass = screenshotsPass && testBench
+                    .compareScreen(getReferenceImage("tabsheet/third.png"));
 
             driver.findElement(By.xpath("//span[. = '4th']")).click();
 
@@ -45,9 +47,10 @@ public class TabsheetITCase extends AbstractTestBenchTest {
 
             Thread.sleep(2000);
 
-            assertTrue(testBench
-                    .compareScreen(getReferenceImage("tabsheet/last.png")));
+            screenshotsPass = screenshotsPass && testBench
+                    .compareScreen(getReferenceImage("tabsheet/last.png"));
 
+            assertTrue(screenshotsPass);
         } finally {
             driver.quit();
         }

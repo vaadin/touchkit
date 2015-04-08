@@ -32,7 +32,7 @@ public class Tabsheet extends AbstractTouchKitIntegrationTest {
         Tab tab = tabBarView.addTab(getFields(), "4th", new ThemeResource(
                 "../runo/icons/64/email.png"));
         tabBarView.setSelectedTab(tab);
-        
+
         makeSmallTabletSize(tabBarView);
         addComponent(tabBarView);
 

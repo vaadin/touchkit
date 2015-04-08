@@ -21,7 +21,7 @@ public class UrlFieldITCase extends AbstractTestBenchTest {
 
             WebElement textfield = driver.findElement(By
                     .className("v-textfield"));
-            WebElement urlfield = driver.findElement(By.className("urlfield"));
+            WebElement urlfield = driver.findElement(By.className("v-textfield-urlfield"));
 
             // when
             textfield.sendKeys("http://www.vaadin.com/");
@@ -47,7 +47,7 @@ public class UrlFieldITCase extends AbstractTestBenchTest {
 
             WebElement textfield = driver.findElement(By
                     .className("v-textfield"));
-            WebElement urlfield = driver.findElement(By.className("urlfield"));
+            WebElement urlfield = driver.findElement(By.className("v-textfield-urlfield"));
             WebElement body = driver.findElement(By.tagName("body"));
 
             // when
