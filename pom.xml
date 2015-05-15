@@ -5,7 +5,7 @@
     <groupId>com.vaadin.addon</groupId>
     <artifactId>vaadin-touchkit-root</artifactId>
     <packaging>pom</packaging>
-    <version>4.0.0-SNAPSHOT</version>
+    <version>4.0.2-SNAPSHOT</version>
     <name>Vaadin TouchKit</name>
     <description>Vaadin TouchKit Root Project</description>
     <organization>

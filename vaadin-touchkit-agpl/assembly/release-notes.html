@@ -155,7 +155,7 @@ ul {
         <li><a href="#package">Package Contents</a></li>
         <li><a href="#new">New in Vaadin TouchKit ${Implementation-Version}</a></li>
         <li><a href="#changelog">Complete change log for Vaadin TouchKit ${Implementation-Version}</a></li>
-<!--        <li><a href="#knownissues">Known issues</a></li>-->
+        <li><a href="#knownissues">Known Issues and Limitations</a></li>
         <li><a href="#vaadinontheweb">Related Links</a></li>
     </ul>
 
@@ -184,25 +184,25 @@ ul {
     <h3 id="new">New in Vaadin TouchKit ${Implementation-Version}</h3>
 
     <p>The following bugs were fixed in Vaadin TouchKit ${Implementation-Version}:</p>
-    <ul>
-        <li>Scrolling in Chrome in UIs with a VerticalLayout and a Toolbar</li>
-        <li>Correctly detect Android version in DatePicker</li>
-        <li>Fix Safari viewport height issues on iOS 8</li>
-    </ul>
+    <table>
+        <tbody>
+        <tr><td><a href="https://dev.vaadin.com/ticket/17020">#17020</a></td><td>Touchkit 4 DatePicker Locale bug</td></tr>
+        </tbody>
+    </table>
 
     <h3 id="changelog">Change Log</h3>
 
     <p>
         For a complete list of changes in this release, please see the <a
-            href="http://dev.vaadin.com/query?status=closed&milestone=TouchKit+4.0.1&group=milestone&order=priority">
+            href="http://dev.vaadin.com/query?status=closed&milestone=TouchKit+${Implementation-Version}&group=milestone&order=priority">
         of closed tickets</a>.
     </p>
 
-<!--
-    <h2 id="knownissues">Known Issues</h2>
+    <h2 id="knownissues">Known Issues and Limitations</h2>
     <ul>
+        <li>Setting the DatePicker locale from the server will not work with a native date input. Native date input
+            always uses the browser locale.</li>
     </ul>
--->
 
     <h2 id="vaadinontheweb">Related Links</h2>
 

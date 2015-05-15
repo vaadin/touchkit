@@ -5,7 +5,7 @@
     <groupId>com.vaadin.addon</groupId>
     <artifactId>vaadin-touchkit-agpl</artifactId>
     <packaging>jar</packaging>
-    <version>4.0.0-SNAPSHOT</version>
+    <version>4.0.2-SNAPSHOT</version>
     <name>Vaadin TouchKit</name>
 
     <profiles>
@@ -301,13 +301,12 @@
                     <extraJvmArgs>-Xmx1024M -Xss4024k</extraJvmArgs>
                     <runTarget>http://localhost:7777/</runTarget>
                     <hostedWebapp>${project.build.directory}/${project.build.finalName}</hostedWebapp>
-                    <soyc>false</soyc>
                     <draftCompile>false</draftCompile>
                     <strict>true</strict>
                     <style>OBF</style>
                     <force>false</force>
                     <!-- not enabling it right now, until issue #13801 is fixed -->
-                    <closureCompiler>false</closureCompiler>
+                    <enableClosureCompiler>false</enableClosureCompiler>
                 </configuration>
                 <executions>
                     <execution>

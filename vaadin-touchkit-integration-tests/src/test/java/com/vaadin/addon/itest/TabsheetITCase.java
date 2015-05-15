@@ -27,17 +27,17 @@ public class TabsheetITCase extends AbstractTestBenchTest {
 
             driver.findElement(By.xpath("//span[. = 'First']")).click();
 
-            boolean screenshotsPass = testBench
+            boolean screenshotsPass = testBench()
                     .compareScreen(getReferenceImage("tabsheet/first.png"));
 
             driver.findElement(By.xpath("//span[. = 'Other']")).click();
 
-            screenshotsPass = screenshotsPass && testBench
+            screenshotsPass = screenshotsPass && testBench()
                     .compareScreen(getReferenceImage("tabsheet/another.png"));
 
             driver.findElement(By.xpath("//span[. = 'Third']")).click();
 
-            screenshotsPass = screenshotsPass && testBench
+            screenshotsPass = screenshotsPass && testBench()
                     .compareScreen(getReferenceImage("tabsheet/third.png"));
 
             driver.findElement(By.xpath("//span[. = '4th']")).click();
@@ -47,7 +47,7 @@ public class TabsheetITCase extends AbstractTestBenchTest {
 
             Thread.sleep(2000);
 
-            screenshotsPass = screenshotsPass && testBench
+            screenshotsPass = screenshotsPass && testBench()
                     .compareScreen(getReferenceImage("tabsheet/last.png"));
 
             assertTrue(screenshotsPass);

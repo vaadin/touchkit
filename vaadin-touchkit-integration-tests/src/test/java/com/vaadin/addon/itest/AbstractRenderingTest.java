@@ -14,7 +14,7 @@ public abstract class AbstractRenderingTest extends AbstractTestBenchTest {
         try {
             driver.navigate().to(BASEURL + getTestViewName());
 
-            assertTrue(testBench
+            assertTrue(testBench()
                     .compareScreen(getReferenceImage(getTestViewName() + ".png")));
         } finally {
             driver.quit();

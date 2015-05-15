@@ -19,16 +19,16 @@ public class NavigationManagerViewITCase extends AbstractTestBenchTest {
             driver.navigate().to(BASEURL + NavigationManagerView.class.getName());
 
             driver.findElement(By.id("toSecondView")).click();
-            
+
             Thread.sleep(500);
 
-            assertTrue(testBench
+            assertTrue(testBench()
                     .compareScreen(getReferenceImage("navigationmanager/secondview.png")));
 
             driver.findElement(By.className("v-touchkit-navbutton-back"))
                     .click();
 
-            assertTrue(testBench
+            assertTrue(testBench()
                     .compareScreen(getReferenceImage("navigationmanager/rootview.png")));
 
         } finally {

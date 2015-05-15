@@ -3,6 +3,7 @@ package com.vaadin.addon.touchkit.ui;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import com.vaadin.addon.touchkit.gwt.client.vcom.DatePickerServerRpc;
 import com.vaadin.addon.touchkit.gwt.client.vcom.DatePickerState;
@@ -15,7 +16,7 @@ import com.vaadin.ui.DateField;
  * the standard Vaadin {@link DateField}, this component shows a native
  * DatePicker in browsers that support this. Browsers that do not support native
  * date pickers show a touch friendly fallback.
- * 
+ *
  * Browsers that have good support for native date pickers:
  * <ul>
  * <li>iOS - full support since 5.0, earlier versions have partial support</li>
@@ -38,7 +39,7 @@ public class DatePicker extends AbstractField<Date> {
     /**
      * Constructs a new DatePicker instance with day resolution and the
      * specified caption.
-     * 
+     *
      * @param caption
      *            The caption
      */
@@ -75,6 +76,14 @@ public class DatePicker extends AbstractField<Date> {
         } else {
             getState().date = getFormat().format(getValue());
         }
+
+        Locale locale = getLocale();
+
+        if (locale != null) {
+            getState().locale = locale.toString();
+        } else {
+            getState().locale = null;
+        }
     }
 
     private SimpleDateFormat getFormat() {
@@ -110,7 +119,7 @@ public class DatePicker extends AbstractField<Date> {
 
     /**
      * Sets the current resolution of this DatePicker
-     * 
+     *
      * @param resolution
      *            The resolution. Not all resolutions are supported on all
      *            devices.
@@ -120,10 +129,18 @@ public class DatePicker extends AbstractField<Date> {
     }
 
     /**
+     * <p>
      * Sets whether to use native date field when possible or always use the
      * fallback. E.g. iOS Safari fully supports native date fields since iOS
      * version 5.
-     * 
+     * </p>
+     *
+     * <p>
+     * Note that when using the native date field, {@link #setLocale(Locale)}
+     * will have no effect, since the locale for the native field is defined by
+     * the browser locale
+     * </p>
+     *
      * @param useNative
      *            If true native date field is used with browsers supporting it
      */
@@ -133,6 +150,7 @@ public class DatePicker extends AbstractField<Date> {
 
     /**
      * @return true if native date field is used in supported browsers.
+     * @see #setUseNative(boolean)
      */
     public boolean isUseNative() {
         return getState().useNative;
@@ -142,7 +160,7 @@ public class DatePicker extends AbstractField<Date> {
      * Sets the minimum date value accepted from the user. Notice that, in
      * native mode, this is supported only by some devices. This function is
      * here for future use.
-     * 
+     *
      * @param min
      *            The minimum date value accepted from the user. Set to null to
      *            clear. The value must be before the maximum date value (if
@@ -170,7 +188,7 @@ public class DatePicker extends AbstractField<Date> {
      * Sets the maximum date value accepted from the user. Notice that, in
      * native mode, this is supported only by some devices. This function is
      * here for future use.
-     * 
+     *
      * @param max
      *            Maximum date value accepted from the user. Set to null to
      *            clear. The value must be after the minimum date value (if

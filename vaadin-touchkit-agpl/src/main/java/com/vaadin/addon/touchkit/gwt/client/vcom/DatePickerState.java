@@ -29,5 +29,6 @@ public class DatePickerState extends AbstractFieldState {
     public String min;
     public String max;
     public boolean useNative = true;
+    public String locale;
 
 }

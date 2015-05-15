@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import com.ibm.icu.util.Calendar;
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
@@ -58,11 +59,12 @@ public class DatePickerTest extends AbstractTouchKitIntegrationTest {
         optionsLayout.setCaption("Options");
         addComponent(optionsLayout);
 
-        CheckBox cbox = new CheckBox("Use native");
-        cbox.setImmediate(true);
-        cbox.setValue(pickerA.isUseNative());
-        optionsLayout.addComponent(cbox);
-        cbox.addValueChangeListener(new ValueChangeListener() {
+        final CheckBox useNative = new CheckBox("Use native");
+        useNative.setId("usenative");
+        useNative.setImmediate(true);
+        useNative.setValue(pickerA.isUseNative());
+        optionsLayout.addComponent(useNative);
+        useNative.addValueChangeListener(new ValueChangeListener() {
 
             @Override
             public void valueChange(ValueChangeEvent event) {
@@ -99,7 +101,6 @@ public class DatePickerTest extends AbstractTouchKitIntegrationTest {
         mingroup.addItem("2011-02-01");
         mingroup.addItem("2011-02-10");
         mingroup.addItem("2011-02-12");
-        addComponent(mingroup);
         mingroup.addValueChangeListener(new ValueChangeListener() {
 
             @Override
@@ -129,7 +130,6 @@ public class DatePickerTest extends AbstractTouchKitIntegrationTest {
         maxgroup.addItem("2011-02-12");
         maxgroup.addItem("2011-02-27");
         maxgroup.addItem("2011-03-01");
-        addComponent(maxgroup);
         maxgroup.addValueChangeListener(new ValueChangeListener() {
 
             @Override
@@ -150,6 +150,37 @@ public class DatePickerTest extends AbstractTouchKitIntegrationTest {
 
         });
 
+        HorizontalLayout minmax = new HorizontalLayout();
+        minmax.setSpacing(true);
+        minmax.addComponents(mingroup, maxgroup);
+
+        addComponent(minmax);
+
+        final OptionGroup localeGroup = new OptionGroup("Change the locale");
+        localeGroup.setId("locale");
+        localeGroup.setEnabled(!useNative.getValue());
+        localeGroup.addContainerProperty("locale", Locale.class, null);
+        localeGroup.addItem("Default");
+        localeGroup.addItem("Finnish").getItemProperty("locale").setValue(new Locale("fi", "FI"));
+        localeGroup.addItem("US").getItemProperty("locale").setValue(Locale.US);
+        localeGroup.addItem("UK").getItemProperty("locale").setValue(Locale.UK);
+        localeGroup.addValueChangeListener(new ValueChangeListener() {
+            @Override
+            public void valueChange(ValueChangeEvent event) {
+                Locale locale = (Locale) localeGroup.getItem(event.getProperty().getValue()).getItemProperty("locale").getValue();
+                pickerA.setLocale(locale);
+            }
+        });
+        useNative.addValueChangeListener(new ValueChangeListener() {
+            @Override
+            public void valueChange(ValueChangeEvent valueChangeEvent) {
+                localeGroup.setEnabled(!useNative.getValue());
+            }
+        });
+
+        localeGroup.select("Default");
+
+        addComponent(localeGroup);
     }
 
     private final Button.ClickListener dateButtonListener = new ClickListener() {

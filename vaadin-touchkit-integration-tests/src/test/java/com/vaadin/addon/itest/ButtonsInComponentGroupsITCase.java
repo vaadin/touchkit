@@ -16,7 +16,7 @@ public class ButtonsInComponentGroupsITCase extends AbstractTestBenchTest {
         try {
             driver.navigate().to(BASEURL + ButtonsInComponentGroups.class.getName());
 
-            assertTrue(testBench
+            assertTrue(testBench()
                     .compareScreen(getReferenceImage("buttonsincomponentgroups.png")));
 
             try {

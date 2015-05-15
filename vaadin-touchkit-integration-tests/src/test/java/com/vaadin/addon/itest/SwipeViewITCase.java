@@ -28,7 +28,7 @@ public class SwipeViewITCase extends AbstractTestBenchTest {
                 System.out.print(i + " ");
                 System.out.println(size);
                 if (i == 0) {
-                    assertTrue(testBench
+                    assertTrue(testBench()
                             .compareScreen(getReferenceImage("swipeview/initialview.png")));
                     findElements.get(0).click();
                 } else {
@@ -36,7 +36,7 @@ public class SwipeViewITCase extends AbstractTestBenchTest {
                 }
             }
 
-            testBench.waitForVaadin();
+            testBench().waitForVaadin();
 
             WebElement firstCheckbox = driver.findElement(By
                     .xpath("//input[@type='checkbox']"));
@@ -44,7 +44,7 @@ public class SwipeViewITCase extends AbstractTestBenchTest {
             firstCheckbox.click();
             String attribute = firstCheckbox.getAttribute("value");
             assertEquals("on", attribute);
-            assertTrue(testBench
+            assertTrue(testBench()
                     .compareScreen(getReferenceImage("swipeview/formview.png")));
 
         } finally {
