@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.vaadin.addon</groupId>
-        <version>4.0.2-SNAPSHOT</version>
+        <version>4.0.3-SNAPSHOT</version>
         <artifactId>vaadin-touchkit-root</artifactId>
         <relativePath>..</relativePath>
     </parent>
@@ -13,7 +13,7 @@
         <testbench.browsers>win7-googlechrome-stable</testbench.browsers>
         <!-- Which TouchKit package to use for testing -->
         <license.short.name>agpl</license.short.name>
-        <touchkit.version>4.0.2-SNAPSHOT</touchkit.version>
+        <touchkit.version>4.0.3-SNAPSHOT</touchkit.version>
         <vaadin.version.maven>7.4.6</vaadin.version.maven>
     </properties>
 
