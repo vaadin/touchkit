@@ -45,8 +45,12 @@ public class SwitchConnector extends AbstractFieldConnector implements
 
             @Override
             public void onValueChange(ValueChangeEvent<Boolean> event) {
-                rpc.setChecked(event.getValue(), null);
-            }
+            	getState().checked = getWidget().getValue();
+            	rpc.setChecked(event.getValue(), null);
+                if (getState().immediate) {
+                        getConnection().sendPendingVariableChanges();
+                    }            
+                }
         });
     }
 
