@@ -118,7 +118,11 @@ public class DatePickerConnector extends AbstractFieldConnector implements
 
     @Override
     public void onValueChange(ValueChangeEvent<Date> event) {
-        rpc.valueChanged(getWireFormat().format((event.getValue())));
+        if (event.getValue() != null) {
+            rpc.valueChanged(getWireFormat().format((event.getValue())));
+        } else {
+            rpc.valueChanged(null);
+        }
     }
 
     /*

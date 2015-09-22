@@ -52,7 +52,11 @@ public class DatePicker extends AbstractField<Date> {
 
         @Override
         public void valueChanged(String date) {
-            DatePicker.this.setValue(fromStr(date), false);
+            if (date != null) {
+                DatePicker.this.setValue(fromStr(date), false);
+            } else {
+                DatePicker.this.setValue(null, false);
+            }
         }
     };
 

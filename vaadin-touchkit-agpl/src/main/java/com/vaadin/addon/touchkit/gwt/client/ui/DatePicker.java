@@ -149,7 +149,8 @@ public class DatePicker extends SimplePanel implements
         public void onBrowserEvent(com.google.gwt.user.client.Event event) {
             String newDateString = input.getValue();
             if (newDateString == null || newDateString.isEmpty()) {
-                setDate(null, true, false);
+                // fire event if date value has changed
+                setDate(null, true, date != null);
             } else {
                 // non-empty value, set if changed
                 Date newDate = toStandardDate(newDateString);
