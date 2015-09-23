@@ -5,8 +5,8 @@
     <groupId>com.vaadin.addon</groupId>
     <artifactId>vaadin-touchkit-root</artifactId>
     <packaging>pom</packaging>
-    <version>4.0.3-SNAPSHOT</version>
-    <name>Vaadin TouchKit</name>
+    <version>4.0.4-SNAPSHOT</version>
+    <name>Vaadin TouchKit Root</name>
     <description>Vaadin TouchKit Root Project</description>
     <organization>
         <name>Vaadin Ltd</name>
@@ -69,7 +69,6 @@
 <!--         <module>vaadin-touchkit-integration-tests</module> -->
 <!--         <module>vaadin-touchkit-offline-tests</modules> -->
     </modules>
-
     <build>
         <pluginManagement>
             <plugins>
