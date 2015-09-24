@@ -6,7 +6,7 @@
     <artifactId>vaadin-touchkit-cval</artifactId>
     <packaging>jar</packaging>
     <version>4.0.0-SNAPSHOT</version>
-    <name>Vaadin TouchKit CVAL</name>
+    <name>Vaadin TouchKit</name>
 
     <!-- TODO(manolo): using maven-dependency-plugin and depending just
          on the touckit-agpl artifact, this file should be simpler -->
