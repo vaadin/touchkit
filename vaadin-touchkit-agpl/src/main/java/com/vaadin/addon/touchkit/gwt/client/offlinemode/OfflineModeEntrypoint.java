@@ -31,10 +31,7 @@ import com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineMode.OnlineEvent;
 import com.vaadin.addon.touchkit.gwt.client.vcom.OfflineModeConnector;
 import com.vaadin.client.ApplicationConfiguration;
 import com.vaadin.client.ApplicationConnection;
-import com.vaadin.client.ApplicationConnection.CommunicationErrorHandler;
 import com.vaadin.client.ApplicationConnection.CommunicationHandler;
-import com.vaadin.client.ApplicationConnection.ConnectionStatusEvent;
-import com.vaadin.client.ApplicationConnection.ConnectionStatusEvent.ConnectionStatusHandler;
 import com.vaadin.client.ApplicationConnection.RequestStartingEvent;
 import com.vaadin.client.ApplicationConnection.ResponseHandlingEndedEvent;
 import com.vaadin.client.ApplicationConnection.ResponseHandlingStartedEvent;
@@ -52,7 +49,7 @@ import com.vaadin.client.ApplicationConnection.ResponseHandlingStartedEvent;
  * and reconfigures heartbeat intervals depending on the connection status.
  */
 public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
-        CommunicationErrorHandler, ConnectionStatusHandler, RequestCallback {
+        RequestCallback {
 
     /**
      * We maintain three flags for defining application statuses.
@@ -238,8 +235,6 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
                     this);
             applicationConnection.addHandler(ResponseHandlingEndedEvent.TYPE,
                     this);
-            applicationConnection.addHandler(ConnectionStatusEvent.TYPE, this);
-            applicationConnection.setCommunicationErrorDelegate(this);
             dispatch(APP_STARTED);
         }
     }
@@ -365,7 +360,6 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
                 if (getOfflineMode().isActive()) {
                     getOfflineMode().deactivate();
                 }
-                applicationConnection.setApplicationRunning(true);
                 configureHeartBeat();
                 applicationConnection.fireEvent(new OnlineEvent());
             } else {
@@ -403,7 +397,7 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
         }
         getOfflineMode().activate(reason);
         if (applicationConnection != null) {
-            applicationConnection.setApplicationRunning(false);
+            applicationConnection.getLoadingIndicator().hide();
             applicationConnection.fireEvent(new OfflineEvent(reason));
         }
         configureHeartBeat();
@@ -425,12 +419,6 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
     }
 
     @Override
-    public boolean onError(String details, int statusCode) {
-        dispatch(BAD_RESPONSE);
-        return true;
-    }
-
-    @Override
     public void onRequestStarting(RequestStartingEvent e) {
     }
 
@@ -443,15 +431,6 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
     public void onResponseHandlingEnded(ResponseHandlingEndedEvent e) {
         if (lastReason == APP_STARTING) {
             dispatch(SERVER_AVAILABLE);
-        }
-    }
-
-    @Override
-    public void onConnectionStatusChange(ConnectionStatusEvent event) {
-        if (event.getStatus() == Response.SC_OK) {
-            dispatch(SERVER_AVAILABLE);
-        } else {
-            dispatch(BAD_RESPONSE);
         }
     }
 
@@ -639,7 +618,7 @@ public class OfflineModeEntrypoint implements EntryPoint, CommunicationHandler,
 
     // Return true if offline mode is enabled in this app.
     // When true we never show the offline UI when the server is unreachable.
-    private boolean isOfflineModeEnabled() {
+    public boolean isOfflineModeEnabled() {
         return Boolean.valueOf(getVaadinConfValue("offlineEnabled"));
     }
 

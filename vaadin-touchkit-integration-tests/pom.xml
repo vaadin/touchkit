@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.vaadin.addon</groupId>
-        <version>4.0.4-SNAPSHOT</version>
+        <version>4.1-SNAPSHOT</version>
         <artifactId>vaadin-touchkit-root</artifactId>
         <relativePath>..</relativePath>
     </parent>
@@ -13,8 +13,8 @@
         <testbench.browsers>win7-googlechrome-stable</testbench.browsers>
         <!-- Which TouchKit package to use for testing -->
         <license.short.name>agpl</license.short.name>
-        <touchkit.version>4.0.4-SNAPSHOT</touchkit.version>
-        <vaadin.version.maven>7.5.6</vaadin.version.maven>
+        <touchkit.version>4.1-SNAPSHOT</touchkit.version>
+        <vaadin.version.maven>7.6.0.alpha5</vaadin.version.maven>
     </properties>
 
     <repositories>
@@ -32,6 +32,10 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
+        <repository>
+            <id>vaadin-prereleases</id>
+            <url>https://maven.vaadin.com/vaadin-prereleases</url>
+        </repository>
     </repositories>
 
     <pluginRepositories>
@@ -44,6 +48,10 @@
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>vaadin-prereleases</id>
+            <url>https://maven.vaadin.com/vaadin-prereleases</url>
         </pluginRepository>
     </pluginRepositories>
 

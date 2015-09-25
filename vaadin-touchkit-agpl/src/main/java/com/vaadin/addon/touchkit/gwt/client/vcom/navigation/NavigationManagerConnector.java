@@ -80,6 +80,7 @@ public class NavigationManagerConnector extends
     }
 
     private final ElementResizeListener listener = new ElementResizeListener() {
+        @Override
         public void onElementResize(ElementResizeEvent e) {
             Scheduler.get().scheduleDeferred(new ScheduledCommand() {
                 @Override
@@ -106,12 +107,12 @@ public class NavigationManagerConnector extends
 
     @Override
     public void animationWillStart() {
-        getConnection().suspendReponseHandling(this);
+        getConnection().getMessageHandler().suspendReponseHandling(this);
     }
 
     @Override
     public void animationDidEnd() {
-        getConnection().resumeResponseHandling(this);
+        getConnection().getMessageHandler().resumeResponseHandling(this);
     }
 
 }
