@@ -114,7 +114,7 @@
             <resource>
                 <directory>../</directory>
                 <includes>
-                    <include>license.html</include>
+                    <include>LICENSE.md</include>
                 </includes>
                 <filtering>true</filtering>
             </resource>

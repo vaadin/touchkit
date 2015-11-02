@@ -58,7 +58,7 @@
             <filtered>true</filtered>
         </file>
         <file>
-            <source>../license.html</source>
+            <source>../LICENSE.md</source>
             <filtered>true</filtered>
         </file>
     </files>
