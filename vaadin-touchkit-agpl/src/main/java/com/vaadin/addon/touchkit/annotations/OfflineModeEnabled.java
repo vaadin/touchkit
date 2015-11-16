@@ -24,8 +24,11 @@ import java.lang.annotation.Target;
 /**
  * Disable or enable OfflineMode in client.
  *
- * It prevents client sending heartbeat requests and switching
- * to OfflineModeView.
+ * It prevents client sending heartbeat requests and switching to
+ * OfflineModeView.
+ * 
+ * OfflineModeEnabled(<code>false</code>) will disable TouchKit default offline
+ * mode and enable default Vaadin Framework reconnect dialog
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

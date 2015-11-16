@@ -47,7 +47,7 @@
 
         <license.short.name>cval</license.short.name>
         <license.version>3</license.version>
-        <vaadin.version.maven>7.6.0.alpha5</vaadin.version.maven>
+        <vaadin.version.maven>7.6.0.beta1</vaadin.version.maven>
         <gpg.passphrase.file>empty.properties</gpg.passphrase.file>
         <gpg.skip>true</gpg.skip>
         <snapshot.repository.url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</snapshot.repository.url>
@@ -202,6 +202,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <!-- Prevent DocLint from cancelling the build -->
+                <configuration>
+                    <failOnError>false</failOnError>
+                </configuration>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>

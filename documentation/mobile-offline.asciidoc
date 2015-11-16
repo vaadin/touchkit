@@ -62,27 +62,40 @@ deployment descriptor as follows:
 
 
 [[mobile.offline.offlinemodesettings]]
-== Enabling Offline Mode
 
-To enable the offline mode, you need to add the [classname]#OfflineMode#
-extension to the UI.
+Offline Mode is enabled by default.
+
+== Disabling Offline Mode
+
+Offline Mode can be disabled adding the [classname]#@OfflineModeEnabled(false)# annotation to the UI class.
+When offline mode is disabled Vaadin Framework default reconnect dialog will be used if connection is lost.
+
+== Configuring Offline Mode
+ 
+Additional configuration can be defined adding the [classname]#OfflineMode# extension to the UI.
 
 
 ----
-OfflineMode offlineMode = new OfflineMode();
-offlineMode.extend(this);
+public class OfflineTest extends UI {
 
-// Maintain the session when the browser app closes
-offlineMode.setPersistentSessionCookie(true);
+    @Override
+    protected void init(VaadinRequest request) {
+        OfflineMode offlineMode = new OfflineMode();
+        // Maintain the session when the browser app closes
+        offlineMode.setPersistentSessionCookie(true);
 
-// Define the timeout in secs to wait when a server
-// request is sent before falling back to offline mode
-offlineMode.setOfflineModeTimeout(15);
+        // Define the timeout in secs to wait when a server
+        // request is sent before falling back to offline mode
+        offlineMode.setOfflineModeTimeout(15);
+        offlineMode.extend(this);
+
+        buildUi();
+    }
+
+    ...
+
+}
 ----
-
-The above code is included in the project stub created by the Maven archetype
-(see <<dummy/../../mobile/mobile-project#mobile.project.maven,"Using the Maven
-Archetype">>).
 
 You can extend the [classname]#OfflineMode# extension to transfer data
 conveniently from the offline UI to the server-side, as described in

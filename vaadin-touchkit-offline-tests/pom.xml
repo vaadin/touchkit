@@ -14,7 +14,7 @@
         <!-- Which TouchKit package to use for testing -->
         <license.short.name>agpl</license.short.name>
         <touchkit.version>4.1-SNAPSHOT</touchkit.version>
-        <vaadin.version.maven>7.6.0.alpha5</vaadin.version.maven>
+        <vaadin.version.maven>7.6.0.beta1</vaadin.version.maven>
         <gwt.version>2.5.0-rc1</gwt.version>
         <gpg.passphrase.file>empty.properties</gpg.passphrase.file>
         <gpg.skip>true</gpg.skip>

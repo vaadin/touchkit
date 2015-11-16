@@ -30,7 +30,7 @@
     <replace-with
         class="com.vaadin.addon.touchkit.gwt.client.communication.TouchKitConnectionStateHandler">
         <when-type-is
-            class="com.vaadin.client.communication.DefaultConnectionStateHandler" />
+            class="com.vaadin.client.communication.ConnectionStateHandler" />
     </replace-with>
 
     <replace-with class="com.vaadin.addon.touchkit.gwt.client.ui.TouchButton">
