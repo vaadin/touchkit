@@ -47,7 +47,7 @@
 
         <license.short.name>cval</license.short.name>
         <license.version>3</license.version>
-        <vaadin.version.maven>7.6.0.beta1</vaadin.version.maven>
+        <vaadin.version.maven>[7.6.0.beta1,7.99.9999]</vaadin.version.maven>
         <gpg.passphrase.file>empty.properties</gpg.passphrase.file>
         <gpg.skip>true</gpg.skip>
         <snapshot.repository.url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</snapshot.repository.url>
