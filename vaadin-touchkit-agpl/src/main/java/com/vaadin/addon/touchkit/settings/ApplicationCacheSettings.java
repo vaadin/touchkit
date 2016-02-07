@@ -82,8 +82,12 @@ public class ApplicationCacheSettings implements BootstrapListener {
      * @return The manifest file name, eg. "safari.manifest".
      */
     protected String generateManifestFileName(BootstrapPageResponse response) {
-        VBrowserDetails browser = new VBrowserDetails(response.getRequest()
-                .getHeader("user-agent"));
+        String userAgent = response.getRequest().getHeader("user-agent");
+        if (userAgent == null) {
+            // Should not happen in "normal" cases but the header is optional
+            return "safari.manifest";
+        }
+        VBrowserDetails browser = new VBrowserDetails(userAgent);
 
         if (browser.isFirefox()) {
             return "gecko1_8.manifest";
