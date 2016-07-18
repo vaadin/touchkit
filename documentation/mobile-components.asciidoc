@@ -686,7 +686,7 @@ Also the [classname]#Upload# component has a button, and you can give it the
 
 ifdef::web[]
 , as is done in
-<<dummy/../../mobile/mobile-features#mobile.features.upload,"Uploading
+<<dummy/../../touchkit/mobile-features#mobile.features.upload,"Uploading
 Content">>
 endif::web[]
 .

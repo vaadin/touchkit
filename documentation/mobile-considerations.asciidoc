@@ -45,7 +45,7 @@ lines. With a low-end mobile connection, such as 384 kbps, just loading the
 Vaadin client-side engine can take several seconds. This can be helped by
 compiling a widget set that includes only the widgets for the used components,
 as described in
-<<dummy/../../mobile/mobile-optimization#mobile.optimization,"Building an
+<<dummy/../../touchkit/mobile-optimization#mobile.optimization,"Building an
 Optimized Widget Set">>, by compiling the theme into the widget set, and so
 forth.
 

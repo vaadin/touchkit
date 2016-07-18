@@ -43,7 +43,7 @@ public class MyUIProvider extends UIProvider {
 
 The custom UI provider has to be added in a custom servlet class, which you need
 to define in the [filename]#web.xml#, as described in
-<<dummy/../../mobile/mobile-elements#mobile.elements.settings,"TouchKit
+<<dummy/../../touchkit/mobile-elements#mobile.elements.settings,"TouchKit
 Settings">>. For example, as follows:
 
 

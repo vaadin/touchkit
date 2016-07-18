@@ -8,7 +8,7 @@ layout: page
 = Importing the Parking Demo
 
 The Parking Demo, illustrated in
-<<dummy/../../mobile/mobile-overview#figure.mobile.overview.touchkit,"The
+<<dummy/../../touchkit/mobile-overview#figure.mobile.overview.touchkit,"The
 Parking Demo for Vaadin TouchKit">> in the overview, showcases most of the
 functionality in Vaadin TouchKit. You can try out the demo online with a
 TouchKit-compatible browser at

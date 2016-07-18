@@ -29,7 +29,7 @@ configure the following TouchKit features in the servlet class:
 * Customize splash screen image
 * Customize status bar in iOS
 * Use special web app mode in iOS
-* Provide a fallback UI ( <<dummy/../../mobile/mobile-features#mobile.features.fallback,"Providing a Fallback UI">>)
+* Provide a fallback UI ( <<dummy/../../touchkit/mobile-features#mobile.features.fallback,"Providing a Fallback UI">>)
 * Enable offline mode
 
 A custom servlet should normally extend the [classname]#TouchKitServlet#. You
@@ -199,7 +199,7 @@ functionality in the iOS browser.
 
 The [classname]#ApplicationCacheSettings# object manages the cache manifest,
 which is used to configure how the browser caches the page and other resources
-for the web app. See <<dummy/../../mobile/mobile-offline#mobile.offline,"Offline
+for the web app. See <<dummy/../../touchkit/mobile-offline#mobile.offline,"Offline
 Mode">> for more details about its use.
 
 
@@ -238,7 +238,7 @@ as the basis of the UI: [classname]#TabBarView#, [classname]#NavigationView#, or
 [classname]#NavigationManager#.
 
 If a offline UI is provided, it needs to be enabled in the initialization of the
-UI, as described in <<dummy/../../mobile/mobile-offline#mobile.offline,"Offline
+UI, as described in <<dummy/../../touchkit/mobile-offline#mobile.offline,"Offline
 Mode">>. This code is included in the project stub created by the Maven
 archetype.
 

@@ -39,25 +39,25 @@ classes such as [classname]#MyTouchKitUI#.
 The generated project has the following source files:
 
 [filename]#MyTouchKitUI.java#:: The mobile UI for the TouchKit application. See
-<<dummy/../../mobile/mobile-elements#mobile.elements.ui,"The UI">> for the
+<<dummy/../../touchkit/mobile-elements#mobile.elements.ui,"The UI">> for the
 basics of a TouchKit UI. The example UI uses [classname]#TabBarView# as the
 content. The first tab features a [classname]#MenuView# (see below), a
 navigation view stub defined in the project.
 
 [filename]#MyFallbackUI.java#:: A fallback UI for browsers unsupported by TouchKit, such as regular desktop
 browsers. See
-<<dummy/../../mobile/mobile-features#mobile.features.fallback,"Providing a
+<<dummy/../../touchkit/mobile-features#mobile.features.fallback,"Providing a
 Fallback UI">> for more information about fallback UIs.
 
 [filename]#MyServlet.java#:: The servlet class for the UI, defined using the [literal]#++@WebServlet++#
 annotation in Servlet API 3.0. The generated servlet customizes TouchKit to
 define the [classname]#MyUIProvider#, which sets the fallback UI. See
-<<dummy/../../mobile/mobile-elements#mobile.elements.servlet,"The Servlet
+<<dummy/../../touchkit/mobile-elements#mobile.elements.servlet,"The Servlet
 Class">> for more details about defining a custom servlet to customize TouchKit.
 
 [filename]#MyUIProvider.java#:: Creates either the [classname]#MyTouchKitUI# for supported mobile browsers or
 [classname]#MyFallBackUI# for unsupported browsers. See
-<<dummy/../../mobile/mobile-features#mobile.features.fallback,"Providing a
+<<dummy/../../touchkit/mobile-features#mobile.features.fallback,"Providing a
 Fallback UI">> for more information about fallback UIs.
 
 [filename]#MenuView.java#:: Presents a stub for a menu view. The menu is made of
@@ -71,7 +71,7 @@ view; in the stub to a [classname]#FormView# (see below).
 updated to include possible other add-on widget sets in the project.
 
 [filename]#gwt/client/MyOfflineDataService.java#:: A data service stub for storing data in the offline mode. See
-<<dummy/../../mobile/mobile-offline#mobile.offline,"Offline Mode">>.
+<<dummy/../../touchkit/mobile-offline#mobile.offline,"Offline Mode">>.
 
 [filename]#gwt/client/MyPersistToServerRpc.java#:: Client-to-Server RPC stub to persist offline data to the server-side.
 
@@ -116,14 +116,14 @@ After creating the project, you need to do the following tasks:
 [filename]#ivy.xml#
 ifdef::web[]
 , as described in
-<<dummy/../../mobile/mobile-installation#mobile.elements.ivy,"Installing as Ivy
+<<dummy/../../touchkit/mobile-installation#mobile.elements.ivy,"Installing as Ivy
 Dependency">>,
 endif::web[]
  and compile the widget set.
 
 . Extend [classname]#TouchkitServlet# instead of [classname]#VaadinServlet# in the
 servlet class, as described in
-<<dummy/../../mobile/mobile-elements#mobile.elements.servlet,"The Servlet
+<<dummy/../../touchkit/mobile-elements#mobile.elements.servlet,"The Servlet
 Class">>. It is recommended that you extract the static inner class created by
 the wizard to a regular class, as you most probably need to do additional
 configuration in it.
@@ -141,14 +141,14 @@ public class MyProjectServlet extends **TouchKitServlet** {
 }
 ----
 . If you intend to define a fallback UI later, as described in
-<<dummy/../../mobile/mobile-features#mobile.features.fallback,"Providing a
+<<dummy/../../touchkit/mobile-features#mobile.features.fallback,"Providing a
 Fallback UI">>, you may want to copy the original UI class stub to use it as a
 fallback UI class.
 
 . To get started quickly, disable the use of custom theme by using
 [literal]#++@Theme("touchkit")++# in the UI class. To create a custom mobile
 theme later, see
-<<dummy/../../mobile/mobile-elements#mobile.elements.theme,"Mobile Theme">>.
+<<dummy/../../touchkit/mobile-elements#mobile.elements.theme,"Mobile Theme">>.
 
 
 +
@@ -159,11 +159,11 @@ public class MyMobileUI extends UI {
 ----
 . Build the mobile UI preferring TouchKit components instead of the core Vaadin
 components, as described in
-<<dummy/../../mobile/mobile-elements#mobile.elements.ui,"The UI">>.
+<<dummy/../../touchkit/mobile-elements#mobile.elements.ui,"The UI">>.
 
 
 We cover these and various other tasks in more detail in
-<<dummy/../../mobile/mobile-elements#mobile.elements,"Elements of a TouchKit
+<<dummy/../../touchkit/mobile-elements#mobile.elements,"Elements of a TouchKit
 Application">>.
 
 

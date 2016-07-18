@@ -78,7 +78,7 @@ In addition to developing regular server-side UIs, TouchKit allows a special
 __offline mode__, which is a client-side Vaadin UI that is stored in the browser
 cache and switched to automatically when the network connection is not
 available, either when starting the application or while using it. For more
-information, see <<dummy/../../mobile/mobile-offline#mobile.offline,"Offline
+information, see <<dummy/../../touchkit/mobile-offline#mobile.offline,"Offline
 Mode">>.
 
 In this chapter, we first consider some special aspects of mobile browsing.
@@ -96,7 +96,7 @@ enforcement officers write parking tickets on the streets. It uses geolocation,
 image acquisition from the camera of the mobile device, map navigation, data
 visualization with Vaadin Charts, and dynamic UIs with responsive layouts. You
 can try it out at http://demo.vaadin.com/parking. See
-<<dummy/../../mobile/mobile-installation-parking-demo#mobile.installation.parking-demo,"Importing
+<<dummy/../../touchkit/mobile-installation-parking-demo#mobile.installation.parking-demo,"Importing
 the Parking Demo">> for instructions for importing the project in Eclipse.
 
 ifdef::web[]

@@ -49,7 +49,7 @@ ifdef::web[]
 
 You can install Vaadin TouchKit in a Maven project by adding it as a dependency,
 as described below, or by using the Maven archetype, as described in
-<<dummy/../../mobile/mobile-project#mobile.project.maven,"Using the Maven
+<<dummy/../../touchkit/mobile-project#mobile.project.maven,"Using the Maven
 Archetype">>.
 
 To use TouchKit in a Vaadin project, you need to include the following
