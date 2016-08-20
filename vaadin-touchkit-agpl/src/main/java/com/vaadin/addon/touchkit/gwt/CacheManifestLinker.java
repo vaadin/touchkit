@@ -1,31 +1,13 @@
 package com.vaadin.addon.touchkit.gwt;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.SortedMap;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
 import com.google.gwt.core.ext.LinkerContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.core.ext.linker.AbstractLinker;
-import com.google.gwt.core.ext.linker.Artifact;
-import com.google.gwt.core.ext.linker.ArtifactSet;
-import com.google.gwt.core.ext.linker.CompilationResult;
-import com.google.gwt.core.ext.linker.ConfigurationProperty;
-import com.google.gwt.core.ext.linker.EmittedArtifact;
-import com.google.gwt.core.ext.linker.LinkerOrder;
-import com.google.gwt.core.ext.linker.SelectionProperty;
-import com.google.gwt.core.ext.linker.Shardable;
+import com.google.gwt.core.ext.linker.*;
+
+import java.io.File;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * A GWT linker that produces a cache.manifest file describing what to cache in
@@ -170,6 +152,14 @@ public class CacheManifestLinker extends AbstractLinker {
                     .getConfigurationProperties();
             for (ConfigurationProperty configurationProperty : configurationProperties) {
                 if (configurationProperty.getName().equals(
+                        "touchkit.manifestlinker.additionalCacheFileExtension")) {
+                    List<String> values = configurationProperty.getValues();
+                    for (String value : values) {
+                        acceptedFileExtensions.add("." + value);
+                    }
+                    break;
+                }
+                if (configurationProperty.getName().equals(
                         "touchkit.manifestlinker.additionalCacheRoot")) {
                     List<String> values = configurationProperty.getValues();
                     for (String root : values) {
@@ -222,7 +212,7 @@ public class CacheManifestLinker extends AbstractLinker {
     }
 
     List<String> acceptedFileExtensions = Arrays.asList(".html", ".js", ".css",
-            ".png", ".jpg", ".gif", ".ico", ".woff");
+            ".png", ".jpg", ".gif", ".ico", ".svg", ".woff");
 
     protected boolean acceptCachedResource(String filename) {
         if (filename.startsWith("compile-report/")) {
