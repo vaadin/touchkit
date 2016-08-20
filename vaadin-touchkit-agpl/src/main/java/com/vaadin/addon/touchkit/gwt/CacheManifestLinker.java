@@ -155,7 +155,7 @@ public class CacheManifestLinker extends AbstractLinker {
                         "touchkit.manifestlinker.additionalCacheFileExtension")) {
                     List<String> values = configurationProperty.getValues();
                     for (String value : values) {
-                        acceptedFileExtensions.add("." + value);
+                        acceptedFileExtensions.add(value);
                     }
                     break;
                 }
