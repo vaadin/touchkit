@@ -6,7 +6,7 @@ import com.vaadin.addon.touchkit.ui.NavigationButton.NavigationButtonClickListen
 import com.vaadin.addon.touchkit.ui.NavigationManager;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.CssLayout;
-import com.vaadin.ui.Label;
+import com.vaadin.v7.ui.Label;
 
 public class NavPanelTestWithNavButtons extends NavigationManager implements
         ComponentContainer {

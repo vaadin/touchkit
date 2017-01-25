@@ -1,15 +1,15 @@
 package com.vaadin.addon.touchkit.itest;
 
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.data.Item;
-import com.vaadin.data.fieldgroup.FieldGroup;
-import com.vaadin.data.util.BeanItem;
+import com.vaadin.v7.data.Item;
+import com.vaadin.v7.data.fieldgroup.FieldGroup;
+import com.vaadin.v7.data.util.BeanItem;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.Field;
-import com.vaadin.ui.Form;
-import com.vaadin.ui.FormFieldFactory;
+import com.vaadin.v7.ui.Field;
+import com.vaadin.v7.ui.Form;
+import com.vaadin.v7.ui.FormFieldFactory;
 import com.vaadin.ui.FormLayout;
-import com.vaadin.ui.NativeSelect;
+import com.vaadin.v7.ui.NativeSelect;
 
 public class NativeSelectInForm extends AbstractTouchKitIntegrationTest {
 

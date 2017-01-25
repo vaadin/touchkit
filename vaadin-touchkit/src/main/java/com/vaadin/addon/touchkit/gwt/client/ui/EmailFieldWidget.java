@@ -1,6 +1,6 @@
 package com.vaadin.addon.touchkit.gwt.client.ui;
 
-import com.vaadin.client.ui.VTextField;
+import com.vaadin.v7.client.ui.VTextField;
 
 public class EmailFieldWidget extends VTextField {
 

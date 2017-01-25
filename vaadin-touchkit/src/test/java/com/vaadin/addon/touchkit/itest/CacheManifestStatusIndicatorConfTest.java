@@ -5,7 +5,7 @@ import com.vaadin.addon.touchkit.server.TouchKitServlet;
 import com.vaadin.addon.touchkit.settings.ApplicationCacheSettings;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.TextField;
+import com.vaadin.v7.ui.TextField;
 
 public class CacheManifestStatusIndicatorConfTest extends
         AbstractTouchKitIntegrationTest {

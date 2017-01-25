@@ -7,8 +7,8 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.CssLayout;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.Table;
+import com.vaadin.v7.ui.Label;
+import com.vaadin.v7.ui.Table;
 
 public class NavigationViewWithTablePopover extends
         AbstractTouchKitIntegrationTest {

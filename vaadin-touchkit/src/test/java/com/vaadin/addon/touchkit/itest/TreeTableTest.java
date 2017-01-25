@@ -1,7 +1,7 @@
 package com.vaadin.addon.touchkit.itest;
 
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.ui.TreeTable;
+import com.vaadin.v7.ui.TreeTable;
 
 @SuppressWarnings("serial")
 public class TreeTableTest extends AbstractTouchKitIntegrationTest {

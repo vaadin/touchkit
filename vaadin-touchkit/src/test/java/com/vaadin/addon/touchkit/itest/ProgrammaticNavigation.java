@@ -9,7 +9,7 @@ import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Label;
+import com.vaadin.v7.ui.Label;
 
 public class ProgrammaticNavigation extends AbstractTouchKitIntegrationTest {
 

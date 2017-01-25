@@ -1,7 +1,7 @@
 package com.vaadin.addon.touchkit.ui;
 
 import com.vaadin.ui.Component;
-import com.vaadin.ui.Field;
+import com.vaadin.v7.ui.Field;
 
 /**
  * The VerticalComponentGroup is a layout to group controls vertically. Unlike

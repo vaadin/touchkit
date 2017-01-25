@@ -4,7 +4,7 @@ import java.util.Locale;
 
 import com.vaadin.addon.touchkit.gwt.client.vcom.Html5InputSettingsState;
 import com.vaadin.server.AbstractExtension;
-import com.vaadin.ui.TextField;
+import com.vaadin.v7.ui.TextField;
 
 /**
  * A TextField extension to control the new input properties that were

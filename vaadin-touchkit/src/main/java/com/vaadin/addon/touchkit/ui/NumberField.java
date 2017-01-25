@@ -1,7 +1,7 @@
 package com.vaadin.addon.touchkit.ui;
 
-import com.vaadin.data.Property;
-import com.vaadin.ui.TextField;
+import com.vaadin.v7.data.Property;
+import com.vaadin.v7.ui.TextField;
 
 /**
  * A {@link TextField} that is intended for numerical input.

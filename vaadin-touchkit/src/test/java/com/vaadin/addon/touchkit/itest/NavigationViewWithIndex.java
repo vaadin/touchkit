@@ -5,7 +5,7 @@ import com.vaadin.addon.touchkit.extensions.FloatingIndex;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.ui.CssLayout;
-import com.vaadin.ui.Label;
+import com.vaadin.v7.ui.Label;
 
 public class NavigationViewWithIndex extends
         AbstractTouchKitIntegrationTest {

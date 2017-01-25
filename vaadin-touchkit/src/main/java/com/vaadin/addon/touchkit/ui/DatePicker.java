@@ -8,8 +8,8 @@ import java.util.Locale;
 import com.vaadin.addon.touchkit.gwt.client.vcom.DatePickerServerRpc;
 import com.vaadin.addon.touchkit.gwt.client.vcom.DatePickerState;
 import com.vaadin.addon.touchkit.gwt.client.vcom.DatePickerState.Resolution;
-import com.vaadin.ui.AbstractField;
-import com.vaadin.ui.DateField;
+import com.vaadin.v7.ui.AbstractField;
+import com.vaadin.v7.ui.DateField;
 
 /**
  * DatePicker is a field used to ask time values from the user. In contrast to

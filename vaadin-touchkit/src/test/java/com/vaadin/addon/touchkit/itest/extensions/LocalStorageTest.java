@@ -6,7 +6,7 @@ import com.vaadin.addon.touchkit.extensions.LocalStorageCallback;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Notification;
-import com.vaadin.ui.TextField;
+import com.vaadin.v7.ui.TextField;
 
 @SuppressWarnings("serial")
 public class LocalStorageTest extends AbstractTouchKitIntegrationTest {

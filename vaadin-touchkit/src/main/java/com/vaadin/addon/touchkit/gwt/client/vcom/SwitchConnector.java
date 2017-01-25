@@ -17,11 +17,11 @@ import com.vaadin.client.EventHelper;
 import com.vaadin.client.VTooltip;
 import com.vaadin.client.communication.RpcProxy;
 import com.vaadin.client.communication.StateChangeEvent;
-import com.vaadin.client.ui.AbstractFieldConnector;
+import com.vaadin.v7.client.ui.AbstractFieldConnector;
 import com.vaadin.shared.communication.FieldRpc.FocusAndBlurServerRpc;
 import com.vaadin.shared.ui.Connect;
-import com.vaadin.shared.ui.checkbox.CheckBoxServerRpc;
-import com.vaadin.shared.ui.checkbox.CheckBoxState;
+import com.vaadin.v7.shared.ui.checkbox.CheckBoxServerRpc;
+import com.vaadin.v7.shared.ui.checkbox.CheckBoxState;
 
 @Connect(Switch.class)
 public class SwitchConnector extends AbstractFieldConnector implements

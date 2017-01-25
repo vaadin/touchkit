@@ -5,14 +5,14 @@ import java.io.Serializable;
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
-import com.vaadin.data.Item;
-import com.vaadin.data.util.BeanItem;
+import com.vaadin.v7.data.Item;
+import com.vaadin.v7.data.util.BeanItem;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.DefaultFieldFactory;
-import com.vaadin.ui.Field;
-import com.vaadin.ui.Form;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.NativeSelect;
+import com.vaadin.v7.ui.DefaultFieldFactory;
+import com.vaadin.v7.ui.Field;
+import com.vaadin.v7.ui.Form;
+import com.vaadin.v7.ui.Label;
+import com.vaadin.v7.ui.NativeSelect;
 
 public class MeetingRoomView extends AbstractTouchKitIntegrationTest {
 

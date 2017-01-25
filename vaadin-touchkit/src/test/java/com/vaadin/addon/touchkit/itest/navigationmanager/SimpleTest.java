@@ -8,7 +8,7 @@ import com.vaadin.addon.touchkit.ui.NavigationManager.NavigationListener;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.CssLayout;
-import com.vaadin.ui.Label;
+import com.vaadin.v7.ui.Label;
 
 public class SimpleTest extends AbstractTouchKitIntegrationTest {
 

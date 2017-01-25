@@ -8,15 +8,15 @@ import com.vaadin.addon.touchkit.ui.Switch;
 import com.vaadin.addon.touchkit.ui.TabBarView;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.server.ThemeResource;
-import com.vaadin.ui.ComboBox;
+import com.vaadin.v7.ui.ComboBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
-import com.vaadin.ui.DateField;
-import com.vaadin.ui.InlineDateField;
-import com.vaadin.ui.NativeSelect;
-import com.vaadin.ui.Slider;
+import com.vaadin.v7.ui.DateField;
+import com.vaadin.v7.ui.InlineDateField;
+import com.vaadin.v7.ui.NativeSelect;
+import com.vaadin.v7.ui.Slider;
 import com.vaadin.ui.TabSheet.Tab;
-import com.vaadin.ui.Table;
+import com.vaadin.v7.ui.Table;
 
 public class Tabsheet extends AbstractTouchKitIntegrationTest {
 

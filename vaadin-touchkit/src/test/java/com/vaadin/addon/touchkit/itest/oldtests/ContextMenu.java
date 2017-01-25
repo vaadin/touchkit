@@ -5,7 +5,7 @@ import com.vaadin.addon.touchkit.ui.NavigationManager;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.event.Action;
 import com.vaadin.event.Action.Handler;
-import com.vaadin.ui.Table;
+import com.vaadin.v7.ui.Table;
 
 public class ContextMenu extends AbstractTouchKitIntegrationTest {
 

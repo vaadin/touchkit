@@ -5,8 +5,8 @@ import org.junit.Ignore;
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
 import com.vaadin.addon.touchkit.ui.NavigationManager;
 import com.vaadin.addon.touchkit.ui.SwipeView;
-import com.vaadin.ui.Table;
-import com.vaadin.ui.Table.RowHeaderMode;
+import com.vaadin.v7.ui.Table;
+import com.vaadin.v7.ui.Table.RowHeaderMode;
 
 @SuppressWarnings("serial")
 @Ignore

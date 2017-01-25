@@ -6,7 +6,7 @@ import com.vaadin.addon.touchkit.extensions.PositionCallback;
 import com.vaadin.addon.touchkit.gwt.client.vcom.Position;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Label;
+import com.vaadin.v7.ui.Label;
 import com.vaadin.ui.Notification;
 
 @SuppressWarnings("serial")

@@ -10,8 +10,8 @@ import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Notification;
-import com.vaadin.ui.TextField;
-import com.vaadin.ui.themes.BaseTheme;
+import com.vaadin.v7.ui.TextField;
+import com.vaadin.v7.ui.themes.BaseTheme;
 
 public class FormLayoutInVerticalComponentGroup extends AbstractTouchKitIntegrationTest {
     public FormLayoutInVerticalComponentGroup() {

@@ -5,7 +5,7 @@ import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.CssLayout;
-import com.vaadin.ui.Label;
+import com.vaadin.v7.ui.Label;
 
 @SuppressWarnings("serial")
 public class DynamicVerticalComponentGroupTest extends AbstractTouchKitIntegrationTest {

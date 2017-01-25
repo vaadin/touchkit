@@ -3,13 +3,13 @@ package com.vaadin.addon.touchkit.itest;
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
 import com.vaadin.addon.touchkit.extensions.Html5InputSettings;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
-import com.vaadin.data.fieldgroup.FieldGroup;
-import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
-import com.vaadin.data.util.BeanItem;
+import com.vaadin.v7.data.fieldgroup.FieldGroup;
+import com.vaadin.v7.data.fieldgroup.FieldGroup.CommitException;
+import com.vaadin.v7.data.util.BeanItem;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.TextField;
+import com.vaadin.v7.ui.TextField;
 
 public class Html5InputExtensionTest extends AbstractTouchKitIntegrationTest {
     public Html5InputExtensionTest() {
