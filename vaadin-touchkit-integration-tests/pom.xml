@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.vaadin.addon</groupId>
-        <version>4.1-SNAPSHOT</version>
+        <version>5.0-SNAPSHOT</version>
         <artifactId>vaadin-touchkit-root</artifactId>
         <relativePath>..</relativePath>
     </parent>
@@ -11,9 +11,7 @@
     <properties>
         <testbench.hubhost>testbench-hub.intra.itmill.com</testbench.hubhost>
         <testbench.browsers>win7-googlechrome-stable</testbench.browsers>
-        <!-- Which TouchKit package to use for testing -->
-        <license.short.name>agpl</license.short.name>
-        <touchkit.version>4.1-SNAPSHOT</touchkit.version>
+        <touchkit.version>5.0-SNAPSHOT</touchkit.version>
         <vaadin.version.maven>7.6.0.beta1</vaadin.version.maven>
     </properties>
 
@@ -62,7 +60,7 @@
     <dependencies>
         <dependency>
             <groupId>com.vaadin.addon</groupId>
-            <artifactId>vaadin-touchkit-agpl</artifactId>
+            <artifactId>vaadin-touchkit</artifactId>
             <version>${touchkit.version}</version>
         </dependency>
         <dependency>
@@ -124,7 +122,7 @@
                 <directory>src/test/resources</directory>
             </resource>
             <resource>
-                <directory>../vaadin-touchkit-agpl/src/test/resources</directory>
+                <directory>../vaadin-touchkit/src/test/resources</directory>
             </resource>
         </resources>
 
@@ -239,7 +237,7 @@
                         <configuration>
                             <sources>
                                 <!-- Use test sources from core package -->
-                                <source>../vaadin-touchkit-agpl/src/test/java</source>
+                                <source>../vaadin-touchkit/src/test/java</source>
                             </sources>
                         </configuration>
                     </execution>
