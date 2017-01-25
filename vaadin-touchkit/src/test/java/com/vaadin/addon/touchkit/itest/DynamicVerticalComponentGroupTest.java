@@ -5,7 +5,7 @@ import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.CssLayout;
-import com.vaadin.v7.ui.Label;
+import com.vaadin.ui.Label;
 
 @SuppressWarnings("serial")
 public class DynamicVerticalComponentGroupTest extends AbstractTouchKitIntegrationTest {
@@ -21,7 +21,6 @@ public class DynamicVerticalComponentGroupTest extends AbstractTouchKitIntegrati
 		
 		Button addToTop = new Button("AddToTop");
 		addToTop.setId("add-top");
-		addToTop.setImmediate(true);
 		buttonLayout.addComponent(addToTop);
 		addToTop.addClickListener(new Button.ClickListener() {
 			
@@ -34,7 +33,6 @@ public class DynamicVerticalComponentGroupTest extends AbstractTouchKitIntegrati
 		
 		Button addToSecond = new Button("AddToSecond");
 		addToSecond.setId("add-second");
-		addToSecond.setImmediate(true);
 		buttonLayout.addComponent(addToSecond);
 		addToSecond.addClickListener(new Button.ClickListener() {
 			

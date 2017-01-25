@@ -24,7 +24,6 @@ public class VPopover extends com.vaadin.client.ui.VWindow {
     protected int zIndex;
 
     public VPopover() {
-        setShadowEnabled(false);
     }
 
     public void setRelatedComponent(Widget relComponent) {
