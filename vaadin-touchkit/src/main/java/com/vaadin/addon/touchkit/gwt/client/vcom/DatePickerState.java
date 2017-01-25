@@ -1,6 +1,6 @@
 package com.vaadin.addon.touchkit.gwt.client.vcom;
 
-import com.vaadin.shared.AbstractFieldState;
+import com.vaadin.v7.shared.AbstractFieldState;
 
 /**
  * State class for DatePicker

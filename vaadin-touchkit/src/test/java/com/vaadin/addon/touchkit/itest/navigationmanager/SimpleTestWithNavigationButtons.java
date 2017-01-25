@@ -9,7 +9,7 @@ import com.vaadin.addon.touchkit.ui.NavigationManager.NavigationEvent;
 import com.vaadin.addon.touchkit.ui.NavigationManager.NavigationEvent.Direction;
 import com.vaadin.addon.touchkit.ui.NavigationManager.NavigationListener;
 import com.vaadin.ui.CssLayout;
-import com.vaadin.ui.Label;
+import com.vaadin.v7.ui.Label;
 
 public class SimpleTestWithNavigationButtons extends
         AbstractTouchKitIntegrationTest {

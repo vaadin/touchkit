@@ -6,8 +6,8 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.CssLayout;
-import com.vaadin.ui.ProgressBar;
-import com.vaadin.ui.ProgressIndicator;
+import com.vaadin.v7.ui.ProgressBar;
+import com.vaadin.v7.ui.ProgressIndicator;
 
 public class WaitingAndSpinning extends AbstractTouchKitIntegrationTest implements ClickListener {
 

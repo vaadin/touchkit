@@ -3,8 +3,8 @@ package com.vaadin.addon.touchkit.ui;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import com.vaadin.data.Property;
-import com.vaadin.ui.TextField;
+import com.vaadin.v7.data.Property;
+import com.vaadin.v7.ui.TextField;
 
 /**
  * A {@link TextField} that is intended for URL input.

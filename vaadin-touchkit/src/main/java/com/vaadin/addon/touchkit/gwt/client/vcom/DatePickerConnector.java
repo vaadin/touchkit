@@ -14,7 +14,7 @@ import com.vaadin.client.LocaleNotLoadedException;
 import com.vaadin.client.LocaleService;
 import com.vaadin.client.communication.RpcProxy;
 import com.vaadin.client.communication.StateChangeEvent;
-import com.vaadin.client.ui.AbstractFieldConnector;
+import com.vaadin.v7.client.ui.AbstractFieldConnector;
 import com.vaadin.shared.ui.Connect;
 
 /**

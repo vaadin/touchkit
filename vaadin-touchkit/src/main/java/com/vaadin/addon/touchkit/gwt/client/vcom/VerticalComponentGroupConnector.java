@@ -9,7 +9,7 @@ import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.ConnectorHierarchyChangeEvent;
 import com.vaadin.client.communication.StateChangeEvent;
-import com.vaadin.client.ui.AbstractFieldConnector;
+import com.vaadin.v7.client.ui.AbstractFieldConnector;
 import com.vaadin.client.ui.AbstractLayoutConnector;
 import com.vaadin.client.ui.Icon;
 import com.vaadin.shared.ComponentConstants;

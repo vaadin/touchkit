@@ -3,7 +3,7 @@ package com.vaadin.addon.touchkit.itest;
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.ComboBox;
+import com.vaadin.v7.ui.ComboBox;
 import com.vaadin.ui.Notification;
 
 public class ComboBoxTest extends AbstractTouchKitIntegrationTest implements ClickListener {

@@ -6,7 +6,7 @@ import com.vaadin.addon.touchkit.ui.NavigationButton.NavigationButtonClickEvent;
 import com.vaadin.addon.touchkit.ui.NavigationButton.NavigationButtonClickListener;
 import com.vaadin.addon.touchkit.ui.NavigationManager;
 import com.vaadin.addon.touchkit.ui.NavigationView;
-import com.vaadin.ui.Label;
+import com.vaadin.v7.ui.Label;
 
 public class NavigatingBackAndForthTest extends AbstractTouchKitIntegrationTest {
 

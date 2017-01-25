@@ -19,22 +19,22 @@ import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Page;
 import com.vaadin.server.UserError;
-import com.vaadin.shared.ui.datefield.Resolution;
-import com.vaadin.shared.ui.label.ContentMode;
+import com.vaadin.v7.shared.ui.datefield.Resolution;
+import com.vaadin.v7.shared.ui.label.ContentMode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.CheckBox;
-import com.vaadin.ui.ComboBox;
+import com.vaadin.v7.ui.CheckBox;
+import com.vaadin.v7.ui.ComboBox;
 import com.vaadin.ui.CssLayout;
-import com.vaadin.ui.DateField;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.NativeSelect;
+import com.vaadin.v7.ui.DateField;
+import com.vaadin.v7.ui.Label;
+import com.vaadin.v7.ui.NativeSelect;
 import com.vaadin.ui.Notification;
-import com.vaadin.ui.OptionGroup;
-import com.vaadin.ui.Slider;
+import com.vaadin.v7.ui.OptionGroup;
+import com.vaadin.v7.ui.Slider;
 import com.vaadin.ui.TabSheet.Tab;
-import com.vaadin.ui.Table;
-import com.vaadin.ui.TextField;
+import com.vaadin.v7.ui.Table;
+import com.vaadin.v7.ui.TextField;
 
 public class ThemeTest extends AbstractTouchKitIntegrationTest {
 

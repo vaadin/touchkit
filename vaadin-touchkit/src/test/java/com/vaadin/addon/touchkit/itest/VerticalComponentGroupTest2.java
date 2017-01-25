@@ -3,7 +3,7 @@ package com.vaadin.addon.touchkit.itest;
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.ui.FormLayout;
-import com.vaadin.ui.TextField;
+import com.vaadin.v7.ui.TextField;
 
 public class VerticalComponentGroupTest2 extends AbstractTouchKitIntegrationTest {
 

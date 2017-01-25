@@ -4,7 +4,7 @@ import com.vaadin.addon.touchkit.gwt.client.vcom.popover.PopoverRpc;
 import com.vaadin.addon.touchkit.gwt.client.vcom.popover.PopoverState;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.v7.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
 /**

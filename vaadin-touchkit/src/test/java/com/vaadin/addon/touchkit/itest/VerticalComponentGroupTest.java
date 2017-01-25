@@ -13,10 +13,10 @@ import com.vaadin.server.ExternalResource;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.Label;
+import com.vaadin.v7.ui.Label;
 import com.vaadin.ui.Link;
-import com.vaadin.ui.OptionGroup;
-import com.vaadin.ui.TextField;
+import com.vaadin.v7.ui.OptionGroup;
+import com.vaadin.v7.ui.TextField;
 
 public class VerticalComponentGroupTest extends AbstractTouchKitIntegrationTest {
 

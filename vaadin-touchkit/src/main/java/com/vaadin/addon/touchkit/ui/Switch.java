@@ -1,7 +1,7 @@
 package com.vaadin.addon.touchkit.ui;
 
-import com.vaadin.data.Property;
-import com.vaadin.ui.CheckBox;
+import com.vaadin.v7.data.Property;
+import com.vaadin.v7.ui.CheckBox;
 
 /**
  * A {@link CheckBox} that is rendered as a switch button, which might provide a

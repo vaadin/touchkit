@@ -1,7 +1,7 @@
 package com.vaadin.addon.touchkit.itest;
 
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.ui.Tree;
+import com.vaadin.v7.ui.Tree;
 
 /**
  * Test to be used to verify that tree theming works.

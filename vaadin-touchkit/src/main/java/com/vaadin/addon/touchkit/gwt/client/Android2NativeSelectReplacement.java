@@ -28,7 +28,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.vaadin.client.UIDL;
 import com.vaadin.client.ui.TouchScrollDelegate;
-import com.vaadin.client.ui.VNativeSelect;
+import com.vaadin.v7.client.ui.VNativeSelect;
 import com.vaadin.client.ui.VOverlay;
 
 public class Android2NativeSelectReplacement extends VNativeSelect {
