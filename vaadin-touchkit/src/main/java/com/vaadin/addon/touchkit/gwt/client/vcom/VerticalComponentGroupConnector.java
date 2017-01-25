@@ -9,13 +9,13 @@ import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.ConnectorHierarchyChangeEvent;
 import com.vaadin.client.communication.StateChangeEvent;
-import com.vaadin.v7.client.ui.AbstractFieldConnector;
 import com.vaadin.client.ui.AbstractLayoutConnector;
 import com.vaadin.client.ui.Icon;
 import com.vaadin.shared.ComponentConstants;
 import com.vaadin.shared.communication.URLReference;
 import com.vaadin.shared.ui.ComponentStateUtil;
 import com.vaadin.shared.ui.Connect;
+import com.vaadin.v7.client.ui.AbstractFieldConnector;
 
 @SuppressWarnings("serial")
 @Connect(VerticalComponentGroup.class)
@@ -27,7 +27,8 @@ public class VerticalComponentGroupConnector extends AbstractLayoutConnector {
     }
 
     @Override
-    public void onConnectorHierarchyChange(ConnectorHierarchyChangeEvent event) {
+    public void onConnectorHierarchyChange(
+            ConnectorHierarchyChangeEvent event) {
         if (getParent() == null) {
             // Component is removed, skip stuff to save user from JS exceptions
             // and some milliseconds of lost life
@@ -78,7 +79,7 @@ public class VerticalComponentGroupConnector extends AbstractLayoutConnector {
         }
         if (connector instanceof AbstractFieldConnector) {
             AbstractFieldConnector field = (AbstractFieldConnector) connector;
-            if (field.isRequired()) {
+            if (field.isRequiredIndicatorVisible()) {
                 style += " v-caption-required";
             }
         }

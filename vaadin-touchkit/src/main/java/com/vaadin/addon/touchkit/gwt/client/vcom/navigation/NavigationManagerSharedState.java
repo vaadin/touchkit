@@ -1,9 +1,10 @@
 package com.vaadin.addon.touchkit.gwt.client.vcom.navigation;
 
-import com.vaadin.shared.AbstractComponentState;
 import com.vaadin.shared.Connector;
+import com.vaadin.shared.ui.AbstractComponentContainerState;
 
-public class NavigationManagerSharedState extends AbstractComponentState {
+public class NavigationManagerSharedState
+        extends AbstractComponentContainerState {
 
     private Connector previousComponent;
     private Connector nextComponent;
