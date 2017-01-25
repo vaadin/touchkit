@@ -5,7 +5,7 @@
     <groupId>com.vaadin.addon</groupId>
     <artifactId>vaadin-touchkit-root</artifactId>
     <packaging>pom</packaging>
-    <version>4.1-SNAPSHOT</version>
+    <version>5.0-SNAPSHOT</version>
     <name>Vaadin TouchKit Root</name>
     <description>Vaadin TouchKit Root Project</description>
     <organization>
@@ -15,13 +15,9 @@
     <url>http://vaadin.com/</url>
     <scm>
         <connection>scm:git:git://github.com/vaadin/touchkit</connection>
-        <developerConnection>scm:git:ssh://dev.vaadin.com:29418/touchkit.git</developerConnection>
+        <developerConnection>scm:git:git://github.com/vaadin/touchkit</developerConnection>
         <url>https://github.com/vaadin/touchkit</url>
     </scm>
-    <issueManagement>
-        <system>trac</system>
-        <url>http://dev.vaadin.com/</url>
-    </issueManagement>
     <developers>
         <developer>
             <name>Juho Nurminen</name>
@@ -32,16 +28,10 @@
         </developer>
     </developers>
     <licenses>
-        <!-- For the license that applies to this distribution package, see licensing.txt -->
         <license>
-            <name>GNU Affero General Public License version 3.0</name>
-            <url>http://www.gnu.org/licenses/agpl-3.0.html</url>
+            <name>Apache License Version 2.0</name>
             <distribution>repo</distribution>
-        </license>
-        <license>
-            <name>Commercial Vaadin Add-On License version 3</name>
-            <url>http://vaadin.com/license/cval-3</url>
-            <distribution>manual</distribution>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>
 
@@ -57,14 +47,13 @@
         <!-- Must not change this because of the Directory -->
         <Implementation-Title>Vaadin TouchKit</Implementation-Title>
         <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
-        <Vaadin-Addon>vaadin-touchkit-${license.short.name}-${project.version}.jar</Vaadin-Addon>
+        <Vaadin-Addon>vaadin-touchkit-${project.version}.jar</Vaadin-Addon>
 
         <snapshot.repository.url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</snapshot.repository.url>
     </properties>
 
     <modules>
-        <module>vaadin-touchkit-agpl</module>
-        <module>vaadin-touchkit-cval</module>
+        <module>vaadin-touchkit</module>
 <!--         Disabled temporary as cis has no testbench 3.0 installed. ITests must be run manually until that. -->
 <!--         <module>vaadin-touchkit-integration-tests</module> -->
 <!--         <module>vaadin-touchkit-offline-tests</modules> -->
