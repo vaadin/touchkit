@@ -2,31 +2,17 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.vaadin.addon</groupId>
-    <artifactId>vaadin-touchkit-root</artifactId>
+    <groupId>org.vaadin.touchkit</groupId>
+    <artifactId>touchkit-root</artifactId>
     <packaging>pom</packaging>
     <version>5.0-SNAPSHOT</version>
-    <name>Vaadin TouchKit Root</name>
-    <description>Vaadin TouchKit Root Project</description>
-    <organization>
-        <name>Vaadin Ltd</name>
-        <url>http://vaadin.com/</url>
-    </organization>
-    <url>http://vaadin.com/</url>
+    <name>TouchKit Root</name>
+    <description>TouchKit Root Project</description>
     <scm>
         <connection>scm:git:git://github.com/vaadin/touchkit</connection>
         <developerConnection>scm:git:git://github.com/vaadin/touchkit</developerConnection>
         <url>https://github.com/vaadin/touchkit</url>
     </scm>
-    <developers>
-        <developer>
-            <name>Juho Nurminen</name>
-            <id>juho</id>
-            <email>juho at vaadin.com</email>
-            <organization>Vaadin Ltd</organization>
-            <timezone>+2</timezone>
-        </developer>
-    </developers>
     <licenses>
         <license>
             <name>Apache License Version 2.0</name>
@@ -45,15 +31,15 @@
 
         <Implementation-Version>${project.version}</Implementation-Version>
         <!-- Must not change this because of the Directory -->
-        <Implementation-Title>Vaadin TouchKit</Implementation-Title>
+        <Implementation-Title>TouchKit</Implementation-Title>
         <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
-        <Vaadin-Addon>vaadin-touchkit-${project.version}.jar</Vaadin-Addon>
+        <Vaadin-Addon>touchkit-${project.version}.jar</Vaadin-Addon>
 
         <snapshot.repository.url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</snapshot.repository.url>
     </properties>
 
     <modules>
-        <module>vaadin-touchkit</module>
+        <module>addon</module>
     </modules>
     <build>
         <pluginManagement>
