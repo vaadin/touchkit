@@ -1,10 +1,12 @@
-# Vaadin TouchKit
+# TouchKit for Vaadin
 
 The easiest way of building a cross-platform mobile user interface for a Java application. Add support for smartphones and tablets in days instead of months, with the tools you are already using.
 
+The master branch contains a Framework 8 compatible version which is not maintained by Vaadin Ltd.
+
 ## Releases
 
-Official releases of this add-on are available at http://vaadin.com/addon/vaadin-touchkit
+Official releases for versions 3.x and 4.x are available at http://vaadin.com/addon/vaadin-touchkit
 
 ## Building TouchKit
 
@@ -12,15 +14,11 @@ Official releases of this add-on are available at http://vaadin.com/addon/vaadin
     cd touchkit
     mvn install
 
-## Issue tracking
+## Issue tracking & Contributions
 
-The issues for this add-on are tracked using [the Vaadin issue tracker](http://dev.vaadin.com/query?status=%21closed&component=TouchKit). All bug reports and feature requests are appreciated.
-
-## Contributions
-
-For information about how you can contribute to the project, see https://vaadin.com/contribute
+This project is no longer maintained by Vaadin Ltd. If you want to contribute to the project, please create a fork.
+If you want to become a maintainer, please contact Vaadin Ltd and we will redirect users to your fork.
 
 ## License
 
-This add-on is distributed under [AGPL 3.0](http://www.gnu.org/licenses/agpl-3.0.html) and [CVAL 3](https://vaadin.com/license/cval-3).
-
+Version 5.x is distributed under [Apache 2](http://www.apache.org/licenses/LICENSE-2.0).
