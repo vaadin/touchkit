@@ -40,25 +40,6 @@
                             </execution>
                         </executions>
                     </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-assembly-plugin</artifactId>
-                        <version>2.2.1</version>
-                        <configuration>
-                            <appendAssemblyId>false</appendAssemblyId>
-                            <descriptors>
-                                <descriptor>assembly/assembly.xml</descriptor>
-                            </descriptors>
-                        </configuration>
-                        <executions>
-                            <execution>
-                               <goals>
-                               <goal>single</goal>
-                               </goals>
-                               <phase>package</phase>
-                            </execution>
-                        </executions>
-                    </plugin>
                 </plugins>
             </build>
         </profile>
@@ -185,16 +166,6 @@
                             <Vaadin-Widgetsets>org.vaadin.touchkit.gwt.TouchKitWidgetSet</Vaadin-Widgetsets>
                         </manifestEntries>
                     </archive>
-                    <!-- exclude other META-INF data under build directory -->
-                    <includes>
-                        <include>META-INF/maven/${project.groupId}/${project.artifactId}/**</include>
-                        <include>com/**</include>
-                        <include>*.txt</include>
-                        <include>*.html</include>
-                        <include>assets/**</include>
-                        <include>licenses/**</include>
-                        <include>VAADIN/widgetsets/org.vaadin.touchkit.gwt.TouchKitWidgetSet/**</include>
-                    </includes>
                 </configuration>
             </plugin>
             <!-- Compiles your custom GWT components with the GWT compiler -->
