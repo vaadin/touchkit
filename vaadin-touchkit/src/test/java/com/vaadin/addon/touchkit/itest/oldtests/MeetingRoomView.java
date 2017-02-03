@@ -2,9 +2,10 @@ package com.vaadin.addon.touchkit.itest.oldtests;
 
 import java.io.Serializable;
 
+import org.vaadin.touchkit.ui.NavigationView;
+import org.vaadin.touchkit.ui.VerticalComponentGroup;
+
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.ui.NavigationView;
-import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.v7.data.Item;
 import com.vaadin.v7.data.util.BeanItem;
 import com.vaadin.ui.Component;

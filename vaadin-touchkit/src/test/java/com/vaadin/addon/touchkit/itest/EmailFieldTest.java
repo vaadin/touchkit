@@ -1,7 +1,8 @@
 package com.vaadin.addon.touchkit.itest;
 
+import org.vaadin.touchkit.ui.EmailField;
+
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.ui.EmailField;
 import com.vaadin.v7.event.FieldEvents.TextChangeEvent;
 import com.vaadin.v7.event.FieldEvents.TextChangeListener;
 import com.vaadin.ui.Notification;

@@ -9,8 +9,7 @@ import org.eclipse.jetty.server.nio.SelectChannelConnector;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.junit.Ignore;
-
-import com.vaadin.addon.touchkit.server.TouchKitServlet;
+import org.vaadin.touchkit.server.TouchKitServlet;
 
 @Ignore
 public class TestServer {
@@ -35,7 +34,7 @@ public class TestServer {
         ServletHolder servletHolder = new ServletHolder(TouchKitServlet.class);
         servletHolder.setInitParameter("UI", TouchkitTestUI.class.getName());
         servletHolder.setInitParameter("widgetset",
-                "com.vaadin.addon.touchkit.gwt.TouchKitWidgetSet");
+                "org.vaadin.touchkit.gwt.TouchKitWidgetSet");
 
         // check for production mode argument
         for (String arg : args) {

@@ -1,7 +1,8 @@
 package com.vaadin.addon.touchkit.itest;
 
+import org.vaadin.touchkit.ui.Toolbar;
+
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.ui.Toolbar;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Button;

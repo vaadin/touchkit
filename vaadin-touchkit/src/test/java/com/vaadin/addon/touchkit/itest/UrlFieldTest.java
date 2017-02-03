@@ -3,8 +3,9 @@ package com.vaadin.addon.touchkit.itest;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.vaadin.touchkit.ui.UrlField;
+
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.ui.UrlField;
 import com.vaadin.v7.event.FieldEvents.TextChangeEvent;
 import com.vaadin.v7.event.FieldEvents.TextChangeListener;
 import com.vaadin.ui.Notification;

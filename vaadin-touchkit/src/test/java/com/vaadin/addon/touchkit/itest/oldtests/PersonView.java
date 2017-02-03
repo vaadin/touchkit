@@ -1,8 +1,9 @@
 package com.vaadin.addon.touchkit.itest.oldtests;
 
+import org.vaadin.touchkit.ui.NavigationView;
+import org.vaadin.touchkit.ui.VerticalComponentGroup;
+
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.ui.NavigationView;
-import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.v7.ui.Label;

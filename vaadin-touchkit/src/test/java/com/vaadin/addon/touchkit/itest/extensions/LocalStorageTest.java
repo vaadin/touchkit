@@ -1,8 +1,9 @@
 package com.vaadin.addon.touchkit.itest.extensions;
 
+import org.vaadin.touchkit.extensions.LocalStorage;
+import org.vaadin.touchkit.extensions.LocalStorageCallback;
+
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.extensions.LocalStorage;
-import com.vaadin.addon.touchkit.extensions.LocalStorageCallback;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Notification;

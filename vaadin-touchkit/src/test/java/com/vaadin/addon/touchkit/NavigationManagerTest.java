@@ -1,9 +1,8 @@
 package com.vaadin.addon.touchkit;
 
 import org.junit.Test;
-
-import com.vaadin.addon.touchkit.ui.NavigationManager;
-import com.vaadin.addon.touchkit.ui.NavigationView;
+import org.vaadin.touchkit.ui.NavigationManager;
+import org.vaadin.touchkit.ui.NavigationView;
 
 public class NavigationManagerTest {
 

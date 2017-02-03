@@ -1,8 +1,9 @@
 package com.vaadin.addon.touchkit.itest.navigationmanager;
 
+import org.vaadin.touchkit.ui.NavigationButton;
+import org.vaadin.touchkit.ui.NavigationButton.NavigationButtonClickListener;
+
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.ui.NavigationButton;
-import com.vaadin.addon.touchkit.ui.NavigationButton.NavigationButtonClickListener;
 import com.vaadin.ui.Notification;
 
 public class NavigationButtonStandaloneTest extends
@@ -21,7 +22,7 @@ public class NavigationButtonStandaloneTest extends
 
             @Override
             public void buttonClick(
-                    com.vaadin.addon.touchkit.ui.NavigationButton.NavigationButtonClickEvent event) {
+                    org.vaadin.touchkit.ui.NavigationButton.NavigationButtonClickEvent event) {
                 Notification.show("clicked!");
             }
         });

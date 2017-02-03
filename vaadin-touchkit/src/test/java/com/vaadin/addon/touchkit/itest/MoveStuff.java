@@ -2,8 +2,9 @@ package com.vaadin.addon.touchkit.itest;
 
 import java.util.Random;
 
+import org.vaadin.touchkit.ui.NavigationView;
+
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.ui.Button;
 import com.vaadin.v7.ui.HorizontalLayout;
 import com.vaadin.ui.Button.ClickEvent;

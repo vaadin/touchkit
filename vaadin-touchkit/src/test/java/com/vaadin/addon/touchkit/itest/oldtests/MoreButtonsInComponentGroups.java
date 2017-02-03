@@ -2,10 +2,11 @@ package com.vaadin.addon.touchkit.itest.oldtests;
 
 import java.util.Iterator;
 
+import org.vaadin.touchkit.ui.HorizontalButtonGroup;
+import org.vaadin.touchkit.ui.NavigationView;
+import org.vaadin.touchkit.ui.VerticalComponentGroup;
+
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.ui.HorizontalButtonGroup;
-import com.vaadin.addon.touchkit.ui.NavigationView;
-import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.server.ClassResource;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Button;
