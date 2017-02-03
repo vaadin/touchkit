@@ -1,8 +1,9 @@
 package com.vaadin.addon.touchkit.itest.oldtests;
 
+import org.vaadin.touchkit.ui.NavigationManager;
+import org.vaadin.touchkit.ui.NavigationView;
+
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.ui.NavigationManager;
-import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.event.Action;
 import com.vaadin.event.Action.Handler;
 import com.vaadin.v7.ui.Table;

@@ -3,12 +3,13 @@ package com.vaadin.addon.touchkit.itest;
 import java.util.Iterator;
 import java.util.Locale;
 
+import org.vaadin.touchkit.ui.HorizontalButtonGroup;
+import org.vaadin.touchkit.ui.NavigationButton;
+import org.vaadin.touchkit.ui.NumberField;
+import org.vaadin.touchkit.ui.Switch;
+import org.vaadin.touchkit.ui.VerticalComponentGroup;
+
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.ui.HorizontalButtonGroup;
-import com.vaadin.addon.touchkit.ui.NavigationButton;
-import com.vaadin.addon.touchkit.ui.NumberField;
-import com.vaadin.addon.touchkit.ui.Switch;
-import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Button;

@@ -6,10 +6,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import org.vaadin.touchkit.gwt.client.vcom.DatePickerState.Resolution;
+import org.vaadin.touchkit.ui.DatePicker;
+
 import com.ibm.icu.util.Calendar;
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.gwt.client.vcom.DatePickerState.Resolution;
-import com.vaadin.addon.touchkit.ui.DatePicker;
 import com.vaadin.v7.data.Property;
 import com.vaadin.v7.data.Property.ValueChangeEvent;
 import com.vaadin.v7.data.Property.ValueChangeListener;

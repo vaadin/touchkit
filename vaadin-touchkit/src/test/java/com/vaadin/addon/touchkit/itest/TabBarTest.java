@@ -1,8 +1,9 @@
 package com.vaadin.addon.touchkit.itest;
 
+import org.vaadin.touchkit.ui.TabBarView;
+
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
 import com.vaadin.addon.touchkit.itest.oldtests.TestUtils;
-import com.vaadin.addon.touchkit.ui.TabBarView;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.v7.shared.ui.label.ContentMode;
 import com.vaadin.ui.Button;

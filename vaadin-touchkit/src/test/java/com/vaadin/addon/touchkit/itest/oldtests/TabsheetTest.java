@@ -1,14 +1,14 @@
 package com.vaadin.addon.touchkit.itest.oldtests;
 
 import org.junit.Ignore;
+import org.vaadin.touchkit.ui.NavigationButton;
+import org.vaadin.touchkit.ui.NavigationManager;
+import org.vaadin.touchkit.ui.NavigationView;
+import org.vaadin.touchkit.ui.TabBarView;
+import org.vaadin.touchkit.ui.VerticalComponentGroup;
+import org.vaadin.touchkit.ui.NavigationButton.NavigationButtonClickEvent;
+import org.vaadin.touchkit.ui.NavigationButton.NavigationButtonClickListener;
 
-import com.vaadin.addon.touchkit.ui.NavigationButton;
-import com.vaadin.addon.touchkit.ui.NavigationButton.NavigationButtonClickEvent;
-import com.vaadin.addon.touchkit.ui.NavigationButton.NavigationButtonClickListener;
-import com.vaadin.addon.touchkit.ui.NavigationManager;
-import com.vaadin.addon.touchkit.ui.NavigationView;
-import com.vaadin.addon.touchkit.ui.TabBarView;
-import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;

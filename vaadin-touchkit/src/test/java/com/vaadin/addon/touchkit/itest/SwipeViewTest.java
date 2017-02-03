@@ -5,14 +5,14 @@ import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Ignore;
+import org.vaadin.touchkit.ui.NavigationBar;
+import org.vaadin.touchkit.ui.NavigationButton;
+import org.vaadin.touchkit.ui.NavigationManager;
+import org.vaadin.touchkit.ui.SwipeView;
+import org.vaadin.touchkit.ui.VerticalComponentGroup;
+import org.vaadin.touchkit.ui.NavigationManager.NavigationEvent.Direction;
 
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.ui.NavigationBar;
-import com.vaadin.addon.touchkit.ui.NavigationButton;
-import com.vaadin.addon.touchkit.ui.NavigationManager;
-import com.vaadin.addon.touchkit.ui.NavigationManager.NavigationEvent.Direction;
-import com.vaadin.addon.touchkit.ui.SwipeView;
-import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.v7.data.Property;
 import com.vaadin.v7.data.Property.ValueChangeEvent;
 import com.vaadin.server.ExternalResource;

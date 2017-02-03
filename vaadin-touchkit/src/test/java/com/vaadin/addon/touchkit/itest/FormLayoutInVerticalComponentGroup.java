@@ -1,9 +1,10 @@
 package com.vaadin.addon.touchkit.itest;
 
+import org.vaadin.touchkit.ui.NavigationView;
+import org.vaadin.touchkit.ui.Switch;
+import org.vaadin.touchkit.ui.VerticalComponentGroup;
+
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.ui.NavigationView;
-import com.vaadin.addon.touchkit.ui.Switch;
-import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.server.UserError;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.FormLayout;

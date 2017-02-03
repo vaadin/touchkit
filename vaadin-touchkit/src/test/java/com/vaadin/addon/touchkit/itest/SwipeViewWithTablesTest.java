@@ -1,10 +1,10 @@
 package com.vaadin.addon.touchkit.itest;
 
 import org.junit.Ignore;
+import org.vaadin.touchkit.ui.NavigationManager;
+import org.vaadin.touchkit.ui.SwipeView;
 
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.ui.NavigationManager;
-import com.vaadin.addon.touchkit.ui.SwipeView;
 import com.vaadin.v7.ui.Table;
 import com.vaadin.v7.ui.Table.RowHeaderMode;
 

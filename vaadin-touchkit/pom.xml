@@ -196,7 +196,7 @@
                             <AdVaaLicen>Apache2</AdVaaLicen>
                             <AdVaaName>vaadin-touchkit</AdVaaName>
                             <!-- Comma-separated list of widgetsets in the package -->
-                            <Vaadin-Widgetsets>com.vaadin.addon.touchkit.gwt.TouchKitWidgetSet</Vaadin-Widgetsets>
+                            <Vaadin-Widgetsets>org.vaadin.touchkit.gwt.TouchKitWidgetSet</Vaadin-Widgetsets>
                         </manifestEntries>
                     </archive>
                     <!-- exclude other META-INF data under build directory -->
@@ -207,7 +207,7 @@
                         <include>*.html</include>
                         <include>assets/**</include>
                         <include>licenses/**</include>
-                        <include>VAADIN/widgetsets/com.vaadin.addon.touchkit.gwt.TouchKitWidgetSet/**</include>
+                        <include>VAADIN/widgetsets/org.vaadin.touchkit.gwt.TouchKitWidgetSet/**</include>
                     </includes>
                 </configuration>
             </plugin>
@@ -219,7 +219,7 @@
                 <configuration>
                     <webappDirectory>target/classes/VAADIN/widgetsets</webappDirectory>
                     <modules>
-                        <module>com.vaadin.addon.touchkit.gwt.TouchKitWidgetSet</module>
+                        <module>org.vaadin.touchkit.gwt.TouchKitWidgetSet</module>
                     </modules>
                     <extraJvmArgs>-Xmx1024M -Xss4024k</extraJvmArgs>
                     <runTarget>http://localhost:7777/</runTarget>

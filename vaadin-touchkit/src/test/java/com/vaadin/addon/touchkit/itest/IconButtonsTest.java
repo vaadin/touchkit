@@ -1,8 +1,9 @@
 package com.vaadin.addon.touchkit.itest;
 
+import org.vaadin.touchkit.ui.NavigationButton;
+import org.vaadin.touchkit.ui.VerticalComponentGroup;
+
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.ui.NavigationButton;
-import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;

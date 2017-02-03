@@ -2,18 +2,19 @@ package com.vaadin.addon.touchkit.itest;
 
 import java.util.Date;
 
+import org.vaadin.touchkit.gwt.client.theme.StyleNames;
+import org.vaadin.touchkit.ui.DatePicker;
+import org.vaadin.touchkit.ui.EmailField;
+import org.vaadin.touchkit.ui.HorizontalButtonGroup;
+import org.vaadin.touchkit.ui.NavigationButton;
+import org.vaadin.touchkit.ui.NavigationView;
+import org.vaadin.touchkit.ui.NumberField;
+import org.vaadin.touchkit.ui.Popover;
+import org.vaadin.touchkit.ui.Switch;
+import org.vaadin.touchkit.ui.Toolbar;
+import org.vaadin.touchkit.ui.VerticalComponentGroup;
+
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.gwt.client.theme.StyleNames;
-import com.vaadin.addon.touchkit.ui.DatePicker;
-import com.vaadin.addon.touchkit.ui.EmailField;
-import com.vaadin.addon.touchkit.ui.HorizontalButtonGroup;
-import com.vaadin.addon.touchkit.ui.NavigationButton;
-import com.vaadin.addon.touchkit.ui.NavigationView;
-import com.vaadin.addon.touchkit.ui.NumberField;
-import com.vaadin.addon.touchkit.ui.Popover;
-import com.vaadin.addon.touchkit.ui.Switch;
-import com.vaadin.addon.touchkit.ui.Toolbar;
-import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;

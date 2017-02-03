@@ -2,11 +2,12 @@ package com.vaadin.addon.touchkit.itest.oldtests;
 
 import java.util.Date;
 
+import org.vaadin.touchkit.ui.NumberField;
+import org.vaadin.touchkit.ui.Switch;
+import org.vaadin.touchkit.ui.TabBarView;
+import org.vaadin.touchkit.ui.VerticalComponentGroup;
+
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.ui.NumberField;
-import com.vaadin.addon.touchkit.ui.Switch;
-import com.vaadin.addon.touchkit.ui.TabBarView;
-import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.v7.ui.ComboBox;
 import com.vaadin.ui.Component;

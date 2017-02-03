@@ -1,9 +1,10 @@
 package com.vaadin.addon.touchkit.itest;
 
+import org.vaadin.touchkit.extensions.FloatingIndex;
+import org.vaadin.touchkit.ui.NavigationView;
+import org.vaadin.touchkit.ui.VerticalComponentGroup;
+
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.extensions.FloatingIndex;
-import com.vaadin.addon.touchkit.ui.NavigationView;
-import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.v7.ui.Label;
 

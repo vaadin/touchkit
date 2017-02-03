@@ -1,9 +1,10 @@
 package com.vaadin.addon.touchkit.itest;
 
+import org.vaadin.touchkit.gwt.client.theme.StyleNames;
+import org.vaadin.touchkit.ui.HorizontalButtonGroup;
+import org.vaadin.touchkit.ui.NavigationView;
+
 import com.vaadin.addon.touchkit.AbstractTouchKitIntegrationTest;
-import com.vaadin.addon.touchkit.gwt.client.theme.StyleNames;
-import com.vaadin.addon.touchkit.ui.HorizontalButtonGroup;
-import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.v7.ui.VerticalLayout;

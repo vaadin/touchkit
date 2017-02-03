@@ -1,8 +1,8 @@
 package com.vaadin.addon.touchkit.itest.oldtests;
 
 import org.junit.Ignore;
+import org.vaadin.touchkit.ui.NavigationManager;
 
-import com.vaadin.addon.touchkit.ui.NavigationManager;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
