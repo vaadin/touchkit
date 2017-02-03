@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.vaadin.addon</groupId>
-    <artifactId>vaadin-touchkit</artifactId>
+    <groupId>org.vaadin.touchkit</groupId>
+    <artifactId>touchkit</artifactId>
     <packaging>jar</packaging>
     <version>5.0-SNAPSHOT</version>
-    <name>Vaadin TouchKit</name>
+    <name>TouchKit</name>
 
     <profiles>
         <profile>
@@ -63,25 +63,11 @@
             </build>
         </profile>
     </profiles>
-    <organization>
-        <name>Vaadin Ltd</name>
-        <url>http://vaadin.com/</url>
-    </organization>
-    <url>http://vaadin.com/</url>
     <scm>
         <connection>scm:git:git://github.com/vaadin/touchkit</connection>
         <developerConnection>scm:git:git://github.com/vaadin/touchkit</developerConnection>
         <url>https://github.com/vaadin/touchkit</url>
     </scm>
-    <developers>
-        <developer>
-            <name>Juho Nurminen</name>
-            <id>juho</id>
-            <email>juho at vaadin.com</email>
-            <organization>Vaadin Ltd</organization>
-            <timezone>+2</timezone>
-        </developer>
-    </developers>
     <licenses>
         <license>
             <name>Apache License Version 2.0</name>
@@ -99,10 +85,10 @@
 
         <Implementation-Version>${project.version}</Implementation-Version>
         <!-- Must not change this because of the Directory -->
-        <Implementation-Title>Vaadin TouchKit</Implementation-Title>
+        <Implementation-Title>TouchKit</Implementation-Title>
         <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
-        <Vaadin-Addon>vaadin-touchkit-${project.version}.jar</Vaadin-Addon>
-        <jetty.version>8.1.12.v20130726</jetty.version>
+        <Vaadin-Addon>touchkit-${project.version}.jar</Vaadin-Addon>
+        <jetty.version>9.2.14.v20151106</jetty.version>
     </properties>
 
     <distributionManagement>
@@ -194,7 +180,7 @@
                             <!-- Package format version - do not change -->
                             <Vaadin-Package-Version>1</Vaadin-Package-Version>
                             <AdVaaLicen>Apache2</AdVaaLicen>
-                            <AdVaaName>vaadin-touchkit</AdVaaName>
+                            <AdVaaName>touchkit</AdVaaName>
                             <!-- Comma-separated list of widgetsets in the package -->
                             <Vaadin-Widgetsets>org.vaadin.touchkit.gwt.TouchKitWidgetSet</Vaadin-Widgetsets>
                         </manifestEntries>

@@ -6,23 +6,23 @@ import java.util.Collection;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
+import com.vaadin.server.Page;
+import com.vaadin.server.VaadinRequest;
+import com.vaadin.ui.AbstractComponent;
+import com.vaadin.ui.AbstractComponentContainer;
+import com.vaadin.ui.Component;
+import com.vaadin.ui.UI;
 import com.vaadin.v7.data.util.BeanItemContainer;
 import com.vaadin.v7.event.FieldEvents.TextChangeEvent;
 import com.vaadin.v7.event.FieldEvents.TextChangeListener;
 import com.vaadin.v7.event.ItemClickEvent;
 import com.vaadin.v7.event.ItemClickEvent.ItemClickListener;
-import com.vaadin.server.Page;
-import com.vaadin.server.VaadinRequest;
-import com.vaadin.ui.AbstractComponent;
-import com.vaadin.ui.AbstractComponentContainer;
 import com.vaadin.v7.ui.CheckBox;
-import com.vaadin.ui.Component;
 import com.vaadin.v7.ui.HorizontalLayout;
 import com.vaadin.v7.ui.Label;
 import com.vaadin.v7.ui.Table;
 import com.vaadin.v7.ui.Table.ColumnGenerator;
 import com.vaadin.v7.ui.TextField;
-import com.vaadin.ui.UI;
 import com.vaadin.v7.ui.VerticalLayout;
 
 @Theme("touchkit")
@@ -37,7 +37,7 @@ public class TouchkitTestUI extends UI {
             try {
 
                 String className;
-                if (requestPathInfo.startsWith("/com.")) {
+                if (requestPathInfo.startsWith("/org.")) {
                     className = requestPathInfo.substring(1);
                 } else {
                     className = getClass().getPackage().getName() + ".itest."
@@ -61,12 +61,13 @@ public class TouchkitTestUI extends UI {
             }
         }
 
-        File itestroot = new File("../vaadin-touchkit-agpl/src/test/java/"
+        File itestroot = new File("src/test/java/"
                 + getClass().getPackage().getName().replace(".", "/")
                 + "/itest");
 
         Collection<Class<? extends AbstractComponent>> tests = new ArrayList<Class<? extends AbstractComponent>>();
-        addTests(getClass().getPackage().getName() + ".itest", itestroot, tests);
+        addTests(getClass().getPackage().getName() + ".itest", itestroot,
+                tests);
 
         Table table = new Table();
         final BeanItemContainer<Class<? extends AbstractComponent>> beanItemContainer = new BeanItemContainer<Class<? extends AbstractComponent>>(
@@ -74,14 +75,17 @@ public class TouchkitTestUI extends UI {
         table.setContainerDataSource(beanItemContainer);
         table.setVisibleColumns(new Object[] { "simpleName" });
         table.addGeneratedColumn("description", new ColumnGenerator() {
+            @Override
             public Object generateCell(Table source, Object itemId,
                     Object columnId) {
                 Class<?> c = (Class<?>) itemId;
                 try {
-                    AbstractComponent t = (AbstractComponent) c
-                            .newInstance();
+                    AbstractComponent t = (AbstractComponent) c.newInstance();
                     String description = t.getDescription();
-                    if(description == null) {description = "-";};
+                    if (description == null) {
+                        description = "-";
+                    }
+                    ;
                     Label label2 = new Label(description);
                     // label2.setWidth("300px");
                     // label2.setHeight("50px");
@@ -94,6 +98,7 @@ public class TouchkitTestUI extends UI {
         });
         table.addItemClickListener(new ItemClickListener() {
 
+            @Override
             public void itemClick(ItemClickEvent event) {
                 Class<?> itemId = (Class<?>) event.getItemId();
                 String canonicalName = itemId.getCanonicalName();
@@ -109,12 +114,13 @@ public class TouchkitTestUI extends UI {
         TextField textField = new TextField();
         textField.setInputPrompt("Filter");
         textField.addTextChangeListener(new TextChangeListener() {
-            
+
             @Override
             public void textChange(TextChangeEvent event) {
-                
+
                 beanItemContainer.removeAllContainerFilters();
-                beanItemContainer.addContainerFilter("simpleName", event.getText(), true, false);
+                beanItemContainer.addContainerFilter("simpleName",
+                        event.getText(), true, false);
             }
         });
         options.addComponent(textField);
@@ -147,8 +153,7 @@ public class TouchkitTestUI extends UI {
                 try {
                     Class<?> forName = Class.forName(base + "." + name);
 
-                    if (AbstractComponent.class
-                            .isAssignableFrom(forName)) {
+                    if (AbstractComponent.class.isAssignableFrom(forName)) {
                         tests.add((Class<? extends AbstractComponent>) forName);
                     }
                 } catch (ClassNotFoundException e) {
