@@ -60,8 +60,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <vaadin.version.maven>8.0.0.beta1</vaadin.version.maven>
-        <vaadin.plugin.version>8.0.0.beta1</vaadin.plugin.version>
+        <vaadin.version.maven>8.0.0.beta2</vaadin.version.maven>
+        <vaadin.plugin.version>8.0.0.beta2</vaadin.plugin.version>
         <snapshot.repository.url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</snapshot.repository.url>
 
         <Implementation-Version>${project.version}</Implementation-Version>
