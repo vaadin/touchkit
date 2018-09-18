@@ -1,3 +1,7 @@
+[![Published on Vaadin  Directory](https://img.shields.io/badge/Vaadin%20Directory-published-00b4f0.svg)](https://vaadin.com/directory/component/vaadin-touchkit)
+[![Stars on Vaadin Directory](https://img.shields.io/vaadin-directory/star/vaadin-touchkit.svg)](https://vaadin.com/directory/component/vaadin-touchkit)
+
+
 # TouchKit for Vaadin
 
 The easiest way of building a cross-platform mobile user interface for a Java application. Add support for smartphones and tablets in days instead of months, with the tools you are already using.
