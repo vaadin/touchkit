@@ -35,7 +35,7 @@
         <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
         <Vaadin-Addon>touchkit-${project.version}.jar</Vaadin-Addon>
 
-        <snapshot.repository.url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</snapshot.repository.url>
+        <snapshot.repository.url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</snapshot.repository.url>
     </properties>
 
     <modules>

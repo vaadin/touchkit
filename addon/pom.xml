@@ -62,7 +62,7 @@
 
         <vaadin.version.maven>8.0.0</vaadin.version.maven>
         <vaadin.plugin.version>8.0.0</vaadin.plugin.version>
-        <snapshot.repository.url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</snapshot.repository.url>
+        <snapshot.repository.url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</snapshot.repository.url>
 
         <Implementation-Version>${project.version}</Implementation-Version>
         <!-- Must not change this because of the Directory -->
@@ -95,7 +95,7 @@
     <pluginRepositories>
         <pluginRepository>
             <id>vaadin-snapshots</id>
-            <url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+            <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
