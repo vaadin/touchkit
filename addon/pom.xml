@@ -69,7 +69,7 @@
         <Implementation-Title>TouchKit</Implementation-Title>
         <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
         <Vaadin-Addon>touchkit-${project.version}.jar</Vaadin-Addon>
-        <jetty.version>9.2.14.v20151106</jetty.version>
+        <jetty.version>9.4.34.v20201102</jetty.version>
     </properties>
 
     <distributionManagement>
