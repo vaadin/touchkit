@@ -16,7 +16,7 @@
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>properties-maven-plugin</artifactId>
-                        <version>1.0-alpha-2</version>
+                        <version>1.0.0</version>
                         <executions>
                             <execution>
                                 <phase>initialize</phase>
@@ -34,6 +34,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -63,6 +64,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.10.4</version>
                         <!-- Prevent DocLint from cancelling the build -->
                         <configuration>
                             <failOnError>false</failOnError>
@@ -157,8 +159,8 @@
         <!-- May be overridden by the build system -->
         <license.short.name>agpl</license.short.name>
         <license.version>3.0</license.version>
-        <vaadin.version.maven>[7.6.0.beta1,7.99.9999]</vaadin.version.maven>
-        <vaadin.plugin.version>7.6.0.beta1</vaadin.plugin.version>
+        <vaadin.version.maven>7.6.0</vaadin.version.maven>
+        <vaadin.plugin.version>7.6.0</vaadin.plugin.version>
         <gpg.passphrase.file>empty.properties</gpg.passphrase.file>
         <gpg.skip>true</gpg.skip>
         <snapshot.repository.url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</snapshot.repository.url>
@@ -253,8 +255,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
 

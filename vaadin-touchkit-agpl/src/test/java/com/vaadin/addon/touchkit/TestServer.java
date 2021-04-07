@@ -32,7 +32,7 @@ public class TestServer {
 
         WebAppContext context = new WebAppContext();
 
-        ServletHolder servletHolder = new ServletHolder(TouchKitServlet.class);
+        ServletHolder servletHolder = new ServletHolder(TestTouchKitServlet.class);
         servletHolder.setInitParameter("UI", TouchkitTestUI.class.getName());
         servletHolder.setInitParameter("widgetset",
                 "com.vaadin.addon.touchkit.gwt.TouchKitWidgetSet");

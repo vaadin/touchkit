@@ -257,7 +257,10 @@ public class CacheManifestStatusIndicator implements EntryPoint {
      */
     private static native int getStatus()
     /*-{
-        return $wnd.applicationCache.status;
+		if($wnd.applicationCache) {
+        	return $wnd.applicationCache.status;
+		}
+        return 99;
     }-*/;
 
     /**

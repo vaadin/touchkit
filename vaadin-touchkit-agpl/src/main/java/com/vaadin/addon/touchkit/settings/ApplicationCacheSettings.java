@@ -117,7 +117,7 @@ public class ApplicationCacheSettings implements BootstrapListener {
      *         enabled.
      */
     public boolean isCacheManifestEnabled() {
-        return cacheManifestEnabled;
+        return cacheManifestEnabled && !TouchKitSettings.supportsGooglePWA();
     }
 
     /**
