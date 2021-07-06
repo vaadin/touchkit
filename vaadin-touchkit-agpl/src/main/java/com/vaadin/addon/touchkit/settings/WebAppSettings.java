@@ -23,6 +23,44 @@ public class WebAppSettings implements BootstrapListener {
     private boolean webAppCapable = true;
     private String statusBarStyle = "black";
     private String startupImage;
+    private String applicationName;
+    private String applicationShortName;
+    private String display = "fullscreen";
+    private String start_url = "/";
+    private String background_color = "white";
+    private String theme_color = "gray";
+
+    public void setTheme_color(String theme_color) {
+        this.theme_color = theme_color;
+    }
+
+    public String getTheme_color() {
+        return theme_color;
+    }
+
+    public String getBackground_color() {
+        return background_color;
+    }
+
+    public void setBackground_color(String background_color) {
+        this.background_color = background_color;
+    }
+
+    public String getStart_url() {
+        return start_url;
+    }
+
+    public void setStart_url(String start_url) {
+        this.start_url = start_url;
+    }
+
+    public String getDisplay() {
+        return display;
+    }
+
+    public void setDisplay(String display) {
+        this.display = display;
+    }
 
     /**
      * Sets a header that tells the client whether the application is designed
@@ -92,6 +130,22 @@ public class WebAppSettings implements BootstrapListener {
         return startupImage;
     }
 
+    public String getApplicationName() {
+        return applicationName;
+    }
+
+    public void setApplicationName(String applicationName) {
+        this.applicationName = applicationName;
+    }
+
+    public String getApplicationShortName() {
+        return applicationShortName;
+    }
+
+    public void setApplicationShortName(String applicationShortName) {
+        this.applicationShortName = applicationShortName;
+    }
+    
     @Override
     public void modifyBootstrapFragment(BootstrapFragmentResponse response) {
         // NOP
@@ -124,6 +178,13 @@ public class WebAppSettings implements BootstrapListener {
             element.attr("rel", "apple-touch-startup-image");
             element.attr("href", getStartupImage());
             head.appendChild(element);
+        }
+        if (getApplicationShortName() != null) {
+            element = document.createElement("meta");
+            element.attr("name", "apple-mobile-web-app-title");
+            element.attr("content", getApplicationShortName());
+            head.appendChild(element);
+        		//
         }
 
         /*

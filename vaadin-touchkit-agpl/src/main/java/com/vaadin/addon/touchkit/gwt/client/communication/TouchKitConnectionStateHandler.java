@@ -6,6 +6,7 @@ import static com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineMode.Activ
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.Response;
+import com.google.gwt.user.client.Window;
 import com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineModeEntrypoint;
 import com.vaadin.client.communication.ConnectionStateHandler;
 import com.vaadin.client.communication.DefaultConnectionStateHandler;
@@ -40,7 +41,14 @@ public class TouchKitConnectionStateHandler extends
 
     @Override
     public void heartbeatInvalidStatusCode(Request request, Response response) {
-        if (!offlineModeEntrypoint.isOfflineModeEnabled()) {
+		if(response.getStatusCode() == 410) {
+			// This has broken at some point, session expired don't properly 
+			// restart the application. Do a manual reload as I don't know how
+			// it should be done these days...
+			// TODO ask somebody who knows about this mess
+			Window.Location.reload();
+		}
+		if (!offlineModeEntrypoint.isOfflineModeEnabled()) {
             super.heartbeatInvalidStatusCode(request, response);
         } else {
             offlineModeEntrypoint.dispatch(BAD_RESPONSE);

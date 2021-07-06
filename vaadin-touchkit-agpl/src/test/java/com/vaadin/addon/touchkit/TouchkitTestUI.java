@@ -43,6 +43,9 @@ public class TouchkitTestUI extends UI {
                     className = getClass().getPackage().getName() + ".itest."
                             + requestPathInfo.substring(1);
                 }
+                if (className.contains("/")) {
+                    className = className.substring(0, className.indexOf("/"));
+                }
                 Class<?> forName = Class.forName(className);
                 if (forName != null) {
                     AbstractComponentContainer newInstance = (AbstractComponentContainer) forName
