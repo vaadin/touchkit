@@ -158,7 +158,7 @@
         <license.short.name>agpl</license.short.name>
         <license.version>3.0</license.version>
         <vaadin.version.maven>[7.6.0.beta1,7.99.9999]</vaadin.version.maven>
-        <vaadin.plugin.version>7.6.0.beta1</vaadin.plugin.version>
+        <vaadin.plugin.version>7.7.26</vaadin.plugin.version>
         <gpg.passphrase.file>empty.properties</gpg.passphrase.file>
         <gpg.skip>true</gpg.skip>
         <snapshot.repository.url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</snapshot.repository.url>
@@ -168,7 +168,7 @@
         <Implementation-Title>Vaadin TouchKit</Implementation-Title>
         <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
         <Vaadin-Addon>vaadin-touchkit-${license.short.name}-${project.version}.jar</Vaadin-Addon>
-        <jetty.version>8.1.12.v20130726</jetty.version>
+        <jetty.version>9.4.31.v20200723</jetty.version>
     </properties>
 
     <distributionManagement>

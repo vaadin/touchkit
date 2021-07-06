@@ -57,7 +57,7 @@
         <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
         <Vaadin-Addon>vaadin-touchkit-${license.short.name}-${project.version}.jar</Vaadin-Addon>
 
-        <jetty.version>8.1.12.v20130726</jetty.version>
+        <jetty.version>9.4.31.v20200723</jetty.version>
 
 
     </properties>

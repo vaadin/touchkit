@@ -253,11 +253,15 @@ public class CacheManifestStatusIndicator implements EntryPoint {
 
     /**
      * @return The status of the application cache. See the constants in this
-     *         class for possible values.
+     *         class for possible values. Return 99 if application cache does 
+     *         not exist.
      */
     private static native int getStatus()
     /*-{
-        return $wnd.applicationCache.status;
+		if($wnd.applicationCache) {
+        	return $wnd.applicationCache.status;
+		}
+        return 99;
     }-*/;
 
     /**
