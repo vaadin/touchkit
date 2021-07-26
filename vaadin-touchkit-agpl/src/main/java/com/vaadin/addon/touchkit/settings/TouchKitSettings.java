@@ -456,7 +456,7 @@ public class TouchKitSettings implements BootstrapListener,
             VaadinRequest currentRequest = VaadinServletService.getCurrentRequest();
             String useragentheader = currentRequest.getHeader("User-Agent").toLowerCase();
             // Simply expect all chromes to support
-            if (useragentheader.contains("chrome")) {
+            if (useragentheader.contains("chrome") || useragentheader.contains("firefox")) {
                 return true;
             }
         } catch (Exception e) {
