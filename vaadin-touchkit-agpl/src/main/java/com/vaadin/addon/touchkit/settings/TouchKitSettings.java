@@ -231,8 +231,13 @@ public class TouchKitSettings implements BootstrapListener,
                 Pattern p = Pattern.compile(".*widgetset\": \"([^\"]+)\"", Pattern.DOTALL);
                 Matcher matcher = p.matcher(text);
                 boolean find = matcher.find();
-                String wsname = matcher.group(1);
-
+                String wsname = "";
+                if (find) {
+                	wsname = matcher.group(1);
+                } else {
+                	return;
+                }
+                
                 InputStream resourceAsStream = getClass().getResourceAsStream("/VAADIN/widgetsets/" + wsname + "/" + "safari.manifest");
 
                 // Might be null in case of for example fallback UI
@@ -305,6 +310,10 @@ public class TouchKitSettings implements BootstrapListener,
             public boolean handleRequest(VaadinSession session, VaadinRequest request, VaadinResponse response) throws IOException {
                 final String pathInfo = request.getPathInfo();
                 String contextPath = request.getContextPath();
+                // Skip the request if the pathInfo is null
+                if (pathInfo == null) {
+                	return false;
+                }
                 if (pathInfo.endsWith("manifest.json")) {
                     // TODO write manifest.json using Jackson or similar
                     PrintWriter writer = response.getWriter();
