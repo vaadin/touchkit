@@ -63,7 +63,7 @@ public class ApplicationCacheSettings implements BootstrapListener {
         script = script.replace("});", ",\"widgetsetUrl\":\"" + widgetsetUrl
                 + "\",\"offlineEnabled\":" + isOfflineModeEnabled() + "});");
 
-        scriptTag.appendChild(new DataNode(script, scriptTag.baseUri()));
+        scriptTag.appendChild(new DataNode(script));
 
         if (isCacheManifestEnabled()) {
             // Add cache manifest attribute to html tag

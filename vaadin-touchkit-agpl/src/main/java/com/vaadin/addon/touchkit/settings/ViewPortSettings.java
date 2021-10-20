@@ -136,7 +136,7 @@ public class ViewPortSettings implements BootstrapListener {
         Element head = document.getElementsByTag("head").get(0);
 
         DocumentType doctype = (DocumentType) html.previousSibling();
-        DocumentType html5doc = new DocumentType("html", "", "", "");
+        DocumentType html5doc = new DocumentType("html", "", "");
         doctype.replaceWith(html5doc);
 
         Element element = document.createElement("meta");
