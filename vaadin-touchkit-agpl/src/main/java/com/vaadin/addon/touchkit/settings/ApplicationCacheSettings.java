@@ -20,7 +20,7 @@ import com.vaadin.shared.VBrowserDetails;
 @SuppressWarnings("serial")
 public class ApplicationCacheSettings implements BootstrapListener {
 
-    private boolean cacheManifestEnabled = true;
+    private boolean cacheManifestEnabled = false;
     private boolean offlineModeEnabled = true;
 
     @Override
@@ -113,21 +113,28 @@ public class ApplicationCacheSettings implements BootstrapListener {
     }
 
     /**
+     * @deprecated Safari, Chrome and Firefox use serviceworkerd and localstorage,
+     * so this is allways false with them.
+     *
      * @return true if the cache manifest (and thus application cache) is
      *         enabled.
      */
+    @Deprecated
     public boolean isCacheManifestEnabled() {
-    	return cacheManifestEnabled && !TouchKitSettings.supportsGooglePWA();
+    	return false;
     }
 
     /**
      * Enable or disable the cache manifest (and thus application cache).
      *
+     * @deprecated Safari, Chrome and Firefox use serviceworkerd and localstorage,
+     * so this is allways false with them.
+     *
      * @param cacheManifestEnabled
      *            true to enable.
      */
+    @Deprecated
     public void setCacheManifestEnabled(boolean cacheManifestEnabled) {
-        this.cacheManifestEnabled = cacheManifestEnabled;
     }
 
     /**

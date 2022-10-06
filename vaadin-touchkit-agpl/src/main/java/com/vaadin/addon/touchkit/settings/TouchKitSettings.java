@@ -17,7 +17,6 @@ import org.apache.commons.io.IOUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import com.vaadin.addon.touchkit.annotations.CacheManifestEnabled;
 import com.vaadin.addon.touchkit.annotations.OfflineModeEnabled;
 import com.vaadin.addon.touchkit.server.TouchKitServlet;
 import com.vaadin.addon.touchkit.service.ApplicationIcon;
@@ -182,12 +181,10 @@ public class TouchKitSettings implements BootstrapListener,
         }
         if (getApplicationCacheSettings() != null) {
             OfflineModeEnabled offline = null;
-            CacheManifestEnabled manifest = null;
 
             Class<?> clazz = response.getUiClass();
             if (clazz != null) {
                 offline = clazz.getAnnotation(OfflineModeEnabled.class);
-                manifest = clazz.getAnnotation(CacheManifestEnabled.class);
             }
             if (response.getSession().getService() instanceof VaadinServletService) {
                 clazz = ((VaadinServletService) response.getSession()
@@ -195,13 +192,8 @@ public class TouchKitSettings implements BootstrapListener,
                 if (offline == null) {
                     offline = clazz.getAnnotation(OfflineModeEnabled.class);
                 }
-                if (manifest == null) {
-                    manifest = clazz.getAnnotation(CacheManifestEnabled.class);
-                }
             }
 
-            getApplicationCacheSettings().setCacheManifestEnabled(
-                    manifest == null || manifest.value());
             getApplicationCacheSettings().setOfflineModeEnabled(
                     offline == null || offline.value());
             getApplicationCacheSettings().modifyBootstrapPage(response);
@@ -465,7 +457,7 @@ public class TouchKitSettings implements BootstrapListener,
             VaadinRequest currentRequest = VaadinServletService.getCurrentRequest();
             String useragentheader = currentRequest.getHeader("User-Agent").toLowerCase();
             // Simply expect all chromes to support
-            if (useragentheader.contains("chrome") || useragentheader.contains("firefox")) {
+            if (useragentheader.contains("chrome") || useragentheader.contains("firefox") || useragentheader.contains("safari")) {
                 return true;
             }
         } catch (Exception e) {
