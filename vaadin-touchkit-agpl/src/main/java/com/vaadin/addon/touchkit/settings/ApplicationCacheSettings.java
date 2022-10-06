@@ -38,8 +38,7 @@ public class ApplicationCacheSettings implements BootstrapListener {
 
         final VaadinService service = response.getSession().getService();
         final VaadinRequest request = response.getRequest();
-        final String staticFilePath = service
-                .getStaticFileLocation(request);
+        final String staticFilePath = service.getStaticFileLocation(request);
         // VAADIN folder location
         final String vaadinDir = staticFilePath + "/VAADIN/";
         // Figure out widgetset
@@ -47,8 +46,7 @@ public class ApplicationCacheSettings implements BootstrapListener {
                 response.getUiClass());
         String widgetset = response.getUIProvider().getWidgetset(event);
         if (widgetset == null) {
-            widgetset = request.getService()
-                    .getConfiguredWidgetset(request);
+            widgetset = request.getService().getConfiguredWidgetset(request);
         }
         // Url for the widgetset
         final String widgetsetUrl = String.format(
@@ -67,8 +65,7 @@ public class ApplicationCacheSettings implements BootstrapListener {
 
         if (isCacheManifestEnabled()) {
             // Add cache manifest attribute to html tag
-            document.getElementsByTag("html").attr(
-                    "manifest",
+            document.getElementsByTag("html").attr("manifest",
                     vaadinDir + "widgetsets/" + widgetset + "/"
                             + generateManifestFileName(response));
         }
@@ -113,22 +110,22 @@ public class ApplicationCacheSettings implements BootstrapListener {
     }
 
     /**
-     * @deprecated Safari, Chrome and Firefox use serviceworkerd and localstorage,
-     * so this is allways false with them.
+     * @deprecated Safari, Chrome and Firefox use serviceworkerd and
+     *             localstorage, so this is allways false with them.
      *
      * @return true if the cache manifest (and thus application cache) is
      *         enabled.
      */
     @Deprecated
     public boolean isCacheManifestEnabled() {
-    	return false;
+        return false;
     }
 
     /**
      * Enable or disable the cache manifest (and thus application cache).
      *
-     * @deprecated Safari, Chrome and Firefox use serviceworkerd and localstorage,
-     * so this is allways false with them.
+     * @deprecated Safari, Chrome and Firefox use serviceworkerd and
+     *             localstorage, so this is allways false with them.
      *
      * @param cacheManifestEnabled
      *            true to enable.
@@ -159,8 +156,8 @@ public class ApplicationCacheSettings implements BootstrapListener {
      * cache (== new version of the widget set).
      *
      * @param message
-     *            The new message. The default is
-     *            "There are updates ready to be installed. Would you like to restart now?"
+     *            The new message. The default is "There are updates ready to be
+     *            installed. Would you like to restart now?"
      */
     public void setUpdateNowMessage(String message) {
         LocalStorage.get().put(CacheManifestStatusIndicator.UPDATE_NOW_MSG_KEY,
