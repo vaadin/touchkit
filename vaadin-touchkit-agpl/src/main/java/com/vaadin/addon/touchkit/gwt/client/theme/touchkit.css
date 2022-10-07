@@ -1797,6 +1797,10 @@ select.v-select-select::-ms-expand {
 	width:100%;
 }
 
+.v-touchkit-datepicker>input::-webkit-calendar-picker-indicator {
+    background: none !important;
+}
+
 .v-touchkit-datepicker:after,
 .v-select:after {
 	content: fa-icon-chevron-down;
