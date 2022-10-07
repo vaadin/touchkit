@@ -35,7 +35,8 @@ public class CacheManifestStatusIndicator implements EntryPoint {
     // TODO(manolo): should be configurable via offline connector
     private int updateCheckInterval = 1800000;
 
-    private static final Logger logger = Logger.getLogger(CacheManifestStatusIndicator.class.getName());
+    private static final Logger logger = Logger
+            .getLogger(CacheManifestStatusIndicator.class.getName());
 
     private static boolean confirmationRequired = true;
 
@@ -48,8 +49,8 @@ public class CacheManifestStatusIndicator implements EntryPoint {
     }
 
     /**
-     * Let the indicator ask the user to reload the application
-     * when a new version of the app has been downloaded.
+     * Let the indicator ask the user to reload the application when a new
+     * version of the app has been downloaded.
      */
     public static void setConfirmationRequired(boolean b) {
         confirmationRequired = b;
@@ -59,7 +60,8 @@ public class CacheManifestStatusIndicator implements EntryPoint {
      * return true if we are downloading a new version of the app.
      */
     public static boolean isUpdating() {
-        return updating || getStatus() == CHECKING || getStatus() == DOWNLOADING;
+        return updating || getStatus() == CHECKING
+                || getStatus() == DOWNLOADING;
     }
 
     /**
@@ -67,7 +69,6 @@ public class CacheManifestStatusIndicator implements EntryPoint {
      */
     public void init() {
         loadSettingsFromLocalStorage();
-        hookAllListeners(this);
         scheduleUpdateChecker();
         if (getStatus() == CHECKING || getStatus() == DOWNLOADING) {
             showProgress();
@@ -79,8 +80,8 @@ public class CacheManifestStatusIndicator implements EntryPoint {
 
     private void pollForStatusOnAndroid() {
         if (BrowserInfo.get().isAndroid()) {
-            Scheduler.get().scheduleFixedPeriod(
-                    new Scheduler.RepeatingCommand() {
+            Scheduler.get()
+                    .scheduleFixedPeriod(new Scheduler.RepeatingCommand() {
                         @Override
                         public boolean execute() {
                             if (updating) {
@@ -121,7 +122,8 @@ public class CacheManifestStatusIndicator implements EntryPoint {
                     && !updateCheckIntervalStr.isEmpty()) {
                 // The value in local storage is in seconds, but we need
                 // milliseconds.
-                updateCheckInterval = Integer.valueOf(updateCheckIntervalStr) * 1000;
+                updateCheckInterval = Integer.valueOf(updateCheckIntervalStr)
+                        * 1000;
             }
         }
     }
@@ -135,9 +137,8 @@ public class CacheManifestStatusIndicator implements EntryPoint {
             public boolean execute() {
                 // Don't try to update cache if already updating or app is
                 // paused
-                if (!isUpdating()
-                        && OfflineModeEntrypoint.get().getNetworkStatus()
-                                .isAppRunning()) {
+                if (!isUpdating() && OfflineModeEntrypoint.get()
+                        .getNetworkStatus().isAppRunning()) {
                     updateCache();
                 }
                 return true;
@@ -210,7 +211,8 @@ public class CacheManifestStatusIndicator implements EntryPoint {
      *            true to force reloading the site without asking the user.
      */
     private void requestUpdate() {
-        logger.info("Application cache updated, confirmationRequired=" + confirmationRequired);
+        logger.info("Application cache updated, confirmationRequired="
+                + confirmationRequired);
         if (!confirmationRequired || Window.confirm(updateNowMessage)) {
             Window.Location.reload();
         }
@@ -219,48 +221,28 @@ public class CacheManifestStatusIndicator implements EntryPoint {
     /**
      * Hooks all listeners to the specified instance.
      * 
+     * @deprecated This is NOP as Safari, Chrome and Firefox do not need this
+     *             anymore.
+     *
      * @param instance
      *            the instance to hook the listeners to.
      */
+    @Deprecated
     protected final native void hookAllListeners(
             CacheManifestStatusIndicator instance)
     /*-{
-        $wnd.applicationCache.addEventListener('cached',
-            function(event) {
-                instance.@com.vaadin.addon.touchkit.gwt.client.offlinemode.CacheManifestStatusIndicator::onCacheEvent(Lcom/google/gwt/user/client/Event;)(event);
-            }, false);
-        $wnd.applicationCache.addEventListener('checking',
-            function(event) {
-                instance.@com.vaadin.addon.touchkit.gwt.client.offlinemode.CacheManifestStatusIndicator::onCacheEvent(Lcom/google/gwt/user/client/Event;)(event);
-            }, false);
-        $wnd.applicationCache.addEventListener('downloading',
-            function(event) {
-                instance.@com.vaadin.addon.touchkit.gwt.client.offlinemode.CacheManifestStatusIndicator::onCacheEvent(Lcom/google/gwt/user/client/Event;)(event);
-            }, false);
-        $wnd.applicationCache.addEventListener('noupdate',
-            function(event) {
-                instance.@com.vaadin.addon.touchkit.gwt.client.offlinemode.CacheManifestStatusIndicator::onCacheEvent(Lcom/google/gwt/user/client/Event;)(event);
-            }, false);
-        $wnd.applicationCache.addEventListener('updateready',
-            function(event) {
-                instance.@com.vaadin.addon.touchkit.gwt.client.offlinemode.CacheManifestStatusIndicator::onCacheEvent(Lcom/google/gwt/user/client/Event;)(event);
-            }, false);
-        $wnd.applicationCache.addEventListener('error',
-            function(event) {
-                instance.@com.vaadin.addon.touchkit.gwt.client.offlinemode.CacheManifestStatusIndicator::onError(Lcom/google/gwt/user/client/Event;)(event);
-            }, false);
     }-*/;
 
     /**
      * @return The status of the application cache. See the constants in this
-     *         class for possible values. Return 99 if application cache does 
+     *         class for possible values. Return 99 if application cache does
      *         not exist.
      */
     private static native int getStatus()
     /*-{
-		if($wnd.applicationCache) {
+    	if($wnd.applicationCache) {
         	return $wnd.applicationCache.status;
-		}
+    	}
         return 99;
     }-*/;
 

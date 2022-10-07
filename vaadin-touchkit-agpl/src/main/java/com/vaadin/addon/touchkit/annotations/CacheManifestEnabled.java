@@ -22,10 +22,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Disables o enable the manifest cache.
+ * This annotation is no longer needed as service worker and local storage is
+ * being used by Safari, Chrome and Firefox for now on.
  */
+@Deprecated
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface CacheManifestEnabled {
-    boolean value() default true;
+	boolean value() default true;
 }
